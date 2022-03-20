@@ -1,0 +1,26 @@
+{
+  "name": "react-wallet",
+  "version": "0.0.0",
+  "description": "Ready-made drop-in Web3 wallet components and hooks for React",
+  "keywords": [
+    "web3",
+    "wallet",
+    "react",
+    "hooks",
+    "ethereum",
+    "polygon"
+  ],
+  "author": "Flair.Finance",
+  "homepage": "https://github.com/0xflair/typescript-sdk#readme",
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xflair/typescript-sdk.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/0xflair/typescript-sdk/issues"
+  }
+}
