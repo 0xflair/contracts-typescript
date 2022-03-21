@@ -24,8 +24,8 @@ jobs:
 
       - name: Authenticate to NPM
         run: |
-          echo "@grandcore:registry=http://registry.npmjs.org/" > .npmrc
-          echo "registry=http://registry.npmjs.org/" >> .npmrc
+          echo "@grandcore:registry=https://registry.npmjs.org/" > .npmrc
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
           npm whoami
         env:
