@@ -1,6 +1,11 @@
 {
   "name": "@0xflair/react-wallet",
   "version": "0.1.4",
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "main": "./build/index.js",
   "module": "./build/index.es.js",
   "scripts": {
