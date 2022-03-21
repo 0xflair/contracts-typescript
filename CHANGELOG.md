@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.4 (2022-03-21)
+
+
+### Bug Fixes
+
+* ignore verifying access for npm tokens ([06bb728](https://github.com/0xflair/typescript-sdk/commit/06bb7284646eded916aa7278816f0722a31af3c4))
+
+
+
+
+
 ## 0.1.3 (2022-03-21)
 
 
