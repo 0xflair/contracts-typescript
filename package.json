@@ -24,7 +24,7 @@
     "lint": "eslint ./packages --fix",
     "show-updated": "lerna updated",
     "new-git-version": "lerna version --conventional-commits --create-release github --yes --message 'chore(release): publish'",
-    "publish": "lerna publish from-package --yes",
+    "publish": "lerna publish from-package --yes --no-verify-access",
     "test": "lerna run test --parallel"
   },
   "publishConfig": {
