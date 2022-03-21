@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.8 (2022-03-21)
+
+
+### Bug Fixes
+
+* remove access argument ([312d0aa](https://github.com/0xflair/typescript-sdk/commit/312d0aa72b6c0b5a8bf9616f01116a51e5be8f9b))
+
+
+
+
+
 ## 0.1.7 (2022-03-21)
 
 
