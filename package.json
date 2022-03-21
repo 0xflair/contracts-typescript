@@ -1,7 +1,21 @@
 {
   "name": "@0xflair/typescript-sdk",
-  "private": true,
   "devDependencies": {
     "lerna": "^4.0.0"
+  },  
+  "scripts": {    
+    "build": "lerna run build",
+    "install": "lerna bootstrap",
+    "remove-modules": "lerna clean && rm -rf node_modules ",
+    "clean": "lerna exec -- rimraf dist",
+    "refresh": "npm run clean && lerna build",
+    "lint": "eslint ./packages --fix",
+    "show-updated": "lerna updated",
+    "new-git-version": "lerna version --conventional-commits --create-release github --yes",
+    "publish": "lerna publish from-package --yes",
+    "test": "lerna run test --parallel"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
