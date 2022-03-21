@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.6 (2022-03-21)
+
+
+### Bug Fixes
+
+* remove unknown argument ([a0a3cdd](https://github.com/0xflair/typescript-sdk/commit/a0a3cdd22fe53c22c3e7237e0b4a51174cf31a4f))
+
+
+
+
+
 ## 0.1.5 (2022-03-21)
 
 
