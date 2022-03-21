@@ -1,0 +1,23 @@
+name: Test
+
+on:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build packages
+        run: yarn build
+        shell: bash
+
+      - name: Test
+        run: yarn test
+        shell: bash

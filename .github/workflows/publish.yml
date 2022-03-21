@@ -1,0 +1,33 @@
+name: Publish
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build packages
+        run: yarn build
+        shell: bash
+
+      - name: Authenticate to NPM
+        run: |
+          echo "@grandcore:registry=http://registry.npmjs.org/" > .npmrc
+          echo "registry=http://registry.npmjs.org/" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish 
+        run: yarn publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

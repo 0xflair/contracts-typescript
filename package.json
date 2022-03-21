@@ -1,9 +1,21 @@
 {
   "name": "@0xflair/typescript-sdk",
   "devDependencies": {
-    "lerna": "^4.0.0"
-  },  
-  "scripts": {    
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^7.0.4",
+    "lerna": "^4.0.0",
+    "prettier": "^2.6.0",
+    "typescript": "^4.6.2"
+  },
+  "scripts": {
+    "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+    "postinstall": "husky install",
     "build": "lerna run build",
     "install": "lerna bootstrap",
     "remove-modules": "lerna clean && rm -rf node_modules ",
@@ -17,5 +29,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint"
+    ]
   }
 }
