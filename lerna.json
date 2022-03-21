@@ -1,12 +1,22 @@
 {
-  "packages": ["packages/*"],
-  "version": "0.0.0",
+  "packages": [
+    "packages/*"
+  ],
+  "version": "0.1.1",
   "command": {
     "version": {
-      "ignoreChanges": ["**/.npmrc", "**/node_modules", "node_modules"]
+      "ignoreChanges": [
+        "**/.npmrc",
+        "**/node_modules",
+        "node_modules"
+      ]
     },
     "publish": {
-      "ignoreChanges": ["**/.npmrc", "**/node_modules", "node_modules"]
+      "ignoreChanges": [
+        "**/.npmrc",
+        "**/node_modules",
+        "node_modules"
+      ]
     }
   }
 }
