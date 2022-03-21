@@ -1,7 +1,6 @@
 {
   "name": "@0xflair/react-wallet",
   "version": "0.1.0",
-  "private": true,
   "main": "./build/index.js",
   "module": "./build/index.es.js",
   "scripts": {
