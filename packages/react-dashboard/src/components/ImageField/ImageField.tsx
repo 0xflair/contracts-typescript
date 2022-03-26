@@ -1,13 +1,13 @@
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-export type Props = {
+export type ImageFieldProps = {
   label: string;
   setImageFile: React.Dispatch<React.SetStateAction<File | undefined>>;
   setImagePreview?: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
-export const ImageField = (props: Props) => {
+export const ImageField = (props: ImageFieldProps) => {
   const {
     label,
     setImageFile: parentSetImageFile,

@@ -1,8 +1,8 @@
-import { Props, FormSection } from "./FormSection";
+import { FormSectionProps, FormSection } from "./FormSection";
 
 export default { title: "FormSection Component", decorators: [] };
 
-export const defaultFormSection = (args: Props) => {
+export const DefaultFormSection = (args: FormSectionProps) => {
   return (
     <div className="bg-gray-100 p-8">
       <FormSection {...args}>
@@ -12,8 +12,8 @@ export const defaultFormSection = (args: Props) => {
   );
 };
 
-defaultFormSection.args = {
+DefaultFormSection.args = {
   title: "My Title",
   description: "A description of my section.",
   toggleable: true,
-};
+} as FormSectionProps;

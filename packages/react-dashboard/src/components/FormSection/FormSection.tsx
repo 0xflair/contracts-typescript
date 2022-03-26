@@ -2,14 +2,14 @@ import { useState } from "react";
 import { Switch } from "@headlessui/react";
 import { classNames } from "../../utils";
 
-export type Props = {
+export type FormSectionProps = {
   title: string;
   description: string;
   toggleable?: boolean;
   children: JSX.IntrinsicElements | JSX.Element | string;
 };
 
-export const FormSection = (props: Props) => {
+export const FormSection = (props: FormSectionProps) => {
   const { title, description, toggleable, children } = props;
   const [enabled, setEnabled] = useState(false);
 

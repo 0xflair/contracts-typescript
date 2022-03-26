@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Props, ImageField } from "./ImageField";
+import { ImageFieldProps, ImageField } from "./ImageField";
 
 export default { title: "ImageField Component", decorators: [] };
 
-export const DefaultFormSection = (args: Props) => {
+export const DefaultImageField = (args: ImageFieldProps) => {
   const [imageFile, setImageFile] = useState<File>();
   const [imagePreview, setImagePreview] = useState<string>();
 
@@ -19,13 +19,13 @@ export const DefaultFormSection = (args: Props) => {
           Image File: name={imageFile?.name} size={imageFile?.size}
         </li>
         <li>
-          Image Preview: <img src={imagePreview} />
+          Image Preview: <img alt="preview" src={imagePreview} />
         </li>
       </ul>
     </div>
   );
 };
 
-DefaultFormSection.args = {
+DefaultImageField.args = {
   label: "My Image",
-} as Props;
+} as ImageFieldProps;
