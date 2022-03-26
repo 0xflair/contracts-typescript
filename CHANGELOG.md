@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.4 (2022-03-26)
+
+
+### Bug Fixes
+
+* use proper type for children prop ([8c436e8](https://github.com/0xflair/typescript-sdk/commit/8c436e8c88ec65ecb1147bd3c52a29b2a6dff061))
+
+
+
+
+
 ## 0.3.3 (2022-03-26)
 
 
