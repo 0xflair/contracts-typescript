@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.5 (2022-03-26)
+
+
+### Bug Fixes
+
+* allow customing class name ([7994cfc](https://github.com/0xflair/typescript-sdk/commit/7994cfcfd954a83cacf72e4c669fe1cf6de8a0b7))
+
+
+
+
+
 ## 0.3.4 (2022-03-26)
 
 

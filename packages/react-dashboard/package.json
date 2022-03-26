@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-dashboard",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "private": false,
   "publishConfig": {
     "access": "public",
