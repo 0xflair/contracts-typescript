@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.2 (2022-03-26)
+
+
+### Bug Fixes
+
+* use distiguished names for prop types ([bd96955](https://github.com/0xflair/typescript-sdk/commit/bd96955b9a1904de4eb7c7bf6ae20ffa2038192e))
+
+
+
+
+
 ## 0.3.1 (2022-03-26)
 
 
