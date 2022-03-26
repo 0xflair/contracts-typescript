@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.7.0 (2022-03-26)
+
+
+### Features
+
+* add copy feature to code block ([8f9ba2f](https://github.com/0xflair/typescript-sdk/commit/8f9ba2f7a0a12e196b951e67d663117730549240))
+
+
+
+
+
 # 0.6.0 (2022-03-26)
 
 
