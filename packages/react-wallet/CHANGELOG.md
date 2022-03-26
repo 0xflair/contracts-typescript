@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.5.0 (2022-03-26)
+
+
+### Features
+
+* add basic code block component ([371c973](https://github.com/0xflair/typescript-sdk/commit/371c973a0b303d00637bd3931e155a31204f40e6))
+
+
+
+
+
 # 0.4.0 (2022-03-26)
 
 
