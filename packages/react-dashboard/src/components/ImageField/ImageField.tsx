@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 export type Props = {
   label: string;
   setImageFile: React.Dispatch<React.SetStateAction<File | undefined>>;
-  setImagePreview: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setImagePreview?: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 export const ImageField = (props: Props) => {
@@ -20,10 +20,13 @@ export const ImageField = (props: Props) => {
   const onDrop = useCallback(
     (acceptedFiles: any) => {
       const base64Url = URL.createObjectURL(acceptedFiles[0]);
-      parentSetImageFile(acceptedFiles[0]);
       setImageFile(acceptedFiles[0]);
-      parentSetImagePreview(base64Url);
+      parentSetImageFile(acceptedFiles[0]);
+      
       setImagePreview(base64Url);
+      if (parentSetImagePreview) {
+        parentSetImagePreview(base64Url);
+      }
     },
     [parentSetImageFile, parentSetImagePreview, setImagePreview]
   );
