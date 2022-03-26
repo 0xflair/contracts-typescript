@@ -22,7 +22,7 @@ export const ImageField = (props: ImageFieldProps) => {
       const base64Url = URL.createObjectURL(acceptedFiles[0]);
       setImageFile(acceptedFiles[0]);
       parentSetImageFile(acceptedFiles[0]);
-      
+
       setImagePreview(base64Url);
       if (parentSetImagePreview) {
         parentSetImagePreview(base64Url);
@@ -35,14 +35,12 @@ export const ImageField = (props: ImageFieldProps) => {
 
   return (
     <div {...getRootProps()}>
+      <label className="block text-sm font-medium text-gray-700">{label}</label>
       <div
         className={`mt-1 px-6 pt-5 pb-6 border-2 border-dashed rounded-md focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 ${
           isDragActive ? "border-indigo-300" : "border-gray-300"
         }`}
       >
-        <label className="block text-sm font-medium text-gray-700 mb-4">
-          {label}
-        </label>
         <div className="text-sm text-gray-600">
           <input className="sr-only" {...getInputProps()} />
           <div className="space-x-4 flex">
