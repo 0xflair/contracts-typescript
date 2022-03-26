@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.1 (2022-03-26)
+
+
+### Bug Fixes
+
+* styling for form header section ([a4d0ae3](https://github.com/0xflair/typescript-sdk/commit/a4d0ae38e46cf16af0e71ff6ef39b0f81b22d390))
+
+
+
+
+
 # 0.2.0 (2022-03-26)
 
 
