@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.6.0 (2022-03-26)
+
+
+### Features
+
+* accept language for highlight ([a1abee8](https://github.com/0xflair/typescript-sdk/commit/a1abee8e89593431a420de0bb8af24d23e695a2e))
+
+
+
+
+
 # 0.5.0 (2022-03-26)
 
 
