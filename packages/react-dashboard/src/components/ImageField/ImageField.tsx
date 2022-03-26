@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 
 export type ImageFieldProps = {
   label: string;
+  description?: string;
   className?: string;
   setImageFile: React.Dispatch<React.SetStateAction<File | undefined>>;
   setImagePreview?: React.Dispatch<React.SetStateAction<string | undefined>>;
@@ -11,6 +12,7 @@ export type ImageFieldProps = {
 export const ImageField = (props: ImageFieldProps) => {
   const {
     label,
+    description,
     className,
     setImageFile: parentSetImageFile,
     setImagePreview: parentSetImagePreview,
@@ -36,9 +38,10 @@ export const ImageField = (props: ImageFieldProps) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div {...getRootProps()} className={className}>
+    <div className={className}>
       <label className="block text-sm font-medium text-gray-700">{label}</label>
       <div
+        {...getRootProps()}
         className={`mt-1 px-6 pt-5 pb-6 border-2 border-dashed rounded-md focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 ${
           isDragActive ? "border-indigo-300" : "border-gray-300"
         }`}
@@ -85,6 +88,11 @@ export const ImageField = (props: ImageFieldProps) => {
           </div>
         </div>
       </div>
+      {description ? (
+        <p className="mt-2 text-sm text-gray-500">{description}</p>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

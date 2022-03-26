@@ -28,4 +28,5 @@ export const DefaultImageField = (args: ImageFieldProps) => {
 
 DefaultImageField.args = {
   label: "My Image",
+  description: "Some explanation",
 } as ImageFieldProps;
