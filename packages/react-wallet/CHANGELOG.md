@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.4.0 (2022-03-26)
+
+
+### Features
+
+* add description for image field ([cb246c9](https://github.com/0xflair/typescript-sdk/commit/cb246c93cef6faf5f99fe0fd16bf12b93c990b40))
+
+
+
+
+
 ## 0.3.5 (2022-03-26)
 
 
