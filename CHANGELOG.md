@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.1 (2022-03-26)
+
+
+### Bug Fixes
+
+* make image preview setter optional ([1e61626](https://github.com/0xflair/typescript-sdk/commit/1e6162688c60706141eab995f186fea1f7030c12))
+
+
+
+
+
 # 0.3.0 (2022-03-26)
 
 
