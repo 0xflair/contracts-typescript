@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import Highlight, { defaultProps } from "prism-react-renderer";
+import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/vsDark";
 
 export type CodeBlockProps = {
   code: string;
+  language?: Language;
 };
-
 
 const Pre = styled.pre`
   text-align: left;
-  margin: 1em 0;
+  margin: 0;
   padding: 0.5em;
   overflow: scroll;
 `;
@@ -32,10 +32,10 @@ const LineContent = styled.span`
 `;
 
 export const CodeBlock = (props: CodeBlockProps) => {
-  const { code } = props;
+  const { code, language } = props;
 
   return (
-    <Highlight {...defaultProps} theme={theme} code={code} language="tsx">
+    <Highlight {...defaultProps} theme={theme} code={code} language={language || "typescript"}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <Pre className={className} style={style}>
           {tokens.map((line, i) => (
