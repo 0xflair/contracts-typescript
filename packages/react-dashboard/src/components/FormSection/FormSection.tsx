@@ -6,7 +6,7 @@ export type FormSectionProps = {
   title: string;
   description: string;
   toggleable?: boolean;
-  children: JSX.IntrinsicElements | JSX.Element | string;
+  children: React.ReactNode;
 };
 
 export const FormSection = (props: FormSectionProps) => {
