@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.3 (2022-03-26)
+
+
+### Bug Fixes
+
+* consistent style for image field ([8ee4920](https://github.com/0xflair/typescript-sdk/commit/8ee492043334e2fc15124d8451163be5583f2cc7))
+
+
+
+
+
 ## 0.3.2 (2022-03-26)
 
 
