@@ -48,32 +48,34 @@ export const CodeBlock = (props: CodeBlockProps) => {
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <Pre className={classNames(className, "relative")} style={style}>
-          <button
-            type="button"
-            className="fixed top-2 right-2 inline-flex items-center px-1.5 py-0.5 border border-gray-300 shadow-sm text-xs font-bold rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onClick={() => {
-              copy(code);
-              setCopiedRecently(true);
-            }}
-          >
-            {copiedRecently ? (
-              <>
-                <CheckCircleIcon
-                  className="-ml-0.5 mr-2 h-4 w-4"
-                  aria-hidden="true"
-                />
-                Copied
-              </>
-            ) : (
-              <>
-                <ClipboardCopyIcon
-                  className="-ml-0.5 mr-2 h-4 w-4"
-                  aria-hidden="true"
-                />
-                Copy this
-              </>
-            )}
-          </button>
+          <div className="relative top-0 right-0 w-full flex justify-end">
+            <button
+              type="button"
+              className="absolute top-0 right-0 inline-flex items-center px-1.5 py-0.5 border border-gray-300 shadow-sm text-xs font-bold rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              onClick={() => {
+                copy(code);
+                setCopiedRecently(true);
+              }}
+            >
+              {copiedRecently ? (
+                <>
+                  <CheckCircleIcon
+                    className="-ml-0.5 mr-2 h-4 w-4"
+                    aria-hidden="true"
+                  />
+                  Copied
+                </>
+              ) : (
+                <>
+                  <ClipboardCopyIcon
+                    className="-ml-0.5 mr-2 h-4 w-4"
+                    aria-hidden="true"
+                  />
+                  Copy this
+                </>
+              )}
+            </button>
+          </div>
           {tokens.map((line, i) => (
             <Line key={i} {...getLineProps({ line, key: i })}>
               <LineNo>{i + 1}</LineNo>
