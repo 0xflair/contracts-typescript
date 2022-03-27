@@ -1,20 +1,29 @@
 import * as React from "react";
 import { Signer } from "ethers";
 import { useContractDeployer } from "../../../common/useContractDeployer";
-
-import ERC721FullFeaturedContractArtifact from "@0xflair/evm-contracts/collections/ERC721/presets/ERC721FullFeaturedCollection.json";
-const ERC721FullFeaturedContractBytecode = require("@0xflair/evm-contracts/collections/ERC721/presets/ERC721FullFeaturedCollection.sol");
+import { Version, loadContract } from "@0xflair/contracts-registry";
 
 export type ERC721FullFeaturedContractDeployerConfig = {
+  version?: Version;
   signer?: Signer;
 };
 
+export type ERC721FullFeaturedContractArguments = [
+  collectionName: string,
+  collectionSymbol: string,
+];
+
 export const useERC721FullFeaturedContractDeployer = <Contract = any>({
+  version,
   signer,
 }: ERC721FullFeaturedContractDeployerConfig) => {
-  return useContractDeployer({
-    contractInterface: ERC721FullFeaturedContractArtifact.abi,
-    contractByteCode: ERC721FullFeaturedContractBytecode,
+  const contract = loadContract(
+    "collections/ERC721/presets/ERC721FullFeaturedCollection",
+    version
+  );
+  return useContractDeployer<ERC721FullFeaturedContractArguments>({
+    contractInterface: contract.artifact.abi,
+    contractByteCode: contract.artifact.bytecode,
     signer,
   });
 };
