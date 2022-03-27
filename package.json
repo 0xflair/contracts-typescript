@@ -12,6 +12,7 @@
     "husky": "^7.0.4",
     "lerna": "^4.0.0",
     "prettier": "^2.6.0",
+    "rimraf": "^3.0.2",
     "typescript": "^4.6.2"
   },
   "scripts": {
@@ -19,7 +20,7 @@
     "postinstall": "husky install",
     "build": "lerna run build",
     "install": "lerna bootstrap",
-    "remove-modules": "lerna clean && rm -rf node_modules ",
+    "remove-modules": "lerna clean && rm -rf node_modules",
     "clean": "lerna exec -- rimraf dist",
     "refresh": "npm run clean && npm run build",
     "lint": "eslint ./packages --fix",
