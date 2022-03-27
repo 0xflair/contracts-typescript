@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.7.1 (2022-03-27)
+
+
+### Bug Fixes
+
+* copy button position ([07099eb](https://github.com/0xflair/typescript-sdk/commit/07099eb2867da113ed371c070fe4a08e94fd8613))
+
+
+
+
+
 # 0.7.0 (2022-03-26)
 
 
