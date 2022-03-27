@@ -1,9 +1,16 @@
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+  purge: [
+    './public/**/*.html',
+    './src/**/*.{js,jsx,ts,tsx,vue}',
+    './node_modules/@0xflair/**/*.{js,jsx,ts,tsx,vue}',
   ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {},
   },
-  plugins: [],
-}
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
+  safelist: [],
+};
