@@ -11,6 +11,10 @@ export type ERC721FullFeaturedContractDeployerConfig = {
 export type ERC721FullFeaturedContractArguments = [
   collectionName: string,
   collectionSymbol: string,
+  collectionMetadataUri: string,
+  placeholderMetadataUri: string,
+  uintArguments: [maxSupply: number, preSalePrice: number, preSaleMaxPerWallet: number, publicSalePrice: number, maxMintPerTx: number],
+  addressArguments: [raribleRoyaltyAddress: string, openSeaProxyRegistryAddress: string, openSeaExchangeAddress: string],
 ];
 
 export const useERC721FullFeaturedContractDeployer = <Contract = any>({
