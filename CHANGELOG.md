@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.7.4 (2022-03-28)
+
+
+### Bug Fixes
+
+* spread contract args ([26f3ac8](https://github.com/0xflair/typescript-sdk/commit/26f3ac8e1e9b5a554f8d77e24be318b7c940ed42))
+
+
+
+
+
 ## 0.7.3 (2022-03-28)
 
 
