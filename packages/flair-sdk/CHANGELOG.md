@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.9.6 (2022-03-28)
+
+
+### Bug Fixes
+
+* export CryptoAmountField ([543cfa2](https://github.com/0xflair/typescript-sdk/commit/543cfa266118833b1ac2b29e44e5ee20cc8efa41))
+
+
+
+
+
 ## 0.9.5 (2022-03-28)
 
 
