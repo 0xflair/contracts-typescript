@@ -1,0 +1,34 @@
+{
+  "name": "flair-sdk",
+  "version": "0.8.1",
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "echo 'No need to build'"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ]
+  },
+  "devDependencies": {
+    "@0xflair/contracts-registry": "^0.8.1",
+    "@0xflair/react-common": "^0.8.1",
+    "@0xflair/react-contracts": "^0.8.1",
+    "@0xflair/react-crypto-prices": "^0.8.1",
+    "@0xflair/react-dashboard": "^0.8.1",
+    "@0xflair/react-wallet": "^0.8.1",
+    "@types/node": "^16.11.26",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "typescript": "^4.6.2"
+  }
+}
