@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.9.3 (2022-03-28)
+
+
+### Bug Fixes
+
+* allow showing prices based on wagmi currency definitions ([031ac3b](https://github.com/0xflair/typescript-sdk/commit/031ac3b878e49106ad36a177db2d8715b5be22e0))
+
+
+
+
+
 ## 0.9.2 (2022-03-28)
 
 
