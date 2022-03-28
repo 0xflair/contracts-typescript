@@ -15,7 +15,7 @@ export const RequireConnect = (props: Props) => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center h-full">
         <div className="rounded-md bg-red-50 p-4">
           <div className="flex">
             <div className="flex-shrink-0">
@@ -40,7 +40,7 @@ export const RequireConnect = (props: Props) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center h-full">
         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
           Loading, please wait...
         </span>
@@ -50,7 +50,7 @@ export const RequireConnect = (props: Props) => {
 
   if (networkData.chain?.unsupported) {
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center h-full">
         <div className="rounded-md bg-yellow-50 p-4">
           <div className="flex">
             <div className="flex-shrink-0">
@@ -93,24 +93,17 @@ export const RequireConnect = (props: Props) => {
     return notConnectedView ? (
       <>{notConnectedView}</>
     ) : (
-      <div className="flex items-center justify-center">
-        <div className="flex flex-col items-start">
-          <div className="sm:flex sm:items-start">
-            <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
-              <LinkIcon className="h-6 w-6 text-blue-600" aria-hidden="true" />
-            </div>
-            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                gm fren...
-              </h3>
-              <div className="mt-2">
-                <p className="text-sm text-gray-500">
-                  Connect your wallet first, then you can see this section.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="mt-5 sm:mt-4 sm:ml-10 sm:pl-4 sm:flex">
+      <div className="flex items-center justify-center h-full">
+        <div className="text-center">
+          <LinkIcon
+            className="mx-auto h-8 w-8 text-gray-400"
+            aria-hidden="true"
+          />
+          <h3 className="mt-2 text-sm font-medium text-gray-900">Gm, wen wallet?</h3>
+          <p className="mt-1 text-sm text-gray-500">
+            Connect your wallet first, then you can see this section.
+          </p>
+          <div className="mt-6">
             <ConnectButton label="Connect" />
           </div>
         </div>
