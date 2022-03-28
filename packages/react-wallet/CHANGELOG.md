@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.8.2 (2022-03-28)
+
+
+### Bug Fixes
+
+* more user friendly wallet wall ([5ea0f01](https://github.com/0xflair/typescript-sdk/commit/5ea0f0193e2b82cf9cf12b6e7b8eae72dfa4960a))
+
+
+
+
+
 ## 0.8.1 (2022-03-28)
 
 
