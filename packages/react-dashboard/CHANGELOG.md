@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.8.1 (2022-03-28)
+
+
+### Bug Fixes
+
+* export component from barrel ([7001ecb](https://github.com/0xflair/typescript-sdk/commit/7001ecbcf62c32c04fb8ef451030b2e0e4b0d007))
+
+
+
+
+
 # 0.8.0 (2022-03-28)
 
 
