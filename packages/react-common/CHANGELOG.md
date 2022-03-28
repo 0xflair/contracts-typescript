@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.9.7 (2022-03-28)
+
+
+### Bug Fixes
+
+* price currency overlay ([350d285](https://github.com/0xflair/typescript-sdk/commit/350d2857696aa8192a72fb759c3329915d42294f))
+
+
+
+
+
 ## 0.9.6 (2022-03-28)
 
 
