@@ -1,6 +1,6 @@
-# Flair SDK: `contracts-registry`
+# Flair SDK
 
-A registry of versioned Flair contract ABIs and ByteCodes ready for use with ability to have backward-compatibility.
+This package provides all Typescript components, hooks and utility to build a web3 dApp.
 
 ## Getting Started
 
@@ -9,5 +9,5 @@ A registry of versioned Flair contract ABIs and ByteCodes ready for use with abi
 1. Install the package:
 
    ```sh
-   npm install @0xflair/contracts-registry
+   npm install flair-sdk
    ```
