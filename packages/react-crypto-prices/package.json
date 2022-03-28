@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-crypto-prices",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "private": false,
   "publishConfig": {
     "access": "public",
@@ -54,9 +54,9 @@
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.0",
     "axios": "^0.26.1",
+    "ethers": "^5.6.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "ethers": "^5.6.2"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@ethersproject/bignumber": "^5.6.0",
