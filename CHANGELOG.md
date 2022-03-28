@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.9.1 (2022-03-28)
+
+
+### Bug Fixes
+
+* add deps on package.json ([6f446e0](https://github.com/0xflair/typescript-sdk/commit/6f446e01e75439e907631a99670b30131b46e2d3))
+
+
+
+
+
 # 0.9.0 (2022-03-28)
 
 
