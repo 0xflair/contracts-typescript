@@ -1,30 +1,37 @@
 import * as React from "react";
+import { CryptoSymbol } from "../constants/currencies";
 
 import { useCryptoPricesContext } from "../providers";
-import { PriceUpstream } from "../types";
+import { PriceBaseCurrency } from "../types";
 
 type Config = {
-  symbol?: string;
-  priceUpstream?: PriceUpstream;
+  symbol?: CryptoSymbol;
+  baseCurrency?: PriceBaseCurrency;
 };
 
 export const useCryptoPrice = ({
   symbol,
-  priceUpstream = PriceUpstream.COIN_GECKO,
+  baseCurrency = PriceBaseCurrency.USD,
 }: Config = {}) => {
-  const { state } = useCryptoPricesContext();
+  const {
+    state: { data: priceDictionariesBySymbol, error, loading },
+  } = useCryptoPricesContext();
+
+  const normalizedSymbol =
+    priceDictionariesBySymbol &&
+    symbol &&
+    (Object.keys(priceDictionariesBySymbol).find((s) =>
+      symbol.endsWith(s)
+    ) as CryptoSymbol);
 
   return [
     {
       data:
-        symbol &&
-        state.data &&
-        state.data[priceUpstream] &&
-        state.data[priceUpstream][symbol]
-          ? state.data[priceUpstream][symbol].usd
+        normalizedSymbol && priceDictionariesBySymbol[normalizedSymbol]
+          ? priceDictionariesBySymbol[normalizedSymbol][baseCurrency]
           : undefined,
-      error: state.error,
-      loading: state.loading,
+      error,
+      loading,
     },
   ] as const;
 };

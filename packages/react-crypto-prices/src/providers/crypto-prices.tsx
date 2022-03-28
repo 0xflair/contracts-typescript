@@ -1,13 +1,16 @@
 import React from "react";
 import axios from "axios";
-import { CryptoPriceDictionary, CryptoSymbol, PriceUpstream } from "../types";
+import { CryptoPriceDictionary } from "../types";
+import {
+  ALL_CURRENCIES,
+  CryptoCurrency,
+  CryptoSymbol,
+} from "../constants/currencies";
 
 type PricesDictionariesBySymbol = Record<CryptoSymbol, CryptoPriceDictionary>;
 
-type PricesDataByUpstream = Record<PriceUpstream, PricesDictionariesBySymbol>;
-
 type State = {
-  data?: PricesDataByUpstream;
+  data?: PricesDictionariesBySymbol;
   loading?: boolean;
   error?: Error;
 };
@@ -22,41 +25,50 @@ export const Context = React.createContext<ContextValue | null>(null);
 
 export type Props = {
   config?: {
-    coinGecko?: {
-      symbols: string[];
-    };
+    currencies: CryptoCurrency[];
   };
 };
+
+function convertCoinGeckoSymbol(coinGeckoSymbol: string) {
+  switch (coinGeckoSymbol) {
+    case "ethereum":
+      return CryptoSymbol.ETH;
+    case "matic-network":
+      return CryptoSymbol.MATIC;
+  }
+
+  throw new Error(`Unsupported CoinGecko symbol: ${coinGeckoSymbol}`);
+}
 
 export const CryptoPricesProvider = ({
   config,
   children,
 }: React.PropsWithChildren<Props>) => {
-  const { coinGecko } = config || {
-    coinGecko: {
-      symbols: ["ethereum", "matic-network"],
-    },
-  };
+  const { currencies = ALL_CURRENCIES } = config || {};
   const [state, setState] = React.useState<State>({});
 
   const fetchPrices = React.useCallback(async () => {
-    if (coinGecko) {
-      setState({ loading: true });
+    setState({ loading: true });
 
-      try {
-        const { data: coinGeckoResult } =
-          await axios.get<PricesDictionariesBySymbol>(
-            `https://api.coingecko.com/api/v3/simple/price?ids=${coinGecko.symbols.join(
-              ","
-            )}&vs_currencies=usd`
-          );
+    try {
+      const { data: coinGeckoResult } = await axios.get(
+        `https://api.coingecko.com/api/v3/simple/price?ids=${currencies
+          .map((c) => c.coinGeckoId)
+          .join(",")}&vs_currencies=usd`
+      );
 
-        setState({ data: { coinGecko: coinGeckoResult }, loading: false });
-      } catch (e) {
-        setState({ error: e as Error, loading: false });
+      const data: PricesDictionariesBySymbol = {} as PricesDictionariesBySymbol;
+
+      for (const coinGeckoSymbol in coinGeckoResult) {
+        data[convertCoinGeckoSymbol(coinGeckoSymbol)] =
+          coinGeckoResult[coinGeckoSymbol];
       }
+
+      setState({ data, loading: false });
+    } catch (e) {
+      setState({ error: e as Error, loading: false });
     }
-  }, [coinGecko]);
+  }, [currencies]);
 
   /* eslint-disable react-hooks/exhaustive-deps */
   React.useEffect(() => {

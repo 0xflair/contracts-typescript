@@ -8,14 +8,8 @@ export enum CryptoUnits {
   ETHER = "ether",
 }
 
-export type CryptoSymbol = string;
-
 export enum PriceBaseCurrency {
   USD = "usd",
-}
-
-export enum PriceUpstream {
-  COIN_GECKO = "coinGecko",
 }
 
 export type CryptoPriceDictionary = Record<PriceBaseCurrency, number>;

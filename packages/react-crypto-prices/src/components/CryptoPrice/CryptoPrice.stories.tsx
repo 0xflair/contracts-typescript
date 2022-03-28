@@ -3,6 +3,7 @@ import { CryptoPricesProvider } from "../../providers";
 import { CryptoPrice } from "./CryptoPrice";
 import { useCryptoPricesContext } from "../../providers/crypto-prices";
 import { CryptoUnits } from "../../types";
+import { CryptoSymbol } from "../../constants/currencies";
 
 export default {
   title: "CryptoPrice Component",
@@ -24,13 +25,13 @@ export const Default = () => {
     <>
       <ul className="grid gap-4">
         <li>
-          ETH Price = <CryptoPrice symbol="ethereum" />
+          ETH Price = <CryptoPrice symbol={'rETH' as CryptoSymbol} />
         </li>
         <li>
           Value = 0.06 ETH ={" "}
           <CryptoPrice
             value={"0.06"}
-            symbol="ethereum"
+            symbol={CryptoSymbol.ETH}
             unit={CryptoUnits.ETHER}
           />{" "}
           USD
