@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.9.4 (2022-03-28)
+
+
+### Bug Fixes
+
+* use a better name ([debd8b4](https://github.com/0xflair/typescript-sdk/commit/debd8b4d693ad02e890ac8ea16d8046da9c83867))
+
+
+
+
+
 ## 0.9.3 (2022-03-28)
 
 
