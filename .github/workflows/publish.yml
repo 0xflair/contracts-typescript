@@ -11,6 +11,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
+      - name: Setup node 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
       - name: Install dependencies
         run: npm install
 
@@ -18,9 +23,9 @@ jobs:
         run: npm run build
         shell: bash
 
-      - name: Test
-        run: npm run test
-        shell: bash
+      # - name: Test
+      #   run: npm run test
+      #   shell: bash
 
       - name: Config git user
         run: |
