@@ -1,11 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { CryptoPriceDictionary } from "../types";
-import {
-  ALL_CURRENCIES,
-  CryptoCurrency,
-  CryptoSymbol,
-} from "../constants/currencies";
+import { CryptoCurrency, CryptoPriceDictionary, CryptoSymbol } from "../types";
+import { ALL_CURRENCIES } from "../constants/currencies";
 
 type PricesDictionariesBySymbol = Record<CryptoSymbol, CryptoPriceDictionary>;
 

@@ -1,9 +1,8 @@
 import React from "react";
 import { BigNumber } from "@ethersproject/bignumber";
-import { CryptoUnits } from "../../types";
+import { CryptoSymbol, CryptoUnits } from "../../types";
 import { useCryptoPrice } from "../../hooks";
 import * as ethers from "ethers";
-import { CryptoSymbol } from "../../constants/currencies";
 
 type Props = {
   value?: string | BigNumber;
@@ -14,7 +13,7 @@ type Props = {
 
 export const CryptoPrice = (props: Props) => {
   const {
-    value = '1',
+    value = "1",
     fractionDigits = 2,
     unit = CryptoUnits.ETHER,
     symbol = CryptoSymbol.ETH,
@@ -24,7 +23,7 @@ export const CryptoPrice = (props: Props) => {
     symbol,
   });
 
-  const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
+  const valueBn = ethers.utils.parseUnits(value?.toString() || "0", unit);
   const etherValue = ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
 
   return <>{(Number(etherValue) * Number(data)).toFixed(fractionDigits)}</>;

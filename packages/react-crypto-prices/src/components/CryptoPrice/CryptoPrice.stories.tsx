@@ -2,8 +2,7 @@ import React from "react";
 import { CryptoPricesProvider } from "../../providers";
 import { CryptoPrice } from "./CryptoPrice";
 import { useCryptoPricesContext } from "../../providers/crypto-prices";
-import { CryptoUnits } from "../../types";
-import { CryptoSymbol } from "../../constants/currencies";
+import { CryptoSymbol, CryptoUnits } from "../../types";
 
 export default {
   title: "CryptoPrice Component",

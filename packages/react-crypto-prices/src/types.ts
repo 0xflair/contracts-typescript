@@ -1,3 +1,16 @@
+export enum CryptoSymbol {
+  ETH = "ETH",
+  MATIC = "MATIC",
+}
+
+export type CryptoCurrency = {
+  symbol: CryptoSymbol;
+  name: string;
+  icon?: React.ReactNode;
+  coinGeckoId?: string;
+  wagmiId?: string;
+};
+
 export enum CryptoUnits {
   WEI = "wei",
   KWEI = "kwei",

@@ -1,8 +1,7 @@
 import * as React from "react";
-import { CryptoSymbol } from "../constants/currencies";
 
 import { useCryptoPricesContext } from "../providers";
-import { PriceBaseCurrency } from "../types";
+import { CryptoSymbol, PriceBaseCurrency } from "../types";
 
 type Config = {
   symbol?: CryptoSymbol;

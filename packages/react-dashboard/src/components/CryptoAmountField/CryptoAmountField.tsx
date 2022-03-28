@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useNetwork } from "wagmi";
-import { CryptoPrice } from "@0xflair/react-crypto-prices";
+import { CryptoSymbol, CryptoPrice } from "@0xflair/react-crypto-prices";
 
 type Props = {
   label: string;
@@ -30,7 +30,7 @@ export default function CryptoAmountField(props: Props) {
             {networkData.chain?.nativeCurrency?.name} (
             <CryptoPrice
               value={value}
-              symbol={networkData.chain?.nativeCurrency?.symbol}
+              symbol={networkData.chain?.nativeCurrency?.symbol as CryptoSymbol}
             />{" "}
             USD)
           </span>
