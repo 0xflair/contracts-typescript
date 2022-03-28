@@ -9,7 +9,7 @@ type Props = {
   onChange: (event: any) => void;
 };
 
-export default function CryptoAmountField(props: Props) {
+export const CryptoAmountField = (props: Props) => {
   const { label, description, value, onChange } = props;
 
   const [{ data: networkData }] = useNetwork();
