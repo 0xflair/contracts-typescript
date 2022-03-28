@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Contract, ContractFactory, ContractInterface, Signer } from "ethers";
 import { useMemo } from "react";
-import { useCancel } from '@0xflair/react-common';
+import { useCancel } from "@0xflair/react-common";
 
 export type ContractDeployerConfig = {
   /** Contract interface or ABI */
@@ -57,7 +57,7 @@ export const useContractDeployer = <ArgsType extends any[]>({
       try {
         setState((x) => ({ ...x, error: undefined, loading: true }));
 
-        const contract = await contractFactory.deploy(args);
+        const contract = await contractFactory.deploy(...args);
 
         if (!didCancel) {
           setState((x) => ({ ...x, contract, loading: false }));
