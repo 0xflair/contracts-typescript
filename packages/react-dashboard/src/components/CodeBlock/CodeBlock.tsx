@@ -47,11 +47,11 @@ export const CodeBlock = (props: CodeBlockProps) => {
       language={language || "typescript"}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Pre className={classNames(className, "relative")} style={style}>
+        <Pre className={classNames(className, "relative group")} style={style}>
           <div className="relative top-0 right-0 w-full flex justify-end">
             <button
               type="button"
-              className="absolute top-0 right-0 inline-flex items-center px-1.5 py-0.5 border border-gray-300 shadow-sm text-xs font-bold rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="absolute hidden group-hover:inline-flex top-0 right-0 items-center px-1.5 py-0.5 border border-gray-300 shadow-sm text-xs font-bold rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               onClick={() => {
                 copy(code);
                 setCopiedRecently(true);
