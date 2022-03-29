@@ -5,3 +5,10 @@ export const FLAIR_CHAINS: Chain[] = WagmiChains.filter((chain) => FLAIR_CHAIN_I
 export const FLAIR_DEFAULT_CHAIN = FLAIR_CHAINS.find(
   (c) => c.id === 4 /* rinkeby */
 ) as Chain;
+
+export const FLAIR_CHAIN_MACHINE_NAMES = {
+  1: 'mainnet',
+  4: 'rinkeby',
+  137: 'matic',
+  80001: 'mumbai',
+}
