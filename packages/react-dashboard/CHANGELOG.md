@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.10.1 (2022-03-29)
+
+
+### Bug Fixes
+
+* add machine name mapping for chains ([47f1403](https://github.com/0xflair/typescript-sdk/commit/47f1403d43bfbc92c0a3ce1aacf3c604ef9f400d))
+
+
+
+
+
 # 0.10.0 (2022-03-29)
 
 
