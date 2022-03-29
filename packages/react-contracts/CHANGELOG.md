@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.10.0 (2022-03-29)
+
+
+### Features
+
+* add ui components and hoverable copy button in code block ([e362c6e](https://github.com/0xflair/typescript-sdk/commit/e362c6e3164adc438ca084948d0bada8c94c2ede))
+
+
+
+
+
 ## 0.9.7 (2022-03-28)
 
 
