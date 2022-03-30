@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.11.3 (2022-03-30)
+
+
+### Bug Fixes
+
+* export contracts registry from flair sdk ([5707e04](https://github.com/0xflair/typescript-sdk/commit/5707e041248a02c78ef1ac9145d05f356d66f690))
+
+
+
+
+
 ## 0.11.2 (2022-03-30)
 
 
