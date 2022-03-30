@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.11.7 (2022-03-30)
+
+
+### Bug Fixes
+
+* add generic type to sticky state hook ([7e41444](https://github.com/0xflair/typescript-sdk/commit/7e41444470fa7e5f842c883a1bd1fb274feb90c5))
+
+
+
+
+
 ## 0.11.6 (2022-03-30)
 
 
