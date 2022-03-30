@@ -52,12 +52,12 @@
     ]
   },
   "peerDependencies": {
-    "@0xflair/react-common": "^0.10.1",
+    "@0xflair/react-common": "^0.11.4",
     "axios": "^0.26.1",
     "react": "^17.0.2"
   },
   "devDependencies": {
-    "@0xflair/react-common": "^0.10.1",
+    "@0xflair/react-common": "^0.11.4",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@rollup/plugin-commonjs": "^21.0.2",
