@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.11.5 (2022-03-30)
+
+
+### Bug Fixes
+
+* package versions in flair-sdk ([a84280e](https://github.com/0xflair/typescript-sdk/commit/a84280ed3ffa05fced6ee83a6b15caadd617d017))
+
+
+
+
+
 ## 0.11.4 (2022-03-30)
 
 

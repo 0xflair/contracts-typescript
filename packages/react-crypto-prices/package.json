@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-crypto-prices",
-  "version": "0.11.4",
+  "version": "0.11.5",
   "private": false,
   "repository": {
     "type": "git",
@@ -52,6 +52,7 @@
     ]
   },
   "peerDependencies": {
+    "@0xflair/react-common": "^0.11.4",
     "@ethersproject/bignumber": "^5.6.0",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
@@ -60,11 +61,10 @@
     "axios": "^0.26.1",
     "ethers": "^5.6.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "@0xflair/react-common": "^0.11.4"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@0xflair/react-common": "^0.11.4",
+    "@0xflair/react-common": "^0.11.5",
     "@ethersproject/bignumber": "^5.6.0",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
