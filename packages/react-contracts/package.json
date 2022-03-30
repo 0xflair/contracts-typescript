@@ -50,7 +50,8 @@
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "wagmi": "^0.2.21"
+    "wagmi": "^0.2.21",
+    "@0xflair/react-common": "^0.10.1"
   },
   "devDependencies": {
     "@0xflair/contracts-registry": "^0.10.1",

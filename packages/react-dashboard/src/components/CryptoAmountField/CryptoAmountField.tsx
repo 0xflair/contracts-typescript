@@ -2,14 +2,14 @@ import * as React from "react";
 import { useNetwork } from "wagmi";
 import { CryptoSymbol, CryptoPrice } from "@0xflair/react-crypto-prices";
 
-type Props = {
+export type CryptoAmountFieldProps = {
   label: string;
   description?: React.ReactNode;
   value: any;
   onChange: (event: any) => void;
 };
 
-export const CryptoAmountField = (props: Props) => {
+export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
   const { label, description, value, onChange } = props;
 
   const [{ data: networkData }] = useNetwork();
