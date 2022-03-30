@@ -1,6 +1,6 @@
 # Flair SDK: `react-ipfs`
 
-React components and hooks to work with IPFS.
+React components and hooks to work with IPFS. This library uses Flair's APIs to upload and pin the file to IPFS, but the file will not be stored on the backend.
 
 ## Getting Started
 
@@ -43,34 +43,27 @@ React components and hooks to work with IPFS.
 
 ### Usage
 
-#### IPFS Upload (using @0xflair/react-dashboard's image field)
+#### IPFS Uploader Hook
 
 ```tsx
-import { CryptoPrice, CryptoUnits } from "@0xflair/react-crypto-prices";
+import { useIpfsUploader } from "@0xflair/react-ipfs";
 
 function App() {
-  return (
-    <>
-      <CryptoPrice value='0.06' unit={CryptoUnits.ETHER} />
-    </>
-  );
-```
-
-#### Price Hook
-
-```tsx
-import { useCryptoPrice } from "@0xflair/react-crypto-prices";
-
-function App() {
-  const [{data, error, loading}, fetchPrice] = useCryptoPrice({
-    symbol: 'ethereum'
+  const [userFile, serUserFile] = useState<File>();
+  const [{
+    data: ipfsUrl,
+    error: ipfsError,
+    loading: ipfsLoading
+  }, ipfsUpload] = useIpfsUploader({
+    autoUpload: true,
+    fromFile: userFile,
   });
 
   return (
     <ul>
-        <li>Price of Ether: {data.usd} USD</li>
-        <li>Loading: {loading ? 'Yes...' : 'Idle'}</li>
-        <li>Error: {error}</li>
+      <li>Choose file: <input type="file" value={userFile} onChange={setUserFile} /></li>
+      <li>IPFS Loading: {ipfsLoading ? 'Yes...' : 'Idle'}</li>
+      <li>IPFS Error: {ipfsError?.message || ipfsError?.toString()}</li>
     </ul>
   );
 ```

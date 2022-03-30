@@ -1,6 +1,4 @@
 import {
-  IpfsUploaderHook,
-  IpfsUploaderOptions,
   IpfsUploadResult,
 } from "../types";
 import axios from "axios";

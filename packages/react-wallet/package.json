@@ -101,5 +101,8 @@
     "typescript": "^4.6.2",
     "wagmi": "^0.2.21",
     "webpack": "^5.70.0"
+  },
+  "dependencies": {
+    "@0xflair/react-common": "^0.10.1"
   }
 }

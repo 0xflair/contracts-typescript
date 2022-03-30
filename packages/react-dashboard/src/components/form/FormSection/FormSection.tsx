@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Switch } from "@headlessui/react";
-import { classNames } from "../../utils";
+import { classNames } from "@0xflair/react-common";
 
 export type FormSectionProps = {
   title: string;

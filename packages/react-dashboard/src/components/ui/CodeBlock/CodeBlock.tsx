@@ -4,7 +4,7 @@ import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import { useCopyToClipboard } from "usehooks-ts";
 import theme from "prism-react-renderer/themes/vsDark";
 import { ClipboardCopyIcon, CheckCircleIcon } from "@heroicons/react/solid";
-import { classNames } from "../../../utils";
+import { classNames } from "@0xflair/react-common";
 
 export type CodeBlockProps = {
   code: string;
