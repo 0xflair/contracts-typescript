@@ -1,6 +1,10 @@
 {
   "name": "@0xflair/typescript-sdk",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xflair/typescript-sdk.git"
+  },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
