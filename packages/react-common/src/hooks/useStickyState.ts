@@ -1,9 +1,12 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
-export const useStickyState = <T>(defaultValue: any, key: string) => {
-  const [value, setValue] = React.useState<T>(() => {
+export const useStickyState = <S>(
+  initialState: S,
+  key: string
+): [S, Dispatch<SetStateAction<S>>] => {
+  const [value, setValue] = React.useState<S>(() => {
     const stickyValue = window.localStorage.getItem(key);
-    return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue;
+    return stickyValue !== null ? JSON.parse(stickyValue) : initialState;
   });
 
   React.useEffect(() => {
