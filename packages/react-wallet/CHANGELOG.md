@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.11.6 (2022-03-30)
+
+
+### Bug Fixes
+
+* export stricky state hook ([f8014c0](https://github.com/0xflair/typescript-sdk/commit/f8014c0c853f3faba508e31e583e53251dbcd257))
+
+
+
+
+
 ## 0.11.5 (2022-03-30)
 
 
