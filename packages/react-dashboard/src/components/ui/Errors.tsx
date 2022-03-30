@@ -5,7 +5,7 @@ import {
   translateContractError,
 } from '../../utils/errors';
 
-export interface Props {
+interface Props {
   error?: string | string[] | null | Error | any;
 }
 
