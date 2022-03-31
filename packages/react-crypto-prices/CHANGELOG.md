@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.11.9 (2022-03-31)
+
+
+### Bug Fixes
+
+* correct signature for setting file and preview on image field ([5203faf](https://github.com/0xflair/typescript-sdk/commit/5203faf63f86056a0b7504168a2dae474bc5a47d))
+
+
+
+
+
 ## 0.11.8 (2022-03-30)
 
 
