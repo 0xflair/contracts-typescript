@@ -11,6 +11,8 @@ export const DefaultImageField = (args: ImageFieldProps) => {
     <div className="bg-gray-100 p-8">
       <ImageField
         {...args}
+        imageFile={imageFile}
+        imagePreview={imagePreview}
         setImageFile={setImageFile}
         setImagePreview={setImagePreview}
       />

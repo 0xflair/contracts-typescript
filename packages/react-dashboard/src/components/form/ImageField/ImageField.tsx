@@ -5,8 +5,10 @@ export type ImageFieldProps = {
   label: string;
   description?: string;
   className?: string;
+  imageFile?: File;
+  imagePreview?: string;
   setImageFile: (value: File) => void;
-  setImagePreview?: (value: string) => void;
+  setImagePreview: (value: string) => void;
 };
 
 export const ImageField = (props: ImageFieldProps) => {
@@ -14,25 +16,19 @@ export const ImageField = (props: ImageFieldProps) => {
     label,
     description,
     className,
-    setImageFile: parentSetImageFile,
-    setImagePreview: parentSetImagePreview,
+    imageFile,
+    imagePreview,
+    setImageFile,
+    setImagePreview,
   } = props;
-
-  const [imageFile, setImageFile] = useState<File>();
-  const [imagePreview, setImagePreview] = useState<string>();
 
   const onDrop = useCallback(
     (acceptedFiles: any) => {
       const base64Url = URL.createObjectURL(acceptedFiles[0]);
       setImageFile(acceptedFiles[0]);
-      parentSetImageFile(acceptedFiles[0]);
-
       setImagePreview(base64Url);
-      if (parentSetImagePreview) {
-        parentSetImagePreview(base64Url);
-      }
     },
-    [parentSetImageFile, parentSetImagePreview, setImagePreview]
+    [setImageFile, setImagePreview]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
