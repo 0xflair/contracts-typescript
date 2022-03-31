@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.11.10 (2022-03-31)
+
+
+### Bug Fixes
+
+* accept values for file and preview from parent component ([4961167](https://github.com/0xflair/typescript-sdk/commit/4961167cf58c773b3d7149a78dd55db37e62522d))
+
+
+
+
+
 ## 0.11.9 (2022-03-31)
 
 
