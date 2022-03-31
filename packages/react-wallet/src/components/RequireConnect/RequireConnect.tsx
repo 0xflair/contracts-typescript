@@ -71,7 +71,7 @@ export const RequireConnect = (props: Props) => {
                   {switchNetwork ? (
                     FLAIR_CHAINS.map((chain) => (
                       <>
-                        <button onClick={() => switchNetwork(chain.id)}>
+                        <button key={chain.id} onClick={() => switchNetwork(chain.id)}>
                           {chain.name}
                         </button>
                         {", "}

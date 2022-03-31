@@ -5,8 +5,8 @@ export type ImageFieldProps = {
   label: string;
   description?: string;
   className?: string;
-  setImageFile: React.Dispatch<React.SetStateAction<File | undefined>>;
-  setImagePreview?: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setImageFile: (value: File) => void;
+  setImagePreview?: (value: string) => void;
 };
 
 export const ImageField = (props: ImageFieldProps) => {
