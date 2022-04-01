@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.12.3 (2022-04-01)
+
+
+### Bug Fixes
+
+* add more chains for flair supported ones ([305db7c](https://github.com/0xflair/typescript-sdk/commit/305db7c083eda75f606c8fee995ee66df8f1eea8))
+
+
+
+
+
 ## 0.12.2 (2022-04-01)
 
 
