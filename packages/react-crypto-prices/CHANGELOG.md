@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.12.0 (2022-04-01)
+
+
+### Features
+
+* add v1.2 contracts to registry ([e306ea4](https://github.com/0xflair/typescript-sdk/commit/e306ea4ff934d6b3c67a88bf08d6786e250f9f50))
+
+
+
+
+
 ## 0.11.14 (2022-04-01)
 
 
