@@ -17,6 +17,13 @@ export default {
 type Config = {
   collectionName: string;
   collectionSymbol: string;
+  collectionMetadataUri: string;
+  placeholderMetadataUri: string;
+  maxSupply: number;
+  preSalePrice: number;
+  preSaleMaxPerWallet: number;
+  publicSalePrice: number;
+  maxMintPerTx: number;
 };
 
 export const Default = (args: Config) => {
@@ -33,6 +40,13 @@ export const Default = (args: Config) => {
     return deployContract(
       args.collectionName,
       args.collectionSymbol,
+      args.collectionMetadataUri,
+      args.placeholderMetadataUri,
+      args.maxSupply,
+      args.preSalePrice,
+      args.preSaleMaxPerWallet,
+      args.publicSalePrice,
+      args.maxMintPerTx
     );
   }, [deployContract]);
 
@@ -61,4 +75,11 @@ export const Default = (args: Config) => {
 Default.args = {
   collectionName: "Flair Angels",
   collectionSymbol: "ANGEL",
+  collectionMetadataUri: "ipfs://xxxxx",
+  placeholderMetadataUri: "ipfs://xxxxx",
+  maxSupply: 10000,
+  preSalePrice: 1000000000000000000,
+  preSaleMaxPerWallet: 2,
+  publicSalePrice: 10000000000000000000,
+  maxMintPerTx: 10,
 } as Config;
