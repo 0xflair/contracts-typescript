@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.11.14 (2022-04-01)
+
+
+### Bug Fixes
+
+* add suffix for button classes ([5975e2a](https://github.com/0xflair/typescript-sdk/commit/5975e2acf44d2b4ad555c1d4616256e8d301ff47))
+
+
+
+
+
 ## 0.11.13 (2022-04-01)
 
 
