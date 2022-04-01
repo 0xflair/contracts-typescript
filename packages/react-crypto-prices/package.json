@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-crypto-prices",
-  "version": "0.11.12",
+  "version": "0.11.13",
   "private": false,
   "repository": {
     "type": "git",
@@ -64,7 +64,7 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@0xflair/react-common": "^0.11.12",
+    "@0xflair/react-common": "^0.11.13",
     "@ethersproject/bignumber": "^5.6.0",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
