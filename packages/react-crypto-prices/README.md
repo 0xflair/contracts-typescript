@@ -21,7 +21,7 @@ React components and hooks to get prices of cryptocurrency coins and tokens from
    npm install tailwindcss @headlessui/react @heroicons/react @tailwindcss/aspect-ratio
    ```
 
-3. Configure `tailwind.config.js` to scan SDK for classes (if visual components needed):
+3. Configure `tailwind.config.js` (Tailwind v3) to scan SDK for classes (if visual components needed):
 
    ```javascript
    module.exports = {

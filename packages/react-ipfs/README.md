@@ -21,7 +21,7 @@ React components and hooks to work with IPFS. This library uses Flair's APIs to 
    npm install tailwindcss @headlessui/react @heroicons/react @tailwindcss/aspect-ratio
    ```
 
-3. Configure `tailwind.config.js` to scan SDK for classes (if visual components needed):
+3. Configure `tailwind.config.js` (Tailwind v3) to scan SDK for classes (if visual components needed):
 
    ```javascript
    module.exports = {

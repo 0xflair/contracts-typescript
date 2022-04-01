@@ -1,6 +1,6 @@
-# Flair SDK: `react-dashboard`
+# Flair SDK: `react-nft-collections`
 
-Tailwind and React components and hooks that helps building a web3 dApp dashboard.
+Ready-made React components and hooks for working with ERC721 and ERC1155 NFTs in a web3 dApp. This SDK also supports interacting with Flair smart contracts and extensions.
 
 ## Getting Started
 
@@ -9,12 +9,15 @@ Tailwind and React components and hooks that helps building a web3 dApp dashboar
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-dashboard
+   npm install @0xflair/react-nft-collections
    ```
 
-2. Install peer dependencies if not already done:
+2. Install peer dependencies if not installed yet:
 
    ```sh
+   npm install ethers wagmi
+
+   # and if using visual components:
    npm install tailwindcss @headlessui/react @heroicons/react @tailwindcss/aspect-ratio
    ```
 
@@ -38,20 +41,18 @@ Tailwind and React components and hooks that helps building a web3 dApp dashboar
    };
    ```
 
-### Example
+4. Configure the React provider:
+   TODO
+
+### Usage
 
 ```ts
-import { FormSection } from "@0xflair/react-dashboard";
+import { NetworkSelector } from "@0xflair/react-wallet";
 
-function CreatePage() {
+function App() {
   return (
     <>
-      <FormSection
-        title={"Wallet Info"}
-        description={"Provide information about your wallet"}
-      >
-        ...
-      </FormSection>
+        Your network: <NetworkSelector />
     </>
   );
 ```
