@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.11.11 (2022-04-01)
+
+
+### Bug Fixes
+
+* allow ignoring keys on sticky state ([31d65b7](https://github.com/0xflair/typescript-sdk/commit/31d65b75c447763210130befefb56ad05b1432d8))
+
+
+
+
+
 ## 0.11.10 (2022-03-31)
 
 
