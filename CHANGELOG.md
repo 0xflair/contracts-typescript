@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.12.1 (2022-04-01)
+
+
+### Bug Fixes
+
+* use major version locking for peer deps ([efc4547](https://github.com/0xflair/typescript-sdk/commit/efc45475526cb667a28edbd9b676cd37d5a44012))
+
+
+
+
+
 # 0.12.0 (2022-04-01)
 
 
