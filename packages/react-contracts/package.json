@@ -52,8 +52,8 @@
     ]
   },
   "peerDependencies": {
-    "@0xflair/contracts-registry": "^0.11.12",
-    "@0xflair/react-common": "^0.11.12",
+    "@0xflair/contracts-registry": "0.*",
+    "@0xflair/react-common": "0.*",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "wagmi": "^0.2.21"
