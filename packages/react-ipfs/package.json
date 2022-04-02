@@ -57,7 +57,7 @@
     "react": "^17.0.2"
   },
   "devDependencies": {
-    "@0xflair/react-common": "^0.11.4",
+    "@0xflair/react-common": "^0.13.1",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@rollup/plugin-commonjs": "^21.0.2",
@@ -95,8 +95,5 @@
     "rollup-plugin-postcss": "^4.0.2",
     "typescript": "^4.6.2",
     "webpack": "^5.70.0"
-  },
-  "dependencies": {
-    "@0xflair/react-common": "^0.13.1"
   }
 }
