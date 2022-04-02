@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-dashboard",
-  "version": "0.13.1",
+  "version": "0.13.2",
   "private": false,
   "repository": {
     "type": "git",
@@ -52,9 +52,9 @@
     ]
   },
   "peerDependencies": {
+    "@0xflair/react-common": "0.*",
     "@0xflair/react-crypto-prices": "0.*",
     "@0xflair/react-wallet": "0.*",
-    "@0xflair/react-common": "0.*",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@tailwindcss/aspect-ratio": "^0.4.0",
@@ -68,9 +68,9 @@
     "wagmi": "^0.2.21"
   },
   "devDependencies": {
-    "@0xflair/react-crypto-prices": "^0.13.1",
-    "@0xflair/react-wallet": "^0.13.1",
-    "@0xflair/react-common": "^0.13.1",
+    "@0xflair/react-common": "^0.13.2",
+    "@0xflair/react-crypto-prices": "^0.13.2",
+    "@0xflair/react-wallet": "^0.13.2",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@rollup/plugin-commonjs": "^21.0.2",
