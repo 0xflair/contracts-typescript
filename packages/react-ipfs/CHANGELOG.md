@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.13.0 (2022-04-02)
+
+
+### Features
+
+* add axios post and get hooks ([c472469](https://github.com/0xflair/typescript-sdk/commit/c4724695a96cdcfeb2b7898ca17f04653d251dea))
+
+
+
+
+
 ## 0.12.3 (2022-04-01)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-common",
-  "version": "0.12.3",
+  "version": "0.13.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -52,10 +52,10 @@
     ]
   },
   "peerDependencies": {
+    "axios": "^0.26.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-use": "^17.3.2",
-    "axios": "^0.26.1"
+    "react-use": "^17.3.2"
   },
   "devDependencies": {
     "@headlessui/react": "^1.5.0",
