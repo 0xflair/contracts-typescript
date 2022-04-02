@@ -22,9 +22,8 @@ export const useAxiosGet = <T>({
   const sendGet = useCallback(() => {
     let unmounted = false;
     let source = axios.CancelToken.source();
-
     setLoading(true);
-
+    setError(undefined);
     axios
       .get<T>(url, {
         params,

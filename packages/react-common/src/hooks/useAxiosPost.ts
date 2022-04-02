@@ -17,11 +17,13 @@ export const useAxiosPost = <T>({
 }: Config) => {
   const [response, setResponse] = useState<T | null>(null);
   const [error, setError] = useState<Error>();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const sendPost = useCallback(() => {
     let unmounted = false;
     let source = axios.CancelToken.source();
+    setLoading(true);
+    setError(undefined);
     axios
       .post<T>(url, data, {
         cancelToken: source.token,
