@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.13.1 (2022-04-02)
+
+
+### Bug Fixes
+
+* consistent interface for the hooks ([ce0ec5b](https://github.com/0xflair/typescript-sdk/commit/ce0ec5bdcdff66515c28bdf58debc12883415729))
+
+
+
+
+
 # 0.13.0 (2022-04-02)
 
 
