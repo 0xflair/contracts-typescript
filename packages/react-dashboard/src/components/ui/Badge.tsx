@@ -12,7 +12,7 @@ export const Badge = (props: Props) => {
   // views
   return (
     <span
-      className={`inline-flex mr-4 items-center rounded-full text-xs font-medium h-6 px-2.5 py-0.5 bg-${color}-100 bg-opacity-75 text-${color}-800`}
+      className={`inline-flex items-center rounded-full text-xs font-medium h-6 px-2.5 py-0.5 bg-${color}-100 bg-opacity-75 text-${color}-800`}
     >
       <svg
         className={`-ml-0.5 mr-1.5 h-2 w-2 text-${color}-800`}

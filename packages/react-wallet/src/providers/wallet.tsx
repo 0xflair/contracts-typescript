@@ -5,8 +5,11 @@ import { InjectedConnector } from "wagmi-core";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { WalletLinkConnector } from "wagmi/connectors/walletLink";
 
-import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from "../utils";
-import { FLAIR_INFURA_PROJECT_ID } from "../utils/infura";
+import {
+  FLAIR_CHAINS,
+  FLAIR_DEFAULT_CHAIN,
+  FLAIR_INFURA_PROJECT_ID,
+} from "../constants";
 
 type Config = {
   appName?: string;

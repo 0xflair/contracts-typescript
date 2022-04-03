@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Listbox, Transition } from "@headlessui/react";
 import { Chain, useNetwork } from "wagmi";
-import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from "../../utils/chains";
+import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from "../../constants/chains";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { ExclamationIcon, LinkIcon, XCircleIcon } from "@heroicons/react/solid";
 import { useNetwork } from "wagmi";
-import { FLAIR_CHAINS } from "../../utils/chains";
+import { FLAIR_CHAINS } from "../../constants/chains";
 import { ConnectButton } from "../ConnectButton/ConnectButton";
 
 type Props = {

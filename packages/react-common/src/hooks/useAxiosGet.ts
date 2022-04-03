@@ -4,7 +4,7 @@ import { useDeepCompareEffect } from "react-use";
 
 type Config = {
   url: string;
-  params: any;
+  params?: any;
   timeout?: number;
   skip?: boolean;
 };
