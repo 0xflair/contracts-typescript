@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-dashboard",
-  "version": "0.13.3",
+  "version": "0.14.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -68,9 +68,9 @@
     "wagmi": "^0.2.21"
   },
   "devDependencies": {
-    "@0xflair/react-common": "^0.13.3",
-    "@0xflair/react-crypto-prices": "^0.13.3",
-    "@0xflair/react-wallet": "^0.13.3",
+    "@0xflair/react-common": "^0.14.0",
+    "@0xflair/react-crypto-prices": "^0.14.0",
+    "@0xflair/react-wallet": "^0.14.0",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@rollup/plugin-commonjs": "^21.0.2",

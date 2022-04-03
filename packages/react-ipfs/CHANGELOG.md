@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.14.0 (2022-04-03)
+
+
+### Features
+
+* add wallet login provider and hook ([bd4a9bc](https://github.com/0xflair/typescript-sdk/commit/bd4a9bc3913cfc57cb1661ca576f811c9a40746d))
+
+
+
+
+
 ## 0.13.3 (2022-04-02)
 
 
