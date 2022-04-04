@@ -1,10 +1,11 @@
-import axios from "axios";
+import axios, { AxiosRequestHeaders } from "axios";
 import { useCallback, useState } from "react";
 import { useDeepCompareEffect } from "react-use";
 
 type Config = {
   url: string;
   data: any;
+  headers?: AxiosRequestHeaders;
   timeout?: number;
   skip?: boolean;
 };
@@ -12,6 +13,7 @@ type Config = {
 export const useAxiosPost = <T>({
   url,
   data,
+  headers,
   timeout,
   skip = true,
 }: Config) => {
@@ -28,6 +30,7 @@ export const useAxiosPost = <T>({
       .post<T>(url, data, {
         cancelToken: source.token,
         timeout: timeout,
+        headers,
       })
       .then((a) => {
         if (!unmounted) {
