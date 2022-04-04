@@ -19,7 +19,7 @@ type ContextValue = {
 
 export const Context = React.createContext<ContextValue | null>(null);
 
-export type Props = {
+export type CryptoPricesProviderProps = {
   config?: {
     currencies: CryptoCurrency[];
   };
@@ -39,7 +39,7 @@ function convertCoinGeckoSymbol(coinGeckoSymbol: string) {
 export const CryptoPricesProvider = ({
   config,
   children,
-}: React.PropsWithChildren<Props>) => {
+}: React.PropsWithChildren<CryptoPricesProviderProps>) => {
   const { currencies = ALL_CURRENCIES } = config || {};
   const [state, setState] = React.useState<State>({});
 
