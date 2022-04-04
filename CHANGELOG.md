@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.14.2 (2022-04-04)
+
+
+### Bug Fixes
+
+* export login provider from barrel ([9c807ce](https://github.com/0xflair/typescript-sdk/commit/9c807ce0c2e31ba9bb1c1e770d91733b4ab4f0ee))
+
+
+
+
+
 ## 0.14.1 (2022-04-04)
 
 
