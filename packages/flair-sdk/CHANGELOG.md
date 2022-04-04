@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.15.0 (2022-04-04)
+
+
+### Features
+
+* support headers in axios hooks ([dbebb06](https://github.com/0xflair/typescript-sdk/commit/dbebb068defbca19b0e3e901bed90658c2648b0f))
+
+
+
+
+
 ## 0.14.4 (2022-04-04)
 
 
