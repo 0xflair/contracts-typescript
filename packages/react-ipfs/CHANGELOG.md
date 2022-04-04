@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.14.1 (2022-04-04)
+
+
+### Bug Fixes
+
+* export props with specific name ([b8f3d65](https://github.com/0xflair/typescript-sdk/commit/b8f3d650b9d91342f934162fd980ac180937eab7))
+
+
+
+
+
 # 0.14.0 (2022-04-03)
 
 
