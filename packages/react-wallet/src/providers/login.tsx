@@ -8,6 +8,7 @@ import { Environment } from "@0xflair/react-common";
 import axios from "axios";
 import json from "jsonwebtoken";
 import { WalletJwtClaims } from "../types";
+import { useCallback, useEffect } from "react";
 
 type SignedInWallet = {
   jwtToken: string;
@@ -21,7 +22,7 @@ type State = {
   error?: Error;
 };
 
-type ContextValue = {
+type LoginContextValue = {
   state: {
     /** Flag for when user-side signing is in progress */
     loginSigning?: State["loginSigning"];
@@ -33,31 +34,47 @@ type ContextValue = {
     error?: State["error"];
   };
   setState: React.Dispatch<React.SetStateAction<State>>;
+  login: () => Promise<void>;
+  logout: () => Promise<void>;
 };
 
-export const Context = React.createContext<ContextValue | null>(null);
+export enum AutoLoginMode {
+  NEVER = "never",
+  ONLY_IF_PREVIOUSLY_LOGGED_IN = "only_if_previously_logged_in",
+  ALWAYS = "always",
+}
 
-export type Props = {
+export const LoginContext = React.createContext<LoginContextValue | null>(null);
+
+export type LoginProviderProps = {
   /** Environment can be either 'prod' (default) or 'env' */
   env?: Environment;
-  /** Enables login attempt on mount as soon as wallet in connected */
-  autoLogin?: boolean;
+
+  /**
+   * Determines when to automatically login the wallet:
+   * - NEVER: never automatically login
+   * - ONLY_IF_PREVIOUSLY_LOGGED_IN: only if there's a wallet JWT stored in local storage
+   * - ALWAYS: always automatically ask to sign the message for login
+   */
+  autoLogin?: AutoLoginMode;
+
   /**
    * Key for saving connector preference to browser
    * @default 'flair.walletJwt'
    */
   loginStorageKey?: string;
+
   /** Timeout in milliseconds for login attempt */
   timeout?: number;
 };
 
 export const LoginProvider = ({
   env = Environment.PROD,
-  autoLogin = false,
+  autoLogin = AutoLoginMode.ONLY_IF_PREVIOUSLY_LOGGED_IN,
   children,
   loginStorageKey = "flair.walletJwt",
   timeout = 5000,
-}: React.PropsWithChildren<Props>) => {
+}: React.PropsWithChildren<LoginProviderProps>) => {
   const [{ data: account }] = useAccount();
   const [{ data: signer }] = useSigner();
   const [walletJwt, setWalletJwt] = useLocalStorage<string>(loginStorageKey);
@@ -67,74 +84,111 @@ export const LoginProvider = ({
     loginPosting: false,
   });
 
-  // Attempt to login connect on mount
+  // Login method that asks user to sign, verifies in the backend and stores the JWT in local storage
   const cancelQuery = useCancel();
-  React.useEffect(() => {
-    if (!autoLogin) return;
-    (async () => {
-      let didCancel = false;
-      let source = axios.CancelToken.source();
-      cancelQuery(() => {
-        didCancel = true;
-        source.cancel("Cancelling in cleanup");
-      });
+  const login = useCallback(async () => {
+    let didCancel = false;
+    let source = axios.CancelToken.source();
+    cancelQuery(() => {
+      didCancel = true;
+      source.cancel("Cancelling in cleanup");
+    });
+    try {
+      setState((x) => ({
+        ...x,
+        error: undefined,
+        loginSigning: true,
+        loginPosting: false,
+      }));
+      const signatureHex = await signer?.signMessage(LOGIN_MESSAGE_TO_SIGN);
+      if (didCancel) return;
 
-      if (!signer || !account) {
-        setState((x) => ({
-          ...x,
-          loginSigning: false,
-          loginPosting: false,
-          error: new Error("No wallet signer found for login"),
-        }));
-        return;
-      }
-
-      try {
-        setState((x) => ({ ...x, loginSigning: true }));
-        const signatureHash = await signer.signMessage(LOGIN_MESSAGE_TO_SIGN);
-
-        let jwtToken = walletJwt;
-        let jwtClaims = jwtToken
-          ? (json.decode(jwtToken) as WalletJwtClaims)
-          : undefined;
-
-        if (
-          !walletJwt ||
-          !jwtClaims ||
-          jwtClaims?.walletAddress !== account.address
-        ) {
-          setState((x) => ({ ...x, loginSigning: false, loginPosting: true }));
-          const response = await axios.post<{ jwtToken: string }>(
-            `${FLAIR_WALLET_BACKEND[env].host}${FLAIR_WALLET_BACKEND[env].loginEndpoint}`,
-            {
-              signatureHash,
-            },
-            {
-              cancelToken: source.token,
-              timeout: timeout,
-            }
-          );
-
-          jwtToken = response.data.jwtToken;
-          jwtClaims = json.decode(jwtToken) as WalletJwtClaims;
-
-          setWalletJwt(jwtToken);
+      setState((x) => ({
+        ...x,
+        error: undefined,
+        loginSigning: false,
+        loginPosting: true,
+      }));
+      const response = await axios.post<{ jwtToken: string }>(
+        `${FLAIR_WALLET_BACKEND[env].host}${FLAIR_WALLET_BACKEND[env].loginEndpoint}`,
+        {
+          walletAddress: account?.address,
+          signatureHex,
+        },
+        {
+          cancelToken: source.token,
+          timeout: timeout,
         }
+      );
+      if (didCancel) return;
 
-        setState((x) => ({
-          ...x,
-          data: {
-            jwtToken: jwtToken as string,
-            jwtClaims: jwtClaims as WalletJwtClaims,
-          },
-        }));
-      } catch (error: any) {
-        setState((x) => ({ ...x, error }));
-      } finally {
+      setWalletJwt(response.data.jwtToken);
+    } catch (error: any) {
+      if (!didCancel) {
+        setState((x) => ({ ...x, data: undefined, error }));
+      }
+    } finally {
+      if (!didCancel) {
         setState((x) => ({ ...x, loginSigning: false, loginPosting: false }));
       }
-    })();
-  }, [account?.address, signer]);
+    }
+  }, [cancelQuery, account?.address, signer]);
+
+  // Logout method that remove the wallet JWT from local storage
+  const logout = useCallback(async () => {
+    setWalletJwt("");
+  }, []);
+
+  // Initially logout if auto-login mode is NEVER.
+  useEffect(() => {
+    if (autoLogin === AutoLoginMode.NEVER && walletJwt) {
+      logout();
+    }
+  }, [walletJwt, autoLogin]);
+
+  // If wallet JWT is expired call logout.
+  useEffect(() => {
+    if (
+      state.data?.jwtClaims.exp &&
+      state.data.jwtClaims.exp < Date.now() / 1000
+    ) {
+      logout();
+    }
+  }, [state.data?.jwtClaims.exp]);
+
+  // Logout if connected wallet address is different than wallet JWT
+  useEffect(() => {
+    if (
+      account?.address &&
+      state.data?.jwtClaims?.walletAddress &&
+      state.data.jwtClaims.walletAddress.toLowerCase() !==
+        account.address.toLowerCase()
+    ) {
+      logout();
+    }
+  }, [account, state.data, logout]);
+
+  // Automatically attempt to login if auto-login mode is ALWAYS.
+  useEffect(() => {
+    if (
+      autoLogin === AutoLoginMode.ALWAYS &&
+      account?.address &&
+      !walletJwt &&
+      !state.data
+    ) {
+      login();
+    }
+  }, [autoLogin, account?.address, walletJwt, login]);
+
+  // Refresh the state whenever wallet JWT is changed.
+  useEffect(() => {
+    if (!walletJwt) {
+      setState((x) => ({ ...x, data: undefined }));
+    } else {
+      const jwtClaims = json.decode(walletJwt) as WalletJwtClaims;
+      setState((x) => ({ ...x, data: { jwtToken: walletJwt, jwtClaims } }));
+    }
+  }, [walletJwt]);
 
   const value = {
     state: {
@@ -144,13 +198,15 @@ export const LoginProvider = ({
       error: state.error,
     },
     setState,
+    login,
+    logout,
   };
 
-  return React.createElement(Context.Provider, { value }, children);
+  return React.createElement(LoginContext.Provider, { value }, children);
 };
 
 export const useLoginContext = () => {
-  const context = React.useContext(Context);
+  const context = React.useContext(LoginContext);
   if (!context) throw Error("Must be used within <LoginProvider>");
   return context;
 };

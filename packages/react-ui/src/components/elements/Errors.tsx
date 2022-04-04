@@ -1,9 +1,8 @@
-import * as React from 'react';
-
+import * as React from "react";
 import {
   extractHumanReadableError,
   translateContractError,
-} from '../../utils/errors';
+} from "@0xflair/react-common";
 
 interface Props {
   error?: string | string[] | null | Error | any;
@@ -13,9 +12,9 @@ export class Errors extends React.Component<Props> {
   render() {
     const { error } = this.props;
 
-    const mainClass = 'errors text-sm rounded-md bg-red-100 p-2 text-red-800';
+    const mainClass = "errors text-sm rounded-md bg-red-100 p-2 text-red-800";
 
-    if (typeof error === 'string') {
+    if (typeof error === "string") {
       return (
         <ul className={mainClass}>
           <li>{error}</li>
@@ -35,14 +34,14 @@ export class Errors extends React.Component<Props> {
       );
     }
 
-    if (typeof error === 'object') {
+    if (typeof error === "object") {
       if (error === null) {
-        return '';
+        return "";
       }
 
       if (error.response) {
         switch (error.response?.data?.code) {
-          case 'GITHUB_BAD_CREDENTIALS':
+          case "GITHUB_BAD_CREDENTIALS":
             return (
               <ul className={mainClass}>
                 <li>
@@ -81,6 +80,6 @@ export class Errors extends React.Component<Props> {
       );
     }
 
-    return '';
+    return "";
   }
 }

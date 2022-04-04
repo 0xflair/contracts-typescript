@@ -13,7 +13,7 @@ These components and hooks are for [React](https://reactjs.org/) framework to ea
 | `@0xflair/react-crypto-prices` | React components and hooks to work with crypto prices both as input or for display.                                   | [Docs](./packages/react-crypto-prices) |
 | `@0xflair/react-ipfs`          | Easy to use react hooks for working with IPFS such as uploading.                                                      | [Docs](./packages/react-ipfs)          |
 | `@0xflair/react-wallet`        | Ready-made drop-in wallet-related components and hooks, such as Connect button, Network switcher, Web3 provider, etc. | [Docs](./packages/react-wallet)        |
-| `@0xflair/react-dashboard`     | Tailwind and React components and hooks that helps building a web3 dApp dashboard.                                    | [Docs](./packages/react-dashboard)     |
+| `@0xflair/react-ui`     | Tailwind and React components and hooks that helps building a web3 dApp dashboard.                                    | [Docs](./packages/react-dashboard)     |
 
 ## Development
 

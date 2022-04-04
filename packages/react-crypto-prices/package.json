@@ -53,6 +53,7 @@
   },
   "peerDependencies": {
     "@0xflair/react-common": "0.*",
+    "@0xflair/react-wallet": "0.*",
     "@ethersproject/bignumber": "^5.6.0",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
@@ -61,10 +62,12 @@
     "axios": "^0.26.1",
     "ethers": "^5.6.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "wagmi": "^0.2.24"
   },
   "devDependencies": {
     "@0xflair/react-common": "^0.14.0",
+    "@0xflair/react-wallet": "^0.14.0",
     "@ethersproject/bignumber": "^5.6.0",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
@@ -80,7 +83,7 @@
     "@storybook/builder-webpack5": "^6.4.19",
     "@storybook/manager-webpack5": "^6.4.19",
     "@storybook/node-logger": "^6.4.19",
-    "@storybook/preset-create-react-app": "^4.1.0",
+    "@storybook/preset-create-react-app": "4.1.0",
     "@storybook/react": "^6.4.19",
     "@storybook/testing-library": "^0.0.9",
     "@testing-library/jest-dom": "^5.16.2",
@@ -92,8 +95,11 @@
     "@types/react": "^17.0.41",
     "@types/react-dom": "^17.0.14",
     "axios": "^0.26.1",
+    "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
     "ethers": "^5.6.2",
+    "https-browserify": "^1.0.0",
     "postcss": "^8.4.12",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -103,7 +109,10 @@
     "rollup-plugin-dts": "^4.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
     "typescript": "^4.6.2",
+    "wagmi": "^0.2.24",
     "webpack": "^5.70.0"
   }
 }

@@ -48,10 +48,11 @@ const setupConnectors = (config: Config) => {
 
 type Props = Config & {
   children?: React.ReactNode;
+  wagmiOverrides?: Record<string, any>;
 };
 
 export const WalletProvider = (props: Props) => {
-  const { children, appName, infuraId } = props;
+  const { children, appName, infuraId, wagmiOverrides } = props;
   const connectors = useMemo(() => setupConnectors(props), [appName, infuraId]);
 
   const provider = useCallback(
@@ -60,7 +61,12 @@ export const WalletProvider = (props: Props) => {
   );
 
   return (
-    <Provider autoConnect connectors={connectors} provider={provider}>
+    <Provider
+      autoConnect={true}
+      connectors={connectors}
+      provider={provider}
+      {...wagmiOverrides}
+    >
       {children}
     </Provider>
   );

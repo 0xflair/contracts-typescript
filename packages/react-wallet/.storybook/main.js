@@ -7,7 +7,6 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/addon-controls",
-    "@storybook/preset-create-react-app",
     "@storybook/addon-contexts",
   ],
   framework: "@storybook/react",
@@ -20,6 +19,8 @@ module.exports = {
       fallback: {
         ...config.resolve.fallback,
         buffer: require.resolve("buffer/"),
+        stream: require.resolve("stream-browserify"),
+        crypto: require.resolve("crypto-browserify"),
       },
     };
 

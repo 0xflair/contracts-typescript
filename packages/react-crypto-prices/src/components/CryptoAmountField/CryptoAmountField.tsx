@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useNetwork } from "wagmi";
-import { CryptoSymbol, CryptoPrice } from "@0xflair/react-crypto-prices";
+import { CryptoSymbol } from "../../types";
+import { CryptoPrice } from "../CryptoPrice/CryptoPrice";
 
 export type CryptoAmountFieldProps = {
   label: string;
@@ -39,4 +40,4 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
       </div>
     </div>
   );
-}
+};

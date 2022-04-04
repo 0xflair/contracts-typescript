@@ -9,7 +9,7 @@ Tailwind and React components and hooks that helps building a web3 dApp dashboar
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-dashboard
+   npm install @0xflair/react-ui
    ```
 
 2. Install peer dependencies if not already done:
@@ -41,7 +41,7 @@ Tailwind and React components and hooks that helps building a web3 dApp dashboar
 ### Example
 
 ```ts
-import { FormSection } from "@0xflair/react-dashboard";
+import { FormSection } from "@0xflair/react-ui";
 
 function CreatePage() {
   return (

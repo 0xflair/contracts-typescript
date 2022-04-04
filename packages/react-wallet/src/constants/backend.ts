@@ -6,7 +6,7 @@ export const FLAIR_WALLET_BACKEND = {
     loginEndpoint: "/v1/login",
   },
   [Environment.DEV]: {
-    host: "http://localhost",
+    host: "http://localhost:3000",
     loginEndpoint: "/v1/login",
   },
 };

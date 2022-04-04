@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { LinkIcon } from "@heroicons/react/solid";
 import { useConnect } from "wagmi";
+import { useCancel } from "@0xflair/react-common";
 
 // import MetamaskImage from "../../assets/wallets/metamask.svg";
 // import WalletConnectImage from "../../assets/wallets/walletconnect.svg";
@@ -24,9 +25,17 @@ export const ConnectButton = (props: ConnectButtonProps) => {
   const connectorCoinbaseWallet = data.connectors[2];
 
   useEffect(() => {
+    let didCancel = false;
+
     if (data.connected && dialogOpen) {
-      setDialogOpen(false);
+      if (!didCancel) {
+        setDialogOpen(false);
+      }
     }
+
+    return () => {
+      didCancel = true;
+    };
   }, [data.connected, dialogOpen]);
 
   return (
