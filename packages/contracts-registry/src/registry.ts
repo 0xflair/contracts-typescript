@@ -9,7 +9,7 @@ export type ContractDefinition = {
         bytecode: string;
         abi: any[];
     };
-    source: string;
+    source?: string;
 };
 type ContractDictionary = Record<string, ContractDefinition>;
 type ContractRegistry = Record<Version, ContractDictionary>;
