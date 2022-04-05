@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.16.1 (2022-04-05)
+
+
+### Bug Fixes
+
+* make source optional on contract definition ([bb60d31](https://github.com/0xflair/typescript-sdk/commit/bb60d312225689ffc0ed71fbc68d5d38213933c1))
+
+
+
+
+
 # 0.16.0 (2022-04-04)
 
 
