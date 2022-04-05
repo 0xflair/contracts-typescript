@@ -7,7 +7,20 @@ import ERC721FullFeaturedCollectionWyvernSource from "contracts-v1.2/collections
 import ERC721FullFeaturedCollectionZeroExArtifact from "contracts-v1.2/collections/ERC721/presets/ERC721FullFeaturedCollectionZeroEx.json";
 import ERC721FullFeaturedCollectionZeroExSource from "contracts-v1.2/collections/ERC721/presets/ERC721FullFeaturedCollectionZeroEx.sol";
 
+import ERC721PreSalesExtensionArtifact from "contracts-v1.2/collections/ERC721/extensions/ERC721PreSalesExtension.json";
+import ERC721AutoIdMinterExtensionArtifact from "contracts-v1.2/collections/ERC721/extensions/ERC721AutoIdMinterExtension.json";
+import ERC721BulkifyExtensionArtifact from "contracts-v1.2/collections/ERC721/extensions/ERC721BulkifyExtension.json";
+import ERC721MetadataExtensionArtifact from "contracts-v1.2/collections/ERC721/extensions/ERC721MetadataExtension.json";
+import ERC721OwnerMintExtensionArtifact from "contracts-v1.2/collections/ERC721/extensions/ERC721OwnerMintExtension.json";
+import ERC721PublicSalesExtensionArtifact from "contracts-v1.2/collections/ERC721/extensions/ERC721PublicSalesExtension.json";
+import ERC721RoleBasedMintExtensionArtifact from "contracts-v1.2/collections/ERC721/extensions/ERC721RoleBasedMintExtension.json";
+import ERC721RoyaltyExtensionArtifact from "contracts-v1.2/collections/ERC721/extensions/ERC721RoyaltyExtension.json";
+import ERC721SimpleProceedsExtensionArtifact from "contracts-v1.2/collections/ERC721/extensions/ERC721SimpleProceedsExtension.json";
+
 export const CONTRACTS_V_1_2 = {
+  //
+  // ERC721 Collection Presets
+  //
   'collections/ERC721/presets/ERC721SimpleCollection': {
     artifact: ERC721SimpleCollectionArtifact,
     source: ERC721SimpleCollectionSource,
@@ -23,5 +36,33 @@ export const CONTRACTS_V_1_2 = {
   'collections/ERC721/presets/ERC721FullFeaturedZeroExCollection': {
     artifact: ERC721FullFeaturedCollectionZeroExArtifact,
     source: ERC721FullFeaturedCollectionZeroExSource,
+  },
+  // ERC721 Extensions
+  'collections/ERC721/extensions/ERC721PreSalesExtension': {
+    artifact: ERC721PreSalesExtensionArtifact,
+  },
+  'collections/ERC721/extensions/ERC721AutoIdMinterExtension': {
+    artifact: ERC721AutoIdMinterExtensionArtifact,
+  },
+  'collections/ERC721/extensions/ERC721BulkifyExtension': {
+    artifact: ERC721BulkifyExtensionArtifact,
+  },
+  'collections/ERC721/extensions/ERC721MetadataExtension': {
+    artifact: ERC721MetadataExtensionArtifact,
+  },
+  'collections/ERC721/extensions/ERC721OwnerMintExtension': {
+    artifact: ERC721OwnerMintExtensionArtifact,
+  },
+  'collections/ERC721/extensions/ERC721PublicSalesExtension': {
+    artifact: ERC721PublicSalesExtensionArtifact,
+  },
+  'collections/ERC721/extensions/ERC721RoleBasedMintExtension': {
+    artifact: ERC721RoleBasedMintExtensionArtifact,
+  },
+  'collections/ERC721/extensions/ERC721RoyaltyExtension': {
+    artifact: ERC721RoyaltyExtensionArtifact,
+  },
+  'collections/ERC721/extensions/ERC721SimpleProceedsExtension': {
+    artifact: ERC721SimpleProceedsExtensionArtifact,
   },
 };
