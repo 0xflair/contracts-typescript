@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.17.0 (2022-04-06)
+
+
+### Features
+
+* add require chain component ([c17d7f1](https://github.com/0xflair/typescript-sdk/commit/c17d7f18c6abf7076a2f642e7ec19d0846d3f754))
+
+
+
+
+
 ## 0.16.2 (2022-04-06)
 
 
