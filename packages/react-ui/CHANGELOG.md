@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.16.2 (2022-04-06)
+
+
+### Bug Fixes
+
+* add symbol arg to crypto amount field ([2ae8f97](https://github.com/0xflair/typescript-sdk/commit/2ae8f975ee444ee3e99dc76a74a684b5224ecede))
+
+
+
+
+
 ## 0.16.1 (2022-04-05)
 
 
