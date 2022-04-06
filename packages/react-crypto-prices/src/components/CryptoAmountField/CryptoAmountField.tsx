@@ -9,6 +9,7 @@ export type CryptoAmountFieldProps = {
   description?: React.ReactNode;
   value: string;
   unit?: CryptoUnits;
+  symbol?: CryptoSymbol;
   onChange: (value: string) => void;
 };
 
@@ -18,6 +19,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
     description,
     value,
     unit = CryptoUnits.ETHER,
+    symbol,
     onChange,
   } = props;
 
@@ -45,7 +47,10 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
             {networkData.chain?.nativeCurrency?.name} (
             <CryptoPrice
               value={value}
-              symbol={networkData.chain?.nativeCurrency?.symbol as CryptoSymbol}
+              symbol={
+                symbol ||
+                (networkData.chain?.nativeCurrency?.symbol as CryptoSymbol)
+              }
               unit={unit}
             />{" "}
             USD)
