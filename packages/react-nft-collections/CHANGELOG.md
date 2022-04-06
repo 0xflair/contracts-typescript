@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.17.1 (2022-04-06)
+
+
+### Bug Fixes
+
+* export require chain component ([3b44d56](https://github.com/0xflair/typescript-sdk/commit/3b44d56e6ff99f4c160798efa420e0992e628e9f))
+
+
+
+
+
 # 0.17.0 (2022-04-06)
 
 
