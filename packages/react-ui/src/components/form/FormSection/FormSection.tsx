@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Switch } from "@headlessui/react";
 import { classNames } from "@0xflair/react-common";
 
@@ -6,12 +6,20 @@ export type FormSectionProps = {
   title: string;
   description: string;
   toggleable?: boolean;
+  enabled?: boolean;
+  onEnabledChange?: (newValue: boolean) => void;
   children: React.ReactNode;
 };
 
 export const FormSection = (props: FormSectionProps) => {
-  const { title, description, toggleable, children } = props;
-  const [enabled, setEnabled] = useState(false);
+  const { title, description, toggleable, children, enabled = false, onEnabledChange } = props;
+  const [internalEnabled, setInternalEnabled] = useState(enabled);
+
+  useEffect(() => {
+    if (onEnabledChange  && enabled !== internalEnabled) {
+      onEnabledChange(internalEnabled);
+    }
+  }, [internalEnabled, onEnabledChange, enabled]);
 
   return (
     <div className="mt-10 sm:mt-0">
@@ -20,10 +28,10 @@ export const FormSection = (props: FormSectionProps) => {
           <div className="flex items-center gap-x-4">
             {toggleable ? (
               <Switch
-                checked={enabled}
-                onChange={setEnabled}
+                checked={internalEnabled}
+                onChange={setInternalEnabled}
                 className={classNames(
-                  enabled ? "bg-indigo-600" : "bg-gray-200",
+                  internalEnabled ? "bg-indigo-600" : "bg-gray-200",
                   "relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 )}
               >
@@ -31,7 +39,7 @@ export const FormSection = (props: FormSectionProps) => {
                 <span
                   aria-hidden="true"
                   className={classNames(
-                    enabled ? "translate-x-5" : "translate-x-0",
+                    internalEnabled ? "translate-x-5" : "translate-x-0",
                     "pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
                   )}
                 />
@@ -50,7 +58,7 @@ export const FormSection = (props: FormSectionProps) => {
         <div
           className={classNames(
             "mt-5 md:mt-0 md:col-span-2 md:col-start-2",
-            enabled || !toggleable ? "" : "hidden"
+            internalEnabled || !toggleable ? "" : "hidden"
           )}
         >
           <form action="#" method="POST">

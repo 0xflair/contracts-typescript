@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { LinkIcon, RefreshIcon } from "@heroicons/react/solid";
+import { RefreshIcon } from "@heroicons/react/solid";
 import { useNetwork } from "wagmi";
 import { useChainInfo } from "@0xflair/react-common";
 import { Button } from "@0xflair/react-ui";
@@ -13,7 +13,7 @@ type Props = {
 export const RequireChain = (props: Props) => {
   const { requiredChainId, wrongChainView, children } = props;
   const [{ data: networkData }, switchNetwork] = useNetwork();
-  const requiredChain = useChainInfo(requiredChainId);
+  const requiredChain = useChainInfo(Number(requiredChainId));
 
   if (
     !networkData.chain?.id ||
