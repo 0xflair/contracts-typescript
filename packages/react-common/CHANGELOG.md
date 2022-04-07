@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.18.0 (2022-04-07)
+
+
+### Features
+
+* allow tracking of enabled state for a togglable form section ([c86eba8](https://github.com/0xflair/typescript-sdk/commit/c86eba8f340692dc96171391a6401bf18671b549))
+
+
+
+
+
 ## 0.17.1 (2022-04-06)
 
 
