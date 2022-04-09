@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.18.1 (2022-04-09)
+
+
+### Bug Fixes
+
+* properly handle axios hooks cancelation ([d73105b](https://github.com/0xflair/typescript-sdk/commit/d73105b0bf94ffc057c699b65b21300637eb2413))
+
+
+
+
+
 # 0.18.0 (2022-04-07)
 
 
