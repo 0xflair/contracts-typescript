@@ -30,7 +30,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700">{label}</label>
-      <div className="mt-1 relative rounded-md shadow-sm">
+      <div className="mt-1 relative rounded-md">
         <input
           type="text"
           className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"
