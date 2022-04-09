@@ -35,7 +35,7 @@ export const CryptoValue = (props: Props) => {
             fractionDigits={0}
             symbol={symbol}
             unit={unit}
-          />
+          /> USD
           )
         </>
       )}
