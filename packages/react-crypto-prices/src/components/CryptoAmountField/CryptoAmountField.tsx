@@ -1,4 +1,4 @@
-import { utils } from "ethers";
+import { utils, BigNumberish } from 'ethers';
 import * as React from "react";
 import { useNetwork } from "wagmi";
 import { CryptoSymbol, CryptoUnits } from "../../types";
@@ -7,7 +7,7 @@ import { CryptoPrice } from "../CryptoPrice/CryptoPrice";
 export type CryptoAmountFieldProps = {
   label: string;
   description?: React.ReactNode;
-  value: string;
+  value: string | BigNumberish;
   unit?: CryptoUnits;
   symbol?: CryptoSymbol;
   onChange: (value: string) => void;
@@ -23,7 +23,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
     onChange,
   } = props;
 
-  const convertedValueWei = utils.parseUnits(value, unit);
+  const convertedValueWei = utils.parseUnits(value.toString(), unit);
   const convertedValueEther = utils.formatEther(convertedValueWei);
   const [{ data: networkData }] = useNetwork();
 

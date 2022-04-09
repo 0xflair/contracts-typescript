@@ -1,11 +1,11 @@
 import React from "react";
-import { BigNumber } from "@ethersproject/bignumber";
 import { CryptoSymbol, CryptoUnits } from "../../types";
 import { useCryptoPrice } from "../../hooks";
 import * as ethers from "ethers";
+import { BigNumberish } from 'ethers';
 
 type Props = {
-  value?: string | BigNumber;
+  value?: string | BigNumberish;
   fractionDigits?: number;
   unit?: CryptoUnits;
   symbol?: CryptoSymbol;
