@@ -110,8 +110,5 @@
     "typescript": "^4.6.2",
     "wagmi": "^0.2.21",
     "webpack": "^5.70.0"
-  },
-  "dependencies": {
-    "flair-sdk": "^0.19.2"
   }
 }
