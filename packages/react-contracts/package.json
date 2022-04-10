@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-contracts",
-  "version": "0.19.2",
+  "version": "0.19.3",
   "private": false,
   "repository": {
     "type": "git",
@@ -61,10 +61,10 @@
     "wagmi": "^0.2.21"
   },
   "devDependencies": {
-    "@0xflair/contracts-registry": "^0.19.2",
+    "@0xflair/contracts-registry": "^0.19.3",
     "@0xflair/evm-contracts": "^1.2.0",
-    "@0xflair/react-common": "^0.19.2",
-    "@0xflair/react-wallet": "^0.19.2",
+    "@0xflair/react-common": "^0.19.3",
+    "@0xflair/react-wallet": "^0.19.3",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@rollup/plugin-commonjs": "^21.0.2",

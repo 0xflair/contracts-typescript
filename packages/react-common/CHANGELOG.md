@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.19.3 (2022-04-10)
+
+
+### Bug Fixes
+
+* wait for deploy transaction on deployer hook ([4f37407](https://github.com/0xflair/typescript-sdk/commit/4f37407ebef5b4751bdf6e64b416f89dc9b34f63))
+
+
+
+
+
 ## 0.19.2 (2022-04-10)
 
 
