@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.19.2 (2022-04-10)
+
+
+### Bug Fixes
+
+* packages of react wallet ([1f2f20c](https://github.com/0xflair/typescript-sdk/commit/1f2f20c1ff624fe55d7d1b7d72fcb347f41807aa))
+
+
+
+
+
 ## 0.19.1 (2022-04-09)
 
 
