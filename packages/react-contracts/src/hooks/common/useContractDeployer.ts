@@ -59,11 +59,13 @@ export const useContractDeployer = <ArgsType extends any[]>({
 
         const contract = await contractFactory.deploy(...args);
 
+        const receipt = await contract.deployTransaction.wait(1);
+
         if (!didCancel) {
           setState((x) => ({ ...x, contract, loading: false }));
         }
 
-        return { data: contract, error: undefined };
+        return { data: { contract, receipt }, error: undefined };
       } catch (error_) {
         const error = <Error>error_;
 

@@ -15,18 +15,19 @@ type Props = {
 export const CryptoValue = (props: Props) => {
   const {
     value = "1",
-    fractionDigits = 2,
+    fractionDigits,
     unit = CryptoUnits.ETHER,
     symbol = CryptoSymbol.ETH,
     showPrice = true,
   } = props;
 
+  const fractions = fractionDigits || (symbol === CryptoSymbol.ETH ? 4 : 2);
   const valueBn = ethers.utils.parseUnits(value?.toString() || "0", unit);
   const etherValue = ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
 
   return (
     <>
-      {Number(etherValue).toFixed(fractionDigits)}{" "}{symbol}
+      {Number(etherValue).toFixed(fractions)} {symbol}
       {showPrice && (
         <>
           (~
@@ -35,8 +36,8 @@ export const CryptoValue = (props: Props) => {
             fractionDigits={0}
             symbol={symbol}
             unit={unit}
-          /> USD
-          )
+          />{" "}
+          USD )
         </>
       )}
     </>
