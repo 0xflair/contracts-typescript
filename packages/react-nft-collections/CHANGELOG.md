@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.20.0 (2022-04-11)
+
+
+### Features
+
+* bump contract versions and add json ipfs uploader ([a575d0f](https://github.com/0xflair/typescript-sdk/commit/a575d0f783d9ba0f804487537e5d09149044949f))
+
+
+
+
+
 ## 0.19.3 (2022-04-10)
 
 
