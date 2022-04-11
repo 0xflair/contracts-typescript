@@ -46,7 +46,7 @@ React components and hooks to work with IPFS. This library uses Flair's APIs to 
 #### IPFS Uploader Hook
 
 ```tsx
-import { useIpfsUploader } from "@0xflair/react-ipfs";
+import { useIpfsFileUploader } from "@0xflair/react-ipfs";
 
 function App() {
   const [userFile, serUserFile] = useState<File>();
@@ -54,7 +54,7 @@ function App() {
     data: ipfsUrl,
     error: ipfsError,
     loading: ipfsLoading
-  }, ipfsUpload] = useIpfsUploader({
+  }, ipfsUpload] = useIpfsFileUploader({
     autoUpload: true,
     fromFile: userFile,
   });

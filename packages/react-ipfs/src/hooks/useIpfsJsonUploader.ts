@@ -2,14 +2,11 @@ import axios from "axios";
 import { Environment, useCancel } from "@0xflair/react-common";
 import { useCallback, useEffect, useState } from "react";
 
-import {
-  IpfsUploadResult,
-} from "../types";
 import { FLAIR_IPFS_BACKEND } from "../constants";
 
 async function ipfsUploadJson(env: Environment, jsonContent: string | Buffer) {
   return axios
-    .post<IpfsUploadResult>(
+    .post<string>(
       `${FLAIR_IPFS_BACKEND[env]}/v1/ipfs/upload/json`,
       jsonContent
     )
@@ -28,7 +25,7 @@ const initialState: State = {
   loading: false,
 };
 
-export function useIpfsContentUploader(options: {
+export function useIpfsJsonUploader(options: {
   env?: Environment;
   autoUpload?: boolean;
   jsonContent?: string | Buffer;
@@ -59,8 +56,8 @@ export function useIpfsContentUploader(options: {
         loading: true,
       });
 
-      const result = await ipfsUploadJson(env, jsonContent);
-      const ipfsUrl = `ipfs://${result.ipfsHash}`;
+      const ipfsHash = await ipfsUploadJson(env, jsonContent);
+      const ipfsUrl = `ipfs://${ipfsHash}`;
 
       if (!didCancel) {
         setState({ ipfsUrl, loading: false });
