@@ -46,6 +46,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@types/jest": "^27.4.1",
+    "flair-sdk": "^0.19.3",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.3"
   }

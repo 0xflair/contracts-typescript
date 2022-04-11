@@ -1,20 +1,17 @@
+import axios from "axios";
+import { Environment, useCancel } from "@0xflair/react-common";
+import { useCallback, useEffect, useState } from "react";
+
 import {
   IpfsUploadResult,
 } from "../types";
-import axios from "axios";
 import { FLAIR_IPFS_BACKEND } from "../constants";
-import { useCallback, useEffect, useState } from "react";
-import { useCancel } from "@0xflair/react-common";
 
-async function ipfsUploadFiles(files: File[]) {
-  const formData = new FormData();
-
-  files.forEach((file) => formData.append("files[]", file));
-
+async function ipfsUploadJson(env: Environment, jsonContent: string | Buffer) {
   return axios
-    .post<any, { data: IpfsUploadResult[] }>(
-      `${FLAIR_IPFS_BACKEND.host}${FLAIR_IPFS_BACKEND.uploadUrl}`,
-      formData
+    .post<IpfsUploadResult>(
+      `${FLAIR_IPFS_BACKEND[env]}/v1/ipfs/upload/json`,
+      jsonContent
     )
     .then((res) => {
       return res.data;
@@ -31,11 +28,12 @@ const initialState: State = {
   loading: false,
 };
 
-export function useIpfsUploader(options: {
+export function useIpfsContentUploader(options: {
+  env?: Environment;
   autoUpload?: boolean;
-  fromFile?: File;
+  jsonContent?: string | Buffer;
 }) {
-  const { autoUpload, fromFile } = options;
+  const { env = Environment.PROD, autoUpload, jsonContent } = options;
 
   const [state, setState] = useState<State>(initialState);
 
@@ -46,10 +44,10 @@ export function useIpfsUploader(options: {
       didCancel = true;
     });
 
-    if (!fromFile) {
+    if (!jsonContent) {
       if (!didCancel) {
         setState({
-          error: new Error(`Must provide File to useIpfsUploader hook`),
+          error: new Error(`Must provide "jsonContent" to useIpfsContentUploader hook`),
           loading: false,
         });
       }
@@ -61,8 +59,8 @@ export function useIpfsUploader(options: {
         loading: true,
       });
 
-      const result = await ipfsUploadFiles([fromFile]);
-      const ipfsUrl = `ipfs://${result[0].ipfsHash}`;
+      const result = await ipfsUploadJson(env, jsonContent);
+      const ipfsUrl = `ipfs://${result.ipfsHash}`;
 
       if (!didCancel) {
         setState({ ipfsUrl, loading: false });
@@ -72,14 +70,14 @@ export function useIpfsUploader(options: {
         setState({ error: error as Error, loading: false });
       }
     }
-  }, [cancelQuery, fromFile]);
+  }, [cancelQuery, jsonContent]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (autoUpload) {
       uploadToIpfs();
     }
-  }, [autoUpload, fromFile]);
+  }, [autoUpload, jsonContent]);
 
   return [
     {

@@ -1,4 +1,6 @@
+import { Environment } from "@0xflair/react-common";
+
 export const FLAIR_IPFS_BACKEND = {
-  host: "https://api.flair.finance",
-  uploadUrl: "/v1/ipfs/upload/files",
+  [Environment.PROD]: "https://api.flair.finance",
+  [Environment.DEV]: "http://localhost:3000",
 };

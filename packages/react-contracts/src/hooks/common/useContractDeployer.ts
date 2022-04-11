@@ -59,7 +59,7 @@ export const useContractDeployer = <ArgsType extends any[]>({
 
         const contract = await contractFactory.deploy(...args);
 
-        const receipt = await contract.deployTransaction.wait(1);
+        const receipt = await contract.deployTransaction.wait(2);
 
         if (!didCancel) {
           setState((x) => ({ ...x, contract, loading: false }));

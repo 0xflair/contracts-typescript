@@ -1,1 +1,2 @@
-export * from './useIpfsUploader';
+export * from './useIpfsFileUploader';
+export * from './useIpfsJsonUploader';

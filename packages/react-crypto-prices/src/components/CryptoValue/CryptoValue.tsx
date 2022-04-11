@@ -30,14 +30,14 @@ export const CryptoValue = (props: Props) => {
       {Number(etherValue).toFixed(fractions)} {symbol}
       {showPrice && (
         <>
-          (~
+          {' '}(~
           <CryptoPrice
             value={value}
             fractionDigits={0}
             symbol={symbol}
             unit={unit}
           />{" "}
-          USD )
+          USD)
         </>
       )}
     </>
