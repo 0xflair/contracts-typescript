@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.20.1 (2022-04-11)
+
+
+### Bug Fixes
+
+* return of ipfs hash url ([ee5e33a](https://github.com/0xflair/typescript-sdk/commit/ee5e33ac02d740745a8f337bc09d3546146b9ead))
+
+
+
+
+
 # 0.20.0 (2022-04-11)
 
 
