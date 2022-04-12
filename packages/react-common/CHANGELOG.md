@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.21.2 (2022-04-12)
+
+
+### Bug Fixes
+
+* allow paasing options as args useful when chaining multiple hooks ([19b718e](https://github.com/0xflair/typescript-sdk/commit/19b718e40702aea5f0de33532cf0dc2f439ff18e))
+
+
+
+
+
 ## 0.21.1 (2022-04-12)
 
 
