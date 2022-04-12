@@ -38,6 +38,7 @@ export function useIpfsFileUploader(options: {
   const { env = Environment.PROD, autoUpload, fromFile } = options;
 
   const [state, setState] = useState<State>(initialState);
+  const [lastAutoUploaded, setLastAutoUploaded] = useState<File>();
 
   const cancelQuery = useCancel();
   const uploadToIpfs = useCallback(
@@ -83,11 +84,12 @@ export function useIpfsFileUploader(options: {
     [cancelQuery, fromFile]
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (autoUpload) {
+    if (autoUpload && lastAutoUploaded !== fromFile) {
+      setLastAutoUploaded(fromFile);
       uploadToIpfs();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoUpload, fromFile]);
 
   return [

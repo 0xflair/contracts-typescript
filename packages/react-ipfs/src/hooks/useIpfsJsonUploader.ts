@@ -34,6 +34,7 @@ export function useIpfsJsonUploader(options: {
   } = options;
 
   const [state, setState] = useState<State>(initialState);
+  const [lastAutoUploaded, setLastAutoUploaded] = useState<any>();
 
   const cancelQuery = useCancel();
   const uploadToIpfs = useCallback(
@@ -80,11 +81,13 @@ export function useIpfsJsonUploader(options: {
     [cancelQuery, jsonContent]
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (autoUpload) {
+    const stringContent = JSON.stringify(jsonContent);
+    if (autoUpload && lastAutoUploaded !== stringContent) {
+      setLastAutoUploaded(stringContent);
       uploadToIpfs();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoUpload, jsonContent]);
 
   return [
