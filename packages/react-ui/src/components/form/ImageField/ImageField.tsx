@@ -49,7 +49,7 @@ export const ImageField = (props: ImageFieldProps) => {
           <input className="sr-only" {...getInputProps()} />
           <div className="space-x-4 flex">
             <div className="w-10">
-              {imageFile ? (
+              {imagePreview ? (
                 <img
                   alt="collectionImage"
                   src={imagePreview}
