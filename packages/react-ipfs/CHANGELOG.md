@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.21.3 (2022-04-12)
+
+
+### Bug Fixes
+
+* prevent loop on auto-upload for ipfs hooks ([fc37bb4](https://github.com/0xflair/typescript-sdk/commit/fc37bb4c097d7c31744ea5336fbdec6089f2573e))
+
+
+
+
+
 ## 0.21.2 (2022-04-12)
 
 
