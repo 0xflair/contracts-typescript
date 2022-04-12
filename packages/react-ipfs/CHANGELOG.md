@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.21.0 (2022-04-12)
+
+
+### Features
+
+* allow image filed to be disabled ([bb8fd2d](https://github.com/0xflair/typescript-sdk/commit/bb8fd2d4cafcb547a0e3971ae06e14d32f26edb4))
+
+
+
+
+
 ## 0.20.1 (2022-04-11)
 
 
