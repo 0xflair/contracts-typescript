@@ -1,3 +1,4 @@
+import { classNames } from "@0xflair/react-common";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -5,6 +6,7 @@ export type ImageFieldProps = {
   label: string;
   description?: string;
   className?: string;
+  disabled?: boolean;
   imageFile?: File;
   imagePreview?: string;
   setImageFile: (value: File) => void;
@@ -16,6 +18,7 @@ export const ImageField = (props: ImageFieldProps) => {
     label,
     description,
     className,
+    disabled,
     imageFile,
     imagePreview,
     setImageFile,
@@ -31,10 +34,10 @@ export const ImageField = (props: ImageFieldProps) => {
     [setImageFile, setImagePreview]
   );
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, disabled });
 
   return (
-    <div className={className}>
+    <div className={classNames(className || '', disabled ? 'opacity-50 cursor-not-allowed' : '')}>
       <label className="block text-sm font-medium text-gray-700">{label}</label>
       <div
         {...getRootProps()}
