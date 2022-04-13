@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.22.0 (2022-04-13)
+
+
+### Features
+
+* throw typed errors while fetching artifacts ([daf9960](https://github.com/0xflair/typescript-sdk/commit/daf996033c6b3172d7e16674cfa1674862593157))
+
+
+
+
+
 ## 0.21.3 (2022-04-12)
 
 
