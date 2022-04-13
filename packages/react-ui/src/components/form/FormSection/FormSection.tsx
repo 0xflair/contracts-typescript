@@ -5,24 +5,32 @@ import { classNames } from "@0xflair/react-common";
 export type FormSectionProps = {
   title: string;
   description: string;
+  className?: string;
   toggleable?: boolean;
   enabled?: boolean;
   onEnabledChange?: (newValue: boolean) => void;
   children: React.ReactNode;
 };
 
-export const FormSection = (props: FormSectionProps) => {
-  const { title, description, toggleable, children, enabled = false, onEnabledChange } = props;
+export const FormSection = ({
+  title,
+  description,
+  className,
+  toggleable,
+  children,
+  enabled = false,
+  onEnabledChange,
+}: FormSectionProps) => {
   const [internalEnabled, setInternalEnabled] = useState(enabled);
 
   useEffect(() => {
-    if (onEnabledChange  && enabled !== internalEnabled) {
+    if (onEnabledChange && enabled !== internalEnabled) {
       onEnabledChange(internalEnabled);
     }
   }, [internalEnabled, onEnabledChange, enabled]);
 
   return (
-    <div className="mt-10 sm:mt-0">
+    <div className={classNames("relative mt-10 sm:mt-0", className || '')}>
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="md:col-span-1">
           <div className="flex items-center gap-x-4">

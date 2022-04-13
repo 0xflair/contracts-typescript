@@ -1,8 +1,9 @@
 import React, { ReactNode } from "react";
 import { LinkIcon } from "@heroicons/react/solid";
+import { ACTION_BUTTON, Errors } from "@0xflair/react-ui";
+
 import { useLoginContext } from "../../providers/login";
 import { LoginButton } from "../LoginButton/LoginButton";
-import { Errors } from "@0xflair/react-ui";
 
 type Props = {
   notLoggedInView?: ReactNode;
@@ -25,7 +26,7 @@ export const RequireLogin = (props: Props) => {
             className="mx-auto h-8 w-8 text-gray-400"
             aria-hidden="true"
           />
-          <h3 className="mt-2 text-sm font-medium text-gray-900">Wen login?</h3>
+          <h3 className="mt-2 text-sm font-medium text-gray-900">OK, now login...</h3>
           <p className="mt-1 text-sm text-gray-500">
             Please login using your wallet first, then you can see this section.
           </p>
@@ -35,7 +36,7 @@ export const RequireLogin = (props: Props) => {
             </p>
           )}
           <div className="mt-6">
-            <LoginButton label="Login" />
+            <LoginButton label="Login" className={ACTION_BUTTON} />
           </div>
         </div>
       </div>
