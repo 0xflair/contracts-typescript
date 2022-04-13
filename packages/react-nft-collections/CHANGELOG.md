@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.22.2 (2022-04-13)
+
+
+### Bug Fixes
+
+* allow customizing form section class ([48623eb](https://github.com/0xflair/typescript-sdk/commit/48623eb6eee293e12ced3e5f9201609ee3868f4f))
+
+
+
+
+
 ## 0.22.1 (2022-04-13)
 
 
