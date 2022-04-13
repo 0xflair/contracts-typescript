@@ -1,3 +1,15 @@
+
+function translateErrorName(error: Error) {
+  switch (error.name) {
+    case 'FlairInvalidArtifactError':
+      return `Requested artifact (e.g. smart contract) does not exist, make sure to use correct path. ${error.message}`;
+    case 'FlairInvalidVersionError':
+      return `Requested version (e.g. specific smart contract version) does not exist, make sure to use correct version. ${error.message}`;
+    default:
+      return `${error.name}: ${error.message}`;
+  }
+}
+
 export function extractHumanReadableError(input: any) {
   const error = input.error || input;
 
@@ -8,6 +20,8 @@ export function extractHumanReadableError(input: any) {
       return error.error.message;
     } else if (error.reason) {
       return error.reason;
+    } else if (error.name) {
+      return translateErrorName(error);
     } else if (error.message) {
       return error.message;
     } else {
