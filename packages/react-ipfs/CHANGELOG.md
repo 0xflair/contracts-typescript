@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.22.1 (2022-04-13)
+
+
+### Bug Fixes
+
+* translate errors based on name ([5323123](https://github.com/0xflair/typescript-sdk/commit/5323123ce6b3f161986eacaccec04dd63397c039))
+
+
+
+
+
 # 0.22.0 (2022-04-13)
 
 
