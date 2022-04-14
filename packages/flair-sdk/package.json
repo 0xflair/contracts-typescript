@@ -29,6 +29,7 @@
     "@0xflair/react-common": "^0.23.0",
     "@0xflair/react-contracts": "^0.23.0",
     "@0xflair/react-crypto-prices": "^0.23.0",
+    "@0xflair/react-icons": "^0.23.0",
     "@0xflair/react-ipfs": "^0.23.0",
     "@0xflair/react-ui": "^0.23.0",
     "@0xflair/react-wallet": "^0.23.0",

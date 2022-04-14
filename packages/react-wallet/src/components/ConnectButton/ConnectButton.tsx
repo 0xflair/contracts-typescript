@@ -1,13 +1,14 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
-
+import MetaMaskOnboarding from '@metamask/onboarding';
 import { Dialog, Transition } from "@headlessui/react";
 import { LinkIcon } from "@heroicons/react/solid";
 import { useConnect } from "wagmi";
-import { useCancel } from "@0xflair/react-common";
 
-// import MetamaskImage from "../../assets/wallets/metamask.svg";
-// import WalletConnectImage from "../../assets/wallets/walletconnect.svg";
-// import WalletLinkImage from "../../assets/wallets/walletlink.svg";
+import {
+  MetaMaskIcon,
+  WalletConnectIcon,
+  WalletLinkIcon,
+} from "@0xflair/react-icons";
 
 export type ConnectButtonProps = {
   label?: string;
@@ -129,7 +130,7 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                         >
                           WalletConnect
                         </a>{" "}
-                        on your mobile to use Flair Finance.
+                        on your mobile.
                       </p>
                     </div>
                   </div>
@@ -137,18 +138,19 @@ export const ConnectButton = (props: ConnectButtonProps) => {
 
                 <>
                   <div className="mt-5 sm:mt-6">
-                    {true ? (
+                    {(MetaMaskOnboarding.isMetaMaskInstalled()) ? (
                       <button
                         type="button"
                         className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
                         onClick={() => connect(connectorMetamask)}
                       >
-                        <img
+                        <MetaMaskIcon className="-ml-0.5 mr-2 h-12 w-12" />
+                        {/* <img
                           className="-ml-0.5 mr-2 h-12 w-12"
                           // src={metamaskImage}
                           aria-hidden="true"
                           alt={"MetaMask"}
-                        />
+                        /> */}
                         MetaMask
                       </button>
                     ) : (
@@ -157,12 +159,13 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                         type="button"
                         className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <img
+                        <MetaMaskIcon className="-ml-0.5 mr-2 h-12 w-12" />
+                        {/* <img
                           className="-ml-0.5 mr-2 h-12 w-12"
                           // src={MetamaskImage}
                           aria-hidden="true"
                           alt={"MetaMask"}
-                        />
+                        /> */}
                         MetaMask (mobile)
                       </a>
                     )}
@@ -173,12 +176,13 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                       className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       onClick={() => connect(connectorWalletConnect)}
                     >
-                      <img
+                      <WalletConnectIcon className="-ml-0.5 mr-2 h-12 w-12" />
+                      {/* <img
                         className="-ml-0.5 mr-2 h-12 w-12"
                         // src={WalletConnectImage}
                         aria-hidden="true"
                         alt={"WalletConnect"}
-                      />
+                      /> */}
                       WalletConnect
                     </button>
                   </div>
@@ -188,12 +192,13 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                       className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       onClick={() => connect(connectorCoinbaseWallet)}
                     >
-                      <img
+                      <WalletLinkIcon className="-ml-0.5 mr-2 h-12 w-12" />
+                      {/* <img
                         className="-ml-0.5 mr-2 h-12 w-12"
                         // src={WalletLinkImage}
                         aria-hidden="true"
                         alt={"CoinBase Wallet"}
-                      />
+                      /> */}
                       Coinbase Wallet
                     </button>
                   </div>

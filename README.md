@@ -17,7 +17,7 @@ These components and hooks are for [React](https://reactjs.org/) framework to ea
 
 ## Development
 
-This repository is equiped with [Storybook](https://storybook.js.org/) for ease of development and manual testing.
+This repository is equipped with [Storybook](https://storybook.js.org/) for ease of development and manual testing.
 
 1. Clone this repo:
 
@@ -31,8 +31,9 @@ This repository is equiped with [Storybook](https://storybook.js.org/) for ease 
    npm install
    ```
 
-3. Start the Storybook:
+3. Start the Storybook for any package:
 
    ```sh
+   cd packages/react-wallet
    npm start
    ```
