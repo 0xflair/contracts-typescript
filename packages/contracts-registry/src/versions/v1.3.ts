@@ -7,13 +7,14 @@ import ERC721FullFeaturedCollectionWyvernSource from "contracts-v1.3/collections
 import ERC721FullFeaturedCollectionZeroExArtifact from "contracts-v1.3/collections/ERC721/presets/ERC721FullFeaturedCollectionZeroEx.json";
 import ERC721FullFeaturedCollectionZeroExSource from "contracts-v1.3/collections/ERC721/presets/ERC721FullFeaturedCollectionZeroEx.sol";
 
-import ERC721PreSalesExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721PreSalesExtension.json";
 import ERC721AutoIdMinterExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721AutoIdMinterExtension.json";
 import ERC721BulkifyExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721BulkifyExtension.json";
+import ERC721OneOfOneMintExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721OneOfOneMintExtension.json";
+import ERC721OwnerMintExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721OwnerMintExtension.json";
 import ERC721PerTokenMetadataExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721PerTokenMetadataExtension.json";
 import ERC721PrefixedMetadataExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721PrefixedMetadataExtension.json";
-import ERC721OwnerMintExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721OwnerMintExtension.json";
-import ERC721PublicSalesExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721PublicSalesExtension.json";
+import ERC721PreSaleExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721PreSaleExtension.json";
+import ERC721PublicSaleExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721PublicSaleExtension.json";
 import ERC721RoleBasedMintExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721RoleBasedMintExtension.json";
 import ERC721RoyaltyExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721RoyaltyExtension.json";
 import ERC721SimpleProceedsExtensionArtifact from "contracts-v1.3/collections/ERC721/extensions/ERC721SimpleProceedsExtension.json";
@@ -39,26 +40,29 @@ export const CONTRACTS_V_1_3 = {
     source: ERC721FullFeaturedCollectionZeroExSource,
   },
   // ERC721 Extensions
-  'collections/ERC721/extensions/ERC721PreSalesExtension': {
-    artifact: ERC721PreSalesExtensionArtifact,
-  },
   'collections/ERC721/extensions/ERC721AutoIdMinterExtension': {
     artifact: ERC721AutoIdMinterExtensionArtifact,
   },
   'collections/ERC721/extensions/ERC721BulkifyExtension': {
     artifact: ERC721BulkifyExtensionArtifact,
   },
-  'collections/ERC721/extensions/ERC721PerTokenMetadataExtensionArtifact': {
+  'collections/ERC721/extensions/ERC721OneOfOneMintExtension': {
+    artifact: ERC721OneOfOneMintExtensionArtifact,
+  },
+  'collections/ERC721/extensions/ERC721OwnerMintExtension': {
+    artifact: ERC721OwnerMintExtensionArtifact,
+  },
+  'collections/ERC721/extensions/ERC721PerTokenMetadataExtension': {
     artifact: ERC721PerTokenMetadataExtensionArtifact,
   },
   'collections/ERC721/extensions/ERC721PrefixedMetadataExtension': {
     artifact: ERC721PrefixedMetadataExtensionArtifact,
   },
-  'collections/ERC721/extensions/ERC721OwnerMintExtension': {
-    artifact: ERC721OwnerMintExtensionArtifact,
+  'collections/ERC721/extensions/ERC721PreSaleExtension': {
+    artifact: ERC721PreSaleExtensionArtifact,
   },
-  'collections/ERC721/extensions/ERC721PublicSalesExtension': {
-    artifact: ERC721PublicSalesExtensionArtifact,
+  'collections/ERC721/extensions/ERC721PublicSaleExtension': {
+    artifact: ERC721PublicSaleExtensionArtifact,
   },
   'collections/ERC721/extensions/ERC721RoleBasedMintExtension': {
     artifact: ERC721RoleBasedMintExtensionArtifact,
