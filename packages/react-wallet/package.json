@@ -53,6 +53,7 @@
   },
   "peerDependencies": {
     "@0xflair/react-common": "0.*",
+    "@0xflair/react-icons": "0.*",
     "@0xflair/react-ui": "0.*",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
