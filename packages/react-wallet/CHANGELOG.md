@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.24.1 (2022-04-15)
+
+
+### Bug Fixes
+
+* export supported contract keys as type ([125f2d5](https://github.com/0xflair/typescript-sdk/commit/125f2d5193a8aeb5658f5fbe8560f5961f669050))
+
+
+
+
+
 # 0.24.0 (2022-04-14)
 
 
