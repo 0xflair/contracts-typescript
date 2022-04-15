@@ -1,5 +1,5 @@
 import { Version } from "./versions";
-import { CONTRACTS_V_1_3 } from "./versions/v1.3";
+import * as RegistryJson from "./registry-mapping.json";
 
 export type ContractDefinition = {
     artifact: {
@@ -10,9 +10,8 @@ export type ContractDefinition = {
     };
     source?: string;
 };
-type ContractDictionary = Record<string, ContractDefinition>;
-type ContractRegistry = Record<Version, ContractDictionary>;
 
-export const REGISTRY: ContractRegistry = {
-  [Version.v1_3]: CONTRACTS_V_1_3,
-};
+export type ContractDictionary = Record<string, ContractDefinition>;
+export type ContractRegistry = Record<Version, ContractDictionary>;
+
+export const REGISTRY: ContractRegistry = RegistryJson;
