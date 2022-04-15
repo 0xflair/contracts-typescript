@@ -1,4 +1,4 @@
-import { Version } from "./versions";
+import { Version } from "./generated-types";
 import * as RegistryJson from "./registry-mapping.json";
 
 export type ContractDefinition = {

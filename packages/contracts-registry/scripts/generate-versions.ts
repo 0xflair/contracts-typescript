@@ -41,19 +41,25 @@ const main = async () => {
   }
 
   const versions = Object.keys(registry).sort();
+  const lastVersion = versions[versions.length - 1];
 
-  fse.writeJSONSync(path.resolve(__dirname, "../src/registry-mapping.json"), registry);
+  fse.writeJSONSync(
+    path.resolve(__dirname, "../src/registry-mapping.json"),
+    registry
+  );
 
+  // TODO Extend ContractKey type to export keys per version not just latest
   fse.writeFileSync(
-    path.resolve(__dirname, "../src/versions.ts"),
-    `export enum Version {${Object.keys(registry)
-  .map((v) => `'${v}' = '${v}'`)
-  .join(", ")}}
+    path.resolve(__dirname, "../src/generated-types.ts"),
+    `export type Version = '${Object.keys(registry).join("' | '")}';
 
-export const LATEST_VERSION = Version['${versions[versions.length - 1]}'];
-`);
+export const LATEST_VERSION = '${lastVersion}';
 
-
+export type ContractKey = '${Object.keys(registry[lastVersion]).join(
+  "' | '"
+)}';
+`
+  );
 };
 
 main()
