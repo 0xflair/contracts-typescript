@@ -5,12 +5,16 @@ export const useStickyState = <S>(
   key: string,
   ignoredKeys?: string[]
 ): [S, Dispatch<SetStateAction<S>>] => {
+  const supportsLocalStorage = typeof window.localStorage !== 'undefined';
+
   const [value, setValue] = React.useState<S>(() => {
-    const stickyValue = window.localStorage.getItem(key);
+    const stickyValue = supportsLocalStorage ? window.localStorage.getItem(key) : null;
     return stickyValue !== null ? JSON.parse(stickyValue) : initialState;
   });
 
   React.useEffect(() => {
+    if (!supportsLocalStorage) return;
+
     if (typeof value === "object") {
       const cloneValue: any = Object.assign({}, value);
       Object.keys(cloneValue).forEach((key) => {
