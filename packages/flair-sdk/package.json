@@ -1,6 +1,6 @@
 {
   "name": "flair-sdk",
-  "version": "0.24.1",
+  "version": "0.24.2",
   "private": false,
   "repository": {
     "type": "git",
@@ -25,14 +25,14 @@
     ]
   },
   "dependencies": {
-    "@0xflair/contracts-registry": "^0.24.1",
-    "@0xflair/react-common": "^0.24.1",
-    "@0xflair/react-contracts": "^0.24.1",
-    "@0xflair/react-crypto-prices": "^0.24.1",
-    "@0xflair/react-icons": "^0.24.1",
-    "@0xflair/react-ipfs": "^0.24.1",
-    "@0xflair/react-ui": "^0.24.1",
-    "@0xflair/react-wallet": "^0.24.1",
+    "@0xflair/contracts-registry": "^0.24.2",
+    "@0xflair/react-common": "^0.24.2",
+    "@0xflair/react-contracts": "^0.24.2",
+    "@0xflair/react-crypto-prices": "^0.24.2",
+    "@0xflair/react-icons": "^0.24.2",
+    "@0xflair/react-ipfs": "^0.24.2",
+    "@0xflair/react-ui": "^0.24.2",
+    "@0xflair/react-wallet": "^0.24.2",
     "@ethersproject/bignumber": "^5.6.0",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",

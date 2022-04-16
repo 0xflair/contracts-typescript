@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.24.2 (2022-04-16)
+
+
+### Bug Fixes
+
+* registry mapping export ([45d4513](https://github.com/0xflair/typescript-sdk/commit/45d4513b675e5209f7308f538be0037d4edaedaa))
+
+
+
+
+
 ## 0.24.1 (2022-04-15)
 
 
