@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.25.0 (2022-04-16)
+
+
+### Features
+
+* allow a title for error component ([cec0e7e](https://github.com/0xflair/typescript-sdk/commit/cec0e7e6124d1540762b340891161c8e0dc12a88))
+
+
+
+
+
 ## 0.24.2 (2022-04-16)
 
 
