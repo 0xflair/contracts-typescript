@@ -1,5 +1,5 @@
 import { Version } from "./generated-types";
-import * as RegistryJson from "./registry-mapping.json";
+import RegistryJson from "./registry-mapping.json";
 
 export type ContractDefinition = {
     artifact: {
