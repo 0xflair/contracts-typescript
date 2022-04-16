@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.25.1 (2022-04-16)
+
+
+### Bug Fixes
+
+* check for local storage support before using ([21ea244](https://github.com/0xflair/typescript-sdk/commit/21ea244ab55032e67b12c675e3b1ef8313862c23))
+
+
+
+
+
 # 0.25.0 (2022-04-16)
 
 

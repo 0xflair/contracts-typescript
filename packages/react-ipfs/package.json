@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-ipfs",
-  "version": "0.25.0",
+  "version": "0.25.1",
   "private": false,
   "repository": {
     "type": "git",
@@ -57,7 +57,7 @@
     "react": "^17.0.2"
   },
   "devDependencies": {
-    "@0xflair/react-common": "^0.25.0",
+    "@0xflair/react-common": "^0.25.1",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@rollup/plugin-commonjs": "^21.0.2",
