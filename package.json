@@ -15,7 +15,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react-hooks": "^4.4.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "husky": "^7.0.4",
     "lerna": "^4.0.0",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
@@ -23,7 +22,6 @@
   },
   "scripts": {
     "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-    "postinstall": "husky install",
     "build": "lerna run build",
     "install": "lerna bootstrap",
     "remove-modules": "lerna clean && rm -rf node_modules",
@@ -38,11 +36,6 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "eslint"
-    ]
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
