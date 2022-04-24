@@ -1,14 +1,14 @@
-import * as React from "react";
-import { useLocalStorage } from "react-use";
-import { useAccount, useSigner } from "wagmi";
-import { useCancel } from "@0xflair/react-common";
-import { LOGIN_MESSAGE_TO_SIGN } from "../constants/login";
-import { FLAIR_WALLET_BACKEND } from "../constants";
-import { Environment } from "@0xflair/react-common";
-import axios from "axios";
-import json from "jsonwebtoken";
-import { WalletJwtClaims } from "../types";
-import { useCallback, useEffect } from "react";
+import { Environment, useCancel } from '@0xflair/react-common';
+import axios from 'axios';
+import json from 'jsonwebtoken';
+import * as React from 'react';
+import { useCallback, useEffect } from 'react';
+import { useLocalStorage } from 'react-use';
+import { useAccount, useSigner } from 'wagmi';
+
+import { FLAIR_WALLET_BACKEND } from '../constants';
+import { LOGIN_MESSAGE_TO_SIGN } from '../constants/login';
+import { WalletJwtClaims } from '../types';
 
 type SignedInWallet = {
   jwtToken: string;
@@ -25,13 +25,13 @@ type State = {
 type LoginContextValue = {
   state: {
     /** Flag for when user-side signing is in progress */
-    loginSigning?: State["loginSigning"];
+    loginSigning?: State['loginSigning'];
     /** Flag for when backend-side posting is in progress */
-    loginPosting?: State["loginPosting"];
+    loginPosting?: State['loginPosting'];
     /** Logged-in wallet data */
-    data?: State["data"];
+    data?: State['data'];
     /** Any error during login signing or posting */
-    error?: State["error"];
+    error?: State['error'];
   };
   setState: React.Dispatch<React.SetStateAction<State>>;
   login: () => Promise<void>;
@@ -39,9 +39,9 @@ type LoginContextValue = {
 };
 
 export enum AutoLoginMode {
-  NEVER = "never",
-  ONLY_IF_PREVIOUSLY_LOGGED_IN = "only_if_previously_logged_in",
-  ALWAYS = "always",
+  NEVER = 'never',
+  ONLY_IF_PREVIOUSLY_LOGGED_IN = 'only_if_previously_logged_in',
+  ALWAYS = 'always',
 }
 
 export const LoginContext = React.createContext<LoginContextValue | null>(null);
@@ -72,7 +72,7 @@ export const LoginProvider = ({
   env = Environment.PROD,
   autoLogin = AutoLoginMode.ONLY_IF_PREVIOUSLY_LOGGED_IN,
   children,
-  loginStorageKey = "flair.walletJwt",
+  loginStorageKey = 'flair.walletJwt',
   timeout = 5000,
 }: React.PropsWithChildren<LoginProviderProps>) => {
   const [{ data: account }] = useAccount();
@@ -91,7 +91,7 @@ export const LoginProvider = ({
     let source = axios.CancelToken.source();
     cancelQuery(() => {
       didCancel = true;
-      source.cancel("Cancelling in cleanup");
+      source.cancel('Cancelling in cleanup');
     });
     try {
       setState((x) => ({
@@ -132,19 +132,19 @@ export const LoginProvider = ({
         setState((x) => ({ ...x, loginSigning: false, loginPosting: false }));
       }
     }
-  }, [cancelQuery, account?.address, signer]);
+  }, [cancelQuery, signer, env, account?.address, timeout, setWalletJwt]);
 
   // Logout method that remove the wallet JWT from local storage
   const logout = useCallback(async () => {
-    setWalletJwt("");
-  }, []);
+    setWalletJwt('');
+  }, [setWalletJwt]);
 
   // Initially logout if auto-login mode is NEVER.
   useEffect(() => {
     if (autoLogin === AutoLoginMode.NEVER && walletJwt) {
       logout();
     }
-  }, [walletJwt, autoLogin]);
+  }, [logout, walletJwt, autoLogin]);
 
   // If wallet JWT is expired call logout.
   useEffect(() => {
@@ -154,7 +154,7 @@ export const LoginProvider = ({
     ) {
       logout();
     }
-  }, [state.data?.jwtClaims.exp]);
+  }, [logout, state.data?.jwtClaims.exp]);
 
   // Logout if connected wallet address is different than wallet JWT
   useEffect(() => {
@@ -178,7 +178,7 @@ export const LoginProvider = ({
     ) {
       login();
     }
-  }, [autoLogin, account?.address, walletJwt, login]);
+  }, [autoLogin, account?.address, walletJwt, login, state.data]);
 
   // Refresh the state whenever wallet JWT is changed.
   useEffect(() => {
@@ -207,6 +207,6 @@ export const LoginProvider = ({
 
 export const useLoginContext = () => {
   const context = React.useContext(LoginContext);
-  if (!context) throw Error("Must be used within <LoginProvider>");
+  if (!context) throw Error('Must be used within <LoginProvider>');
   return context;
 };

@@ -22,7 +22,13 @@ export const Badge = (props: Props) => {
       >
         <circle cx={4} cy={4} r={3} />
       </svg>
-      {href ? <a href={href} target={'_blank'} rel="noreferrer">{text}</a> : text}
+      {href ? (
+        <a href={href} target={'_blank'} rel="noreferrer">
+          {text}
+        </a>
+      ) : (
+        text
+      )}
     </span>
   );
 };

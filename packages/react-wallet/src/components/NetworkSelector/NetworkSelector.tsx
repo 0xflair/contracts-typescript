@@ -1,11 +1,12 @@
-import React, { Fragment, useState } from "react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
-import { Listbox, Transition } from "@headlessui/react";
-import { Chain, useNetwork } from "wagmi";
-import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from "../../constants/chains";
+import { Listbox, Transition } from '@headlessui/react';
+import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import React, { Fragment, useState } from 'react';
+import { Chain, useNetwork } from 'wagmi';
+
+import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from '../../constants/chains';
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 type Props = {
@@ -32,8 +33,9 @@ export const NetworkSelector = (props: Props) => {
           <div className="relative">
             <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <span className="block truncate">
-                {(networkData.chain?.name ?? networkData.chain?.id) || "<wallet not connected>"}{" "}
-                {(networkData.chain?.unsupported && "(unsupported)") || ""}
+                {(networkData.chain?.name ?? networkData.chain?.id) ||
+                  '<wallet not connected>'}{' '}
+                {(networkData.chain?.unsupported && '(unsupported)') || ''}
               </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <SelectorIcon
@@ -56,8 +58,8 @@ export const NetworkSelector = (props: Props) => {
                     key={chain.id}
                     className={({ active }) =>
                       classNames(
-                        active ? "text-white bg-indigo-600" : "text-gray-900",
-                        "cursor-default select-none relative py-2 pl-3 pr-9"
+                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                        'cursor-default select-none relative py-2 pl-3 pr-9'
                       )
                     }
                     value={chain}
@@ -66,8 +68,8 @@ export const NetworkSelector = (props: Props) => {
                       <>
                         <span
                           className={classNames(
-                            selected ? "font-semibold" : "font-normal",
-                            "block truncate"
+                            selected ? 'font-semibold' : 'font-normal',
+                            'block truncate'
                           )}
                         >
                           {chain.name}
@@ -76,8 +78,8 @@ export const NetworkSelector = (props: Props) => {
                         {selected ? (
                           <span
                             className={classNames(
-                              active ? "text-white" : "text-indigo-600",
-                              "absolute inset-y-0 right-0 flex items-center pr-4"
+                              active ? 'text-white' : 'text-indigo-600',
+                              'absolute inset-y-0 right-0 flex items-center pr-4'
                             )}
                           >
                             <CheckIcon className="h-5 w-5" aria-hidden="true" />

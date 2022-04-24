@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import { CryptoPrice } from './CryptoPrice';
 
 it('renders without crashing', () => {

@@ -9,10 +9,10 @@ export const FLAIR_OPENSEA_ADDRESSES = {
   },
   137: {
     registryAddress: '0x0000000000000000000000000000000000000000',
-    exchangeAddress: '0x58807baD0B376efc12F5AD86aAc70E78ed67deaE'
+    exchangeAddress: '0x58807baD0B376efc12F5AD86aAc70E78ed67deaE',
   },
   80001: {
     registryAddress: '0x0000000000000000000000000000000000000000',
-    exchangeAddress: '0x2545943C4d9f6F4A617cEAbA91bd13eD37DeF1aD'
+    exchangeAddress: '0x2545943C4d9f6F4A617cEAbA91bd13eD37DeF1aD',
   },
-}
+};

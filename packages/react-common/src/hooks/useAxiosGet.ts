@@ -1,7 +1,8 @@
-import axios, { AxiosRequestHeaders } from "axios";
-import { useCallback, useState } from "react";
-import { useDeepCompareEffect } from "react-use";
-import { useCancel } from "./useCancel";
+import axios, { AxiosRequestHeaders } from 'axios';
+import { useCallback, useState } from 'react';
+import { useDeepCompareEffect } from 'react-use';
+
+import { useCancel } from './useCancel';
 
 type Config = {
   url: string;
@@ -28,7 +29,7 @@ export const useAxiosGet = <T>({
     let source = axios.CancelToken.source();
     cancelQuery(() => {
       didCancel = true;
-      source.cancel("Cancelling in cleanup");
+      source.cancel('Cancelling in cleanup');
     });
     try {
       setLoading(true);
@@ -55,7 +56,7 @@ export const useAxiosGet = <T>({
         }
       }
     }
-  }, [cancelQuery, url, params, timeout]);
+  }, [cancelQuery, url, params, timeout, headers]);
 
   useDeepCompareEffect(() => {
     if (!skip) {

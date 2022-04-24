@@ -41,18 +41,6 @@ Ready-made React components and hooks for working with ERC721 and ERC1155 NFTs i
    };
    ```
 
-4. Configure the React provider:
-   TODO
+## Documentation
 
-### Usage
-
-```ts
-import { NetworkSelector } from "@0xflair/react-wallet";
-
-function App() {
-  return (
-    <>
-        Your network: <NetworkSelector />
-    </>
-  );
-```
+Visit [docs.flair.finance/sdk/nft-collections](https://docs.flair.finance/sdk/nft-collections) for the full SDK documentation.

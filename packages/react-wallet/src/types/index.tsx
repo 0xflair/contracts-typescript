@@ -1,2 +1,2 @@
-export * from "./wallet-analysis";
-export * from "./wallet-jwt-claims";
+export * from './wallet-analysis';
+export * from './wallet-jwt-claims';

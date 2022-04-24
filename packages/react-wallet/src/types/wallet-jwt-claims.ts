@@ -16,7 +16,7 @@ export type WalletJwtClaims = {
 
   // Analysis of wallet
   walletAnalysis?: WalletAnalysis;
-  
+
   // Standard JWT expiry timestamp
   exp: number;
 };

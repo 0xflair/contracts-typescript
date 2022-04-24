@@ -1,8 +1,9 @@
-import { utils, BigNumberish } from 'ethers';
-import * as React from "react";
-import { useNetwork } from "wagmi";
-import { CryptoSymbol, CryptoUnits } from "../../types";
-import { CryptoPrice } from "../CryptoPrice/CryptoPrice";
+import { BigNumberish, utils } from 'ethers';
+import * as React from 'react';
+import { useNetwork } from 'wagmi';
+
+import { CryptoSymbol, CryptoUnits } from '../../types';
+import { CryptoPrice } from '../CryptoPrice/CryptoPrice';
 
 export type CryptoAmountFieldProps = {
   label: string;
@@ -52,7 +53,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
                 (networkData.chain?.nativeCurrency?.symbol as CryptoSymbol)
               }
               unit={unit}
-            />{" "}
+            />{' '}
             USD)
           </span>
         </div>

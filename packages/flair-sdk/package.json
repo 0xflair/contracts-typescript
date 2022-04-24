@@ -18,12 +18,6 @@
   "scripts": {
     "build": "echo 'No need to build'"
   },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended"
-    ]
-  },
   "dependencies": {
     "@0xflair/contracts-registry": "^0.25.1",
     "@0xflair/react-common": "^0.25.1",
@@ -50,7 +44,6 @@
   },
   "devDependencies": {
     "@types/node": "^16.11.26",
-    "@typescript-eslint/eslint-plugin": "^5.16.0",
     "typescript": "^4.6.2"
   }
 }

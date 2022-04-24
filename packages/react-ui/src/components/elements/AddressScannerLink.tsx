@@ -1,4 +1,4 @@
-import { useChainInfo } from "@0xflair/react-common";
+import { useChainInfo } from '@0xflair/react-common';
 
 type Props = {
   address?: string;

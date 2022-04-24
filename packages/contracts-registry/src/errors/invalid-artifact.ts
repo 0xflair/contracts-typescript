@@ -3,6 +3,6 @@ export class FlairInvalidArtifactError extends Error {
     super(
       `Artifact ${expectedArtifact} (version ${expectedVersion}) does not exist in Flair's registry`
     );
-    this.name = "FlairInvalidArtifactError";
+    this.name = 'FlairInvalidArtifactError';
   }
 }

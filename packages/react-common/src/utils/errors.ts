@@ -1,4 +1,3 @@
-
 function translateErrorName(error: Error) {
   switch (error.name) {
     case 'FlairInvalidArtifactError':

@@ -1,8 +1,9 @@
-import ReactDOM from "react-dom";
-import { ImageField } from "./ImageField";
+import ReactDOM from 'react-dom';
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
+import { ImageField } from './ImageField';
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
   ReactDOM.render(
     <ImageField
       label="My Image"

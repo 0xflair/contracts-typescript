@@ -1,5 +1,6 @@
-import { useChainInfo } from "@0xflair/react-common";
-import { Badge } from "./Badge";
+import { useChainInfo } from '@0xflair/react-common';
+
+import { Badge } from './Badge';
 
 type Props = {
   chainId?: number;
@@ -12,6 +13,10 @@ export const ChainBadge = ({ chainId }: Props) => {
     `https://blockscan.com`;
 
   return (
-    <Badge text={(chain?.name || chainId || '...').toString()} href={explorerUrl} color="blue" />
+    <Badge
+      text={(chain?.name || chainId || '...').toString()}
+      href={explorerUrl}
+      color="blue"
+    />
   );
 };

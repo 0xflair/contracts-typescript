@@ -1,9 +1,10 @@
-import React from "react";
-import { WalletProvider } from "../../providers/wallet";
-import { RequireConnect } from "./RequireConnect";
+import React from 'react';
+
+import { WalletProvider } from '../../providers/wallet';
+import { RequireConnect } from './RequireConnect';
 
 export default {
-  title: "RequireConnect Component",
+  title: 'RequireConnect Component',
   decorators: [
     (Story: any) => (
       <WalletProvider>
@@ -18,7 +19,9 @@ export const Default = () => {
     <>
       <ul className="grid gap-4">
         <li>
-          <RequireConnect>Now you are connected and can see the protected content!</RequireConnect>
+          <RequireConnect>
+            Now you are connected and can see the protected content!
+          </RequireConnect>
         </li>
       </ul>
     </>

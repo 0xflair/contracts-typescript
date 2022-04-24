@@ -23,22 +23,6 @@
     "start": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -52,6 +36,11 @@
     ]
   },
   "peerDependencies": {
+    "@0xflair/contracts-registry": "0.*",
+    "@0xflair/react-common": "0.*",
+    "@0xflair/react-contracts": "0.*",
+    "@0xflair/react-ipfs": "0.*",
+    "@0xflair/react-wallet": "0.*",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@tailwindcss/aspect-ratio": "^0.4.0",
@@ -63,7 +52,13 @@
     "wagmi": "^0.2.21"
   },
   "devDependencies": {
+    "@0xflair/contracts-registry": "^0.25.1",
+    "@0xflair/react-address-lists": "^0.25.1",
     "@0xflair/react-common": "^0.25.1",
+    "@0xflair/react-contracts": "^0.25.1",
+    "@0xflair/react-ipfs": "^0.25.1",
+    "@0xflair/react-openzeppelin": "^0.25.1",
+    "@0xflair/react-wallet": "^0.25.1",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@rollup/plugin-commonjs": "^21.0.2",

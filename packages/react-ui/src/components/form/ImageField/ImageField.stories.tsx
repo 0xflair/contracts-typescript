@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { ImageFieldProps, ImageField } from "./ImageField";
+import { useState } from 'react';
 
-export default { title: "ImageField Component", decorators: [] };
+import { ImageField, ImageFieldProps } from './ImageField';
+
+export default { title: 'ImageField Component', decorators: [] };
 
 export const DefaultImageField = (args: ImageFieldProps) => {
   const [imageFile, setImageFile] = useState<File>();
@@ -29,6 +30,6 @@ export const DefaultImageField = (args: ImageFieldProps) => {
 };
 
 DefaultImageField.args = {
-  label: "My Image",
-  description: "Some explanation",
+  label: 'My Image',
+  description: 'Some explanation',
 } as ImageFieldProps;

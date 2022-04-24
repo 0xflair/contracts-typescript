@@ -1,14 +1,14 @@
-import axios from "axios";
-import { Environment, useCancel } from "@0xflair/react-common";
-import { useCallback, useEffect, useState } from "react";
+import { Environment, useCancel } from '@0xflair/react-common';
+import axios from 'axios';
+import { useCallback, useEffect, useState } from 'react';
 
-import { IpfsUploadResult } from "../types";
-import { FLAIR_IPFS_BACKEND } from "../constants";
+import { FLAIR_IPFS_BACKEND } from '../constants';
+import { IpfsUploadResult } from '../types';
 
 async function ipfsUploadFiles(env: Environment, files: File[]) {
   const formData = new FormData();
 
-  files.forEach((file) => formData.append("files[]", file));
+  files.forEach((file) => formData.append('files[]', file));
 
   return axios
     .post<any, { data: IpfsUploadResult[] }>(
@@ -81,7 +81,7 @@ export function useIpfsFileUploader(options: {
         }
       }
     },
-    [cancelQuery, fromFile]
+    [cancelQuery, env, fromFile]
   );
 
   useEffect(() => {

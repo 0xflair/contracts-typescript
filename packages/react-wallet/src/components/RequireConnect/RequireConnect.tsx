@@ -1,8 +1,9 @@
-import React, { ReactNode } from "react";
-import { ExclamationIcon, LinkIcon, XCircleIcon } from "@heroicons/react/solid";
-import { useNetwork } from "wagmi";
-import { FLAIR_CHAINS } from "../../constants/chains";
-import { ConnectButton } from "../ConnectButton/ConnectButton";
+import { ExclamationIcon, LinkIcon, XCircleIcon } from '@heroicons/react/solid';
+import React, { ReactNode } from 'react';
+import { useNetwork } from 'wagmi';
+
+import { FLAIR_CHAINS } from '../../constants/chains';
+import { ConnectButton } from '../ConnectButton/ConnectButton';
 
 type Props = {
   notConnectedView?: ReactNode;
@@ -65,20 +66,23 @@ export const RequireConnect = (props: Props) => {
               </h3>
               <div className="mt-2 text-sm text-yellow-700">
                 <p>
-                  Your wallet is currently connected to{" "}
+                  Your wallet is currently connected to{' '}
                   <b>{networkData.chain.name}</b> which is not supported yet.
-                  Please switch to one of the following networks:{" "}
+                  Please switch to one of the following networks:{' '}
                   {switchNetwork ? (
                     FLAIR_CHAINS.map((chain) => (
                       <>
-                        <button key={chain.id} onClick={() => switchNetwork(chain.id)}>
+                        <button
+                          key={chain.id}
+                          onClick={() => switchNetwork(chain.id)}
+                        >
                           {chain.name}
                         </button>
-                        {", "}
+                        {', '}
                       </>
                     ))
                   ) : (
-                    <b>{FLAIR_CHAINS.map((chain) => chain.name).join(", ")}</b>
+                    <b>{FLAIR_CHAINS.map((chain) => chain.name).join(', ')}</b>
                   )}
                 </p>
               </div>
@@ -99,7 +103,9 @@ export const RequireConnect = (props: Props) => {
             className="mx-auto h-8 w-8 text-gray-400"
             aria-hidden="true"
           />
-          <h3 className="mt-2 text-sm font-medium text-gray-900">Gm, wen wallet?</h3>
+          <h3 className="mt-2 text-sm font-medium text-gray-900">
+            Gm, wen wallet?
+          </h3>
           <p className="mt-1 text-sm text-gray-500">
             Connect your wallet first, then you can see this section.
           </p>

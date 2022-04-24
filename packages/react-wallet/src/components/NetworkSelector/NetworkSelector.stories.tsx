@@ -1,11 +1,12 @@
-import React from "react";
-import { useNetwork } from "wagmi";
-import { WalletProvider } from "../../providers/wallet";
-import { ConnectButton } from "../ConnectButton/ConnectButton";
-import { NetworkSelector } from "./NetworkSelector";
+import React from 'react';
+import { useNetwork } from 'wagmi';
+
+import { WalletProvider } from '../../providers/wallet';
+import { ConnectButton } from '../ConnectButton/ConnectButton';
+import { NetworkSelector } from './NetworkSelector';
 
 export default {
-  title: "NetworkSelector Component",
+  title: 'NetworkSelector Component',
   decorators: [
     (Story: any) => (
       <WalletProvider>
@@ -24,9 +25,9 @@ export const Default = () => {
           <ConnectButton />
         </li>
         <li>
-          Connected to{" "}
-          {(networkData.chain?.name ?? networkData.chain?.id) || "..."}{" "}
-          {networkData.chain?.unsupported && "(unsupported)"}
+          Connected to{' '}
+          {(networkData.chain?.name ?? networkData.chain?.id) || '...'}{' '}
+          {networkData.chain?.unsupported && '(unsupported)'}
         </li>
         <li>
           <NetworkSelector />

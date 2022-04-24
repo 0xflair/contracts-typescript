@@ -1,5 +1,6 @@
-import * as React from "react";
-import { useLoginContext } from "../providers";
+import * as React from 'react';
+
+import { useLoginContext } from '../providers';
 
 type Config = {};
 

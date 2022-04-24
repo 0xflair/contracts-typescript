@@ -1,10 +1,13 @@
-import axios from "axios";
-import { Environment, useCancel } from "@0xflair/react-common";
-import { useCallback, useEffect, useState } from "react";
+import { Environment, useCancel } from '@0xflair/react-common';
+import axios from 'axios';
+import { useCallback, useEffect, useState } from 'react';
 
-import { FLAIR_IPFS_BACKEND } from "../constants";
+import { FLAIR_IPFS_BACKEND } from '../constants';
 
-async function ipfsUploadJson(env: Environment, jsonContent: Record<string, any>) {
+async function ipfsUploadJson(
+  env: Environment,
+  jsonContent: Record<string, any>
+) {
   return axios
     .post<string>(`${FLAIR_IPFS_BACKEND[env]}/v1/ipfs/upload/json`, jsonContent)
     .then((res) => {
@@ -27,11 +30,7 @@ export function useIpfsJsonUploader(options: {
   autoUpload?: boolean;
   jsonContent?: Record<string, any>;
 }) {
-  const {
-    env = Environment.PROD,
-    autoUpload,
-    jsonContent,
-  } = options;
+  const { env = Environment.PROD, autoUpload, jsonContent } = options;
 
   const [state, setState] = useState<State>(initialState);
   const [lastAutoUploaded, setLastAutoUploaded] = useState<any>();
@@ -78,7 +77,7 @@ export function useIpfsJsonUploader(options: {
         }
       }
     },
-    [cancelQuery, jsonContent]
+    [cancelQuery, env, jsonContent]
   );
 
   useEffect(() => {

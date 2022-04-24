@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import { NetworkSelector } from './NetworkSelector';
 
 it('renders without crashing', () => {

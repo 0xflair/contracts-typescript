@@ -1,10 +1,11 @@
-import React from "react";
-import { WalletProvider } from "../../providers/wallet";
-import { RequireConnect } from "../RequireConnect/RequireConnect";
-import { RequireChain } from "./RequireChain";
+import React from 'react';
+
+import { WalletProvider } from '../../providers/wallet';
+import { RequireConnect } from '../RequireConnect/RequireConnect';
+import { RequireChain } from './RequireChain';
 
 export default {
-  title: "RequireChain Component",
+  title: 'RequireChain Component',
   decorators: [
     (Story: any) => (
       <WalletProvider>

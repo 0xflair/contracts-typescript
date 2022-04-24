@@ -1,6 +1,6 @@
-import { classNames } from "@0xflair/react-common";
-import { useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import { classNames } from '@0xflair/react-common';
+import { useCallback, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 
 export type ImageFieldProps = {
   label: string;
@@ -34,15 +34,23 @@ export const ImageField = (props: ImageFieldProps) => {
     [setImageFile, setImagePreview]
   );
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, disabled });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    disabled,
+  });
 
   return (
-    <div className={classNames(className || '', disabled ? 'opacity-50 cursor-not-allowed' : '')}>
+    <div
+      className={classNames(
+        className || '',
+        disabled ? 'opacity-50 cursor-not-allowed' : ''
+      )}
+    >
       <label className="block text-sm font-medium text-gray-700">{label}</label>
       <div
         {...getRootProps()}
         className={`mt-1 px-6 pt-5 pb-6 border-2 border-dashed rounded-md focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 ${
-          isDragActive ? "border-indigo-300" : "border-gray-300"
+          isDragActive ? 'border-indigo-300' : 'border-gray-300'
         }`}
       >
         <div className="text-sm text-gray-600">
@@ -90,7 +98,7 @@ export const ImageField = (props: ImageFieldProps) => {
       {description ? (
         <p className="mt-2 text-sm text-gray-500">{description}</p>
       ) : (
-        ""
+        ''
       )}
     </div>
   );

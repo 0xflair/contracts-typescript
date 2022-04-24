@@ -1,14 +1,13 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
-import MetaMaskOnboarding from '@metamask/onboarding';
-import { Dialog, Transition } from "@headlessui/react";
-import { LinkIcon } from "@heroicons/react/solid";
-import { useConnect } from "wagmi";
-
 import {
   MetaMaskIcon,
   WalletConnectIcon,
   WalletLinkIcon,
-} from "@0xflair/react-icons";
+} from '@0xflair/react-icons';
+import { Dialog, Transition } from '@headlessui/react';
+import { LinkIcon } from '@heroicons/react/solid';
+import MetaMaskOnboarding from '@metamask/onboarding';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+import { useConnect } from 'wagmi';
 
 export type ConnectButtonProps = {
   label?: string;
@@ -48,11 +47,11 @@ export const ConnectButton = (props: ConnectButtonProps) => {
           disabled={loading}
           className={
             props.className ||
-            "inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            'inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed'
           }
           onClick={() => setDialogOpen(true)}
         >
-          {props.label || "Connect Wallet"}
+          {props.label || 'Connect Wallet'}
         </button>
       )}
       <Transition.Root show={dialogOpen} as={Fragment}>
@@ -112,24 +111,24 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        You need to either install{" "}
+                        You need to either install{' '}
                         <a
-                          target={"_blank"}
-                          href={"https://metamask.io/"}
-                          className={"text-indigo-600"}
+                          target={'_blank'}
+                          href={'https://metamask.io/'}
+                          className={'text-indigo-600'}
                           rel="noreferrer"
                         >
                           MetaMask extension
-                        </a>{" "}
-                        on your browser or use{" "}
+                        </a>{' '}
+                        on your browser or use{' '}
                         <a
-                          target={"_blank"}
-                          href={"https://walletconnect.org/"}
-                          className={"text-indigo-600"}
+                          target={'_blank'}
+                          href={'https://walletconnect.org/'}
+                          className={'text-indigo-600'}
                           rel="noreferrer"
                         >
                           WalletConnect
-                        </a>{" "}
+                        </a>{' '}
                         on your mobile.
                       </p>
                     </div>
@@ -138,7 +137,7 @@ export const ConnectButton = (props: ConnectButtonProps) => {
 
                 <>
                   <div className="mt-5 sm:mt-6">
-                    {(MetaMaskOnboarding.isMetaMaskInstalled()) ? (
+                    {MetaMaskOnboarding.isMetaMaskInstalled() ? (
                       <button
                         type="button"
                         className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"

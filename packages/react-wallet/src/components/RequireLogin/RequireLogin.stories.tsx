@@ -1,12 +1,13 @@
-import React from "react";
-import { LoginProvider, AutoLoginMode } from "../../providers/login";
-import { WalletProvider } from "../../providers/wallet";
-import { RequireConnect } from "../RequireConnect/RequireConnect";
-import { RequireLogin } from "./RequireLogin";
-import { Environment } from "@0xflair/react-common";
+import { Environment } from '@0xflair/react-common';
+import React from 'react';
+
+import { AutoLoginMode, LoginProvider } from '../../providers/login';
+import { WalletProvider } from '../../providers/wallet';
+import { RequireConnect } from '../RequireConnect/RequireConnect';
+import { RequireLogin } from './RequireLogin';
 
 export default {
-  title: "RequireLogin Component",
+  title: 'RequireLogin Component',
   decorators: [
     (Story: any) => (
       <WalletProvider>
@@ -17,7 +18,7 @@ export default {
   argTypes: {
     env: {
       options: [Environment.DEV, Environment.PROD],
-      control: { type: "radio" },
+      control: { type: 'radio' },
     },
     autoLogin: {
       options: [
@@ -25,7 +26,7 @@ export default {
         AutoLoginMode.ONLY_IF_PREVIOUSLY_LOGGED_IN,
         AutoLoginMode.ALWAYS,
       ],
-      control: { type: "radio" },
+      control: { type: 'radio' },
     },
   },
 };

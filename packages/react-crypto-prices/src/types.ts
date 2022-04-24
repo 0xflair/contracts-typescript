@@ -1,6 +1,6 @@
 export enum CryptoSymbol {
-  ETH = "ETH",
-  MATIC = "MATIC",
+  ETH = 'ETH',
+  MATIC = 'MATIC',
 }
 
 export type CryptoCurrency = {
@@ -12,17 +12,17 @@ export type CryptoCurrency = {
 };
 
 export enum CryptoUnits {
-  WEI = "wei",
-  KWEI = "kwei",
-  MWEI = "mwei",
-  GWEI = "gwei",
-  SZABO = "szabo",
-  FINNEY = "finney",
-  ETHER = "ether",
+  WEI = 'wei',
+  KWEI = 'kwei',
+  MWEI = 'mwei',
+  GWEI = 'gwei',
+  SZABO = 'szabo',
+  FINNEY = 'finney',
+  ETHER = 'ether',
 }
 
 export enum PriceBaseCurrency {
-  USD = "usd",
+  USD = 'usd',
 }
 
 export type CryptoPriceDictionary = Record<PriceBaseCurrency, number>;

@@ -1,7 +1,7 @@
-import { FlairInvalidVersionError } from "./errors";
-import { REGISTRY } from "./registry";
-import { ContractKey, LATEST_VERSION, Version } from "./generated-types";
-import { FlairInvalidArtifactError } from "./errors/invalid-artifact";
+import { FlairInvalidVersionError } from './errors';
+import { FlairInvalidArtifactError } from './errors/invalid-artifact';
+import { ContractKey, LATEST_VERSION, Version } from './generated-types';
+import { REGISTRY } from './registry';
 
 export const loadContract = (
   contractKey: ContractKey,

@@ -1,7 +1,8 @@
-import React from "react";
-import axios from "axios";
-import { CryptoCurrency, CryptoPriceDictionary, CryptoSymbol } from "../types";
-import { ALL_CURRENCIES } from "../constants/currencies";
+import axios from 'axios';
+import React from 'react';
+
+import { ALL_CURRENCIES } from '../constants/currencies';
+import { CryptoCurrency, CryptoPriceDictionary, CryptoSymbol } from '../types';
 
 type PricesDictionariesBySymbol = Record<CryptoSymbol, CryptoPriceDictionary>;
 
@@ -27,9 +28,9 @@ export type CryptoPricesProviderProps = {
 
 function convertCoinGeckoSymbol(coinGeckoSymbol: string) {
   switch (coinGeckoSymbol) {
-    case "ethereum":
+    case 'ethereum':
       return CryptoSymbol.ETH;
-    case "matic-network":
+    case 'matic-network':
       return CryptoSymbol.MATIC;
   }
 
@@ -50,7 +51,7 @@ export const CryptoPricesProvider = ({
       const { data: coinGeckoResult } = await axios.get(
         `https://api.coingecko.com/api/v3/simple/price?ids=${currencies
           .map((c) => c.coinGeckoId)
-          .join(",")}&vs_currencies=usd`
+          .join(',')}&vs_currencies=usd`
       );
 
       const data: PricesDictionariesBySymbol = {} as PricesDictionariesBySymbol;
@@ -69,7 +70,7 @@ export const CryptoPricesProvider = ({
   /* eslint-disable react-hooks/exhaustive-deps */
   React.useEffect(() => {
     fetchPrices().catch((error) => {
-      console.error("Could not fetch prices: ", error);
+      console.error('Could not fetch prices: ', error);
     });
   }, []);
 
@@ -88,6 +89,6 @@ export const CryptoPricesProvider = ({
 
 export const useCryptoPricesContext = () => {
   const context = React.useContext(Context);
-  if (!context) throw Error("Must be used within CryptoPricesProvider");
+  if (!context) throw Error('Must be used within CryptoPricesProvider');
   return context;
 };

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
-import { useCopyToClipboard } from "usehooks-ts";
-import theme from "prism-react-renderer/themes/vsDark";
-import { ClipboardCopyIcon, CheckCircleIcon } from "@heroicons/react/solid";
-import { classNames } from "@0xflair/react-common";
+import { classNames } from '@0xflair/react-common';
+import { CheckCircleIcon, ClipboardCopyIcon } from '@heroicons/react/solid';
+import Highlight, { defaultProps, Language } from 'prism-react-renderer';
+import theme from 'prism-react-renderer/themes/vsDark';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useCopyToClipboard } from 'usehooks-ts';
 
 export type CodeBlockProps = {
   code: string;
@@ -44,10 +44,10 @@ export const CodeBlock = (props: CodeBlockProps) => {
       {...defaultProps}
       theme={theme}
       code={code}
-      language={language || "typescript"}
+      language={language || 'typescript'}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Pre className={classNames(className, "relative group")} style={style}>
+        <Pre className={classNames(className, 'relative group')} style={style}>
           <div className="relative top-0 right-0 w-full flex justify-end">
             <button
               type="button"

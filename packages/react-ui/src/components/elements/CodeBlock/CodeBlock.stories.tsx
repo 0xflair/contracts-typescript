@@ -1,6 +1,6 @@
-import { CodeBlockProps, CodeBlock } from "./CodeBlock";
+import { CodeBlock, CodeBlockProps } from './CodeBlock';
 
-export default { title: "CodeBlock Component", decorators: [] };
+export default { title: 'CodeBlock Component', decorators: [] };
 
 export const DefaultCodeBlock = (args: CodeBlockProps) => {
   return (
@@ -11,5 +11,5 @@ export const DefaultCodeBlock = (args: CodeBlockProps) => {
 };
 
 DefaultCodeBlock.args = {
-  code: `console.log("something", true);`
+  code: `console.log("something", true);`,
 } as CodeBlockProps;

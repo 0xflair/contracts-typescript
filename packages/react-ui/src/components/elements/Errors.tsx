@@ -1,8 +1,8 @@
-import * as React from "react";
 import {
   extractHumanReadableError,
   translateContractError,
-} from "@0xflair/react-common";
+} from '@0xflair/react-common';
+import * as React from 'react';
 
 interface Props {
   title?: string;
@@ -13,11 +13,11 @@ interface Props {
 export const Errors = ({
   title,
   error,
-  className = "errors flex flex-col gap-2 text-sm rounded-md bg-red-100 p-2 text-red-800",
+  className = 'errors flex flex-col gap-2 text-sm rounded-md bg-red-100 p-2 text-red-800',
 }: Props) => {
   let errorsList: React.ReactNode = null;
 
-  if (typeof error === "string") {
+  if (typeof error === 'string') {
     errorsList = (
       <ul>
         <li>{error}</li>
@@ -33,12 +33,12 @@ export const Errors = ({
         ))}
       </ul>
     );
-  } else if (typeof error === "object") {
+  } else if (typeof error === 'object') {
     if (error === null) {
       errorsList = null;
     } else if (error.response) {
       switch (error.response?.data?.code) {
-        case "GITHUB_BAD_CREDENTIALS":
+        case 'GITHUB_BAD_CREDENTIALS':
           errorsList = (
             <ul>
               <li>
