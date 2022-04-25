@@ -52,7 +52,6 @@
     "@0xflair/react-contracts": "0.*",
     "@0xflair/react-icons": "0.*",
     "@0xflair/react-ipfs": "0.*",
-    "@0xflair/react-coingecko": "0.*",
     "@0xflair/react-nft-collections": "0.*",
     "@0xflair/react-openzeppelin": "0.*",
     "@0xflair/react-ui": "0.*",
