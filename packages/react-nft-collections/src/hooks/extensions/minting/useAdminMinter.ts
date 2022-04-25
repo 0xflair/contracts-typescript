@@ -96,7 +96,11 @@ export const useAdminMinter = ({
 
   return [
     {
-      data: mintByOwnerData || mintByRoleData,
+      data: {
+        isOwner,
+        hasMinterRole,
+        ...(mintByOwnerData || mintByRoleData),
+      },
       error: mintByOwnerError || mintByRoleError || ownerError || hasRoleError,
       loading:
         mintByOwnerLoading ||
