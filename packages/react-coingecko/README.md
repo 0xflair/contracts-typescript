@@ -1,6 +1,6 @@
-# Flair SDK: `react-crypto-prices`
+# Flair SDK: `react-coingecko`
 
-React components and hooks to get prices of cryptocurrency coins and tokens from CoinGecko.
+React hooks to get prices of cryptocurrency coins and tokens from CoinGecko.
 
 ## Getting Started
 
@@ -9,7 +9,7 @@ React components and hooks to get prices of cryptocurrency coins and tokens from
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-crypto-prices
+   npm install @0xflair/react-coingecko
    ```
 
 2. Install peer dependencies:
@@ -54,9 +54,9 @@ React components and hooks to get prices of cryptocurrency coins and tokens from
    const App = () => {
      return (
        <div className="app">
-         <CryptoPricesProvider config={cryptoPricesConfig}>
+         <CoinGeckoProvider config={cryptoPricesConfig}>
            <HookExample />
-         </CryptoPricesProvider>
+         </CoinGeckoProvider>
        </div>
      );
    };
@@ -67,7 +67,7 @@ React components and hooks to get prices of cryptocurrency coins and tokens from
 #### Simple Price
 
 ```tsx
-import { CryptoPrice, CryptoUnits } from "@0xflair/react-crypto-prices";
+import { CryptoPrice, CryptoUnits } from "@0xflair/react-coingecko";
 
 function App() {
   return (
@@ -80,7 +80,7 @@ function App() {
 #### Price Hook
 
 ```tsx
-import { useCryptoPrice } from "@0xflair/react-crypto-prices";
+import { useCryptoPrice } from "@0xflair/react-coingecko";
 
 function App() {
   const [{data, error, loading}, fetchPrice] = useCryptoPrice({

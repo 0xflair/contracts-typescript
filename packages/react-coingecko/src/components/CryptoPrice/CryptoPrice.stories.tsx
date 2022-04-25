@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { CryptoPricesProvider } from '../../providers';
-import { useCryptoPricesContext } from '../../providers/crypto-prices';
+import { CoinGeckoProvider } from '../../providers';
+import { useCryptoPricesContext } from '../../providers/coingecko';
 import { CryptoSymbol, CryptoUnits } from '../../types';
 import { CryptoPrice } from './CryptoPrice';
 
@@ -9,9 +9,9 @@ export default {
   title: 'CryptoPrice Component',
   decorators: [
     (Story: any) => (
-      <CryptoPricesProvider>
+      <CoinGeckoProvider>
         <Story />
-      </CryptoPricesProvider>
+      </CoinGeckoProvider>
     ),
   ],
 };

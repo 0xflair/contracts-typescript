@@ -20,7 +20,7 @@ type ContextValue = {
 
 export const Context = React.createContext<ContextValue | null>(null);
 
-export type CryptoPricesProviderProps = {
+export type CoinGeckoProviderProps = {
   config?: {
     currencies: CryptoCurrency[];
   };
@@ -37,10 +37,10 @@ function convertCoinGeckoSymbol(coinGeckoSymbol: string) {
   throw new Error(`Unsupported CoinGecko symbol: ${coinGeckoSymbol}`);
 }
 
-export const CryptoPricesProvider = ({
+export const CoinGeckoProvider = ({
   config,
   children,
-}: React.PropsWithChildren<CryptoPricesProviderProps>) => {
+}: React.PropsWithChildren<CoinGeckoProviderProps>) => {
   const { currencies = ALL_CURRENCIES } = config || {};
   const [state, setState] = React.useState<State>({});
 
@@ -89,6 +89,6 @@ export const CryptoPricesProvider = ({
 
 export const useCryptoPricesContext = () => {
   const context = React.useContext(Context);
-  if (!context) throw Error('Must be used within CryptoPricesProvider');
+  if (!context) throw Error('Must be used within CoinGeckoProvider');
   return context;
 };
