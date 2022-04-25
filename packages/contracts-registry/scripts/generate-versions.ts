@@ -51,7 +51,8 @@ const main = async () => {
   // TODO Extend ContractKey type to export keys per version not just latest
   fse.writeFileSync(
     path.resolve(__dirname, '../src/generated-types.ts'),
-    `export type Version = '${Object.keys(registry).join("' | '")}';
+    `/* eslint-disable */
+export type Version = '${Object.keys(registry).join("' | '")}';
 
 export const LATEST_VERSION = '${lastVersion}';
 
