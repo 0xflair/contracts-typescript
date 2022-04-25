@@ -1,5 +1,5 @@
 import { loadContract, Version } from '@0xflair/contracts-registry';
-import { useContractDeployer } from '@0xflair/react-contracts';
+import { useContractDeployer } from '@0xflair/react-common';
 import { BigNumberish, Signer } from 'ethers';
 
 export type ERC721FullFeaturedContractDeployerConfig = {

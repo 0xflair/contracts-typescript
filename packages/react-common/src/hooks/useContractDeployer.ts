@@ -1,7 +1,8 @@
-import { useCancel } from '@0xflair/react-common';
 import { Contract, ContractFactory, ContractInterface, Signer } from 'ethers';
 import * as React from 'react';
 import { useMemo } from 'react';
+
+import { useCancel } from './useCancel';
 
 export type ContractDeployerConfig = {
   /** Contract interface or ABI */

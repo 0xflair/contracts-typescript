@@ -1,6 +1,5 @@
 export * from '@0xflair/contracts-registry';
 export * from '@0xflair/react-common';
-export * from '@0xflair/react-contracts';
 export * from '@0xflair/react-wallet';
 export * from '@0xflair/react-nft-collections';
 export * from '@0xflair/react-address-lists';
