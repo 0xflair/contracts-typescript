@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.26.6 (2022-04-25)
+
+
+### Bug Fixes
+
+* expose owner and role status on admin minter ([32bdd52](https://github.com/0xflair/typescript-sdk/commit/32bdd521310eadd33c3735517a61904868dc1fbd))
+
+
+
+
+
 ## 0.26.5 (2022-04-25)
 
 **Note:** Version bump only for package @0xflair/react-nft-collections
