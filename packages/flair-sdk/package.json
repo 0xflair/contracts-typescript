@@ -48,6 +48,7 @@
   "peerDependencies": {
     "@0xflair/contracts-registry": "0.*",
     "@0xflair/react-address-lists": "0.*",
+    "@0xflair/react-coingecko": "0.*",
     "@0xflair/react-common": "0.*",
     "@0xflair/react-contracts": "0.*",
     "@0xflair/react-icons": "0.*",

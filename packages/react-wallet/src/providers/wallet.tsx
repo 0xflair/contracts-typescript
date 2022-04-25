@@ -1,9 +1,8 @@
 import { providers } from 'ethers';
 import { useCallback, useMemo } from 'react';
-import { Provider } from 'wagmi';
+import { InjectedConnector, Provider } from 'wagmi';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { WalletLinkConnector } from 'wagmi/connectors/walletLink';
-import { InjectedConnector } from 'wagmi-core';
 
 import {
   FLAIR_CHAINS,
