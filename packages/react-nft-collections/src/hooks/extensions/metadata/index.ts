@@ -6,6 +6,6 @@ export * from './useCollectionMetadataUpdater';
 export * from './useCollectionMetadataUri';
 export * from './useCollectionMetadataUriUpdater';
 export * from './useIpfsNftTokenMetadataUploader';
-export * from './usePlaceholderMetadataUpdater';
+export * from './usePlaceholderUpdater';
 export * from './usePlaceholderUri';
 export * from './usePlaceholderUriUpdater';

@@ -34,7 +34,7 @@ export type NftTokenMetadata = {
   animation_url?: string;
   youtube_url?: string;
   description?: string;
-  creator: string;
+  creator?: string;
   external_uri?: string;
   attributes?: NftTokenAttribute[];
 };
