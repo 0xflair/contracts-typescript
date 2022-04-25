@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.26.0 (2022-04-25)
+
+
+### Features
+
+* move few ui components to SDK ([5bda6bd](https://github.com/0xflair/typescript-sdk/commit/5bda6bda6d9c4ac5a4962900e2a1f24113750d9a))
+
+
+
+
+
 ## 0.25.2 (2022-04-24)
 
 
