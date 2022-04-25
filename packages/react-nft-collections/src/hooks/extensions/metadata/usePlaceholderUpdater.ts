@@ -1,5 +1,5 @@
 import { Version } from '@0xflair/contracts-registry';
-import { Environment } from '@0xflair/react-common';
+import { Environment, ZERO_ADDRESS, ZERO_BYTES32 } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 import { useCallback } from 'react';
@@ -61,10 +61,14 @@ export const usePlaceholderUpdater = ({
       return;
     }
 
+    if (!contractAddress || contractAddress === ZERO_ADDRESS) {
+      return;
+    }
+
     setPlaceholderUri(metadataUri);
 
     return { animationUri, imageUri, metadataUri };
-  }, [placeholderMetadataUpload, setPlaceholderUri]);
+  }, [contractAddress, placeholderMetadataUpload, setPlaceholderUri]);
 
   return [
     {

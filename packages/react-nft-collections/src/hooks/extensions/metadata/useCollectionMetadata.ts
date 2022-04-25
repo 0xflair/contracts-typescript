@@ -47,7 +47,7 @@ export const useCollectionMetadata = ({
 
   const readCollectionMetadata = useCallback(async () => {
     await contractURIRead();
-    await fetchContractMetadata();
+    return await fetchContractMetadata();
   }, [contractURIRead, fetchContractMetadata]);
 
   return [

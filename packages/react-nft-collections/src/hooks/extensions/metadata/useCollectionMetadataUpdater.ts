@@ -108,7 +108,7 @@ export const useCollectionMetadataUpdater = ({
     const { collectionImageUri, collectionMetadataUri } =
       await uploadCollectionMetadata();
 
-    if (contractAddress) {
+    if (contractAddress && contractAddress !== ZERO_ADDRESS) {
       await updateCollectionMetadataUri({
         collectionMetadataUri,
       });
