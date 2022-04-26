@@ -6,7 +6,7 @@ import { Signer } from 'ethers';
 type Config = Partial<ReadContractConfig> & {
   version?: Version;
   contractAddress?: string;
-  signerOrProvider?: Signer | Provider;
+  signerOrProvider?: Signer | Provider | null;
 };
 
 export const usePublicSaleStatus = ({

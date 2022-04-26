@@ -14,7 +14,7 @@ type Config = {
   chainId?: number;
   version?: Version;
   contractAddress?: string;
-  signerOrProvider?: Signer | Provider;
+  signerOrProvider?: Signer | Provider | null;
   minterAddress?: BytesLike;
   toAddress?: BytesLike;
   mintCount?: BigNumberish;

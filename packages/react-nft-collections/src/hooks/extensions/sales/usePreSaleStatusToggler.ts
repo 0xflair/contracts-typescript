@@ -6,7 +6,7 @@ import { Signer } from 'ethers';
 type Config = {
   version?: Version;
   contractAddress?: string;
-  signerOrProvider?: Signer | Provider;
+  signerOrProvider?: Signer | Provider | null;
   newStatus?: boolean;
 };
 

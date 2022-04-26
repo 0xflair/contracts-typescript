@@ -8,7 +8,7 @@ import { usePreSalePrice } from './usePreSalePrice';
 type Config = {
   version?: Version;
   contractAddress?: string;
-  signerOrProvider?: Signer | Provider;
+  signerOrProvider?: Signer | Provider | null;
   mintCount?: BigNumberish;
   allowlistProof?: BytesLike[];
 };

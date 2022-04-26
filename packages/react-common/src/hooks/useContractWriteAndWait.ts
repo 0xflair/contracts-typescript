@@ -14,7 +14,7 @@ export type ContractWriteConfig<ArgsType extends any[]> =
     version?: Version;
     contractKey: ContractKey;
     contractAddress?: string;
-    signerOrProvider?: Signer | Provider;
+    signerOrProvider?: Signer | Provider | null;
     functionName: string;
     args?: ArgsType;
   };
@@ -42,7 +42,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     {
       addressOrName: contractAddress as string,
       contractInterface: contract.artifact.abi,
-      signerOrProvider,
+      signerOrProvider: signerOrProvider || undefined,
     },
     functionName as string,
     {

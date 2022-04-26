@@ -14,7 +14,7 @@ type Config = {
   env?: Environment;
   version?: Version;
   contractAddress?: string;
-  signerOrProvider?: Signer | Provider;
+  signerOrProvider?: Signer | Provider | null;
   placeholderMetadata?: NftTokenMetadataInput;
 };
 

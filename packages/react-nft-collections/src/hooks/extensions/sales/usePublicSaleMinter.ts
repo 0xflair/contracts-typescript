@@ -8,7 +8,7 @@ import { usePublicSalePrice } from './usePublicSalePrice';
 type Config = {
   version?: Version;
   contractAddress?: string;
-  signerOrProvider?: Signer | Provider;
+  signerOrProvider?: Signer | Provider | null;
   mintCount?: BigNumberish;
 };
 

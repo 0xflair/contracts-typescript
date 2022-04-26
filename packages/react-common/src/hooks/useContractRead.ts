@@ -15,7 +15,7 @@ export type ReadContractConfig<ArgsType extends any[] = any[]> =
     version?: Version;
     contractKey: ContractKey;
     contractAddress?: string;
-    signerOrProvider?: Signer | Provider;
+    signerOrProvider?: Signer | Provider | null;
     functionName: string;
     args?: ArgsType;
     enabled?: boolean;
@@ -28,12 +28,12 @@ export const useContractRead = <
   ArgsType extends any[] = any[]
 >({
   version,
+  enabled,
   contractKey,
   contractAddress,
   signerOrProvider,
   functionName,
   args,
-  enabled,
   watch,
   cacheOnBlock,
   ...restOfConfig
@@ -48,7 +48,7 @@ export const useContractRead = <
     {
       addressOrName: contractAddress as string,
       contractInterface: contract.artifact.abi,
-      signerOrProvider,
+      signerOrProvider: signerOrProvider || undefined,
     },
     functionName as string,
     {

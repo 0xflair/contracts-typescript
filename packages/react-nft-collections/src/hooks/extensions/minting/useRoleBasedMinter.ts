@@ -6,7 +6,7 @@ import { BigNumberish, BytesLike, Signer } from 'ethers';
 type Config = {
   contractAddress?: string;
   version?: Version;
-  signerOrProvider?: Signer | Provider;
+  signerOrProvider?: Signer | Provider | null;
   toAddress?: BytesLike;
   mintCount?: BigNumberish;
 };

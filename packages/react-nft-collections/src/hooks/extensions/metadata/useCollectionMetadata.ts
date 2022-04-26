@@ -11,7 +11,7 @@ import { useCollectionMetadataUri } from './useCollectionMetadataUri';
 type Config = Partial<ReadContractConfig> & {
   version?: Version;
   contractAddress?: string;
-  signerOrProvider?: Signer | Provider;
+  signerOrProvider?: Signer | Provider | null;
 };
 
 export const useCollectionMetadata = ({

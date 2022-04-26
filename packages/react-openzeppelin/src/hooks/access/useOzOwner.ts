@@ -1,38 +1,27 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { ReadContractConfig } from '@wagmi/core';
-import { Signer } from 'ethers';
-import { useContractRead } from 'wagmi';
+import { BytesLike, Signer } from 'ethers';
 
-type Config = ReadContractConfig & {
-  contractAddress?: string;
+type Config = Partial<ReadContractConfig> & {
   version?: Version;
-  signerOrProvider?: Signer | Provider;
-  enabled?: boolean;
-  watch?: boolean;
+  contractAddress?: string;
+  signerOrProvider?: Signer | Provider | null;
 };
 
 export const useOzOwner = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
-  enabled,
   ...restOfConfig
 }: Config) => {
-  const contract = loadContract('openzeppelin/access/Ownable', version);
-
-  const result = useContractRead(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
-    },
-    'owner',
-    {
-      enabled: Boolean(enabled && contractAddress),
-      ...restOfConfig,
-    }
-  );
-
-  return result;
+  return useContractRead({
+    version,
+    contractKey: 'openzeppelin/access/Ownable',
+    functionName: 'owner',
+    contractAddress,
+    signerOrProvider,
+    ...restOfConfig,
+  });
 };
