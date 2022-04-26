@@ -24,8 +24,8 @@ export type ReadContractConfig<ArgsType extends any[] = any[]> =
   };
 
 export const useContractRead = <
-  ArgsType extends any[] = any[],
-  ResultType = any
+  ResultType = any,
+  ArgsType extends any[] = any[]
 >({
   version,
   contractKey,

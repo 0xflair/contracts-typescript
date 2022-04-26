@@ -31,6 +31,8 @@
     "jest": true
   },
   "extends": [
+    "react-app",
+    "react-app/jest",
     "prettier",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended"

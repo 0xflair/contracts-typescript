@@ -1,5 +1,6 @@
 export * from './useAddressList';
 export * from './useAddressListBulkAddressAppender';
+export * from './useAddressListBulkAddressDeleter';
 export * from './useAddressListBulkItemDeleter';
 export * from './useAddressListCreator';
 export * from './useAddressListItems';
