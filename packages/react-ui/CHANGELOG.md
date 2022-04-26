@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.27.0 (2022-04-26)
+
+
+### Features
+
+* add bulk address deleter hook ([63b5247](https://github.com/0xflair/typescript-sdk/commit/63b52477dce21afd5e077199720e3af060fbded8))
+
+
+
+
+
 ## 0.26.7 (2022-04-25)
 
 **Note:** Version bump only for package @0xflair/react-ui
