@@ -24,10 +24,7 @@ export const Default = () => {
         <li>
           <ConnectButton />
         </li>
-        <li>
-          Connected to {(activeChain?.name ?? activeChain?.id) || '...'}{' '}
-          {activeChain?.unsupported && '(unsupported)'}
-        </li>
+        <li>Connected to {(activeChain?.name ?? activeChain?.id) || '...'}</li>
         <li>
           <NetworkSelector />
         </li>
