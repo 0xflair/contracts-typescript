@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-openzeppelin",
-  "version": "0.26.7",
+  "version": "0.27.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -37,13 +37,13 @@
   },
   "peerDependencies": {
     "@0xflair/contracts-registry": "0.*",
+    "@wagmi/core": "^0.2.0",
     "ethers": "^5.6.1",
     "react": "^17.0.2",
-    "@wagmi/core": "^0.2.0",
     "wagmi": "^0.3.0"
   },
   "devDependencies": {
-    "@0xflair/contracts-registry": "^0.26.7",
+    "@0xflair/contracts-registry": "^0.27.0",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@rollup/plugin-commonjs": "^21.0.2",
