@@ -5,26 +5,22 @@ import { FLAIR_NFT_COLLECTIONS_BACKEND } from '../../constants';
 import { NftCollection } from '../../types';
 
 type UpdaterConfig = {
-  skip?: boolean;
   env?: Environment;
+  enabled?: boolean;
 };
 
 export function useNftCollectionCreator<TConfig extends Record<string, any>>(
   collection: Partial<NftCollection<TConfig>>,
-  { skip = false, env = Environment.PROD }: UpdaterConfig
+  { enabled = true, env = Environment.PROD }: UpdaterConfig
 ) {
   const loginJwt = useLoginJwt();
 
-  const [{ data, loading, error }, sendPost] = useAxiosPost<
-    NftCollection<TConfig>
-  >({
+  return useAxiosPost<NftCollection<TConfig>>({
     url: `${FLAIR_NFT_COLLECTIONS_BACKEND[env]}/v1/nft-collections`,
+    enabled: Boolean(enabled && loginJwt),
+    data: collection,
     headers: {
       Authorization: `Bearer ${loginJwt}`,
     },
-    data: collection,
-    skip,
   });
-
-  return [{ data, loading, error }, sendPost] as const;
 }

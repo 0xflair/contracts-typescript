@@ -1,4 +1,5 @@
 import { Version } from '@0xflair/contracts-registry';
+import { ReadContractConfig } from '@0xflair/react-common';
 import { useRemoteJsonReader } from '@0xflair/react-ipfs';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
@@ -7,57 +8,53 @@ import { useCallback } from 'react';
 import { NftCollectionMetadata } from '../../../types';
 import { useCollectionMetadataUri } from './useCollectionMetadataUri';
 
-type Config = {
-  contractAddress?: string;
+type Config = Partial<ReadContractConfig> & {
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
-  skip?: boolean;
-  watch?: boolean;
 };
 
 export const useCollectionMetadata = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
-  skip,
+  enabled,
   watch = false,
 }: Config) => {
-  const [
-    { data: contractURI, error: contractURIError, loading: contractURILoading },
-    contractURIRead,
-  ] = useCollectionMetadataUri({
-    contractAddress,
+  const {
+    data: contractURI,
+    error: contractURIError,
+    isLoading: contractURILoading,
+    refetch: contractURIRefetch,
+  } = useCollectionMetadataUri({
     version,
+    contractAddress,
     signerOrProvider,
-    skip,
+    enabled,
     watch,
   });
 
-  const [
-    {
-      data: collectionMetadata,
-      error: collectionMetadataError,
-      loading: collectionMetadataLoading,
-    },
-    fetchContractMetadata,
-  ] = useRemoteJsonReader<NftCollectionMetadata>({
+  const {
+    data: collectionMetadata,
+    error: collectionMetadataError,
+    isLoading: collectionMetadataLoading,
+    sendRequest: fetchContractMetadata,
+  } = useRemoteJsonReader<NftCollectionMetadata>({
     uri: contractURI,
-    skip,
+    enabled,
   });
 
   const readCollectionMetadata = useCallback(async () => {
-    await contractURIRead();
+    await contractURIRefetch();
     return await fetchContractMetadata();
-  }, [contractURIRead, fetchContractMetadata]);
+  }, [contractURIRefetch, fetchContractMetadata]);
 
-  return [
-    {
-      data: collectionMetadata,
-      error: !collectionMetadata
-        ? collectionMetadataError || contractURIError
-        : undefined,
-      loading: collectionMetadataLoading || contractURILoading,
-    },
+  return {
+    data: collectionMetadata,
+    error: !collectionMetadata
+      ? collectionMetadataError || contractURIError
+      : undefined,
+    isLoading: collectionMetadataLoading || contractURILoading,
     readCollectionMetadata,
-  ] as const;
+  } as const;
 };

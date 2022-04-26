@@ -1,106 +1,73 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
 import { useAddressListMerkleProof } from '@0xflair/react-address-lists';
-import { Environment } from '@0xflair/react-common';
-import { BytesLike } from 'ethers';
-import { useCallback, useState } from 'react';
-import { useContractRead } from 'wagmi';
+import { Environment, useContractRead } from '@0xflair/react-common';
+import { Provider } from '@ethersproject/providers';
+import { BytesLike, Signer } from 'ethers';
+import { useCallback } from 'react';
 
 type Config = {
   env?: Environment;
+  enabled?: boolean;
   chainId?: number;
-  contractAddress?: string;
-  minterAddress?: BytesLike;
   version?: Version;
-  skip?: boolean;
+  contractAddress?: string;
+  signerOrProvider?: Signer | Provider;
+  minterAddress?: BytesLike;
 };
 
 export const usePreSaleAllowlistChecker = ({
   env = Environment.PROD,
+  enabled = true,
   chainId,
-  contractAddress,
-  minterAddress,
   version,
-  skip,
+  contractAddress,
+  signerOrProvider,
+  minterAddress,
 }: Config) => {
-  const [allowlistState, setAllowlistState] = useState<boolean>();
-
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721PreSaleExtension',
-    version
-  );
-
   const readyToRead = Boolean(
-    !skip && minterAddress && contractAddress && chainId
+    enabled && minterAddress && contractAddress && chainId
   );
 
-  const [
-    { data: proofData, error: proofError, loading: proofLoading },
-    fetchProof,
-  ] = useAddressListMerkleProof({
+  const {
+    data: proofData,
+    error: proofError,
+    isLoading: proofLoading,
+    sendRequest: fetchProof,
+  } = useAddressListMerkleProof({
     env,
     address: minterAddress,
     treeKey: `${chainId}-${contractAddress}`,
-    skip: !readyToRead,
+    enabled: readyToRead,
   });
 
-  const [
-    {
-      data: onPreSaleAllowListData,
-      error: onPreSaleAllowListError,
-      loading: onPreSaleAllowListLoading,
-    },
-    onPreSaleAllowListRead,
-  ] = useContractRead(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-    },
-    'onPreSaleAllowList',
-    {
-      args: [minterAddress, proofData],
-      skip: !readyToRead || !proofData,
-      watch: true,
-    }
-  );
+  const {
+    data: isPreSaleAllowListed,
+    error: onPreSaleAllowListError,
+    isLoading: onPreSaleAllowListLoading,
+    refetch: onPreSaleAllowListRead,
+  } = useContractRead<boolean>({
+    version,
+    enabled: Boolean(readyToRead && proofData),
+    contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    functionName: 'onPreSaleAllowList',
+    contractAddress,
+    signerOrProvider,
+    args: [minterAddress, proofData],
+  });
 
-  const onPreSaleAllowList = useCallback(
-    (args?: { toAddress: BytesLike }) => {
-      setAllowlistState(undefined);
-      fetchProof().then((proofResponse) => {
-        if (!proofResponse?.data || (!minterAddress && !args?.toAddress)) {
-          setAllowlistState(false);
-          return false;
-        }
-        return onPreSaleAllowListRead({
-          args: [args?.toAddress || minterAddress, proofResponse?.data],
-        })
-          .then((result) => {
-            if (result.data?.toString() === 'true') {
-              setAllowlistState(true);
-              return true;
-            } else {
-              setAllowlistState(false);
-              return false;
-            }
-          })
-          .catch(() => {
-            setAllowlistState(undefined);
-          });
-      });
-    },
-    [minterAddress, fetchProof, onPreSaleAllowListRead]
-  );
+  const onPreSaleAllowList = useCallback(() => {
+    fetchProof().then(() => {
+      return onPreSaleAllowListRead();
+    });
+  }, [fetchProof, onPreSaleAllowListRead]);
 
-  return [
-    {
-      data: {
-        isAllowlisted:
-          allowlistState || onPreSaleAllowListData?.toString() === 'true',
-        allowlistProof: proofData || undefined,
-      },
-      error: onPreSaleAllowListError || proofError,
-      loading: onPreSaleAllowListLoading || proofLoading,
+  return {
+    data: {
+      isAllowlisted: isPreSaleAllowListed,
+      allowlistProof: proofData || undefined,
     },
-    onPreSaleAllowList,
-  ] as const;
+    error: onPreSaleAllowListError || proofError,
+    isLoading: onPreSaleAllowListLoading || proofLoading,
+    reCheck: onPreSaleAllowList,
+  } as const;
 };

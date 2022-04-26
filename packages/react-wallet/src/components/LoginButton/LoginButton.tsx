@@ -11,7 +11,7 @@ export type LoginButtonProps = {
 };
 
 export const LoginButton = (props: LoginButtonProps) => {
-  const [{ data: account }] = useAccount();
+  const { data: account } = useAccount();
   const {
     state: { data, error, loginSigning, loginPosting },
     login,

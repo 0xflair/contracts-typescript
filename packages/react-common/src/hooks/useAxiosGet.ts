@@ -9,7 +9,7 @@ type Config = {
   params?: any;
   headers?: AxiosRequestHeaders;
   timeout?: number;
-  skip?: boolean;
+  enabled?: boolean;
 };
 
 export const useAxiosGet = <T>({
@@ -17,11 +17,11 @@ export const useAxiosGet = <T>({
   params,
   headers,
   timeout,
-  skip = false,
+  enabled = true,
 }: Config) => {
   const [response, setResponse] = useState<T | null>(null);
   const [error, setError] = useState<Error>();
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const cancelQuery = useCancel();
   const sendRequest = useCallback(async () => {
@@ -59,10 +59,10 @@ export const useAxiosGet = <T>({
   }, [cancelQuery, url, params, timeout, headers]);
 
   useDeepCompareEffect(() => {
-    if (!skip) {
+    if (enabled) {
       sendRequest();
     }
   }, [url, params, timeout]);
 
-  return [{ data: response, loading, error }, sendRequest] as const;
+  return { data: response, isLoading, error, sendRequest } as const;
 };

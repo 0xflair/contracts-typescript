@@ -15,10 +15,8 @@ export default {
 };
 
 export const Default = (args: ConnectButtonProps) => {
-  const [account] = useAccount({
-    fetchEns: true,
-  });
-  const [network] = useNetwork();
+  const account = useAccount();
+  const network = useNetwork();
 
   return (
     <div className="bg-gray-100 p-8">
@@ -26,24 +24,19 @@ export const Default = (args: ConnectButtonProps) => {
       <ul className="mt-5">
         {account?.data ? (
           <li>
-            <img src={account?.data?.ens?.avatar || ''} />
-            <div>
-              {account?.data?.ens?.name
-                ? `${account?.data?.ens?.name} (${account?.data?.address})`
-                : account?.data?.address}
-            </div>
+            <div>{account?.data?.address}</div>
           </li>
         ) : (
           ''
         )}
         <li>
           Account: error={account.error} loading=
-          {account.loading}
+          {account.isLoading}
         </li>
         <li>
-          Network: name={network.data.chain?.name} error={network.error}{' '}
+          Network: name={network.activeChain?.name} error={network.error}{' '}
           loading=
-          {network.loading}
+          {network.isLoading}
         </li>
       </ul>
     </div>

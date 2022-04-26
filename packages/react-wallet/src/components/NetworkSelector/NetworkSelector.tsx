@@ -1,9 +1,9 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { Chain, useNetwork } from 'wagmi';
 
-import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from '../../constants/chains';
+import { FLAIR_CHAINS } from '../../constants/chains';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -16,10 +16,10 @@ type Props = {
 
 export const NetworkSelector = (props: Props) => {
   const { chains } = props;
-  const [{ data: networkData, error, loading }, switchNetwork] = useNetwork();
+  const { activeChain, switchNetwork } = useNetwork();
 
   const availableChains = chains || FLAIR_CHAINS;
-  const selected = availableChains.find((c) => c.id === networkData.chain?.id);
+  const selected = availableChains.find((c) => c.id === activeChain?.id);
 
   return (
     <Listbox
@@ -33,9 +33,9 @@ export const NetworkSelector = (props: Props) => {
           <div className="relative">
             <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <span className="block truncate">
-                {(networkData.chain?.name ?? networkData.chain?.id) ||
+                {(activeChain?.name ?? activeChain?.id) ||
                   '<wallet not connected>'}{' '}
-                {(networkData.chain?.unsupported && '(unsupported)') || ''}
+                {(activeChain?.unsupported && '(unsupported)') || ''}
               </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <SelectorIcon

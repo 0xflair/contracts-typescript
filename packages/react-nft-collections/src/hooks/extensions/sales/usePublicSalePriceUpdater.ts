@@ -1,65 +1,29 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, Signer } from 'ethers';
-import { useCallback } from 'react';
-import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 type Config = {
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
+  newValue?: BigNumberish;
 };
 
+type ArgsType = [newValue: BigNumberish];
+
 export const usePublicSalePriceUpdater = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
+  newValue,
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721PublicSaleExtension',
-    version
-  );
-
-  const [
-    { data: responseData, error: responseError, loading: responseLoading },
-    setPublicSalePriceWrite,
-  ] = useContractWrite(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
-    },
-    'setPublicSalePrice'
-  );
-
-  const [{ data: receiptData, error: receiptError, loading: receiptLoading }] =
-    useWaitForTransaction({
-      hash: responseData?.hash,
-      confirmations: 2,
-    });
-
-  const setPublicSalePrice = useCallback(
-    async (newPrice: BigNumberish) => {
-      const response = await setPublicSalePriceWrite({
-        args: [newPrice],
-      });
-
-      const receipt = await response.data?.wait(1);
-
-      return { response, receipt };
-    },
-    [setPublicSalePriceWrite]
-  );
-
-  return [
-    {
-      data: {
-        txResponse: responseData,
-        txReceipt: receiptData,
-      },
-      error: responseError || receiptError,
-      loading: responseLoading || receiptLoading,
-    },
-    setPublicSalePrice,
-  ] as const;
+  return useContractWriteAndWait<ArgsType>({
+    version,
+    contractKey: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
+    contractAddress,
+    signerOrProvider,
+    functionName: 'setPublicSalePrice',
+    args: [newValue] as ArgsType,
+  });
 };

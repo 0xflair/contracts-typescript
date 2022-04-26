@@ -1,14 +1,14 @@
 import { loadContract, Version } from '@0xflair/contracts-registry';
 import { Provider } from '@ethersproject/providers';
+import { ReadContractConfig } from '@wagmi/core';
 import { BytesLike, Signer } from 'ethers';
 import { useContractRead } from 'wagmi';
 
-type Config = {
+type Config = ReadContractConfig & {
   contractAddress?: string;
   version?: Version;
   signerOrProvider?: Signer | Provider;
-  skip?: boolean;
-  watch?: boolean;
+  enabled?: boolean;
   role?: BytesLike;
   address?: BytesLike;
 };
@@ -17,14 +17,14 @@ export const useOzHasRole = ({
   contractAddress,
   version,
   signerOrProvider,
-  skip,
-  watch,
+  enabled,
   role,
   address,
+  ...restOfConfig
 }: Config) => {
   const contract = loadContract('openzeppelin/access/AccessControl', version);
 
-  const [{ data, error, loading }, hasRole] = useContractRead(
+  const result = useContractRead(
     {
       addressOrName: contractAddress as string,
       contractInterface: contract.artifact.abi,
@@ -33,17 +33,10 @@ export const useOzHasRole = ({
     'hasRole',
     {
       args: [role, address],
-      skip: skip || !role || !address,
-      watch,
+      enabled: Boolean(enabled && role && address),
+      ...restOfConfig,
     }
   );
 
-  return [
-    {
-      data,
-      error,
-      loading,
-    },
-    hasRole,
-  ] as const;
+  return result;
 };

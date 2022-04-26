@@ -1,7 +1,9 @@
 // web3
+export * from './useChainInfo';
 export * from './useAddressOfSigner';
 export * from './useContractDeployer';
-export * from './useChainInfo';
+export * from './useContractWriteAndWait';
+export * from './useContractRead';
 
 // web2
 export * from './useAxiosGet';

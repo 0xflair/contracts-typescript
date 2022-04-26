@@ -1,65 +1,28 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
-import { useCallback } from 'react';
-import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 type Config = {
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
+  newValue?: boolean;
 };
+type ArgsType = [newValue: boolean];
 
 export const usePublicSaleStatusToggler = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
+  newValue,
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721PublicSaleExtension',
-    version
-  );
-
-  const [
-    { data: responseData, error: responseError, loading: responseLoading },
-    togglePublicSaleStatusWrite,
-  ] = useContractWrite(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
-    },
-    'togglePublicSaleStatus'
-  );
-
-  const [{ data: receiptData, error: receiptError, loading: receiptLoading }] =
-    useWaitForTransaction({
-      hash: responseData?.hash,
-      confirmations: 2,
-    });
-
-  const togglePublicSaleStatus = useCallback(
-    async (newValue: boolean) => {
-      const response = await togglePublicSaleStatusWrite({
-        args: [newValue],
-      });
-
-      const receipt = await response.data?.wait(1);
-
-      return { response, receipt };
-    },
-    [togglePublicSaleStatusWrite]
-  );
-
-  return [
-    {
-      data: {
-        txResponse: responseData,
-        txReceipt: receiptData,
-      },
-      error: responseError || receiptError,
-      loading: responseLoading || receiptLoading,
-    },
-    togglePublicSaleStatus,
-  ] as const;
+  return useContractWriteAndWait<ArgsType>({
+    version,
+    contractKey: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
+    contractAddress,
+    signerOrProvider,
+    functionName: 'togglePublicSaleStatus',
+    args: [newValue] as ArgsType,
+  });
 };

@@ -18,11 +18,11 @@ async function ipfsUploadJson(
 type State = {
   ipfsUrl?: string;
   error?: Error;
-  loading?: boolean;
+  isLoading?: boolean;
 };
 
 const initialState: State = {
-  loading: false,
+  isLoading: false,
 };
 
 export function useIpfsJsonUploader(options: {
@@ -49,7 +49,7 @@ export function useIpfsJsonUploader(options: {
             error: new Error(
               `Must provide "jsonContent" to useIpfsContentUploader hook as option or as arg when calling uploadToIpfs`
             ),
-            loading: false,
+            isLoading: false,
           });
         }
         return;
@@ -57,7 +57,7 @@ export function useIpfsJsonUploader(options: {
 
       try {
         setState({
-          loading: true,
+          isLoading: true,
         });
 
         const ipfsHash = await ipfsUploadJson(
@@ -67,13 +67,13 @@ export function useIpfsJsonUploader(options: {
         const ipfsUrl = `ipfs://${ipfsHash}`;
 
         if (!didCancel) {
-          setState({ ipfsUrl, loading: false });
+          setState({ ipfsUrl, isLoading: false });
         }
 
         return ipfsUrl;
       } catch (error) {
         if (!didCancel) {
-          setState({ error: error as Error, loading: false });
+          setState({ error: error as Error, isLoading: false });
         }
       }
     },
@@ -89,12 +89,10 @@ export function useIpfsJsonUploader(options: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoUpload, jsonContent]);
 
-  return [
-    {
-      data: state.ipfsUrl,
-      error: state.error,
-      loading: state.loading,
-    },
+  return {
+    data: state.ipfsUrl,
+    error: state.error,
+    isLoading: state.isLoading,
     uploadToIpfs,
-  ] as const;
+  } as const;
 }

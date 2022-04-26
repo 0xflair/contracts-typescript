@@ -17,7 +17,7 @@ export default {
 };
 
 export const Default = () => {
-  const [{ data: networkData, error, loading }] = useNetwork();
+  const { activeChain, error, isLoading } = useNetwork();
   return (
     <>
       <ul className="grid gap-4">
@@ -25,15 +25,14 @@ export const Default = () => {
           <ConnectButton />
         </li>
         <li>
-          Connected to{' '}
-          {(networkData.chain?.name ?? networkData.chain?.id) || '...'}{' '}
-          {networkData.chain?.unsupported && '(unsupported)'}
+          Connected to {(activeChain?.name ?? activeChain?.id) || '...'}{' '}
+          {activeChain?.unsupported && '(unsupported)'}
         </li>
         <li>
           <NetworkSelector />
         </li>
         <li>error={error}</li>
-        <li>loading={loading}</li>
+        <li>loading={isLoading}</li>
       </ul>
     </>
   );

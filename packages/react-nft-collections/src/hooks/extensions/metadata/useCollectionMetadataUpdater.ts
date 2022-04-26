@@ -18,52 +18,46 @@ export type NftCollectionMetadataUpdates = {
 
 type Config = {
   env?: Environment;
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
   metadataUpdates?: NftCollectionMetadataUpdates;
 };
 
 export const useCollectionMetadataUpdater = ({
   env = Environment.PROD,
-  contractAddress,
   version,
+  contractAddress = ZERO_ADDRESS,
   signerOrProvider,
   metadataUpdates,
 }: Config) => {
-  const [
-    {
-      data: setCollectionMetadataUriDate,
-      error: setCollectionMetadataUriError,
-      loading: setCollectionMetadataUriLoading,
-    },
-    setCollectionMetadataUri,
-  ] = useCollectionMetadataUriUpdater({
+  const {
+    data: setCollectionMetadataUriDate,
+    error: setCollectionMetadataUriError,
+    isLoading: setCollectionMetadataUriLoading,
+    writeAndWait: setCollectionMetadataUri,
+  } = useCollectionMetadataUriUpdater({
     contractAddress,
     signerOrProvider,
     version,
   });
 
-  const [
-    {
-      data: collectionImageUploaderUri,
-      loading: collectionImageUploaderLoading,
-      error: collectionImageUploaderError,
-    },
-    collectionImageUpload,
-  ] = useIpfsFileUploader({
+  const {
+    data: collectionImageUploaderUri,
+    isLoading: collectionImageUploaderLoading,
+    error: collectionImageUploaderError,
+    uploadToIpfs: collectionImageUpload,
+  } = useIpfsFileUploader({
     env,
     autoUpload: false,
   });
 
-  const [
-    {
-      data: collectionMetadataUploaderUri,
-      loading: collectionMetadataUploaderLoading,
-      error: collectionMetadataUploaderError,
-    },
-    collectionMetadataUpload,
-  ] = useIpfsJsonUploader({
+  const {
+    data: collectionMetadataUploaderUri,
+    isLoading: collectionMetadataUploaderLoading,
+    error: collectionMetadataUploaderError,
+    uploadToIpfs: collectionMetadataUpload,
+  } = useIpfsJsonUploader({
     env,
     autoUpload: false,
   });
@@ -97,9 +91,9 @@ export const useCollectionMetadataUpdater = ({
     async (args: { collectionMetadataUri?: string }) => {
       if (!args.collectionMetadataUri && !collectionMetadataUploaderUri) return;
 
-      await setCollectionMetadataUri(
-        (args.collectionMetadataUri || collectionMetadataUploaderUri) as string
-      );
+      await setCollectionMetadataUri([
+        (args.collectionMetadataUri || collectionMetadataUploaderUri) as string,
+      ]);
     },
     [collectionMetadataUploaderUri, setCollectionMetadataUri]
   );

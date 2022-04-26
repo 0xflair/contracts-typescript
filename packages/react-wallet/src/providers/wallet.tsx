@@ -1,8 +1,8 @@
-import { providers } from 'ethers';
-import { useCallback, useMemo } from 'react';
-import { InjectedConnector, Provider } from 'wagmi';
+import { useMemo } from 'react';
+import { createClient, Provider } from 'wagmi';
+import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
+import { InjectedConnector } from 'wagmi/connectors/injected';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
-import { WalletLinkConnector } from 'wagmi/connectors/walletLink';
 
 import {
   FLAIR_CHAINS,
@@ -21,8 +21,8 @@ const setupConnectors = (config: Config) => {
 
   return ({ chainId }: any) => {
     const rpcUrl =
-      FLAIR_CHAINS.find((x) => x.id === chainId)?.rpcUrls?.[0] ??
-      FLAIR_DEFAULT_CHAIN.rpcUrls[0];
+      FLAIR_CHAINS.find((x) => x.id === chainId)?.rpcUrls.default ??
+      FLAIR_DEFAULT_CHAIN.rpcUrls.default;
 
     return [
       new InjectedConnector({
@@ -35,7 +35,7 @@ const setupConnectors = (config: Config) => {
           qrcode: true,
         },
       }),
-      new WalletLinkConnector({
+      new CoinbaseWalletConnector({
         options: {
           appName,
           jsonRpcUrl: `${rpcUrl}/${infuraId}`,
@@ -52,21 +52,23 @@ type Props = Config & {
 
 export const WalletProvider = (props: Props) => {
   const { children, appName, infuraId, wagmiOverrides } = props;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const connectors = useMemo(() => setupConnectors(props), [appName, infuraId]);
 
-  const provider = useCallback(
-    ({ chainId }: any) => new providers.InfuraProvider(chainId, infuraId),
-    [infuraId]
+  const connectors = useMemo(
+    () => setupConnectors({ appName, infuraId }),
+    [appName, infuraId]
+  );
+
+  const client = useMemo(
+    () =>
+      createClient({
+        autoConnect: true,
+        connectors,
+      }),
+    [connectors]
   );
 
   return (
-    <Provider
-      autoConnect={true}
-      connectors={connectors}
-      provider={provider}
-      {...wagmiOverrides}
-    >
+    <Provider client={client} {...wagmiOverrides}>
       {children}
     </Provider>
   );

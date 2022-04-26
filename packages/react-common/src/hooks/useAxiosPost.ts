@@ -9,7 +9,7 @@ type Config = {
   data: any;
   headers?: AxiosRequestHeaders;
   timeout?: number;
-  skip?: boolean;
+  enabled?: boolean;
 };
 
 export const useAxiosPost = <T>({
@@ -17,11 +17,11 @@ export const useAxiosPost = <T>({
   data,
   headers,
   timeout,
-  skip = true,
+  enabled = false,
 }: Config) => {
   const [response, setResponse] = useState<T | null>(null);
   const [error, setError] = useState<Error>();
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const cancelQuery = useCancel();
   const sendRequest = useCallback(async () => {
@@ -58,10 +58,10 @@ export const useAxiosPost = <T>({
   }, [cancelQuery, url, data, timeout, headers]);
 
   useDeepCompareEffect(() => {
-    if (!skip) {
+    if (enabled) {
       sendRequest();
     }
   }, [url, data, timeout]);
 
-  return [{ data: response, loading, error }, sendRequest] as const;
+  return { data: response, isLoading, error, sendRequest } as const;
 };

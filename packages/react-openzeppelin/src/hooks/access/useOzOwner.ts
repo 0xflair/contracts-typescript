@@ -1,13 +1,14 @@
 import { loadContract, Version } from '@0xflair/contracts-registry';
 import { Provider } from '@ethersproject/providers';
+import { ReadContractConfig } from '@wagmi/core';
 import { Signer } from 'ethers';
 import { useContractRead } from 'wagmi';
 
-type Config = {
+type Config = ReadContractConfig & {
   contractAddress?: string;
   version?: Version;
   signerOrProvider?: Signer | Provider;
-  skip?: boolean;
+  enabled?: boolean;
   watch?: boolean;
 };
 
@@ -15,12 +16,12 @@ export const useOzOwner = ({
   contractAddress,
   version,
   signerOrProvider,
-  skip,
-  watch,
+  enabled,
+  ...restOfConfig
 }: Config) => {
   const contract = loadContract('openzeppelin/access/Ownable', version);
 
-  const [{ data, error, loading }, ownerRead] = useContractRead(
+  const result = useContractRead(
     {
       addressOrName: contractAddress as string,
       contractInterface: contract.artifact.abi,
@@ -28,17 +29,10 @@ export const useOzOwner = ({
     },
     'owner',
     {
-      skip: skip || !contractAddress,
-      watch,
+      enabled: Boolean(enabled && contractAddress),
+      ...restOfConfig,
     }
   );
 
-  return [
-    {
-      data,
-      error,
-      loading,
-    },
-    ownerRead,
-  ] as const;
+  return result;
 };

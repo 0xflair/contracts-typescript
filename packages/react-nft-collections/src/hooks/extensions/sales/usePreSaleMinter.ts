@@ -1,95 +1,50 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
-import { useCallback } from 'react';
-import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 import { usePreSalePrice } from './usePreSalePrice';
 
 type Config = {
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
   mintCount?: BigNumberish;
   allowlistProof?: BytesLike[];
 };
 
+type ArgsType = [mintCount: BigNumberish, allowlistProof: BytesLike[]];
+
 export const usePreSaleMinter = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
   mintCount,
   allowlistProof,
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721PreSaleExtension',
-    version
-  );
-
-  const [
-    {
-      data: preSalePrice,
-      error: preSalePriceError,
-      loading: preSalePriceLoading,
-    },
-  ] = usePreSalePrice({
+  const { data: preSalePrice } = usePreSalePrice({
     contractAddress,
     version,
     signerOrProvider,
   });
 
-  const [
-    { data: responseData, error: responseError, loading: responseLoading },
-    mintPreSaleWrite,
-  ] = useContractWrite(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
+  const result = useContractWriteAndWait<ArgsType>({
+    version,
+    contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    contractAddress,
+    signerOrProvider,
+    functionName: 'mintPreSale',
+    args: [mintCount, allowlistProof] as ArgsType,
+    overrides: {
+      value: BigNumber.from(preSalePrice).mul(BigNumber.from(mintCount)),
     },
-    'mintPreSale'
-  );
+  });
 
-  const [{ data: receiptData, error: receiptError, loading: receiptLoading }] =
-    useWaitForTransaction({
-      hash: responseData?.hash,
-      confirmations: 2,
-    });
-
-  const mintPreSale = useCallback(
-    async (args?: {
-      mintCount?: BigNumberish;
-      allowlistProof?: BytesLike[];
-    }) => {
-      const response = await mintPreSaleWrite({
-        args: [
-          args?.mintCount || mintCount,
-          args?.allowlistProof || allowlistProof,
-        ],
-        overrides: {
-          value: BigNumber.from(preSalePrice).mul(
-            BigNumber.from(args?.mintCount || mintCount)
-          ),
-        },
-      });
-
-      const receipt = await response.data?.wait(1);
-
-      return { response, receipt };
+  return {
+    ...result,
+    data: {
+      ...result.data,
+      preSalePrice,
     },
-    [mintPreSaleWrite, preSalePrice, mintCount, allowlistProof]
-  );
-
-  return [
-    {
-      data: {
-        preSalePrice,
-        txResponse: responseData,
-        txReceipt: receiptData,
-      },
-      error: preSalePriceError || responseError || receiptError,
-      loading: preSalePriceLoading || responseLoading || receiptLoading,
-    },
-    mintPreSale,
-  ] as const;
+  };
 };

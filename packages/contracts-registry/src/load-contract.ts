@@ -11,10 +11,10 @@ export const loadContract = (
     throw new FlairInvalidVersionError(version);
   }
 
-  const contract = REGISTRY[version][contractKey];
+  const contract = REGISTRY[version][contractKey as string];
 
   if (!contract) {
-    throw new FlairInvalidArtifactError(contractKey, version);
+    throw new FlairInvalidArtifactError(contractKey as string, version);
   }
 
   return contract;

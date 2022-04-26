@@ -1,14 +1,12 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, Signer } from 'ethers';
-import { useContractRead } from 'wagmi';
 
-type Config = {
-  contractAddress?: string;
+type Config = Partial<ReadContractConfig> & {
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
-  skip?: boolean;
-  watch?: boolean;
 };
 
 export type ERC721FullFeaturedContractInfo = [
@@ -28,31 +26,14 @@ export const useERC721FullFeaturedContractInfo = ({
   contractAddress,
   version,
   signerOrProvider,
-  skip,
-  watch = true,
+  ...restOfConfig
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/presets/ERC721FullFeaturedCollection',
-    version
-  );
-
-  const readyToRead = Boolean(!skip && contractAddress);
-
-  const [{ data, error, loading }, readInfo] = useContractRead(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
-    },
-    'getInfo',
-    {
-      skip: !readyToRead,
-      watch,
-    }
-  );
-
-  return [
-    { data: data as ERC721FullFeaturedContractInfo, error, loading },
-    readInfo,
-  ] as const;
+  return useContractRead<ERC721FullFeaturedContractInfo>({
+    version,
+    contractKey: 'collections/ERC721/presets/ERC721FullFeaturedCollection',
+    functionName: 'getInfo',
+    contractAddress,
+    signerOrProvider,
+    ...restOfConfig,
+  });
 };

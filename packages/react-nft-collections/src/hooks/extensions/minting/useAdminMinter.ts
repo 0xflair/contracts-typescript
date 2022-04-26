@@ -1,6 +1,7 @@
 import { Version } from '@0xflair/contracts-registry';
-import { Environment, useAddressOfSigner } from '@0xflair/react-common';
+import { Environment } from '@0xflair/react-common';
 import { useOzHasRole, useOzOwner } from '@0xflair/react-openzeppelin';
+import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 import { keccak256, toUtf8Bytes } from 'ethers/lib/utils';
 import { useCallback } from 'react';
@@ -13,11 +14,13 @@ type Config = {
   chainId?: number;
   contractAddress?: string;
   version?: Version;
-  signer?: Signer;
+  signerOrProvider?: Signer | Provider;
   minterAddress?: string;
   toAddress?: BytesLike;
   mintCount?: BigNumberish;
 };
+
+type ArgsType = [toAddress: BytesLike, mintCount: BigNumberish];
 
 /**
  * Consolidated function for minting as admin without paying (either contract owner, or having minter role).
@@ -25,89 +28,90 @@ type Config = {
 export const useAdminMinter = ({
   contractAddress,
   version,
-  signer,
+  signerOrProvider,
+  minterAddress,
   toAddress,
   mintCount,
 }: Config) => {
-  const minterAddress = useAddressOfSigner(signer);
-
-  const [{ data: ownerData, error: ownerError, loading: ownerLoading }] =
-    useOzOwner({
-      contractAddress,
-      version,
-    });
-  const [{ data: hasRoleData, error: hasRoleError, loading: hasRoleLoading }] =
-    useOzHasRole({
-      contractAddress,
-      version,
-      address: minterAddress,
-      role: keccak256(toUtf8Bytes('MINTER_ROLE')),
-    });
+  const {
+    data: ownerData,
+    error: ownerError,
+    isLoading: ownerLoading,
+  } = useOzOwner({
+    contractAddress,
+    version,
+    signerOrProvider,
+  });
+  const {
+    data: hasRoleData,
+    error: hasRoleError,
+    isLoading: hasRoleLoading,
+  } = useOzHasRole({
+    contractAddress,
+    version,
+    signerOrProvider,
+    address: minterAddress,
+    role: keccak256(toUtf8Bytes('MINTER_ROLE')),
+  });
 
   const isOwner =
     ownerData?.toString().toLowerCase() ===
     minterAddress?.toString().toLowerCase();
   const hasMinterRole = hasRoleData?.toString() === 'true';
 
-  const [
-    {
-      data: mintByOwnerData,
-      error: mintByOwnerError,
-      loading: mintByOwnerLoading,
-    },
-    mintByOwnerWrite,
-  ] = useOwnerMinter({
+  const {
+    data: mintByOwnerData,
+    error: mintByOwnerError,
+    isLoading: mintByOwnerLoading,
+    writeAndWait: mintByOwnerWrite,
+  } = useOwnerMinter({
     contractAddress,
     version,
-    signerOrProvider: signer,
+    signerOrProvider,
     toAddress,
     mintCount,
   });
 
-  const [
-    {
-      data: mintByRoleData,
-      error: mintByRoleError,
-      loading: mintByRoleLoading,
-    },
-    mintByRoleWrite,
-  ] = useRoleBasedMinter({
+  const {
+    data: mintByRoleData,
+    error: mintByRoleError,
+    isLoading: mintByRoleLoading,
+    writeAndWait: mintByRoleWrite,
+  } = useRoleBasedMinter({
     contractAddress,
     version,
-    signerOrProvider: signer,
+    signerOrProvider,
     toAddress,
     mintCount,
   });
 
   const mintAsAdmin = useCallback(
-    (args?: { toAddress?: BytesLike; mintCount?: BigNumberish }) => {
+    (args?: ArgsType) => {
       if (hasMinterRole) {
-        mintByRoleWrite({
-          ...args,
-        });
+        mintByRoleWrite(args || ([toAddress, mintCount] as ArgsType));
       } else if (isOwner) {
-        mintByOwnerWrite({
-          ...args,
-        });
+        mintByOwnerWrite(args || ([toAddress, mintCount] as ArgsType));
       }
     },
-    [hasMinterRole, isOwner, mintByOwnerWrite, mintByRoleWrite]
+    [
+      hasMinterRole,
+      isOwner,
+      mintByOwnerWrite,
+      mintByRoleWrite,
+      mintCount,
+      toAddress,
+    ]
   );
 
-  return [
-    {
-      data: {
-        isOwner,
-        hasMinterRole,
-        ...(mintByOwnerData || mintByRoleData),
-      },
-      error: mintByOwnerError || mintByRoleError || ownerError || hasRoleError,
-      loading:
-        mintByOwnerLoading ||
-        mintByRoleLoading ||
-        ownerLoading ||
-        hasRoleLoading,
+  return {
+    data: {
+      isOwner,
+      hasMinterRole,
+      ...(mintByOwnerData || mintByRoleData),
     },
+    error: mintByOwnerError || mintByRoleError || ownerError || hasRoleError,
+    isLoading:
+      mintByOwnerLoading || mintByRoleLoading || ownerLoading || hasRoleLoading,
     mintAsAdmin,
-  ] as const;
+  } as const;
 };

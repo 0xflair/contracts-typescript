@@ -1,65 +1,29 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
-import { useCallback } from 'react';
-import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 type Config = {
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
+  newStatus?: boolean;
 };
 
+type ArgsType = [newStatus: boolean];
+
 export const usePreSaleStatusToggler = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
+  newStatus,
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721PreSaleExtension',
-    version
-  );
-
-  const [
-    { data: responseData, error: responseError, loading: responseLoading },
-    togglePreSaleStatusWrite,
-  ] = useContractWrite(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
-    },
-    'togglePreSaleStatus'
-  );
-
-  const [{ data: receiptData, error: receiptError, loading: receiptLoading }] =
-    useWaitForTransaction({
-      hash: responseData?.hash,
-      confirmations: 2,
-    });
-
-  const togglePreSaleStatus = useCallback(
-    async (newValue: boolean) => {
-      const response = await togglePreSaleStatusWrite({
-        args: [newValue],
-      });
-
-      const receipt = await response.data?.wait(1);
-
-      return { response, receipt };
-    },
-    [togglePreSaleStatusWrite]
-  );
-
-  return [
-    {
-      data: {
-        txResponse: responseData,
-        txReceipt: receiptData,
-      },
-      error: responseError || receiptError,
-      loading: responseLoading || receiptLoading,
-    },
-    togglePreSaleStatus,
-  ] as const;
+  return useContractWriteAndWait<ArgsType>({
+    version,
+    contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    contractAddress,
+    signerOrProvider,
+    functionName: 'togglePreSaleStatus',
+    args: [newStatus] as ArgsType,
+  });
 };

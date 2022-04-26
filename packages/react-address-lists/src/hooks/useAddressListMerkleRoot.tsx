@@ -4,22 +4,20 @@ import { BytesLike } from 'ethers';
 import { FLAIR_ADDRESS_LISTS_BACKEND } from '../constants';
 
 type Config = {
+  env?: Environment;
+  enabled?: boolean;
   treeKey?: string;
   address?: string;
-  skip?: boolean;
-  env?: Environment;
 };
 
 export function useAddressListMerkleRoot({
   env = Environment.PROD,
+  enabled = true,
   treeKey,
-  skip,
 }: Config) {
   const url = `${FLAIR_ADDRESS_LISTS_BACKEND[env]}/v1/address-list-merkle-trees/${treeKey}/root`;
-  const [{ data, loading, error }, sendRequest] = useAxiosGet<BytesLike[]>({
+  return useAxiosGet<BytesLike[]>({
     url,
-    skip: skip,
+    enabled: Boolean(enabled && treeKey),
   });
-
-  return [{ data, loading, error }, sendRequest] as const;
 }

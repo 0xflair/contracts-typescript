@@ -12,8 +12,8 @@ import { usePublicSaleMinter } from '../sales/usePublicSaleMinter';
 type Config = {
   env?: Environment;
   chainId?: number;
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
   minterAddress?: BytesLike;
   toAddress?: BytesLike;
@@ -26,76 +26,66 @@ type Config = {
 export const useSaleMinter = ({
   env,
   chainId,
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
   minterAddress,
   mintCount,
 }: Config) => {
-  const [
-    {
-      data: preSaleStatus,
-      error: preSaleStatusError,
-      loading: preSaleStatusLoading,
-    },
-  ] = usePreSaleStatus({
-    contractAddress,
+  const {
+    data: preSaleStatus,
+    error: preSaleStatusError,
+    isLoading: preSaleStatusLoading,
+  } = usePreSaleStatus({
     version,
+    contractAddress,
     signerOrProvider,
   });
 
-  const [
-    {
-      data: publicSaleStatus,
-      error: publicSaleStatusError,
-      loading: publicSaleStatusLoading,
-    },
-  ] = usePublicSaleStatus({
-    contractAddress,
+  const {
+    data: publicSaleStatus,
+    error: publicSaleStatusError,
+    isLoading: publicSaleStatusLoading,
+  } = usePublicSaleStatus({
     version,
+    contractAddress,
     signerOrProvider,
   });
 
-  const [
-    {
-      data: { allowlistProof, isAllowlisted },
-      error: allowlistCheckerError,
-      loading: allowlistCheckerLoading,
-    },
-  ] = usePreSaleAllowlistChecker({
+  const {
+    data: { allowlistProof, isAllowlisted },
+    error: allowlistCheckerError,
+    isLoading: allowlistCheckerLoading,
+  } = usePreSaleAllowlistChecker({
     env,
     chainId,
     contractAddress,
     version,
-    skip: false,
+    enabled: true,
     minterAddress,
   });
 
-  const [
-    {
-      data: preSaleMintData,
-      error: preSaleMintError,
-      loading: preSaleMintLoading,
-    },
-    preSaleMintWrite,
-  ] = usePreSaleMinter({
-    contractAddress,
+  const {
+    data: preSaleMintData,
+    error: preSaleMintError,
+    isLoading: preSaleMintLoading,
+    writeAndWait: preSaleMintWrite,
+  } = usePreSaleMinter({
     version,
+    contractAddress,
     signerOrProvider,
     mintCount,
     allowlistProof,
   });
 
-  const [
-    {
-      data: publicSaleMintData,
-      error: publicSaleMintError,
-      loading: publicSaleMintLoading,
-    },
-    publicSaleMintWrite,
-  ] = usePublicSaleMinter({
-    contractAddress,
+  const {
+    data: publicSaleMintData,
+    error: publicSaleMintError,
+    isLoading: publicSaleMintLoading,
+    writeAndWait: publicSaleMintWrite,
+  } = usePublicSaleMinter({
     version,
+    contractAddress,
     signerOrProvider,
     mintCount,
   });
@@ -103,14 +93,12 @@ export const useSaleMinter = ({
   const mint = useCallback(
     (args?: { mintCount?: BigNumberish; allowlistProof?: BytesLike[] }) => {
       if (isAllowlisted && preSaleStatus) {
-        preSaleMintWrite({
-          mintCount: args?.mintCount || mintCount,
-          allowlistProof: args?.allowlistProof || allowlistProof,
-        });
+        preSaleMintWrite([
+          (args?.mintCount || mintCount) as BigNumberish,
+          (args?.allowlistProof || allowlistProof) as BytesLike[],
+        ]);
       } else if (publicSaleStatus) {
-        publicSaleMintWrite({
-          mintCount: args?.mintCount || mintCount,
-        });
+        publicSaleMintWrite([(args?.mintCount || mintCount) as BigNumberish]);
       }
     },
     [
@@ -124,30 +112,28 @@ export const useSaleMinter = ({
     ]
   );
 
-  return [
-    {
-      data: {
-        txResponse: preSaleMintData.txResponse || publicSaleMintData.txResponse,
-        txReceipt: preSaleMintData.txReceipt || publicSaleMintData.txReceipt,
-        preSaleStatus,
-        preSalePrice: preSaleMintData.preSalePrice,
-        preSaleIsAllowlisted: isAllowlisted,
-        publicSaleStatus,
-        publicSalePrice: publicSaleMintData.publicSalePrice,
-      },
-      error:
-        preSaleMintError ||
-        publicSaleMintError ||
-        preSaleStatusError ||
-        publicSaleStatusError ||
-        allowlistCheckerError,
-      loading:
-        preSaleMintLoading ||
-        publicSaleMintLoading ||
-        preSaleStatusLoading ||
-        publicSaleStatusLoading ||
-        allowlistCheckerLoading,
+  return {
+    data: {
+      txResponse: preSaleMintData.txResponse || publicSaleMintData.txResponse,
+      txReceipt: preSaleMintData.txReceipt || publicSaleMintData.txReceipt,
+      preSaleStatus,
+      preSalePrice: preSaleMintData.preSalePrice,
+      preSaleIsAllowlisted: isAllowlisted,
+      publicSaleStatus,
+      publicSalePrice: publicSaleMintData.publicSalePrice,
     },
+    error:
+      preSaleMintError ||
+      publicSaleMintError ||
+      preSaleStatusError ||
+      publicSaleStatusError ||
+      allowlistCheckerError,
+    isLoading:
+      preSaleMintLoading ||
+      publicSaleMintLoading ||
+      preSaleStatusLoading ||
+      publicSaleStatusLoading ||
+      allowlistCheckerLoading,
     mint,
-  ] as const;
+  } as const;
 };

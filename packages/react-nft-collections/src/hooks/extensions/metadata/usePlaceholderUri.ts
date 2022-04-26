@@ -1,49 +1,27 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
-import { useContractRead } from 'wagmi';
 
-type Config = {
-  contractAddress?: string;
+type Config = Partial<ReadContractConfig> & {
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
-  skip?: boolean;
-  watch?: boolean;
 };
 
 export const usePlaceholderUri = ({
   contractAddress,
   version,
   signerOrProvider,
-  skip,
-  watch,
+  ...restOfConfig
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721PrefixedMetadataExtension',
-    version
-  );
-
-  const readyToRead = Boolean(!skip && contractAddress && signerOrProvider);
-
-  const [{ data, error, loading }, placeholderURIRead] = useContractRead(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
-    },
-    'placeholderURI',
-    {
-      skip: !readyToRead,
-      watch,
-    }
-  );
-
-  return [
-    {
-      data: data ? data.toString() : undefined,
-      error: !data ? error : undefined,
-      loading,
-    },
-    placeholderURIRead,
-  ] as const;
+  return useContractRead({
+    version,
+    contractKey:
+      'collections/ERC721/extensions/ERC721PrefixedMetadataExtension',
+    functionName: 'placeholderURI',
+    contractAddress,
+    signerOrProvider,
+    ...restOfConfig,
+  });
 };

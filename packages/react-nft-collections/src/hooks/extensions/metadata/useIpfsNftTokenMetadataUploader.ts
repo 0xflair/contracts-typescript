@@ -18,38 +18,32 @@ export const useIpfsNftTokenMetadataUploader = ({
   env = Environment.PROD,
   newMetadata,
 }: Config) => {
-  const [
-    {
-      data: imageUri,
-      loading: imageUploaderLoading,
-      error: imageUploaderError,
-    },
-    uploadImage,
-  ] = useIpfsFileUploader({
+  const {
+    data: imageUri,
+    isLoading: imageUploaderLoading,
+    error: imageUploaderError,
+    uploadToIpfs: uploadImage,
+  } = useIpfsFileUploader({
     env,
     autoUpload: false,
   });
 
-  const [
-    {
-      data: animationUri,
-      loading: animationUploaderLoading,
-      error: animationUploaderError,
-    },
-    uploadAnimation,
-  ] = useIpfsFileUploader({
+  const {
+    data: animationUri,
+    isLoading: animationUploaderLoading,
+    error: animationUploaderError,
+    uploadToIpfs: uploadAnimation,
+  } = useIpfsFileUploader({
     env,
     autoUpload: false,
   });
 
-  const [
-    {
-      data: metadataUri,
-      loading: metadataUploaderLoading,
-      error: metadataUploaderError,
-    },
-    uploadMetadata,
-  ] = useIpfsJsonUploader({
+  const {
+    data: metadataUri,
+    isLoading: metadataUploaderLoading,
+    error: metadataUploaderError,
+    uploadToIpfs: uploadMetadata,
+  } = useIpfsJsonUploader({
     env,
     autoUpload: false,
   });
@@ -80,20 +74,18 @@ export const useIpfsNftTokenMetadataUploader = ({
     return { imageUri, animationUri, metadataUri };
   }, [newMetadata, uploadImage, uploadAnimation, uploadMetadata]);
 
-  return [
-    {
-      data: {
-        metadataUri,
-        imageUri,
-        animationUri,
-      },
-      error:
-        metadataUploaderError || imageUploaderError || animationUploaderError,
-      loading:
-        metadataUploaderLoading ||
-        imageUploaderLoading ||
-        animationUploaderLoading,
+  return {
+    data: {
+      metadataUri,
+      imageUri,
+      animationUri,
     },
+    error:
+      metadataUploaderError || imageUploaderError || animationUploaderError,
+    isLoading:
+      metadataUploaderLoading ||
+      imageUploaderLoading ||
+      animationUploaderLoading,
     uploadNftTokenMetadata,
-  ] as const;
+  } as const;
 };

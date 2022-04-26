@@ -1,50 +1,26 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
-import { Signer } from 'ethers';
-import { useContractRead } from 'wagmi';
+import { BigNumberish, Signer } from 'ethers';
 
-type Config = {
-  contractAddress?: string;
+type Config = Partial<ReadContractConfig> & {
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
-  skip?: boolean;
-  watch?: boolean;
 };
 
 export const usePreSaleAllowlistMerkleRoot = ({
   contractAddress,
   version,
   signerOrProvider,
-  skip,
-  watch = true,
+  ...restOfConfig
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721PreSaleExtension',
-    version
-  );
-
-  const readyToRead = Boolean(!skip && contractAddress);
-
-  const [{ data, error, loading }, preSaleAllowlistMerkleRootRead] =
-    useContractRead(
-      {
-        addressOrName: contractAddress as string,
-        contractInterface: contract.artifact.abi,
-        signerOrProvider,
-      },
-      'preSaleAllowlistMerkleRoot',
-      {
-        skip: !readyToRead,
-        watch,
-      }
-    );
-
-  return [
-    {
-      data,
-      error,
-      loading,
-    },
-    preSaleAllowlistMerkleRootRead,
-  ] as const;
+  return useContractRead<BigNumberish>({
+    version,
+    contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    functionName: 'preSaleAllowlistMerkleRoot',
+    contractAddress,
+    signerOrProvider,
+    ...restOfConfig,
+  });
 };

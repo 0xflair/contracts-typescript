@@ -4,20 +4,18 @@ import { normalizeIpfsUrl } from '../utils';
 
 type Config = {
   uri?: string;
-  skip?: boolean;
+  enabled?: boolean;
 };
 
 export function useRemoteJsonReader<TContent = Record<string, any>>({
   uri,
-  skip,
+  enabled,
 }: Config) {
-  const [{ data, loading, error }, sendRequest] = useAxiosGet<TContent>({
+  return useAxiosGet<TContent>({
     url: normalizeIpfsUrl(uri) as string,
-    skip: skip || !uri,
+    enabled: Boolean(enabled && uri),
     headers: {
       Accept: 'application/json',
     },
   });
-
-  return [{ data, loading, error }, sendRequest] as const;
 }

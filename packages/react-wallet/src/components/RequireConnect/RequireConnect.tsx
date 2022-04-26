@@ -12,7 +12,7 @@ type Props = {
 
 export const RequireConnect = (props: Props) => {
   const { notConnectedView, children } = props;
-  const [{ data: networkData, error, loading }, switchNetwork] = useNetwork();
+  const { activeChain, error, isLoading, switchNetwork } = useNetwork();
 
   if (error) {
     return (
@@ -39,7 +39,7 @@ export const RequireConnect = (props: Props) => {
     );
   }
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-full">
         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -49,7 +49,7 @@ export const RequireConnect = (props: Props) => {
     );
   }
 
-  if (networkData.chain?.unsupported) {
+  if (activeChain?.unsupported) {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="rounded-md bg-yellow-50 p-4">
@@ -67,8 +67,8 @@ export const RequireConnect = (props: Props) => {
               <div className="mt-2 text-sm text-yellow-700">
                 <p>
                   Your wallet is currently connected to{' '}
-                  <b>{networkData.chain.name}</b> which is not supported yet.
-                  Please switch to one of the following networks:{' '}
+                  <b>{activeChain.name}</b> which is not supported yet. Please
+                  switch to one of the following networks:{' '}
                   {switchNetwork ? (
                     FLAIR_CHAINS.map((chain) => (
                       <>
@@ -93,7 +93,7 @@ export const RequireConnect = (props: Props) => {
     );
   }
 
-  if (!networkData.chain) {
+  if (!activeChain) {
     return notConnectedView ? (
       <>{notConnectedView}</>
     ) : (

@@ -24,9 +24,10 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
     onChange,
   } = props;
 
+  const { activeChain } = useNetwork();
+
   const convertedValueWei = utils.parseUnits(value.toString(), unit);
   const convertedValueEther = utils.formatEther(convertedValueWei);
-  const [{ data: networkData }] = useNetwork();
 
   return (
     <div>
@@ -45,12 +46,11 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
         />
         <div className="absolute top-2 right-0 pr-3 flex items-center pointer-events-none">
           <span className="text-gray-500 sm:text-sm" id="price-currency">
-            {networkData.chain?.nativeCurrency?.name} (
+            {activeChain?.nativeCurrency?.name} (
             <CryptoPrice
               value={value}
               symbol={
-                symbol ||
-                (networkData.chain?.nativeCurrency?.symbol as CryptoSymbol)
+                symbol || (activeChain?.nativeCurrency?.symbol as CryptoSymbol)
               }
               unit={unit}
             />{' '}

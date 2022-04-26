@@ -75,8 +75,8 @@ export const LoginProvider = ({
   loginStorageKey = 'flair.walletJwt',
   timeout = 5000,
 }: React.PropsWithChildren<LoginProviderProps>) => {
-  const [{ data: account }] = useAccount();
-  const [{ data: signer }] = useSigner();
+  const { data: account } = useAccount();
+  const { data: signer } = useSigner();
   const [walletJwt, setWalletJwt] = useLocalStorage<string>(loginStorageKey);
 
   const [state, setState] = React.useState<State>({

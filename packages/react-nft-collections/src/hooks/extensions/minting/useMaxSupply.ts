@@ -1,47 +1,26 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
-import { BigNumber, Signer } from 'ethers';
-import { useContractRead } from 'wagmi';
+import { BigNumberish, Signer } from 'ethers';
 
-type Config = {
-  contractAddress?: string;
+type Config = Partial<ReadContractConfig> & {
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
-  skip?: boolean;
-  watch?: boolean;
 };
 
 export const useMaxSupply = ({
   contractAddress,
   version,
   signerOrProvider,
-  skip,
-  watch = true,
+  ...restOfConfig
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721AutoIdMinterExtension',
-    version
-  );
-
-  const [{ data, error, loading }, maxSupplyRead] = useContractRead(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
-    },
-    'maxSupply',
-    {
-      skip,
-      watch,
-    }
-  );
-
-  return [
-    {
-      data: data ? BigNumber.from(data) : undefined,
-      error,
-      loading,
-    },
-    maxSupplyRead,
-  ] as const;
+  return useContractRead<BigNumberish>({
+    version,
+    contractKey: 'collections/ERC721/extensions/ERC721AutoIdMinterExtension',
+    functionName: 'maxSupply',
+    contractAddress,
+    signerOrProvider,
+    ...restOfConfig,
+  });
 };

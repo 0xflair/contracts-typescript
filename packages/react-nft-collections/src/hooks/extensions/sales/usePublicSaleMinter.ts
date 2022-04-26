@@ -1,87 +1,48 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumber, BigNumberish, Signer } from 'ethers';
-import { useCallback } from 'react';
-import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 import { usePublicSalePrice } from './usePublicSalePrice';
 
 type Config = {
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
   mintCount?: BigNumberish;
 };
 
+type ArgsType = [mintCount: BigNumberish];
+
 export const usePublicSaleMinter = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
   mintCount,
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721PublicSaleExtension',
-    version
-  );
-
-  const [
-    {
-      data: publicSalePrice,
-      error: publicSalePriceError,
-      loading: publicSalePriceLoading,
-    },
-  ] = usePublicSalePrice({
-    contractAddress,
+  const { data: publicSalePrice } = usePublicSalePrice({
     version,
+    contractAddress,
     signerOrProvider,
   });
 
-  const [
-    { data: responseData, error: responseError, loading: responseLoading },
-    mintPublicSaleWrite,
-  ] = useContractWrite(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
+  const result = useContractWriteAndWait<ArgsType>({
+    version,
+    contractKey: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
+    contractAddress,
+    signerOrProvider,
+    functionName: 'mintPublicSale',
+    args: [mintCount] as ArgsType,
+    overrides: {
+      value: BigNumber.from(publicSalePrice).mul(BigNumber.from(mintCount)),
     },
-    'mintPublicSale'
-  );
+  });
 
-  const [{ data: receiptData, error: receiptError, loading: receiptLoading }] =
-    useWaitForTransaction({
-      hash: responseData?.hash,
-      confirmations: 2,
-    });
-
-  const mintPublicSale = useCallback(
-    async (args?: { mintCount?: BigNumberish }) => {
-      const response = await mintPublicSaleWrite({
-        args: [args?.mintCount || mintCount],
-        overrides: {
-          value: BigNumber.from(publicSalePrice).mul(
-            BigNumber.from(args?.mintCount || mintCount)
-          ),
-        },
-      });
-
-      const receipt = await response.data?.wait(1);
-
-      return { response, receipt };
+  return {
+    ...result,
+    data: {
+      ...result.data,
+      publicSalePrice,
     },
-    [mintPublicSaleWrite, publicSalePrice, mintCount]
-  );
-
-  return [
-    {
-      data: {
-        publicSalePrice,
-        txResponse: responseData,
-        txReceipt: receiptData,
-      },
-      error: publicSalePriceError || responseError || receiptError,
-      loading: publicSalePriceLoading || responseLoading || receiptLoading,
-    },
-    mintPublicSale,
-  ] as const;
+  };
 };

@@ -25,11 +25,11 @@ const newContractFactory = <T = ContractFactory>({
 type State = {
   contract?: Contract;
   error?: Error;
-  loading?: boolean;
+  isLoading?: boolean;
 };
 
 const initialState: State = {
-  loading: false,
+  isLoading: false,
 };
 
 export const useContractDeployer = <ArgsType extends any[]>({
@@ -56,7 +56,7 @@ export const useContractDeployer = <ArgsType extends any[]>({
       });
 
       try {
-        setState((x) => ({ ...x, error: undefined, loading: true }));
+        setState((x) => ({ ...x, error: undefined, isLoading: true }));
 
         const contract = await contractFactory.deploy(...args);
         if (!didCancel) {
@@ -65,7 +65,7 @@ export const useContractDeployer = <ArgsType extends any[]>({
 
         const receipt = await contract.deployTransaction.wait(2);
         if (!didCancel) {
-          setState((x) => ({ ...x, loading: false }));
+          setState((x) => ({ ...x, isLoading: false }));
         }
 
         return { data: { contract, receipt }, error: undefined };
@@ -73,7 +73,7 @@ export const useContractDeployer = <ArgsType extends any[]>({
         const error = <Error>error_;
 
         if (!didCancel) {
-          setState((x) => ({ ...x, error, loading: false }));
+          setState((x) => ({ ...x, error, isLoading: false }));
         }
 
         return { data: undefined, error };
@@ -82,12 +82,10 @@ export const useContractDeployer = <ArgsType extends any[]>({
     [cancelQuery, contractFactory]
   );
 
-  return [
-    {
-      data: state.contract,
-      error: state.error,
-      loading: state.loading,
-    },
+  return {
+    data: state.contract,
+    error: state.error,
+    isLoading: state.isLoading,
     deployContract,
-  ] as const;
+  } as const;
 };

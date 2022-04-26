@@ -1,8 +1,7 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
-import { useCallback } from 'react';
-import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 type Config = {
   contractAddress?: string;
@@ -12,6 +11,8 @@ type Config = {
   mintCount?: BigNumberish;
 };
 
+type ArgsType = [toAddress: BytesLike, mintCount: BigNumberish];
+
 export const useRoleBasedMinter = ({
   contractAddress,
   version,
@@ -19,51 +20,12 @@ export const useRoleBasedMinter = ({
   toAddress,
   mintCount,
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721RoleBasedMintExtension',
-    version
-  );
-
-  const [
-    { data: responseData, error: responseError, loading: responseLoading },
-    mintByRoleWrite,
-  ] = useContractWrite(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
-    },
-    'mintByRole'
-  );
-
-  const [{ data: receiptData, error: receiptError, loading: receiptLoading }] =
-    useWaitForTransaction({
-      hash: responseData?.hash,
-      confirmations: 2,
-    });
-
-  const mintByRole = useCallback(
-    async (args?: { toAddress?: BytesLike; mintCount?: BigNumberish }) => {
-      const response = await mintByRoleWrite({
-        args: [args?.toAddress || toAddress, args?.mintCount || mintCount],
-      });
-
-      const receipt = await response.data?.wait(1);
-
-      return { response, receipt };
-    },
-    [mintByRoleWrite, toAddress, mintCount]
-  );
-
-  return [
-    {
-      data: {
-        txResponse: responseData,
-        txReceipt: receiptData,
-      },
-      error: responseError || receiptError,
-      loading: responseLoading || receiptLoading,
-    },
-    mintByRole,
-  ] as const;
+  return useContractWriteAndWait<ArgsType>({
+    version,
+    contractKey: 'collections/ERC721/extensions/ERC721RoleBasedMintExtension',
+    contractAddress,
+    signerOrProvider,
+    functionName: 'mintByRole',
+    args: [toAddress, mintCount] as ArgsType,
+  });
 };

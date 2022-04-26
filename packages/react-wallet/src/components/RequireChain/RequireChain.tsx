@@ -12,13 +12,13 @@ type Props = {
 
 export const RequireChain = (props: Props) => {
   const { requiredChainId, wrongChainView, children } = props;
-  const [{ data: networkData }, switchNetwork] = useNetwork();
+  const { activeChain, switchNetwork } = useNetwork();
   const requiredChain = useChainInfo(Number(requiredChainId));
 
   if (
-    !networkData.chain?.id ||
+    !activeChain?.id ||
     !requiredChainId ||
-    networkData.chain.id.toString() !== requiredChainId.toString()
+    activeChain.id.toString() !== requiredChainId.toString()
   ) {
     return wrongChainView ? (
       <>{wrongChainView}</>
@@ -33,8 +33,7 @@ export const RequireChain = (props: Props) => {
             Switch your network to {requiredChain?.name}
           </h3>
           <p className="mt-1 text-sm text-gray-500">
-            Your wallet is currently connected to {networkData.chain?.name},{' '}
-            <br />
+            Your wallet is currently connected to {activeChain?.name}, <br />
             but you must connect to <b>{requiredChain?.name}</b> to access this
             section.
           </p>

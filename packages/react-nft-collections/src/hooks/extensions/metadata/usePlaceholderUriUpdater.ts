@@ -1,66 +1,26 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { useContractWriteAndWait } from '@0xflair/react-common';
 import { BytesLike } from '@ethersproject/bytes';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
-import { useCallback } from 'react';
-import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 type Config = {
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
 };
 
 export const usePlaceholderUriUpdater = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721PrefixedMetadataExtension',
-    version
-  );
-
-  const [
-    { data: responseData, error: responseError, loading: responseLoading },
-    setPlaceholderUriWrite,
-  ] = useContractWrite(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
-    },
-    'setPlaceholderURI'
-  );
-
-  const [{ data: receiptData, error: receiptError, loading: receiptLoading }] =
-    useWaitForTransaction({
-      hash: responseData?.hash,
-      confirmations: 2,
-    });
-
-  const setPlaceholderUri = useCallback(
-    async (newValue: BytesLike) => {
-      const response = await setPlaceholderUriWrite({
-        args: [newValue],
-      });
-
-      const receipt = await response.data?.wait(1);
-
-      return { response, receipt };
-    },
-    [setPlaceholderUriWrite]
-  );
-
-  return [
-    {
-      data: {
-        txResponse: responseData,
-        txReceipt: receiptData,
-      },
-      error: responseError || receiptError,
-      loading: responseLoading || receiptLoading,
-    },
-    setPlaceholderUri,
-  ] as const;
+  return useContractWriteAndWait<[BytesLike]>({
+    version,
+    contractKey:
+      'collections/ERC721/extensions/ERC721PrefixedMetadataExtension',
+    contractAddress,
+    signerOrProvider,
+    functionName: 'setPlaceholderURI',
+  });
 };

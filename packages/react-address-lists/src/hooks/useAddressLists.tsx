@@ -5,27 +5,22 @@ import { FLAIR_ADDRESS_LISTS_BACKEND } from '../constants';
 import { AddressList } from '../types';
 
 type Config = {
-  skip?: boolean;
   env?: Environment;
+  enabled?: boolean;
 };
 
 export function useAddressLists<TListConfig extends Record<string, any>>({
-  skip = false,
   env = Environment.PROD,
+  enabled = true,
 }: Config | undefined = {}) {
+  const loginJwt = useLoginJwt();
   const url = `${FLAIR_ADDRESS_LISTS_BACKEND[env]}/v1/address-lists`;
 
-  const loginJwt = useLoginJwt();
-
-  const [{ data, loading, error }, sendRequest] = useAxiosGet<
-    AddressList<TListConfig>[]
-  >({
+  return useAxiosGet<AddressList<TListConfig>[]>({
     url,
-    skip,
+    enabled: Boolean(enabled && loginJwt),
     headers: {
       Authorization: `Bearer ${loginJwt}`,
     },
   });
-
-  return [{ data, loading, error }, sendRequest] as const;
 }

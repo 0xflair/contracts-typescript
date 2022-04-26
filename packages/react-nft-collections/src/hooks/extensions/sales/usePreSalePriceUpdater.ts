@@ -1,65 +1,29 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { Version } from '@0xflair/contracts-registry';
+import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, Signer } from 'ethers';
-import { useCallback } from 'react';
-import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 type Config = {
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
+  newPrice?: BigNumberish;
 };
 
+type ArgsType = [newPrice: BigNumberish];
+
 export const usePreSalePriceUpdater = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
+  newPrice,
 }: Config) => {
-  const contract = loadContract(
-    'collections/ERC721/extensions/ERC721PreSaleExtension',
-    version
-  );
-
-  const [
-    { data: responseData, error: responseError, loading: responseLoading },
-    setPreSalePriceWrite,
-  ] = useContractWrite(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
-      signerOrProvider,
-    },
-    'setPreSalePrice'
-  );
-
-  const [{ data: receiptData, error: receiptError, loading: receiptLoading }] =
-    useWaitForTransaction({
-      hash: responseData?.hash,
-      confirmations: 2,
-    });
-
-  const setPreSalePrice = useCallback(
-    async (newPrice: BigNumberish) => {
-      const response = await setPreSalePriceWrite({
-        args: [newPrice],
-      });
-
-      const receipt = await response.data?.wait(1);
-
-      return { response, receipt };
-    },
-    [setPreSalePriceWrite]
-  );
-
-  return [
-    {
-      data: {
-        txResponse: responseData,
-        txReceipt: receiptData,
-      },
-      error: responseError || receiptError,
-      loading: responseLoading || receiptLoading,
-    },
-    setPreSalePrice,
-  ] as const;
+  return useContractWriteAndWait<ArgsType>({
+    version,
+    contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    contractAddress,
+    signerOrProvider,
+    functionName: 'setPreSalePrice',
+    args: [newPrice] as ArgsType,
+  });
 };

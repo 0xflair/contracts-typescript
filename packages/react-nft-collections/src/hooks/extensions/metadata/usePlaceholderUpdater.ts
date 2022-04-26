@@ -1,5 +1,5 @@
 import { Version } from '@0xflair/contracts-registry';
-import { Environment, ZERO_ADDRESS, ZERO_BYTES32 } from '@0xflair/react-common';
+import { Environment, ZERO_ADDRESS } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 import { useCallback } from 'react';
@@ -12,40 +12,36 @@ import { usePlaceholderUriUpdater } from './usePlaceholderUriUpdater';
 
 type Config = {
   env?: Environment;
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider;
   placeholderMetadata?: NftTokenMetadataInput;
 };
 
 export const usePlaceholderUpdater = ({
   env = Environment.PROD,
-  contractAddress,
   version,
+  contractAddress = ZERO_ADDRESS,
   signerOrProvider,
   placeholderMetadata,
 }: Config) => {
-  const [
-    {
-      data: setPlaceholderUriDate,
-      error: setPlaceholderUriError,
-      loading: setPlaceholderUriLoading,
-    },
-    setPlaceholderUri,
-  ] = usePlaceholderUriUpdater({
+  const {
+    data: setPlaceholderUriDate,
+    error: setPlaceholderUriError,
+    isLoading: setPlaceholderUriLoading,
+    writeAndWait: setPlaceholderUri,
+  } = usePlaceholderUriUpdater({
     contractAddress,
     signerOrProvider,
     version,
   });
 
-  const [
-    {
-      data: placeholderMetadataUploaderUri,
-      loading: placeholderMetadataUploaderLoading,
-      error: placeholderMetadataUploaderError,
-    },
-    placeholderMetadataUpload,
-  ] = useIpfsNftTokenMetadataUploader({
+  const {
+    data: placeholderMetadataUploaderUri,
+    isLoading: placeholderMetadataUploaderLoading,
+    error: placeholderMetadataUploaderError,
+    uploadNftTokenMetadata: placeholderMetadataUpload,
+  } = useIpfsNftTokenMetadataUploader({
     env,
     newMetadata: placeholderMetadata,
   });
@@ -65,20 +61,18 @@ export const usePlaceholderUpdater = ({
       return;
     }
 
-    setPlaceholderUri(metadataUri);
+    setPlaceholderUri([metadataUri]);
 
     return { animationUri, imageUri, metadataUri };
   }, [contractAddress, placeholderMetadataUpload, setPlaceholderUri]);
 
-  return [
-    {
-      data: {
-        ...placeholderMetadataUploaderUri,
-        ...setPlaceholderUriDate,
-      },
-      error: setPlaceholderUriError || placeholderMetadataUploaderError,
-      loading: setPlaceholderUriLoading || placeholderMetadataUploaderLoading,
+  return {
+    data: {
+      ...placeholderMetadataUploaderUri,
+      ...setPlaceholderUriDate,
     },
+    error: setPlaceholderUriError || placeholderMetadataUploaderError,
+    isLoading: setPlaceholderUriLoading || placeholderMetadataUploaderLoading,
     uploadPlaceholder,
-  ] as const;
+  } as const;
 };

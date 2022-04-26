@@ -18,16 +18,17 @@ export type ConnectButtonProps = {
 export const ConnectButton = (props: ConnectButtonProps) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const activeButtonRef = useRef(null);
-  const [{ data, error, loading }, connect] = useConnect();
+  const { error, isConnecting, isConnected, connectors, connect } =
+    useConnect();
 
-  const connectorMetamask = data.connectors[0];
-  const connectorWalletConnect = data.connectors[1];
-  const connectorCoinbaseWallet = data.connectors[2];
+  const connectorMetamask = connectors[0];
+  const connectorWalletConnect = connectors[1];
+  const connectorCoinbaseWallet = connectors[2];
 
   useEffect(() => {
     let didCancel = false;
 
-    if (data.connected && dialogOpen) {
+    if (isConnected && dialogOpen) {
       if (!didCancel) {
         setDialogOpen(false);
       }
@@ -36,15 +37,15 @@ export const ConnectButton = (props: ConnectButtonProps) => {
     return () => {
       didCancel = true;
     };
-  }, [data.connected, dialogOpen]);
+  }, [isConnected, dialogOpen]);
 
   return (
     <>
-      {data.connected && !error && !loading ? (
+      {isConnected && !error && !isConnecting ? (
         props.children || <></>
       ) : (
         <button
-          disabled={loading}
+          disabled={isConnecting}
           className={
             props.className ||
             'inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed'
