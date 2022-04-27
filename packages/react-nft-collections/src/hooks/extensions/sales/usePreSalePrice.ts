@@ -10,8 +10,8 @@ type Config = Partial<ReadContractConfig> & {
 };
 
 export const usePreSalePrice = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
   ...restOfConfig
 }: Config) => {

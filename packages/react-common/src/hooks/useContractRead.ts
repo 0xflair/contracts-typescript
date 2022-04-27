@@ -28,7 +28,7 @@ export const useContractRead = <
   ArgsType extends any[] = any[]
 >({
   version,
-  enabled,
+  enabled = true,
   contractKey,
   contractAddress,
   signerOrProvider,
