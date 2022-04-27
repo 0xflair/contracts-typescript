@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.3 (2022-04-27)
+
+
+### Bug Fixes
+
+* consistent return format for the placeholder hook ([5e3334e](https://github.com/0xflair/typescript-sdk/commit/5e3334e3208974b418b609330c202b3ab5607a82))
+
+
+
+
+
 ## 0.27.2 (2022-04-27)
 
 **Note:** Version bump only for package @0xflair/react-nft-collections
