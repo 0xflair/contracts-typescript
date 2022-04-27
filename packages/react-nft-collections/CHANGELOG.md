@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.9 (2022-04-27)
+
+
+### Bug Fixes
+
+* set minter hooks as loading while fetching price ([ed0348d](https://github.com/0xflair/typescript-sdk/commit/ed0348deb1db46db23eafcf86650cd3f7f72d80a))
+
+
+
+
+
 ## 0.27.8 (2022-04-27)
 
 
