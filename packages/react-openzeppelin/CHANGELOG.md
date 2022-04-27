@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.14 (2022-04-27)
+
+
+### Bug Fixes
+
+* pass rest of config when calling contract write manually ([c5de1f3](https://github.com/0xflair/typescript-sdk/commit/c5de1f366eab85d29bd83164e79e8129819bbad6))
+
+
+
+
+
 ## 0.27.13 (2022-04-27)
 
 
