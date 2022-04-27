@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.7 (2022-04-27)
+
+
+### Bug Fixes
+
+* remove signer object from read-only calls ([28e2d70](https://github.com/0xflair/typescript-sdk/commit/28e2d70fe24d6ef41b920fd3376971c30a3d90b2))
+
+
+
+
+
 ## 0.27.6 (2022-04-27)
 
 
