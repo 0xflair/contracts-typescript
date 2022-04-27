@@ -9,8 +9,7 @@ type Props = {
 export const AddressScannerLink = ({ className, address, chainId }: Props) => {
   const chain = useChainInfo(chainId);
   const explorerUrl =
-    (chain?.blockExplorers && chain?.blockExplorers[0].url) ||
-    `https://blockscan.com`;
+    chain?.blockExplorers?.default.url || `https://blockscan.com`;
 
   return (
     <a

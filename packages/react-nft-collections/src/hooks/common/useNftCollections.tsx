@@ -11,7 +11,7 @@ type Config = {
 
 export function useNftCollections<TConfig extends Record<string, any>>({
   env = Environment.PROD,
-  enabled = false,
+  enabled = true,
 }: Config | undefined = {}) {
   const loginJwt = useLoginJwt();
   const url = `${FLAIR_NFT_COLLECTIONS_BACKEND[env]}/v1/nft-collections`;
