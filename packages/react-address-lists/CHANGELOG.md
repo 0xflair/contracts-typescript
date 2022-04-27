@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.10 (2022-04-27)
+
+
+### Bug Fixes
+
+* remove signer from read-only hooks ([32b6571](https://github.com/0xflair/typescript-sdk/commit/32b65712e9435b76c9b7b9c93e0e6893cbf01abf))
+
+
+
+
+
 ## 0.27.9 (2022-04-27)
 
 
