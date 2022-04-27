@@ -1,3 +1,4 @@
+import { useCancel } from '@0xflair/react-common';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useAccount } from 'wagmi';
 
@@ -17,7 +18,13 @@ export const LoginButton = (props: LoginButtonProps) => {
     login,
   } = useLoginContext();
 
+  const cancelQuery = useCancel();
   useEffect(() => {
+    let didCancel = false;
+    cancelQuery(() => {
+      didCancel = true;
+    });
+
     // Attempt to login connect if wallet is connected
     if (
       props.autoLogin &&
@@ -26,10 +33,13 @@ export const LoginButton = (props: LoginButtonProps) => {
       !loginSigning &&
       !loginPosting
     ) {
-      login();
+      if (!didCancel) {
+        login();
+      }
     }
   }, [
     account?.address,
+    cancelQuery,
     error,
     login,
     loginPosting,
