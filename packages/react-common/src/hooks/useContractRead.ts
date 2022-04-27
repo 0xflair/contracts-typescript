@@ -34,7 +34,7 @@ export const useContractRead = <
   signerOrProvider,
   functionName,
   args,
-  watch,
+  watch = false,
   cacheOnBlock,
   ...restOfConfig
 }: ReadContractConfig<ArgsType>) => {
