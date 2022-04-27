@@ -5,7 +5,7 @@ import {
 } from '@0xflair/contracts-registry';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
-import { useContractRead as useContractReadWagmi } from 'wagmi';
+import { useContractRead as useContractReadWagmi, useProvider } from 'wagmi';
 import { UseContractReadConfig } from 'wagmi/dist/declarations/src/hooks/contracts/useContractRead';
 
 import { ZERO_ADDRESS } from '../utils';
@@ -38,6 +38,7 @@ export const useContractRead = <
   cacheOnBlock,
   ...restOfConfig
 }: ReadContractConfig<ArgsType>) => {
+  const provider = useProvider();
   const contract = loadContract(contractKey, version);
 
   const readyToRead = Boolean(
@@ -48,7 +49,11 @@ export const useContractRead = <
     {
       addressOrName: contractAddress as string,
       contractInterface: contract.artifact.abi,
-      ...(signerOrProvider ? { signerOrProvider } : {}),
+      ...(signerOrProvider
+        ? { signerOrProvider }
+        : provider
+        ? { signerOrProvider: provider }
+        : {}),
     },
     functionName as string,
     {
