@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.18 (2022-04-27)
+
+
+### Bug Fixes
+
+* avoid creating a new object when providing signer or provider ([63faa82](https://github.com/0xflair/typescript-sdk/commit/63faa8295d28bfb79c26db828c9f9f8859a6ccb8))
+
+
+
+
+
 ## 0.27.17 (2022-04-27)
 
 **Note:** Version bump only for package @0xflair/typescript-sdk
