@@ -9,7 +9,7 @@ type Config = {
 
 export function useRemoteJsonReader<TContent = Record<string, any>>({
   uri,
-  enabled,
+  enabled = true,
 }: Config) {
   return useAxiosGet<TContent>({
     url: normalizeIpfsUrl(uri) as string,
