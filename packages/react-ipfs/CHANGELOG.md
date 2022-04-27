@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.5 (2022-04-27)
+
+
+### Bug Fixes
+
+* enable read contract hook by default ([19ebadf](https://github.com/0xflair/typescript-sdk/commit/19ebadf6e99e147e57747135c70e873c6c4a3852))
+
+
+
+
+
 ## 0.27.4 (2022-04-27)
 
 **Note:** Version bump only for package @0xflair/react-ipfs

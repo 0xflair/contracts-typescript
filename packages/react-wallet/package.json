@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-wallet",
-  "version": "0.27.4",
+  "version": "0.27.5",
   "private": false,
   "repository": {
     "type": "git",
@@ -57,9 +57,9 @@
     "wagmi": "^0.3.0"
   },
   "devDependencies": {
-    "@0xflair/react-common": "^0.27.4",
-    "@0xflair/react-icons": "^0.27.4",
-    "@0xflair/react-ui": "^0.27.4",
+    "@0xflair/react-common": "^0.27.5",
+    "@0xflair/react-icons": "^0.27.5",
+    "@0xflair/react-ui": "^0.27.5",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@metamask/onboarding": "^1.0.1",
