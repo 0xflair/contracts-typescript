@@ -18,7 +18,7 @@ export const TransactionLink = ({
 
   const txHash = txResponse?.hash || txReceipt?.transactionHash;
   const scannerChain = chain || activeChain;
-  const explorer = ((scannerChain?.blockExplorers as any) || [])[0];
+  const explorer = scannerChain?.blockExplorers?.default;
 
   return (
     <div className={className}>
@@ -34,7 +34,7 @@ export const TransactionLink = ({
               View on {explorer.name}
             </a>
           ) : (
-            <span className="truncate w-40">{txHash}</span>
+            <span className="truncate w-30">{txHash}</span>
           )}
         </>
       ) : null}
