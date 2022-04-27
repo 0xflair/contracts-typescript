@@ -7,12 +7,7 @@ import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';
 import { Signer } from 'ethers';
 import { useCallback } from 'react';
-import {
-  useContractWrite,
-  useProvider,
-  useSigner,
-  useWaitForTransaction,
-} from 'wagmi';
+import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 export type ContractWriteConfig<ArgsType extends any[]> =
   WriteContractConfig & {
@@ -33,8 +28,6 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   args,
   ...restOfConfig
 }: ContractWriteConfig<ArgsType>) => {
-  const provider = useProvider();
-  const { data: signer } = useSigner();
   const contract = loadContract(contractKey, version);
 
   const {
@@ -49,7 +42,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     {
       addressOrName: contractAddress as string,
       contractInterface: contract.artifact.abi,
-      signerOrProvider: signerOrProvider || signer || provider,
+      ...(signerOrProvider ? { signerOrProvider } : {}),
     },
     functionName as string,
     {

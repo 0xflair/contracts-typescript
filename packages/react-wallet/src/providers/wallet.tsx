@@ -1,5 +1,5 @@
 import { providers } from 'ethers';
-import { ReactNode } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import { createClient, Provider } from 'wagmi';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
@@ -11,65 +11,64 @@ import {
   FLAIR_INFURA_PROJECT_ID,
 } from '../constants';
 
-type Config = {
-  appName?: string;
-  infuraId?: string;
-};
-
-export const setupConnectorsAndProvider = (config?: Config) => {
-  const appName = config?.appName || 'Flair';
-  const infuraId = config?.infuraId || FLAIR_INFURA_PROJECT_ID;
-
-  const provider = (config: { chainId?: number }) => {
-    return new providers.InfuraProvider(config.chainId, infuraId);
-  };
-
-  const connectors = ({ chainId }: any) => {
-    const rpcUrl =
-      FLAIR_CHAINS.find((x) => x.id === chainId)?.rpcUrls.default ??
-      FLAIR_DEFAULT_CHAIN.rpcUrls.default;
-
-    return [
-      new InjectedConnector({
-        chains: FLAIR_CHAINS,
-        options: { shimDisconnect: true },
-      }),
-      new WalletConnectConnector({
-        options: {
-          infuraId,
-          qrcode: true,
-        },
-      }),
-      new CoinbaseWalletConnector({
-        options: {
-          appName,
-          jsonRpcUrl: `${rpcUrl}/${infuraId}`,
-        },
-      }),
-    ];
-  };
-
-  return {
-    connectors,
-    provider,
-  };
-};
-
 type Props = {
   children?: ReactNode;
+  appName?: string;
+  infuraId?: string;
   wagmiOverrides?: Record<string, any>;
 };
 
-const { connectors, provider } = setupConnectorsAndProvider();
+export const WalletProvider = ({
+  children,
+  appName = 'Flair',
+  infuraId = FLAIR_INFURA_PROJECT_ID,
+  wagmiOverrides,
+}: Props) => {
+  const provider = useCallback(
+    (config: { chainId?: number }) => {
+      return new providers.InfuraProvider(config.chainId, infuraId);
+    },
+    [infuraId]
+  );
 
-const client = createClient({
-  autoConnect: true,
-  connectors,
-  provider,
-});
+  const connectors = useCallback(
+    ({ chainId }: any) => {
+      const rpcUrl =
+        FLAIR_CHAINS.find((x) => x.id === chainId)?.rpcUrls.default ??
+        FLAIR_DEFAULT_CHAIN.rpcUrls.default;
 
-export const WalletProvider = (props: Props) => {
-  const { children, wagmiOverrides } = props;
+      return [
+        new InjectedConnector({
+          chains: FLAIR_CHAINS,
+          options: { shimDisconnect: true },
+        }),
+        new WalletConnectConnector({
+          options: {
+            infuraId,
+            qrcode: true,
+          },
+        }),
+        new CoinbaseWalletConnector({
+          options: {
+            appName,
+            jsonRpcUrl: `${rpcUrl}/${infuraId}`,
+          },
+        }),
+      ];
+    },
+    [appName, infuraId]
+  );
+
+  const client = useMemo(
+    () =>
+      createClient({
+        autoConnect: true,
+        connectors,
+        provider,
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [appName, infuraId]
+  );
 
   return (
     <Provider client={client} {...wagmiOverrides}>
