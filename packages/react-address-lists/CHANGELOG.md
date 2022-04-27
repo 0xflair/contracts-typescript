@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.22 (2022-04-27)
+
+
+### Bug Fixes
+
+* disable watch mode for contract reads ([ad9b00c](https://github.com/0xflair/typescript-sdk/commit/ad9b00c276bb34bdae75fe18e45a2d59230c29b8))
+
+
+
+
+
 ## 0.27.21 (2022-04-27)
 
 
