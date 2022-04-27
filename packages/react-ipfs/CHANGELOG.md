@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.11 (2022-04-27)
+
+
+### Bug Fixes
+
+* only set signerOrProvider if any value is given ([f9e808d](https://github.com/0xflair/typescript-sdk/commit/f9e808de254c97275ffeef4ad0397a8b8db4e942))
+
+
+
+
+
 ## 0.27.10 (2022-04-27)
 
 
