@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.20 (2022-04-27)
+
+
+### Bug Fixes
+
+* enable the hook for remote json reader ([4c6bc6b](https://github.com/0xflair/typescript-sdk/commit/4c6bc6b707e8c3ff68615e0e24da3346ea3a691d))
+
+
+
+
+
 ## 0.27.19 (2022-04-27)
 
 
