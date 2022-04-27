@@ -49,11 +49,7 @@ export const useContractRead = <
     {
       addressOrName: contractAddress as string,
       contractInterface: contract.artifact.abi,
-      ...(signerOrProvider
-        ? { signerOrProvider }
-        : provider
-        ? { signerOrProvider: provider }
-        : {}),
+      signerOrProvider: signerOrProvider || provider,
     },
     functionName as string,
     {

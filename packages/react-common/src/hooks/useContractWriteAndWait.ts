@@ -49,13 +49,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     {
       addressOrName: contractAddress as string,
       contractInterface: contract.artifact.abi,
-      ...(signerOrProvider
-        ? { signerOrProvider }
-        : signer
-        ? { signerOrProvider: signer }
-        : provider
-        ? { signerOrProvider: provider }
-        : {}),
+      signerOrProvider: signerOrProvider || signer || provider,
     },
     functionName as string,
     {
