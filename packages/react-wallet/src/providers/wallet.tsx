@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { providers } from 'ethers';
 import { createClient, Provider } from 'wagmi';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
@@ -15,11 +15,15 @@ type Config = {
   infuraId?: string;
 };
 
-const setupConnectors = (config: Config) => {
-  const appName = config.appName || 'Flair';
-  const infuraId = config.infuraId || FLAIR_INFURA_PROJECT_ID;
+export const setupConnectorsAndProvider = (config?: Config) => {
+  const appName = config?.appName || 'Flair';
+  const infuraId = config?.infuraId || FLAIR_INFURA_PROJECT_ID;
 
-  return ({ chainId }: any) => {
+  const provider = (config: { chainId?: number }) => {
+    return new providers.InfuraProvider(config.chainId, infuraId);
+  };
+
+  const connectors = ({ chainId }: any) => {
     const rpcUrl =
       FLAIR_CHAINS.find((x) => x.id === chainId)?.rpcUrls.default ??
       FLAIR_DEFAULT_CHAIN.rpcUrls.default;
@@ -43,29 +47,28 @@ const setupConnectors = (config: Config) => {
       }),
     ];
   };
+
+  return {
+    connectors,
+    provider,
+  };
 };
 
-type Props = Config & {
+type Props = {
   children?: React.ReactNode;
   wagmiOverrides?: Record<string, any>;
 };
 
+const { connectors, provider } = setupConnectorsAndProvider();
+
+const client = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
+
 export const WalletProvider = (props: Props) => {
-  const { children, appName, infuraId, wagmiOverrides } = props;
-
-  const connectors = useMemo(
-    () => setupConnectors({ appName, infuraId }),
-    [appName, infuraId]
-  );
-
-  const client = useMemo(
-    () =>
-      createClient({
-        autoConnect: true,
-        connectors,
-      }),
-    [connectors]
-  );
+  const { children, wagmiOverrides } = props;
 
   return (
     <Provider client={client} {...wagmiOverrides}>
