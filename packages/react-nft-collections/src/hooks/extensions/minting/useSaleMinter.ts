@@ -39,7 +39,6 @@ export const useSaleMinter = ({
   } = usePreSaleStatus({
     version,
     contractAddress,
-    signerOrProvider,
   });
 
   const {
@@ -49,7 +48,6 @@ export const useSaleMinter = ({
   } = usePublicSaleStatus({
     version,
     contractAddress,
-    signerOrProvider,
   });
 
   const {
