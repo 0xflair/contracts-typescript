@@ -8,10 +8,11 @@ import { ConnectButton } from '../ConnectButton/ConnectButton';
 type Props = {
   notConnectedView?: ReactNode;
   children?: ReactNode;
+  preventUnsupported?: boolean;
 };
 
 export const RequireConnect = (props: Props) => {
-  const { notConnectedView, children } = props;
+  const { notConnectedView, children, preventUnsupported } = props;
   const { activeChain, error, isLoading, switchNetwork } = useNetwork();
 
   if (error) {
@@ -49,7 +50,7 @@ export const RequireConnect = (props: Props) => {
     );
   }
 
-  if (activeChain?.unsupported) {
+  if (preventUnsupported && activeChain?.unsupported) {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="rounded-md bg-yellow-50 p-4">

@@ -1,6 +1,7 @@
 import { Contract, ContractFactory, ContractInterface, Signer } from 'ethers';
 import * as React from 'react';
 import { useMemo } from 'react';
+import { useWaitForTransaction } from 'wagmi';
 
 import { useCancel } from './useCancel';
 
