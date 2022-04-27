@@ -22,7 +22,7 @@ export const useOzHasRole = ({
   address,
   ...restOfConfig
 }: Config) => {
-  return useContractRead({
+  return useContractRead<boolean>({
     version,
     contractKey: 'openzeppelin/access/AccessControl',
     functionName: 'hasRole',

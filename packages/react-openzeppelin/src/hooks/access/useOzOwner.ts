@@ -16,7 +16,7 @@ export const useOzOwner = ({
   signerOrProvider,
   ...restOfConfig
 }: Config) => {
-  return useContractRead({
+  return useContractRead<BytesLike>({
     version,
     contractKey: 'openzeppelin/access/Ownable',
     functionName: 'owner',
