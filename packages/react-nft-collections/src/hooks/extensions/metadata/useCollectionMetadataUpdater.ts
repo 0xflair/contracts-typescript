@@ -115,22 +115,20 @@ export const useCollectionMetadataUpdater = ({
     return { collectionImageUri, collectionMetadataUri };
   }, [uploadCollectionMetadata, contractAddress, updateCollectionMetadataUri]);
 
-  return [
-    {
-      data: {
-        collectionImageUploaderUri,
-        collectionMetadataUploaderUri,
-        ...setCollectionMetadataUriDate,
-      },
-      error:
-        setCollectionMetadataUriError ||
-        collectionImageUploaderError ||
-        collectionMetadataUploaderError,
-      loading:
-        setCollectionMetadataUriLoading ||
-        collectionImageUploaderLoading ||
-        collectionMetadataUploaderLoading,
+  return {
+    data: {
+      collectionImageUploaderUri,
+      collectionMetadataUploaderUri,
+      ...setCollectionMetadataUriDate,
     },
-    uploadAndUpdateCollectionMetadata,
-  ] as const;
+    error:
+      setCollectionMetadataUriError ||
+      collectionImageUploaderError ||
+      collectionMetadataUploaderError,
+    isLoading:
+      setCollectionMetadataUriLoading ||
+      collectionImageUploaderLoading ||
+      collectionMetadataUploaderLoading,
+    uploadAndUpdate: uploadAndUpdateCollectionMetadata,
+  } as const;
 };
