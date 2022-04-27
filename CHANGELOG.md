@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.21 (2022-04-27)
+
+
+### Bug Fixes
+
+* enable nft collections list hook ([f096233](https://github.com/0xflair/typescript-sdk/commit/f096233796b6060a5debb4dc010d02db9e471500))
+
+
+
+
+
 ## 0.27.20 (2022-04-27)
 
 
