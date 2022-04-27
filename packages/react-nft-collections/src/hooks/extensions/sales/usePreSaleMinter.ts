@@ -22,7 +22,11 @@ export const usePreSaleMinter = ({
   mintCount,
   allowlistProof,
 }: Config) => {
-  const { data: preSalePrice } = usePreSalePrice({
+  const {
+    data: preSalePrice,
+    isLoading,
+    error,
+  } = usePreSalePrice({
     version,
     contractAddress,
   });
@@ -35,12 +39,16 @@ export const usePreSaleMinter = ({
     signerOrProvider,
     args: [mintCount, allowlistProof] as ArgsType,
     overrides: {
-      value: BigNumber.from(preSalePrice).mul(BigNumber.from(mintCount)),
+      value: preSalePrice
+        ? BigNumber.from(preSalePrice).mul(BigNumber.from(mintCount))
+        : undefined,
     },
   });
 
   return {
     ...result,
+    isLoading: result.isLoading || isLoading || !preSalePrice,
+    error: result.error || error,
     data: {
       ...result.data,
       preSalePrice,

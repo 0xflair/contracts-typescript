@@ -20,7 +20,11 @@ export const usePublicSaleMinter = ({
   signerOrProvider,
   mintCount,
 }: Config) => {
-  const { data: publicSalePrice } = usePublicSalePrice({
+  const {
+    data: publicSalePrice,
+    error,
+    isLoading,
+  } = usePublicSalePrice({
     version,
     contractAddress,
   });
@@ -33,12 +37,17 @@ export const usePublicSaleMinter = ({
     signerOrProvider,
     args: [mintCount] as ArgsType,
     overrides: {
-      value: BigNumber.from(publicSalePrice).mul(BigNumber.from(mintCount)),
+      value:
+        typeof publicSalePrice !== 'undefined'
+          ? BigNumber.from(publicSalePrice).mul(BigNumber.from(mintCount))
+          : undefined,
     },
   });
 
   return {
     ...result,
+    isLoading: result.isLoading || isLoading || !publicSalePrice,
+    error: result.error || error,
     data: {
       ...result.data,
       publicSalePrice,
