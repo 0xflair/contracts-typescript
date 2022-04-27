@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.15 (2022-04-27)
+
+
+### Bug Fixes
+
+* provide wagmi resolved provider or signer by default ([afc3bea](https://github.com/0xflair/typescript-sdk/commit/afc3bea78bc756d73e642367480438c66bb9a8ce))
+
+
+
+
+
 ## 0.27.14 (2022-04-27)
 
 
