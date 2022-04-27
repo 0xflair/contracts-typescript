@@ -20,9 +20,9 @@ export const usePublicSaleStatusToggler = ({
   return useContractWriteAndWait<ArgsType>({
     version,
     contractKey: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
+    functionName: 'togglePublicSaleStatus',
     contractAddress,
     signerOrProvider,
-    functionName: 'togglePublicSaleStatus',
     args: [newValue] as ArgsType,
   });
 };

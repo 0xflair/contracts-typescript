@@ -21,9 +21,9 @@ export const usePreSaleAllowlistMerkleRootUpdater = ({
   return useContractWriteAndWait<ArgsType>({
     version,
     contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    functionName: 'setAllowlistMerkleRoot',
     contractAddress,
     signerOrProvider,
-    functionName: 'mintByRole',
     args: [newRoot] as ArgsType,
   });
 };

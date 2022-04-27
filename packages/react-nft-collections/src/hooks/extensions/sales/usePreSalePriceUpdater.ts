@@ -21,9 +21,9 @@ export const usePreSalePriceUpdater = ({
   return useContractWriteAndWait<ArgsType>({
     version,
     contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    functionName: 'setPreSalePrice',
     contractAddress,
     signerOrProvider,
-    functionName: 'setPreSalePrice',
     args: [newPrice] as ArgsType,
   });
 };

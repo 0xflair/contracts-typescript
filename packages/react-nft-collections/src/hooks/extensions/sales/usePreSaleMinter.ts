@@ -30,9 +30,9 @@ export const usePreSaleMinter = ({
   const result = useContractWriteAndWait<ArgsType>({
     version,
     contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    functionName: 'mintPreSale',
     contractAddress,
     signerOrProvider,
-    functionName: 'mintPreSale',
     args: [mintCount, allowlistProof] as ArgsType,
     overrides: {
       value: BigNumber.from(preSalePrice).mul(BigNumber.from(mintCount)),

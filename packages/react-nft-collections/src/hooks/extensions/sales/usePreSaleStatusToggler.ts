@@ -21,9 +21,9 @@ export const usePreSaleStatusToggler = ({
   return useContractWriteAndWait<ArgsType>({
     version,
     contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    functionName: 'togglePreSaleStatus',
     contractAddress,
     signerOrProvider,
-    functionName: 'togglePreSaleStatus',
     args: [newStatus] as ArgsType,
   });
 };

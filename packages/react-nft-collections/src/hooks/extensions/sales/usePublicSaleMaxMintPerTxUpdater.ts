@@ -21,9 +21,9 @@ export const usePublicSaleMaxMintPerTxUpdater = ({
   return useContractWriteAndWait<ArgsType>({
     version,
     contractKey: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
+    functionName: 'setPublicSaleMaxMintPerTx',
     contractAddress,
     signerOrProvider,
-    functionName: 'setPublicSaleMaxMintPerTx',
     args: [newValue] as ArgsType,
   });
 };

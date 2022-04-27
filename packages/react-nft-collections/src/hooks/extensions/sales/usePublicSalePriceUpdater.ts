@@ -21,9 +21,9 @@ export const usePublicSalePriceUpdater = ({
   return useContractWriteAndWait<ArgsType>({
     version,
     contractKey: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
+    functionName: 'setPublicSalePrice',
     contractAddress,
     signerOrProvider,
-    functionName: 'setPublicSalePrice',
     args: [newValue] as ArgsType,
   });
 };

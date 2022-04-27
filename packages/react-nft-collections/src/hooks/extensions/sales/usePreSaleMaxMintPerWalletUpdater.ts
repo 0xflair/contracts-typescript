@@ -21,9 +21,9 @@ export const usePreSaleMaxMintPerWalletUpdater = ({
   return useContractWriteAndWait<ArgsType>({
     version,
     contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    functionName: 'setPreSaleMaxMintPerWallet',
     contractAddress,
     signerOrProvider,
-    functionName: 'setPreSaleMaxMintPerWallet',
     args: [newLimit] as ArgsType,
   });
 };

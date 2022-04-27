@@ -28,9 +28,9 @@ export const usePublicSaleMinter = ({
   const result = useContractWriteAndWait<ArgsType>({
     version,
     contractKey: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
+    functionName: 'mintPublicSale',
     contractAddress,
     signerOrProvider,
-    functionName: 'mintPublicSale',
     args: [mintCount] as ArgsType,
     overrides: {
       value: BigNumber.from(publicSalePrice).mul(BigNumber.from(mintCount)),
