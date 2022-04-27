@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.16 (2022-04-27)
+
+
+### Bug Fixes
+
+* use infura rpc for injected providers ([f562ef4](https://github.com/0xflair/typescript-sdk/commit/f562ef47fbf576e2296ea922a31fb1265c29f0fa))
+
+
+
+
+
 ## 0.27.15 (2022-04-27)
 
 
