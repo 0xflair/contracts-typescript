@@ -38,18 +38,16 @@ export const useAdminMinter = ({
     error: ownerError,
     isLoading: ownerLoading,
   } = useOzOwner({
-    contractAddress,
     version,
-    signerOrProvider,
+    contractAddress,
   });
   const {
     data: hasRoleData,
     error: hasRoleError,
     isLoading: hasRoleLoading,
   } = useOzHasRole({
-    contractAddress,
     version,
-    signerOrProvider,
+    contractAddress,
     address: minterAddress,
     role: keccak256(toUtf8Bytes('MINTER_ROLE')),
   });
@@ -65,8 +63,8 @@ export const useAdminMinter = ({
     isLoading: mintByOwnerLoading,
     writeAndWait: mintByOwnerWrite,
   } = useOwnerMinter({
-    contractAddress,
     version,
+    contractAddress,
     signerOrProvider,
     toAddress,
     mintCount,
@@ -78,8 +76,8 @@ export const useAdminMinter = ({
     isLoading: mintByRoleLoading,
     writeAndWait: mintByRoleWrite,
   } = useRoleBasedMinter({
-    contractAddress,
     version,
+    contractAddress,
     signerOrProvider,
     toAddress,
     mintCount,

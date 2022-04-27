@@ -23,9 +23,8 @@ export const usePreSaleMinter = ({
   allowlistProof,
 }: Config) => {
   const { data: preSalePrice } = usePreSalePrice({
-    contractAddress,
     version,
-    signerOrProvider,
+    contractAddress,
   });
 
   const result = useContractWriteAndWait<ArgsType>({

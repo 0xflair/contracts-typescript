@@ -10,8 +10,8 @@ type Config = Partial<ReadContractConfig> & {
 };
 
 export const useTotalSupply = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
   ...restOfConfig
 }: Config) => {

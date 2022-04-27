@@ -59,8 +59,8 @@ export const useSaleMinter = ({
   } = usePreSaleAllowlistChecker({
     env,
     chainId,
-    contractAddress,
     version,
+    contractAddress,
     enabled: true,
     minterAddress,
   });

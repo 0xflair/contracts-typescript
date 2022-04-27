@@ -23,7 +23,6 @@ export const usePublicSaleMinter = ({
   const { data: publicSalePrice } = usePublicSalePrice({
     version,
     contractAddress,
-    signerOrProvider,
   });
 
   const result = useContractWriteAndWait<ArgsType>({

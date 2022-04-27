@@ -23,8 +23,8 @@ export type ERC721FullFeaturedContractInfo = [
 ];
 
 export const useERC721FullFeaturedContractInfo = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
   ...restOfConfig
 }: Config) => {

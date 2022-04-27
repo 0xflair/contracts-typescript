@@ -4,8 +4,8 @@ import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 
 type Config = {
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   toAddress?: BytesLike;
   mintCount?: BigNumberish;
@@ -14,8 +14,8 @@ type Config = {
 type ArgsType = [toAddress: BytesLike, mintCount: BigNumberish];
 
 export const useRoleBasedMinter = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
   toAddress,
   mintCount,

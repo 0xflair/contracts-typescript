@@ -14,8 +14,8 @@ type Config = {
 type ArgsType = [toAddress: BytesLike, mintCount: BigNumberish];
 
 export const useOwnerMinter = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
   toAddress,
   mintCount,

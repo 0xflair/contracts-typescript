@@ -19,8 +19,8 @@ type ArgsType = [
 ];
 
 export const useOneOfOneMinter = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
   toAddress,
   mintCount,
