@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.19 (2022-04-27)
+
+
+### Bug Fixes
+
+* cache wallet hooks and proper signer or provider ([7a8fb90](https://github.com/0xflair/typescript-sdk/commit/7a8fb900eda98f758dada7d2dac42c9fe363ac2c))
+
+
+
+
+
 ## 0.27.18 (2022-04-27)
 
 
