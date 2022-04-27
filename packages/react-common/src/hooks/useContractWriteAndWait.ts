@@ -67,13 +67,14 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     async (inputArgs: ArgsType) => {
       const response = await doWrite({
         args: inputArgs || args,
+        ...restOfConfig,
       });
 
       const receipt = await response?.wait(1);
 
       return { response, receipt };
     },
-    [doWrite, args]
+    [doWrite, args, restOfConfig]
   );
 
   return {
