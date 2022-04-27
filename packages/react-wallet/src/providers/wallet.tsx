@@ -1,4 +1,5 @@
 import { providers } from 'ethers';
+import { ReactNode } from 'react';
 import { createClient, Provider } from 'wagmi';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
@@ -55,7 +56,7 @@ export const setupConnectorsAndProvider = (config?: Config) => {
 };
 
 type Props = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   wagmiOverrides?: Record<string, any>;
 };
 
