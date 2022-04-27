@@ -31,10 +31,10 @@ export const TransactionLink = ({
               className={'text-sm text-indigo-700'}
               rel="noreferrer"
             >
-              View on {explorer.name}
+              View on {explorer.name.toString()}
             </a>
           ) : (
-            <span className="truncate w-30">{txHash}</span>
+            <span className="truncate w-30">{txHash.toString()}</span>
           )}
         </>
       ) : null}

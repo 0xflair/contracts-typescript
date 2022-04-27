@@ -12,8 +12,8 @@ import { useRoleBasedMinter } from './useRoleBasedMinter';
 type Config = {
   env?: Environment;
   chainId?: number;
-  contractAddress?: string;
   version?: Version;
+  contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   minterAddress?: string;
   toAddress?: BytesLike;
@@ -26,8 +26,8 @@ type ArgsType = [toAddress: BytesLike, mintCount: BigNumberish];
  * Consolidated function for minting as admin without paying (either contract owner, or having minter role).
  */
 export const useAdminMinter = ({
-  contractAddress,
   version,
+  contractAddress,
   signerOrProvider,
   minterAddress,
   toAddress,
