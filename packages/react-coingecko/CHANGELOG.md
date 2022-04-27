@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.13 (2022-04-27)
+
+
+### Bug Fixes
+
+* avoid rendering object in transaction link ([a3f0187](https://github.com/0xflair/typescript-sdk/commit/a3f0187bba6766d505b43eab7fd5f643d442e9b1))
+
+
+
+
+
 ## 0.27.12 (2022-04-27)
 
 
