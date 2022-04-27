@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.12 (2022-04-27)
+
+
+### Bug Fixes
+
+* properly handle unmounted login button component ([e0de25a](https://github.com/0xflair/typescript-sdk/commit/e0de25a6ba9803d346e22ff3dba0fcc440bc8ca0))
+
+
+
+
+
 ## 0.27.11 (2022-04-27)
 
 
