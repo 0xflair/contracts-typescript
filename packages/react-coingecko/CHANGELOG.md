@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.8 (2022-04-27)
+
+
+### Bug Fixes
+
+* functiona name for setting merkle root ([4185686](https://github.com/0xflair/typescript-sdk/commit/4185686d6308cdece1b44a6751d83e8851cdcbc8))
+
+
+
+
+
 ## 0.27.7 (2022-04-27)
 
 
