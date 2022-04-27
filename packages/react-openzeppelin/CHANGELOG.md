@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.6 (2022-04-27)
+
+
+### Bug Fixes
+
+* correct explorer url on tx link component ([0bf3ce5](https://github.com/0xflair/typescript-sdk/commit/0bf3ce5998317074b56697bc2670923086e047db))
+
+
+
+
+
 ## 0.27.5 (2022-04-27)
 
 
