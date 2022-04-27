@@ -3,6 +3,7 @@ import { Environment } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 import { useCallback } from 'react';
+import { useAccount } from 'wagmi';
 
 import { usePreSaleStatus, usePublicSaleStatus } from '../sales';
 import { usePreSaleAllowlistChecker } from '../sales/usePreSaleAllowlistChecker';
@@ -16,7 +17,6 @@ type Config = {
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   minterAddress?: BytesLike;
-  toAddress?: BytesLike;
   mintCount?: BigNumberish;
 };
 
@@ -32,6 +32,8 @@ export const useSaleMinter = ({
   minterAddress,
   mintCount,
 }: Config) => {
+  const { data: account } = useAccount();
+
   const {
     data: preSaleStatus,
     error: preSaleStatusError,
@@ -96,10 +98,14 @@ export const useSaleMinter = ({
           (args?.allowlistProof || allowlistProof) as BytesLike[],
         ]);
       } else if (publicSaleStatus) {
-        publicSaleMintWrite([(args?.mintCount || mintCount) as BigNumberish]);
+        publicSaleMintWrite([
+          account?.address as BytesLike,
+          (args?.mintCount || mintCount) as BigNumberish,
+        ]);
       }
     },
     [
+      account?.address,
       allowlistProof,
       isAllowlisted,
       mintCount,
