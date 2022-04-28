@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-nft-collections",
-  "version": "0.27.23",
+  "version": "0.28.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -53,12 +53,12 @@
     "wagmi": "^0.3.0"
   },
   "devDependencies": {
-    "@0xflair/contracts-registry": "^0.27.23",
-    "@0xflair/react-address-lists": "^0.27.23",
-    "@0xflair/react-common": "^0.27.23",
-    "@0xflair/react-ipfs": "^0.27.23",
-    "@0xflair/react-openzeppelin": "^0.27.23",
-    "@0xflair/react-wallet": "^0.27.23",
+    "@0xflair/contracts-registry": "^0.28.0",
+    "@0xflair/react-address-lists": "^0.28.0",
+    "@0xflair/react-common": "^0.28.0",
+    "@0xflair/react-ipfs": "^0.28.0",
+    "@0xflair/react-openzeppelin": "^0.28.0",
+    "@0xflair/react-wallet": "^0.28.0",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@rollup/plugin-commonjs": "^21.0.2",

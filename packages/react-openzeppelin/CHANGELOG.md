@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.28.0 (2022-04-28)
+
+
+### Features
+
+* add crypto currency hook ([6b0f304](https://github.com/0xflair/typescript-sdk/commit/6b0f3047670e430693e61f1b03b1da6e07e2563b))
+
+
+
+
+
 ## 0.27.23 (2022-04-28)
 
 
