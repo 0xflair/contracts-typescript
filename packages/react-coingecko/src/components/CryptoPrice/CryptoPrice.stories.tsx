@@ -25,15 +25,11 @@ export const Default = () => {
     <>
       <ul className="grid gap-4">
         <li>
-          ETH Price = <CryptoPrice symbol={'rETH' as CryptoSymbol} />
+          ETH Price = <CryptoPrice symbol={'rETH'} />
         </li>
         <li>
           Value = 0.06 ETH ={' '}
-          <CryptoPrice
-            value={'0.06'}
-            symbol={CryptoSymbol.ETH}
-            unit={CryptoUnits.ETHER}
-          />{' '}
+          <CryptoPrice value={'0.06'} symbol={'ETH'} unit={CryptoUnits.ETHER} />{' '}
           USD
         </li>
         <li>error = {error?.message || error?.toString()}</li>

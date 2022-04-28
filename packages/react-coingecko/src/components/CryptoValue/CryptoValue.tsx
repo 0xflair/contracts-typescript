@@ -1,8 +1,8 @@
 import * as ethers from 'ethers';
 import { BigNumberish } from 'ethers';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-import { useCryptoInfo } from '../../hooks';
+import { useCryptoCurrency } from '../../hooks';
 import { CryptoSymbol, CryptoUnits } from '../../types';
 import { CryptoPrice } from '../CryptoPrice/CryptoPrice';
 
@@ -12,6 +12,7 @@ type Props = {
   unit?: CryptoUnits;
   symbol?: CryptoSymbol;
   showPrice?: boolean;
+  loadingContent?: ReactNode;
 };
 
 export const CryptoValue = (props: Props) => {
@@ -19,19 +20,26 @@ export const CryptoValue = (props: Props) => {
     value = '1',
     fractionDigits,
     unit = CryptoUnits.ETHER,
-    symbol = CryptoSymbol.ETH,
+    symbol = 'ETH',
     showPrice = true,
+    loadingContent = '...',
   } = props;
 
-  const cryptoCurrency = useCryptoInfo(symbol);
+  const { data, error, loading } = useCryptoCurrency({ symbol });
 
-  const fractions = fractionDigits || (symbol === CryptoSymbol.ETH ? 4 : 2);
+  const fractions = fractionDigits || (symbol === 'ETH' ? 4 : 2);
   const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
   const etherValue = ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
 
-  return (
+  if (error) {
+    console.warn(`Could not fetch price for ${symbol}: `, error);
+  }
+
+  return loading ? (
+    loadingContent
+  ) : (
     <>
-      {Number(etherValue).toFixed(fractions)} {cryptoCurrency?.icon || symbol}
+      {Number(etherValue).toFixed(fractions)} {data.info?.icon || symbol}
       {showPrice && (
         <>
           {' '}
