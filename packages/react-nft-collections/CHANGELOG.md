@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.2 (2022-04-28)
+
+
+### Bug Fixes
+
+* wrap loading content around fragment ([a60e9da](https://github.com/0xflair/typescript-sdk/commit/a60e9da75891c8005b354cadc161f656b0379453))
+
+
+
+
+
 ## 0.28.1 (2022-04-28)
 
 
