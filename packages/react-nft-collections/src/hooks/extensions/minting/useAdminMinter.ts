@@ -42,9 +42,9 @@ export const useAdminMinter = ({
     contractAddress,
   });
   const {
-    data: hasRoleData,
-    error: hasRoleError,
-    isLoading: hasRoleLoading,
+    data: hasMinterRole,
+    error: hasMinterRoleError,
+    isLoading: hasMinterRoleLoading,
   } = useOzHasRole({
     version,
     contractAddress,
@@ -55,7 +55,6 @@ export const useAdminMinter = ({
   const isOwner =
     ownerData?.toString().toLowerCase() ===
     minterAddress?.toString().toLowerCase();
-  const hasMinterRole = hasRoleData?.toString() === 'true';
 
   const {
     data: mintByOwnerData,
@@ -85,10 +84,10 @@ export const useAdminMinter = ({
 
   const mintAsAdmin = useCallback(
     (args?: ArgsType) => {
-      if (hasMinterRole) {
-        mintByRoleWrite(args || ([toAddress, mintCount] as ArgsType));
-      } else if (isOwner) {
+      if (isOwner) {
         mintByOwnerWrite(args || ([toAddress, mintCount] as ArgsType));
+      } else if (hasMinterRole) {
+        mintByRoleWrite(args || ([toAddress, mintCount] as ArgsType));
       }
     },
     [
@@ -105,11 +104,17 @@ export const useAdminMinter = ({
     data: {
       isOwner,
       hasMinterRole,
-      ...(mintByOwnerData || mintByRoleData),
+      ...(mintByOwnerData.txResponse || mintByOwnerData.txReceipt
+        ? mintByOwnerData
+        : mintByRoleData),
     },
-    error: mintByOwnerError || mintByRoleError || ownerError || hasRoleError,
+    error:
+      mintByOwnerError || mintByRoleError || ownerError || hasMinterRoleError,
     isLoading:
-      mintByOwnerLoading || mintByRoleLoading || ownerLoading || hasRoleLoading,
+      mintByOwnerLoading ||
+      mintByRoleLoading ||
+      ownerLoading ||
+      hasMinterRoleLoading,
     mintAsAdmin,
   } as const;
 };

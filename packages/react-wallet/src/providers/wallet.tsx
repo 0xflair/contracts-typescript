@@ -26,7 +26,11 @@ export const WalletProvider = ({
 }: Props) => {
   const provider = useCallback(
     (config: { chainId?: number }) => {
-      return new providers.InfuraProvider(config.chainId, infuraId);
+      try {
+        return new providers.InfuraProvider(config.chainId, infuraId);
+      } catch (e) {
+        return providers.getDefaultProvider(config.chainId);
+      }
     },
     [infuraId]
   );
