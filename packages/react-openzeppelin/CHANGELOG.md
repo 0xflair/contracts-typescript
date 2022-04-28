@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.3 (2022-04-28)
+
+
+### Bug Fixes
+
+* fallback to metamask default provider ([f9e2a79](https://github.com/0xflair/typescript-sdk/commit/f9e2a790b6c3bcac838de8c860a5fb2b8973c24e))
+
+
+
+
+
 ## 0.28.2 (2022-04-28)
 
 
