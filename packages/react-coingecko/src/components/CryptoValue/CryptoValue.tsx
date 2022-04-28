@@ -2,6 +2,7 @@ import * as ethers from 'ethers';
 import { BigNumberish } from 'ethers';
 import React from 'react';
 
+import { useCryptoCurrency } from '../../hooks';
 import { CryptoSymbol, CryptoUnits } from '../../types';
 import { CryptoPrice } from '../CryptoPrice/CryptoPrice';
 
@@ -22,13 +23,15 @@ export const CryptoValue = (props: Props) => {
     showPrice = true,
   } = props;
 
+  const cryptoCurrency = useCryptoCurrency(symbol);
+
   const fractions = fractionDigits || (symbol === CryptoSymbol.ETH ? 4 : 2);
   const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
   const etherValue = ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
 
   return (
     <>
-      {Number(etherValue).toFixed(fractions)} {symbol}
+      {Number(etherValue).toFixed(fractions)} {cryptoCurrency?.icon || symbol}
       {showPrice && (
         <>
           {' '}

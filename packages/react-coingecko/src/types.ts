@@ -8,7 +8,6 @@ export type CryptoCurrency = {
   name: string;
   icon?: React.ReactNode;
   coinGeckoId?: string;
-  wagmiId?: string;
 };
 
 export enum CryptoUnits {
