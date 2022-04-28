@@ -29,7 +29,15 @@ export const WalletProvider = ({
       try {
         return new providers.InfuraProvider(config.chainId, infuraId);
       } catch (e) {
-        return providers.getDefaultProvider(config.chainId);
+        try {
+          return providers.getDefaultProvider(config.chainId);
+        } catch (e) {
+          try {
+            return new providers.Web3Provider(window.ethereum as any, 'any');
+          } catch (e) {
+            return providers.getDefaultProvider();
+          }
+        }
       }
     },
     [infuraId]

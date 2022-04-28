@@ -33,8 +33,10 @@ export const RequireChain = (props: Props) => {
             Switch your network to {requiredChain?.name}
           </h3>
           <p className="mt-1 text-sm text-gray-500">
-            Your wallet is currently connected to {activeChain?.name}, <br />
-            but you must connect to <b>{requiredChain?.name}</b> to access this
+            Your wallet is currently connected to{' '}
+            {activeChain?.name || activeChain?.id}, <br />
+            but you must connect to{' '}
+            <b>{requiredChain?.name || requiredChainId}</b> to access this
             section.
           </p>
           <div className="mt-6">
