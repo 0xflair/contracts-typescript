@@ -36,7 +36,7 @@ export const CryptoValue = (props: Props) => {
   }
 
   return loading ? (
-    loadingContent
+    <>{loadingContent}</>
   ) : (
     <>
       {Number(etherValue).toFixed(fractions)} {data.info?.icon || symbol}
