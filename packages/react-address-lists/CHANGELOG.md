@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.1 (2022-04-28)
+
+
+### Bug Fixes
+
+* update crypto price components with new hooks ([a3a6236](https://github.com/0xflair/typescript-sdk/commit/a3a62364ef1e3e856939f7ed0346632fff458d45))
+
+
+
+
+
 # 0.28.0 (2022-04-28)
 
 
