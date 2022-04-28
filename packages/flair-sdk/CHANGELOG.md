@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.23 (2022-04-28)
+
+
+### Bug Fixes
+
+* fallback to default provider if Infura does not support ([9cc1a7a](https://github.com/0xflair/typescript-sdk/commit/9cc1a7ab778758525d1b521269c2e15fb2b30e26))
+
+
+
+
+
 ## 0.27.22 (2022-04-27)
 
 
