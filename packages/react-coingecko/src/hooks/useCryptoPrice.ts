@@ -1,16 +1,16 @@
 import * as React from 'react';
 
 import { useCryptoPricesContext } from '../providers';
-import { CryptoSymbol, PriceBaseCurrency } from '../types';
+import { BaseCurrency, CryptoSymbol } from '../types';
 
 type Config = {
   symbol?: CryptoSymbol;
-  baseCurrency?: PriceBaseCurrency;
+  baseCurrency?: BaseCurrency;
 };
 
 export const useCryptoPrice = ({
-  symbol,
-  baseCurrency = PriceBaseCurrency.USD,
+  symbol = 'ETH',
+  baseCurrency = 'USD',
 }: Config = {}) => {
   const {
     state: { data: priceDictionariesBySymbol, error, loading },
@@ -23,14 +23,20 @@ export const useCryptoPrice = ({
       symbol.endsWith(s)
     ) as CryptoSymbol);
 
-  return [
-    {
-      data:
-        normalizedSymbol && priceDictionariesBySymbol[normalizedSymbol]
-          ? priceDictionariesBySymbol[normalizedSymbol][baseCurrency]
-          : undefined,
-      error,
-      loading,
-    },
-  ] as const;
+  const price =
+    normalizedSymbol && priceDictionariesBySymbol[normalizedSymbol]
+      ? priceDictionariesBySymbol[normalizedSymbol][baseCurrency.toLowerCase()]
+      : undefined;
+
+  if (!price) {
+    console.warn(
+      `Could not resolve price of symbol (${symbol}) in base currency (${baseCurrency}), make sure both are defined on <CoinGeckoProvider />`
+    );
+  }
+
+  return {
+    data: price,
+    error,
+    loading,
+  } as const;
 };

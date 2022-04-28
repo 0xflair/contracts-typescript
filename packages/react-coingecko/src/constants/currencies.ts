@@ -1,16 +1,18 @@
 import * as React from 'react';
 
-import { CryptoCurrency, CryptoSymbol } from '../types';
+import { BaseCurrency, CryptoCurrency } from '../types';
 
-export const ALL_CURRENCIES: CryptoCurrency[] = [
+export const KNOWN_BASE_CURRENCIES: BaseCurrency[] = ['USD'];
+
+export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
   {
-    symbol: CryptoSymbol.ETH,
+    symbol: 'ETH',
     name: 'Ethereum',
     icon: 'Ξ',
     coinGeckoId: 'ethereum',
   },
   {
-    symbol: CryptoSymbol.MATIC,
+    symbol: 'MATIC',
     name: 'Matic',
     icon: '$MATIC',
     coinGeckoId: 'matic-network',

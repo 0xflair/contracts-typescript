@@ -1,8 +1,16 @@
 import axios from 'axios';
 import React from 'react';
 
-import { ALL_CURRENCIES } from '../constants/currencies';
-import { CryptoCurrency, CryptoPriceDictionary, CryptoSymbol } from '../types';
+import {
+  KNOWN_BASE_CURRENCIES,
+  KNOWN_CRYPTO_CURRENCIES,
+} from '../constants/currencies';
+import {
+  BaseCurrency,
+  CryptoCurrency,
+  CryptoPriceDictionary,
+  CryptoSymbol,
+} from '../types';
 
 type PricesDictionariesBySymbol = Record<CryptoSymbol, CryptoPriceDictionary>;
 
@@ -23,25 +31,29 @@ export const Context = React.createContext<ContextValue | null>(null);
 export type CoinGeckoProviderProps = {
   config?: {
     currencies: CryptoCurrency[];
+    baseCurrencies: BaseCurrency[];
   };
 };
 
-function convertCoinGeckoSymbol(coinGeckoSymbol: string) {
+function convertCoinGeckoSymbol(coinGeckoSymbol: string): CryptoSymbol {
   switch (coinGeckoSymbol) {
     case 'ethereum':
-      return CryptoSymbol.ETH;
+      return 'ETH';
     case 'matic-network':
-      return CryptoSymbol.MATIC;
+      return 'MATIC';
   }
 
-  throw new Error(`Unsupported CoinGecko symbol: ${coinGeckoSymbol}`);
+  return coinGeckoSymbol;
 }
 
 export const CoinGeckoProvider = ({
   config,
   children,
 }: React.PropsWithChildren<CoinGeckoProviderProps>) => {
-  const { currencies = ALL_CURRENCIES } = config || {};
+  const {
+    currencies = KNOWN_CRYPTO_CURRENCIES,
+    baseCurrencies = KNOWN_BASE_CURRENCIES,
+  } = config || {};
   const [state, setState] = React.useState<State>({});
 
   const fetchPrices = React.useCallback(async () => {
@@ -50,8 +62,10 @@ export const CoinGeckoProvider = ({
     try {
       const { data: coinGeckoResult } = await axios.get(
         `https://api.coingecko.com/api/v3/simple/price?ids=${currencies
-          .map((c) => c.coinGeckoId)
-          .join(',')}&vs_currencies=usd`
+          .map((c) => c.coinGeckoId?.toLowerCase())
+          .join(',')}&vs_currencies=${baseCurrencies
+          .map((c) => c.toLowerCase())
+          .join(',')}`
       );
 
       const data: PricesDictionariesBySymbol = {} as PricesDictionariesBySymbol;
@@ -65,7 +79,7 @@ export const CoinGeckoProvider = ({
     } catch (e) {
       setState({ error: e as Error, loading: false });
     }
-  }, [currencies]);
+  }, [baseCurrencies, currencies]);
 
   /* eslint-disable react-hooks/exhaustive-deps */
   React.useEffect(() => {

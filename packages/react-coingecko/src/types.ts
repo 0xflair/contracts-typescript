@@ -1,7 +1,4 @@
-export enum CryptoSymbol {
-  ETH = 'ETH',
-  MATIC = 'MATIC',
-}
+export type CryptoSymbol = 'ETH' | 'MATIC' | string;
 
 export type CryptoCurrency = {
   symbol: CryptoSymbol;
@@ -20,8 +17,6 @@ export enum CryptoUnits {
   ETHER = 'ether',
 }
 
-export enum PriceBaseCurrency {
-  USD = 'usd',
-}
+export type BaseCurrency = 'USD' | string;
 
-export type CryptoPriceDictionary = Record<PriceBaseCurrency, number>;
+export type CryptoPriceDictionary = Record<BaseCurrency, number>;
