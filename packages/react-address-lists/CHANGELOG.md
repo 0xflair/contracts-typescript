@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.5 (2022-04-29)
+
+
+### Bug Fixes
+
+* provide chain id to web3 provider instance ([1cd4a89](https://github.com/0xflair/typescript-sdk/commit/1cd4a89639b3cb70859582b0acf64076902ce54b))
+
+
+
+
+
 ## 0.28.4 (2022-04-29)
 
 
