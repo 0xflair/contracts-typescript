@@ -10,7 +10,6 @@ function classNames(...classes: string[]) {
 }
 
 type Props = {
-  defaultChain?: Chain;
   chains?: Chain[];
 };
 

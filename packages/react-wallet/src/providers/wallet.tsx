@@ -33,7 +33,22 @@ export const WalletProvider = ({
           return providers.getDefaultProvider(config.chainId);
         } catch (e) {
           try {
-            return new providers.Web3Provider(window.ethereum as any, 'any');
+            const provider = new providers.Web3Provider(
+              window.ethereum as any,
+              'any'
+            );
+
+            // TODO Remove when wagmi does not fail on useChainId()
+            if (provider.network) {
+              provider.network.chainId = Number(config.chainId);
+            } else {
+              // @ts-ignore
+              provider.network = {
+                chainId: config.chainId,
+              };
+            }
+
+            return provider;
           } catch (e) {
             return providers.getDefaultProvider();
           }
