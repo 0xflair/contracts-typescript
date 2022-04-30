@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.29.0 (2022-04-30)
+
+
+### Features
+
+* add collection proceeds hooks ([a9192ff](https://github.com/0xflair/typescript-sdk/commit/a9192ff916dc7fb0653d3909d6152b497ce4ad7b))
+
+
+
+
+
 ## 0.28.5 (2022-04-29)
 
 
