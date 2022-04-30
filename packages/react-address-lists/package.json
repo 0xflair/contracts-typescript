@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-address-lists",
-  "version": "0.29.1",
+  "version": "0.30.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -49,8 +49,8 @@
     "wagmi": "^0.3.0"
   },
   "devDependencies": {
-    "@0xflair/react-common": "^0.29.1",
-    "@0xflair/react-wallet": "^0.29.1",
+    "@0xflair/react-common": "^0.30.0",
+    "@0xflair/react-wallet": "^0.30.0",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@rollup/plugin-commonjs": "^21.0.2",
