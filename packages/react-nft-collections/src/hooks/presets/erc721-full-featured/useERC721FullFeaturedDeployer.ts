@@ -8,23 +8,23 @@ export type ERC721FullFeaturedContractDeployerConfig = {
 };
 
 export type ERC721FullFeaturedContractArguments = [
-  {
-    collectionName: string;
-    collectionSymbol: string;
-    collectionMetadataUri: string;
-    placeholderMetadataUri: string;
-    maxSupply: BigNumberish;
-    preSalePrice: BigNumberish;
-    preSaleMaxPerWallet: BigNumberish;
-    publicSalePrice: BigNumberish;
-    maxMintPerTx: BigNumberish;
-  }
+  [
+    collectionName: string,
+    collectionSymbol: string,
+    collectionMetadataUri: string,
+    placeholderMetadataUri: string,
+    maxSupply: BigNumberish,
+    preSalePrice: BigNumberish,
+    preSaleMaxPerWallet: BigNumberish,
+    publicSalePrice: BigNumberish,
+    maxMintPerTx: BigNumberish
+  ]
 ];
 
 export const useERC721FullFeaturedContractDeployer = <Contract = any>({
   version,
   signer,
-}: ERC721FullFeaturedContractDeployerConfig) => {
+}: ERC721FullFeaturedContractDeployerConfig = {}) => {
   const contract = loadContract(
     'collections/ERC721/presets/ERC721FullFeaturedCollection',
     version
