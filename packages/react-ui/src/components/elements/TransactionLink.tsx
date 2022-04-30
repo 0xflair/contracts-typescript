@@ -1,6 +1,8 @@
 import { ethers } from 'ethers';
 import { Chain, useNetwork } from 'wagmi';
 
+import { CopyButton } from './CopyButton';
+
 type Props = {
   className?: string;
   chain?: Chain;
@@ -34,7 +36,10 @@ export const TransactionLink = ({
               View on {explorer.name.toString()}
             </a>
           ) : (
-            <span className="truncate w-30">{txHash.toString()}</span>
+            <CopyButton
+              className="inline-block truncate w-20"
+              label={`Copy TxHash: ${txHash.toString()}`}
+            />
           )}
         </>
       ) : null}

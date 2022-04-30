@@ -30,7 +30,7 @@ export const RequireChain = (props: Props) => {
             aria-hidden="true"
           />
           <h3 className="mt-2 text-md font-medium text-gray-900">
-            Switch your network to {requiredChain?.name}
+            Switch your network to {requiredChain?.name || requiredChainId}
           </h3>
           <p className="mt-1 text-sm text-gray-500">
             Your wallet is currently connected to{' '}

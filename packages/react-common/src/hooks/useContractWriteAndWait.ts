@@ -64,7 +64,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   });
 
   const writeAndWait = useCallback(
-    async (inputArgs: ArgsType) => {
+    async (inputArgs?: ArgsType) => {
       const response = await doWrite({
         args: inputArgs || args,
         ...restOfConfig,
