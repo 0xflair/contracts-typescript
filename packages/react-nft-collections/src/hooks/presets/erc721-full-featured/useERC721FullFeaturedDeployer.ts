@@ -1,6 +1,6 @@
 import { loadContract, Version } from '@0xflair/contracts-registry';
 import { useContractDeployer } from '@0xflair/react-common';
-import { BigNumberish, Signer } from 'ethers';
+import { BigNumberish, BytesLike, Signer } from 'ethers';
 
 export type ERC721FullFeaturedContractDeployerConfig = {
   version?: Version;
@@ -17,7 +17,9 @@ export type ERC721FullFeaturedContractArguments = [
     preSalePrice: BigNumberish,
     preSaleMaxPerWallet: BigNumberish,
     publicSalePrice: BigNumberish,
-    maxMintPerTx: BigNumberish
+    maxMintPerTx: BigNumberish,
+    defaultRoyaltyAddress: BytesLike,
+    defaultRoyaltyBps: BigNumberish
   ]
 ];
 
