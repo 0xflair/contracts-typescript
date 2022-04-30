@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.30.4 (2022-04-30)
+
+
+### Bug Fixes
+
+* add missing arguments for full-featured preset ([92a4997](https://github.com/0xflair/typescript-sdk/commit/92a49978255fd70f067c8d34c01583e3c9cc8931))
+
+
+
+
+
 ## 0.30.3 (2022-04-30)
 
 
