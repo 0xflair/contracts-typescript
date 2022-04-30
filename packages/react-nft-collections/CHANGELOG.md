@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.29.1 (2022-04-30)
+
+
+### Bug Fixes
+
+* export proceeds hooks ([3237809](https://github.com/0xflair/typescript-sdk/commit/3237809f9ceb6412b4c8419a37a319a1ae869f26))
+
+
+
+
+
 # 0.29.0 (2022-04-30)
 
 
