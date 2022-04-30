@@ -1,3 +1,5 @@
+import '@wagmi/core';
+
 import { Version } from '@0xflair/contracts-registry';
 import { BigNumber } from 'ethers';
 import { useBalance } from 'wagmi';
