@@ -1,7 +1,7 @@
 {
   "name": "@0xflair/stories",
   "description": "This is a phony package to maintain Storybook stories.",
-  "private": false,
+  "private": true,
   "dependencies": {
     "@0xflair/common": "^0.31.0",
     "@0xflair/contracts-registry": "^0.31.0",

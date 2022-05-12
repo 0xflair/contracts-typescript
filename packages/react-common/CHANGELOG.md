@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.31.0 (2022-05-01)
+
+
+### Features
+
+* add royalty management hooks ([d852800](https://github.com/0xflair/typescript-sdk/commit/d852800baba489cb36caf3f01ebe1c59e04e30c1))
+
+
+
+
+
 ## 0.30.4 (2022-04-30)
 
 
