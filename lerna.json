@@ -1,6 +1,6 @@
 {
   "packages": ["packages/*", "src"],
-  "version": "0.30.4",
+  "version": "0.31.0",
   "command": {
     "version": {
       "ignoreChanges": ["**/.npmrc", "**/node_modules", "node_modules"]
