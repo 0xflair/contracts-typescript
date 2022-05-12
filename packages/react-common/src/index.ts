@@ -1,3 +1,2 @@
-export * from './types';
+export * from '@0xflair/common';
 export * from './hooks';
-export * from './utils';

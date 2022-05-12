@@ -1,4 +1,4 @@
-import { useAccount, useNetwork } from 'wagmi';
+import { useAccount, useNetwork, useSigner } from 'wagmi';
 
 import { WalletProvider } from '../../providers/wallet';
 import { ConnectButton, ConnectButtonProps } from './ConnectButton';
@@ -17,10 +17,13 @@ export default {
 export const Default = (args: ConnectButtonProps) => {
   const account = useAccount();
   const network = useNetwork();
+  const { data: signer } = useSigner();
 
   return (
     <div className="bg-gray-100 p-8">
-      <ConnectButton {...args}>Yay! Connected!</ConnectButton>
+      <ConnectButton {...args}>
+        Yay! Connected {signer?.signMessage.toString()}!
+      </ConnectButton>
       <ul className="mt-5">
         {account?.data ? (
           <li>

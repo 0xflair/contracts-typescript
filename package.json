@@ -23,7 +23,7 @@
   "scripts": {
     "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
     "build": "lerna run build",
-    "install": "lerna bootstrap",
+    "install": "lerna bootstrap --hoist --nohoist 'flair-contracts-*'",
     "remove-modules": "lerna clean && rm -rf node_modules",
     "clean": "lerna exec -- rimraf dist",
     "refresh": "npm run clean && npm run build",

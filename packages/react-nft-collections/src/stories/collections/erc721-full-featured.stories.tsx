@@ -1,8 +1,7 @@
 import { ConnectButton, WalletProvider } from '@0xflair/react-wallet';
 import { useCallback } from 'react';
-import { useSigner } from 'wagmi';
 
-import { useERC721FullFeaturedContractDeployer } from '../../src/hooks/presets/erc721-full-featured/useERC721FullFeaturedDeployer';
+import { useERC721FullFeaturedContractDeployer } from '../../hooks/presets/erc721-full-featured/useERC721FullFeaturedDeployer';
 
 export default {
   title: 'ERC721 Full Featured Collection',
@@ -25,20 +24,20 @@ type Config = {
   preSaleMaxPerWallet: number;
   publicSalePrice: number;
   maxMintPerTx: number;
+  defaultRoyaltyAddress: string;
+  defaultRoyaltyBps: number;
 };
 
 export const Default = (args: Config) => {
-  const [{ data: signer }] = useSigner();
-
-  const [
-    { data: deployData, error: deployError, loading: deployLoading },
+  const {
+    data: deployData,
+    error: deployError,
+    isLoading: deployLoading,
     deployContract,
-  ] = useERC721FullFeaturedContractDeployer({
-    signer,
-  });
+  } = useERC721FullFeaturedContractDeployer({});
 
   const handleDeploy = useCallback(() => {
-    return deployContract(
+    return deployContract([
       args.collectionName,
       args.collectionSymbol,
       args.collectionMetadataUri,
@@ -47,8 +46,10 @@ export const Default = (args: Config) => {
       args.preSalePrice,
       args.preSaleMaxPerWallet,
       args.publicSalePrice,
-      args.maxMintPerTx
-    );
+      args.maxMintPerTx,
+      args.defaultRoyaltyAddress,
+      args.defaultRoyaltyBps,
+    ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deployContract]);
 
@@ -84,4 +85,6 @@ Default.args = {
   preSaleMaxPerWallet: 2,
   publicSalePrice: 10000000000000000000,
   maxMintPerTx: 10,
+  defaultRoyaltyAddress: '0x0000000000000000000000000000000000000000',
+  defaultRoyaltyBps: 250,
 } as Config;

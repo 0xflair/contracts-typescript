@@ -2,6 +2,9 @@ import { Version } from './generated-types';
 import RegistryJson from './registry-mapping.json';
 
 export type ContractDefinition = {
+  address?: {
+    [key: string]: string;
+  };
   artifact: {
     contractName: string;
     sourceName: string;

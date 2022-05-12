@@ -1,3 +1,4 @@
+import { ZERO_ADDRESS } from '@0xflair/common';
 import {
   ContractKey,
   loadContract,
@@ -7,8 +8,6 @@ import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 import { useContractRead as useContractReadWagmi } from 'wagmi';
 import { UseContractReadConfig } from 'wagmi/dist/declarations/src/hooks/contracts/useContractRead';
-
-import { ZERO_ADDRESS } from '../utils';
 
 export type ReadContractConfig<ArgsType extends any[] = any[]> =
   UseContractReadConfig & {

@@ -14,6 +14,21 @@ const main = async () => {
     }
   );
 
+  const versionToContractToChainAddress: Record<
+    string,
+    Record<string, string>
+  > = {};
+
+  for (const pkg of contractPackages) {
+    const version = pkg.slice(pkg.lastIndexOf('-') + 1);
+    const addressesPath = path.resolve(pkg, 'addresses.json');
+
+    if (fse.existsSync(addressesPath)) {
+      versionToContractToChainAddress[version] =
+        fse.readJsonSync(addressesPath);
+    }
+  }
+
   const packagePaths: Record<string, string> = {};
   const importNames: Record<string, string> = {};
 
@@ -41,6 +56,10 @@ const main = async () => {
       const sourcePath = path.resolve(pkg, artifactKey + '.sol');
 
       registry[version][artifactKey] = {
+        address:
+          (versionToContractToChainAddress[version] &&
+            versionToContractToChainAddress[version][artifactKey]) ||
+          undefined,
         artifact: fse.existsSync(artifactPath)
           ? fse.readJsonSync(artifactPath)
           : undefined,
