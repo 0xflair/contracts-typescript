@@ -4,7 +4,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import { string } from 'rollup-plugin-string';
 
 import packageJson from './package.json';
 
@@ -23,16 +22,7 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [
-      peerDepsExternal(),
-      resolve(),
-      commonjs(),
-      typescript(),
-      json(),
-      string({
-        include: ['**/*.sol'],
-      }),
-    ],
+    plugins: [peerDepsExternal(), resolve(), commonjs(), typescript(), json()],
   },
   {
     input: 'src/index.ts',

@@ -3,7 +3,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import postcss from 'rollup-plugin-postcss';
 
 import packageJson from './package.json';
 
@@ -23,13 +22,7 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [
-      peerDepsExternal(),
-      resolve(),
-      commonjs(),
-      typescript(),
-      postcss(),
-    ],
+    plugins: [peerDepsExternal(), resolve(), commonjs(), typescript()],
   },
   {
     input: 'src/index.ts',

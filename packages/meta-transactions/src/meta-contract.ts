@@ -2,9 +2,9 @@ import { Environment } from '@0xflair/common';
 import {
   ContractKey,
   LATEST_VERSION,
+  loadContract,
   Version,
-} from '@0xflair/contracts-registry/src/generated-types';
-import { loadContract } from '@0xflair/contracts-registry/src/load-contract';
+} from '@0xflair/contracts-registry';
 import { Provider } from '@ethersproject/providers';
 import {
   BaseContract,
@@ -36,8 +36,12 @@ function buildMetaTransaction(
   };
 }
 
-export class MetaContract extends EthersContract {
-  readonly metaTransaction!: { [name: string]: ContractFunction };
+export class MetaContract<
+  T extends EthersContract = EthersContract
+> extends EthersContract {
+  readonly metaTransaction:
+    | { [name: string]: ContractFunction<any> }
+    | T['functions'];
 
   constructor(
     metaTransactionsClient: MetaTransactionsClient,
@@ -63,13 +67,24 @@ export class MetaContract extends EthersContract {
       signerOrProvider
     );
 
+    this.metaTransaction = {};
     Object.keys(this.interface.functions).forEach((signature) => {
       const fragment = this.interface.functions[signature];
 
       if (this.metaTransaction[signature] == null) {
-        defineReadOnly(
+        defineReadOnly<any, any>(
           this.metaTransaction,
           signature,
+          buildMetaTransaction(chainId, metaTransactionsClient, this, fragment)
+        );
+      }
+
+      const name = fragment.name;
+
+      if (this.metaTransaction[name] == null) {
+        defineReadOnly<any, any>(
+          this.metaTransaction,
+          name,
           buildMetaTransaction(chainId, metaTransactionsClient, this, fragment)
         );
       }

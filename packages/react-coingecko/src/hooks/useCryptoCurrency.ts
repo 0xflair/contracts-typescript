@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { BaseCurrency, CryptoSymbol } from '../types';
 import { useCryptoInfo } from './useCryptoInfo';
 import { useCryptoPrice } from './useCryptoPrice';

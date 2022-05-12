@@ -2,7 +2,6 @@ import * as fse from 'fs-extra';
 import glob from 'glob';
 import * as path from 'path';
 import { basename } from 'path';
-import * as rimraf from 'rimraf';
 
 const main = async () => {
   const registry: Record<string, any> = {};
@@ -45,7 +44,7 @@ const main = async () => {
     });
 
     for (const file of files) {
-      if (file === 'addresses.json') {
+      if (file === 'addresses.json' || file.startsWith('node_modules')) {
         continue;
       }
 

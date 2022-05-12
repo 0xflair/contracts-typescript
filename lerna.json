@@ -1,5 +1,5 @@
 {
-  "packages": ["packages/*"],
+  "packages": ["packages/*", "src"],
   "version": "0.30.4",
   "command": {
     "version": {

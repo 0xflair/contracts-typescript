@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { useCryptoPricesContext } from '../providers';
 import { BaseCurrency, CryptoSymbol } from '../types';
 

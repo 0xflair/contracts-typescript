@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { KNOWN_CRYPTO_CURRENCIES } from '../constants/currencies';
 
 export const useCryptoInfo = (symbol?: string) => {

@@ -1,6 +1,6 @@
 import * as ethers from 'ethers';
 import { BigNumberish } from 'ethers';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { useCryptoCurrency } from '../../hooks';
 import { CryptoSymbol, CryptoUnits } from '../../types';

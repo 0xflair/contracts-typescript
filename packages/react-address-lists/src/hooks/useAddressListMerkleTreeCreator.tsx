@@ -1,5 +1,6 @@
 import { Environment, useAxiosPost } from '@0xflair/react-common';
 import { useLoginJwt } from '@0xflair/react-wallet';
+import * as axios from 'axios';
 import { BytesLike } from 'ethers';
 
 import { FLAIR_ADDRESS_LISTS_BACKEND } from '../constants';

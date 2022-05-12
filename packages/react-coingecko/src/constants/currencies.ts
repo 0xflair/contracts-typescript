@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { BaseCurrency, CryptoCurrency } from '../types';
 
 export const KNOWN_BASE_CURRENCIES: BaseCurrency[] = ['USD'];
