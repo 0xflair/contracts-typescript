@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.33.0 (2022-05-13)
+
+
+### Features
+
+* add ipfs package with basic client ([0bc004d](https://github.com/0xflair/typescript-sdk/commit/0bc004d0fcf19476cdb9373310b7704bdb980b29))
+
+
+
+
+
 # 0.32.0 (2022-05-13)
 
 

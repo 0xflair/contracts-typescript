@@ -3,18 +3,18 @@
   "description": "This is a phony package to maintain Storybook stories.",
   "private": true,
   "dependencies": {
-    "@0xflair/common": "^0.32.0",
-    "@0xflair/contracts-registry": "^0.32.0",
-    "@0xflair/meta-transactions": "^0.32.0",
-    "@0xflair/react-address-lists": "^0.32.0",
-    "@0xflair/react-coingecko": "^0.32.0",
-    "@0xflair/react-common": "^0.32.0",
-    "@0xflair/react-icons": "^0.32.0",
-    "@0xflair/react-ipfs": "^0.32.0",
-    "@0xflair/react-nft-collections": "^0.32.0",
-    "@0xflair/react-openzeppelin": "^0.32.0",
-    "@0xflair/react-ui": "^0.32.0",
-    "@0xflair/react-wallet": "^0.32.0"
+    "@0xflair/common": "^0.33.0",
+    "@0xflair/contracts-registry": "^0.33.0",
+    "@0xflair/meta-transactions": "^0.33.0",
+    "@0xflair/react-address-lists": "^0.33.0",
+    "@0xflair/react-coingecko": "^0.33.0",
+    "@0xflair/react-common": "^0.33.0",
+    "@0xflair/react-icons": "^0.33.0",
+    "@0xflair/react-ipfs": "^0.33.0",
+    "@0xflair/react-nft-collections": "^0.33.0",
+    "@0xflair/react-openzeppelin": "^0.33.0",
+    "@0xflair/react-ui": "^0.33.0",
+    "@0xflair/react-wallet": "^0.33.0"
   },
-  "version": "0.32.0"
+  "version": "0.33.0"
 }
