@@ -1,6 +1,5 @@
+import { normalizeIpfsUrl } from '@0xflair/ipfs';
 import { useAxiosGet } from '@0xflair/react-common';
-
-import { normalizeIpfsUrl } from '../utils';
 
 type Config = {
   uri?: string;

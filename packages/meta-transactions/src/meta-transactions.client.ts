@@ -98,7 +98,7 @@ export class MetaTransactionsClient {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          'Flair-Client-Id': this.config.flairClientId,
+          'X-Flair-Client-Id': this.config.flairClientId,
         },
       }
     );

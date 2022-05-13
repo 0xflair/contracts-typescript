@@ -1,8 +1,7 @@
+import { FLAIR_IPFS_BACKEND } from '@0xflair/ipfs';
 import { Environment, useCancel } from '@0xflair/react-common';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-
-import { FLAIR_IPFS_BACKEND } from '../constants';
 
 async function ipfsUploadJson(
   env: Environment,

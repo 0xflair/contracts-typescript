@@ -34,13 +34,12 @@
     ]
   },
   "peerDependencies": {
-    "@0xflair/contracts-registry": "0.*",
+    "@0xflair/common": "0.*",
     "axios": "^0.26.1",
     "ethers": "^5.6.5"
   },
   "dependencies": {
     "@0xflair/common": "^0.32.0",
-    "@0xflair/contracts-registry": "^0.32.0",
     "axios": "^0.26.1",
     "ethers": "^5.6.5"
   }

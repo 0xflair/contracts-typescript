@@ -42,6 +42,7 @@
     "wagmi": "^0.3.5"
   },
   "peerDependencies": {
+    "@0xflair/common": "0.*",
     "@0xflair/contracts-registry": "0.*",
     "@0xflair/meta-transactions": "0.*",
     "@0xflair/react-address-lists": "0.*",

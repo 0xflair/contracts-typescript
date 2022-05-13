@@ -1,9 +1,7 @@
+import { FLAIR_IPFS_BACKEND, IpfsUploadResult } from '@0xflair/ipfs';
 import { Environment, useCancel } from '@0xflair/react-common';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-
-import { FLAIR_IPFS_BACKEND } from '../constants';
-import { IpfsUploadResult } from '../types';
 
 async function ipfsUploadFiles(env: Environment, files: File[]) {
   const formData = new FormData();

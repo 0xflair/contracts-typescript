@@ -22,6 +22,7 @@
     "test:watch": "jest --watch"
   },
   "peerDependencies": {
+    "@0xflair/common": "0.*",
     "@0xflair/react-common": "0.*",
     "@0xflair/react-wallet": "0.*",
     "axios": "^0.26.1",
