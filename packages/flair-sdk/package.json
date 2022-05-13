@@ -26,6 +26,7 @@
   "dependencies": {
     "@0xflair/common": "^0.33.0",
     "@0xflair/contracts-registry": "^0.33.0",
+    "@0xflair/ipfs": "^0.33.0",
     "@0xflair/meta-transactions": "^0.33.0",
     "@0xflair/react-address-lists": "^0.33.0",
     "@0xflair/react-coingecko": "^0.33.0",

@@ -1,5 +1,6 @@
 export * from '@0xflair/common';
 export * from '@0xflair/contracts-registry';
+export * from '@0xflair/ipfs';
 export * from '@0xflair/meta-transactions';
 export * from '@0xflair/react-address-lists';
 export * from '@0xflair/react-coingecko';
