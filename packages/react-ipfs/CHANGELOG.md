@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.34.0 (2022-05-13)
+
+
+### Features
+
+* re-export ipfs package in flair-sdk ([e43cfff](https://github.com/0xflair/typescript-sdk/commit/e43cfff617398d4348dcb40a3956b224c2cc37c6))
+
+
+
+
+
 # 0.33.0 (2022-05-13)
 
 
