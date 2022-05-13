@@ -114,6 +114,14 @@ ${Object.entries(registry)
   })
   .join(';')}
 
+${Object.entries(registry)
+  .map(([versionTag]) => {
+    return `export type { ${Object.values(typeNames[versionTag])
+      .filter((key) => key !== 'any')
+      .join(',')} };`;
+  })
+  .join(';')}
+
 export type ContractTypeRegistry = { ${Object.entries(registry)
       .map(([versionTag, artifacts]) => {
         const safeVersionPrefix = getSafeVersionPrefix(versionTag);
