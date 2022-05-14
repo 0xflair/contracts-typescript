@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.36.1 (2022-05-14)
+
+
+### Bug Fixes
+
+* use chain id hook in packages ([1132ea4](https://github.com/0xflair/typescript-sdk/commit/1132ea4904252d81eb597d7be25fff2a5b0eebd8))
+
+
+
+
+
 # 0.36.0 (2022-05-14)
 
 
