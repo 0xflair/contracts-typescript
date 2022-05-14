@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.36.0 (2022-05-14)
+
+
+### Features
+
+* add chain id helper hook ([f13acf3](https://github.com/0xflair/typescript-sdk/commit/f13acf34dad194666d8b87c3d535a8a1599317a4))
+
+
+
+
+
 ## 0.35.2 (2022-05-14)
 
 
