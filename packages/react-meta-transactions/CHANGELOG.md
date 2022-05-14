@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.35.2 (2022-05-14)
+
+
+### Bug Fixes
+
+* export react meta-transactions hooks ([7b3e5eb](https://github.com/0xflair/typescript-sdk/commit/7b3e5ebf0426bacca8563ea6fca5f8ac13baeff5))
+
+
+
+
+
 ## 0.35.1 (2022-05-14)
 
 
