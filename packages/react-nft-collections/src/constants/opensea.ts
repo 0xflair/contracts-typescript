@@ -1,3 +1,5 @@
+export type SupportedOpenSeaChains = keyof typeof FLAIR_OPENSEA_ADDRESSES;
+
 export const FLAIR_OPENSEA_ADDRESSES = {
   1: {
     registryAddress: '0xa5409ec958c83c3f309868babaca7c86dcb077c1',

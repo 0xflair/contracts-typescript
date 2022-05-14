@@ -19,7 +19,10 @@ export type ERC721FullFeaturedContractArguments = [
     publicSalePrice: BigNumberish,
     maxMintPerTx: BigNumberish,
     defaultRoyaltyAddress: BytesLike,
-    defaultRoyaltyBps: BigNumberish
+    defaultRoyaltyBps: BigNumberish,
+    openSeaProxyRegistryAddress?: string,
+    openSeaExchangeAddress?: string,
+    trustedForwarder?: string
   ]
 ];
 

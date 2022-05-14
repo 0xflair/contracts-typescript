@@ -15,4 +15,7 @@ export type ERC721FullFeaturedCollectionConfig = {
   publicSalePerTx?: string;
   royaltyAddress?: string;
   royaltyPercent?: string;
+  openSeaProxyRegistryAddress?: string;
+  openSeaExchangeAddress?: string;
+  trustedForwarder?: string;
 };
