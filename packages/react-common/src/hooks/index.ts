@@ -1,5 +1,6 @@
 // web3
 export * from './useChainInfo';
+export * from './useChainId';
 export * from './useAddressOfSigner';
 export * from './useContractDeployer';
 export * from './useContractWriteAndWait';
