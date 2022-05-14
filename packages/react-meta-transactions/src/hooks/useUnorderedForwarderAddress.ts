@@ -1,30 +1,35 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
-import { ZERO_ADDRESS } from '@0xflair/react-common';
+import {
+  LATEST_VERSION,
+  loadContract,
+  Version,
+} from '@0xflair/contracts-registry';
+import { useChainId, ZERO_ADDRESS } from '@0xflair/react-common';
 import { useMemo } from 'react';
-import { useChainId } from 'wagmi/dist/declarations/src/hooks';
 
-type Config = {
-  version?: Version;
-  chainId?: number;
-};
-
-export const useUnorderedForwarderAddress = (args?: Config) => {
-  const chain = (useChainId(args) || args?.chainId) as number | undefined;
+export const useUnorderedForwarderAddress = (
+  chainId?: number,
+  version: Version = LATEST_VERSION
+) => {
+  const resolvedChainId = useChainId(chainId);
 
   return useMemo(() => {
+    if (!resolvedChainId) {
+      return ZERO_ADDRESS;
+    }
+
     try {
       const definition = loadContract(
         'common/meta-transactions/UnorderedForwarder',
-        args?.version
+        version
       );
 
-      return definition.address?.[Number(chain)] ?? ZERO_ADDRESS;
+      return definition.address?.[resolvedChainId] ?? ZERO_ADDRESS;
     } catch (e) {
       console.warn(
-        `Could not load UnorderedForwarder contract for chain ${chain}: `,
+        `Could not load UnorderedForwarder contract for chain ${resolvedChainId}: `,
         e
       );
       return ZERO_ADDRESS;
     }
-  }, [args?.version, chain]);
+  }, [version, resolvedChainId]);
 };

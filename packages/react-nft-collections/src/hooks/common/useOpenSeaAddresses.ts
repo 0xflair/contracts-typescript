@@ -1,29 +1,27 @@
-import { ZERO_ADDRESS } from '@0xflair/react-common';
-import { useChainId } from 'wagmi/dist/declarations/src/hooks';
-import { UseChainIdArgs } from 'wagmi/dist/declarations/src/hooks/utils/useChainId';
+import { useChainId, ZERO_ADDRESS } from '@0xflair/react-common';
 
 import {
   FLAIR_OPENSEA_ADDRESSES,
   SupportedOpenSeaChains,
 } from '../../constants';
 
-export const useOpenSeaAddresses = (args?: UseChainIdArgs) => {
-  const chain = (useChainId(args) || args?.chainId) as
+export const useOpenSeaAddresses = (chainId?: number) => {
+  const resolvedChainId = useChainId(chainId) as
     | SupportedOpenSeaChains
     | undefined;
 
   return {
     openSeaProxyRegistryAddress:
-      chain &&
-      FLAIR_OPENSEA_ADDRESSES[chain] &&
-      FLAIR_OPENSEA_ADDRESSES[chain].registryAddress
-        ? FLAIR_OPENSEA_ADDRESSES[chain].registryAddress
+      resolvedChainId &&
+      FLAIR_OPENSEA_ADDRESSES[resolvedChainId] &&
+      FLAIR_OPENSEA_ADDRESSES[resolvedChainId].registryAddress
+        ? FLAIR_OPENSEA_ADDRESSES[resolvedChainId].registryAddress
         : ZERO_ADDRESS,
     openSeaExchangeAddress:
-      chain &&
-      FLAIR_OPENSEA_ADDRESSES[chain] &&
-      FLAIR_OPENSEA_ADDRESSES[chain].exchangeAddress
-        ? FLAIR_OPENSEA_ADDRESSES[chain].exchangeAddress
+      resolvedChainId &&
+      FLAIR_OPENSEA_ADDRESSES[resolvedChainId] &&
+      FLAIR_OPENSEA_ADDRESSES[resolvedChainId].exchangeAddress
+        ? FLAIR_OPENSEA_ADDRESSES[resolvedChainId].exchangeAddress
         : ZERO_ADDRESS,
   } as const;
 };
