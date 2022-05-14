@@ -7,8 +7,8 @@ import {
   SupportedOpenSeaChains,
 } from '../../constants';
 
-export const useOpenSeaAddresses = (args: UseChainIdArgs) => {
-  const chain = (useChainId(args) || args.chainId) as
+export const useOpenSeaAddresses = (args?: UseChainIdArgs) => {
+  const chain = (useChainId(args) || args?.chainId) as
     | SupportedOpenSeaChains
     | undefined;
 
@@ -17,13 +17,13 @@ export const useOpenSeaAddresses = (args: UseChainIdArgs) => {
       chain &&
       FLAIR_OPENSEA_ADDRESSES[chain] &&
       FLAIR_OPENSEA_ADDRESSES[chain].registryAddress
-        ? FLAIR_OPENSEA_ADDRESSES[chain]
+        ? FLAIR_OPENSEA_ADDRESSES[chain].registryAddress
         : ZERO_ADDRESS,
     openSeaExchangeAddress:
       chain &&
       FLAIR_OPENSEA_ADDRESSES[chain] &&
       FLAIR_OPENSEA_ADDRESSES[chain].exchangeAddress
-        ? FLAIR_OPENSEA_ADDRESSES[chain]
+        ? FLAIR_OPENSEA_ADDRESSES[chain].exchangeAddress
         : ZERO_ADDRESS,
-  };
+  } as const;
 };

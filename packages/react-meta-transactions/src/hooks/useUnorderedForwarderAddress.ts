@@ -8,14 +8,14 @@ type Config = {
   chainId?: number;
 };
 
-export const useUnorderedForwarderAddress = (args: Config) => {
-  const chain = (useChainId(args) || args.chainId) as number | undefined;
+export const useUnorderedForwarderAddress = (args?: Config) => {
+  const chain = (useChainId(args) || args?.chainId) as number | undefined;
 
   return useMemo(() => {
     try {
       const definition = loadContract(
         'common/meta-transactions/UnorderedForwarder',
-        args.version
+        args?.version
       );
 
       return definition.address?.[Number(chain)] ?? ZERO_ADDRESS;
@@ -26,5 +26,5 @@ export const useUnorderedForwarderAddress = (args: Config) => {
       );
       return ZERO_ADDRESS;
     }
-  }, [args.version, chain]);
+  }, [args?.version, chain]);
 };
