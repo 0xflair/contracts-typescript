@@ -18,6 +18,9 @@
       { "singleQuote": true, "parser": "typescript" }
     ]
   },
+  "ignorePatterns": [
+    "**/node_modules/**"
+  ],
   "overrides": [
     {
       "files": ["**/*.stories.*"],
