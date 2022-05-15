@@ -1,4 +1,4 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { Environment } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
@@ -13,7 +13,7 @@ import { usePublicSaleMinter } from '../sales/usePublicSaleMinter';
 type Config = {
   env?: Environment;
   chainId?: number;
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   minterAddress?: BytesLike;

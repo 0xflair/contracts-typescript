@@ -1,10 +1,10 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
 type Config = {
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   newValue?: boolean;
@@ -19,7 +19,7 @@ export const usePublicSaleStatusToggler = ({
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
     version,
-    contractKey: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
+    contractFqn: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
     functionName: 'togglePublicSaleStatus',
     contractAddress,
     signerOrProvider,

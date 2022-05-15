@@ -1,10 +1,10 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
@@ -17,7 +17,7 @@ export const usePreSaleStatus = ({
 }: Config) => {
   return useContractRead<boolean>({
     version,
-    contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'preSaleStatus',
     contractAddress,
     signerOrProvider,

@@ -1,10 +1,10 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
@@ -17,7 +17,7 @@ export const usePublicSaleStatus = ({
 }: Config) => {
   return useContractRead<boolean>({
     version,
-    contractKey: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
+    contractFqn: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
     functionName: 'publicSaleStatus',
     contractAddress,
     signerOrProvider,

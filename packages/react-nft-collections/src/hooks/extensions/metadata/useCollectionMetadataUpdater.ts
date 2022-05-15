@@ -1,4 +1,4 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { Environment, ZERO_ADDRESS } from '@0xflair/react-common';
 import { useIpfsFileUploader, useIpfsJsonUploader } from '@0xflair/react-ipfs';
 import { Provider } from '@ethersproject/providers';
@@ -18,7 +18,7 @@ export type NftCollectionMetadataUpdates = {
 
 type Config = {
   env?: Environment;
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   metadataUpdates?: NftCollectionMetadataUpdates;

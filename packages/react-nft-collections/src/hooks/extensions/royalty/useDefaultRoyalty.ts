@@ -1,10 +1,10 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
@@ -19,7 +19,7 @@ export const useDefaultRoyalty = ({
     [receiver: BytesLike, bps: BigNumberish]
   >({
     version,
-    contractKey: 'collections/ERC721/extensions/ERC721RoyaltyExtension',
+    contractFqn: 'collections/ERC721/extensions/ERC721RoyaltyExtension',
     functionName: 'defaultRoyalty',
     contractAddress,
     signerOrProvider,

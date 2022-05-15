@@ -1,4 +1,4 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
@@ -6,7 +6,7 @@ import { BigNumberish, BytesLike, Signer } from 'ethers';
 type ArgsType = [[newReceiver: BytesLike, newBasisPoints: BigNumberish]];
 
 type Config = {
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   args?: ArgsType;
@@ -20,7 +20,7 @@ export const useDefaultRoyaltyUpdater = ({
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
     version,
-    contractKey: 'collections/ERC721/extensions/ERC721RoyaltyExtension',
+    contractFqn: 'collections/ERC721/extensions/ERC721RoyaltyExtension',
     functionName: 'setDefaultRoyalty',
     contractAddress,
     signerOrProvider,

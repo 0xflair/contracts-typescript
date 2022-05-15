@@ -1,4 +1,4 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { useAddressListMerkleProof } from '@0xflair/react-address-lists';
 import { Environment, useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
@@ -9,7 +9,7 @@ type Config = {
   env?: Environment;
   enabled?: boolean;
   chainId?: number;
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   minterAddress?: BytesLike;
@@ -48,7 +48,7 @@ export const usePreSaleAllowlistChecker = ({
   } = useContractRead<boolean>({
     version,
     enabled: Boolean(readyToRead && proofData),
-    contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'onPreSaleAllowList',
     contractAddress,
     signerOrProvider,

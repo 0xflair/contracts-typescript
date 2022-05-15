@@ -1,11 +1,11 @@
 import '@wagmi/core';
 
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { BigNumber } from 'ethers';
 import { useBalance } from 'wagmi';
 
 type Config = {
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
 };
 

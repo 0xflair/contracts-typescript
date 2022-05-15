@@ -1,4 +1,4 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
@@ -6,7 +6,7 @@ import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
 import { usePublicSalePrice } from './usePublicSalePrice';
 
 type Config = {
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   toAddress?: string;
@@ -33,7 +33,7 @@ export const usePublicSaleMinter = ({
 
   const result = useContractWriteAndWait<ArgsType>({
     version,
-    contractKey: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
+    contractFqn: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
     functionName: 'mintPublicSale',
     contractAddress,
     signerOrProvider,

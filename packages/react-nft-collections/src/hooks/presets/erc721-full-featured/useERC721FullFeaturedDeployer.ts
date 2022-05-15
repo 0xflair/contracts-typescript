@@ -1,9 +1,9 @@
-import { loadContract, Version } from '@0xflair/contracts-registry';
+import { loadContract, ContractVersion } from '@0xflair/contracts-registry';
 import { useContractDeployer } from '@0xflair/react-common';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 
 export type ERC721FullFeaturedContractDeployerConfig = {
-  version?: Version;
+  version?: ContractVersion;
   signer?: Signer;
 };
 

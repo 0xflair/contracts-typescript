@@ -1,14 +1,14 @@
 import {
   LATEST_VERSION,
   loadContract,
-  Version,
+  ContractVersion,
 } from '@0xflair/contracts-registry';
 import { useChainId, ZERO_ADDRESS } from '@0xflair/react-common';
 import { useMemo } from 'react';
 
 export const useUnorderedForwarderAddress = (
   chainId?: number,
-  version: Version = LATEST_VERSION
+  version: ContractVersion = LATEST_VERSION
 ) => {
   const resolvedChainId = useChainId(chainId);
 

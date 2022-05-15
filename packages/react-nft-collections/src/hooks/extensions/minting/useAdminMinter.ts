@@ -1,4 +1,4 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { Environment } from '@0xflair/react-common';
 import { useOzHasRole, useOzOwner } from '@0xflair/react-openzeppelin';
 import { Provider } from '@ethersproject/providers';
@@ -12,7 +12,7 @@ import { useRoleBasedMinter } from './useRoleBasedMinter';
 type Config = {
   env?: Environment;
   chainId?: number;
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   minterAddress?: string;

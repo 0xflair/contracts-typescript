@@ -1,20 +1,24 @@
 import { FlairInvalidVersionError } from './errors';
 import { FlairInvalidArtifactError } from './errors/invalid-artifact';
-import { ContractKey, LATEST_VERSION, Version } from './generated-types';
+import {
+  ContractFqn,
+  ContractVersion,
+  LATEST_VERSION,
+} from './generated-types';
 import { REGISTRY } from './registry';
 
 export const loadContract = (
-  contractKey: ContractKey,
-  version: Version = LATEST_VERSION
+  contractFqn: ContractFqn,
+  version: ContractVersion = LATEST_VERSION
 ) => {
   if (!REGISTRY[version]) {
     throw new FlairInvalidVersionError(version);
   }
 
-  const contract = REGISTRY[version][contractKey as string];
+  const contract = REGISTRY[version][contractFqn as string];
 
   if (!contract) {
-    throw new FlairInvalidArtifactError(contractKey as string, version);
+    throw new FlairInvalidArtifactError(contractFqn as string, version);
   }
 
   return contract;

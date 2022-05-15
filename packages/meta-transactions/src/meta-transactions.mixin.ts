@@ -1,8 +1,8 @@
 import { Environment } from '@0xflair/common';
 import {
-  ContractKey,
+  ContractFqn,
   FlairContract,
-  Version,
+  ContractVersion,
 } from '@0xflair/contracts-registry';
 import {
   Contract,
@@ -86,8 +86,8 @@ export const createFlairContractWithMetaTransactions = <
   env?: Environment;
   chainId: number;
   flairClientId: string;
-  contractKey: ContractKey;
-  contractVersion?: Version;
+  contractFqn: ContractFqn;
+  contractVersion?: ContractVersion;
   addressOrName?: string;
   signer?: Signer;
 }): T => {
@@ -99,7 +99,7 @@ export const createFlairContractWithMetaTransactions = <
 
   const contract = new FlairContract(
     config.chainId,
-    config.contractKey,
+    config.contractFqn,
     config.signer,
     config.contractVersion,
     config.addressOrName

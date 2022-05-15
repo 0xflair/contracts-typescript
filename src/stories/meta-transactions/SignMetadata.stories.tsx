@@ -1,9 +1,9 @@
 import { Environment } from '@0xflair/common';
 import {
+  ContractVersion,
   LATEST_VERSION,
   loadContract,
   REGISTRY,
-  Version,
 } from '@0xflair/contracts-registry';
 import {
   MetaTransaction,
@@ -27,7 +27,7 @@ export default {
 };
 
 type Args = {
-  version: Version;
+  version: ContractVersion;
   forwarder: string;
 
   from: string;

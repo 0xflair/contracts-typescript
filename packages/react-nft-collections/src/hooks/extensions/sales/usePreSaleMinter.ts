@@ -1,4 +1,4 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
@@ -6,7 +6,7 @@ import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
 import { usePreSalePrice } from './usePreSalePrice';
 
 type Config = {
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   mintCount?: BigNumberish;
@@ -33,7 +33,7 @@ export const usePreSaleMinter = ({
 
   const result = useContractWriteAndWait<ArgsType>({
     version,
-    contractKey: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+    contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'mintPreSale',
     contractAddress,
     signerOrProvider,

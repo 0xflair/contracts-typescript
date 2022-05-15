@@ -1,11 +1,11 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { ReadContractConfig } from '@wagmi/core';
 import { BytesLike, Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: Version;
+  version?: ContractVersion;
   enabled?: boolean;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
@@ -24,7 +24,7 @@ export const useOzHasRole = ({
 }: Config) => {
   return useContractRead<boolean>({
     version,
-    contractKey: 'openzeppelin/access/AccessControl',
+    contractFqn: 'openzeppelin/access/AccessControl',
     functionName: 'hasRole',
     args: [role, address],
     enabled: Boolean(enabled && role && address),

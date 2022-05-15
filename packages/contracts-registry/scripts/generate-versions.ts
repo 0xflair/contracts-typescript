@@ -44,7 +44,7 @@ const main = async () => {
     });
 
     for (const file of files) {
-      if (file === 'addresses.json' || file.startsWith('node_modules')) {
+      if (!file.includes('/') || file.startsWith('node_modules')) {
         continue;
       }
 
@@ -79,7 +79,7 @@ const main = async () => {
 
   const typeNames: Record<string, any> = {};
 
-  // TODO Extend ContractKey type to export keys per version not just latest
+  // TODO Extend ContractFqn type to export keys per version not just latest
   fse.writeFileSync(
     path.resolve(__dirname, '../src/generated-types.ts'),
     `/* THIS AN AUTO-GENERATED FILE, DO NOT EDIT MANUALLY */
@@ -147,16 +147,16 @@ ${Object.entries(registry)
   })
   .join(';\n')};
 
-export type ContractKey = ${Object.entries(registry)
+export type ContractFqn = ${Object.entries(registry)
       .map(([versionTag]) => {
         const safeVersionPrefix = getSafeVersionPrefix(versionTag);
         return `${safeVersionPrefix}CONTRACTS`;
       })
       .join(' | ')};
 
-export type Version = keyof ContractTypeRegistry;
+export type ContractVersion = keyof ContractTypeRegistry;
 
-export const LATEST_VERSION: Version = "${lastVersion}";
+export const LATEST_VERSION: ContractVersion = "${lastVersion}";
 `
   );
 };

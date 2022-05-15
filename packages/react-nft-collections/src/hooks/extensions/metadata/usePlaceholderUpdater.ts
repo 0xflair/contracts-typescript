@@ -1,4 +1,4 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { Environment, ZERO_ADDRESS } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
@@ -12,7 +12,7 @@ import { usePlaceholderUriUpdater } from './usePlaceholderUriUpdater';
 
 type Config = {
   env?: Environment;
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   placeholderMetadata?: NftTokenMetadataInput;

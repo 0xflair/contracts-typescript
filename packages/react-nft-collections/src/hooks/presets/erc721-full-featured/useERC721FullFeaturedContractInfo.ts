@@ -1,10 +1,10 @@
-import { Version } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: Version;
+  version?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
@@ -30,7 +30,7 @@ export const useERC721FullFeaturedContractInfo = ({
 }: Config) => {
   return useContractRead<ERC721FullFeaturedContractInfo>({
     version,
-    contractKey: 'collections/ERC721/presets/ERC721FullFeaturedCollection',
+    contractFqn: 'collections/ERC721/presets/ERC721FullFeaturedCollection',
     functionName: 'getInfo',
     contractAddress,
     signerOrProvider,

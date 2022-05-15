@@ -1,9 +1,9 @@
 import { Environment } from '@0xflair/common';
 import {
-  ContractKey,
+  ContractFqn,
   LATEST_VERSION,
   loadContract,
-  Version,
+  ContractVersion,
 } from '@0xflair/contracts-registry';
 import { Provider } from '@ethersproject/providers';
 import {
@@ -46,12 +46,12 @@ export class MetaContract<
   constructor(
     metaTransactionsClient: MetaTransactionsClient,
     chainId: number,
-    contractKey: ContractKey,
-    contractVersion: Version = LATEST_VERSION,
+    contractFqn: ContractFqn,
+    contractVersion: ContractVersion = LATEST_VERSION,
     addressOrName?: string,
     signerOrProvider?: Signer | Provider
   ) {
-    const contractDefinition = loadContract(contractKey, contractVersion);
+    const contractDefinition = loadContract(contractFqn, contractVersion);
     const contractAddressOrName =
       addressOrName || contractDefinition.address?.[String(chainId)];
 
@@ -95,8 +95,8 @@ export class MetaContract<
     env?: Environment;
     chainId: number;
     flairClientId: string;
-    contractKey: ContractKey;
-    contractVersion?: Version;
+    contractFqn: ContractFqn;
+    contractVersion?: ContractVersion;
     addressOrName?: string;
     signerOrProvider?: Signer | Provider;
   }): T {
@@ -109,7 +109,7 @@ export class MetaContract<
     return new MetaContract(
       metaTxClient,
       config.chainId,
-      config.contractKey,
+      config.contractFqn,
       config.contractVersion,
       config.addressOrName,
       config.signerOrProvider

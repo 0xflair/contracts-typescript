@@ -1,18 +1,18 @@
 import { Provider } from '@ethersproject/providers';
 import { Contract as EthersContract, Signer } from 'ethers';
 
-import { ContractKey, LATEST_VERSION, Version } from './generated-types';
+import { ContractFqn, LATEST_VERSION, ContractVersion } from './generated-types';
 import { loadContract } from './load-contract';
 
 export class FlairContract extends EthersContract {
   constructor(
     chainId: number,
-    contractKey: ContractKey,
+    contractFqn: ContractFqn,
     signerOrProvider?: Signer | Provider,
-    contractVersion: Version = LATEST_VERSION,
+    contractVersion: ContractVersion = LATEST_VERSION,
     addressOrName?: string
   ) {
-    const contractDefinition = loadContract(contractKey, contractVersion);
+    const contractDefinition = loadContract(contractFqn, contractVersion);
     const contractAddressOrName =
       addressOrName || contractDefinition.address?.[String(chainId)];
 

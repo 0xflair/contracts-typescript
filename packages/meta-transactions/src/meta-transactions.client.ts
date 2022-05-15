@@ -2,7 +2,7 @@ import { Environment } from '@0xflair/common';
 import {
   LATEST_VERSION,
   loadContract,
-  Version,
+  ContractVersion,
 } from '@0xflair/contracts-registry';
 import axios from 'axios';
 import { Signer } from 'ethers';
@@ -18,7 +18,7 @@ type Config =
   | {
       env?: Environment;
       chainId: number;
-      contractVersion?: Version;
+      contractVersion?: ContractVersion;
       forwarder?: string;
       flairClientId: string;
       defaults?: Partial<MetaTransaction>;
@@ -26,7 +26,7 @@ type Config =
   | {
       env?: Environment;
       chainId?: number;
-      contractVersion?: Version;
+      contractVersion?: ContractVersion;
       forwarder: string;
       flairClientId: string;
       defaults?: Partial<MetaTransaction>;

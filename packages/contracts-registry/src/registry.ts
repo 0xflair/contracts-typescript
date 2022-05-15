@@ -1,4 +1,4 @@
-import { Version } from './generated-types';
+import { ContractVersion } from './generated-types';
 import RegistryJson from './registry-mapping.json';
 
 export type ContractDefinition = {
@@ -15,6 +15,6 @@ export type ContractDefinition = {
 };
 
 export type ContractDictionary = Record<string, ContractDefinition>;
-export type ContractRegistry = Record<Version, ContractDictionary>;
+export type ContractRegistry = Record<ContractVersion, ContractDictionary>;
 
 export const REGISTRY: ContractRegistry = RegistryJson;
