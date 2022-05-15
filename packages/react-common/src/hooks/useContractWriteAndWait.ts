@@ -65,7 +65,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
 
   const writeAndWait = useCallback(
     async (inputArgs?: ArgsType) => {
-      if (!Array.isArray(inputArgs)) {
+      if (inputArgs && inputArgs instanceof Event) {
         throw new Error(
           `Failed to call ${functionName} on ${contractAddress}, writeAndWait is called with wrong "args", it must be an array. Did you forget to call like this "onClick={() => writeAndWait()}"?`
         );
@@ -80,7 +80,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
 
       return { response, receipt };
     },
-    [doWrite, args, restOfConfig]
+    [doWrite, args, restOfConfig, functionName, contractAddress]
   );
 
   return {
