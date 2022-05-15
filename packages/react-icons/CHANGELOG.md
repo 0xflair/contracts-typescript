@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.38.0 (2022-05-15)
+
+
+### Features
+
+* add oz role renouncer hook ([43b78de](https://github.com/0xflair/typescript-sdk/commit/43b78de07b14a83a5884ce52e7043f8c00c18f2f))
+
+
+
+
+
 # 0.37.0 (2022-05-15)
 
 
