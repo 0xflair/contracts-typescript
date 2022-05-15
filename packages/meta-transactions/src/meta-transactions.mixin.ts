@@ -106,7 +106,7 @@ export const createFlairContractWithMetaTransactions = <
   );
 
   const augmentedContract = applyMetaTransactions<T>(
-    contract as T,
+    contract as unknown as T, // TODO fix this to get proper typing!
     config.chainId,
     metaTxClient
   );
