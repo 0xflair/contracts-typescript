@@ -4,19 +4,19 @@ import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
 
 export const usePreSaleStatus = ({
   contractAddress,
-  version,
+  contractVersion,
   signerOrProvider,
   ...restOfConfig
 }: Config) => {
   return useContractRead<boolean>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'preSaleStatus',
     contractAddress,

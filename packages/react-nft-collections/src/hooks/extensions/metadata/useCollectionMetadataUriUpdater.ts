@@ -4,20 +4,20 @@ import { Provider } from '@ethersproject/providers';
 import { BytesLike, Signer } from 'ethers';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
 
 export const useCollectionMetadataUriUpdater = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
 }: Config) => {
   return useContractWriteAndWait<[BytesLike]>({
     contractFqn:
       'collections/ERC721/extensions/ERC721CollectionMetadataExtension',
-    version,
+    contractVersion,
     contractAddress,
     signerOrProvider,
     functionName: 'setContractURI',

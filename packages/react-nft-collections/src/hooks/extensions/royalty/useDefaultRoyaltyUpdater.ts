@@ -6,20 +6,20 @@ import { BigNumberish, BytesLike, Signer } from 'ethers';
 type ArgsType = [[newReceiver: BytesLike, newBasisPoints: BigNumberish]];
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   args?: ArgsType;
 };
 
 export const useDefaultRoyaltyUpdater = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   args,
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721RoyaltyExtension',
     functionName: 'setDefaultRoyalty',
     contractAddress,

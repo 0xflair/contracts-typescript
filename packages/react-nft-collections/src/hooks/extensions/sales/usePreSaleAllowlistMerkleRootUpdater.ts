@@ -4,7 +4,7 @@ import { Provider } from '@ethersproject/providers';
 import { BytesLike, Signer } from 'ethers';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   newRoot?: BytesLike;
@@ -13,13 +13,13 @@ type Config = {
 type ArgsType = [newRoot: BytesLike];
 
 export const usePreSaleAllowlistMerkleRootUpdater = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   newRoot,
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'setAllowlistMerkleRoot',
     contractAddress,

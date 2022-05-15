@@ -1,7 +1,7 @@
 import {
   ContractFqn,
-  loadContract,
   ContractVersion,
+  loadContract,
 } from '@0xflair/contracts-registry';
 import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';
@@ -11,7 +11,7 @@ import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 export type ContractWriteConfig<ArgsType extends any[]> =
   WriteContractConfig & {
-    version?: ContractVersion;
+    contractVersion?: ContractVersion;
     contractFqn: ContractFqn;
     contractAddress?: string;
     signerOrProvider?: Signer | Provider | null;
@@ -20,7 +20,7 @@ export type ContractWriteConfig<ArgsType extends any[]> =
   };
 
 export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
-  version,
+  contractVersion,
   contractFqn,
   contractAddress,
   signerOrProvider,
@@ -28,7 +28,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   args,
   ...restOfConfig
 }: ContractWriteConfig<ArgsType>) => {
-  const contract = loadContract(contractFqn, version);
+  const contract = loadContract(contractFqn, contractVersion);
 
   const {
     data: responseData,

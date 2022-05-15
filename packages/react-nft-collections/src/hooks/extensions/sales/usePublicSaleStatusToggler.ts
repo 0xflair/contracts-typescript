@@ -4,7 +4,7 @@ import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   newValue?: boolean;
@@ -12,13 +12,13 @@ type Config = {
 type ArgsType = [newValue: boolean];
 
 export const usePublicSaleStatusToggler = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   newValue,
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
     functionName: 'togglePublicSaleStatus',
     contractAddress,

@@ -4,7 +4,7 @@ import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   toAddress?: BytesLike;
@@ -14,14 +14,14 @@ type Config = {
 type ArgsType = [toAddress: BytesLike, mintCount: BigNumberish];
 
 export const useRoleBasedMinter = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   toAddress,
   mintCount,
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721RoleBasedMintExtension',
     contractAddress,
     signerOrProvider,

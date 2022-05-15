@@ -9,13 +9,13 @@ import { NftCollectionMetadata } from '../../../types';
 import { useCollectionMetadataUri } from './useCollectionMetadataUri';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
 
 export const useCollectionMetadata = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   enabled,
@@ -27,7 +27,7 @@ export const useCollectionMetadata = ({
     isLoading: contractURILoading,
     refetch: contractURIRefetch,
   } = useCollectionMetadataUri({
-    version,
+    contractVersion,
     contractAddress,
     signerOrProvider,
     enabled,

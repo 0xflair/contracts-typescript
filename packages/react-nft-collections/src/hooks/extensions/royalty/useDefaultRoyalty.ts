@@ -4,13 +4,13 @@ import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
 
 export const useDefaultRoyalty = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   ...restOfConfig
@@ -18,7 +18,7 @@ export const useDefaultRoyalty = ({
   const { data, ...rest } = useContractRead<
     [receiver: BytesLike, bps: BigNumberish]
   >({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721RoyaltyExtension',
     functionName: 'defaultRoyalty',
     contractAddress,

@@ -5,7 +5,7 @@ import { ReadContractConfig } from '@wagmi/core';
 import { BytesLike, Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   enabled?: boolean;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
@@ -16,7 +16,7 @@ type Config = Partial<ReadContractConfig> & {
 type Args = [role?: BytesLike, address?: BytesLike];
 
 export const useOzRoleGranter = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   role,
@@ -24,7 +24,7 @@ export const useOzRoleGranter = ({
   ...restOfConfig
 }: Config) => {
   return useContractWriteAndWait<Args>({
-    version,
+    contractVersion,
     contractFqn: 'openzeppelin/access/AccessControl',
     functionName: 'grantRole',
     args: [role, address],

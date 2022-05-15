@@ -12,7 +12,7 @@ import { usePlaceholderUriUpdater } from './usePlaceholderUriUpdater';
 
 type Config = {
   env?: Environment;
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   placeholderMetadata?: NftTokenMetadataInput;
@@ -20,7 +20,7 @@ type Config = {
 
 export const usePlaceholderUpdater = ({
   env = Environment.PROD,
-  version,
+  contractVersion,
   contractAddress = ZERO_ADDRESS,
   signerOrProvider,
   placeholderMetadata,
@@ -33,7 +33,7 @@ export const usePlaceholderUpdater = ({
   } = usePlaceholderUriUpdater({
     contractAddress,
     signerOrProvider,
-    version,
+    contractVersion,
   });
 
   const {

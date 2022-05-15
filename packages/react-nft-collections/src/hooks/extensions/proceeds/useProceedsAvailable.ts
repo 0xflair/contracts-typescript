@@ -5,7 +5,7 @@ import { BigNumber } from 'ethers';
 import { useBalance } from 'wagmi';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
 };
 

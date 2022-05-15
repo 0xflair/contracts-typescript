@@ -9,7 +9,7 @@ type Config = {
   env?: Environment;
   enabled?: boolean;
   chainId?: number;
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   minterAddress?: BytesLike;
@@ -19,7 +19,7 @@ export const usePreSaleAllowlistChecker = ({
   env = Environment.PROD,
   enabled = true,
   chainId,
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   minterAddress,
@@ -46,7 +46,7 @@ export const usePreSaleAllowlistChecker = ({
     isLoading: onPreSaleAllowListLoading,
     refetch: onPreSaleAllowListRead,
   } = useContractRead<boolean>({
-    version,
+    contractVersion,
     enabled: Boolean(readyToRead && proofData),
     contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'onPreSaleAllowList',

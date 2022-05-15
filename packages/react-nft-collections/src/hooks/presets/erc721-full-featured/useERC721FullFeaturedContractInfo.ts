@@ -4,7 +4,7 @@ import { Provider } from '@ethersproject/providers';
 import { BigNumberish, Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
@@ -23,13 +23,13 @@ export type ERC721FullFeaturedContractInfo = [
 ];
 
 export const useERC721FullFeaturedContractInfo = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   ...restOfConfig
 }: Config) => {
   return useContractRead<ERC721FullFeaturedContractInfo>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/presets/ERC721FullFeaturedCollection',
     functionName: 'getInfo',
     contractAddress,

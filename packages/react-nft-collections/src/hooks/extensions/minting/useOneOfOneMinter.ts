@@ -4,7 +4,7 @@ import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   toAddress?: BytesLike;
@@ -19,7 +19,7 @@ type ArgsType = [
 ];
 
 export const useOneOfOneMinter = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   toAddress,
@@ -27,7 +27,7 @@ export const useOneOfOneMinter = ({
   tokenURIs,
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721OneOfOneMintExtension',
     contractAddress,
     signerOrProvider,

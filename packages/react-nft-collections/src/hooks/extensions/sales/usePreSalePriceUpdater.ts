@@ -4,7 +4,7 @@ import { Provider } from '@ethersproject/providers';
 import { BigNumberish, Signer } from 'ethers';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   newPrice?: BigNumberish;
@@ -13,13 +13,13 @@ type Config = {
 type ArgsType = [newPrice: BigNumberish];
 
 export const usePreSalePriceUpdater = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   newPrice,
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'setPreSalePrice',
     contractAddress,

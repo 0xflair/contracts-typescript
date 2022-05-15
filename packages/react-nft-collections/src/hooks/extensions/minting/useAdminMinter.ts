@@ -12,7 +12,7 @@ import { useRoleBasedMinter } from './useRoleBasedMinter';
 type Config = {
   env?: Environment;
   chainId?: number;
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   minterAddress?: string;
@@ -26,7 +26,7 @@ type ArgsType = [toAddress: BytesLike, mintCount: BigNumberish];
  * Consolidated function for minting as admin without paying (either contract owner, or having minter role).
  */
 export const useAdminMinter = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   minterAddress,
@@ -38,7 +38,7 @@ export const useAdminMinter = ({
     error: ownerError,
     isLoading: ownerLoading,
   } = useOzOwner({
-    version,
+    contractVersion,
     contractAddress,
   });
   const {
@@ -46,7 +46,7 @@ export const useAdminMinter = ({
     error: hasMinterRoleError,
     isLoading: hasMinterRoleLoading,
   } = useOzHasRole({
-    version,
+    contractVersion,
     contractAddress,
     address: minterAddress,
     role: keccak256(toUtf8Bytes('MINTER_ROLE')),
@@ -62,7 +62,7 @@ export const useAdminMinter = ({
     isLoading: mintByOwnerLoading,
     writeAndWait: mintByOwnerWrite,
   } = useOwnerMinter({
-    version,
+    contractVersion,
     contractAddress,
     signerOrProvider,
     toAddress,
@@ -75,7 +75,7 @@ export const useAdminMinter = ({
     isLoading: mintByRoleLoading,
     writeAndWait: mintByRoleWrite,
   } = useRoleBasedMinter({
-    version,
+    contractVersion,
     contractAddress,
     signerOrProvider,
     toAddress,

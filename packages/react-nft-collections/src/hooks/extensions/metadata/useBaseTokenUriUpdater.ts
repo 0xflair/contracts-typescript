@@ -5,7 +5,7 @@ import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   args?: [BytesLike];
@@ -13,12 +13,12 @@ type Config = {
 
 export const useBaseTokenUriUpdater = ({
   contractAddress,
-  version,
+  contractVersion,
   signerOrProvider,
   args,
 }: Config) => {
   return useContractWriteAndWait({
-    version,
+    contractVersion,
     contractFqn:
       'collections/ERC721/extensions/ERC721PrefixedMetadataExtension',
     contractAddress,

@@ -5,21 +5,21 @@ import { ReadContractConfig } from '@wagmi/core';
 import { BytesLike, Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   enabled?: boolean;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
 
 export const useOzOwner = ({
-  version,
+  contractVersion,
   enabled,
   contractAddress,
   signerOrProvider,
   ...restOfConfig
 }: Config) => {
   return useContractRead<BytesLike>({
-    version,
+    contractVersion,
     enabled,
     contractFqn: 'openzeppelin/access/Ownable',
     functionName: 'owner',

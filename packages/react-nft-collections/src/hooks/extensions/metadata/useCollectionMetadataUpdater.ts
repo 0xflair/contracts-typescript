@@ -18,7 +18,7 @@ export type NftCollectionMetadataUpdates = {
 
 type Config = {
   env?: Environment;
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   metadataUpdates?: NftCollectionMetadataUpdates;
@@ -26,7 +26,7 @@ type Config = {
 
 export const useCollectionMetadataUpdater = ({
   env = Environment.PROD,
-  version,
+  contractVersion,
   contractAddress = ZERO_ADDRESS,
   signerOrProvider,
   metadataUpdates,
@@ -39,7 +39,7 @@ export const useCollectionMetadataUpdater = ({
   } = useCollectionMetadataUriUpdater({
     contractAddress,
     signerOrProvider,
-    version,
+    contractVersion,
   });
 
   const {

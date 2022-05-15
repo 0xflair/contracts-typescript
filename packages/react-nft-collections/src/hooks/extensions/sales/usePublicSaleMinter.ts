@@ -6,7 +6,7 @@ import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
 import { usePublicSalePrice } from './usePublicSalePrice';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   toAddress?: string;
@@ -16,7 +16,7 @@ type Config = {
 type ArgsType = [toAddress: BytesLike, mintCount: BigNumberish];
 
 export const usePublicSaleMinter = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   toAddress,
@@ -27,12 +27,12 @@ export const usePublicSaleMinter = ({
     error,
     isLoading,
   } = usePublicSalePrice({
-    version,
+    contractVersion,
     contractAddress,
   });
 
   const result = useContractWriteAndWait<ArgsType>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
     functionName: 'mintPublicSale',
     contractAddress,

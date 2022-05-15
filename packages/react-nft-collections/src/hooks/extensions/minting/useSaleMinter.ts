@@ -13,7 +13,7 @@ import { usePublicSaleMinter } from '../sales/usePublicSaleMinter';
 type Config = {
   env?: Environment;
   chainId?: number;
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   minterAddress?: BytesLike;
@@ -26,7 +26,7 @@ type Config = {
 export const useSaleMinter = ({
   env,
   chainId,
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   minterAddress,
@@ -39,7 +39,7 @@ export const useSaleMinter = ({
     error: preSaleStatusError,
     isLoading: preSaleStatusLoading,
   } = usePreSaleStatus({
-    version,
+    contractVersion,
     contractAddress,
   });
 
@@ -48,7 +48,7 @@ export const useSaleMinter = ({
     error: publicSaleStatusError,
     isLoading: publicSaleStatusLoading,
   } = usePublicSaleStatus({
-    version,
+    contractVersion,
     contractAddress,
   });
 
@@ -59,7 +59,7 @@ export const useSaleMinter = ({
   } = usePreSaleAllowlistChecker({
     env,
     chainId,
-    version,
+    contractVersion,
     contractAddress,
     enabled: true,
     minterAddress,
@@ -71,7 +71,7 @@ export const useSaleMinter = ({
     isLoading: preSaleMintLoading,
     writeAndWait: preSaleMintWrite,
   } = usePreSaleMinter({
-    version,
+    contractVersion,
     contractAddress,
     signerOrProvider,
     mintCount,
@@ -84,7 +84,7 @@ export const useSaleMinter = ({
     isLoading: publicSaleMintLoading,
     writeAndWait: publicSaleMintWrite,
   } = usePublicSaleMinter({
-    version,
+    contractVersion,
     contractAddress,
     signerOrProvider,
     mintCount,

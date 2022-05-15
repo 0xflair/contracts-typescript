@@ -4,7 +4,7 @@ import { Provider } from '@ethersproject/providers';
 import { BigNumberish, Signer } from 'ethers';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   newLimit?: BigNumberish;
@@ -13,13 +13,13 @@ type Config = {
 type ArgsType = [newLimit: BigNumberish];
 
 export const usePreSaleMaxMintPerWalletUpdater = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   newLimit,
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'setPreSaleMaxMintPerWallet',
     contractAddress,

@@ -1,8 +1,8 @@
 import { ZERO_ADDRESS } from '@0xflair/common';
 import {
   ContractFqn,
-  loadContract,
   ContractVersion,
+  loadContract,
 } from '@0xflair/contracts-registry';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
@@ -11,7 +11,7 @@ import { UseContractReadConfig } from 'wagmi/dist/declarations/src/hooks/contrac
 
 export type ReadContractConfig<ArgsType extends any[] = any[]> =
   UseContractReadConfig & {
-    version?: ContractVersion;
+    contractVersion?: ContractVersion;
     contractFqn: ContractFqn;
     contractAddress?: string;
     signerOrProvider?: Signer | Provider | null;
@@ -26,7 +26,7 @@ export const useContractRead = <
   ResultType = any,
   ArgsType extends any[] = any[]
 >({
-  version,
+  contractVersion,
   enabled = true,
   contractFqn,
   contractAddress,
@@ -37,7 +37,7 @@ export const useContractRead = <
   cacheOnBlock,
   ...restOfConfig
 }: ReadContractConfig<ArgsType>) => {
-  const contract = loadContract(contractFqn, version);
+  const contract = loadContract(contractFqn, contractVersion);
   const readyToRead = Boolean(
     enabled && contractAddress && contractAddress !== ZERO_ADDRESS
   );

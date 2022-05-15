@@ -4,7 +4,7 @@ import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
@@ -12,12 +12,12 @@ type Config = {
 type ArgsType = [];
 
 export const useProceedsWithdraw = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721SimpleProceedsExtension',
     functionName: 'withdraw',
     contractAddress,

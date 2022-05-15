@@ -4,19 +4,19 @@ import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
 type Config = Partial<ReadContractConfig> & {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
 };
 
 export const useCollectionMetadataUri = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   ...restOfConfig
 }: Config) => {
   return useContractRead<string>({
-    version,
+    contractVersion,
     contractFqn:
       'collections/ERC721/extensions/ERC721CollectionMetadataExtension',
     functionName: 'contractURI',

@@ -4,7 +4,7 @@ import { Provider } from '@ethersproject/providers';
 import { BytesLike, Signer } from 'ethers';
 
 type Config = {
-  version?: ContractVersion;
+  contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   newValue?: BytesLike;
@@ -13,13 +13,13 @@ type Config = {
 type ArgsType = [newValue: BytesLike];
 
 export const usePublicSaleMaxMintPerTxUpdater = ({
-  version,
+  contractVersion,
   contractAddress,
   signerOrProvider,
   newValue,
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
-    version,
+    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
     functionName: 'setPublicSaleMaxMintPerTx',
     contractAddress,
