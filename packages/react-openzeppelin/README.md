@@ -41,6 +41,10 @@ const { data, error, isLoading } = useOzHasRole({
 
 Assign a certain role to a specific address.
 
+#### `useOzRoleRenouncer`
+
+Renounce a certain role from an already granted address.
+
 #### `useOzOwner`
 
 Check if a certain address is owner based on Openzeppelin's Ownable.
