@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.39.2 (2022-05-15)
+
+
+### Bug Fixes
+
+* use more verbose name for version ([b021ae8](https://github.com/0xflair/typescript-sdk/commit/b021ae8a29873be1cf77b701e909e1e1139d6221))
+
+
+
+
+
 ## 0.39.1 (2022-05-15)
 
 **Note:** Version bump only for package @0xflair/contracts-registry

@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-wallet",
-  "version": "0.39.1",
+  "version": "0.39.2",
   "private": false,
   "repository": {
     "type": "git",
@@ -51,9 +51,9 @@
     "@types/jsonwebtoken": "^8.5.8"
   },
   "dependencies": {
-    "@0xflair/react-common": "^0.39.1",
-    "@0xflair/react-icons": "^0.39.1",
-    "@0xflair/react-ui": "^0.39.1",
+    "@0xflair/react-common": "^0.39.2",
+    "@0xflair/react-icons": "^0.39.2",
+    "@0xflair/react-ui": "^0.39.2",
     "@headlessui/react": "^1.6.0",
     "@heroicons/react": "^1.0.6",
     "axios": "^0.26.1",
