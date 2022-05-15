@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "src/hooks/access/.ts"  ]
 }

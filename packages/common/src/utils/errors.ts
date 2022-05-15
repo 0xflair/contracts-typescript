@@ -12,23 +12,31 @@ function translateErrorName(error: Error) {
 export function extractHumanReadableError(input: any) {
   const error = input.error || input;
 
+  let result;
+
   if (error) {
     if (error.data && error.data.message) {
-      return error.data.message;
+      result = error.data.message;
     } else if (error.error && error.error.message) {
-      return error.error.message;
+      result = error.error.message;
     } else if (error.reason) {
-      return error.reason;
+      result = error.reason;
     } else if (error.name) {
-      return translateErrorName(error);
+      result = translateErrorName(error);
     } else if (error.message) {
-      return error.message;
+      result = error.message;
     } else {
-      return error.toString();
+      result = error.toString();
     }
+  } else {
+    result = input.toString();
   }
 
-  return input.toString();
+  if (result.includes('transaction underpriced')) {
+    result = 'You must use higher gas price. Transaction is underpriced.';
+  }
+
+  return result;
 }
 
 export function translateContractError(message: string) {
