@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.38.1 (2022-05-15)
+
+
+### Bug Fixes
+
+* when args are not provided as an array ([a7dc80e](https://github.com/0xflair/typescript-sdk/commit/a7dc80eed40a7f665a24dc874bbd40b9e5caf445))
+
+
+
+
+
 # 0.38.0 (2022-05-15)
 
 
