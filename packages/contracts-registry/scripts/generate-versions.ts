@@ -28,6 +28,17 @@ const main = async () => {
     }
   }
 
+  const versionToBuildInfo: Record<string, Record<string, any>> = {};
+
+  for (const pkg of contractPackages) {
+    const version = pkg.slice(pkg.lastIndexOf('-') + 1);
+    const buildInfoPath = path.resolve(pkg, 'build-info.json');
+
+    if (fse.existsSync(buildInfoPath)) {
+      versionToBuildInfo[version] = fse.readJsonSync(buildInfoPath);
+    }
+  }
+
   const packagePaths: Record<string, string> = {};
   const importNames: Record<string, string> = {};
 
@@ -75,6 +86,11 @@ const main = async () => {
   fse.writeJSONSync(
     path.resolve(__dirname, '../src/registry-mapping.json'),
     registry
+  );
+
+  fse.writeJSONSync(
+    path.resolve(__dirname, '../src/build-info.json'),
+    versionToBuildInfo
   );
 
   const typeNames: Record<string, any> = {};

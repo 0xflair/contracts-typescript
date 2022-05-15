@@ -1,7 +1,7 @@
 import {
   ContractDefinition,
   LATEST_VERSION,
-  REGISTRY,
+  CONTRACT_REGISTRY,
 } from '@0xflair/contracts-registry';
 import { ZERO_ADDRESS } from '@0xflair/react-common';
 import { PRIMARY_BUTTON } from '@0xflair/react-ui';
@@ -50,7 +50,7 @@ export const Default = (args: Args) => {
   );
 };
 
-const ContractNames = Object.keys(REGISTRY[LATEST_VERSION]);
+const ContractNames = Object.keys(CONTRACT_REGISTRY[LATEST_VERSION]);
 
 Default.args = {
   contractDefinition: ContractNames.find((n) =>
@@ -67,7 +67,7 @@ Default.args = {
 Default.argTypes = {
   contractDefinition: {
     options: ContractNames,
-    mapping: REGISTRY[LATEST_VERSION],
+    mapping: CONTRACT_REGISTRY[LATEST_VERSION],
     control: { type: 'select' },
   },
 };

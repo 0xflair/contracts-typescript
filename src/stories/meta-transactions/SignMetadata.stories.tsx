@@ -1,9 +1,9 @@
 import { Environment } from '@0xflair/common';
 import {
+  CONTRACT_REGISTRY,
   ContractVersion,
   LATEST_VERSION,
   loadContract,
-  REGISTRY,
 } from '@0xflair/contracts-registry';
 import {
   MetaTransaction,
@@ -146,7 +146,7 @@ Default.args = {
 
 Default.argTypes = {
   version: {
-    control: { type: 'select', options: Object.keys(REGISTRY) },
+    control: { type: 'select', options: Object.keys(CONTRACT_REGISTRY) },
   },
   forwarder: {
     control: { type: 'text' },

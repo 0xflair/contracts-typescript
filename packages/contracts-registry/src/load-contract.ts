@@ -5,17 +5,17 @@ import {
   ContractVersion,
   LATEST_VERSION,
 } from './generated-types';
-import { REGISTRY } from './registry';
+import { CONTRACT_REGISTRY } from './registry';
 
 export const loadContract = (
   contractFqn: ContractFqn,
   version: ContractVersion = LATEST_VERSION
 ) => {
-  if (!REGISTRY[version]) {
+  if (!CONTRACT_REGISTRY[version]) {
     throw new FlairInvalidVersionError(version);
   }
 
-  const contract = REGISTRY[version][contractFqn as string];
+  const contract = CONTRACT_REGISTRY[version][contractFqn as string];
 
   if (!contract) {
     throw new FlairInvalidArtifactError(contractFqn as string, version);

@@ -1,5 +1,6 @@
+import BuildInfoJson from './build-info.json';
 import { ContractVersion } from './generated-types';
-import RegistryJson from './registry-mapping.json';
+import ContractRegistryJson from './registry-mapping.json';
 
 export type ContractDefinition = {
   address?: {
@@ -14,7 +15,21 @@ export type ContractDefinition = {
   source?: string;
 };
 
-export type ContractDictionary = Record<string, ContractDefinition>;
-export type ContractRegistry = Record<ContractVersion, ContractDictionary>;
+export type BuildInfo = {
+  compilerVersion?: string;
+  solcInput?: {
+    language: string | 'Solidity';
+    sources: {
+      [key: string]: { content: string };
+    };
+  };
+};
 
-export const REGISTRY: ContractRegistry = RegistryJson;
+export type ContractDictionary = Record<string, ContractDefinition>;
+export type ContractRegistry = Partial<
+  Record<ContractVersion, ContractDictionary>
+>;
+export type BuildInfoRegistry = Partial<Record<ContractVersion, BuildInfo>>;
+
+export const CONTRACT_REGISTRY: ContractRegistry = ContractRegistryJson;
+export const BUILD_INFO_REGISTRY: BuildInfoRegistry = BuildInfoJson;
