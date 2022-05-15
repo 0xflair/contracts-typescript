@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.37.0 (2022-05-15)
+
+
+### Features
+
+* add OZ role granter hook ([5b68347](https://github.com/0xflair/typescript-sdk/commit/5b68347dc069f159cbe1f3af6b36b91566dd36a1))
+
+
+
+
+
 ## 0.36.1 (2022-05-14)
 
 
