@@ -15,7 +15,7 @@ export const loadContract = (
     throw new FlairInvalidVersionError(version);
   }
 
-  const contract = CONTRACT_REGISTRY[version][contractFqn as string];
+  const contract = CONTRACT_REGISTRY[version]?.[contractFqn as string];
 
   if (!contract) {
     throw new FlairInvalidArtifactError(contractFqn as string, version);
