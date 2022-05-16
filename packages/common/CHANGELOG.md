@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.41.0 (2022-05-16)
+
+
+### Features
+
+* add flair contract deployer hook ([a4a6c21](https://github.com/0xflair/typescript-sdk/commit/a4a6c21d6f5c88c90d0d770a24125234de6f9d47))
+
+
+
+
+
 # 0.40.0 (2022-05-16)
 
 
