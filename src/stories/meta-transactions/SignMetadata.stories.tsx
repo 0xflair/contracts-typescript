@@ -27,7 +27,7 @@ export default {
 };
 
 type Args = {
-  version: ContractVersion;
+  contractVersion: ContractVersion;
   forwarder: string;
 
   from: string;
@@ -130,7 +130,7 @@ export const Default = (args: Args) => {
 };
 
 Default.args = {
-  version: LATEST_VERSION,
+  contractVersion: LATEST_VERSION,
   forwarder: ZERO_ADDRESS,
 
   from: ZERO_ADDRESS,
@@ -145,7 +145,7 @@ Default.args = {
 } as Args;
 
 Default.argTypes = {
-  version: {
+  contractVersion: {
     control: { type: 'select', options: Object.keys(CONTRACT_REGISTRY) },
   },
   forwarder: {
