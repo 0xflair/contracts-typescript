@@ -1,1 +1,2 @@
-export * from './erc721-full-featured';
+export * from './useERC721FullFeaturedContractInfo';
+export * from './useERC721OneOfOneContractInfo';
