@@ -6,7 +6,7 @@ import {
 import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';
 import { Signer } from 'ethers';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 export type ContractWriteConfig<ArgsType extends any[]> =
@@ -28,7 +28,10 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   args,
   ...restOfConfig
 }: ContractWriteConfig<ArgsType>) => {
-  const contract = loadContract(contractFqn, contractVersion);
+  const contract = useMemo(
+    () => loadContract(contractFqn, contractVersion),
+    [contractFqn, contractVersion]
+  );
 
   const {
     data: responseData,

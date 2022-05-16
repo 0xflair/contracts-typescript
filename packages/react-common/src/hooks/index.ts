@@ -4,6 +4,7 @@ export * from './useChainId';
 export * from './useAddressOfSigner';
 export * from './useContractDeployer';
 export * from './useContractWriteAndWait';
+export * from './useFlairContractDeployer';
 export * from './useContractRead';
 
 // web2

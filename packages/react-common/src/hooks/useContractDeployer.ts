@@ -1,7 +1,6 @@
 import { Contract, ContractFactory, ContractInterface, Signer } from 'ethers';
 import * as React from 'react';
 import { useMemo } from 'react';
-import { useWaitForTransaction } from 'wagmi';
 
 import { useCancel } from './useCancel';
 
@@ -37,10 +36,14 @@ export const useContractDeployer = <ArgsType extends any[]>({
   contractInterface,
   contractByteCode,
   signer,
-}: ContractDeployerConfig) => {
+}: Partial<ContractDeployerConfig>) => {
   const [state, setState] = React.useState<State>(initialState);
 
   const contractFactory = useMemo(() => {
+    if (!contractInterface || !contractByteCode) {
+      return null;
+    }
+
     return newContractFactory<ContractFactory>({
       contractInterface,
       contractByteCode,
@@ -51,6 +54,11 @@ export const useContractDeployer = <ArgsType extends any[]>({
   const cancelQuery = useCancel();
   const deployContract = React.useCallback(
     async (...args: ArgsType) => {
+      if (!contractFactory) {
+        console.warn(`Contract factory is not defined yet`);
+        return;
+      }
+
       let didCancel = false;
       cancelQuery(() => {
         didCancel = true;

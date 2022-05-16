@@ -98,7 +98,7 @@ export const Default = (args: Args) => {
     try {
       return loadContract(
         'common/meta-transactions/UnorderedForwarder',
-        args.version
+        args.contractVersion
       );
     } catch (e) {
       return null;

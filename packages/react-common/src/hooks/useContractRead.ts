@@ -6,6 +6,7 @@ import {
 } from '@0xflair/contracts-registry';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
+import { useMemo } from 'react';
 import { useContractRead as useContractReadWagmi } from 'wagmi';
 import { UseContractReadConfig } from 'wagmi/dist/declarations/src/hooks/contracts/useContractRead';
 
@@ -37,7 +38,10 @@ export const useContractRead = <
   cacheOnBlock,
   ...restOfConfig
 }: ReadContractConfig<ArgsType>) => {
-  const contract = loadContract(contractFqn, contractVersion);
+  const contract = useMemo(
+    () => loadContract(contractFqn, contractVersion),
+    [contractFqn, contractVersion]
+  );
   const readyToRead = Boolean(
     enabled && contractAddress && contractAddress !== ZERO_ADDRESS
   );
