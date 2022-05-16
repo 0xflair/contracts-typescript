@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.42.0 (2022-05-16)
+
+
+### Features
+
+* add contract info hooks and bump up the contracts registry ([a718bed](https://github.com/0xflair/typescript-sdk/commit/a718bed460efe531fd6cb12704e17235a3409efb))
+
+
+
+
+
 # 0.41.0 (2022-05-16)
 
 
