@@ -1,8 +1,4 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-
-export enum NftCollectionPreset {
-  ERC721FullFeaturedCollection = 'ERC721FullFeaturedCollection',
-}
+import { ContractFqn, ContractVersion } from '@0xflair/contracts-registry';
 
 export type NftCollection<
   TConfig extends Record<string, any> = Record<string, any>
@@ -12,7 +8,7 @@ export type NftCollection<
   contractAddress: string;
   deployerAddress: string;
   deployTransaction: string;
-  presetName: string;
+  presetFqn: ContractFqn;
   presetVersion: ContractVersion;
   config?: TConfig;
 };
