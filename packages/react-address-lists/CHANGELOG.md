@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.40.0 (2022-05-16)
+
+
+### Features
+
+* use contract fqn for preset names in the contracts ([e94d85c](https://github.com/0xflair/typescript-sdk/commit/e94d85c0ae23d5a2bce9b6b4b1cede4c67a19e35))
+
+
+
+
+
 ## 0.39.5 (2022-05-16)
 
 
