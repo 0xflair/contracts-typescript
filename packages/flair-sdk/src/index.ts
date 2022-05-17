@@ -5,6 +5,7 @@ export * from '@0xflair/meta-transactions';
 export * from '@0xflair/react-address-lists';
 export * from '@0xflair/react-coingecko';
 export * from '@0xflair/react-common';
+export * from '@0xflair/react-contract-verification';
 export * from '@0xflair/react-icons';
 export * from '@0xflair/react-ipfs';
 export * from '@0xflair/react-meta-transactions';

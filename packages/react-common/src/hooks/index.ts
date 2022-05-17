@@ -6,6 +6,7 @@ export * from './useContractDeployer';
 export * from './useContractWriteAndWait';
 export * from './useFlairContractDeployer';
 export * from './useContractRead';
+export * from './useExtensionChecker';
 
 // web2
 export * from './useAxiosGet';
