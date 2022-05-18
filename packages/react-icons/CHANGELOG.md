@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.43.0 (2022-05-18)
+
+
+### Features
+
+* export interface ID on the extension checker hook ([1cab376](https://github.com/0xflair/typescript-sdk/commit/1cab37664fabe035c0792e70423e08ae3026263b))
+
+
+
+
+
 ## 0.42.2 (2022-05-18)
 
 
