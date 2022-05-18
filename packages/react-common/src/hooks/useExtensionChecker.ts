@@ -39,15 +39,19 @@ export const useExtensionChecker = ({
     }
   }, [extensionFqn, contractVersion]);
 
-  return useContractRead<boolean>({
+  const result = useContractRead<boolean>({
     contractVersion,
     contractFqn: 'openzeppelin/utils/introspection/ERC165',
     functionName: 'supportsInterface',
     args: [interfaceId],
     contractAddress,
     signerOrProvider,
-    enabled: true, // Boolean(interfaceId && contractAddress),
-    watch: true,
+    enabled: Boolean(interfaceId && contractAddress),
     ...restOfConfig,
   });
+
+  return {
+    ...result,
+    interfaceId,
+  } as const;
 };
