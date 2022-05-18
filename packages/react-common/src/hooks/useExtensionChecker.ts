@@ -29,10 +29,14 @@ export const useExtensionChecker = ({
       return null;
     }
 
-    const definition = loadContract(extensionFqn, contractVersion);
-    const iface = new ethers.utils.Interface(definition.artifact.abi);
+    try {
+      const definition = loadContract(extensionFqn, contractVersion);
+      const iface = new ethers.utils.Interface(definition.artifact.abi);
 
-    return getInterfaceId(iface);
+      return getInterfaceId(iface);
+    } catch (e) {
+      return null;
+    }
   }, [extensionFqn, contractVersion]);
 
   return useContractRead<boolean>({
@@ -42,6 +46,8 @@ export const useExtensionChecker = ({
     args: [interfaceId],
     contractAddress,
     signerOrProvider,
+    enabled: true, // Boolean(interfaceId && contractAddress),
+    watch: true,
     ...restOfConfig,
   });
 };
