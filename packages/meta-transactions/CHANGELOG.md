@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.44.0 (2022-05-19)
+
+
+### Features
+
+* use flair ipfs dedicated gateway ([1c1ffe3](https://github.com/0xflair/typescript-sdk/commit/1c1ffe3bd46f5deaa39e8c298675e84fe19fb573))
+
+
+
+
+
 # 0.43.0 (2022-05-18)
 
 
