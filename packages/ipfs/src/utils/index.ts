@@ -1,2 +1,2 @@
 export const normalizeIpfsUrl = (uri?: string) =>
-  uri?.replace(/^ipfs:\/\//i, 'https://cloudflare-ipfs.com/ipfs/');
+  uri?.replace(/^ipfs:\/\//i, 'https://ipfs.flair.finance/ipfs/');
