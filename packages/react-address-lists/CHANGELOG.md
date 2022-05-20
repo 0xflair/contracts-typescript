@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.45.0 (2022-05-20)
+
+
+### Features
+
+* allow choosing which access mode for 1-of-1 minter ([594bd16](https://github.com/0xflair/typescript-sdk/commit/594bd1671e88e6c741b8a9a4b95ffd321a001d4f))
+
+
+
+
+
 ## 0.44.1 (2022-05-20)
 
 
