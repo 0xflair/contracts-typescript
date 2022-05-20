@@ -10,6 +10,7 @@ type Config = {
   toAddress?: BytesLike;
   mintCount?: BigNumberish;
   tokenURIs?: BytesLike[];
+  access?: 'ByRole' | 'ByOwner';
 };
 
 type ArgsType = [
@@ -25,13 +26,17 @@ export const useOneOfOneMinter = ({
   toAddress,
   mintCount,
   tokenURIs,
+  access = 'ByOwner',
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
     contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721OneOfOneMintExtension',
     contractAddress,
     signerOrProvider,
-    functionName: 'mintWithTokenURIsByOwner',
+    functionName:
+      access === 'ByRole'
+        ? 'mintWithTokenURIsByRole'
+        : 'mintWithTokenURIsByOwner',
     args: [toAddress, mintCount, tokenURIs] as ArgsType,
   });
 };
