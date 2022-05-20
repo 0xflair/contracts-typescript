@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.44.1 (2022-05-20)
+
+
+### Bug Fixes
+
+* bump up evm contracts version ([5e1d41a](https://github.com/0xflair/typescript-sdk/commit/5e1d41a42e266b8c95f151e32a0a13641fc4e0f2))
+
+
+
+
+
 # 0.44.0 (2022-05-19)
 
 
