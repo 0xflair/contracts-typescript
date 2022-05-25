@@ -38,9 +38,8 @@ This repository is equipped with [Storybook](https://storybook.js.org/) for ease
    npm install
    ```
 
-3. Start the Storybook for any package:
+3. Start the Storybook:
 
    ```sh
-   cd packages/react-wallet
    npm start
    ```

@@ -16,6 +16,7 @@ type Props = {
 export const NetworkSelector = (props: Props) => {
   const { chains } = props;
   const { activeChain, switchNetwork } = useNetwork();
+  const data = useNetwork();
 
   const availableChains = chains || FLAIR_CHAINS;
   const selected = availableChains.find((c) => c.id === activeChain?.id);

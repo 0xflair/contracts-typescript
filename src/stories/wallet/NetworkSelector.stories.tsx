@@ -1,48 +1,41 @@
 import {
   ConnectButton,
-  ConnectButtonProps,
-  LoginProvider,
-  LogoutButton,
+  NetworkSelector,
   WalletProvider,
 } from '@0xflair/react-wallet';
-import { useAccount, useBalance, useNetwork, useSigner } from 'wagmi';
+import React from 'react';
+import { useAccount, useBalance, useNetwork } from 'wagmi';
 
 export default {
-  title: 'ConnectButton Component',
+  title: 'NetworkSelector Component',
   decorators: [
     (Story: any) => (
       <WalletProvider>
-        <LoginProvider>
-          <Story />
-        </LoginProvider>
+        <Story />
       </WalletProvider>
     ),
   ],
 };
 
-export const Default = (args: ConnectButtonProps) => {
+export const Default = () => {
+  const { activeChain, error, isLoading } = useNetwork();
   const account = useAccount();
   const balance = useBalance({
     addressOrName: account.data?.address,
     enabled: true,
   });
   const network = useNetwork();
-  const { data: signer } = useSigner();
 
   return (
-    <div className="bg-gray-100 p-8">
-      <ConnectButton {...args}>
-        Yay! Connected {signer?.signMessage.toString()}!
-        <LogoutButton />
-      </ConnectButton>
-      <ul className="mt-5">
-        {account?.data ? (
-          <li>
-            <div>{account?.data?.address}</div>
-          </li>
-        ) : (
-          ''
-        )}
+    <>
+      <ul className="grid gap-4">
+        <li>
+          <ConnectButton />
+        </li>
+        <li>
+          Connected to {(activeChain?.name ?? activeChain?.id) || '...'} /
+          error={error} / loading={isLoading}
+        </li>
         <li>
           Account: error={account.error} loading=
           {account.isLoading}
@@ -57,11 +50,10 @@ export const Default = (args: ConnectButtonProps) => {
           loading=
           {network.isLoading}
         </li>
+        <li>
+          <NetworkSelector />
+        </li>
       </ul>
-    </div>
+    </>
   );
 };
-
-Default.args = {
-  label: 'Connect me',
-} as ConnectButtonProps;

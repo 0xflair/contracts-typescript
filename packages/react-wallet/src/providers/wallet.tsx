@@ -1,4 +1,3 @@
-import { MagicConnector } from '@everipedia/wagmi-magic-connector';
 import { providers } from 'ethers';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { createClient, Provider } from 'wagmi';
@@ -6,6 +5,7 @@ import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
+import { MagicLinkConnector } from '../connectors/magic-link';
 import {
   FLAIR_CHAINS,
   FLAIR_DEFAULT_CHAIN,
@@ -56,12 +56,25 @@ export const WalletProvider = ({
         FLAIR_DEFAULT_CHAIN.rpcUrls.default;
 
       return [
-        new MagicConnector({
+        // new MagicConnector({
+        //   chains: FLAIR_CHAINS,
+        //   options: {
+        //     apiKey: FLAIR_MAGIC_API_KEY,
+        //     oauthOptions: {
+        //       providers: ['google', 'twitter', 'github'],
+        //     },
+        //     customHeaderText: appName,
+        //     additionalMagicOptions: {},
+        //   },
+        // }),
+        new MagicLinkConnector({
+          chains: FLAIR_CHAINS,
           options: {
             apiKey: FLAIR_MAGIC_API_KEY,
             oauthOptions: {
               providers: ['google', 'twitter', 'github'],
             },
+            customHeaderText: appName,
           },
         }),
         new InjectedConnector({
