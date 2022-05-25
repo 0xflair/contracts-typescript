@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.46.0 (2022-05-25)
+
+
+### Features
+
+* add magic link integration out-of-box ([52c2c90](https://github.com/0xflair/typescript-sdk/commit/52c2c90fe6d2115ce38d1332e1318a6cf7efacc6))
+
+
+
+
+
 # 0.45.0 (2022-05-20)
 
 
