@@ -1,29 +1,30 @@
-import { useAccount, useNetwork, useSigner } from 'wagmi';
-
-import { WalletProvider } from '../../providers/wallet';
-import { ConnectButton, ConnectButtonProps } from './ConnectButton';
+import {
+  LoginProvider,
+  LogoutButton,
+  WalletProvider,
+} from '@0xflair/react-wallet';
+import { useAccount, useNetwork } from 'wagmi';
 
 export default {
-  title: 'ConnectButton Component',
+  title: 'LogoutButton Component',
   decorators: [
     (Story: any) => (
       <WalletProvider>
-        <Story />
+        <LoginProvider>
+          <Story />
+        </LoginProvider>
       </WalletProvider>
     ),
   ],
 };
 
-export const Default = (args: ConnectButtonProps) => {
+export const Default = () => {
   const account = useAccount();
   const network = useNetwork();
-  const { data: signer } = useSigner();
 
   return (
     <div className="bg-gray-100 p-8">
-      <ConnectButton {...args}>
-        Yay! Connected {signer?.signMessage.toString()}!
-      </ConnectButton>
+      <LogoutButton />
       <ul className="mt-5">
         {account?.data ? (
           <li>
@@ -48,4 +49,4 @@ export const Default = (args: ConnectButtonProps) => {
 
 Default.args = {
   label: 'Connect me',
-} as ConnectButtonProps;
+};

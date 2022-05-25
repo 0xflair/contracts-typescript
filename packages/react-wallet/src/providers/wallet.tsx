@@ -1,3 +1,4 @@
+import { MagicConnector } from '@everipedia/wagmi-magic-connector';
 import { providers } from 'ethers';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { createClient, Provider } from 'wagmi';
@@ -17,6 +18,8 @@ type Props = {
   infuraId?: string;
   wagmiOverrides?: Record<string, any>;
 };
+
+const FLAIR_MAGIC_API_KEY = 'pk_live_8B82089A89462668';
 
 export const WalletProvider = ({
   children,
@@ -53,6 +56,14 @@ export const WalletProvider = ({
         FLAIR_DEFAULT_CHAIN.rpcUrls.default;
 
       return [
+        new MagicConnector({
+          options: {
+            apiKey: FLAIR_MAGIC_API_KEY,
+            oauthOptions: {
+              providers: ['google', 'twitter', 'github'],
+            },
+          },
+        }),
         new InjectedConnector({
           chains: FLAIR_CHAINS,
           options: { shimDisconnect: true },

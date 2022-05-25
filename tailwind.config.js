@@ -5,6 +5,7 @@ module.exports = {
     './packages/*/src/**/*.{js,jsx,ts,tsx,vue}',
   ],
   content: [
+    './public/**/*.html',
     './stories/**/*.{js,jsx,ts,tsx,vue}',
     './packages/*/src/**/*.{js,jsx,ts,tsx,vue}',
   ],

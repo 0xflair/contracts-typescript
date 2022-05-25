@@ -1,11 +1,12 @@
 import {
+  MagicLinkIcon,
   MetaMaskIcon,
   WalletConnectIcon,
   WalletLinkIcon,
 } from '@0xflair/react-icons';
 import { Dialog, Transition } from '@headlessui/react';
 import { LinkIcon } from '@heroicons/react/solid';
-// import MetaMaskOnboarding from '@metamask/onboarding';
+import MetaMaskOnboarding from '@metamask/onboarding';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useConnect } from 'wagmi';
 
@@ -21,9 +22,10 @@ export const ConnectButton = (props: ConnectButtonProps) => {
   const { error, isConnecting, isConnected, connectors, connect } =
     useConnect();
 
-  const connectorMetamask = connectors[0];
-  const connectorWalletConnect = connectors[1];
-  const connectorCoinbaseWallet = connectors[2];
+  const connectorMagic = connectors[0];
+  const connectorMetamask = connectors[1];
+  const connectorWalletConnect = connectors[2];
+  const connectorCoinbaseWallet = connectors[3];
 
   useEffect(() => {
     let didCancel = false;
@@ -93,7 +95,7 @@ export const ConnectButton = (props: ConnectButtonProps) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+              <div className="align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 inline-flex flex-col gap-4">
                 <div>
                   <div
                     className={`mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100`}
@@ -108,101 +110,87 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                       as="h3"
                       className="text-lg leading-6 font-medium text-gray-900"
                     >
-                      Connect your wallet
+                      Connect or create your wallet
                     </Dialog.Title>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        You need to either install{' '}
-                        <a
-                          target={'_blank'}
-                          href={'https://metamask.io/'}
-                          className={'text-indigo-600'}
-                          rel="noreferrer"
-                        >
-                          MetaMask extension
-                        </a>{' '}
-                        on your browser or use{' '}
-                        <a
-                          target={'_blank'}
-                          href={'https://walletconnect.org/'}
-                          className={'text-indigo-600'}
-                          rel="noreferrer"
-                        >
-                          WalletConnect
-                        </a>{' '}
-                        on your mobile.
-                      </p>
-                    </div>
                   </div>
                 </div>
 
-                <>
-                  <div className="mt-5 sm:mt-6">
-                    {true /* MetaMaskOnboarding.isMetaMaskInstalled() */ ? (
-                      <button
-                        type="button"
-                        className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                        onClick={() => connect(connectorMetamask)}
-                      >
-                        <MetaMaskIcon className="-ml-0.5 mr-2 h-12 w-12" />
-                        {/* <img
-                          className="-ml-0.5 mr-2 h-12 w-12"
-                          // src={metamaskImage}
-                          aria-hidden="true"
-                          alt={"MetaMask"}
-                        /> */}
-                        MetaMask
-                      </button>
-                    ) : (
-                      <a
-                        href={`https://metamask.app.link/dapp/${window.location.href}`}
-                        type="button"
-                        className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <MetaMaskIcon className="-ml-0.5 mr-2 h-12 w-12" />
-                        {/* <img
-                          className="-ml-0.5 mr-2 h-12 w-12"
-                          // src={MetamaskImage}
-                          aria-hidden="true"
-                          alt={"MetaMask"}
-                        /> */}
-                        MetaMask (mobile)
-                      </a>
-                    )}
+                <div className="inline-flex flex-col gap-4">
+                  <button
+                    type="button"
+                    className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={() => connect(connectorMagic)}
+                  >
+                    <MagicLinkIcon className="-ml-0.5 mr-2 h-12 w-12" />
+                    <span className="text-left">
+                      Create a Wallet
+                      <br />
+                      <span className="opacity-60">
+                        via Email, Github, Google, etc.
+                      </span>
+                    </span>
+                  </button>
+                  <div className="relative">
+                    <div
+                      className="absolute inset-0 flex items-center"
+                      aria-hidden="true"
+                    >
+                      <div className="w-full border-t border-gray-300" />
+                    </div>
+                    <div className="relative flex justify-center">
+                      <span className="px-2 bg-white text-sm text-gray-500">
+                        OR
+                      </span>
+                    </div>
                   </div>
-                  <div className="mt-5 sm:mt-6">
+                  {MetaMaskOnboarding.isMetaMaskInstalled() ? (
                     <button
                       type="button"
-                      className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onClick={() => connect(connectorWalletConnect)}
+                      className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                      onClick={() => connect(connectorMetamask)}
                     >
-                      <WalletConnectIcon className="-ml-0.5 mr-2 h-12 w-12" />
-                      {/* <img
+                      <MetaMaskIcon className="-ml-0.5 mr-2 h-12 w-12" />
+                      MetaMask
+                    </button>
+                  ) : (
+                    <a
+                      href={`https://metamask.app.link/dapp/${window.location.href}`}
+                      type="button"
+                      className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <MetaMaskIcon className="-ml-0.5 mr-2 h-12 w-12" />
+                      MetaMask (mobile)
+                    </a>
+                  )}
+                  <button
+                    type="button"
+                    className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={() => connect(connectorWalletConnect)}
+                  >
+                    <WalletConnectIcon className="-ml-0.5 mr-2 h-12 w-12" />
+                    {/* <img
                         className="-ml-0.5 mr-2 h-12 w-12"
                         // src={WalletConnectImage}
                         aria-hidden="true"
                         alt={"WalletConnect"}
                       /> */}
-                      WalletConnect
-                    </button>
-                  </div>
-                  <div className="mt-5 sm:mt-6">
-                    <button
-                      type="button"
-                      className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onClick={() => connect(connectorCoinbaseWallet)}
-                    >
-                      <WalletLinkIcon className="-ml-0.5 mr-2 h-12 w-12" />
-                      {/* <img
+                    WalletConnect
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={() => connect(connectorCoinbaseWallet)}
+                  >
+                    <WalletLinkIcon className="-ml-0.5 mr-2 h-12 w-12" />
+                    {/* <img
                         className="-ml-0.5 mr-2 h-12 w-12"
                         // src={WalletLinkImage}
                         aria-hidden="true"
                         alt={"CoinBase Wallet"}
                       /> */}
-                      Coinbase Wallet
-                    </button>
-                  </div>
-                </>
+                    Coinbase Wallet
+                  </button>
+                </div>
               </div>
             </Transition.Child>
           </div>

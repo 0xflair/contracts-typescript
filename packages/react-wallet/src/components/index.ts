@@ -4,3 +4,4 @@ export * from './RequireConnect/RequireConnect';
 export * from './RequireLogin/RequireLogin';
 export * from './RequireChain/RequireChain';
 export * from './LoginButton/LoginButton';
+export * from './LogoutButton';

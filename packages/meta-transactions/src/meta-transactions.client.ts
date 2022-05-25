@@ -1,8 +1,8 @@
 import { Environment } from '@0xflair/common';
 import {
+  ContractVersion,
   LATEST_VERSION,
   loadContract,
-  ContractVersion,
 } from '@0xflair/contracts-registry';
 import axios from 'axios';
 import { Signer } from 'ethers';
