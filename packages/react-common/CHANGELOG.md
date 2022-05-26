@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.48.2 (2022-05-26)
+
+
+### Bug Fixes
+
+* use polygon as default network ([e95eb4b](https://github.com/0xflair/typescript-sdk/commit/e95eb4b4a7aea9548272b8105cf65bd27862cd23))
+
+
+
+
+
 ## 0.48.1 (2022-05-26)
 
 
