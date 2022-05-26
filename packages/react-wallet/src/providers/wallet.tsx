@@ -1,3 +1,4 @@
+import { CoinGeckoProvider } from '@0xflair/react-coingecko';
 import { providers } from 'ethers';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { createClient, Provider } from 'wagmi';

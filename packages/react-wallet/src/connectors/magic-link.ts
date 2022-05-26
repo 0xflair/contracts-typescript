@@ -1,10 +1,5 @@
 import { MagicConnector } from '@everipedia/wagmi-magic-connector';
-import {
-  Chain,
-  Connector,
-  normalizeChainId,
-  UserRejectedRequestError,
-} from '@wagmi/core';
+import { Chain, UserRejectedRequestError } from '@wagmi/core';
 import { allChains } from 'wagmi';
 
 export class MagicLinkConnector extends MagicConnector {

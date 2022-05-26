@@ -12,7 +12,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
   {
     symbol: 'MATIC',
     name: 'Matic',
-    icon: '$MATIC',
+    icon: 'MATIC',
     coinGeckoId: 'matic-network',
   },
 ];

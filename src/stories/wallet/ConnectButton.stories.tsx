@@ -1,8 +1,8 @@
 import {
   ConnectButton,
   ConnectButtonProps,
+  DisconnectButton,
   LoginProvider,
-  LogoutButton,
   WalletProvider,
 } from '@0xflair/react-wallet';
 import { useAccount, useBalance, useNetwork, useSigner } from 'wagmi';
@@ -32,8 +32,8 @@ export const Default = (args: ConnectButtonProps) => {
   return (
     <div className="bg-gray-100 p-8">
       <ConnectButton {...args}>
-        Yay! Connected {signer?.signMessage.toString()}!
-        <LogoutButton />
+        Yay! Connected!
+        <DisconnectButton />
       </ConnectButton>
       <ul className="mt-5">
         {account?.data ? (

@@ -1,12 +1,12 @@
 module.exports = {
   purge: [
     './public/**/*.html',
-    './stories/**/*.{js,jsx,ts,tsx,vue}',
+    './src/stories/**/*.{js,jsx,ts,tsx,vue}',
     './packages/*/src/**/*.{js,jsx,ts,tsx,vue}',
   ],
   content: [
     './public/**/*.html',
-    './stories/**/*.{js,jsx,ts,tsx,vue}',
+    './src/stories/**/*.{js,jsx,ts,tsx,vue}',
     './packages/*/src/**/*.{js,jsx,ts,tsx,vue}',
   ],
   theme: {

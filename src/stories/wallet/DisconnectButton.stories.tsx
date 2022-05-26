@@ -1,12 +1,12 @@
 import {
+  DisconnectButton,
   LoginProvider,
-  LogoutButton,
   WalletProvider,
 } from '@0xflair/react-wallet';
 import { useAccount, useNetwork } from 'wagmi';
 
 export default {
-  title: 'LogoutButton Component',
+  title: 'DisconnectButton Component',
   decorators: [
     (Story: any) => (
       <WalletProvider>
@@ -24,7 +24,7 @@ export const Default = () => {
 
   return (
     <div className="bg-gray-100 p-8">
-      <LogoutButton />
+      <DisconnectButton />
       <ul className="mt-5">
         {account?.data ? (
           <li>

@@ -110,7 +110,7 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                       as="h3"
                       className="text-lg leading-6 font-medium text-gray-900"
                     >
-                      Connect or create your wallet
+                      Connect your wallet
                     </Dialog.Title>
                   </div>
                 </div>
@@ -123,7 +123,7 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                   >
                     <MagicLinkIcon className="-ml-0.5 mr-2 h-12 w-12" />
                     <span className="text-left">
-                      Create a Wallet
+                      Quick wallet
                       <br />
                       <span className="opacity-60">
                         via Email, Github, Google, etc.
@@ -154,12 +154,13 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                     </button>
                   ) : (
                     <a
+                      target={'_blank'}
                       href={`https://metamask.app.link/dapp/${window.location.href}`}
                       type="button"
                       className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <MetaMaskIcon className="-ml-0.5 mr-2 h-12 w-12" />
-                      MetaMask (mobile)
+                      MetaMask
                     </a>
                   )}
                   <button
@@ -168,12 +169,6 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                     onClick={() => connect(connectorWalletConnect)}
                   >
                     <WalletConnectIcon className="-ml-0.5 mr-2 h-12 w-12" />
-                    {/* <img
-                        className="-ml-0.5 mr-2 h-12 w-12"
-                        // src={WalletConnectImage}
-                        aria-hidden="true"
-                        alt={"WalletConnect"}
-                      /> */}
                     WalletConnect
                   </button>
                   <button
@@ -182,12 +177,6 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                     onClick={() => connect(connectorCoinbaseWallet)}
                   >
                     <WalletLinkIcon className="-ml-0.5 mr-2 h-12 w-12" />
-                    {/* <img
-                        className="-ml-0.5 mr-2 h-12 w-12"
-                        // src={WalletLinkImage}
-                        aria-hidden="true"
-                        alt={"CoinBase Wallet"}
-                      /> */}
                     Coinbase Wallet
                   </button>
                 </div>
