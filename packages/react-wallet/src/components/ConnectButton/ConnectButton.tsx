@@ -126,7 +126,7 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                       Quick wallet
                       <br />
                       <span className="opacity-60">
-                        via Email, Github, Google, etc.
+                        via Email, Github, Google, Twitter.
                       </span>
                     </span>
                   </button>

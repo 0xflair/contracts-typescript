@@ -10,7 +10,11 @@ export class MagicLinkConnector extends MagicConnector {
   }
 
   async connect() {
-    const defaultChainId = 137;
+    if (!this.currentChain) {
+      const defaultChainId = 137;
+
+      this.updateMagicOptionsForChain(defaultChainId);
+    }
 
     try {
       const provider = await this.getProvider();
@@ -29,7 +33,7 @@ export class MagicLinkConnector extends MagicConnector {
         return {
           provider,
           chain: {
-            id: (await this.switchChain(defaultChainId)).id,
+            id: this.currentChain.id,
             unsupported: false,
           },
           account: await this.getAccount(),
@@ -62,7 +66,7 @@ export class MagicLinkConnector extends MagicConnector {
         return {
           account,
           chain: {
-            id: (await this.switchChain(defaultChainId)).id,
+            id: this.currentChain.id,
             unsupported: false,
           },
           provider,
@@ -74,7 +78,7 @@ export class MagicLinkConnector extends MagicConnector {
     }
   }
 
-  async switchChain(chainId: number): Promise<Chain> {
+  private updateMagicOptionsForChain(chainId: number): Chain {
     const chains = [...this.chains, ...allChains];
     const selectedChain = chains.find((x) => x.id === chainId) ?? {
       id: chainId,
@@ -86,15 +90,26 @@ export class MagicLinkConnector extends MagicConnector {
       ...(this.magicOptions || {}),
       additionalMagicOptions: {
         ...(this.magicOptions.additionalMagicOptions || {}),
-        network: {
-          chainId: selectedChain.id,
-          rpcUrl: selectedChain.rpcUrls.default,
-        },
+        network: selectedChain?.rpcUrls?.default
+          ? {
+              chainId: selectedChain.id,
+              rpcUrl: selectedChain.rpcUrls.default,
+            }
+          : 'rinkeby',
       },
     };
 
+    this.currentChain = selectedChain;
+
+    return selectedChain;
+  }
+
+  async switchChain(chainId: number): Promise<Chain> {
+    const selectedChain = this.updateMagicOptionsForChain(chainId);
+
     this.provider = null;
-    this.magicSDK = this.getMagicSDK();
+    // @ts-ignore
+    this.magicSDK = null;
 
     const provider = await this.getProvider();
 
@@ -104,9 +119,11 @@ export class MagicLinkConnector extends MagicConnector {
       provider.on('disconnect', this.onDisconnect);
     }
 
+    this.magicSDK = this.getMagicSDK();
+
     this.onChainChanged(selectedChain.id);
 
-    return (this.currentChain = selectedChain);
+    return selectedChain;
   }
 
   async getChainId(): Promise<number> {
