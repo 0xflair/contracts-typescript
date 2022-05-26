@@ -62,7 +62,7 @@ export const WalletDropdown = ({
   return (
     <Menu as="div" className="relative inline-block">
       <div>
-        <Menu.Button className="max-w-xs bg-white rounded-full flex gap-2 items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 lg:p-2 lg:rounded-md lg:hover:bg-gray-50">
+        <Menu.Button className="max-w-xs bg-white rounded-full flex gap-2 items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 p-2 lg:rounded-md lg:hover:bg-gray-50">
           {avatar?.toString() ? (
             <img
               className="h-8 w-8 rounded-full"
@@ -77,11 +77,6 @@ export const WalletDropdown = ({
               className={'rounded-full'}
             />
           )}{' '}
-          {balance?.value ? (
-            <span className="text-gray-500 truncate">
-              {Number(balance.formatted).toFixed(4)} {balance.symbol}
-            </span>
-          ) : null}
           <span className="hidden text-gray-700 text-sm font-medium lg:block">
             <span className="sr-only">Open wallet menu</span>
             {ens?.toString() ||
@@ -89,8 +84,13 @@ export const WalletDropdown = ({
                 '...' +
                 account?.address?.slice(-3)}
           </span>
+          {balance?.value ? (
+            <span className="text-gray-500 truncate">
+              {Number(balance.formatted).toFixed(4)} {balance.symbol}
+            </span>
+          ) : null}
           <ChevronDownIcon
-            className="hidden flex-shrink-0 h-5 w-5 text-gray-400 lg:block"
+            className="flex-shrink-0 h-5 w-5 text-gray-400 block"
             aria-hidden="true"
           />
         </Menu.Button>
