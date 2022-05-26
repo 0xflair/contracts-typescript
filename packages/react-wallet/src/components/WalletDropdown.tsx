@@ -89,7 +89,7 @@ export const WalletDropdown = ({
                 account?.address?.slice(-4)}
           </span>
           <ChevronDownIcon
-            className="hidden flex-shrink-0 ml-1 h-5 w-5 text-gray-400 lg:block"
+            className="hidden flex-shrink-0 h-5 w-5 text-gray-400 lg:block"
             aria-hidden="true"
           />
         </Menu.Button>

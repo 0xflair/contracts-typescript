@@ -10,7 +10,7 @@ export class MagicLinkConnector extends MagicConnector {
   }
 
   async connect() {
-    const defaultChainId = 1;
+    const defaultChainId = 137;
 
     try {
       const provider = await this.getProvider();
