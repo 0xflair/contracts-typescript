@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.47.0 (2022-05-26)
+
+
+### Features
+
+* allow switching chains for magic link wallets ([7b9a525](https://github.com/0xflair/typescript-sdk/commit/7b9a52542a78c742523a148c9a4971f13b7f56ca))
+
+
+
+
+
 # 0.46.0 (2022-05-25)
 
 
