@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.48.3 (2022-05-26)
+
+
+### Bug Fixes
+
+* properly switch network for magic wallets ([c1eb18b](https://github.com/0xflair/typescript-sdk/commit/c1eb18ba6502562c16af0e7673c1448a6f2d8e9a))
+
+
+
+
+
 ## 0.48.2 (2022-05-26)
 
 
