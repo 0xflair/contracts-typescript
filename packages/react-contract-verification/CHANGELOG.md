@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.48.4 (2022-05-26)
+
+
+### Bug Fixes
+
+* wallet dropdown on mobile ([53d9633](https://github.com/0xflair/typescript-sdk/commit/53d9633d0deaff96e27e8b458634e34a8d80eb9b))
+
+
+
+
+
 ## 0.48.3 (2022-05-26)
 
 
