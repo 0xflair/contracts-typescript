@@ -12,8 +12,7 @@ export class MagicLinkConnector extends MagicConnector {
   async connect() {
     if (!this.currentChain) {
       const defaultChainId = 137;
-
-      this.updateMagicOptionsForChain(defaultChainId);
+      this.switchChain(defaultChainId);
     }
 
     try {

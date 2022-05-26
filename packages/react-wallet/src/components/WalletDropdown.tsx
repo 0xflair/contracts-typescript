@@ -40,6 +40,7 @@ export const WalletDropdown = ({
   } = useBalance({
     addressOrName: account?.address,
     formatUnits: 'ether',
+    watch: true,
   });
   const {
     data: avatar,
@@ -84,9 +85,9 @@ export const WalletDropdown = ({
           <span className="hidden text-gray-700 text-sm font-medium lg:block">
             <span className="sr-only">Open wallet menu</span>
             {ens?.toString() ||
-              account?.address?.slice(0, 6) +
+              account?.address?.slice(0, 4) +
                 '...' +
-                account?.address?.slice(-4)}
+                account?.address?.slice(-3)}
           </span>
           <ChevronDownIcon
             className="hidden flex-shrink-0 h-5 w-5 text-gray-400 lg:block"
