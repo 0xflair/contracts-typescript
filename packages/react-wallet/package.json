@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-wallet",
-  "version": "0.48.5",
+  "version": "0.49.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -57,20 +57,20 @@
     "@types/react-blockies": "^1.4.1"
   },
   "dependencies": {
-    "@0xflair/react-coingecko": "^0.48.5",
-    "@0xflair/react-common": "^0.48.5",
-    "@0xflair/react-icons": "^0.48.5",
-    "@0xflair/react-ui": "^0.48.5",
+    "@0xflair/react-coingecko": "^0.49.0",
+    "@0xflair/react-common": "^0.49.0",
+    "@0xflair/react-icons": "^0.49.0",
+    "@0xflair/react-ui": "^0.49.0",
     "@everipedia/wagmi-magic-connector": "^0.3.9",
     "@headlessui/react": "^1.6.0",
     "@heroicons/react": "^1.0.6",
     "@metamask/onboarding": "^1.0.1",
+    "@wagmi/core": "^0.2.5",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",
     "jsonwebtoken": "^8.5.1",
     "react-blockies": "^1.4.1",
     "react-use": "^17.3.2",
-    "@wagmi/core": "^0.2.5",
     "wagmi": "^0.3.5"
   }
 }

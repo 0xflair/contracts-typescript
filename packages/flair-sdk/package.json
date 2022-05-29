@@ -1,6 +1,6 @@
 {
   "name": "flair-sdk",
-  "version": "0.48.5",
+  "version": "0.49.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -24,25 +24,25 @@
     "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
-    "@0xflair/common": "^0.48.5",
-    "@0xflair/contracts-registry": "^0.48.5",
-    "@0xflair/ipfs": "^0.48.5",
-    "@0xflair/meta-transactions": "^0.48.5",
-    "@0xflair/react-address-lists": "^0.48.5",
-    "@0xflair/react-coingecko": "^0.48.5",
-    "@0xflair/react-common": "^0.48.5",
-    "@0xflair/react-contract-verification": "^0.48.5",
-    "@0xflair/react-icons": "^0.48.5",
-    "@0xflair/react-ipfs": "^0.48.5",
-    "@0xflair/react-meta-transactions": "^0.48.5",
-    "@0xflair/react-nft-collections": "^0.48.5",
-    "@0xflair/react-openzeppelin": "^0.48.5",
-    "@0xflair/react-ui": "^0.48.5",
-    "@0xflair/react-wallet": "^0.48.5",
+    "@0xflair/common": "^0.49.0",
+    "@0xflair/contracts-registry": "^0.49.0",
+    "@0xflair/ipfs": "^0.49.0",
+    "@0xflair/meta-transactions": "^0.49.0",
+    "@0xflair/react-address-lists": "^0.49.0",
+    "@0xflair/react-coingecko": "^0.49.0",
+    "@0xflair/react-common": "^0.49.0",
+    "@0xflair/react-contract-verification": "^0.49.0",
+    "@0xflair/react-icons": "^0.49.0",
+    "@0xflair/react-ipfs": "^0.49.0",
+    "@0xflair/react-meta-transactions": "^0.49.0",
+    "@0xflair/react-nft-collections": "^0.49.0",
+    "@0xflair/react-openzeppelin": "^0.49.0",
+    "@0xflair/react-ui": "^0.49.0",
+    "@0xflair/react-wallet": "^0.49.0",
     "@headlessui/react": "^1.6.0",
     "@heroicons/react": "^1.0.6",
-    "ethers": "^5.6.5",
     "@wagmi/core": "^0.2.5",
+    "ethers": "^5.6.5",
     "wagmi": "^0.3.5"
   },
   "peerDependencies": {
@@ -62,12 +62,12 @@
     "@heroicons/react": "^1.0.6",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.1",
+    "@wagmi/core": "^0.2.5",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "tailwindcss": "^3.0.24",
-    "@wagmi/core": "^0.2.5",
     "wagmi": "^0.3.5"
   }
 }
