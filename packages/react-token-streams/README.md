@@ -1,6 +1,6 @@
 # Flair SDK: `react-token-streams`
 
-Ready-made React components and hooks for working with Flair's NFT-based streaming pools in a web3 dApp. This SDK also supports interacting with Flair smart contracts and extensions.
+Ready-made React components and hooks for working with Flair's NFT-based token streams in a web3 dApp. This SDK also supports interacting with Flair smart contracts and extensions.
 
 ## Getting Started
 

@@ -1,6 +1,6 @@
 import { classNames } from '@0xflair/react-common';
 import { Switch } from '@headlessui/react';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export type FormSectionProps = {
   title: string;
@@ -23,11 +23,15 @@ export const FormSection = ({
 }: FormSectionProps) => {
   const [internalEnabled, setInternalEnabled] = useState(enabled);
 
-  useEffect(() => {
-    if (onEnabledChange && enabled !== internalEnabled) {
-      onEnabledChange(internalEnabled);
-    }
-  }, [internalEnabled, onEnabledChange, enabled]);
+  const setEnabled = useCallback(
+    (newValue: boolean) => {
+      setInternalEnabled(newValue);
+      if (onEnabledChange) {
+        onEnabledChange(internalEnabled);
+      }
+    },
+    [internalEnabled, onEnabledChange]
+  );
 
   return (
     <div className={classNames('relative mt-10 sm:mt-0', className || '')}>
@@ -37,7 +41,7 @@ export const FormSection = ({
             {toggleable ? (
               <Switch
                 checked={internalEnabled}
-                onChange={setInternalEnabled}
+                onChange={setEnabled}
                 className={classNames(
                   internalEnabled ? 'bg-indigo-600' : 'bg-gray-200',
                   'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
