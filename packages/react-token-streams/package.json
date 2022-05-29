@@ -1,5 +1,5 @@
 {
-  "name": "@0xflair/react-contract-verification",
+  "name": "@0xflair/react-token-streams",
   "version": "0.48.5",
   "private": false,
   "repository": {
@@ -36,20 +36,18 @@
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "@0xflair/common": "0.*",
     "@0xflair/contracts-registry": "0.*",
     "@0xflair/react-common": "0.*",
+    "@0xflair/react-openzeppelin": "0.*",
     "@0xflair/react-wallet": "0.*",
-    "axios": "^0.26.1",
     "ethers": "^5.6.5",
     "wagmi": "^0.3.5"
   },
-  "dependencies": {
-    "@0xflair/common": "^0.48.5",
-    "@0xflair/contracts-registry": "^0.48.5",
-    "@0xflair/react-common": "^0.48.5",
-    "@0xflair/react-wallet": "^0.48.5",
-    "axios": "^0.26.1",
+  "devDependencies": {
+    "@0xflair/contracts-registry": "^0.48.4",
+    "@0xflair/react-common": "^0.48.4",
+    "@0xflair/react-openzeppelin": "^0.48.4",
+    "@0xflair/react-wallet": "^0.48.4",
     "ethers": "^5.6.5",
     "wagmi": "^0.3.5"
   }

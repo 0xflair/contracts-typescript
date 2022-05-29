@@ -1,7 +1,11 @@
 import { Provider } from '@ethersproject/providers';
 import { Contract as EthersContract, Signer } from 'ethers';
 
-import { ContractFqn, LATEST_VERSION, ContractVersion } from './generated-types';
+import {
+  ContractFqn,
+  ContractVersion,
+  LATEST_VERSION,
+} from './generated-types';
 import { loadContract } from './load-contract';
 
 export class FlairContract extends EthersContract {

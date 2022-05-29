@@ -1,6 +1,6 @@
 import { MagicConnector } from '@everipedia/wagmi-magic-connector';
-import { Chain, UserRejectedRequestError } from '@wagmi/core';
-import { allChains } from 'wagmi';
+import { UserRejectedRequestError } from '@wagmi/core';
+import { allChains, Chain } from 'wagmi';
 
 export class MagicLinkConnector extends MagicConnector {
   currentChain!: Chain;
@@ -73,7 +73,7 @@ export class MagicLinkConnector extends MagicConnector {
       }
       throw new UserRejectedRequestError('User rejected request');
     } catch (error) {
-      throw new UserRejectedRequestError();
+      throw new UserRejectedRequestError(error);
     }
   }
 
