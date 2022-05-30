@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.49.4 (2022-05-30)
+
+
+### Bug Fixes
+
+* make config variables publicly readable ([ce09b13](https://github.com/0xflair/typescript-sdk/commit/ce09b1351cb4b6e9b360f11a3ac61937b1db49c5))
+
+
+
+
+
 ## 0.49.3 (2022-05-30)
 
 
