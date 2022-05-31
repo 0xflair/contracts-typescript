@@ -55,15 +55,27 @@ const main = async () => {
     });
 
     for (const file of files) {
-      if (!file.includes('/') || file.startsWith('node_modules')) {
+      if (
+        !file.includes('/') ||
+        file.startsWith('node_modules') ||
+        file === 'package.json'
+      ) {
         continue;
       }
 
-      const artifactKey = file.slice(0, file.lastIndexOf('.'));
-      if (artifactKey === 'package') continue;
-
       const artifactPath = path.resolve(pkg, file);
-      const sourcePath = path.resolve(pkg, artifactKey + '.sol');
+      const { sourceName } = fse.readJsonSync(artifactPath);
+
+      let artifactKey = sourceName
+        .slice(0, sourceName.lastIndexOf('.'))
+        .replace(/^contracts\//i, '')
+        .replace(/^@openzeppelin\/contracts\//i, '');
+
+      if (file.includes('openzeppelin')) {
+        artifactKey = `openzeppelin/${artifactKey}`;
+      }
+
+      const sourcePath = path.resolve(pkg, sourceName);
 
       registry[version][artifactKey] = {
         address:
@@ -140,7 +152,6 @@ ${Object.entries(registry)
 
 export type ContractTypeRegistry = { ${Object.entries(registry)
       .map(([versionTag, artifacts]) => {
-        const safeVersionPrefix = getSafeVersionPrefix(versionTag);
         return `'${versionTag}': { ${Object.keys(artifacts)
           .map(
             (key) =>
@@ -189,17 +200,3 @@ main()
 function getSafeVersionPrefix(versionTag: string) {
   return versionTag.replace(/\./g, '_').toLocaleUpperCase() + '_';
 }
-
-/* 
-
-export type ContractTypeRegistry = {
-  "v1.4": {
-    "collections/ERC721/extensions/ERC721AutoIdMinterExtension": ERC721AutoIdMinterExtension["functions"];
-    "collections/ERC721/extensions/ERC721PrefixedMetadataExtension": ERC721PrefixedMetadataExtension["functions"];
-  };
-  "v1.3": {
-    "collections/ERC721/extensions/ERC721AutoIdMinterExtension": ERC721AutoIdMinterExtension["functions"];
-    "collections/ERC721/extensions/ERC721PrefixedMetadataExtension": ERC721PrefixedMetadataExtension["functions"];
-  };
-};
-*/
