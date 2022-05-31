@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.49.7 (2022-05-31)
+
+
+### Bug Fixes
+
+* use contract name for artifact key ([398b265](https://github.com/0xflair/typescript-sdk/commit/398b2652566753d03c7d7e10d0279f8d1c8593ab))
+
+
+
+
+
 ## 0.49.6 (2022-05-31)
 
 
