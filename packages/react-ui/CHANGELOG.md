@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.49.6 (2022-05-31)
+
+
+### Bug Fixes
+
+* preserve openzeppelin artifact paths ([f28fe80](https://github.com/0xflair/typescript-sdk/commit/f28fe8011b4020f0c77703810ab09360ba29566b))
+
+
+
+
+
 ## 0.49.5 (2022-05-30)
 
 
