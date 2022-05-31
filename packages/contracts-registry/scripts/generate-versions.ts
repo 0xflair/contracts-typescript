@@ -1,7 +1,7 @@
 import * as fse from 'fs-extra';
 import glob from 'glob';
 import * as path from 'path';
-import { basename } from 'path';
+import { basename, dirname } from 'path';
 
 const main = async () => {
   const registry: Record<string, any> = {};
@@ -64,12 +64,17 @@ const main = async () => {
       }
 
       const artifactPath = path.resolve(pkg, file);
-      const { sourceName } = fse.readJsonSync(artifactPath);
+      const { sourceName, contractName } = fse.readJsonSync(artifactPath);
 
-      let artifactKey = sourceName
-        .slice(0, sourceName.lastIndexOf('.'))
-        .replace(/^contracts\//i, '')
-        .replace(/^@openzeppelin\/contracts\//i, '');
+      let artifactKey =
+        dirname(
+          sourceName
+            .slice(0, sourceName.lastIndexOf('.'))
+            .replace(/^contracts\//i, '')
+            .replace(/^@openzeppelin\/contracts\//i, '')
+        ) +
+        '/' +
+        contractName;
 
       if (file.includes('openzeppelin')) {
         artifactKey = `openzeppelin/${artifactKey}`;
