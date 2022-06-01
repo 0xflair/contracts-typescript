@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.49.11 (2022-06-01)
+
+
+### Bug Fixes
+
+* remove white bg on wallet dropdown ([fafa34d](https://github.com/0xflair/typescript-sdk/commit/fafa34d34de61bf6d9fd29cf8f090ac410f8188d))
+
+
+
+
+
 ## 0.49.10 (2022-06-01)
 
 
