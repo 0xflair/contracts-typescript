@@ -27,7 +27,8 @@ export const CryptoValue = (props: Props) => {
 
   const { data, error, loading } = useCryptoCurrency({ symbol });
 
-  const fractions = fractionDigits || (symbol === 'ETH' ? 4 : 2);
+  const fractions =
+    fractionDigits !== undefined ? fractionDigits : symbol === 'ETH' ? 4 : 2;
   const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
   const etherValue = ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
 
@@ -39,7 +40,8 @@ export const CryptoValue = (props: Props) => {
     <>{loadingContent}</>
   ) : (
     <>
-      {Number(etherValue).toFixed(fractions)} {data.info?.icon || symbol}
+      {Number(Number(etherValue).toFixed(fractions)).toLocaleString()}{' '}
+      {data.info?.icon || symbol}
       {showPrice && (
         <>
           {' '}

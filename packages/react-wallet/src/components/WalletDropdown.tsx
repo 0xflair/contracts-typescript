@@ -62,7 +62,7 @@ export const WalletDropdown = ({
   return (
     <Menu as="div" className="relative inline-block">
       <div>
-        <Menu.Button className="max-w-xs bg-white rounded-full flex gap-2 items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 p-2 lg:rounded-md lg:hover:bg-gray-50">
+        <Menu.Button className="max-w-xs rounded-full flex gap-2 items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 p-2 lg:rounded-md lg:hover:bg-gray-50">
           {avatar?.toString() ? (
             <img
               className="h-8 w-8 rounded-full"
