@@ -1,0 +1,46 @@
+{
+  "name": "@0xflair/react-nft-tokens",
+  "version": "0.49.10",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xflair/typescript-sdk.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "test": "react-scripts test",
+    "test:watch": "jest --watch"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "peerDependencies": {
+    "@0xflair/react-common": "0.*",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "axios": "^0.26.1"
+  },
+  "dependencies": {
+    "@0xflair/react-common": "^0.49.10",
+    "axios": "^0.26.1"
+  }
+}

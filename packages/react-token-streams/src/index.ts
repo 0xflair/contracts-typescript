@@ -1,6 +1,7 @@
-import 'axios';
-import 'react-query';
+import 'ethers';
 
-import React from 'react';
+import axios from 'axios';
 
 export * from './constants';
+export * from './hooks';
+export * from './types';
