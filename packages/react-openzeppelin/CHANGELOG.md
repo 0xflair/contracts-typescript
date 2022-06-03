@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.51.5 (2022-06-03)
+
+
+### Bug Fixes
+
+* add all flair packages as peer dep ([d15f35a](https://github.com/0xflair/typescript-sdk/commit/d15f35aa98f1b474e727d9c472887c541961bec6))
+
+
+
+
+
 ## 0.51.4 (2022-06-03)
 
 **Note:** Version bump only for package @0xflair/react-openzeppelin
