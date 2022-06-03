@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.50.2 (2022-06-03)
+
+
+### Bug Fixes
+
+* add missing exports to token streams ([78d2aed](https://github.com/0xflair/typescript-sdk/commit/78d2aed79a594f164b1659ba0857c23446f4d8de))
+
+
+
+
+
 ## 0.50.1 (2022-06-03)
 
 
