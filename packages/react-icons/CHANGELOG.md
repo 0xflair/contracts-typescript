@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.51.1 (2022-06-03)
+
+
+### Bug Fixes
+
+* eliminate reliance on crypto library ([b62adbe](https://github.com/0xflair/typescript-sdk/commit/b62adbec099acdf08241e193b89eff10a5f33752))
+
+
+
+
+
 # 0.51.0 (2022-06-03)
 
 
