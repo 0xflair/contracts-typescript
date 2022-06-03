@@ -1,6 +1,6 @@
 import { Environment, useCancel } from '@0xflair/react-common';
 import axios from 'axios';
-import json from 'jsonwebtoken';
+import jwtDecode from 'jwt-decode';
 import * as React from 'react';
 import { useCallback, useEffect } from 'react';
 import { useLocalStorage } from 'react-use';
@@ -185,7 +185,7 @@ export const LoginProvider = ({
     if (!walletJwt) {
       setState((x) => ({ ...x, data: undefined }));
     } else {
-      const jwtClaims = json.decode(walletJwt) as WalletJwtClaims;
+      const jwtClaims = jwtDecode<WalletJwtClaims>(walletJwt);
       setState((x) => ({ ...x, data: { jwtToken: walletJwt, jwtClaims } }));
     }
   }, [walletJwt]);
