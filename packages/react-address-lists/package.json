@@ -27,7 +27,7 @@
     "@0xflair/react-wallet": "0.*",
     "axios": "^0.26.1",
     "react": "^16 || ^17 || ^18",
-    "react-dom": "^17.0.2||^18.0.0"
+    "react-dom": "^16 || ^17 || ^18"
   },
   "dependencies": {
     "@0xflair/common": "^0.51.6",
