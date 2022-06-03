@@ -23,10 +23,14 @@
     "dist"
   ],
   "peerDependencies": {
-    "react": "^17.0.2||^18.0.0",
+    "react": "^16 || ^17 || ^18",
     "react-dom": "^17.0.2||^18.0.0"
   },
   "devDependencies": {
     "@svgr/cli": "^6.2.1"
+  },
+  "dependencies": {
+    "@types/react": "^18.0.10",
+    "@types/react-dom": "^18.0.5"
   }
 }

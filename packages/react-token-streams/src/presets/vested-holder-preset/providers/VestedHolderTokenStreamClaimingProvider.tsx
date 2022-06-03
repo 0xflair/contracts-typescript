@@ -3,6 +3,7 @@ import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
+import { ReactNode } from 'react';
 
 import { useStreamClaimingContext } from '../../../common/providers';
 import { TokenStream } from '../../../common/types';
@@ -73,15 +74,13 @@ export const VestedHolderStreamClaimingContext =
 
 type FunctionalChildren = (
   contextValue: VestedHolderStreamClaimingValue
-) => JSX.Element | JSX.Element[];
+) => ReactNode | ReactNode[];
 
 type Props = {
-  children: FunctionalChildren | JSX.Element | JSX.Element[];
+  children: FunctionalChildren | ReactNode | ReactNode[];
 };
 
-export const VestedHolderStreamClaimingProvider = ({
-  children,
-}: React.PropsWithChildren<Props>) => {
+export const VestedHolderStreamClaimingProvider = ({ children }: Props) => {
   const { data, isLoading, error, claim } = useStreamClaimingContext();
 
   const {

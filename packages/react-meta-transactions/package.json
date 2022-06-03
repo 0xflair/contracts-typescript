@@ -38,8 +38,8 @@
     "@0xflair/meta-transactions": "0.*",
     "@0xflair/react-common": "0.*",
     "ethers": "^5.6.5",
-    "react": "^17.0.2||^18.0.0",
-    "react-dom": "^17.0.2||^18.0.0",
+    "react": "^16 || ^17 || ^18",
+    "react-dom": "^16 || ^17 || ^18",
     "react-query": "*",
     "wagmi": "^0.3.5"
   },
@@ -49,5 +49,9 @@
     "@0xflair/react-common": "^0.51.2",
     "ethers": "^5.6.5",
     "wagmi": "^0.3.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.10",
+    "@types/react-dom": "^18.0.5"
   }
 }

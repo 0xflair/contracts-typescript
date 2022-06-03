@@ -26,7 +26,7 @@
     "@0xflair/react-common": "0.*",
     "@0xflair/react-wallet": "0.*",
     "axios": "^0.26.1",
-    "react": "^17.0.2||^18.0.0",
+    "react": "^16 || ^17 || ^18",
     "react-dom": "^17.0.2||^18.0.0"
   },
   "dependencies": {
@@ -34,5 +34,9 @@
     "@0xflair/react-common": "^0.51.2",
     "@0xflair/react-wallet": "^0.51.2",
     "axios": "^0.26.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.10",
+    "@types/react-dom": "^18.0.5"
   }
 }
