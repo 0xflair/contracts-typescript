@@ -1,5 +1,7 @@
 export * from './useClaimEnd';
 export * from './useClaimEndUpdater';
+export * from './useClaimStart';
+export * from './useClaimStartUpdater';
 export * from './useStreamClaimableAmount';
 export * from './useStreamReleasedAmount';
 export * from './useStreamTotalClaimableBulk';
