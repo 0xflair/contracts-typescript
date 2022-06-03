@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.51.2 (2022-06-03)
+
+
+### Bug Fixes
+
+* eliminate using node-specific packages in react-wallet package ([d9c39ea](https://github.com/0xflair/typescript-sdk/commit/d9c39eac318f4e0478192b6e8e34fe2a1545e8dd))
+
+
+
+
+
 ## 0.51.1 (2022-06-03)
 
 
