@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.51.6 (2022-06-03)
+
+
+### Bug Fixes
+
+* remove require chain component from claiming section ([76fef4a](https://github.com/0xflair/typescript-sdk/commit/76fef4a5be021db1e40609e512da06d7109b7d13))
+
+
+
+
+
 ## 0.51.5 (2022-06-03)
 
 
