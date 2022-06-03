@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.50.4 (2022-06-03)
+
+
+### Bug Fixes
+
+* avoid error when tickets are not provided ([7b5fdb5](https://github.com/0xflair/typescript-sdk/commit/7b5fdb55cda88f65049dac47634675cdd1ef2ed4))
+
+
+
+
+
 ## 0.50.3 (2022-06-03)
 
 
