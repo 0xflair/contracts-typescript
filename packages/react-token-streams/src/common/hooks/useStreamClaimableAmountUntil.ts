@@ -10,7 +10,7 @@ type Config = Partial<ReadContractConfig> & {
   calculateUntil?: number;
 };
 
-export const useStreamReleasedAmount = ({
+export const useStreamClaimableAmountUntil = ({
   contractVersion,
   contractAddress,
   signerOrProvider,
@@ -20,7 +20,7 @@ export const useStreamReleasedAmount = ({
   return useContractRead<BigNumberish>({
     contractVersion,
     contractFqn: 'streams/ERC721/presets/ERC721HolderVestedDistributor',
-    functionName: 'calculateReleasedAmountUntil',
+    functionName: 'calculateClaimableAmountUntil',
     contractAddress,
     signerOrProvider,
     args: [calculateUntil],

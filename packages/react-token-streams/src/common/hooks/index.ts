@@ -1,4 +1,4 @@
-export * from './useStreamClaimableAmount';
+export * from './useStreamClaimableAmountUntil';
 export * from './useStreamClaimEnd';
 export * from './useStreamClaimEndUpdater';
 export * from './useStreamClaimer';

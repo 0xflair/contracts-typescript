@@ -1,4 +1,4 @@
-export * from './useStreamReleasedAmount';
+export * from './useStreamReleasedAmountUntil';
 export * from './useStreamTotalReleasedBulk';
 export * from './useStreamVestingRate';
 export * from './useStreamVestingRateUpdater';
