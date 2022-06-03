@@ -25,7 +25,7 @@ export const useStreamTotalClaimableBulk = ({
     contractAddress,
     signerOrProvider,
     enabled: ticketTokenIds && ticketTokenIds.length > 0 && enabled,
-    args: [ticketTokenIds],
+    args: [ticketTokenIds || []],
     ...restOfConfig,
   });
 };
