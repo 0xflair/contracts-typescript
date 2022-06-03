@@ -1,26 +1,29 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
-import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
+import { useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, Signer } from 'ethers';
 
-type Config = Partial<ReadContractConfig> & {
+type Config = {
   contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
+  newValue?: BigNumberish;
 };
 
-export const useClaimStart = ({
+type ArgsType = [newValue: BigNumberish];
+
+export const useStreamClaimStartUpdater = ({
   contractVersion,
   contractAddress,
   signerOrProvider,
-  ...restOfConfig
+  newValue,
 }: Config) => {
-  return useContractRead<BigNumberish>({
+  return useContractWriteAndWait<ArgsType>({
     contractVersion,
     contractFqn: 'streams/ERC721/presets/ERC721HolderVestedDistributor',
-    functionName: 'claimStart',
+    functionName: 'setClaimStart',
     contractAddress,
     signerOrProvider,
-    ...restOfConfig,
+    args: [newValue] as ArgsType,
   });
 };

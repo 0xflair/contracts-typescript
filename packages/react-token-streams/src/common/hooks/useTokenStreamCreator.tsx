@@ -12,7 +12,7 @@ type UpdaterConfig = {
 
 export function useTokenStreamCreator<TConfig extends Record<string, any>>(
   tokenStream: Partial<TokenStream<TConfig>>,
-  { loginJwt, enabled = false, env = Environment.PROD }: UpdaterConfig,
+  { loginJwt, enabled = false, env = Environment.PROD }: UpdaterConfig
 ) {
   return useAxiosPost<TokenStream<TConfig>>({
     url: `${FLAIR_TOKEN_STREAMS_BACKEND[env]}/v1/token-streams`,

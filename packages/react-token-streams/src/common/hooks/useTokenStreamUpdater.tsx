@@ -10,10 +10,10 @@ type UpdaterConfig = {
 };
 
 export function useTokenStreamUpdater<
-  TCollectionConfig extends Record<string, any>,
+  TCollectionConfig extends Record<string, any>
 >(
   collection: Partial<TokenStream<TCollectionConfig>>,
-  { enabled = true, env = Environment.PROD }: UpdaterConfig,
+  { enabled = true, env = Environment.PROD }: UpdaterConfig
 ) {
   const loginJwt = useLoginJwt();
 

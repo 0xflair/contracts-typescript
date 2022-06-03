@@ -36,6 +36,7 @@
     ]
   },
   "peerDependencies": {
+    "@0xflair/ipfs": "0.*",
     "@0xflair/react-common": "0.*",
     "axios": "^0.26.1",
     "react": "^17.0.2"

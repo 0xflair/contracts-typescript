@@ -7,23 +7,23 @@ type Config = {
   contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
-  ticketTokenIds?: BigNumberish[];
+  newValue?: BigNumberish;
 };
 
-type ArgsType = [ticketTokenIds: BigNumberish[]];
+type ArgsType = [newValue: BigNumberish];
 
-export const useTokenStreamClaimer = ({
+export const useStreamClaimEndUpdater = ({
   contractVersion,
   contractAddress,
   signerOrProvider,
-  ticketTokenIds,
+  newValue,
 }: Config) => {
   return useContractWriteAndWait<ArgsType>({
     contractVersion,
-    contractFqn: 'streams/ERC721/core/ERC721BaseDistributor',
-    functionName: 'claimBulk',
+    contractFqn: 'streams/ERC721/presets/ERC721HolderVestedDistributor',
+    functionName: 'setClaimEnd',
     contractAddress,
     signerOrProvider,
-    args: [ticketTokenIds] as ArgsType,
+    args: [newValue] as ArgsType,
   });
 };
