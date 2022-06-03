@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.51.3 (2022-06-03)
+
+
+### Bug Fixes
+
+* update packages ([5c5f63f](https://github.com/0xflair/typescript-sdk/commit/5c5f63f1cf2ba1d2c2c9ad02b793d68d614722e4))
+
+
+
+
+
 ## 0.51.2 (2022-06-03)
 
 
