@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.51.0 (2022-06-03)
+
+
+### Features
+
+* support both v17 and v18 reacts ([77e2773](https://github.com/0xflair/typescript-sdk/commit/77e27732aa80bb57e9b0783d43d99632384442f3))
+
+
+
+
+
 ## 0.50.4 (2022-06-03)
 
 
