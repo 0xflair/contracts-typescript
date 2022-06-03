@@ -14,7 +14,7 @@ type Props = {
 
 export const useNftTokens = ({
   env = Environment.PROD,
-  clientId,
+  clientId = 'none',
   chainId,
   collectionAddress,
   walletAddress,
