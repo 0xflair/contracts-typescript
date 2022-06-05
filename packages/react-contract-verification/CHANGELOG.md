@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.52.0 (2022-06-05)
+
+
+### Features
+
+* separate abi hook from write and wait ([#4](https://github.com/0xflair/typescript-sdk/issues/4)) ([563e5a0](https://github.com/0xflair/typescript-sdk/commit/563e5a0ae0ea284eb215d86efb41bc54e34e80f8))
+
+
+
+
+
 ## 0.51.7 (2022-06-03)
 
 
