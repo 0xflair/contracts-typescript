@@ -1,5 +1,5 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
-import { useContractWriteAndWait } from '@0xflair/react-common';
+import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { ReadContractConfig } from '@wagmi/core';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
@@ -14,7 +14,7 @@ type Config = Partial<ReadContractConfig> & {
   amount?: BigNumberish;
 };
 
-type Args = [to?: BytesLike, amount?: BigNumberish];
+type ArgsType = [to?: BytesLike, amount?: BigNumberish];
 
 export const useERC20RoleBasedMint = ({
   contractVersion,
@@ -25,9 +25,13 @@ export const useERC20RoleBasedMint = ({
   amount,
   ...restOfConfig
 }: Config) => {
-  return useContractWriteAndWait<Args>({
+  const contractInterface = useContractAbi({
     contractVersion,
     contractFqn: 'openzeppelin/token/ERC20/presets/ERC20PresetMinterPauser',
+  });
+
+  return useContractWriteAndWait<ArgsType>({
+    contractInterface,
     functionName: 'mint',
     args: [to, amount],
     contractAddress,

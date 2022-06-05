@@ -1,5 +1,5 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
-import { useContractWriteAndWait } from '@0xflair/react-common';
+import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, Signer } from 'ethers';
 import { useCallback } from 'react';
@@ -19,17 +19,20 @@ export const useStreamClaimer = ({
   signerOrProvider,
   ticketTokenIds,
 }: Config) => {
-  const claimBulkHook = useContractWriteAndWait<ArgsType>({
+  const contractInterface = useContractAbi({
     contractVersion,
     contractFqn: 'streams/ERC721/core/ERC721BaseDistributor',
+  });
+
+  const claimBulkHook = useContractWriteAndWait<ArgsType>({
+    contractInterface,
     functionName: 'claimBulk',
     contractAddress,
     signerOrProvider,
     args: [ticketTokenIds] as ArgsType,
   });
   const claimHook = useContractWriteAndWait<ArgsType>({
-    contractVersion,
-    contractFqn: 'streams/ERC721/core/ERC721BaseDistributor',
+    contractInterface,
     functionName: 'claim',
     contractAddress,
     signerOrProvider,

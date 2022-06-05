@@ -1,5 +1,5 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
-import { useContractWriteAndWait } from '@0xflair/react-common';
+import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 
@@ -20,9 +20,13 @@ export const useRoleBasedMinter = ({
   toAddress,
   mintCount,
 }: Config) => {
-  return useContractWriteAndWait<ArgsType>({
+  const contractInterface = useContractAbi({
     contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721RoleBasedMintExtension',
+  });
+
+  return useContractWriteAndWait<ArgsType>({
+    contractInterface,
     contractAddress,
     signerOrProvider,
     functionName: 'mintByRole',

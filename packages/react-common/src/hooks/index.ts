@@ -2,6 +2,7 @@
 export * from './useChainInfo';
 export * from './useChainId';
 export * from './useAddressOfSigner';
+export * from './useContractAbi';
 export * from './useContractDeployer';
 export * from './useContractWriteAndWait';
 export * from './useFlairContractDeployer';

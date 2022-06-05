@@ -1,5 +1,5 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
-import { useContractWriteAndWait } from '@0xflair/react-common';
+import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, Signer } from 'ethers';
 
@@ -18,9 +18,13 @@ export const useStreamVestingTimeUnitUpdater = ({
   signerOrProvider,
   newValue,
 }: Config) => {
-  return useContractWriteAndWait<ArgsType>({
+  const contractInterface = useContractAbi({
     contractVersion,
     contractFqn: 'streams/ERC721/presets/ERC721HolderVestedDistributor',
+  });
+
+  return useContractWriteAndWait<ArgsType>({
+    contractInterface,
     functionName: 'setVestingTimeUnit',
     contractAddress,
     signerOrProvider,

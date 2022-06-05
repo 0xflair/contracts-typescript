@@ -1,5 +1,5 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
-import { useContractWriteAndWait } from '@0xflair/react-common';
+import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { ReadContractConfig } from '@wagmi/core';
 import { BytesLike, Signer } from 'ethers';
@@ -13,7 +13,7 @@ type Config = Partial<ReadContractConfig> & {
   address?: BytesLike;
 };
 
-type Args = [role?: BytesLike, address?: BytesLike];
+type ArgsType = [role?: BytesLike, address?: BytesLike];
 
 export const useOzRoleGranter = ({
   contractVersion,
@@ -23,9 +23,13 @@ export const useOzRoleGranter = ({
   address,
   ...restOfConfig
 }: Config) => {
-  return useContractWriteAndWait<Args>({
+  const contractInterface = useContractAbi({
     contractVersion,
     contractFqn: 'openzeppelin/access/AccessControl',
+  });
+
+  return useContractWriteAndWait<ArgsType>({
+    contractInterface,
     functionName: 'grantRole',
     args: [role, address],
     contractAddress,

@@ -1,18 +1,12 @@
-import {
-  ContractFqn,
-  ContractVersion,
-  loadContract,
-} from '@0xflair/contracts-registry';
 import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';
-import { Signer } from 'ethers';
-import { useCallback, useMemo } from 'react';
+import { ContractInterface, Signer } from 'ethers';
+import { useCallback } from 'react';
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
 
 export type ContractWriteConfig<ArgsType extends any[]> =
   WriteContractConfig & {
-    contractVersion?: ContractVersion;
-    contractFqn: ContractFqn;
+    contractInterface: ContractInterface;
     contractAddress?: string;
     signerOrProvider?: Signer | Provider | null;
     functionName: string;
@@ -20,19 +14,13 @@ export type ContractWriteConfig<ArgsType extends any[]> =
   };
 
 export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
-  contractVersion,
-  contractFqn,
+  contractInterface,
   contractAddress,
   signerOrProvider,
   functionName,
   args,
   ...restOfConfig
 }: ContractWriteConfig<ArgsType>) => {
-  const contract = useMemo(
-    () => loadContract(contractFqn, contractVersion),
-    [contractFqn, contractVersion]
-  );
-
   const {
     data: responseData,
     error: responseError,
@@ -44,7 +32,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   } = useContractWrite(
     {
       addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
+      contractInterface,
       ...(signerOrProvider ? { signerOrProvider } : {}),
     },
     functionName as string,

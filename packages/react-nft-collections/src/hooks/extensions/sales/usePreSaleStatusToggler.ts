@@ -1,5 +1,5 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
-import { useContractWriteAndWait } from '@0xflair/react-common';
+import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
@@ -18,9 +18,13 @@ export const usePreSaleStatusToggler = ({
   signerOrProvider,
   newStatus,
 }: Config) => {
-  return useContractWriteAndWait<ArgsType>({
+  const contractInterface = useContractAbi({
     contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
+  });
+
+  return useContractWriteAndWait<ArgsType>({
+    contractInterface,
     functionName: 'togglePreSaleStatus',
     contractAddress,
     signerOrProvider,

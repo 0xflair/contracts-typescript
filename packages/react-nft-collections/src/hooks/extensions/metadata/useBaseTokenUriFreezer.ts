@@ -1,5 +1,5 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
-import { useContractWriteAndWait } from '@0xflair/react-common';
+import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
@@ -14,10 +14,14 @@ export const useBaseTokenUriFreezer = ({
   contractVersion,
   signerOrProvider,
 }: Config) => {
-  return useContractWriteAndWait({
+  const contractInterface = useContractAbi({
     contractVersion,
     contractFqn:
       'collections/ERC721/extensions/ERC721PrefixedMetadataExtension',
+  });
+
+  return useContractWriteAndWait({
+    contractInterface,
     contractAddress,
     signerOrProvider,
     functionName: 'freezeBaseURI',

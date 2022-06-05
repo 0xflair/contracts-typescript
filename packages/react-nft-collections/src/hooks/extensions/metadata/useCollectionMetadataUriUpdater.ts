@@ -1,5 +1,5 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
-import { useContractWriteAndWait } from '@0xflair/react-common';
+import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BytesLike, Signer } from 'ethers';
 
@@ -14,10 +14,14 @@ export const useCollectionMetadataUriUpdater = ({
   contractAddress,
   signerOrProvider,
 }: Config) => {
-  return useContractWriteAndWait<[BytesLike]>({
+  const contractInterface = useContractAbi({
+    contractVersion,
     contractFqn:
       'collections/ERC721/extensions/ERC721CollectionMetadataExtension',
-    contractVersion,
+  });
+
+  return useContractWriteAndWait<[BytesLike]>({
+    contractInterface,
     contractAddress,
     signerOrProvider,
     functionName: 'setContractURI',
