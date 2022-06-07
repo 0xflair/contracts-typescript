@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.53.1 (2022-06-07)
+
+
+### Bug Fixes
+
+* show last 4 chars of wallet ([fac2e67](https://github.com/0xflair/typescript-sdk/commit/fac2e67d71b8791b2eed9709b583f7a67982f032))
+
+
+
+
+
 # 0.53.0 (2022-06-07)
 
 
