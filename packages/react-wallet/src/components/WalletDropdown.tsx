@@ -82,7 +82,7 @@ export const WalletDropdown = ({
             {ens?.toString() ||
               account?.address?.slice(0, 4) +
                 '...' +
-                account?.address?.slice(-3)}
+                account?.address?.slice(-4)}
           </span>
           {balance?.value ? (
             <span className="text-gray-500 truncate">
