@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.54.0 (2022-06-07)
+
+
+### Features
+
+* add role revoke hook ([7d8560d](https://github.com/0xflair/typescript-sdk/commit/7d8560d38cfdb85ebccf5185c848708d3190e5c6))
+
+
+
+
+
 ## 0.53.4 (2022-06-07)
 
 
