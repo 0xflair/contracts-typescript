@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.53.3 (2022-06-07)
+
+
+### Bug Fixes
+
+* add new contracts ([7438ba8](https://github.com/0xflair/typescript-sdk/commit/7438ba85b7cdbd4bfb1d1e12ceebaf0c68457d80))
+
+
+
+
+
 ## 0.53.2 (2022-06-07)
 
 
