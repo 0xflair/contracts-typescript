@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.53.4 (2022-06-07)
+
+
+### Bug Fixes
+
+* allow watching for role checks ([510f44e](https://github.com/0xflair/typescript-sdk/commit/510f44ed6f2bec073d10516073a707a45dee685d))
+
+
+
+
+
 ## 0.53.3 (2022-06-07)
 
 
