@@ -13,6 +13,7 @@ export * from './useExtensionChecker';
 export * from './useAxiosGet';
 export * from './useAxiosPatch';
 export * from './useAxiosPost';
+export * from './useAxiosPut';
 
 // react
 export * from './useCancel';
