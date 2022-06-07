@@ -7,6 +7,7 @@ import { BytesLike, Signer } from 'ethers';
 type Config = Partial<ReadContractConfig> & {
   contractVersion?: ContractVersion;
   enabled?: boolean;
+  watch?: boolean;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   role?: BytesLike;
@@ -16,6 +17,7 @@ type Config = Partial<ReadContractConfig> & {
 export const useOzHasRole = ({
   contractVersion,
   enabled = true,
+  watch = true,
   contractAddress,
   signerOrProvider,
   role,
@@ -28,6 +30,7 @@ export const useOzHasRole = ({
     functionName: 'hasRole',
     args: [role, address],
     enabled: Boolean(enabled && role && address),
+    watch,
     contractAddress,
     signerOrProvider,
     ...restOfConfig,
