@@ -5,7 +5,7 @@ import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 import { useCallback } from 'react';
 
-import { NftCollectionMetadata } from '../../../types';
+import { NftCollectionMetadata } from '../../types';
 import { useCollectionMetadataUri } from './useCollectionMetadataUri';
 
 type Config = Partial<ReadContractConfig> & {

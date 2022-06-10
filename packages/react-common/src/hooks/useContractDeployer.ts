@@ -1,3 +1,5 @@
+import '@ethersproject/abstract-provider';
+
 import { Contract, ContractFactory, ContractInterface, Signer } from 'ethers';
 import * as React from 'react';
 import { useMemo } from 'react';

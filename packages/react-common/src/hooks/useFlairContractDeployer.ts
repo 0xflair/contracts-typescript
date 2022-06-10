@@ -1,3 +1,5 @@
+import '@ethersproject/abstract-provider';
+
 import {
   ContractFqn,
   ContractVersion,

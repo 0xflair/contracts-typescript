@@ -2,7 +2,7 @@ import { Environment } from '@0xflair/react-common';
 import { useIpfsFileUploader, useIpfsJsonUploader } from '@0xflair/react-ipfs';
 import { useCallback } from 'react';
 
-import { NftTokenMetadata } from '../../../types';
+import { NftTokenMetadata } from '../../types';
 
 export type NftTokenMetadataInput = NftTokenMetadata & {
   imageFile?: File;

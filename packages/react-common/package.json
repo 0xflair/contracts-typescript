@@ -41,6 +41,7 @@
     "react": "^16 || ^17 || ^18",
     "react-dom": "^16 || ^17 || ^18",
     "react-use": "^17.3.2",
+    "react-query": "*",
     "wagmi": "^0.3.5"
   },
   "dependencies": {

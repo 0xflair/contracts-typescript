@@ -1,3 +1,5 @@
+import 'axios';
+
 import { Environment, useAxiosGet } from '@0xflair/react-common';
 
 import { FLAIR_NFT_TOKENS_BACKEND } from '../constants';

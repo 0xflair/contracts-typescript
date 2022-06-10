@@ -5,10 +5,13 @@ import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
 import { useCallback } from 'react';
 import { useAccount } from 'wagmi';
 
-import { usePreSaleStatus, usePublicSaleStatus } from '../sales';
-import { usePreSaleAllowlistChecker } from '../sales/usePreSaleAllowlistChecker';
-import { usePreSaleMinter } from '../sales/usePreSaleMinter';
-import { usePublicSaleMinter } from '../sales/usePublicSaleMinter';
+import {
+  usePreSaleAllowlistChecker,
+  usePreSaleMinter,
+  usePreSaleStatus,
+  usePublicSaleMinter,
+  usePublicSaleStatus,
+} from '../sales';
 
 type Config = {
   env?: Environment;
