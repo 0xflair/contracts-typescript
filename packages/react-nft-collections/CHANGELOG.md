@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.55.0 (2022-06-10)
+
+
+### Features
+
+* allow overriding value on contract writes ([110c176](https://github.com/0xflair/typescript-sdk/commit/110c176043c5af66ca75f86572a67925a02cc780))
+
+
+
+
+
 # 0.54.0 (2022-06-07)
 
 
