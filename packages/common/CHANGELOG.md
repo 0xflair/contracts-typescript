@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.56.0 (2022-06-10)
+
+
+### Features
+
+* add minting components to nft-collections package ([68d3d89](https://github.com/0xflair/typescript-sdk/commit/68d3d893c8a103107b182fb99ec7b1ecd163a862))
+
+
+
+
+
 ## 0.55.2 (2022-06-10)
 
 
