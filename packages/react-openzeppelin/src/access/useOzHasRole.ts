@@ -1,5 +1,3 @@
-import 'ethers/utils';
-
 import { ContractVersion } from '@0xflair/contracts-registry';
 import { useContractRead } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
