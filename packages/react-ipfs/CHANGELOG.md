@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.55.2 (2022-06-10)
+
+
+### Bug Fixes
+
+* put overrides on the right key ([efede02](https://github.com/0xflair/typescript-sdk/commit/efede024b71f45e3a2c15ddc6f0e306473384588))
+
+
+
+
+
 ## 0.55.1 (2022-06-10)
 
 
