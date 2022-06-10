@@ -69,7 +69,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
         args: inputArgs || args,
         ...restOfConfig,
         ...(overrides
-          ? { ...(restOfConfig.overrides || {}), ...overrides }
+          ? { overrides: { ...(restOfConfig.overrides || {}), ...overrides } }
           : {}),
       });
 
