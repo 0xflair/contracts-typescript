@@ -98,7 +98,7 @@ export const useSaleMinter = ({
         if (args?.mintCount) {
           overrides = {
             value: BigNumber.from(preSaleMintData.preSalePrice).mul(
-              BigNumber.from(mintCount)
+              BigNumber.from(args?.mintCount)
             ),
           };
         }
@@ -114,7 +114,7 @@ export const useSaleMinter = ({
         if (args?.mintCount) {
           overrides = {
             value: BigNumber.from(publicSaleMintData.publicSalePrice).mul(
-              BigNumber.from(mintCount)
+              BigNumber.from(args?.mintCount)
             ),
           };
         }
