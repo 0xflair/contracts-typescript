@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.55.1 (2022-06-10)
+
+
+### Bug Fixes
+
+* use correct mint count when passing as arg ([e90a5bc](https://github.com/0xflair/typescript-sdk/commit/e90a5bc5df09fb861ba5db84b8164a943267e322))
+
+
+
+
+
 # 0.55.0 (2022-06-10)
 
 
