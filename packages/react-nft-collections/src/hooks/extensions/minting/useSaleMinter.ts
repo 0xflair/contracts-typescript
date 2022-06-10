@@ -1,7 +1,7 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
 import { Environment } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
-import { BigNumberish, BytesLike, Signer } from 'ethers';
+import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
 import { useCallback } from 'react';
 import { useAccount } from 'wagmi';
 
@@ -91,17 +91,41 @@ export const useSaleMinter = ({
   });
 
   const mint = useCallback(
-    (args?: { mintCount?: BigNumberish; allowlistProof?: BytesLike[] }) => {
+    (args?: { mintCount: BigNumberish; allowlistProof?: BytesLike[] }) => {
+      let overrides;
+
       if (isAllowlisted && preSaleStatus) {
-        preSaleMintWrite([
-          (args?.mintCount || mintCount) as BigNumberish,
-          (args?.allowlistProof || allowlistProof) as BytesLike[],
-        ]);
+        if (args?.mintCount) {
+          overrides = {
+            value: BigNumber.from(preSaleMintData.preSalePrice).mul(
+              BigNumber.from(mintCount)
+            ),
+          };
+        }
+
+        return preSaleMintWrite(
+          [
+            (args?.mintCount || mintCount) as BigNumberish,
+            (args?.allowlistProof || allowlistProof) as BytesLike[],
+          ],
+          overrides
+        );
       } else if (publicSaleStatus) {
-        publicSaleMintWrite([
-          account?.address as BytesLike,
-          (args?.mintCount || mintCount) as BigNumberish,
-        ]);
+        if (args?.mintCount) {
+          overrides = {
+            value: BigNumber.from(publicSaleMintData.publicSalePrice).mul(
+              BigNumber.from(mintCount)
+            ),
+          };
+        }
+
+        return publicSaleMintWrite(
+          [
+            account?.address as BytesLike,
+            (args?.mintCount || mintCount) as BigNumberish,
+          ],
+          overrides
+        );
       }
     },
     [
@@ -109,8 +133,10 @@ export const useSaleMinter = ({
       allowlistProof,
       isAllowlisted,
       mintCount,
+      preSaleMintData.preSalePrice,
       preSaleMintWrite,
       preSaleStatus,
+      publicSaleMintData.publicSalePrice,
       publicSaleMintWrite,
       publicSaleStatus,
     ]

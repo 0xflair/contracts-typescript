@@ -44,7 +44,7 @@ export const usePublicSaleMinter = ({
     args: [toAddress, mintCount] as ArgsType,
     overrides: {
       value:
-        typeof publicSalePrice !== 'undefined'
+        typeof publicSalePrice !== 'undefined' && mintCount
           ? BigNumber.from(publicSalePrice).mul(BigNumber.from(mintCount))
           : undefined,
     },

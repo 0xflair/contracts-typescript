@@ -43,9 +43,10 @@ export const usePreSaleMinter = ({
     signerOrProvider,
     args: [mintCount, allowlistProof] as ArgsType,
     overrides: {
-      value: preSalePrice
-        ? BigNumber.from(preSalePrice).mul(BigNumber.from(mintCount))
-        : undefined,
+      value:
+        typeof preSalePrice !== 'undefined' && mintCount
+          ? BigNumber.from(preSalePrice).mul(BigNumber.from(mintCount))
+          : undefined,
     },
   });
 
