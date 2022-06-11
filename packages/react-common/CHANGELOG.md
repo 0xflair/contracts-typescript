@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.56.3 (2022-06-11)
+
+
+### Bug Fixes
+
+* use randombytes package for uint256 ([0e1b753](https://github.com/0xflair/typescript-sdk/commit/0e1b753fe1425a54e91dca0b82db7e13f3c777fe))
+
+
+
+
+
 ## 0.56.2 (2022-06-10)
 
 
