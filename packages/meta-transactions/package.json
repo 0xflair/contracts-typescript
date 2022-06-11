@@ -37,12 +37,17 @@
     "@0xflair/common": "0.*",
     "@0xflair/contracts-registry": "0.*",
     "axios": "^0.26.1",
-    "ethers": "^5.6.5"
+    "ethers": "^5.6.5",
+    "randombytes": "^2.1.0"
   },
   "dependencies": {
     "@0xflair/common": "^0.56.2",
     "@0xflair/contracts-registry": "^0.56.2",
     "axios": "^0.26.1",
-    "ethers": "^5.6.5"
+    "ethers": "^5.6.5",
+    "randombytes": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/randombytes": "^2.0.0"
   }
 }

@@ -1,9 +1,8 @@
+import { BigNumber } from 'ethers';
+import randomBytes from 'randombytes';
+
 export const generateRandomUint256 = (): string => {
-  let randomUint256 = new Date().getTime().toString(); // 13 chars
+  const value = randomBytes(32);
 
-  randomUint256 += Math.random().toString().slice(2); // 16 chars
-  randomUint256 += Math.random().toString().slice(2); // 16 chars
-  randomUint256 += Math.random().toString().slice(2); // 16 chars
-
-  return randomUint256;
+  return BigNumber.from('0x' + value.toString('hex')).toString();
 };
