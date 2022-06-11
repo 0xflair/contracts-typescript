@@ -4,7 +4,6 @@ export const generateRandomUint256 = (): string => {
   randomUint256 += Math.random().toString().slice(2); // 16 chars
   randomUint256 += Math.random().toString().slice(2); // 16 chars
   randomUint256 += Math.random().toString().slice(2); // 16 chars
-  randomUint256 += Math.random().toString().slice(2); // 16 chars
 
   return randomUint256;
 };
