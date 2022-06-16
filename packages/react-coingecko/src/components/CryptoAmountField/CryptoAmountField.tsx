@@ -1,5 +1,6 @@
 import { BigNumberish, utils } from 'ethers';
 import * as React from 'react';
+import { useState } from 'react';
 import { useNetwork } from 'wagmi';
 
 import { CryptoSymbol, CryptoUnits } from '../../types';
@@ -11,7 +12,7 @@ export type CryptoAmountFieldProps = {
   value: string | BigNumberish;
   unit?: CryptoUnits;
   symbol?: CryptoSymbol;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
 };
 
 export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
@@ -29,6 +30,8 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
   const convertedValueWei = utils.parseUnits(value.toString(), unit);
   const convertedValueEther = utils.formatEther(convertedValueWei);
 
+  const [rawValue, setRawValue] = useState(convertedValueEther.toString());
+
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700">{label}</label>
@@ -37,18 +40,19 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
           type="text"
           className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"
           placeholder="0.00"
-          value={convertedValueEther}
-          onChange={(event) =>
-            onChange(
-              utils.formatUnits(utils.parseEther(event.target.value), unit)
-            )
-          }
+          value={rawValue}
+          onChange={(e) => {
+            setRawValue(e.target.value);
+            onChange && onChange(
+              utils.formatUnits(utils.parseEther(e.target.value), unit)
+            );
+          }}
         />
         <div className="absolute top-2 right-0 pr-3 flex items-center pointer-events-none">
           <span className="text-gray-500 sm:text-sm" id="price-currency">
             {activeChain?.nativeCurrency?.name} (
             <CryptoPrice
-              value={value}
+              value={rawValue}
               symbol={
                 symbol || (activeChain?.nativeCurrency?.symbol as CryptoSymbol)
               }
