@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.57.0 (2022-06-16)
+
+
+### Features
+
+* allow showing read-only data even on wrong chain ([8f02be7](https://github.com/0xflair/typescript-sdk/commit/8f02be7906918376786671544fc29600bc2f5f1a))
+
+
+
+
+
 ## 0.56.4 (2022-06-16)
 
 
