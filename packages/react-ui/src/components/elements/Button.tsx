@@ -10,7 +10,7 @@ export const ACTION_BUTTON =
   'inline-flex items-center whitespace-nowrap px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed';
 
 interface Props {
-  text: string;
+  text: ReactNode;
   icon?: ReactNode;
   className?: string;
   onClick?: any;

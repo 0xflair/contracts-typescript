@@ -3,7 +3,7 @@ import { useRemoteJsonReader } from '@0xflair/react-ipfs';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
 import { ReactNode } from 'react';
-import { Chain } from 'wagmi';
+import { Chain, useProvider } from 'wagmi';
 
 import {
   useCollectionMetadataUri,
@@ -26,6 +26,9 @@ type CollectionContextValue = {
     metadataUri?: BytesLike;
     maxSupply?: BigNumberish;
     totalSupply?: BigNumberish;
+
+    // Helpers
+    readProvider?: ReturnType<typeof useProvider>;
   };
 
   isLoading: {
@@ -79,6 +82,7 @@ export const CollectionProvider = ({
   children,
 }: Props) => {
   const chainInfo = useChainInfo(chainId && Number(chainId));
+  const readProvider = useProvider({ chainId: Number(chainId) });
 
   const {
     data: collection,
@@ -97,6 +101,7 @@ export const CollectionProvider = ({
   } = useCollectionMetadataUri({
     contractVersion: collection?.presetVersion,
     contractAddress,
+    signerOrProvider: readProvider,
   });
 
   const {
@@ -114,6 +119,7 @@ export const CollectionProvider = ({
   } = useMaxSupply({
     contractVersion: collection?.presetVersion,
     contractAddress,
+    signerOrProvider: readProvider,
     watch: true,
   });
 
@@ -124,6 +130,7 @@ export const CollectionProvider = ({
   } = useTotalSupply({
     contractVersion: collection?.presetVersion,
     contractAddress,
+    signerOrProvider: readProvider,
     watch: true,
   });
 
@@ -140,6 +147,9 @@ export const CollectionProvider = ({
       metadataUri,
       maxSupply,
       totalSupply,
+
+      // Helpers
+      readProvider,
     },
 
     isLoading: {

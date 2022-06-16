@@ -11,7 +11,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useConnect } from 'wagmi';
 
 export type ConnectButtonProps = {
-  label?: string;
+  label?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
 };

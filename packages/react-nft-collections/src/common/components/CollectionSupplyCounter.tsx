@@ -4,7 +4,7 @@ type Props = {
   className?: string;
 };
 
-export const CollectionSupplyStat = ({ className }: Props) => {
+export const CollectionSupplyCounter = ({ className }: Props) => {
   const {
     data: { totalSupply, maxSupply },
   } = useCollectionContext();

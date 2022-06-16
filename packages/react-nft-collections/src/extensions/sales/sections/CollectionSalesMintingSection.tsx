@@ -1,8 +1,9 @@
 import { Environment } from '@0xflair/react-common';
+import { ConnectButton, SwitchChainButton } from '@0xflair/react-wallet';
 import { useState } from 'react';
 
 import { CollectionImage } from '../../../common/components/CollectionImage';
-import { CollectionSupplyStat as CollectionSupplyCounter } from '../../../common/components/CollectionSupplyStat';
+import { CollectionSupplyCounter } from '../../../common/components/CollectionSupplyCounter';
 import { CollectionTitle } from '../../../common/components/CollectionTitle';
 import { CollectionProvider } from '../../../common/providers/CollectionProvider';
 import { CollectionSalesActiveStatus } from '../components/CollectionSalesActiveStatus';
@@ -23,6 +24,9 @@ export const CollectionSalesMintingSection = ({
   contractAddress,
 }: Props) => {
   const [mintCount, setMintCount] = useState(1);
+
+  const mintButtonClass =
+    'mt-4 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
 
   return (
     <CollectionProvider
@@ -99,13 +103,21 @@ export const CollectionSalesMintingSection = ({
                       </fieldset>
                     </div>
 
-                    <button
-                      onClick={() => mint({ mintCount })}
-                      disabled={!canMint}
-                      className="mt-4 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      Mint
-                    </button>
+                    {/* Mint button */}
+                    <ConnectButton className={mintButtonClass}>
+                      <SwitchChainButton
+                        requiredChainId={Number(chainId)}
+                        className={mintButtonClass}
+                      >
+                        <button
+                          onClick={() => mint({ mintCount })}
+                          disabled={!canMint}
+                          className={mintButtonClass}
+                        >
+                          Mint
+                        </button>
+                      </SwitchChainButton>
+                    </ConnectButton>
                   </form>
 
                   <CollectionSalesMintStatusBar className="mt-4 flex flex-col gap-2" />

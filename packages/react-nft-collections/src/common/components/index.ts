@@ -1,3 +1,3 @@
 export * from './CollectionImage';
-export * from './CollectionSupplyStat';
+export * from './CollectionSupplyCounter';
 export * from './CollectionTitle';

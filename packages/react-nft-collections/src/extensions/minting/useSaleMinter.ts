@@ -18,6 +18,7 @@ type Config = {
   chainId?: number;
   contractVersion?: ContractVersion;
   contractAddress?: string;
+  readProvider?: Provider | null;
   signerOrProvider?: Signer | Provider | null;
   minterAddress?: BytesLike;
   mintCount?: BigNumberish;
@@ -31,6 +32,7 @@ export const useSaleMinter = ({
   chainId,
   contractVersion,
   contractAddress,
+  readProvider,
   signerOrProvider,
   minterAddress,
   mintCount,
@@ -44,6 +46,7 @@ export const useSaleMinter = ({
   } = usePreSaleStatus({
     contractVersion,
     contractAddress,
+    signerOrProvider: readProvider || signerOrProvider,
   });
 
   const {
@@ -53,6 +56,7 @@ export const useSaleMinter = ({
   } = usePublicSaleStatus({
     contractVersion,
     contractAddress,
+    signerOrProvider: readProvider || signerOrProvider,
   });
 
   const {
@@ -64,6 +68,7 @@ export const useSaleMinter = ({
     chainId,
     contractVersion,
     contractAddress,
+    signerOrProvider: readProvider || signerOrProvider,
     enabled: true,
     minterAddress,
   });

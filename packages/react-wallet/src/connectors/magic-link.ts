@@ -73,7 +73,7 @@ export class MagicLinkConnector extends MagicConnector {
       }
       throw new UserRejectedRequestError('User rejected request');
     } catch (error) {
-      throw new UserRejectedRequestError(error);
+      throw new UserRejectedRequestError(error as any);
     }
   }
 
