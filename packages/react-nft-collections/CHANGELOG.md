@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.56.4 (2022-06-16)
+
+
+### Bug Fixes
+
+* allow freely type the price input ([0b29b8d](https://github.com/0xflair/typescript-sdk/commit/0b29b8dded16feaf82dd9804c8172ba0a1d08fa8))
+
+
+
+
+
 ## 0.56.3 (2022-06-11)
 
 
