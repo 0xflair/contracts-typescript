@@ -117,7 +117,7 @@ export const CollectionProvider = ({
     chainId,
     contractVersion: collection?.presetVersion,
     contractAddress,
-    watch: true,
+    watch: false,
   });
 
   const {
@@ -128,7 +128,7 @@ export const CollectionProvider = ({
     chainId,
     contractVersion: collection?.presetVersion,
     contractAddress,
-    watch: true,
+    watch: false,
   });
 
   const value = {

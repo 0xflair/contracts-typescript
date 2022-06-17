@@ -40,7 +40,7 @@ export const WalletDropdown = ({
   } = useBalance({
     addressOrName: account?.address,
     formatUnits: 'ether',
-    watch: true,
+    watch: false,
   });
   const {
     data: avatar,
