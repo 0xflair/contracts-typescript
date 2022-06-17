@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.59.1 (2022-06-17)
+
+
+### Bug Fixes
+
+* add disconnect button in sales minting section ([f4706ab](https://github.com/0xflair/typescript-sdk/commit/f4706ab3341ee65c9d26d8723a482443a3dc8f32))
+
+
+
+
+
 # 0.59.0 (2022-06-17)
 
 
