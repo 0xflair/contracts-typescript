@@ -33,12 +33,16 @@ export const useNftTokens = ({
     };
   }, [chainId, collectionAddress, walletAddress]);
 
+  const headers = useMemo(() => {
+    return {
+      'X-Flair-Client-Id': clientId,
+    };
+  }, [clientId]);
+
   return useAxiosGet<NftToken[]>({
     url,
     params,
     enabled: enabled,
-    headers: {
-      'X-Flair-Client-Id': clientId,
-    },
+    headers,
   });
 };
