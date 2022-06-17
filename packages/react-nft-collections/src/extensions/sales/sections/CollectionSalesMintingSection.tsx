@@ -5,6 +5,7 @@ import {
   SwitchChainButton,
 } from '@0xflair/react-wallet';
 import { useState } from 'react';
+import { useAccount } from 'wagmi';
 
 import { CollectionImage } from '../../../common/components/CollectionImage';
 import { CollectionSupplyCounter } from '../../../common/components/CollectionSupplyCounter';
@@ -27,6 +28,7 @@ export const CollectionSalesMintingSection = ({
   chainId,
   contractAddress,
 }: Props) => {
+  const { data: account } = useAccount();
   const [mintCount, setMintCount] = useState(1);
 
   const mintButtonClass =
@@ -58,7 +60,7 @@ export const CollectionSalesMintingSection = ({
 
                       <CollectionSalesActiveStatus />
 
-                      <CollectionSalesAllowlistStatus />
+                      {account && <CollectionSalesAllowlistStatus />}
                     </div>
                   </div>
                 </div>
