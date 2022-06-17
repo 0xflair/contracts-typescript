@@ -1,5 +1,10 @@
 import { Environment } from '@0xflair/react-common';
-import { DisconnectButton, RequireChain } from '@0xflair/react-wallet';
+import {
+  ConnectButton,
+  DisconnectButton,
+  RequireChain,
+  SwitchChainButton,
+} from '@0xflair/react-wallet';
 
 import { StreamClaimButton, StreamStatusBar } from '../../../common/components';
 import { StreamClaimingProvider } from '../../../common/providers';
@@ -20,6 +25,9 @@ export const VestedHolderStreamClaimingSection = ({
   chainId,
   contractAddress,
 }: Props) => {
+  const buttonClass =
+    'mt-4 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
+
   return (
     <StreamClaimingProvider
       env={env}
@@ -53,8 +61,17 @@ export const VestedHolderStreamClaimingSection = ({
                         <VestedHolderStreamInformation />
 
                         <div className="mt-6 flex flex-col justify-center items-center">
-                          <StreamClaimButton />
-                          <DisconnectButton className="text-indigo-700 text-sm mt-4" />
+                          {/* Claim button */}
+                          <ConnectButton className={buttonClass}>
+                            <SwitchChainButton
+                              requiredChainId={Number(chainId)}
+                              className={buttonClass}
+                            >
+                              <StreamClaimButton className={buttonClass} />
+                            </SwitchChainButton>
+
+                            <DisconnectButton className="text-indigo-700 text-sm mt-4" />
+                          </ConnectButton>
                         </div>
                       </section>
                     </div>
