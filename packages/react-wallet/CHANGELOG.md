@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.58.3 (2022-06-17)
+
+
+### Bug Fixes
+
+* memoize client id ([5645bdf](https://github.com/0xflair/typescript-sdk/commit/5645bdf126b782fbf63da199c411c5347da0bb0b))
+
+
+
+
+
 ## 0.58.2 (2022-06-17)
 
 
