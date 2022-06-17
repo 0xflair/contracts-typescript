@@ -1,5 +1,9 @@
 import { Environment } from '@0xflair/react-common';
-import { ConnectButton, SwitchChainButton } from '@0xflair/react-wallet';
+import {
+  ConnectButton,
+  DisconnectButton,
+  SwitchChainButton,
+} from '@0xflair/react-wallet';
 import { useState } from 'react';
 
 import { CollectionImage } from '../../../common/components/CollectionImage';
@@ -117,6 +121,8 @@ export const CollectionSalesMintingSection = ({
                           Mint
                         </button>
                       </SwitchChainButton>
+
+                      <DisconnectButton className="text-indigo-700 text-sm mt-4" />
                     </ConnectButton>
                   </form>
 
