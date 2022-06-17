@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.58.1 (2022-06-17)
+
+
+### Bug Fixes
+
+* memoize request args ([bf6ce1b](https://github.com/0xflair/typescript-sdk/commit/bf6ce1b50aaf71b5ec8ab4b9088ee7a5c3d0b874))
+
+
+
+
+
 # 0.58.0 (2022-06-17)
 
 
