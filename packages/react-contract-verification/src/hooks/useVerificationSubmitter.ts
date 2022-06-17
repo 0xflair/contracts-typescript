@@ -47,15 +47,25 @@ export const useVerificationSubmitter = ({
     };
   }, [loginJwt]);
 
-  return useAxiosPost({
-    url: `${FLAIR_CONTRACT_VERIFICATION_BACKEND[env]}/v1/contract-verifications`,
-    data: {
+  const data = useMemo(() => {
+    return {
       chainId,
       contractAddress,
       contractFqn,
       contractVersion,
       encodedConstructorArguments,
-    },
+    };
+  }, [
+    chainId,
+    contractAddress,
+    contractFqn,
+    contractVersion,
+    encodedConstructorArguments,
+  ]);
+
+  return useAxiosPost({
+    url: `${FLAIR_CONTRACT_VERIFICATION_BACKEND[env]}/v1/contract-verifications`,
+    data,
     headers,
   });
 };
