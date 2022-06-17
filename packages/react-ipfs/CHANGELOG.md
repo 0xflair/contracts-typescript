@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.58.0 (2022-06-17)
+
+
+### Features
+
+* allow passing chain id for read hooks ([#5](https://github.com/0xflair/typescript-sdk/issues/5)) ([286eff4](https://github.com/0xflair/typescript-sdk/commit/286eff43613415067a426502f2e7c354f3c09c01))
+
+
+
+
+
 # 0.57.0 (2022-06-16)
 
 
