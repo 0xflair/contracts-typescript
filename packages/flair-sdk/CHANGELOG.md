@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.58.2 (2022-06-17)
+
+
+### Bug Fixes
+
+* memoize data for verification hook ([367d749](https://github.com/0xflair/typescript-sdk/commit/367d749bd346a9049a7bfa97ff466274a32d2245))
+
+
+
+
+
 ## 0.58.1 (2022-06-17)
 
 
