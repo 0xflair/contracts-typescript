@@ -2,6 +2,7 @@ import { Environment, useAxiosPost } from '@0xflair/react-common';
 import { useLoginJwt } from '@0xflair/react-wallet';
 import * as axios from 'axios';
 import { BytesLike } from 'ethers';
+import { useMemo } from 'react';
 
 import { FLAIR_ADDRESS_LISTS_BACKEND } from '../constants';
 
@@ -21,15 +22,23 @@ export function useAddressListMerkleTreeCreator({
   const loginJwt = useLoginJwt();
   const url = `${FLAIR_ADDRESS_LISTS_BACKEND[env]}/v1/address-list-merkle-trees`;
 
-  return useAxiosPost<BytesLike>({
-    url,
-    data: {
+  const headers = useMemo(() => {
+    return {
+      Authorization: `Bearer ${loginJwt}`,
+    };
+  }, [loginJwt]);
+
+  const data = useMemo(() => {
+    return {
       treeKey,
       listId,
-    },
+    };
+  }, [treeKey, listId]);
+
+  return useAxiosPost<BytesLike>({
+    url,
+    data,
     enabled: Boolean(enabled && loginJwt && treeKey && listId),
-    headers: {
-      Authorization: `Bearer ${loginJwt}`,
-    },
+    headers,
   });
 }

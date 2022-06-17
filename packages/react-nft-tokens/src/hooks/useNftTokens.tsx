@@ -1,6 +1,7 @@
 import 'axios';
 
 import { Environment, useAxiosGet } from '@0xflair/react-common';
+import { useMemo } from 'react';
 
 import { FLAIR_NFT_TOKENS_BACKEND } from '../constants';
 import { NftToken } from '../types';
@@ -24,13 +25,17 @@ export const useNftTokens = ({
 }: Props) => {
   const url = `${FLAIR_NFT_TOKENS_BACKEND[env]}/v1/nft-tokens`;
 
-  return useAxiosGet<NftToken[]>({
-    url,
-    params: {
+  const params = useMemo(() => {
+    return {
       chainId,
       collectionAddress,
       walletAddress,
-    },
+    };
+  }, [chainId, collectionAddress, walletAddress]);
+
+  return useAxiosGet<NftToken[]>({
+    url,
+    params,
     enabled: enabled,
     headers: {
       'X-Flair-Client-Id': clientId,

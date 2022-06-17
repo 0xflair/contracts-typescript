@@ -1,5 +1,6 @@
 import { Environment, useAxiosPatch } from '@0xflair/react-common';
 import { useLoginJwt } from '@0xflair/react-wallet';
+import { useMemo } from 'react';
 
 import { FLAIR_NFT_COLLECTIONS_BACKEND } from '../../constants';
 import { NftCollection } from '../../types';
@@ -16,13 +17,16 @@ export function useNftCollectionUpdater<
   { enabled = true, env = Environment.PROD }: UpdaterConfig
 ) {
   const loginJwt = useLoginJwt();
+  const headers = useMemo(() => {
+    return {
+      Authorization: `Bearer ${loginJwt}`,
+    };
+  }, [loginJwt]);
 
   return useAxiosPatch<NftCollection<TCollectionConfig>>({
     url: `${FLAIR_NFT_COLLECTIONS_BACKEND[env]}/v1/nft-collections/${collection._id}`,
     enabled: Boolean(enabled && loginJwt && collection?._id),
     data: collection,
-    headers: {
-      Authorization: `Bearer ${loginJwt}`,
-    },
+    headers,
   });
 }

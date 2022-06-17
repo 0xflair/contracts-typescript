@@ -41,6 +41,12 @@ export const useVerificationSubmitter = ({
     return iface.encodeDeploy(constructorArguments);
   }, [contractFqn, contractVersion, constructorArguments]);
 
+  const headers = useMemo(() => {
+    return {
+      Authorization: `Bearer ${loginJwt}`,
+    };
+  }, [loginJwt]);
+
   return useAxiosPost({
     url: `${FLAIR_CONTRACT_VERIFICATION_BACKEND[env]}/v1/contract-verifications`,
     data: {
@@ -50,8 +56,6 @@ export const useVerificationSubmitter = ({
       contractVersion,
       encodedConstructorArguments,
     },
-    headers: {
-      Authorization: `Bearer ${loginJwt}`,
-    },
+    headers,
   });
 };
