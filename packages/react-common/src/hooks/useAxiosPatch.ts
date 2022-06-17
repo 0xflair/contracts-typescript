@@ -1,6 +1,5 @@
 import axios, { AxiosRequestHeaders } from 'axios';
-import { useCallback, useState } from 'react';
-import { useDeepCompareEffect } from 'react-use';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useCancel } from './useCancel';
 
@@ -57,11 +56,11 @@ export const useAxiosPatch = <T>({
     }
   }, [cancelQuery, url, data, timeout, headers]);
 
-  useDeepCompareEffect(() => {
+  useEffect(() => {
     if (enabled) {
       sendRequest();
     }
-  }, [url, data, timeout]);
+  }, [url, data, timeout, enabled, sendRequest]);
 
   return { data: response, isLoading, error, sendRequest } as const;
 };

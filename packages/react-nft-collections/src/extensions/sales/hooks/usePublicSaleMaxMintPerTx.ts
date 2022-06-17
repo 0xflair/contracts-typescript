@@ -1,26 +1,15 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
-import { Provider } from '@ethersproject/providers';
-import { BigNumberish, Signer } from 'ethers';
+import {
+  PredefinedReadContractConfig,
+  useContractRead,
+} from '@0xflair/react-common';
+import { BigNumberish } from 'ethers';
 
-type Config = Partial<ReadContractConfig> & {
-  contractVersion?: ContractVersion;
-  contractAddress?: string;
-  signerOrProvider?: Signer | Provider | null;
-};
-
-export const usePublicSaleMaxMintPerTx = ({
-  contractAddress,
-  contractVersion,
-  signerOrProvider,
-  ...restOfConfig
-}: Config) => {
+export const usePublicSaleMaxMintPerTx = (
+  config: PredefinedReadContractConfig
+) => {
   return useContractRead<BigNumberish>({
-    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
     functionName: 'publicSaleMaxMintPerTx',
-    contractAddress,
-    signerOrProvider,
-    ...restOfConfig,
+    ...config,
   });
 };

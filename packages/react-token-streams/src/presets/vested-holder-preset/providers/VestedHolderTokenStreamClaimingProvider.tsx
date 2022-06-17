@@ -88,6 +88,7 @@ export const VestedHolderStreamClaimingProvider = ({ children }: Props) => {
     error: vestingRateError,
     isLoading: vestingRateLoading,
   } = useStreamVestingRate({
+    chainId: data?.chainId,
     contractVersion: data.stream?.presetVersion,
     contractAddress: data.contractAddress,
   });
@@ -96,6 +97,7 @@ export const VestedHolderStreamClaimingProvider = ({ children }: Props) => {
     error: vestingTimeUnitError,
     isLoading: vestingTimeUnitLoading,
   } = useStreamVestingTimeUnit({
+    chainId: data?.chainId,
     contractVersion: data.stream?.presetVersion,
     contractAddress: data.contractAddress,
   });
@@ -104,6 +106,7 @@ export const VestedHolderStreamClaimingProvider = ({ children }: Props) => {
     error: totalReleasedAmountError,
     isLoading: totalReleasedAmountLoading,
   } = useStreamTotalReleasedBulk({
+    chainId: data?.chainId,
     contractAddress: data.contractAddress,
     ticketTokenIds: data.ticketTokenIds,
   });

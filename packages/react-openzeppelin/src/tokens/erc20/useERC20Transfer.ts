@@ -1,10 +1,10 @@
 import { ContractVersion } from '@0xflair/contracts-registry';
 import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
-import { ReadContractConfig } from '@wagmi/core';
+import { WriteContractConfig } from '@wagmi/core';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 
-type Config = Partial<ReadContractConfig> & {
+type Config = Partial<WriteContractConfig> & {
   contractVersion?: ContractVersion;
   enabled?: boolean;
   contractAddress?: string;

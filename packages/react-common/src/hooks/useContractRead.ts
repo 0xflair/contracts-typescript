@@ -4,34 +4,34 @@ import {
   ContractVersion,
   loadContract,
 } from '@0xflair/contracts-registry';
-import { Provider } from '@ethersproject/providers';
-import { Signer } from 'ethers';
+import { ReadContractConfig as ReadContractConfigWagmi } from '@wagmi/core';
 import { useMemo } from 'react';
 import { useContractRead as useContractReadWagmi } from 'wagmi';
 import { UseContractReadConfig } from 'wagmi/dist/declarations/src/hooks/contracts/useContractRead';
 
-export type ReadContractConfig<ArgsType extends any[] = any[]> =
+export type ReadContractConfig<ArgsType = []> = Partial<
+  Omit<ReadContractConfigWagmi, 'args'>
+> &
   UseContractReadConfig & {
     contractVersion?: ContractVersion;
     contractFqn: ContractFqn;
     contractAddress?: string;
-    signerOrProvider?: Signer | Provider | null;
     functionName: string;
     args?: ArgsType;
-    enabled?: boolean;
     watch?: boolean;
     cacheOnBlock?: boolean;
   };
 
-export const useContractRead = <
-  ResultType = any,
-  ArgsType extends any[] = any[]
->({
+export type PredefinedReadContractConfig<ArgsType = []> = Omit<
+  ReadContractConfig<ArgsType>,
+  'contractFqn' | 'functionName'
+>;
+
+export const useContractRead = <ResultType = any, ArgsType = []>({
   contractVersion,
   enabled = true,
   contractFqn,
   contractAddress,
-  signerOrProvider,
   functionName,
   args,
   watch = false,
@@ -50,7 +50,6 @@ export const useContractRead = <
     {
       addressOrName: contractAddress as string,
       contractInterface: contract.artifact.abi,
-      ...(signerOrProvider ? { signerOrProvider } : {}),
     },
     functionName as string,
     {

@@ -1,13 +1,8 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
-import { Provider } from '@ethersproject/providers';
-import { BigNumberish, Signer } from 'ethers';
-
-type Config = Partial<ReadContractConfig> & {
-  contractVersion?: ContractVersion;
-  contractAddress?: string;
-  signerOrProvider?: Signer | Provider | null;
-};
+import {
+  PredefinedReadContractConfig,
+  useContractRead,
+} from '@0xflair/react-common';
+import { BigNumberish } from 'ethers';
 
 export type ERC721OneOfOneContractInfo = [
   maxSupply?: BigNumberish,
@@ -18,15 +13,13 @@ export type ERC721OneOfOneContractInfo = [
 export const useERC721OneOfOneContractInfo = ({
   contractVersion,
   contractAddress,
-  signerOrProvider,
   ...restOfConfig
-}: Config) => {
+}: PredefinedReadContractConfig) => {
   return useContractRead<ERC721OneOfOneContractInfo>({
     contractVersion,
     contractFqn: 'collections/ERC721/presets/ERC721OneOfOneCollection',
     functionName: 'getInfo',
     contractAddress,
-    signerOrProvider,
     ...restOfConfig,
   });
 };

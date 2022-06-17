@@ -26,9 +26,6 @@ type CollectionContextValue = {
     metadataUri?: BytesLike;
     maxSupply?: BigNumberish;
     totalSupply?: BigNumberish;
-
-    // Helpers
-    readProvider?: ReturnType<typeof useProvider>;
   };
 
   isLoading: {
@@ -66,7 +63,7 @@ type Props = {
   env?: Environment;
 
   /** ChainID where the token stream is deployed */
-  chainId: number;
+  chainId: number | string;
 
   /** Contract address of the token stream */
   contractAddress: string;
@@ -77,12 +74,12 @@ type Props = {
 
 export const CollectionProvider = ({
   env = Environment.PROD,
-  chainId,
+  chainId: rawChainId,
   contractAddress,
   children,
 }: Props) => {
-  const chainInfo = useChainInfo(chainId && Number(chainId));
-  const readProvider = useProvider({ chainId: Number(chainId) });
+  const chainId = Number(rawChainId);
+  const chainInfo = useChainInfo(chainId);
 
   const {
     data: collection,
@@ -90,7 +87,7 @@ export const CollectionProvider = ({
     isLoading: collectionLoading,
   } = useNftCollection({
     env,
-    chainId: Number(chainId),
+    chainId,
     contractAddress,
   });
 
@@ -99,9 +96,9 @@ export const CollectionProvider = ({
     error: metadataUriError,
     isLoading: metadataUriLoading,
   } = useCollectionMetadataUri({
+    chainId,
     contractVersion: collection?.presetVersion,
     contractAddress,
-    signerOrProvider: readProvider,
   });
 
   const {
@@ -117,9 +114,9 @@ export const CollectionProvider = ({
     error: maxSupplyError,
     isLoading: maxSupplyLoading,
   } = useMaxSupply({
+    chainId,
     contractVersion: collection?.presetVersion,
     contractAddress,
-    signerOrProvider: readProvider,
     watch: true,
   });
 
@@ -128,9 +125,9 @@ export const CollectionProvider = ({
     error: totalSupplyError,
     isLoading: totalSupplyLoading,
   } = useTotalSupply({
+    chainId,
     contractVersion: collection?.presetVersion,
     contractAddress,
-    signerOrProvider: readProvider,
     watch: true,
   });
 
@@ -147,9 +144,6 @@ export const CollectionProvider = ({
       metadataUri,
       maxSupply,
       totalSupply,
-
-      // Helpers
-      readProvider,
     },
 
     isLoading: {

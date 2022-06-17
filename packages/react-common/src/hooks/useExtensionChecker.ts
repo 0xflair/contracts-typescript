@@ -1,27 +1,21 @@
 import { getInterfaceId } from '@0xflair/common';
-import {
-  ContractFqn,
-  ContractVersion,
-  loadContract,
-} from '@0xflair/contracts-registry';
-import { Provider } from '@ethersproject/providers';
-import { ethers, Signer } from 'ethers';
+import { ContractFqn, loadContract } from '@0xflair/contracts-registry';
+import { BigNumberish, ethers } from 'ethers';
 import { useMemo } from 'react';
 
-import { ReadContractConfig, useContractRead } from './useContractRead';
+import {
+  PredefinedReadContractConfig,
+  useContractRead,
+} from './useContractRead';
 
-type Config = Partial<ReadContractConfig> & {
-  contractVersion?: ContractVersion;
-  contractAddress?: string;
+type Config = PredefinedReadContractConfig<[BigNumberish]> & {
   extensionFqn?: ContractFqn;
-  signerOrProvider?: Signer | Provider | null;
 };
 
 export const useExtensionChecker = ({
   contractAddress,
   contractVersion,
   extensionFqn,
-  signerOrProvider,
   ...restOfConfig
 }: Config) => {
   const interfaceId = useMemo(() => {
@@ -39,13 +33,12 @@ export const useExtensionChecker = ({
     }
   }, [extensionFqn, contractVersion]);
 
-  const result = useContractRead<boolean>({
+  const result = useContractRead<boolean, [BigNumberish]>({
     contractVersion,
+    contractAddress,
     contractFqn: 'openzeppelin/utils/introspection/ERC165',
     functionName: 'supportsInterface',
-    args: [interfaceId],
-    contractAddress,
-    signerOrProvider,
+    args: interfaceId ? [interfaceId] : undefined,
     enabled: Boolean(interfaceId && contractAddress),
     ...restOfConfig,
   });

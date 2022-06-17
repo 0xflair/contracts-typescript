@@ -1,27 +1,13 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
-import { Provider } from '@ethersproject/providers';
-import { Signer } from 'ethers';
+import {
+  PredefinedReadContractConfig,
+  useContractRead,
+} from '@0xflair/react-common';
 
-type Config = Partial<ReadContractConfig> & {
-  contractVersion?: ContractVersion;
-  contractAddress?: string;
-  signerOrProvider?: Signer | Provider | null;
-};
-
-export const usePlaceholderUri = ({
-  contractVersion,
-  contractAddress,
-  signerOrProvider,
-  ...restOfConfig
-}: Config) => {
+export const usePlaceholderUri = (config: PredefinedReadContractConfig) => {
   return useContractRead({
-    contractVersion,
     contractFqn:
       'collections/ERC721/extensions/ERC721PrefixedMetadataExtension',
     functionName: 'placeholderURI',
-    contractAddress,
-    signerOrProvider,
-    ...restOfConfig,
+    ...config,
   });
 };

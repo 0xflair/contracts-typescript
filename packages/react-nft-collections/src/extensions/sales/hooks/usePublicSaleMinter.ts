@@ -6,6 +6,7 @@ import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
 import { usePublicSalePrice } from './usePublicSalePrice';
 
 type Config = {
+  chainId?: number;
   contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
@@ -16,6 +17,7 @@ type Config = {
 type ArgsType = [toAddress: BytesLike, mintCount: BigNumberish];
 
 export const usePublicSaleMinter = ({
+  chainId,
   contractVersion,
   contractAddress,
   signerOrProvider,
@@ -27,6 +29,7 @@ export const usePublicSaleMinter = ({
     error,
     isLoading,
   } = usePublicSalePrice({
+    chainId,
     contractVersion,
     contractAddress,
   });

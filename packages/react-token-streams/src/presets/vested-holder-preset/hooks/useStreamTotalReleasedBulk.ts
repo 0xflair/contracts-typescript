@@ -1,29 +1,23 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
-import { Provider } from '@ethersproject/providers';
-import { BigNumberish, Signer } from 'ethers';
+import {
+  PredefinedReadContractConfig,
+  useContractRead,
+} from '@0xflair/react-common';
+import { BigNumberish } from 'ethers';
 
-type Config = Partial<ReadContractConfig> & {
-  contractVersion?: ContractVersion;
-  contractAddress?: string;
-  signerOrProvider?: Signer | Provider | null;
+type Config = PredefinedReadContractConfig<[BigNumberish[]]> & {
   ticketTokenIds?: BigNumberish[];
 };
 
 export const useStreamTotalReleasedBulk = ({
-  contractVersion,
-  contractAddress,
-  signerOrProvider,
+  enabled,
   ticketTokenIds,
   ...restOfConfig
 }: Config) => {
-  return useContractRead<BigNumberish>({
-    contractVersion,
+  return useContractRead<BigNumberish, Config['args']>({
     contractFqn: 'streams/ERC721/presets/ERC721HolderVestedDistributor',
     functionName: 'getTotalReleasedBulk',
-    contractAddress,
-    signerOrProvider,
-    args: [ticketTokenIds],
+    enabled: ticketTokenIds && ticketTokenIds.length > 0 && enabled,
+    args: ticketTokenIds ? [ticketTokenIds] : undefined,
     ...restOfConfig,
   });
 };

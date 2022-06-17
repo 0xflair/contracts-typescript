@@ -18,7 +18,6 @@ type Config = {
   chainId?: number;
   contractVersion?: ContractVersion;
   contractAddress?: string;
-  readProvider?: Provider | null;
   signerOrProvider?: Signer | Provider | null;
   minterAddress?: BytesLike;
   mintCount?: BigNumberish;
@@ -32,7 +31,6 @@ export const useSaleMinter = ({
   chainId,
   contractVersion,
   contractAddress,
-  readProvider,
   signerOrProvider,
   minterAddress,
   mintCount,
@@ -44,9 +42,9 @@ export const useSaleMinter = ({
     error: preSaleStatusError,
     isLoading: preSaleStatusLoading,
   } = usePreSaleStatus({
+    chainId,
     contractVersion,
     contractAddress,
-    signerOrProvider: readProvider || signerOrProvider,
   });
 
   const {
@@ -54,9 +52,9 @@ export const useSaleMinter = ({
     error: publicSaleStatusError,
     isLoading: publicSaleStatusLoading,
   } = usePublicSaleStatus({
+    chainId,
     contractVersion,
     contractAddress,
-    signerOrProvider: readProvider || signerOrProvider,
   });
 
   const {
@@ -68,7 +66,6 @@ export const useSaleMinter = ({
     chainId,
     contractVersion,
     contractAddress,
-    signerOrProvider: readProvider || signerOrProvider,
     enabled: true,
     minterAddress,
   });
@@ -79,6 +76,7 @@ export const useSaleMinter = ({
     isLoading: preSaleMintLoading,
     writeAndWait: preSaleMintWrite,
   } = usePreSaleMinter({
+    chainId,
     contractVersion,
     contractAddress,
     signerOrProvider,
@@ -92,6 +90,7 @@ export const useSaleMinter = ({
     isLoading: publicSaleMintLoading,
     writeAndWait: publicSaleMintWrite,
   } = usePublicSaleMinter({
+    chainId,
     contractVersion,
     contractAddress,
     signerOrProvider,

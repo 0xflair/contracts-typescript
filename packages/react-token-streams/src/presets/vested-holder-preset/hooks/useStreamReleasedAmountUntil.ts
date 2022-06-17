@@ -1,29 +1,21 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
-import { Provider } from '@ethersproject/providers';
-import { BigNumberish, Signer } from 'ethers';
+import {
+  PredefinedReadContractConfig,
+  useContractRead,
+} from '@0xflair/react-common';
+import { BigNumberish } from 'ethers';
 
-type Config = Partial<ReadContractConfig> & {
-  contractVersion?: ContractVersion;
-  contractAddress?: string;
-  signerOrProvider?: Signer | Provider | null;
-  calculateUntil?: number;
+type Config = PredefinedReadContractConfig<[BigNumberish]> & {
+  calculateUntil?: BigNumberish;
 };
 
 export const useStreamReleasedAmountUntil = ({
-  contractVersion,
-  contractAddress,
-  signerOrProvider,
   calculateUntil,
   ...restOfConfig
 }: Config) => {
-  return useContractRead<BigNumberish>({
-    contractVersion,
+  return useContractRead<BigNumberish, Config['args']>({
     contractFqn: 'streams/ERC721/presets/ERC721HolderVestedDistributor',
     functionName: 'calculateReleasedAmountUntil',
-    contractAddress,
-    signerOrProvider,
-    args: [calculateUntil],
+    args: calculateUntil ? [calculateUntil] : undefined,
     ...restOfConfig,
   });
 };

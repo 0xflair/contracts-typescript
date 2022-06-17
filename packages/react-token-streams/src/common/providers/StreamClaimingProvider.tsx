@@ -78,7 +78,7 @@ type Props = {
   env?: Environment;
 
   /** ChainID where the token stream is deployed */
-  chainId: number;
+  chainId: number | string;
 
   /** Contract address of the token stream */
   contractAddress: string;
@@ -121,6 +121,7 @@ export const StreamClaimingProvider = ({
     error: claimTokenSymbolError,
     isLoading: claimTokenSymbolLoading,
   } = useERC20Symbol({
+    chainId: Number(chainId),
     contractAddress: stream?.config?.claimToken,
   });
   const {
@@ -128,6 +129,7 @@ export const StreamClaimingProvider = ({
     error: totalClaimedAmountError,
     isLoading: totalClaimedAmountLoading,
   } = useStreamTotalClaimedBulk({
+    chainId: Number(chainId),
     contractAddress,
     ticketTokenIds,
   });
@@ -136,6 +138,7 @@ export const StreamClaimingProvider = ({
     error: totalClaimableAmountError,
     isLoading: totalClaimableAmountLoading,
   } = useStreamTotalClaimableBulk({
+    chainId: Number(chainId),
     contractAddress,
     ticketTokenIds,
   });
@@ -161,7 +164,7 @@ export const StreamClaimingProvider = ({
   const value = {
     data: {
       // Resources
-      chainId,
+      chainId: Number(chainId),
       contractAddress,
       stream,
       nfts,

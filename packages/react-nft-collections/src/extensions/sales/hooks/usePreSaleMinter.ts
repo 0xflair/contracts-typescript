@@ -6,6 +6,7 @@ import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
 import { usePreSalePrice } from './usePreSalePrice';
 
 type Config = {
+  chainId?: number;
   contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
@@ -16,6 +17,7 @@ type Config = {
 type ArgsType = [mintCount: BigNumberish, allowlistProof: BytesLike[]];
 
 export const usePreSaleMinter = ({
+  chainId,
   contractVersion,
   contractAddress,
   signerOrProvider,
@@ -27,6 +29,7 @@ export const usePreSaleMinter = ({
     isLoading,
     error,
   } = usePreSalePrice({
+    chainId,
     contractVersion,
     contractAddress,
   });

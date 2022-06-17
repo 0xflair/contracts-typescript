@@ -1,26 +1,15 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { ReadContractConfig, useContractRead } from '@0xflair/react-common';
-import { Provider } from '@ethersproject/providers';
-import { BigNumberish, Signer } from 'ethers';
+import {
+  PredefinedReadContractConfig,
+  useContractRead,
+} from '@0xflair/react-common';
+import { BigNumberish } from 'ethers';
 
-type Config = Partial<ReadContractConfig> & {
-  contractVersion?: ContractVersion;
-  contractAddress?: string;
-  signerOrProvider?: Signer | Provider | null;
-};
-
-export const useStreamVestingTimeUnit = ({
-  contractVersion,
-  contractAddress,
-  signerOrProvider,
-  ...restOfConfig
-}: Config) => {
+export const useStreamVestingTimeUnit = (
+  config: PredefinedReadContractConfig
+) => {
   return useContractRead<BigNumberish>({
-    contractVersion,
     contractFqn: 'streams/ERC721/presets/ERC721HolderVestedDistributor',
     functionName: 'vestingTimeUnit',
-    contractAddress,
-    signerOrProvider,
-    ...restOfConfig,
+    ...config,
   });
 };

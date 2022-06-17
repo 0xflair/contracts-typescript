@@ -1,38 +1,20 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { ReadContractConfig } from '@0xflair/react-common';
+import { PredefinedReadContractConfig } from '@0xflair/react-common';
 import { useRemoteJsonReader } from '@0xflair/react-ipfs';
-import { Provider } from '@ethersproject/providers';
-import { Signer } from 'ethers';
 import { useCallback } from 'react';
 
 import { NftCollectionMetadata } from '../../types';
 import { useCollectionMetadataUri } from './useCollectionMetadataUri';
 
-type Config = Partial<ReadContractConfig> & {
-  contractVersion?: ContractVersion;
-  contractAddress?: string;
-  signerOrProvider?: Signer | Provider | null;
-};
-
 export const useCollectionMetadata = ({
-  contractVersion,
-  contractAddress,
-  signerOrProvider,
   enabled,
-  watch = false,
-}: Config) => {
+  ...config
+}: PredefinedReadContractConfig) => {
   const {
     data: contractURI,
     error: contractURIError,
     isLoading: contractURILoading,
     refetch: contractURIRefetch,
-  } = useCollectionMetadataUri({
-    contractVersion,
-    contractAddress,
-    signerOrProvider,
-    enabled,
-    watch,
-  });
+  } = useCollectionMetadataUri(config);
 
   const {
     data: collectionMetadata,
