@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.59.4 (2022-06-17)
+
+
+### Bug Fixes
+
+* show allowlist status only if connected wallet ([a3c05f4](https://github.com/0xflair/typescript-sdk/commit/a3c05f4bd30f3ad6a99a8dab7e4f9bd52922d437))
+
+
+
+
+
 ## 0.59.3 (2022-06-17)
 
 
