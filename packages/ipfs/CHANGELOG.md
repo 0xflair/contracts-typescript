@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.59.3 (2022-06-17)
+
+
+### Bug Fixes
+
+* do not watch on hooks ([b171359](https://github.com/0xflair/typescript-sdk/commit/b171359416000d0c026b4b55a2cf3a7069cbcb78))
+
+
+
+
+
 ## 0.59.2 (2022-06-17)
 
 
