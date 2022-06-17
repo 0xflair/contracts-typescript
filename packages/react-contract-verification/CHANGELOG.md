@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.59.0 (2022-06-17)
+
+
+### Features
+
+* add connect and switch button around claim button ([9ecce19](https://github.com/0xflair/typescript-sdk/commit/9ecce19d3c1eaf572ca2b1af43fcbbd238781595))
+
+
+
+
+
 ## 0.58.3 (2022-06-17)
 
 
