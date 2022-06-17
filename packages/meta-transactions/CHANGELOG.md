@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.59.2 (2022-06-17)
+
+
+### Bug Fixes
+
+* update infura project id ([8edc515](https://github.com/0xflair/typescript-sdk/commit/8edc515c8104b4b06b9f0674eba3c0f8c61ef702))
+
+
+
+
+
 ## 0.59.1 (2022-06-17)
 
 
