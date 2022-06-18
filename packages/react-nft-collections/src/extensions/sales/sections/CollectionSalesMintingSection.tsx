@@ -1,8 +1,8 @@
 import { Environment } from '@0xflair/react-common';
 import {
   ConnectButton,
-  DisconnectButton,
   SwitchChainButton,
+  WalletDropdown,
 } from '@0xflair/react-wallet';
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
@@ -32,7 +32,7 @@ export const CollectionSalesMintingSection = ({
   const [mintCount, setMintCount] = useState(1);
 
   const mintButtonClass =
-    'mt-4 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
+    'w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
 
   return (
     <CollectionProvider
@@ -80,7 +80,7 @@ export const CollectionSalesMintingSection = ({
                     }}
                   >
                     {/* Mint count */}
-                    <div className="mt-8">
+                    <div className="mt-8 mb-4">
                       <div className="flex items-center justify-between">
                         <h2 className="text-sm font-medium text-gray-900">
                           How many to mint?
@@ -111,20 +111,21 @@ export const CollectionSalesMintingSection = ({
 
                     {/* Mint button */}
                     <ConnectButton className={mintButtonClass}>
-                      <SwitchChainButton
-                        requiredChainId={Number(chainId)}
-                        className={mintButtonClass}
-                      >
-                        <button
-                          onClick={() => mint({ mintCount })}
-                          disabled={!canMint}
+                      <div className="flex gap-3 items-center">
+                        <SwitchChainButton
+                          requiredChainId={Number(chainId)}
                           className={mintButtonClass}
                         >
-                          Mint
-                        </button>
-                      </SwitchChainButton>
-
-                      <DisconnectButton className="text-indigo-700 text-sm mt-4" />
+                          <button
+                            onClick={() => mint({ mintCount })}
+                            disabled={!canMint}
+                            className={mintButtonClass}
+                          >
+                            Mint
+                          </button>
+                        </SwitchChainButton>
+                        <WalletDropdown />
+                      </div>
                     </ConnectButton>
                   </form>
 
