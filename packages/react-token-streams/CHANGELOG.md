@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.60.0 (2022-06-18)
+
+
+### Features
+
+* add wallet dropdown in minting section ([fd09cc1](https://github.com/0xflair/typescript-sdk/commit/fd09cc12ae67a1a5c6c074cb64febfcc258136cd))
+
+
+
+
+
 ## 0.59.4 (2022-06-17)
 
 
