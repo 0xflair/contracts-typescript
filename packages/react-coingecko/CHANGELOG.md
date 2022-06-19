@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.60.1 (2022-06-19)
+
+
+### Bug Fixes
+
+* crupto amount field handling fractions ([9c6ccd2](https://github.com/0xflair/typescript-sdk/commit/9c6ccd2cc5424caf4b793336d38356910ee73f74))
+
+
+
+
+
 # 0.60.0 (2022-06-18)
 
 
