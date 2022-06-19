@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useNetwork } from 'wagmi';
 
-import { CryptoSymbol, CryptoUnits } from '../../types';
+import { CryptoUnits, CryptoSymbol } from '../../types';
 import { CryptoPrice } from '../CryptoPrice/CryptoPrice';
 
 export type CryptoAmountFieldProps = {
@@ -30,7 +30,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
   const convertedValueWei = utils.parseUnits(value.toString(), unit);
   const convertedValueEther = utils.formatEther(convertedValueWei);
 
-  const [rawValue, setRawValue] = useState(convertedValueEther.toString());
+  const [etherValue, setEtherValue] = useState(convertedValueEther.toString());
 
   return (
     <div>
@@ -40,9 +40,9 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
           type="text"
           className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"
           placeholder="0.00"
-          value={rawValue}
+          value={etherValue}
           onChange={(e) => {
-            setRawValue(e.target.value);
+            setEtherValue(e.target.value);
             onChange && onChange(
               utils.formatUnits(utils.parseEther(e.target.value), unit)
             );
@@ -52,11 +52,11 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
           <span className="text-gray-500 sm:text-sm" id="price-currency">
             {activeChain?.nativeCurrency?.name} (
             <CryptoPrice
-              value={rawValue}
+              value={etherValue}
               symbol={
                 symbol || (activeChain?.nativeCurrency?.symbol as CryptoSymbol)
               }
-              unit={unit}
+              unit={CryptoUnits.ETHER}
             />{' '}
             USD)
           </span>
