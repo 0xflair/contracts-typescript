@@ -1,3 +1,4 @@
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { Environment } from '@0xflair/react-common';
 import { NftToken, useNftTokens } from '@0xflair/react-nft-tokens';
 import { useERC20Symbol } from '@0xflair/react-openzeppelin';
@@ -31,6 +32,7 @@ type StreamClaimingContextValue = {
 
     // Helpers
     canClaim?: boolean;
+    contractVersion?: ContractVersion;
 
     // Transaction
     txReceipt?: TransactionReceipt;
@@ -82,12 +84,16 @@ type Props = {
 
   /** Contract address of the token stream */
   contractAddress: string;
+
+  /** Optional contract version which defaults to stored value on backend, and falls back to latest */
+  contractVersion?: ContractVersion;
 };
 
 export const StreamClaimingProvider = ({
   env = Environment.PROD,
   chainId,
   contractAddress,
+  contractVersion,
   children,
 }: React.PropsWithChildren<Props>) => {
   const { data: signer } = useSigner();
@@ -131,7 +137,9 @@ export const StreamClaimingProvider = ({
   } = useStreamTotalClaimedBulk({
     chainId: Number(chainId),
     contractAddress,
+    contractVersion: contractVersion || stream?.presetVersion,
     ticketTokenIds,
+    enabled: ticketTokenIds && ticketTokenIds.length > 0,
   });
   const {
     data: totalClaimableAmount,
@@ -140,7 +148,9 @@ export const StreamClaimingProvider = ({
   } = useStreamTotalClaimableBulk({
     chainId: Number(chainId),
     contractAddress,
+    contractVersion: contractVersion || stream?.presetVersion,
     ticketTokenIds,
+    enabled: ticketTokenIds && ticketTokenIds.length > 0,
   });
   const {
     data: { txReceipt, txResponse },
@@ -148,8 +158,8 @@ export const StreamClaimingProvider = ({
     isLoading: claimLoading,
     claim,
   } = useStreamClaimer({
-    contractVersion: stream?.presetVersion,
     contractAddress,
+    contractVersion: contractVersion || stream?.presetVersion,
     signerOrProvider: signer,
     ticketTokenIds,
   });
@@ -177,6 +187,7 @@ export const StreamClaimingProvider = ({
 
       // Helpers
       canClaim,
+      contractVersion: contractVersion || stream?.presetVersion,
 
       // Transaction
       txReceipt,

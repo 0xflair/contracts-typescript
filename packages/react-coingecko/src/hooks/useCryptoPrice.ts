@@ -26,8 +26,13 @@ export const useCryptoPrice = ({
       ? priceDictionariesBySymbol[normalizedSymbol][baseCurrency.toLowerCase()]
       : undefined;
 
-  if (!price) {
-    console.warn(
+  if (
+    !price &&
+    normalizedSymbol &&
+    baseCurrency &&
+    Object.keys(priceDictionariesBySymbol).length > 0
+  ) {
+    console.info(
       `Could not resolve price of symbol (${symbol}) in base currency (${baseCurrency}), make sure both are defined on <CoinGeckoProvider />`
     );
   }

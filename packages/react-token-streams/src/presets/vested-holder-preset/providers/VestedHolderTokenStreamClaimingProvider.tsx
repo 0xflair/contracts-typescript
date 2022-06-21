@@ -89,7 +89,7 @@ export const VestedHolderStreamClaimingProvider = ({ children }: Props) => {
     isLoading: vestingRateLoading,
   } = useStreamVestingRate({
     chainId: data?.chainId,
-    contractVersion: data.stream?.presetVersion,
+    contractVersion: data.contractVersion,
     contractAddress: data.contractAddress,
   });
   const {
@@ -98,7 +98,7 @@ export const VestedHolderStreamClaimingProvider = ({ children }: Props) => {
     isLoading: vestingTimeUnitLoading,
   } = useStreamVestingTimeUnit({
     chainId: data?.chainId,
-    contractVersion: data.stream?.presetVersion,
+    contractVersion: data.contractVersion,
     contractAddress: data.contractAddress,
   });
   const {
@@ -107,6 +107,7 @@ export const VestedHolderStreamClaimingProvider = ({ children }: Props) => {
     isLoading: totalReleasedAmountLoading,
   } = useStreamTotalReleasedBulk({
     chainId: data?.chainId,
+    contractVersion: data.contractVersion,
     contractAddress: data.contractAddress,
     ticketTokenIds: data.ticketTokenIds,
   });
