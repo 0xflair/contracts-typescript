@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.61.5 (2022-06-21)
+
+
+### Bug Fixes
+
+* disable custodial wallet by default ([837ee12](https://github.com/0xflair/typescript-sdk/commit/837ee120d0bc88e0a191350900f0e0f94e78eb1e))
+
+
+
+
+
 ## 0.61.4 (2022-06-21)
 
 
