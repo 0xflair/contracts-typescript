@@ -16,8 +16,8 @@ export const useStreamTotalReleasedBulk = ({
   return useContractRead<BigNumberish, Config['args']>({
     contractFqn: 'streams/ERC721/presets/ERC721HolderVestedDistributor',
     functionName: 'getTotalReleasedBulk',
+    args: ticketTokenIds ? [ticketTokenIds] : [[0]],
     enabled: ticketTokenIds && ticketTokenIds.length > 0 && enabled,
-    args: ticketTokenIds ? [ticketTokenIds] : undefined,
     ...restOfConfig,
   });
 };

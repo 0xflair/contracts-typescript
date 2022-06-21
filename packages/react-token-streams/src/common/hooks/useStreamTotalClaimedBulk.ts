@@ -9,13 +9,15 @@ type Config = PredefinedReadContractConfig<[BigNumberish[]]> & {
 };
 
 export const useStreamTotalClaimedBulk = ({
+  enabled,
   ticketTokenIds,
   ...restOfConfig
 }: Config) => {
   return useContractRead<BigNumberish, Config['args']>({
     contractFqn: 'streams/ERC721/core/ERC721SingleTokenDistributor',
     functionName: 'getTotalClaimedBulk',
-    args: ticketTokenIds ? [ticketTokenIds] : undefined,
+    args: ticketTokenIds ? [ticketTokenIds] : [[0]],
+    enabled: ticketTokenIds && ticketTokenIds.length > 0 && enabled,
     ...restOfConfig,
   });
 };

@@ -16,8 +16,8 @@ export const useStreamTotalClaimableBulk = ({
   return useContractRead<BigNumberish, Config['args']>({
     contractFqn: 'streams/ERC721/core/ERC721SingleTokenDistributor',
     functionName: 'getTotalClaimableBulk',
+    args: ticketTokenIds ? [ticketTokenIds] : [[0]],
     enabled: ticketTokenIds && ticketTokenIds.length > 0 && enabled,
-    args: ticketTokenIds ? [ticketTokenIds] : undefined,
     ...restOfConfig,
   });
 };

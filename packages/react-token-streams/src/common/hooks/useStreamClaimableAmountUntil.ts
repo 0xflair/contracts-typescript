@@ -9,13 +9,15 @@ type Config = PredefinedReadContractConfig<[BigNumberish]> & {
 };
 
 export const useStreamClaimableAmountUntil = ({
+  enabled,
   calculateUntil,
   ...restOfConfig
 }: Config) => {
   return useContractRead<BigNumberish, Config['args']>({
     contractFqn: 'streams/ERC721/presets/ERC721HolderVestedDistributor',
     functionName: 'calculateClaimableAmountUntil',
-    args: calculateUntil ? [calculateUntil] : undefined,
+    enabled: calculateUntil !== undefined && enabled,
+    args: calculateUntil ? [calculateUntil] : [0],
     ...restOfConfig,
   });
 };
