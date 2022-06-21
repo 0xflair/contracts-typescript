@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.61.2 (2022-06-21)
+
+
+### Bug Fixes
+
+* use new contract name for 1.9 streams ([8825ccf](https://github.com/0xflair/typescript-sdk/commit/8825ccf2132c0c9c0bee92aa251360875573453b))
+
+
+
+
+
 ## 0.61.1 (2022-06-21)
 
 
