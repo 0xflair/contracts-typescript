@@ -1,3 +1,4 @@
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { Environment, useChainInfo } from '@0xflair/react-common';
 import { useRemoteJsonReader } from '@0xflair/react-ipfs';
 import { BigNumberish, BytesLike } from 'ethers';
@@ -19,6 +20,7 @@ type CollectionContextValue = {
     chainId?: number;
     chainInfo?: Chain;
     contractAddress?: string;
+    contractVersion?: ContractVersion;
     collection?: NftCollection | null;
     collectionMetadata?: NftCollectionMetadata | null;
 
@@ -68,6 +70,9 @@ type Props = {
   /** Contract address of the token stream */
   contractAddress: string;
 
+  /** Optional contract version which defaults to stored value on backend, and falls back to latest */
+  contractVersion?: ContractVersion;
+
   /** Child elements or a factory function that returns child elements */
   children: FunctionalChildren | ReactNode | ReactNode[];
 };
@@ -76,6 +81,7 @@ export const CollectionProvider = ({
   env = Environment.PROD,
   chainId: rawChainId,
   contractAddress,
+  contractVersion: _contractVersion,
   children,
 }: Props) => {
   const chainId = Number(rawChainId);
@@ -91,13 +97,15 @@ export const CollectionProvider = ({
     contractAddress,
   });
 
+  const contractVersion = _contractVersion || collection?.presetVersion;
+
   const {
     data: metadataUri,
     error: metadataUriError,
     isLoading: metadataUriLoading,
   } = useCollectionMetadataUri({
     chainId,
-    contractVersion: collection?.presetVersion,
+    contractVersion,
     contractAddress,
   });
 
@@ -115,7 +123,7 @@ export const CollectionProvider = ({
     isLoading: maxSupplyLoading,
   } = useMaxSupply({
     chainId,
-    contractVersion: collection?.presetVersion,
+    contractVersion,
     contractAddress,
     watch: false,
   });
@@ -126,7 +134,7 @@ export const CollectionProvider = ({
     isLoading: totalSupplyLoading,
   } = useTotalSupply({
     chainId,
-    contractVersion: collection?.presetVersion,
+    contractVersion,
     contractAddress,
     watch: false,
   });
@@ -137,6 +145,7 @@ export const CollectionProvider = ({
       chainId,
       chainInfo,
       contractAddress,
+      contractVersion,
       collection,
       collectionMetadata,
 

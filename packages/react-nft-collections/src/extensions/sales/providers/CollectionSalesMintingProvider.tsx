@@ -97,7 +97,7 @@ export const CollectionSalesMintingProvider = ({
   } = useSaleMinter({
     env,
     chainId: Number(data.chainId),
-    contractVersion: data.collection?.presetVersion,
+    contractVersion: data.contractVersion,
     contractAddress: data.contractAddress,
     minterAddress: account?.address,
   });

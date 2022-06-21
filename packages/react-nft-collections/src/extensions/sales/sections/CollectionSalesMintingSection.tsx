@@ -1,3 +1,4 @@
+import { ContractVersion } from '@0xflair/contracts-registry';
 import { Environment } from '@0xflair/react-common';
 import {
   ConnectButton,
@@ -21,12 +22,14 @@ type Props = {
   env?: Environment;
   chainId: number;
   contractAddress: string;
+  contractVersion?: ContractVersion;
 };
 
 export const CollectionSalesMintingSection = ({
   env = Environment.PROD,
   chainId,
   contractAddress,
+  contractVersion,
 }: Props) => {
   const { data: account } = useAccount();
   const [mintCount, setMintCount] = useState(1);
@@ -39,6 +42,7 @@ export const CollectionSalesMintingSection = ({
       env={env}
       chainId={Number(chainId)}
       contractAddress={contractAddress}
+      contractVersion={contractVersion}
     >
       <CollectionSalesMintingProvider>
         {({ data: { collection, collectionMetadata, canMint }, mint }) => (
