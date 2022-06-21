@@ -1,6 +1,6 @@
-import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
-
-import { useStreamClaimingContext } from '../providers/StreamClaimingProvider';
+import { StreamClaimableAmount } from './StreamClaimableAmount';
+import { StreamEligibleNfts } from './StreamEligibleNfts';
+import { StreamTotalClaimed } from './StreamTotalClaimed';
 
 type Props = {
   className?: string;
@@ -11,10 +11,6 @@ export const StreamInformation = ({
   className = 'space-y-4',
   children,
 }: Props) => {
-  const {
-    data: { nfts, claimTokenSymbol, totalClaimedAmount, totalClaimableAmount },
-  } = useStreamClaimingContext();
-
   return (
     <dl className={className}>
       <div className="flex items-center justify-between">
@@ -22,7 +18,7 @@ export const StreamInformation = ({
           <span>Your NFTs</span>
         </dt>
         <dd className="text-sm font-medium text-gray-900">
-          {nfts?.length || '...'}
+          <StreamEligibleNfts />
         </dd>
       </div>
       <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
@@ -33,24 +29,14 @@ export const StreamInformation = ({
           </small>
         </dt>
         <dd className="text-sm font-medium text-gray-900">
-          <CryptoValue
-            symbol={claimTokenSymbol?.toString()}
-            value={totalClaimedAmount}
-            unit={CryptoUnits.WEI}
-            showPrice={false}
-          />
+          <StreamTotalClaimed />
         </dd>
       </div>
       {children}
       <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
         <dt className="text-base font-medium text-gray-900">Claimable now</dt>
         <dd className="text-base font-medium text-gray-900">
-          <CryptoValue
-            symbol={claimTokenSymbol?.toString()}
-            value={totalClaimableAmount}
-            unit={CryptoUnits.WEI}
-            showPrice={false}
-          />
+          <StreamClaimableAmount />
         </dd>
       </div>
     </dl>
