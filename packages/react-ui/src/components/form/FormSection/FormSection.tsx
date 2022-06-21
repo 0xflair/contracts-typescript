@@ -1,10 +1,10 @@
 import { classNames } from '@0xflair/react-common';
 import { Switch } from '@headlessui/react';
-import { useCallback, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 
 export type FormSectionProps = {
-  title: string;
-  description: string;
+  title?: ReactNode;
+  description?: ReactNode;
   className?: string;
   toggleable?: boolean;
   enabled?: boolean;
