@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.62.0 (2022-06-21)
+
+
+### Features
+
+* provide every info as separate components ([a511c07](https://github.com/0xflair/typescript-sdk/commit/a511c0747d07c79a401b901c7c45bf74d9e85f40))
+
+
+
+
+
 ## 0.61.5 (2022-06-21)
 
 
