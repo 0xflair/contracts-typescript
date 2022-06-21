@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.61.1 (2022-06-21)
+
+
+### Bug Fixes
+
+* allow description to be react node ([5ee4a84](https://github.com/0xflair/typescript-sdk/commit/5ee4a84ffcd13b52b6bf084328b2a3d150707509))
+
+
+
+
+
 # 0.61.0 (2022-06-20)
 
 
