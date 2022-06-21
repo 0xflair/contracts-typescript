@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.61.4 (2022-06-21)
+
+
+### Bug Fixes
+
+* privde sane defaults to avoid warnings ([72db22e](https://github.com/0xflair/typescript-sdk/commit/72db22e486f3312519f358088bd149ba60ee2ff3))
+
+
+
+
+
 ## 0.61.3 (2022-06-21)
 
 
