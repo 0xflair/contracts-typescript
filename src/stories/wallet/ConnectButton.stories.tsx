@@ -11,7 +11,7 @@ export default {
   title: 'ConnectButton Component',
   decorators: [
     (Story: any) => (
-      <WalletProvider>
+      <WalletProvider custodialWallet={false}>
         <LoginProvider>
           <Story />
         </LoginProvider>
@@ -64,4 +64,5 @@ export const Default = (args: ConnectButtonProps) => {
 
 Default.args = {
   label: 'Connect me',
+  custodialWallet: false,
 } as ConnectButtonProps;

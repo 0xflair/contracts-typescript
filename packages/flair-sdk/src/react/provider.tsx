@@ -4,15 +4,19 @@ import * as React from 'react';
 
 type Props = {
   children?: React.ReactNode;
+  custodialWallet?: boolean;
   wagmiOverrides?: Record<string, any>;
 };
 
 export const FlairProvider = (props: Props) => {
-  const { children, wagmiOverrides } = props;
+  const { children, custodialWallet, wagmiOverrides } = props;
 
   return (
     <CoinGeckoProvider>
-      <WalletProvider wagmiOverrides={wagmiOverrides}>
+      <WalletProvider
+        custodialWallet={custodialWallet}
+        wagmiOverrides={wagmiOverrides}
+      >
         {children}
       </WalletProvider>
     </CoinGeckoProvider>

@@ -16,6 +16,7 @@ type Props = {
   children?: ReactNode;
   appName?: string;
   infuraId?: string;
+  custodialWallet?: boolean;
   wagmiOverrides?: Record<string, any>;
 };
 
@@ -25,6 +26,7 @@ export const WalletProvider = ({
   children,
   appName = 'Flair',
   infuraId = FLAIR_INFURA_PROJECT_ID,
+  custodialWallet = false,
   wagmiOverrides,
 }: Props) => {
   const provider = useCallback(
@@ -55,28 +57,7 @@ export const WalletProvider = ({
         FLAIR_CHAINS.find((x) => x.id === chainId)?.rpcUrls.default ??
         FLAIR_DEFAULT_CHAIN.rpcUrls.default;
 
-      return [
-        // new MagicConnector({
-        //   chains: FLAIR_CHAINS,
-        //   options: {
-        //     apiKey: FLAIR_MAGIC_API_KEY,
-        //     oauthOptions: {
-        //       providers: ['google', 'twitter', 'github'],
-        //     },
-        //     customHeaderText: appName,
-        //     additionalMagicOptions: {},
-        //   },
-        // }),
-        new MagicLinkConnector({
-          chains: FLAIR_CHAINS,
-          options: {
-            apiKey: FLAIR_MAGIC_API_KEY,
-            oauthOptions: {
-              providers: ['google', 'twitter', 'github'],
-            },
-            customHeaderText: appName,
-          },
-        }),
+      const connectors: any[] = [
         new InjectedConnector({
           chains: FLAIR_CHAINS,
           options: { shimDisconnect: true },
@@ -94,8 +75,36 @@ export const WalletProvider = ({
           },
         }),
       ];
+
+      if (custodialWallet) {
+        connectors.push(
+          // new MagicConnector({
+          //   chains: FLAIR_CHAINS,
+          //   options: {
+          //     apiKey: FLAIR_MAGIC_API_KEY,
+          //     oauthOptions: {
+          //       providers: ['google', 'twitter', 'github'],
+          //     },
+          //     customHeaderText: appName,
+          //     additionalMagicOptions: {},
+          //   },
+          // }),
+          new MagicLinkConnector({
+            chains: FLAIR_CHAINS,
+            options: {
+              apiKey: FLAIR_MAGIC_API_KEY,
+              oauthOptions: {
+                providers: ['google', 'twitter', 'github'],
+              },
+              customHeaderText: appName,
+            },
+          })
+        );
+      }
+
+      return connectors;
     },
-    [appName, infuraId]
+    [appName, custodialWallet, infuraId]
   );
 
   const client = useMemo(

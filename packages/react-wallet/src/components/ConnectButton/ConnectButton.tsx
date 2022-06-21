@@ -22,10 +22,10 @@ export const ConnectButton = (props: ConnectButtonProps) => {
   const { error, isConnecting, isConnected, connectors, connect } =
     useConnect();
 
-  const connectorMagic = connectors[0];
-  const connectorMetamask = connectors[1];
-  const connectorWalletConnect = connectors[2];
-  const connectorCoinbaseWallet = connectors[3];
+  const connectorMetamask = connectors[0];
+  const connectorWalletConnect = connectors[1];
+  const connectorCoinbaseWallet = connectors[2];
+  const connectorMagic = connectors[3];
 
   useEffect(() => {
     let didCancel = false;
@@ -40,6 +40,8 @@ export const ConnectButton = (props: ConnectButtonProps) => {
       didCancel = true;
     };
   }, [isConnected, dialogOpen]);
+
+  const metamaskInstalled = MetaMaskOnboarding.isMetaMaskInstalled();
 
   return (
     <>
@@ -116,35 +118,40 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                 </div>
 
                 <div className="inline-flex flex-col gap-4">
-                  <button
-                    type="button"
-                    className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                    onClick={() => connect(connectorMagic)}
-                  >
-                    <MagicLinkIcon className="-ml-0.5 mr-2 h-12 w-12" />
-                    <span className="text-left">
-                      Quick wallet
-                      <br />
-                      <span className="opacity-60">
-                        via Email, Github, Google, Twitter.
-                      </span>
-                    </span>
-                  </button>
-                  <div className="relative">
-                    <div
-                      className="absolute inset-0 flex items-center"
-                      aria-hidden="true"
-                    >
-                      <div className="w-full border-t border-gray-300" />
-                    </div>
-                    <div className="relative flex justify-center">
-                      <span className="px-2 bg-white text-sm text-gray-500">
-                        OR
-                      </span>
-                    </div>
-                  </div>
-                  {MetaMaskOnboarding.isMetaMaskInstalled() ? (
+                  {connectorMagic && (
+                    <>
+                      <button
+                        type="button"
+                        className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                        onClick={() => connect(connectorMagic)}
+                      >
+                        <MagicLinkIcon className="-ml-0.5 mr-2 h-12 w-12" />
+                        <span className="text-left">
+                          Quick wallet
+                          <br />
+                          <span className="opacity-60">
+                            via Email, Github, Google, Twitter.
+                          </span>
+                        </span>
+                      </button>
+                      <div className="relative">
+                        <div
+                          className="absolute inset-0 flex items-center"
+                          aria-hidden="true"
+                        >
+                          <div className="w-full border-t border-gray-300" />
+                        </div>
+                        <div className="relative flex justify-center">
+                          <span className="px-2 bg-white text-sm text-gray-500">
+                            OR
+                          </span>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  {metamaskInstalled ? (
                     <button
+                      ref={activeButtonRef}
                       type="button"
                       className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
                       onClick={() => connect(connectorMetamask)}
@@ -165,6 +172,7 @@ export const ConnectButton = (props: ConnectButtonProps) => {
                   )}
                   <button
                     type="button"
+                    ref={!metamaskInstalled ? activeButtonRef : undefined}
                     className="inline-flex w-full items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     onClick={() => connect(connectorWalletConnect)}
                   >

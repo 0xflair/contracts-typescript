@@ -5,10 +5,10 @@ export default {
   title: 'CryptoAmountField Component',
   decorators: [
     (Story: any) => (
-        <WalletProvider>
-      <CoinGeckoProvider>
-        <Story />
-      </CoinGeckoProvider>
+      <WalletProvider>
+        <CoinGeckoProvider>
+          <Story />
+        </CoinGeckoProvider>
       </WalletProvider>
     ),
   ],
