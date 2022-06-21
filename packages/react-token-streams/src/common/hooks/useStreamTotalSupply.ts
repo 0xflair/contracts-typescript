@@ -6,7 +6,7 @@ import { BigNumberish } from 'ethers';
 
 export const useStreamTotalSupply = (config: PredefinedReadContractConfig) => {
   return useContractRead<BigNumberish>({
-    contractFqn: 'streams/ERC721/core/ERC721BaseDistributor',
+    contractFqn: 'streams/ERC721/core/ERC721SingleTokenDistributor',
     functionName: 'streamTotalSupply',
     ...config,
   });

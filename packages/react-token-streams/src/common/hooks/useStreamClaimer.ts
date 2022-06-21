@@ -21,7 +21,7 @@ export const useStreamClaimer = ({
 }: Config) => {
   const contractInterface = useContractAbi({
     contractVersion,
-    contractFqn: 'streams/ERC721/core/ERC721BaseDistributor',
+    contractFqn: 'streams/ERC721/core/ERC721SingleTokenDistributor',
   });
 
   const claimBulkHook = useContractWriteAndWait<ArgsType>({

@@ -13,7 +13,7 @@ export const useStreamTotalClaimedBulk = ({
   ...restOfConfig
 }: Config) => {
   return useContractRead<BigNumberish, Config['args']>({
-    contractFqn: 'streams/ERC721/core/ERC721BaseDistributor',
+    contractFqn: 'streams/ERC721/core/ERC721SingleTokenDistributor',
     functionName: 'getTotalClaimedBulk',
     args: ticketTokenIds ? [ticketTokenIds] : undefined,
     ...restOfConfig,
