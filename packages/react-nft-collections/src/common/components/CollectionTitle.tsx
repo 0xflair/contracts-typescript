@@ -11,8 +11,8 @@ export const CollectionTitle = ({ className }: Props) => {
 
   return (
     <h1 className={className}>
-      {collection?.config?.collectionName ||
-        collectionMetadata?.name ||
+      {collectionMetadata?.name ||
+        collection?.config?.collectionName ||
         contractAddress?.substring(0, 8) ||
         '...'}
     </h1>

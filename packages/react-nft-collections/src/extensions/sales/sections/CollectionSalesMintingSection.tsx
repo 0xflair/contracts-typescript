@@ -128,22 +128,20 @@ export const CollectionSalesMintingSection = ({
 
                   <CollectionSalesMintStatusBar className="mt-4 flex flex-col gap-2" />
 
-                  <div className="mt-10">
-                    {/* Description */}
-                    {collection?.config?.collectionDescription ||
-                    collectionMetadata?.description ? (
-                      <>
-                        <h2 className="mt-8 text-sm font-medium text-gray-900">
-                          Description
-                        </h2>
+                  {/* Description */}
+                  {collectionMetadata?.description ||
+                  collection?.config?.collectionDescription ? (
+                    <div className="mt-10">
+                      <h2 className="mt-8 text-sm font-medium text-gray-900">
+                        Description
+                      </h2>
 
-                        <div className="mt-3 prose prose-sm text-gray-500">
-                          {collection?.config?.collectionDescription ||
-                            collectionMetadata?.description}
-                        </div>
-                      </>
-                    ) : null}
-                  </div>
+                      <div className="mt-3 prose prose-sm text-gray-500">
+                        {collectionMetadata?.description ||
+                          collection?.config?.collectionDescription}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </main>
