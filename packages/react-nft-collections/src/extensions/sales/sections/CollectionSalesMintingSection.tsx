@@ -5,6 +5,7 @@ import {
   SwitchChainButton,
   WalletDropdown,
 } from '@0xflair/react-wallet';
+import { BigNumberish } from 'ethers';
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
 
@@ -12,7 +13,10 @@ import { CollectionImage } from '../../../common/components/CollectionImage';
 import { CollectionSupplyCounter } from '../../../common/components/CollectionSupplyCounter';
 import { CollectionTitle } from '../../../common/components/CollectionTitle';
 import { CollectionProvider } from '../../../common/providers/CollectionProvider';
-import { CollectionSalesMintButton } from '../components';
+import {
+  CollectionSalesMintButton,
+  CollectionSalesMintInput,
+} from '../components';
 import { CollectionSalesActiveStatus } from '../components/CollectionSalesActiveStatus';
 import { CollectionSalesAllowlistStatus } from '../components/CollectionSalesAllowlistStatus';
 import { CollectionSalesMintStatusBar } from '../components/CollectionSalesMintStatusBar';
@@ -33,7 +37,7 @@ export const CollectionSalesMintingSection = ({
   contractVersion,
 }: Props) => {
   const { data: account } = useAccount();
-  const [mintCount, setMintCount] = useState<string>('1');
+  const [mintCount, setMintCount] = useState<BigNumberish>('1');
 
   const mintButtonClass =
     'w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
@@ -96,14 +100,10 @@ export const CollectionSalesMintingSection = ({
                           Choose number of mints
                         </legend>
                         <div className="flex">
-                          <input
-                            type="number"
-                            required
-                            min={1}
-                            value={mintCount}
-                            disabled={!canMint}
-                            onChange={(e) => setMintCount(e.target.value)}
-                            className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                          <CollectionSalesMintInput
+                            mintCount={mintCount}
+                            setMintCount={setMintCount}
+                            className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 disabled:opacity-75"
                           />
                         </div>
                       </fieldset>
