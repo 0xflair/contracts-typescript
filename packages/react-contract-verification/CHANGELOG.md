@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.63.4 (2022-06-22)
+
+
+### Bug Fixes
+
+* allow providing contract version and freeform mint input ([47104c6](https://github.com/0xflair/typescript-sdk/commit/47104c6df1cd7b0b34b57e87b55fcf933afa7c84))
+
+
+
+
+
 ## 0.63.3 (2022-06-22)
 
 
