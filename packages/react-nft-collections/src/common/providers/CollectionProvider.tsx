@@ -11,6 +11,8 @@ import {
   useMaxSupply,
   useTotalSupply,
 } from '../../extensions';
+import { usePreSaleMaxMintPerWallet } from '../../extensions/sales/hooks/usePreSaleMaxMintPerWallet';
+import { usePublicSaleMaxMintPerTx } from '../../extensions/sales/hooks/usePublicSaleMaxMintPerTx';
 import { NftCollection, NftCollectionMetadata } from '../../types';
 import { useNftCollection } from '../hooks';
 
@@ -28,6 +30,8 @@ type CollectionContextValue = {
     metadataUri?: BytesLike;
     maxSupply?: BigNumberish;
     totalSupply?: BigNumberish;
+    preSaleMaxMintPerWallet?: BigNumberish;
+    publicSaleMaxMintPerTx?: BigNumberish;
   };
 
   isLoading: {
@@ -39,6 +43,8 @@ type CollectionContextValue = {
     metadataUriLoading?: boolean;
     maxSupplyLoading?: boolean;
     totalSupplyLoading?: boolean;
+    preSaleMaxMintPerWalletLoading?: boolean;
+    publicSaleMaxMintPerTxLoading?: boolean;
   };
 
   error: {
@@ -50,6 +56,8 @@ type CollectionContextValue = {
     metadataUriError?: string | Error | null;
     maxSupplyError?: string | Error | null;
     totalSupplyError?: string | Error | null;
+    preSaleMaxMintPerWalletError?: string | Error | null;
+    publicSaleMaxMintPerTxError?: string | Error | null;
   };
 };
 
@@ -129,6 +137,28 @@ export const CollectionProvider = ({
   });
 
   const {
+    data: preSaleMaxMintPerWallet,
+    error: preSaleMaxMintPerWalletError,
+    isLoading: preSaleMaxMintPerWalletLoading,
+  } = usePreSaleMaxMintPerWallet({
+    chainId,
+    contractVersion,
+    contractAddress,
+    watch: false,
+  });
+
+  const {
+    data: publicSaleMaxMintPerTx,
+    error: publicSaleMaxMintPerTxError,
+    isLoading: publicSaleMaxMintPerTxLoading,
+  } = usePublicSaleMaxMintPerTx({
+    chainId,
+    contractVersion,
+    contractAddress,
+    watch: false,
+  });
+
+  const {
     data: totalSupply,
     error: totalSupplyError,
     isLoading: totalSupplyLoading,
@@ -153,6 +183,8 @@ export const CollectionProvider = ({
       metadataUri,
       maxSupply,
       totalSupply,
+      preSaleMaxMintPerWallet,
+      publicSaleMaxMintPerTx,
     },
 
     isLoading: {
@@ -164,6 +196,8 @@ export const CollectionProvider = ({
       metadataUriLoading,
       maxSupplyLoading,
       totalSupplyLoading,
+      preSaleMaxMintPerWalletLoading,
+      publicSaleMaxMintPerTxLoading,
     },
 
     error: {
@@ -175,6 +209,8 @@ export const CollectionProvider = ({
       metadataUriError,
       maxSupplyError,
       totalSupplyError,
+      preSaleMaxMintPerWalletError,
+      publicSaleMaxMintPerTxError,
     },
   };
 
