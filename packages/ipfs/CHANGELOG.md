@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.63.2 (2022-06-22)
+
+
+### Bug Fixes
+
+* pass correct value to humanize duration ([6f54498](https://github.com/0xflair/typescript-sdk/commit/6f544980cf3b288e93ca0c4659acbf851316cc11))
+
+
+
+
+
 ## 0.63.1 (2022-06-22)
 
 
