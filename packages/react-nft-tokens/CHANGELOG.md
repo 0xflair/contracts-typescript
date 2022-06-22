@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.63.0 (2022-06-22)
+
+
+### Features
+
+* allow rendering stream total claimed overally ([6aff799](https://github.com/0xflair/typescript-sdk/commit/6aff7996422e5afaa3ce5de90058a058ce22a160))
+
+
+
+
+
 ## 0.62.1 (2022-06-21)
 
 
