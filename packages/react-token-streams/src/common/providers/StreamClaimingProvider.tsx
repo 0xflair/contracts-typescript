@@ -9,6 +9,7 @@ import * as React from 'react';
 import { useAccount, useSigner } from 'wagmi';
 
 import {
+  useStreamClaimableAmountUntil,
   useStreamTotalClaimable,
   useStreamTotalClaimedByTokenIds,
   useStreamTotalClaimedOverall,
@@ -31,6 +32,7 @@ export type StreamClaimingContextValue = {
     totalClaimedAmountByAccount?: BigNumberish;
     totalClaimableAmountByAccount?: BigNumberish;
     totalClaimedAmountOverall?: BigNumberish;
+    totalClaimableAmountUntilNowPerToken?: BigNumberish;
 
     // Helpers
     canClaim?: boolean;
@@ -51,6 +53,7 @@ export type StreamClaimingContextValue = {
     totalClaimedAmountByAccountLoading?: boolean;
     totalClaimableAmountByAccountLoading?: boolean;
     totalClaimedOverallLoading?: boolean;
+    totalClaimableAmountUntilNowPerTokenLoading?: boolean;
 
     // Transaction
     claimLoading?: boolean;
@@ -66,6 +69,7 @@ export type StreamClaimingContextValue = {
     totalClaimedAmountByAccountError?: string | Error | null;
     totalClaimableAmountByAccountError?: string | Error | null;
     totalClaimedOverallError?: string | Error | null;
+    totalClaimableAmountUntilNowPerTokenError?: string | Error | null;
 
     // Transaction
     claimError?: string | Error | null;
@@ -155,6 +159,16 @@ export const StreamClaimingProvider = ({
     contractVersion: contractVersion || stream?.presetVersion,
   });
   const {
+    data: totalClaimableAmountUntilNowPerToken,
+    error: totalClaimableAmountUntilNowPerTokenError,
+    isLoading: totalClaimableAmountUntilNowPerTokenLoading,
+  } = useStreamClaimableAmountUntil({
+    chainId: Number(chainId),
+    contractAddress,
+    contractVersion: contractVersion || stream?.presetVersion,
+    calculateUntil: Math.floor(+new Date() / 1000),
+  });
+  const {
     data: totalClaimableAmountByAccount,
     error: totalClaimableAmountByAccountError,
     isLoading: totalClaimableAmountByAccountLoading,
@@ -198,6 +212,7 @@ export const StreamClaimingProvider = ({
       totalClaimedAmountByAccount,
       totalClaimableAmountByAccount,
       totalClaimedAmountOverall,
+      totalClaimableAmountUntilNowPerToken,
 
       // Helpers
       canClaim,
@@ -217,7 +232,8 @@ export const StreamClaimingProvider = ({
       claimTokenSymbolLoading,
       totalClaimedAmountByAccountLoading,
       totalClaimableAmountByAccountLoading,
-      totalClaimedAmountOverallError,
+      totalClaimedAmountOverallLoading,
+      totalClaimableAmountUntilNowPerTokenLoading,
 
       // Transaction
       claimLoading,
@@ -229,7 +245,8 @@ export const StreamClaimingProvider = ({
       claimTokenSymbolError,
       totalClaimedAmountByAccountError,
       totalClaimableAmountByAccountError,
-      totalClaimedAmountOverallLoading,
+      totalClaimedAmountOverallError,
+      totalClaimableAmountUntilNowPerTokenError,
       claimError,
     },
 
