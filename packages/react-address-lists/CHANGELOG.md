@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.64.1 (2022-06-22)
+
+
+### Bug Fixes
+
+* show on-chain metadata first then fallback to backend ([db56df1](https://github.com/0xflair/typescript-sdk/commit/db56df1f77cab4f41c217db28ecbe55adc576cff))
+
+
+
+
+
 # 0.64.0 (2022-06-22)
 
 
