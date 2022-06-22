@@ -13,11 +13,19 @@ export const StreamStatusBar = ({
 }: Props) => {
   const {
     data: { txReceipt, txResponse },
-    error: { streamError, totalClaimableAmountError, claimError, nftsError },
+    error: {
+      streamError,
+      totalClaimableAmountByAccountError,
+      totalClaimedAmountByAccountError,
+      totalClaimedOverallError,
+      claimError,
+      nftsError,
+    },
     isLoading: {
       nftsLoading,
-      totalClaimedAmountLoading,
-      totalClaimableAmountLoading,
+      totalClaimedAmountByAccountLoading,
+      totalClaimableAmountByAccountLoading,
+      totalClaimedOverallLoading,
       claimLoading,
     },
   } = useStreamClaimingContext();
@@ -29,7 +37,9 @@ export const StreamStatusBar = ({
           <Spinner /> Loading your NFTs...
         </div>
       )}
-      {totalClaimedAmountLoading || totalClaimableAmountLoading ? (
+      {totalClaimedAmountByAccountLoading ||
+      totalClaimableAmountByAccountLoading ||
+      totalClaimedOverallLoading ? (
         <div className="flex gap-2">
           <Spinner /> Loading claiming information...
         </div>
@@ -44,10 +54,22 @@ export const StreamStatusBar = ({
       ) : null}
       {claimError && <Errors title="Cannot claim" error={claimError} />}
       {streamError && <Errors title="streamError" error={streamError} />}
-      {totalClaimableAmountError && (
+      {totalClaimableAmountByAccountError && (
         <Errors
-          title="totalClaimableAmountError"
-          error={totalClaimableAmountError}
+          title="totalClaimableAmountByAccountError"
+          error={totalClaimableAmountByAccountError}
+        />
+      )}
+      {totalClaimedAmountByAccountError && (
+        <Errors
+          title="totalClaimedAmountByAccountError"
+          error={totalClaimedAmountByAccountError}
+        />
+      )}
+      {totalClaimedOverallError && (
+        <Errors
+          title="totalClaimedOverallError"
+          error={totalClaimedOverallError}
         />
       )}
       {nftsError && <Errors title="nftsError" error={nftsError} />}

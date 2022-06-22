@@ -8,14 +8,14 @@ type Props = {
 
 export const StreamClaimableAmount = ({ className }: Props) => {
   const {
-    data: { claimTokenSymbol, totalClaimableAmount },
+    data: { claimTokenSymbol, totalClaimableAmountByAccount },
   } = useStreamClaimingContext();
 
   return (
     <div className={className}>
       <CryptoValue
         symbol={claimTokenSymbol?.toString()}
-        value={totalClaimableAmount}
+        value={totalClaimableAmountByAccount}
         unit={CryptoUnits.WEI}
         showPrice={false}
       />

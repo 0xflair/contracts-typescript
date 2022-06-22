@@ -8,7 +8,7 @@ type Config = PredefinedReadContractConfig<[BigNumberish[]]> & {
   ticketTokenIds?: BigNumberish[];
 };
 
-export const useStreamTotalClaimedBulk = ({
+export const useStreamTotalClaimedByTokenIds = ({
   enabled,
   ticketTokenIds,
   ...restOfConfig

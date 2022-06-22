@@ -1,12 +1,11 @@
-import { NftToken } from '@0xflair/react-nft-tokens';
-import { TransactionResponse } from '@ethersproject/abstract-provider';
-import { TransactionReceipt } from '@ethersproject/providers';
-import { BigNumberish, BytesLike } from 'ethers';
+import { BigNumberish } from 'ethers';
 import * as React from 'react';
 import { ReactNode } from 'react';
 
-import { useStreamClaimingContext } from '../../../common/providers';
-import { TokenStream } from '../../../common/types';
+import {
+  StreamClaimingContextValue,
+  useStreamClaimingContext,
+} from '../../../common/providers';
 import {
   useStreamTotalReleasedBulk,
   useStreamVestingRate,
@@ -14,54 +13,24 @@ import {
 } from '../hooks';
 
 type VestedHolderStreamClaimingValue = {
-  data: {
-    // Resources
-    stream?: TokenStream | null;
-    nfts?: NftToken[] | null;
-
+  data: StreamClaimingContextValue['data'] & {
     // On-chain values
-    claimTokenSymbol?: BytesLike;
     vestingRate?: BigNumberish;
     vestingTimeUnit?: BigNumberish;
-    totalClaimedAmount?: BigNumberish;
-    totalClaimableAmount?: BigNumberish;
     totalReleasedAmount?: BigNumberish;
-
-    // Helpers
-    canClaim?: boolean;
-
-    // Transaction
-    txReceipt?: TransactionReceipt;
-    txResponse?: TransactionResponse;
   };
 
-  isLoading: {
-    // Resources
-    nftsLoading?: boolean;
-    streamLoading?: boolean;
-
+  isLoading: StreamClaimingContextValue['isLoading'] & {
     // On-chain values
-    claimTokenSymbolLoading?: boolean;
     vestingRateLoading?: boolean;
     vestingTimeUnitLoading?: boolean;
-    totalClaimedAmountLoading?: boolean;
-    totalClaimableAmountLoading?: boolean;
     totalReleasedAmountLoading?: boolean;
-
-    // Transaction
-    claimLoading?: boolean;
   };
 
-  error: {
-    streamError?: string | Error | null;
-    nftsError?: string | Error | null;
-    claimTokenSymbolError?: string | Error | null;
+  error: StreamClaimingContextValue['error'] & {
     vestingRateError?: string | Error | null;
     vestingTimeUnitError?: string | Error | null;
-    totalClaimedAmountError?: string | Error | null;
-    totalClaimableAmountError?: string | Error | null;
     totalReleasedAmountError?: string | Error | null;
-    claimError?: string | Error | null;
   };
 
   claim: (args?: {
