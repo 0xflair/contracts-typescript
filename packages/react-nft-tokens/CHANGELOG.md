@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.64.0 (2022-06-22)
+
+
+### Features
+
+* provide a mint input component ([90ae4a6](https://github.com/0xflair/typescript-sdk/commit/90ae4a6ab7827bb0a129831240a313c1a731cf82))
+
+
+
+
+
 ## 0.63.4 (2022-06-22)
 
 
