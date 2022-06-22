@@ -12,6 +12,7 @@ import { CollectionImage } from '../../../common/components/CollectionImage';
 import { CollectionSupplyCounter } from '../../../common/components/CollectionSupplyCounter';
 import { CollectionTitle } from '../../../common/components/CollectionTitle';
 import { CollectionProvider } from '../../../common/providers/CollectionProvider';
+import { CollectionSalesMintButton } from '../components';
 import { CollectionSalesActiveStatus } from '../components/CollectionSalesActiveStatus';
 import { CollectionSalesAllowlistStatus } from '../components/CollectionSalesAllowlistStatus';
 import { CollectionSalesMintStatusBar } from '../components/CollectionSalesMintStatusBar';
@@ -47,7 +48,6 @@ export const CollectionSalesMintingSection = ({
       <CollectionSalesMintingProvider>
         {({ data: { collection, collectionMetadata, canMint }, mint }) => (
           <>
-            <style type="text/css">{`html {background: none transparent !important;}`}</style>
             <main className="h-fit max-w-2xl mx-auto lg:max-w-5xl flex items-center p-4">
               <div className="min-w-full lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
                 <div className="lg:col-start-6 lg:col-span-7">
@@ -116,13 +116,10 @@ export const CollectionSalesMintingSection = ({
                           requiredChainId={Number(chainId)}
                           className={mintButtonClass}
                         >
-                          <button
-                            onClick={() => mint({ mintCount })}
-                            disabled={!canMint}
+                          <CollectionSalesMintButton
+                            mintCount={mintCount}
                             className={mintButtonClass}
-                          >
-                            Mint
-                          </button>
+                          />
                         </SwitchChainButton>
                         <WalletDropdown />
                       </div>
