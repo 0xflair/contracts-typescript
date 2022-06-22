@@ -30,7 +30,7 @@ export type StreamClaimingContextValue = {
     claimTokenSymbol?: BytesLike;
     totalClaimedAmountByAccount?: BigNumberish;
     totalClaimableAmountByAccount?: BigNumberish;
-    totalClaimedOverall?: BigNumberish;
+    totalClaimedAmountOverall?: BigNumberish;
 
     // Helpers
     canClaim?: boolean;

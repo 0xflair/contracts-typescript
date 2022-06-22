@@ -15,7 +15,7 @@ export const StreamTotalClaimed = ({
     data: {
       claimTokenSymbol,
       totalClaimedAmountByAccount,
-      totalClaimedOverall,
+      totalClaimedAmountOverall,
     },
   } = useStreamClaimingContext();
 
@@ -26,7 +26,7 @@ export const StreamTotalClaimed = ({
         value={
           calculationMode === 'BY_ACCOUNT'
             ? totalClaimedAmountByAccount
-            : totalClaimedOverall
+            : totalClaimedAmountOverall
         }
         unit={CryptoUnits.WEI}
         showPrice={false}
