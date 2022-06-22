@@ -15,7 +15,7 @@ export const VestedHolderStreamTimeUnit = ({ className }: Props) => {
     <div className={className}>
       every{' '}
       {vestingTimeUnit
-        ? humanizeDuration(Number(vestingTimeUnit.toString()))
+        ? humanizeDuration(Number(vestingTimeUnit.toString()) * 1000)
         : '...'}
     </div>
   );
