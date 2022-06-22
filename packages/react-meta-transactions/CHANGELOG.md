@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.63.3 (2022-06-22)
+
+
+### Bug Fixes
+
+* allow calculating total claimable amount overally ([61aa782](https://github.com/0xflair/typescript-sdk/commit/61aa7825bc37464409d05a14421b148d9c91c549))
+
+
+
+
+
 ## 0.63.2 (2022-06-22)
 
 
