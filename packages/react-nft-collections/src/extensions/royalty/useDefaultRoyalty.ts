@@ -17,7 +17,7 @@ export const useDefaultRoyalty = (config: PredefinedReadContractConfig) => {
     data: {
       receiver: data?.[0],
       bps: data?.[1],
-      percent: data?.[1] ? Number(data[1]) / 100 : undefined,
+      percent: data?.[1] !== undefined ? Number(data[1]) / 100 : undefined,
     },
     ...rest,
   };

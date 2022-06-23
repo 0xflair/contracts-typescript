@@ -10,17 +10,19 @@ type Config = Partial<WriteContractConfig> & {
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
   role?: BytesLike;
+  from?: BytesLike;
   to?: BytesLike;
   amount?: BigNumberish;
 };
 
-type ArgsType = [to?: BytesLike, amount?: BigNumberish];
+type ArgsType = [from?: BytesLike, to?: BytesLike, amount?: BigNumberish];
 
 export const useERC721TransferFrom = ({
   contractVersion,
   contractAddress,
   signerOrProvider,
   role,
+  from,
   to,
   amount,
   ...restOfConfig
@@ -33,7 +35,7 @@ export const useERC721TransferFrom = ({
   return useContractWriteAndWait<ArgsType>({
     contractInterface,
     functionName: 'transferFrom',
-    args: [to, amount],
+    args: [from, to, amount],
     contractAddress,
     signerOrProvider,
     ...restOfConfig,
