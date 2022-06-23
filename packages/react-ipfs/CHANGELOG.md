@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.64.4 (2022-06-23)
+
+
+### Bug Fixes
+
+* use correct signature for transferFrom method ([2aa4ae5](https://github.com/0xflair/typescript-sdk/commit/2aa4ae5325d0285d69f837790745478fe022b167))
+
+
+
+
+
 ## 0.64.3 (2022-06-23)
 
 
