@@ -33,9 +33,9 @@ export const RequireLogin = (props: Props) => {
             Please login using your wallet first, then you can see this section.
           </p>
           {error && (
-            <p className="mt-1 text-sm">
+            <div className="mt-1 text-sm">
               <Errors error={error} />
-            </p>
+            </div>
           )}
           <div className="mt-6">
             <LoginButton label="Login" className={ACTION_BUTTON} />

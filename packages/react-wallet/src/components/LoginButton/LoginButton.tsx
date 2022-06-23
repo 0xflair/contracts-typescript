@@ -1,5 +1,5 @@
 import { useCancel } from '@0xflair/react-common';
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useAccount } from 'wagmi';
 
 import { useLoginContext } from '../../providers/login';
@@ -37,6 +37,10 @@ export const LoginButton = (props: LoginButtonProps) => {
         login();
       }
     }
+
+    return () => {
+      didCancel = true;
+    };
   }, [
     account?.address,
     cancelQuery,

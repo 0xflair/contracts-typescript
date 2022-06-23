@@ -40,7 +40,6 @@ export const VestedHolderStreamClaimingSection = ({
       <VestedHolderStreamClaimingProvider>
         {({ data: { stream } }) => (
           <>
-            <style type="text/css">{`html {background: none transparent !important;}`}</style>
             <main className="h-fit mx-auto max-w-lg flex items-center p-4">
               <div className="min-w-full">
                 <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">

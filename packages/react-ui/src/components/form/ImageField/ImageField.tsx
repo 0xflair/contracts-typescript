@@ -96,7 +96,7 @@ export const ImageField = (props: ImageFieldProps) => {
         </div>
       </div>
       {description ? (
-        <p className="mt-2 text-sm text-gray-500">{description}</p>
+        <div className="mt-2 text-sm text-gray-500">{description}</div>
       ) : (
         ''
       )}

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useNetwork } from 'wagmi';
 
-import { CryptoUnits, CryptoSymbol } from '../../types';
+import { CryptoSymbol, CryptoUnits } from '../../types';
 import { CryptoPrice } from '../CryptoPrice/CryptoPrice';
 
 export type CryptoAmountFieldProps = {
@@ -43,9 +43,10 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
           value={etherValue}
           onChange={(e) => {
             setEtherValue(e.target.value);
-            onChange && onChange(
-              utils.formatUnits(utils.parseEther(e.target.value), unit)
-            );
+            onChange &&
+              onChange(
+                utils.formatUnits(utils.parseEther(e.target.value), unit)
+              );
           }}
         />
         <div className="absolute top-2 right-0 pr-3 flex items-center pointer-events-none">
@@ -61,7 +62,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
             USD)
           </span>
         </div>
-        <p className="mt-2 text-sm text-gray-500">{description}</p>
+        <div className="mt-2 text-sm text-gray-500">{description}</div>
       </div>
     </div>
   );
