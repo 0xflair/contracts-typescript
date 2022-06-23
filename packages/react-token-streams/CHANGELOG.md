@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.64.2 (2022-06-23)
+
+
+### Bug Fixes
+
+* various warnings and errors ([b224efc](https://github.com/0xflair/typescript-sdk/commit/b224efc5f8c1ce0f3cc2215d8e6711b6740eed0d))
+
+
+
+
+
 ## 0.64.1 (2022-06-22)
 
 
