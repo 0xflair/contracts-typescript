@@ -12,10 +12,10 @@ type Config = Partial<WriteContractConfig> & {
   role?: BytesLike;
   from?: BytesLike;
   to?: BytesLike;
-  amount?: BigNumberish;
+  tokenId?: BigNumberish;
 };
 
-type ArgsType = [from?: BytesLike, to?: BytesLike, amount?: BigNumberish];
+type ArgsType = [from?: BytesLike, to?: BytesLike, tokenId?: BigNumberish];
 
 export const useERC721TransferFrom = ({
   contractVersion,
@@ -24,7 +24,7 @@ export const useERC721TransferFrom = ({
   role,
   from,
   to,
-  amount,
+  tokenId,
   ...restOfConfig
 }: Config) => {
   const contractInterface = useContractAbi({
@@ -35,7 +35,7 @@ export const useERC721TransferFrom = ({
   return useContractWriteAndWait<ArgsType>({
     contractInterface,
     functionName: 'transferFrom',
-    args: [from, to, amount],
+    args: [from, to, tokenId],
     contractAddress,
     signerOrProvider,
     ...restOfConfig,
