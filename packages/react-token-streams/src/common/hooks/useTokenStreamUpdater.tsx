@@ -11,9 +11,9 @@ type UpdaterConfig = {
 };
 
 export function useTokenStreamUpdater<
-  TCollectionConfig extends Record<string, any>
+  TStreamConfig extends Record<string, any>
 >(
-  collection: Partial<TokenStream<TCollectionConfig>>,
+  stream: Partial<TokenStream<TStreamConfig>>,
   { enabled = true, env = Environment.PROD }: UpdaterConfig
 ) {
   const loginJwt = useLoginJwt();
@@ -23,10 +23,10 @@ export function useTokenStreamUpdater<
     };
   }, [loginJwt]);
 
-  return useAxiosPatch<TokenStream<TCollectionConfig>>({
-    url: `${FLAIR_TOKEN_STREAMS_BACKEND[env]}/v1/token-streams/${collection._id}`,
-    enabled: Boolean(enabled && loginJwt && collection?._id),
-    data: collection,
+  return useAxiosPatch<TokenStream<TStreamConfig>>({
+    url: `${FLAIR_TOKEN_STREAMS_BACKEND[env]}/v1/token-streams/${stream._id}`,
+    enabled: Boolean(enabled && loginJwt && stream?._id),
+    data: stream,
     headers,
   });
 }
