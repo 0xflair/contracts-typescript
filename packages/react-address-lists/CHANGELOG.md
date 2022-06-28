@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.65.0 (2022-06-28)
+
+
+### Features
+
+* add new stream contracts ([06e0b1b](https://github.com/0xflair/typescript-sdk/commit/06e0b1bd1530a71bdaf4168f2d8c37345cb0456d))
+
+
+
+
+
 ## 0.64.7 (2022-06-26)
 
 
