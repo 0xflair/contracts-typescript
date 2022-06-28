@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.65.1 (2022-06-28)
+
+
+### Bug Fixes
+
+* calculate last version correctly ([bddb9a4](https://github.com/0xflair/typescript-sdk/commit/bddb9a4544fab6955ba004351a99f52adc680dcb))
+
+
+
+
+
 # 0.65.0 (2022-06-28)
 
 
