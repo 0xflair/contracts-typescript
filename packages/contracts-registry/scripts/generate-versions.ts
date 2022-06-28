@@ -188,7 +188,7 @@ export type ContractFqn = ${Object.entries(registry)
 
 export type ContractVersion = keyof ContractTypeRegistry;
 
-export const LATEST_VERSION: ContractVersion = "v1";
+export const LATEST_VERSION: ContractVersion = "${lastVersion}";
 `
   );
 };
