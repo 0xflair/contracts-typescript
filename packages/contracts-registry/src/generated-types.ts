@@ -452,4 +452,4 @@ export type ContractFqn = V1_10_CONTRACTS | V1_11_CONTRACTS | V1_3_CONTRACTS | V
 
 export type ContractVersion = keyof ContractTypeRegistry;
 
-export const LATEST_VERSION: ContractVersion = "v1.9";
+export const LATEST_VERSION: ContractVersion = "v1.11";
