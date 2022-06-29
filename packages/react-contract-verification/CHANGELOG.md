@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.66.0 (2022-06-29)
+
+
+### Features
+
+* bump up the contracts version ([97c4868](https://github.com/0xflair/typescript-sdk/commit/97c48685c512b499f1bd4c0d5977c9c7299bf468))
+
+
+
+
+
 ## 0.65.1 (2022-06-28)
 
 
