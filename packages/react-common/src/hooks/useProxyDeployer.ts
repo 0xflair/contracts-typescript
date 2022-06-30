@@ -87,7 +87,9 @@ export const useProxyDeployer = <ArgsType extends any[]>({
         }
 
         const receipt = await deployTransaction.wait();
-        const event = receipt?.events?.find((e) => e.event === 'ProxyCreated');
+        const event = receipt?.events?.find(
+          (e: { event: string }) => e.event === 'ProxyCreated'
+        );
         const emittedAddress = event?.args?.[1];
 
         if (!didCancel) {

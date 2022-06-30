@@ -1,7 +1,7 @@
 import '@ethersproject/abstract-provider';
 
 import { loadContract } from '@0xflair/contracts-registry';
-import { FlairFactory__factory } from '@0xflair/evm-contracts';
+import { ethers } from 'ethers';
 import { useMemo } from 'react';
 import { useSigner } from 'wagmi';
 
@@ -28,7 +28,7 @@ export const useFlairFactoryContract = ({ chainId }: Config) => {
         return undefined;
       }
 
-      return FlairFactory__factory.connect(address, signer);
+      return new ethers.Contract(address, definition.artifact.abi, signer);
     } catch (e) {
       console.warn(
         `Could not get flair factory contract for chain ${resolvedChainId}: `,
