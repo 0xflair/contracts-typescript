@@ -174,7 +174,7 @@ export const StreamClaimingProvider = ({
     stream?.config?.primaryClaimToken ||
     (streamNativeBalance?.value?.gt(0)
       ? ZERO_ADDRESS
-      : streamERC20Balances?.[0].tokenAddress) ||
+      : streamERC20Balances?.[0]?.tokenAddress) ||
     ZERO_ADDRESS;
   const ticketTokenIds = nfts?.map(({ tokenId }) => tokenId);
 
