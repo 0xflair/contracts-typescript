@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.69.0 (2022-06-30)
+
+
+### Features
+
+* use factory deployment if support to save gas ([#7](https://github.com/0xflair/typescript-sdk/issues/7)) ([faf4922](https://github.com/0xflair/typescript-sdk/commit/faf492223d2a85b0c6587520a2c50c56e6f9cfce))
+
+
+
+
+
 ## 0.68.6 (2022-06-30)
 
 
