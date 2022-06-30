@@ -19,11 +19,13 @@ import {
 import { DisconnectButton } from './DisconnectButton';
 
 type Props = {
+  className?: string;
   blockieSize?: number;
   blockieScale?: number;
 };
 
 export const WalletDropdown = ({
+  className,
   blockieSize = 8,
   blockieScale = 3,
 }: Props) => {
@@ -60,7 +62,10 @@ export const WalletDropdown = ({
   });
 
   return (
-    <Menu as="div" className="relative inline-block">
+    <Menu
+      as="div"
+      className={classNames(`relative inline-block`, className || '')}
+    >
       <div>
         <Menu.Button className="max-w-xs rounded-full flex gap-2 items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 p-2 lg:rounded-md lg:hover:bg-gray-50">
           {avatar?.toString() ? (

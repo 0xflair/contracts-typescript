@@ -4,10 +4,16 @@ export * from './useChainId';
 export * from './useAddressOfSigner';
 export * from './useContractAbi';
 export * from './useContractDeployer';
-export * from './useContractWriteAndWait';
 export * from './useFlairContractDeployer';
 export * from './useContractRead';
-export * from './useExtensionChecker';
+export * from './useContractWriteAndWait';
+export * from './useHasAnyOfFeatures';
+export * from './useFeatureRead';
+export * from './useFeatureReadByTag';
+export * from './useFeatureWrite';
+export * from './useFeatureWriteByTag';
+export * from './useNormalizedFunctionCall';
+export * from './useSupportsInterface';
 
 // web2
 export * from './useAxiosGet';
