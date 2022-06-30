@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.68.2 (2022-06-30)
+
+
+### Bug Fixes
+
+* export data query from flair-sdk ([973ff8c](https://github.com/0xflair/typescript-sdk/commit/973ff8cd0dcb7bfb6e9fbf4ba31de5c41ffdf992))
+
+
+
+
+
 ## 0.68.1 (2022-06-30)
 
 
