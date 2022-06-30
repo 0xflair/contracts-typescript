@@ -1,18 +1,20 @@
 // web3
-export * from './useChainInfo';
-export * from './useChainId';
 export * from './useAddressOfSigner';
+export * from './useChainId';
+export * from './useChainInfo';
 export * from './useContractAbi';
 export * from './useContractDeployer';
-export * from './useFlairContractDeployer';
 export * from './useContractRead';
 export * from './useContractWriteAndWait';
-export * from './useHasAnyOfFeatures';
 export * from './useFeatureRead';
 export * from './useFeatureReadByTag';
 export * from './useFeatureWrite';
 export * from './useFeatureWriteByTag';
+export * from './useFlairContractDeployer';
+export * from './useFunctionFeature';
+export * from './useHasAnyOfFeatures';
 export * from './useNormalizedFunctionCall';
+export * from './useSmartContract';
 export * from './useSupportsInterface';
 
 // web2
