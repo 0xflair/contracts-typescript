@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-data-query",
-  "version": "0.68.5",
+  "version": "0.68.6",
   "private": false,
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
     "react-dom": "^16 || ^17 || ^18"
   },
   "dependencies": {
-    "@0xflair/react-common": "^0.68.5",
+    "@0xflair/react-common": "^0.68.6",
     "axios": "^0.26.1"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-meta-transactions",
-  "version": "0.68.5",
+  "version": "0.68.6",
   "private": false,
   "repository": {
     "type": "git",
@@ -44,9 +44,9 @@
     "wagmi": "^0.3.5"
   },
   "dependencies": {
-    "@0xflair/contracts-registry": "^0.68.5",
-    "@0xflair/meta-transactions": "^0.68.5",
-    "@0xflair/react-common": "^0.68.5",
+    "@0xflair/contracts-registry": "^0.68.6",
+    "@0xflair/meta-transactions": "^0.68.6",
+    "@0xflair/react-common": "^0.68.6",
     "ethers": "^5.6.5",
     "wagmi": "^0.3.5"
   },
