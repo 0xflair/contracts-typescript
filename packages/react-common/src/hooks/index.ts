@@ -11,9 +11,11 @@ export * from './useFeatureReadByTag';
 export * from './useFeatureWrite';
 export * from './useFeatureWriteByTag';
 export * from './useFlairContractDeployer';
+export * from './useFlairFactoryContract';
 export * from './useFunctionFeature';
 export * from './useHasAnyOfFeatures';
 export * from './useNormalizedFunctionCall';
+export * from './useProxyDeployer';
 export * from './useSmartContract';
 export * from './useSupportsInterface';
 
