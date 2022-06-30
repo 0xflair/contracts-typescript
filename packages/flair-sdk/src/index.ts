@@ -10,7 +10,7 @@ export * from '@0xflair/react-icons';
 export * from '@0xflair/react-ipfs';
 export * from '@0xflair/react-meta-transactions';
 export * from '@0xflair/react-nft-collections';
-export * from '@0xflair/react-nft-tokens';
+export * from '@0xflair/react-data-query';
 export * from '@0xflair/react-openzeppelin';
 export * from '@0xflair/react-token-streams';
 export * from '@0xflair/react-ui';
