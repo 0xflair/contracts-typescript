@@ -6,7 +6,7 @@ import { Signer } from 'ethers';
 import { useFeatureWrite } from './useFeatureWrite';
 import { useFunctionFeature } from './useFunctionFeature';
 
-export type ContractWriteByFeatureConfig<ArgsType extends Record<string, any>> =
+export type FeatureWriteByTagConfig<ArgsType extends Record<string, any>> =
   Partial<WriteContractConfig> & {
     env?: Environment;
     chainId?: number;
@@ -23,7 +23,7 @@ export const useFeatureWriteByTag = <ArgsType extends Record<string, any>>({
   contractAddress,
   tag,
   ...rest
-}: ContractWriteByFeatureConfig<ArgsType>) => {
+}: FeatureWriteByTagConfig<ArgsType>) => {
   const { data: feature } = useFunctionFeature({
     env,
     chainId,

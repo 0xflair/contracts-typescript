@@ -4,7 +4,7 @@ import { ReadContractConfig } from '@wagmi/core';
 import { useFeatureRead } from './useFeatureRead';
 import { useFunctionFeature } from './useFunctionFeature';
 
-export type ContractReadByFeatureConfig<ArgsType = any> =
+export type FeatureReadByTagConfig<ArgsType = any> =
   Partial<ReadContractConfig> & {
     env?: Environment;
     chainId?: number;
@@ -20,7 +20,7 @@ export const useFeatureReadByTag = <ResultType = any, ArgsType = any>({
   contractAddress,
   tag,
   ...rest
-}: ContractReadByFeatureConfig<ArgsType>) => {
+}: FeatureReadByTagConfig<ArgsType>) => {
   const { data: feature } = useFunctionFeature({
     env,
     chainId,

@@ -1,5 +1,5 @@
 import {
-  ContractReadByFeatureConfig,
+  FeatureReadByTagConfig,
   useFeatureReadByTag,
 } from '@0xflair/react-common';
 import { BigNumberish } from 'ethers';
@@ -10,7 +10,7 @@ type ArgsType = {
 };
 
 export const useStreamEmissionAmountUntil = (
-  config: ContractReadByFeatureConfig<ArgsType>
+  config: FeatureReadByTagConfig<ArgsType>
 ) => {
   return useFeatureReadByTag<ResultType, ArgsType>({
     tag: 'emission_amount_until',

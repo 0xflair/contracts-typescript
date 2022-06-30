@@ -1,15 +1,14 @@
-import { BytesLike } from 'ethers';
-
 import {
-  ContractReadByFeatureConfig,
+  FeatureReadByTagConfig,
   useFeatureReadByTag,
 } from '@0xflair/react-common';
+import { BytesLike } from 'ethers';
 
 type ResultType = BytesLike;
 type ArgsType = {};
 
 export const useStreamTicketToken = (
-  config: ContractReadByFeatureConfig<ArgsType>,
+  config: FeatureReadByTagConfig<ArgsType>
 ) => {
   return useFeatureReadByTag<ResultType, ArgsType>({
     tag: 'ticket_token',
