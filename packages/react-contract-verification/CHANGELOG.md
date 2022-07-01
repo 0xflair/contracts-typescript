@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.70.0 (2022-07-01)
+
+
+### Features
+
+* allow nft collections to deploy via factory ([e1ba538](https://github.com/0xflair/typescript-sdk/commit/e1ba5389864073c2ef096e4404b58a5bc94c6be1))
+
+
+
+
+
 ## 0.69.2 (2022-07-01)
 
 
