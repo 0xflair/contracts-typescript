@@ -26,6 +26,7 @@
   "devDependencies": {
     "flair-contracts-v1.10": "npm:@0xflair/evm-contracts@1.10.*",
     "flair-contracts-v1.11": "npm:@0xflair/evm-contracts@1.11.*",
+    "flair-contracts-v1.12": "npm:@0xflair/evm-contracts@1.12.*",
     "flair-contracts-v1.3": "npm:@0xflair/evm-contracts@1.3.*",
     "flair-contracts-v1.4": "npm:@0xflair/evm-contracts@1.4.*",
     "flair-contracts-v1.6": "npm:@0xflair/evm-contracts@1.6.*",
