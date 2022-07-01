@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.70.3 (2022-07-01)
+
+
+### Bug Fixes
+
+* update azuki version of the collection presets ([df7bf90](https://github.com/0xflair/typescript-sdk/commit/df7bf906caa7677e8a3f1e98862592b37fbf6ca7))
+
+
+
+
+
 ## 0.70.2 (2022-07-01)
 
 
