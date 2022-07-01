@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.69.1 (2022-07-01)
+
+
+### Bug Fixes
+
+* use interface instead of type ([7fa4d14](https://github.com/0xflair/typescript-sdk/commit/7fa4d142549a3de1f6e0132520783872bc28de61))
+
+
+
+
+
 # 0.69.0 (2022-06-30)
 
 
