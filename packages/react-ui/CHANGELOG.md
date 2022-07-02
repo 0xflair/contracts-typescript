@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.71.0 (2022-07-02)
+
+
+### Features
+
+* add lock recipient normalizer ([2eebe23](https://github.com/0xflair/typescript-sdk/commit/2eebe2371abc25389bde508e703c4a0a0aac3504))
+
+
+
+
+
 ## 0.70.5 (2022-07-02)
 
 
