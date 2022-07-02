@@ -2,7 +2,7 @@ export type SupportedOpenSeaChains = keyof typeof FLAIR_OPENSEA_ADDRESSES;
 
 export const FLAIR_OPENSEA_ADDRESSES = {
   1: {
-    registryAddress: '0xa5409ec958c83c3f309868babaca7c86dcb077c1',
+    registryAddress: '0x1E0049783F008A0085193E00003D00cd54003c71', // <- SeaPort, old Wyvern: 0xa5409ec958c83c3f309868babaca7c86dcb077c1
     exchangeAddress: '0x0000000000000000000000000000000000000000',
   },
   4: {

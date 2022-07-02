@@ -55,6 +55,26 @@ export const FunctionsRegistry: FunctionNormalizer[] = [
     },
   },
   {
+    signature: 'lockProceedsRecipient()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function lockProceedsRecipient()'],
+        functionName: 'lockProceedsRecipient',
+        args: [],
+      };
+    },
+  },
+  {
+    signature: 'proceedsRecipientLocked()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function proceedsRecipientLocked() view returns (bool)'],
+        functionName: 'proceedsRecipientLocked',
+        args: [],
+      };
+    },
+  },
+  {
     signature: 'proceedsRecipient()',
     normalize: (args: {}) => {
       return {
