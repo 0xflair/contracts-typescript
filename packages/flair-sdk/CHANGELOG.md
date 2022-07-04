@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.72.2 (2022-07-04)
+
+
+### Bug Fixes
+
+* add missing base uri signature ([46a1b3c](https://github.com/0xflair/typescript-sdk/commit/46a1b3ccd6a05c626a0a70a434d2a3ccd5149659))
+
+
+
+
+
 ## 0.72.1 (2022-07-04)
 
 
