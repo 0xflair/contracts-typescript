@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.72.0 (2022-07-04)
+
+
+### Features
+
+* add support for token uri suffix ([bac206f](https://github.com/0xflair/typescript-sdk/commit/bac206f89cda1389017a583cdc4e7fcbd71bc837))
+
+
+
+
+
 # 0.71.0 (2022-07-02)
 
 
