@@ -165,6 +165,16 @@ export const FunctionsRegistry: FunctionNormalizer[] = [
     },
   },
   {
+    signature: 'baseTokenURI()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function baseTokenURI() view returns (string)'],
+        functionName: 'baseTokenURI',
+        args: [],
+      };
+    },
+  },
+  {
     signature: 'tokenURIPrefix()',
     normalize: (args: {}) => {
       return {
