@@ -1,6 +1,3 @@
-export * from './useBaseTokenUri';
-export * from './useBaseTokenUriFreezer';
-export * from './useBaseTokenUriUpdater';
 export * from './useCollectionMetadata';
 export * from './useCollectionMetadataUpdater';
 export * from './useCollectionMetadataUri';
@@ -9,3 +6,9 @@ export * from './useIpfsNftTokenMetadataUploader';
 export * from './usePlaceholderUpdater';
 export * from './usePlaceholderUri';
 export * from './usePlaceholderUriUpdater';
+export * from './useTokenMetadataUriFreezer';
+export * from './useTokenMetadataUriFrozen';
+export * from './useTokenMetadataUriPrefix';
+export * from './useTokenMetadataUriPrefixUpdater';
+export * from './useTokenMetadataUriSuffix';
+export * from './useTokenMetadataUriSuffixUpdater';

@@ -155,11 +155,101 @@ export const FunctionsRegistry: FunctionNormalizer[] = [
     },
   },
   {
+    signature: 'baseURI()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function baseURI() view returns (string)'],
+        functionName: 'baseURI',
+        args: [],
+      };
+    },
+  },
+  {
+    signature: 'tokenURIPrefix()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function tokenURIPrefix() view returns (string)'],
+        functionName: 'tokenURIPrefix',
+        args: [],
+      };
+    },
+  },
+  {
+    signature: 'tokenURISuffix()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function tokenURISuffix() view returns (string)'],
+        functionName: 'tokenURISuffix',
+        args: [],
+      };
+    },
+  },
+  {
     signature: 'baseURIFrozen()',
     normalize: (args: {}) => {
       return {
         interface: ['function baseURIFrozen() view returns (bool)'],
         functionName: 'baseURIFrozen',
+        args: [],
+      };
+    },
+  },
+  {
+    signature: 'tokenURIFrozen()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function tokenURIFrozen() view returns (bool)'],
+        functionName: 'tokenURIFrozen',
+        args: [],
+      };
+    },
+  },
+  {
+    signature: 'setBaseURI(string)',
+    normalize: (args: { uriPrefix: BytesLike }) => {
+      return {
+        interface: ['function setBaseURI(string)'],
+        functionName: 'setBaseURI',
+        args: [args.uriPrefix],
+      };
+    },
+  },
+  {
+    signature: 'setTokenURIPrefix(string)',
+    normalize: (args: { uriPrefix: BytesLike }) => {
+      return {
+        interface: ['function setTokenURIPrefix(string)'],
+        functionName: 'setTokenURIPrefix',
+        args: [args.uriPrefix],
+      };
+    },
+  },
+  {
+    signature: 'setTokenURISuffix(string)',
+    normalize: (args: { uriSuffix: BytesLike }) => {
+      return {
+        interface: ['function setTokenURISuffix(string)'],
+        functionName: 'setTokenURISuffix',
+        args: [args.uriSuffix],
+      };
+    },
+  },
+  {
+    signature: 'freezeBaseURI()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function freezeBaseURI()'],
+        functionName: 'freezeBaseURI',
+        args: [],
+      };
+    },
+  },
+  {
+    signature: 'freezeTokenURI()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function freezeTokenURI()'],
+        functionName: 'freezeTokenURI',
         args: [],
       };
     },
