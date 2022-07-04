@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.72.1 (2022-07-04)
+
+
+### Bug Fixes
+
+* use bytes type ([82592ad](https://github.com/0xflair/typescript-sdk/commit/82592ad093391bb1e7f309e1cd4aa4b970b6e0d9))
+
+
+
+
+
 # 0.72.0 (2022-07-04)
 
 
