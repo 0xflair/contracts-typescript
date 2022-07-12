@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.72.3 (2022-07-12)
+
+
+### Bug Fixes
+
+* update to latest contracts except mainnet ([d2379fa](https://github.com/0xflair/typescript-sdk/commit/d2379fae30d97f9c786031ee627b92e6cbab06ab))
+
+
+
+
+
 ## 0.72.2 (2022-07-04)
 
 
