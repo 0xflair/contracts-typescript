@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.72.5 (2022-07-13)
+
+
+### Bug Fixes
+
+* add chains to all connectors and support sold out status ([c623aef](https://github.com/0xflair/typescript-sdk/commit/c623aefbc9fff5d0ba570272f1e3619bad053971))
+
+
+
+
+
 ## 0.72.4 (2022-07-13)
 
 
