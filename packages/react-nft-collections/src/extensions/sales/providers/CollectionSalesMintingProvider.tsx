@@ -20,6 +20,7 @@ type CollectionSalesMintingContextValue = {
 
     // Helpers
     canMint?: boolean;
+    soldOut?: boolean;
 
     // Transaction
     txReceipt?: TransactionReceipt;
@@ -102,9 +103,17 @@ export const CollectionSalesMintingProvider = ({
     minterAddress: account?.address,
   });
 
-  const canMint =
+  const soldOut = Boolean(
+    data.totalSupply &&
+      data.maxSupply &&
+      Number(data.totalSupply.toString()) >= Number(data.maxSupply.toString())
+  );
+
+  const canMint = Boolean(
     ((preSaleStatus && preSaleIsAllowlisted) || publicSaleStatus) &&
-    !mintLoading;
+      !soldOut &&
+      !mintLoading
+  );
 
   const value = {
     data: {
@@ -120,6 +129,7 @@ export const CollectionSalesMintingProvider = ({
 
       // Helpers
       canMint,
+      soldOut,
 
       // Transaction
       txReceipt,

@@ -63,12 +63,14 @@ export const WalletProvider = ({
           options: { shimDisconnect: true },
         }),
         new WalletConnectConnector({
+          chains: FLAIR_CHAINS,
           options: {
             infuraId,
             qrcode: true,
           },
         }),
         new CoinbaseWalletConnector({
+          chains: FLAIR_CHAINS,
           options: {
             appName,
             jsonRpcUrl: `${rpcUrl}/${infuraId}`,

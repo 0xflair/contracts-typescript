@@ -50,7 +50,15 @@ export const CollectionSalesMintingSection = ({
       contractVersion={contractVersion}
     >
       <CollectionSalesMintingProvider>
-        {({ data: { collection, collectionMetadata, canMint }, mint }) => (
+        {({
+          data: {
+            collection,
+            collectionMetadata,
+            preSaleStatus,
+            publicSaleStatus,
+          },
+          mint,
+        }) => (
           <>
             <main className="h-fit max-w-2xl mx-auto lg:max-w-5xl flex items-center p-4">
               <div className="min-w-full lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
@@ -68,7 +76,9 @@ export const CollectionSalesMintingSection = ({
 
                       <CollectionSalesActiveStatus />
 
-                      {account && <CollectionSalesAllowlistStatus />}
+                      {account && preSaleStatus && !publicSaleStatus && (
+                        <CollectionSalesAllowlistStatus />
+                      )}
                     </div>
                   </div>
                 </div>
