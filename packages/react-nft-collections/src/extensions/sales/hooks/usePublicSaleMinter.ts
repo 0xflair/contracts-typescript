@@ -55,7 +55,7 @@ export const usePublicSaleMinter = ({
 
   return {
     ...result,
-    isLoading: result.isLoading || isLoading || !publicSalePrice,
+    isLoading: result.isLoading || isLoading,
     error: result.error || error,
     data: {
       ...result.data,

@@ -55,7 +55,7 @@ export const usePreSaleMinter = ({
 
   return {
     ...result,
-    isLoading: result.isLoading || isLoading || !preSalePrice,
+    isLoading: result.isLoading || isLoading,
     error: result.error || error,
     data: {
       ...result.data,
