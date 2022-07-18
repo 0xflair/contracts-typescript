@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.74.1 (2022-07-18)
+
+
+### Bug Fixes
+
+* remove unused large type ([21dd149](https://github.com/0xflair/typescript-sdk/commit/21dd14927bf21d0ae2364c9a9a606db28d80f423))
+
+
+
+
+
 # 0.74.0 (2022-07-17)
 
 
