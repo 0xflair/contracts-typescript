@@ -176,21 +176,6 @@ ${Object.entries(registry)
   })
   .join(';')}
 
-export type ContractTypeRegistry = { ${Object.entries(registry)
-      .map(([versionTag, artifacts]) => {
-        return `'${versionTag}': { ${Object.keys(artifacts)
-          .map(
-            (key) =>
-              `"${key}": ${
-                typeNames[versionTag][key] === 'any'
-                  ? 'any'
-                  : `${typeNames[versionTag][key]}['functions']`
-              }`
-          )
-          .join('; ')} }`;
-      })
-      .join(';')} };
-
 ${Object.entries(registry)
   .map(([versionTag, artifacts]) => {
     const safeVersionPrefix = getSafeVersionPrefix(versionTag);
@@ -207,7 +192,11 @@ export type ContractFqn = ${Object.entries(registry)
       })
       .join(' | ')};
 
-export type ContractVersion = keyof ContractTypeRegistry;
+export type ContractVersion = ${Object.entries(registry)
+      .map(([versionTag]) => {
+        return `"${versionTag}"`;
+      })
+      .join(' | ')};
 
 export const LATEST_VERSION: ContractVersion = "${lastVersion}";
 `
