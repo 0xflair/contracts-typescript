@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.76.2 (2022-07-19)
+
+
+### Bug Fixes
+
+* add unstake normalizers ([07f65a3](https://github.com/0xflair/typescript-sdk/commit/07f65a320700eaf485c9945ccc1ddbb77beb4f3b))
+
+
+
+
+
 ## 0.76.1 (2022-07-19)
 
 
