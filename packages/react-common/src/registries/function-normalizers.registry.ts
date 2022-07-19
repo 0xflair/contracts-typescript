@@ -459,4 +459,24 @@ export const FunctionsRegistry: FunctionNormalizer[] = [
       };
     },
   },
+  {
+    signature: 'unstake(uint256)',
+    normalize: (args: { ticketTokenId: BigNumberish }) => {
+      return {
+        interface: ['function unstake(uint256)'],
+        functionName: 'unstake',
+        args: [args.ticketTokenId],
+      };
+    },
+  },
+  {
+    signature: 'unstake(uint256[])',
+    normalize: (args: { ticketTokenIds: BigNumberish[] }) => {
+      return {
+        interface: ['function unstake(uint256[])'],
+        functionName: 'unstake',
+        args: [args.ticketTokenIds],
+      };
+    },
+  },
 ];
