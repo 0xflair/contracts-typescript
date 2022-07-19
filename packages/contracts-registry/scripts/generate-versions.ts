@@ -135,11 +135,12 @@ const main = async () => {
 
   // TODO Extend ContractFqn type to export keys per version not just latest
   fse.writeFileSync(
-    path.resolve(__dirname, '../src/generated-types.ts'),
+    path.resolve(__dirname, '../src/generated-versions.ts'),
     `/* THIS AN AUTO-GENERATED FILE, DO NOT EDIT MANUALLY */
 /* eslint-disable */
 
 ${Object.entries(registry)
+  .filter(([v]) => v === lastVersion)
   .map(([versionTag, artifacts]) => {
     const safeVersionPrefix = getSafeVersionPrefix(versionTag);
     typeNames[versionTag] = {};
@@ -169,6 +170,7 @@ ${Object.entries(registry)
   .join(';')}
 
 ${Object.entries(registry)
+  .filter(([v]) => v === lastVersion)
   .map(([versionTag]) => {
     return `export type { ${Object.values(typeNames[versionTag])
       .filter((key) => key !== 'any')
@@ -205,7 +207,7 @@ export const LATEST_VERSION: ContractVersion = "${lastVersion}";
 
 main()
   .then((r) => {
-    console.log(`Finished generating mapping.`);
+    console.log(`Finished generating versions mapping.`);
   })
   .catch((e) => {
     console.error(`Error: ${e}`);

@@ -1,5 +1,5 @@
 import BuildInfoJson from './build-info.json';
-import { ContractVersion } from './generated-types';
+import { ContractVersion } from './generated-versions';
 import ContractRegistryJson from './registry-mapping.json';
 
 export type ContractDefinition = {

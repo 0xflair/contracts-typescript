@@ -5,7 +5,7 @@ import {
   ContractFqn,
   ContractVersion,
   LATEST_VERSION,
-} from './generated-types';
+} from './generated-versions';
 import { loadContract } from './load-contract';
 
 export class FlairContract extends EthersContract {

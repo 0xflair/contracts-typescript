@@ -4,7 +4,7 @@ import {
   ContractFqn,
   ContractVersion,
   LATEST_VERSION,
-} from './generated-types';
+} from './generated-versions';
 import { CONTRACT_REGISTRY } from './registry';
 
 export const loadContract = (
