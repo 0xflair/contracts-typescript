@@ -437,4 +437,26 @@ export const FunctionsRegistry: FunctionNormalizer[] = [
       };
     },
   },
+
+  // Stream ERC721LockedStakingExtension
+  {
+    signature: 'stake(uint256)',
+    normalize: (args: { ticketTokenId: BigNumberish }) => {
+      return {
+        interface: ['function stake(uint256)'],
+        functionName: 'stake',
+        args: [args.ticketTokenId],
+      };
+    },
+  },
+  {
+    signature: 'stake(uint256[])',
+    normalize: (args: { ticketTokenIds: BigNumberish[] }) => {
+      return {
+        interface: ['function stake(uint256[])'],
+        functionName: 'stake',
+        args: [args.ticketTokenIds],
+      };
+    },
+  },
 ];
