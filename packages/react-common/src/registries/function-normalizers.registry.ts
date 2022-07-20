@@ -503,4 +503,28 @@ export const FunctionsRegistry: FunctionNormalizer[] = [
       };
     },
   },
+  {
+    signature: 'totalStakedDuration(uint256[])',
+    normalize: (args: { ticketTokenIds: BigNumberish[] }) => {
+      return {
+        interface: [
+          'function totalStakedDuration(uint256[]) view returns (uint256)',
+        ],
+        functionName: 'totalStakedDuration',
+        args: [args.ticketTokenIds],
+      };
+    },
+  },
+  {
+    signature: 'totalStakedDuration(uint256)',
+    normalize: (args: { ticketTokenId: BigNumberish }) => {
+      return {
+        interface: [
+          'function totalStakedDuration(uint256) view returns (uint256)',
+        ],
+        functionName: 'totalStakedDuration',
+        args: [args.ticketTokenId],
+      };
+    },
+  },
 ];
