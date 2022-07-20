@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.77.1 (2022-07-20)
+
+
+### Bug Fixes
+
+* add normalizers for total durations ([94e3757](https://github.com/0xflair/typescript-sdk/commit/94e375749e0678de9ec8b2753cd5c9b797c16c11))
+
+
+
+
+
 # 0.77.0 (2022-07-20)
 
 
