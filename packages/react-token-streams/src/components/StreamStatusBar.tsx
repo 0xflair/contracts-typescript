@@ -33,19 +33,19 @@ export const StreamStatusBar = ({
   return (
     <div className={className}>
       {nftsLoading && (
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <Spinner /> Loading your NFTs...
         </div>
       )}
       {totalClaimedAmountByAccountLoading ||
       totalClaimableAmountByAccountLoading ||
       totalClaimedOverallLoading ? (
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <Spinner /> Loading claiming information...
         </div>
       ) : null}
       {claimLoading && (
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <Spinner /> {txReceipt || txResponse ? 'Claiming...' : 'Preparing...'}
         </div>
       )}

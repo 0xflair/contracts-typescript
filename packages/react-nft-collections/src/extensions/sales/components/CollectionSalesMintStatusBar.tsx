@@ -16,12 +16,12 @@ export const CollectionSalesMintStatusBar = ({ className }: Props) => {
   return (
     <div className={className}>
       {/* {(collectionMetadataLoading || metadataLoading) && (
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <Spinner /> Loading metadata...
         </div>
       )} */}
       {mintLoading && (
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <Spinner /> {txReceipt || txResponse ? 'Minting...' : 'Preparing...'}
         </div>
       )}
