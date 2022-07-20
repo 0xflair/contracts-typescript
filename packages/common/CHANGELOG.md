@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.78.0 (2022-07-20)
+
+
+### Features
+
+* bump up the contracts version to decouple staking ([94c2703](https://github.com/0xflair/typescript-sdk/commit/94c2703cf0f3b215b2385d2e550c670b23fd5a34))
+
+
+
+
+
 ## 0.77.1 (2022-07-20)
 
 
