@@ -479,4 +479,28 @@ export const FunctionsRegistry: FunctionNormalizer[] = [
       };
     },
   },
+  {
+    signature: 'rewardAmountByToken(uint256[])',
+    normalize: (args: { ticketTokenIds: BigNumberish[] }) => {
+      return {
+        interface: [
+          'function rewardAmountByToken(uint256[]) view returns (uint256)',
+        ],
+        functionName: 'rewardAmountByToken',
+        args: [args.ticketTokenIds],
+      };
+    },
+  },
+  {
+    signature: 'rewardAmountByToken(uint256)',
+    normalize: (args: { ticketTokenId: BigNumberish }) => {
+      return {
+        interface: [
+          'function rewardAmountByToken(uint256) view returns (uint256)',
+        ],
+        functionName: 'rewardAmountByToken',
+        args: [args.ticketTokenId],
+      };
+    },
+  },
 ];

@@ -183,7 +183,7 @@ export const StreamClaimingSection = ({
                   </div>
                 </div>
 
-                <div className="mt-4 lg:col-span-12">
+                <div className="lg:col-span-12">
                   <StreamStatusBar />
 
                   {stream?.publicDescription ? (
