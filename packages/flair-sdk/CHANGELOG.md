@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.80.0 (2022-07-21)
+
+
+### Features
+
+* add staking extension hooks and components ([#8](https://github.com/0xflair/typescript-sdk/issues/8)) ([e5048be](https://github.com/0xflair/typescript-sdk/commit/e5048bef2faed34c382fbcec0962f2d8c5b031a1))
+
+
+
+
+
 # 0.79.0 (2022-07-21)
 
 
