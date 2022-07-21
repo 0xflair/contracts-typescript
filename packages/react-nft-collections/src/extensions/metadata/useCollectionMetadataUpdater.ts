@@ -75,10 +75,10 @@ export const useCollectionMetadataUpdater = ({
 
       const collectionMetadataUri = await collectionMetadataUpload({
         jsonContent: {
+          ...(updates?.additionalMetadataAttributes || {}),
           name: updates?.collectionName,
           image: collectionImageUri,
           description: updates?.collectionDescription,
-          ...(updates?.additionalMetadataAttributes || {}),
         },
       });
 
