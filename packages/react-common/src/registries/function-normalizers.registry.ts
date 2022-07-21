@@ -438,7 +438,7 @@ export const FunctionsRegistry: FunctionNormalizer[] = [
     },
   },
 
-  // Stream ERC721LockedStakingExtension
+  // Stream ERC721StakingExtension
   {
     signature: 'stake(uint256)',
     normalize: (args: { ticketTokenId: BigNumberish }) => {
