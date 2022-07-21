@@ -10,7 +10,7 @@ type ArgsType = {
 };
 
 export const useStreamEmissionAmountUntil = (
-  config: FeatureReadByTagConfig<ArgsType>
+  config: FeatureReadByTagConfig<ArgsType>,
 ) => {
   return useFeatureReadByTag<ResultType, ArgsType>({
     tag: 'emission_amount_until',

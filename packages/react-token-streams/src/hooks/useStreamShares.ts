@@ -13,7 +13,7 @@ export const useStreamShares = (config: FeatureReadByTagConfig<ArgsType>) => {
     enabled: Boolean(
       config.args.ticketTokenIds &&
         config.args.ticketTokenIds.length > 0 &&
-        config.contractAddress
+        config.contractAddress,
     ),
     ...config,
   });

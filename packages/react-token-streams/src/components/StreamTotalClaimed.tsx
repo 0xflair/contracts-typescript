@@ -2,6 +2,7 @@ import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
 import { useChainInfo } from '@0xflair/react-common';
 
 import { useStreamClaimingContext } from '../providers/StreamClaimingProvider';
+import { useStreamContext } from '../providers/StreamProvider';
 
 type Props = {
   className?: string;
@@ -13,14 +14,15 @@ export const StreamTotalClaimed = ({
   calculationMode = 'BY_ACCOUNT',
 }: Props) => {
   const {
+    data: { chainInfo },
+  } = useStreamContext();
+  const {
     data: {
-      stream,
       totalClaimedAmountByAccount,
       totalClaimedAmountOverall,
       currentClaimTokenSymbol,
     },
   } = useStreamClaimingContext();
-  const chainInfo = useChainInfo(stream?.chainId);
 
   return (
     <div className={className}>

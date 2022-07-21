@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 import { useStreamEmissionRate } from '../hooks/useStreamEmissionRate';
 import { useStreamEmissionTimeUnit } from '../hooks/useStreamEmissionTimeUnit';
 import { useStreamClaimingContext } from '../providers';
+import { useStreamContext } from '../providers/StreamProvider';
 
 type Props = {
   className?: string;
@@ -16,7 +17,10 @@ export const StreamEmissionRate = ({
   separator = <>/</>,
 }: Props) => {
   const {
-    data: { env, chainId, contractAddress, currentClaimTokenSymbol },
+    data: { env, chainId, contractAddress },
+  } = useStreamContext();
+  const {
+    data: { currentClaimTokenSymbol },
   } = useStreamClaimingContext();
 
   const { data: emissionRate, isLoading: emissionRateLoading } =

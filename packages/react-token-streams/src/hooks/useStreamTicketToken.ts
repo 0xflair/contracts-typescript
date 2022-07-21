@@ -8,7 +8,7 @@ type ResultType = BytesLike;
 type ArgsType = {};
 
 export const useStreamTicketToken = (
-  config: FeatureReadByTagConfig<ArgsType>
+  config: FeatureReadByTagConfig<ArgsType>,
 ) => {
   return useFeatureReadByTag<ResultType, ArgsType>({
     tag: 'ticket_token',

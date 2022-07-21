@@ -3,6 +3,7 @@ import { BigNumberish } from 'ethers';
 import { useStreamShares } from '../hooks/useStreamShares';
 import { useStreamTotalShares } from '../hooks/useStreamTotalShares';
 import { useStreamClaimingContext } from '../providers';
+import { useStreamContext } from '../providers/StreamProvider';
 
 type Props = {
   className?: string;
@@ -18,10 +19,9 @@ export const StreamSharesAllocation = ({
       env,
       chainId,
       contractAddress,
-      currentClaimTokenSymbol,
       ticketTokenIds: accountTicketTokenIds,
     },
-  } = useStreamClaimingContext();
+  } = useStreamContext();
 
   const {
     data: shares,

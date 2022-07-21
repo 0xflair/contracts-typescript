@@ -8,7 +8,7 @@ type ResultType = BigNumberish[];
 type ArgsType = {};
 
 export const useStreamEmissionEnd = (
-  config: FeatureReadByTagConfig<ArgsType>
+  config: FeatureReadByTagConfig<ArgsType>,
 ) => {
   return useFeatureReadByTag<ResultType, ArgsType>({
     tag: 'emission_end',

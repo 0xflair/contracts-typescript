@@ -11,10 +11,10 @@ type UpdaterConfig = {
 };
 
 export function useTokenStreamUpdater<
-  TStreamConfig extends Record<string, any>
+  TStreamConfig extends Record<string, any>,
 >(
   stream: Partial<TokenStream<TStreamConfig>>,
-  { enabled = true, env = Environment.PROD }: UpdaterConfig
+  { enabled = true, env = Environment.PROD }: UpdaterConfig,
 ) {
   const loginJwt = useLoginJwt();
   const headers = useMemo(() => {

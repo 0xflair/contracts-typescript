@@ -1,13 +1,13 @@
-import { useStreamClaimingContext } from '../providers/StreamClaimingProvider';
+import { useStreamContext } from '../providers/StreamProvider';
 
 type Props = {
   className?: string;
 };
 
-export const StreamEligibleNfts = ({ className }: Props) => {
+export const StreamAccountTotalNfts = ({ className }: Props) => {
   const {
     data: { nfts },
-  } = useStreamClaimingContext();
+  } = useStreamContext();
 
   return (
     <div className={className}>

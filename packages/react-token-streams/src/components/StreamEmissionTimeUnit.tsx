@@ -1,7 +1,7 @@
 import humanizeDuration from 'humanize-duration';
 
 import { useStreamEmissionTimeUnit } from '../hooks/useStreamEmissionTimeUnit';
-import { useStreamClaimingContext } from '../providers';
+import { useStreamContext } from '../providers/StreamProvider';
 
 type Props = {
   className?: string;
@@ -10,7 +10,7 @@ type Props = {
 export const StreamEmissionTimeUnit = ({ className }: Props) => {
   const {
     data: { env, chainId, contractAddress },
-  } = useStreamClaimingContext();
+  } = useStreamContext();
 
   const { data: emissionTimeUnit } = useStreamEmissionTimeUnit({
     env,

@@ -7,22 +7,19 @@ type Props = {
   children?: React.ReactNode;
 };
 
-export const StreamStatusBar = ({
-  className = 'mt-4 flex flex-col gap-2',
+export const StreamClaimingStatusBar = ({
+  className = 'flex flex-col gap-2',
   children,
 }: Props) => {
   const {
     data: { txReceipt, txResponse },
     error: {
-      streamError,
       totalClaimableAmountByAccountError,
       totalClaimedAmountByAccountError,
       totalClaimedOverallError,
       claimError,
-      nftsError,
     },
     isLoading: {
-      nftsLoading,
       totalClaimedAmountByAccountLoading,
       totalClaimableAmountByAccountLoading,
       totalClaimedOverallLoading,
@@ -32,11 +29,6 @@ export const StreamStatusBar = ({
 
   return (
     <div className={className}>
-      {nftsLoading && (
-        <div className="flex items-center gap-2">
-          <Spinner /> Loading your NFTs...
-        </div>
-      )}
       {totalClaimedAmountByAccountLoading ||
       totalClaimableAmountByAccountLoading ||
       totalClaimedOverallLoading ? (
@@ -53,7 +45,6 @@ export const StreamStatusBar = ({
         <TransactionLink txReceipt={txReceipt} txResponse={txResponse} />
       ) : null}
       {claimError && <Errors title="Cannot claim" error={claimError} />}
-      {streamError && <Errors title="streamError" error={streamError} />}
       {totalClaimableAmountByAccountError && (
         <Errors
           title="totalClaimableAmountByAccountError"
@@ -72,7 +63,6 @@ export const StreamStatusBar = ({
           error={totalClaimedOverallError}
         />
       )}
-      {nftsError && <Errors title="nftsError" error={nftsError} />}
       {children}
     </div>
   );

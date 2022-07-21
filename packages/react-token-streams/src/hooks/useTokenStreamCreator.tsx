@@ -13,7 +13,7 @@ type UpdaterConfig = {
 
 export function useTokenStreamCreator<TConfig extends Record<string, any>>(
   tokenStream: Partial<TokenStream<TConfig>>,
-  { loginJwt, enabled = false, env = Environment.PROD }: UpdaterConfig
+  { loginJwt, enabled = false, env = Environment.PROD }: UpdaterConfig,
 ) {
   const headers = useMemo(() => {
     return {
