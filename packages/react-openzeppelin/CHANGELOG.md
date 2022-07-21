@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.81.1 (2022-07-21)
+
+
+### Bug Fixes
+
+* allow additional metadata attributes without overriding new values ([571a5a0](https://github.com/0xflair/typescript-sdk/commit/571a5a08cc0c0a602f9e875487b895aa0c24fcb4))
+
+
+
+
+
 # 0.81.0 (2022-07-21)
 
 
