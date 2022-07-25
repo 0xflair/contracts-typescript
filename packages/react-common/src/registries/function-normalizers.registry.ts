@@ -84,6 +84,73 @@ export const FunctionsRegistry: FunctionNormalizer[] = [
       };
     },
   },
+
+  // WithdrawExtension
+  {
+    signature: 'setWithdrawRecipient(address)',
+    normalize: (args: { recipient: BytesLike }) => {
+      return {
+        interface: ['function setWithdrawRecipient(address)'],
+        functionName: 'setWithdrawRecipient',
+        args: [args.recipient],
+      };
+    },
+  },
+  {
+    signature: 'lockWithdrawRecipient()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function lockWithdrawRecipient()'],
+        functionName: 'lockWithdrawRecipient',
+        args: [],
+      };
+    },
+  },
+  {
+    signature: 'withdrawRecipientLocked()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function withdrawRecipientLocked() view returns (bool)'],
+        functionName: 'withdrawRecipientLocked',
+        args: [],
+      };
+    },
+  },
+  {
+    signature: 'withdrawRecipient()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function withdrawRecipient() view returns (address)'],
+        functionName: 'withdrawRecipient',
+        args: [],
+      };
+    },
+  },
+  {
+    signature: 'withdraw()',
+    normalize: (args: {}) => {
+      return {
+        interface: ['function withdraw()'],
+        functionName: 'withdraw',
+        args: [],
+      };
+    },
+  },
+  {
+    signature: 'withdraw(address[],uint256[])',
+    normalize: (args: {
+      tokenAddresses: BytesLike[];
+      amounts: BigNumberish[];
+    }) => {
+      return {
+        interface: ['function withdraw(address[],uint256[])'],
+        functionName: 'withdraw',
+        args: [args.tokenAddresses, args.amounts],
+      };
+    },
+  },
+
+  // Common (ERC20, ERC721)
   {
     signature: 'maxSupply()',
     normalize: (args: {}) => {
@@ -500,6 +567,16 @@ export const FunctionsRegistry: FunctionNormalizer[] = [
         ],
         functionName: 'rewardAmountByToken',
         args: [args.ticketTokenId],
+      };
+    },
+  },
+  {
+    signature: 'rateByToken(uint256[])',
+    normalize: (args: { ticketTokenIds: BigNumberish[] }) => {
+      return {
+        interface: ['function rateByToken(uint256[]) view returns (uint256)'],
+        functionName: 'rateByToken',
+        args: [args.ticketTokenIds],
       };
     },
   },

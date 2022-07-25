@@ -7,6 +7,7 @@ export * from './useStreamEmissionStart';
 export * from './useStreamEmissionTimeUnit';
 export * from './useStreamReleasedAmountUntil';
 export * from './useStreamRewardAmountByToken';
+export * from './useStreamRateByToken';
 export * from './useStreamShares';
 export * from './useStreamStaker';
 export * from './useStreamTicketToken';

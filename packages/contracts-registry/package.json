@@ -31,6 +31,7 @@
     "flair-contracts-v1.14": "npm:@0xflair/evm-contracts@1.14.*",
     "flair-contracts-v1.15": "npm:@0xflair/evm-contracts@1.15.*",
     "flair-contracts-v1.16": "npm:@0xflair/evm-contracts@1.16.*",
+    "flair-contracts-v1.17": "npm:@0xflair/evm-contracts@1.17.*",
     "flair-contracts-v1.8": "npm:@0xflair/evm-contracts@1.8.*",
     "flair-contracts-v1.9": "npm:@0xflair/evm-contracts@1.9.*"
   }
