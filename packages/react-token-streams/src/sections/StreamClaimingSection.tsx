@@ -1,9 +1,12 @@
 import { useHasAnyOfFeatures } from '@0xflair/react-common';
 import { ConnectButton, SwitchChainButton } from '@0xflair/react-wallet';
 
-import { StreamClaimableAmount, StreamClaimingStatusBar } from '../components';
+import {
+  StreamClaimableAmount,
+  StreamClaimingStatusBar,
+  StreamRateByTokens,
+} from '../components';
 import { StreamClaimButton } from '../components/StreamClaimButton';
-import { StreamEmissionRate } from '../components/StreamEmissionRate';
 import { StreamEmissionTimeUnit } from '../components/StreamEmissionTimeUnit';
 import { StreamRewardAmount } from '../components/StreamRewardAmount';
 import { StreamSharesAllocation } from '../components/StreamSharesAllocation';
@@ -48,6 +51,12 @@ export const StreamClaimingSection = ({}: Props) => {
     contractAddress,
     tags: ['reward_amount_by_multi_tokens'],
   });
+  const { data: hasRateByTokens } = useHasAnyOfFeatures({
+    env,
+    chainId,
+    contractAddress,
+    tags: ['rate_by_multiple_tokens'],
+  });
 
   return (
     <StreamClaimingProvider>
@@ -68,19 +77,24 @@ export const StreamClaimingSection = ({}: Props) => {
                       <StreamTotalClaimed />
                     </dd>
                   </div>
-                  {hasEmissionReleaseExtension ? (
+                  {hasRateByTokens ? (
                     <>
                       <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
                         <dt className="flex flex-col gap-1 text-sm text-gray-600">
-                          <span>Emission rate</span>
+                          <span>Reward rate</span>
                           <small className="text-xs flex-shrink-0 text-gray-400">
-                            Tokens distributed among all NFTs{' '}
+                            How many tokens you receive{' '}
+                            <StreamEmissionTimeUnit />
                           </small>
                         </dt>
                         <dd className="text-sm font-medium text-gray-900">
-                          <StreamEmissionRate />
+                          <StreamRateByTokens />
                         </dd>
                       </div>
+                    </>
+                  ) : null}
+                  {hasEmissionReleaseExtension ? (
+                    <>
                       <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
                         <dt className="flex flex-col gap-1 text-sm text-gray-600">
                           <span>Claim window</span>
