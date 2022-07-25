@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.82.0 (2022-07-25)
+
+
+### Features
+
+* add stream rate by token hook ([31eb7de](https://github.com/0xflair/typescript-sdk/commit/31eb7de189f5dee8fa0fb02c55a7b1635185c916))
+
+
+
+
+
 ## 0.81.1 (2022-07-21)
 
 
