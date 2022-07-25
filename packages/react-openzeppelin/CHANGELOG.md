@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.83.0 (2022-07-25)
+
+
+### Features
+
+* add rate by tokens ([159a9cf](https://github.com/0xflair/typescript-sdk/commit/159a9cfd5f0b4bb1fb400e5fb1ee8040cffec449))
+
+
+
+
+
 # 0.82.0 (2022-07-25)
 
 
