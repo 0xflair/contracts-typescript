@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.84.2 (2022-07-26)
+
+
+### Bug Fixes
+
+* add v1.7 version to registry ([44cad65](https://github.com/0xflair/typescript-sdk/commit/44cad6589c7fa6a06b0b666244b41ac61dce0ef7))
+
+
+
+
+
 ## 0.84.1 (2022-07-26)
 
 
