@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.84.1 (2022-07-26)
+
+
+### Bug Fixes
+
+* do not fail if encoding constructor fails ([23ee4d8](https://github.com/0xflair/typescript-sdk/commit/23ee4d805b64691da8eca00ac7ee9b031624b259))
+
+
+
+
+
 # 0.84.0 (2022-07-26)
 
 
