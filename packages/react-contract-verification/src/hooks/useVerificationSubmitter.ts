@@ -32,13 +32,18 @@ export const useVerificationSubmitter = ({
   const loginJwt = useLoginJwt();
 
   const encodedConstructorArguments = useMemo(() => {
-    if (!contractFqn || !constructorArguments) {
+    try {
+      if (!contractFqn || !constructorArguments) {
+        return '';
+      }
+      const definition = loadContract(contractFqn, contractVersion);
+      const iface = new ethers.utils.Interface(definition.artifact.abi);
+
+      return iface.encodeDeploy(constructorArguments);
+    } catch (e) {
+      console.warn(e);
       return '';
     }
-    const definition = loadContract(contractFqn, contractVersion);
-    const iface = new ethers.utils.Interface(definition.artifact.abi);
-
-    return iface.encodeDeploy(constructorArguments);
   }, [contractFqn, contractVersion, constructorArguments]);
 
   const headers = useMemo(() => {
