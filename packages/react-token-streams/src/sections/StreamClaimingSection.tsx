@@ -152,21 +152,6 @@ export const StreamClaimingSection = ({}: Props) => {
                       </div>
                     </>
                   ) : null}
-                  {hasStakingExtension ? (
-                    <>
-                      <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
-                        <dt className="flex flex-col gap-1 text-sm text-gray-600">
-                          <span>Total staked duration(s)</span>
-                          <small className="text-xs flex-shrink-0 text-gray-400">
-                            Sum for all tokens in your wallet
-                          </small>
-                        </dt>
-                        <dd className="text-sm font-medium text-gray-900 flex flex-col gap-1 items-end">
-                          <StreamTotalStakedDurations />
-                        </dd>
-                      </div>
-                    </>
-                  ) : null}
                   <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
                     <dt className="text-base font-medium text-gray-900">
                       Claimable now for you
