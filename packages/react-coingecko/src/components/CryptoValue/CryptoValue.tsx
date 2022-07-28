@@ -28,7 +28,11 @@ export const CryptoValue = (props: Props) => {
   const { data, error, loading } = useCryptoCurrency({ symbol });
 
   const fractions =
-    fractionDigits !== undefined ? fractionDigits : symbol === 'ETH' ? 4 : 2;
+    fractionDigits !== undefined
+      ? fractionDigits
+      : symbol?.toString().toLowerCase().endsWith('eth')
+      ? 4
+      : 2;
   const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
   const etherValue = ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
 
