@@ -6,6 +6,7 @@ import { useCancel } from './useCancel';
 type Config = {
   url: string;
   data: any;
+  params?: any;
   headers?: AxiosRequestHeaders;
   timeout?: number;
   enabled?: boolean;
@@ -14,6 +15,7 @@ type Config = {
 export const useAxiosPost = <T>({
   url,
   data,
+  params,
   headers,
   timeout,
   enabled = false,
@@ -34,6 +36,7 @@ export const useAxiosPost = <T>({
       setLoading(true);
       setError(undefined);
       const response = await axios.post<T>(url, data, {
+        params,
         cancelToken: source.token,
         timeout: timeout,
         headers,
@@ -54,7 +57,7 @@ export const useAxiosPost = <T>({
         }
       }
     }
-  }, [cancelQuery, url, data, timeout, headers]);
+  }, [cancelQuery, url, data, params, timeout, headers]);
 
   useEffect(() => {
     if (enabled) {
