@@ -13,7 +13,7 @@ export type AddressList<
 export type AddressListItem = {
   _id: string;
   address: string;
-  maxAllocation?: number;
+  maxAllowance?: number;
   createdAt: string;
   createdVia: string;
 };
