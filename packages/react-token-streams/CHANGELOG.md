@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.87.1 (2022-07-29)
+
+
+### Bug Fixes
+
+* add max allocation to address list item ([df26d8a](https://github.com/0xflair/typescript-sdk/commit/df26d8a18ab327f7042f986002a27d3252368325))
+
+
+
+
+
 # 0.87.0 (2022-07-29)
 
 
