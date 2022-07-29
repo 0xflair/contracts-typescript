@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.87.2 (2022-07-29)
+
+
+### Bug Fixes
+
+* use correct name maxAllowance ([f1e64f2](https://github.com/0xflair/typescript-sdk/commit/f1e64f2ce0d10da802055488e01068d3405ac5d0))
+
+
+
+
+
 ## 0.87.1 (2022-07-29)
 
 
