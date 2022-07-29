@@ -8,21 +8,15 @@ type Props = {
 
 export const CollectionSalesPrice = ({ className }: Props) => {
   const {
-    data: { preSaleStatus, preSalePrice, publicSalePrice, chainInfo },
+    data: { price, chainInfo, currentTierId },
   } = useCollectionSalesMintingContext();
 
   return (
-    <div className={className}>
-      {preSaleStatus ? (
+    <div className={className} title={`Tier #${currentTierId?.toString()}`}>
+      {price ? (
         <CryptoValue
           symbol={chainInfo?.nativeCurrency?.symbol}
-          value={preSalePrice}
-          unit={CryptoUnits.WEI}
-        />
-      ) : publicSalePrice ? (
-        <CryptoValue
-          symbol={chainInfo?.nativeCurrency?.symbol}
-          value={publicSalePrice}
+          value={price}
           unit={CryptoUnits.WEI}
         />
       ) : (

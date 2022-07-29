@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 type ArgsType = [BigNumberish[] | []];
 
 export const useFilterUnlockedTokens = (
-  config: PredefinedReadContractConfig<ArgsType>
+  config: PredefinedReadContractConfig<ArgsType>,
 ) => {
   const result = useContractRead<BigNumberish[], ArgsType>({
     contractFqn: 'collections/ERC721/extensions/ERC721LockableExtension',

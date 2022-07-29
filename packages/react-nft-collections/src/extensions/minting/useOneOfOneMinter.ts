@@ -16,7 +16,7 @@ type Config = {
 type ArgsType = [
   toAddress: BytesLike,
   mintCount: BigNumberish,
-  tokenURIs: BytesLike[]
+  tokenURIs: BytesLike[],
 ];
 
 export const useOneOfOneMinter = ({

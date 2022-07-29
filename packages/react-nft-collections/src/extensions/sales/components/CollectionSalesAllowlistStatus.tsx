@@ -14,26 +14,26 @@ export const CollectionSalesAllowlistStatus = ({
   notAllowlistedClass = 'inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800',
 }: Props) => {
   const {
-    data: { preSaleStatus, preSaleIsAllowlisted },
+    data: { hasAllowlist, isAllowlisted },
   } = useCollectionSalesMintingContext();
 
   return (
     <div className={className}>
-      {preSaleIsAllowlisted ? (
+      {isAllowlisted ? (
         <span
           className={classNames(
             'allowlist-status allowlist-status-allowlisted',
-            allowlistedClass
+            allowlistedClass,
           )}
         >
-          You are allowlisted for pre-sale
+          You are allowlisted
         </span>
       ) : (
-        preSaleStatus && (
+        hasAllowlist && (
           <span
             className={classNames(
               'allowlist-status allowlist-status-not-allowlisted',
-              notAllowlistedClass
+              notAllowlistedClass,
             )}
           >
             You are not allowlisted

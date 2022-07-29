@@ -14,7 +14,7 @@ export const CollectionImage = ({ className }: Props) => {
   return (
     <img
       src={normalizeIpfsUrl(
-        collectionMetadata?.image || collection?.config?.collectionImageUri
+        collectionMetadata?.image || collection?.config?.collectionImageUri,
       )}
       className={className}
     />

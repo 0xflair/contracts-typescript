@@ -5,7 +5,7 @@ import {
 import { BigNumberish } from 'ethers';
 
 export const usePublicSaleMaxMintPerTx = (
-  config: PredefinedReadContractConfig
+  config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<BigNumberish>({
     contractFqn: 'collections/ERC721/extensions/ERC721PublicSaleExtension',

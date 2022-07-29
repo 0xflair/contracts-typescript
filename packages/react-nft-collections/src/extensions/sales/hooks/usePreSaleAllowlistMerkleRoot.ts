@@ -2,12 +2,12 @@ import {
   PredefinedReadContractConfig,
   useContractRead,
 } from '@0xflair/react-common';
-import { BigNumberish } from 'ethers';
+import { BytesLike } from 'ethers';
 
 export const usePreSaleAllowlistMerkleRoot = (
-  config: PredefinedReadContractConfig
+  config: PredefinedReadContractConfig,
 ) => {
-  return useContractRead<BigNumberish>({
+  return useContractRead<BytesLike>({
     contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'preSaleAllowlistMerkleRoot',
     ...config,

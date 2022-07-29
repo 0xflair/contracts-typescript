@@ -97,7 +97,7 @@ export const useAdminMinter = ({
       mintByRoleWrite,
       mintCount,
       toAddress,
-    ]
+    ],
   );
 
   return {

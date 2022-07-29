@@ -4,7 +4,7 @@ import {
 } from '@0xflair/react-common';
 
 export const useCollectionMetadataUri = (
-  config: PredefinedReadContractConfig
+  config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<string>({
     contractFqn:

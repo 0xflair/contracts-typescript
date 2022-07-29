@@ -14,26 +14,12 @@ export const CollectionSalesMintInput = ({
   setMintCount,
 }: Props) => {
   const {
-    data: {
-      canMint,
-      maxSupply,
-      preSaleMaxMintPerWallet,
-      publicSaleMaxMintPerTx,
-      preSaleStatus,
-      publicSaleStatus,
-    },
+    data: { canMint, maxSupply, eligibleAmount },
   } = useCollectionSalesMintingContext();
 
   const maxAllowedMintCount = Math.min(
     Number(maxSupply?.toString() || Infinity),
-    Number(
-      preSaleStatus ? preSaleMaxMintPerWallet?.toString() || Infinity : Infinity
-    ),
-    Number(
-      publicSaleStatus
-        ? publicSaleMaxMintPerTx?.toString() || Infinity
-        : Infinity
-    )
+    Number(eligibleAmount?.toString() || Infinity),
   );
 
   return (

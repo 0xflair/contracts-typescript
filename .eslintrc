@@ -15,12 +15,14 @@
     "import/no-duplicates": "error",
     "prettier/prettier": [
       "error",
-      { "singleQuote": true, "parser": "typescript" }
+      {
+        "trailingComma": "all",
+        "singleQuote": true,
+        "parser": "typescript"
+      }
     ]
   },
-  "ignorePatterns": [
-    "**/node_modules/**"
-  ],
+  "ignorePatterns": ["**/node_modules/**"],
   "overrides": [
     {
       "files": ["**/*.stories.*"],

@@ -1,28 +1,67 @@
 import { Environment, useAxiosGet } from '@0xflair/react-common';
-import * as axios from 'axios';
 import { BytesLike } from 'ethers';
 
 import { FLAIR_ADDRESS_LISTS_BACKEND } from '../constants';
+import { useAddressListMerkleMetadata } from './useAddressListMerkleMetadata';
+import { useMerkleLeafAddressOnly } from './useMerkleLeafAddressOnly';
+import { useMerkleLeafAddressWithAllowance } from './useMerkleLeafAddressWithAllowance';
 
 type Config = {
   env?: Environment;
   enabled?: boolean;
-  treeKey?: string;
+  rootHash?: BytesLike;
   address?: BytesLike;
+  leafMode?: 'address-only' | 'address-with-allowance';
 };
 
 export function useAddressListMerkleProof({
   env = Environment.PROD,
-  enabled = true,
-  treeKey,
+  enabled,
+  rootHash,
   address,
+  leafMode = 'address-with-allowance',
 }: Config) {
-  const url = `${
-    FLAIR_ADDRESS_LISTS_BACKEND[env]
-  }/v1/address-list-merkle-trees/${treeKey}/proof/${address?.toString()}`;
-
-  return useAxiosGet<BytesLike[]>({
-    url,
-    enabled: Boolean(enabled && treeKey && address),
+  const {
+    data: merkleMetadata,
+    error: merkleMetadataError,
+    isLoading: merkleMetadataLoading,
+    sendRequest: getMerkleMetadata,
+  } = useAddressListMerkleMetadata({
+    env,
+    address,
+    rootHash,
+    enabled: Boolean(enabled && rootHash && address),
   });
+
+  const merkleLeafAddressOnly = useMerkleLeafAddressOnly({
+    address,
+  });
+
+  const merkleLeafWithAllowance = useMerkleLeafAddressWithAllowance({
+    address,
+    maxAllowance: merkleMetadata?.maxAllowance,
+  });
+
+  const merkleLeaf =
+    leafMode === 'address-only'
+      ? merkleLeafAddressOnly
+      : merkleLeafWithAllowance;
+
+  const {
+    data: merkleProofData,
+    error: merkleProofError,
+    isLoading: merkleProofLoading,
+  } = useAxiosGet<{ proof: BytesLike[] }>({
+    url: `${
+      FLAIR_ADDRESS_LISTS_BACKEND[env]
+    }/v2/address-list-merkle-trees/${rootHash}/proof/${merkleLeaf?.toString()}`,
+    enabled: Boolean(enabled && rootHash && address && merkleLeaf),
+  });
+
+  return {
+    data: { merkleProof: merkleProofData?.proof || undefined, merkleMetadata },
+    error: merkleProofError || merkleMetadataError,
+    isLoading: merkleProofLoading || merkleMetadataLoading,
+    refetch: getMerkleMetadata,
+  };
 }

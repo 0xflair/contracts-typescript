@@ -12,7 +12,7 @@ type Config = {
 };
 
 export function useNftCollection<
-  TCollectionConfig extends Record<string, any>
+  TCollectionConfig extends Record<string, any>,
 >({
   env = Environment.PROD,
   enabled = true,

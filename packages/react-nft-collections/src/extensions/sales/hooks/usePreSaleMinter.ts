@@ -10,6 +10,7 @@ type Config = {
   contractVersion?: ContractVersion;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
+  enabled?: boolean;
   mintCount?: BigNumberish;
   allowlistProof?: BytesLike[];
 };
@@ -21,6 +22,7 @@ export const usePreSaleMinter = ({
   contractVersion,
   contractAddress,
   signerOrProvider,
+  enabled,
   mintCount,
   allowlistProof,
 }: Config) => {
@@ -32,6 +34,7 @@ export const usePreSaleMinter = ({
     chainId,
     contractVersion,
     contractAddress,
+    enabled,
   });
 
   const contractInterface = useContractAbi({

@@ -34,6 +34,7 @@
     ]
   },
   "peerDependencies": {
+    "@0xflair/common": "0.*",
     "@0xflair/contracts-registry": "0.*",
     "@0xflair/ipfs": "0.*",
     "@0xflair/react-address-lists": "0.*",
@@ -44,12 +45,14 @@
     "@0xflair/react-wallet": "0.*",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",
+    "versioning": "^1.1.2",
     "react": "^16 || ^17 || ^18",
     "react-dom": "^16 || ^17 || ^18",
     "react-query": "*",
     "wagmi": "^0.3.5"
   },
   "dependencies": {
+    "@0xflair/common": "^0.86.0",
     "@0xflair/contracts-registry": "^0.86.0",
     "@0xflair/ipfs": "^0.86.0",
     "@0xflair/react-address-lists": "^0.86.0",
@@ -61,6 +64,7 @@
     "@0xflair/react-wallet": "^0.86.0",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",
+    "versioning": "^1.1.2",
     "wagmi": "^0.3.5"
   },
   "devDependencies": {

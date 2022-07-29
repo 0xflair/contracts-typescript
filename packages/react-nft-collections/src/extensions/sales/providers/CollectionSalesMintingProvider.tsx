@@ -1,22 +1,27 @@
-import { Environment } from '@0xflair/react-common';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
-import { ReactNode } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 
-import { useCollectionContext } from '../../../common/providers/CollectionProvider';
-import { useSaleMinter } from '../../minting';
+import { useCollectionContext } from '../../../common/providers';
+import { useSaleMinter } from '../../minting/useSaleMinter';
+import { useSaleTiers } from '../hooks/useSaleTiers';
 
 type CollectionSalesMintingContextValue = {
   data: ReturnType<typeof useCollectionContext>['data'] & {
+    currentTierId?: BigNumberish;
+
     // On-chain values
-    preSaleStatus?: boolean;
-    preSalePrice?: BigNumberish;
-    preSaleIsAllowlisted?: boolean;
-    publicSaleStatus?: boolean;
-    publicSalePrice?: BigNumberish;
+    start?: Date;
+    end?: Date;
+    price?: BigNumberish;
+    hasAllowlist?: boolean;
+    isActive?: boolean;
+    isAllowlisted?: boolean;
+    isEligible?: boolean;
+    eligibleAmount?: BigNumberish;
 
     // Helpers
     canMint?: boolean;
@@ -55,6 +60,8 @@ type CollectionSalesMintingContextValue = {
     mintError?: string | Error | null;
   };
 
+  setCurrentTierId: (currentTierId: BigNumberish) => void;
+
   mint: (args?: {
     mintCount: BigNumberish;
     allowlistProof?: BytesLike[];
@@ -65,67 +72,126 @@ export const CollectionSalesMintingContext =
   React.createContext<CollectionSalesMintingContextValue | null>(null);
 
 type FunctionalChildren = (
-  contextValue: CollectionSalesMintingContextValue
+  contextValue: CollectionSalesMintingContextValue,
 ) => ReactNode | ReactNode[];
 
 type Props = {
-  env?: Environment;
-
   /** Child elements or a factory function that returns child elements */
   children: FunctionalChildren | ReactNode | ReactNode[];
+
+  defaultTier?: BigNumberish;
+
+  autoDetectEligibleTier?: boolean;
 };
 
 export const CollectionSalesMintingProvider = ({
-  env = Environment.PROD,
   children,
+  defaultTier = 0,
+  autoDetectEligibleTier = true,
 }: Props) => {
   const { data: account } = useAccount();
   const { data, isLoading, error } = useCollectionContext();
+  const [currentTierId, setCurrentTierId] = useState<BigNumberish>(
+    Number(defaultTier.toString()),
+  );
+
+  const {
+    data: tiers,
+    error: tiersError,
+    isLoading: tiersLoading,
+    refetchTiers,
+  } = useSaleTiers({
+    env: data.env,
+    chainId: Number(data.chainId),
+    contractVersion: data.contractVersion,
+    contractAddress: data.contractAddress,
+  });
 
   const {
     data: {
-      preSaleStatus,
-      preSalePrice,
-      preSaleIsAllowlisted,
-      publicSaleStatus,
-      publicSalePrice,
       txReceipt,
       txResponse,
+      start,
+      end,
+      price,
+      hasAllowlist,
+      isActive,
+      isAllowlisted,
+      isEligible,
+      eligibleAmount,
     },
     error: mintError,
     isLoading: mintLoading,
     mint,
   } = useSaleMinter({
-    env,
+    env: data.env,
     chainId: Number(data.chainId),
     contractVersion: data.contractVersion,
     contractAddress: data.contractAddress,
+    tierId: currentTierId,
     minterAddress: account?.address,
   });
 
   const soldOut = Boolean(
     data.totalSupply &&
       data.maxSupply &&
-      Number(data.totalSupply.toString()) >= Number(data.maxSupply.toString())
+      Number(data.totalSupply.toString()) >= Number(data.maxSupply.toString()),
   );
 
   const canMint = Boolean(
-    ((preSaleStatus && preSaleIsAllowlisted) || publicSaleStatus) &&
+    isActive &&
+      isEligible &&
+      (!hasAllowlist || isAllowlisted) &&
       !soldOut &&
-      !mintLoading
+      !mintLoading,
   );
+
+  useMemo(() => {
+    if (
+      !autoDetectEligibleTier ||
+      tiersLoading ||
+      mintLoading ||
+      isActive === undefined ||
+      isEligible === undefined
+    )
+      return;
+
+    if (!isActive || !isEligible) {
+      const nextTierId = Number(currentTierId) + 1;
+
+      if (
+        Object.keys(tiers)
+          .map((id) => Number(id))
+          .includes(Number(nextTierId))
+      ) {
+        setCurrentTierId(nextTierId);
+      }
+    }
+  }, [
+    autoDetectEligibleTier,
+    currentTierId,
+    isActive,
+    isEligible,
+    mintLoading,
+    tiers,
+    tiersLoading,
+  ]);
 
   const value = {
     data: {
       // Common
       ...data,
+      currentTierId,
 
       // On-chain values
-      preSaleStatus,
-      preSalePrice,
-      preSaleIsAllowlisted,
-      publicSaleStatus,
-      publicSalePrice,
+      start,
+      end,
+      price,
+      hasAllowlist,
+      isActive,
+      isAllowlisted,
+      eligibleAmount,
+      isEligible,
 
       // Helpers
       canMint,
@@ -152,13 +218,14 @@ export const CollectionSalesMintingProvider = ({
       mintError,
     },
 
+    setCurrentTierId,
     mint,
   };
 
   return React.createElement(
     CollectionSalesMintingContext.Provider,
     { value },
-    typeof children === 'function' ? children(value) : children
+    typeof children === 'function' ? children(value) : children,
   );
 };
 
