@@ -1,5 +1,5 @@
 export type AddressList<
-  TConfig extends Record<string, any> = Record<string, any>
+  TConfig extends Record<string, any> = Record<string, any>,
 > = {
   _id: string;
   ownerAddress: string;
@@ -13,9 +13,7 @@ export type AddressList<
 export type AddressListItem = {
   _id: string;
   address: string;
+  maxAllocation?: number;
   createdAt: string;
   createdVia: string;
-  discordUsername?: string;
-  twitterUsername?: string;
-  highestFloorPrice?: string;
 };
