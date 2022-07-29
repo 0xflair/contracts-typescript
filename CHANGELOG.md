@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.87.0 (2022-07-29)
+
+
+### Features
+
+* add tiering extension to sdk ([#9](https://github.com/0xflair/typescript-sdk/issues/9)) ([09e25b0](https://github.com/0xflair/typescript-sdk/commit/09e25b018eeb1720244f16bdb4ef1faacc02f663))
+
+
+
+
+
 # 0.86.0 (2022-07-28)
 
 
