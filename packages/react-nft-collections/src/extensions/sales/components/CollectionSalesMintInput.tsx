@@ -27,7 +27,7 @@ export const CollectionSalesMintInput = ({
       type="number"
       required
       min={1}
-      max={maxAllowedMintCount}
+      max={maxAllowedMintCount || Infinity}
       value={mintCount.toString()}
       disabled={!canMint}
       onChange={(e) => setMintCount(e.target.value)}

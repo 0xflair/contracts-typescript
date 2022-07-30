@@ -38,7 +38,6 @@ type Config = {
 export const useTierSaleMinter = ({
   env,
   chainId,
-  contractVersion,
   contractAddress,
   signerOrProvider,
   tierId,
@@ -52,7 +51,6 @@ export const useTierSaleMinter = ({
     isLoading: tierLoading,
   } = useTierSaleInformation({
     chainId,
-    contractVersion,
     contractAddress,
     tierId,
     enabled,
@@ -80,7 +78,6 @@ export const useTierSaleMinter = ({
   } = useTierSaleAllowlistChecker({
     env,
     chainId,
-    contractVersion,
     contractAddress,
     enabled: Boolean(
       enabled && minterAddress && hasAllowlist && tier?.merkleRoot,
@@ -96,7 +93,6 @@ export const useTierSaleMinter = ({
     isLoading: eligibleAmountLoading,
   } = useTierSaleEligibleAmount({
     chainId,
-    contractVersion,
     contractAddress,
     tierId,
     minterAddress,
@@ -111,7 +107,6 @@ export const useTierSaleMinter = ({
   });
 
   const contractInterface = useContractAbi({
-    contractVersion,
     contractFqn: 'collections/ERC721/extensions/ERC721TieringExtension',
   });
 
@@ -146,7 +141,7 @@ export const useTierSaleMinter = ({
         [
           tierId,
           count,
-          merkleMetadata?.maxAllowance || count,
+          merkleMetadata?.maxAllowance || count || 1,
           merkleProof || [],
         ] as ArgsType,
         {

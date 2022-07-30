@@ -26,7 +26,7 @@ export const useTierSaleEligibleAmount = (config: Config) => {
     args: [
       config.tierId || 0,
       config.minterAddress || ZERO_ADDRESS,
-      config.maxAllowance || 0,
+      config.maxAllowance || 1,
       config.merkleProof || [],
     ] as ArgsType,
     enabled:
