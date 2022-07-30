@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.87.5 (2022-07-30)
+
+
+### Bug Fixes
+
+* calculate eligible even without allowlist ([81d7308](https://github.com/0xflair/typescript-sdk/commit/81d730883633c3738bd07f26771a2ddc8fc7a218))
+
+
+
+
+
 ## 0.87.4 (2022-07-29)
 
 
