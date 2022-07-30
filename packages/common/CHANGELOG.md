@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.87.6 (2022-07-30)
+
+
+### Bug Fixes
+
+* avoid calling when minter address is not set ([5156680](https://github.com/0xflair/typescript-sdk/commit/5156680763ee359e777d77a45ee42256f2f0dfe9))
+
+
+
+
+
 ## 0.87.5 (2022-07-30)
 
 
