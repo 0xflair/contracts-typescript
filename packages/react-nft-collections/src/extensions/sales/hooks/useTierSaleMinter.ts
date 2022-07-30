@@ -98,10 +98,12 @@ export const useTierSaleMinter = ({
     contractAddress,
     tierId,
     minterAddress,
-    maxAllowance: merkleMetadata?.maxAllowance || mintCount,
+    maxAllowance: merkleMetadata?.maxAllowance || mintCount || 1,
     merkleProof: merkleProof || [],
     enabled: Boolean(
-      enabled && hasAllowlist && (merkleMetadata?.maxAllowance || mintCount),
+      enabled &&
+        (!hasAllowlist || (hasAllowlist && merkleProof)) &&
+        (merkleMetadata?.maxAllowance || mintCount || 1),
     ),
   });
 
