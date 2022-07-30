@@ -1,6 +1,7 @@
 import {
   PredefinedReadContractConfig,
   useContractRead,
+  ZERO_ADDRESS,
 } from '@0xflair/react-common';
 import { BigNumberish, BytesLike } from 'ethers';
 
@@ -23,12 +24,15 @@ export const useTierSaleEligibleAmount = (config: Config) => {
     contractFqn: 'collections/ERC721/extensions/ERC721TieringExtension',
     functionName: 'eligibleForTier',
     args: [
-      config.tierId,
-      config.minterAddress,
-      config.maxAllowance,
-      config.merkleProof,
+      config.tierId || 0,
+      config.minterAddress || ZERO_ADDRESS,
+      config.maxAllowance || 0,
+      config.merkleProof || [],
     ] as ArgsType,
-    enabled: config.enabled && config.tierId !== undefined,
+    enabled:
+      config.enabled &&
+      config.tierId !== undefined &&
+      config.minterAddress !== undefined,
     ...config,
   });
 };
