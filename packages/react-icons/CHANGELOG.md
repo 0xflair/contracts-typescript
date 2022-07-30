@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.87.8 (2022-07-30)
+
+
+### Bug Fixes
+
+* remove contract version from tier minter ([05a1757](https://github.com/0xflair/typescript-sdk/commit/05a1757b245af3e49d4a7911ef69863dabd81f51))
+
+
+
+
+
 ## 0.87.7 (2022-07-30)
 
 
