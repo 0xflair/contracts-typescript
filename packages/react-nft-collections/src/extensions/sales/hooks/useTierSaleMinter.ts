@@ -82,7 +82,9 @@ export const useTierSaleMinter = ({
     chainId,
     contractVersion,
     contractAddress,
-    enabled: Boolean(enabled && hasAllowlist && tier?.merkleRoot),
+    enabled: Boolean(
+      enabled && minterAddress && hasAllowlist && tier?.merkleRoot,
+    ),
     merkleRoot: tier?.merkleRoot,
     tierId,
     minterAddress,
@@ -102,6 +104,7 @@ export const useTierSaleMinter = ({
     merkleProof: merkleProof || [],
     enabled: Boolean(
       enabled &&
+        minterAddress &&
         (!hasAllowlist || (hasAllowlist && merkleProof)) &&
         (merkleMetadata?.maxAllowance || mintCount || 1),
     ),
