@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.87.9 (2022-07-30)
+
+
+### Bug Fixes
+
+* avoid requests if proof is not fetched yet ([09fbf3d](https://github.com/0xflair/typescript-sdk/commit/09fbf3d267561735a57c6375be92675c9be9bad7))
+
+
+
+
+
 ## 0.87.8 (2022-07-30)
 
 
