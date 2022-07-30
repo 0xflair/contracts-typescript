@@ -67,7 +67,7 @@ export const usePreSaleAllowlistChecker = ({
   >({
     chainId,
     contractVersion,
-    enabled: Boolean(readyToRead && minterAddress && proofData),
+    enabled: Boolean(readyToRead && minterAddress && proofData?.merkleProof),
     contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'onPreSaleAllowList',
     contractAddress,
