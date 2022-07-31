@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.87.10 (2022-07-31)
+
+
+### Bug Fixes
+
+* hide any user indicator while loading information ([431c1fa](https://github.com/0xflair/typescript-sdk/commit/431c1fadaad8a0015b22c2fba46a3d382ec60e00))
+
+
+
+
+
 ## 0.87.9 (2022-07-30)
 
 
