@@ -48,12 +48,6 @@ export const useSaleTiers = (config: Config) => {
     tags: ['erc721_tiering_extension', 'mint_by_tier_with_allowance_and_proof'],
   });
 
-  const tierReader = useContractRead<Tier, ArgsType>({
-    contractFqn: 'collections/ERC721/extensions/ERC721TieringExtension',
-    functionName: 'tiers',
-    enabled: false,
-  });
-
   const fetchTierById = useCallback(
     async (tierId: BigNumberish) => {
       if (!config.contractAddress) {
@@ -124,13 +118,9 @@ export const useSaleTiers = (config: Config) => {
 
   return {
     data: tiers,
-    error:
-      supportsSimpleSalesError || supportsTieredSalesError || tierReader.error,
+    error: supportsSimpleSalesError || supportsTieredSalesError,
     isLoading:
-      isLoading ||
-      supportsSimpleSalesLoading ||
-      supportsTieredSalesLoading ||
-      tierReader.isLoading,
+      isLoading || supportsSimpleSalesLoading || supportsTieredSalesLoading,
     refetchTiers,
   };
 };

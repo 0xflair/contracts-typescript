@@ -38,6 +38,7 @@ type CollectionSalesMintingContextValue = {
     collectionMetadataLoading?: boolean;
 
     // On-chain values
+    isAutoDetectingTier?: boolean;
     metadataUriLoading?: boolean;
     maxSupplyLoading?: boolean;
     totalSupplyLoading?: boolean;
@@ -94,6 +95,9 @@ export const CollectionSalesMintingProvider = ({
   const [currentTierId, setCurrentTierId] = useState<BigNumberish>(
     Number(defaultTier.toString()),
   );
+  const [isAutoDetectingTier, setIsAutoDetectingTier] = useState(
+    autoDetectEligibleTier,
+  );
 
   const {
     data: tiers,
@@ -147,14 +151,20 @@ export const CollectionSalesMintingProvider = ({
   );
 
   useMemo(() => {
+    if (!autoDetectEligibleTier) {
+      // Should not auto-detect tier
+      setIsAutoDetectingTier(false);
+      return;
+    }
+
     if (
-      !autoDetectEligibleTier ||
       tiersLoading ||
       mintLoading ||
       isActive === undefined ||
       isEligible === undefined
-    )
+    ) {
       return;
+    }
 
     if (!isActive || !isEligible) {
       const nextTierId = Number(currentTierId) + 1;
@@ -165,7 +175,13 @@ export const CollectionSalesMintingProvider = ({
           .includes(Number(nextTierId))
       ) {
         setCurrentTierId(nextTierId);
+      } else {
+        // No more tiers to check
+        setIsAutoDetectingTier(false);
       }
+    } else {
+      // Current tier is active and eligible
+      setIsAutoDetectingTier(false);
     }
   }, [
     autoDetectEligibleTier,
@@ -205,6 +221,7 @@ export const CollectionSalesMintingProvider = ({
     isLoading: {
       // Common
       ...isLoading,
+      isAutoDetectingTier,
 
       // Transaction
       mintLoading,

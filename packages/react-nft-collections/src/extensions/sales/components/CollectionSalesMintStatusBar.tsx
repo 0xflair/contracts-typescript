@@ -9,17 +9,17 @@ type Props = {
 export const CollectionSalesMintStatusBar = ({ className }: Props) => {
   const {
     data: { txReceipt, txResponse },
-    isLoading: { mintLoading },
+    isLoading: { isAutoDetectingTier, mintLoading },
     error: { mintError, collectionMetadataError },
   } = useCollectionSalesMintingContext();
 
   return (
     <div className={className}>
-      {/* {(collectionMetadataLoading || metadataLoading) && (
+      {isAutoDetectingTier && (
         <div className="flex items-center gap-2">
-          <Spinner /> Loading metadata...
+          <Spinner /> Checking your wallet eligibility...
         </div>
-      )} */}
+      )}
       {mintLoading && (
         <div className="flex items-center gap-2">
           <Spinner /> {txReceipt || txResponse ? 'Minting...' : 'Preparing...'}

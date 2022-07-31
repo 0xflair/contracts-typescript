@@ -12,7 +12,6 @@ import { StreamRewardAmount } from '../components/StreamRewardAmount';
 import { StreamSharesAllocation } from '../components/StreamSharesAllocation';
 import { StreamSharesPercentage } from '../components/StreamSharesPercentage';
 import { StreamTotalClaimed } from '../components/StreamTotalClaimed';
-import { StreamTotalStakedDurations } from '../components/StreamTotalStakedDurations';
 import { StreamTotalSupply } from '../components/StreamTotalSupply';
 import { StreamClaimingProvider } from '../providers/StreamClaimingProvider';
 import { useStreamContext } from '../providers/StreamProvider';
@@ -38,12 +37,6 @@ export const StreamClaimingSection = ({}: Props) => {
     chainId,
     contractAddress,
     tags: ['flair_stream_share_split_extension'],
-  });
-  const { data: hasStakingExtension } = useHasAnyOfFeatures({
-    env,
-    chainId,
-    contractAddress,
-    tags: ['flair_stream_staking_extension'],
   });
   const { data: hasRewardCalculationByTokens } = useHasAnyOfFeatures({
     env,
@@ -84,7 +77,7 @@ export const StreamClaimingSection = ({}: Props) => {
                           <span>Reward rate</span>
                           <small className="text-xs flex-shrink-0 text-gray-400">
                             How many tokens you receive{' '}
-                            <StreamEmissionTimeUnit />
+                            <StreamEmissionTimeUnit className="inline" />
                           </small>
                         </dt>
                         <dd className="text-sm font-medium text-gray-900">
