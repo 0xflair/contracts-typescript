@@ -13,12 +13,12 @@ export const CollectionSalesPrice = ({
 }: Props) => {
   const {
     data: { price, chainInfo, currentTierId },
-    isLoading: { isAutoDetectingTier, mintLoading },
+    isLoading: { isAutoDetectingTier },
   } = useCollectionSalesMintingContext();
 
   return (
     <div className={className} title={`Tier #${currentTierId?.toString()}`}>
-      {price && !isAutoDetectingTier && !mintLoading ? (
+      {price && !isAutoDetectingTier ? (
         <CryptoValue
           symbol={chainInfo?.nativeCurrency?.symbol}
           value={price}

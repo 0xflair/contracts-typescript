@@ -12,7 +12,7 @@ export const CollectionSalesActiveStatus = ({ className }: Props) => {
 
   return (
     <div className={className}>
-      {!mintLoading && !isAutoDetectingTier ? (
+      {!isAutoDetectingTier ? (
         <>
           {soldOut ? (
             <span className="sale-status sold-out inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">

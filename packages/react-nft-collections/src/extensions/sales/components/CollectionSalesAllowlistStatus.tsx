@@ -15,12 +15,12 @@ export const CollectionSalesAllowlistStatus = ({
 }: Props) => {
   const {
     data: { hasAllowlist, isAllowlisted },
-    isLoading: { isAutoDetectingTier, mintLoading },
+    isLoading: { isAutoDetectingTier },
   } = useCollectionSalesMintingContext();
 
   return (
     <div className={className}>
-      {!isAutoDetectingTier && !mintLoading ? (
+      {!isAutoDetectingTier ? (
         <>
           {isAllowlisted ? (
             <span
