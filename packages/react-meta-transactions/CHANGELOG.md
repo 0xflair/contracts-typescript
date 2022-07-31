@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.88.3 (2022-07-31)
+
+
+### Bug Fixes
+
+* show status after tier detection is finished ([ef225f9](https://github.com/0xflair/typescript-sdk/commit/ef225f95fa75ddbcb99038c8de714711155c7168))
+
+
+
+
+
 ## 0.88.2 (2022-07-31)
 
 
