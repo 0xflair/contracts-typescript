@@ -21,7 +21,6 @@ type Config = {
 export const useSaleTiers = (config: Config) => {
   const [isLoading, setIsLoading] = useState(false);
   const [tiers, setTiers] = useState<Record<number, Tier>>([]);
-  const [initiallyFetched, setInitiallyFetched] = useState(false);
 
   const {
     data: supportsSimpleSales,
@@ -107,22 +106,12 @@ export const useSaleTiers = (config: Config) => {
   }, [fetchTierById, supportsSimpleSales, supportsTieredSales]);
 
   useMemo(() => {
-    if (
-      supportsSimpleSalesLoading ||
-      supportsTieredSalesLoading ||
-      initiallyFetched
-    ) {
+    if (supportsSimpleSalesLoading || supportsTieredSalesLoading) {
       return;
     }
 
-    setInitiallyFetched(true);
     refetchTiers();
-  }, [
-    supportsSimpleSalesLoading,
-    supportsTieredSalesLoading,
-    initiallyFetched,
-    refetchTiers,
-  ]);
+  }, [supportsSimpleSalesLoading, supportsTieredSalesLoading, refetchTiers]);
 
   return {
     data: tiers,

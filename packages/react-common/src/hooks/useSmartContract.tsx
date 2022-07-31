@@ -1,9 +1,11 @@
 import { Environment } from '@0xflair/common';
-import { useInterval } from 'react-use';
+import axios from 'axios';
+import { QueryClient, useQuery } from 'react-query';
+import { createWebStoragePersister } from 'react-query/createWebStoragePersister';
+import { persistQueryClient } from 'react-query/persistQueryClient';
 
 import { FLAIR_SMART_CONTRACTS_BACKEND } from '../constants/backend';
 import { SmartContract } from '../types';
-import { useAxiosGet } from './useAxiosGet';
 
 type Config = {
   env?: Environment;
@@ -13,7 +15,26 @@ type Config = {
   contractAddress?: string;
 };
 
-const globalSmartContractObjectsCache = new Map<string, SmartContract>();
+const localStoragePersister = createWebStoragePersister({
+  storage: window.localStorage,
+});
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 1_000 * 60 * 60 * 24,
+      staleTime: 1_000 * 60 * 60 * 2,
+      networkMode: 'offlineFirst',
+      refetchOnWindowFocus: false,
+      retry: 0,
+    },
+  },
+});
+
+persistQueryClient({
+  queryClient,
+  persister: localStoragePersister,
+});
 
 export function useSmartContract({
   env = Environment.PROD,
@@ -26,45 +47,26 @@ export function useSmartContract({
     ? `${FLAIR_SMART_CONTRACTS_BACKEND[env]}/v1/smart-contracts/${smartContractId}`
     : `${FLAIR_SMART_CONTRACTS_BACKEND[env]}/v1/smart-contracts/${chainId}/${contractAddress}`;
 
-  const canRequest = Boolean(
-    !globalSmartContractObjectsCache.has(url) &&
-      enabled &&
-      (smartContractId || (chainId && contractAddress))
-  );
+  const queryKey = [
+    { type: 'smart-contract', smartContractId, chainId, contractAddress },
+  ];
+  const queryFn = async () => {
+    const response = await axios.get<SmartContract>(url);
+    return response.data;
+  };
 
-  const result = useAxiosGet<SmartContract>({
-    url,
-    enabled: canRequest,
+  return useQuery(queryKey, queryFn, {
+    enabled: Boolean(
+      enabled && (smartContractId || (chainId && contractAddress)),
+    ),
+    onSuccess(data: SmartContract) {
+      const detectingFeatures =
+        !data?.features ||
+        (data.analysisState !== 'succeeded' && data.analysisState !== 'failed');
+
+      if (detectingFeatures) {
+        queryClient.invalidateQueries({ queryKey });
+      }
+    },
   });
-
-  let data: SmartContract | undefined | null = result.data
-    ? result.data
-    : undefined;
-
-  if (globalSmartContractObjectsCache.has(url)) {
-    data = globalSmartContractObjectsCache.get(url);
-  } else if (data && !result.error && !result.isLoading) {
-    globalSmartContractObjectsCache.set(url, data);
-  }
-
-  const detectingFeatures =
-    !data?.features ||
-    (data.analysisState !== 'succeeded' && data.analysisState !== 'failed');
-
-  if (detectingFeatures) {
-    globalSmartContractObjectsCache.delete(url);
-  }
-
-  useInterval(() => {
-    if (detectingFeatures && canRequest) {
-      result.sendRequest().then(() => {
-        globalSmartContractObjectsCache.delete(url);
-      });
-    }
-  }, 6000);
-
-  return {
-    ...result,
-    data,
-  } as const;
 }
