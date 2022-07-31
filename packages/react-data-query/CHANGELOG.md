@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.88.1 (2022-07-31)
+
+
+### Bug Fixes
+
+* avoid repeating fetching sale tiers ([0966451](https://github.com/0xflair/typescript-sdk/commit/096645131c136873a76d030bdba16bed877cf11d))
+
+
+
+
+
 # 0.88.0 (2022-07-31)
 
 
