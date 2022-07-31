@@ -101,7 +101,7 @@ export const useSaleMinter = ({
         return tierMint(args);
       }
     },
-    [supportsSimpleSales, simpleMint, supportsTieredSales, tierMint]
+    [supportsSimpleSales, simpleMint, supportsTieredSales, tierMint],
   );
 
   return {

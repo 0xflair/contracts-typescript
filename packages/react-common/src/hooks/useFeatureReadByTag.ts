@@ -1,3 +1,5 @@
+import 'react-query';
+
 import { Environment } from '@0xflair/common';
 import { ReadContractConfig } from '@wagmi/core';
 

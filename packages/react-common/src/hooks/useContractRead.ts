@@ -1,3 +1,5 @@
+import 'react-query';
+
 import { ZERO_ADDRESS } from '@0xflair/common';
 import {
   ContractFqn,
@@ -40,10 +42,10 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
 }: ReadContractConfig<ArgsType>) => {
   const contract = useMemo(
     () => loadContract(contractFqn, contractVersion),
-    [contractFqn, contractVersion]
+    [contractFqn, contractVersion],
   );
   const readyToRead = Boolean(
-    enabled && contractAddress && contractAddress !== ZERO_ADDRESS
+    enabled && contractAddress && contractAddress !== ZERO_ADDRESS,
   );
 
   const result = useContractReadWagmi(
@@ -58,7 +60,7 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
       watch,
       cacheOnBlock,
       ...restOfConfig,
-    }
+    },
   );
 
   return {

@@ -2,6 +2,7 @@ import { getInterfaceId } from '@0xflair/common';
 import { ContractFqn, loadContract } from '@0xflair/contracts-registry';
 import { BigNumberish, ethers } from 'ethers';
 import { useMemo } from 'react';
+import reactQuery from 'react-query';
 
 import {
   PredefinedReadContractConfig,

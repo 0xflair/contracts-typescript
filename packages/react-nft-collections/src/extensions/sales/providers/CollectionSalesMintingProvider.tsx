@@ -232,7 +232,7 @@ export const CollectionSalesMintingProvider = ({
       ...error,
 
       // Transaction
-      mintError,
+      mintError: mintError as Error,
     },
 
     setCurrentTierId,
