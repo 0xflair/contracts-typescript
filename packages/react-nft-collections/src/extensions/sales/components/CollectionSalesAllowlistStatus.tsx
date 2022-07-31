@@ -15,31 +15,36 @@ export const CollectionSalesAllowlistStatus = ({
 }: Props) => {
   const {
     data: { hasAllowlist, isAllowlisted },
+    isLoading: { isAutoDetectingTier, mintLoading },
   } = useCollectionSalesMintingContext();
 
   return (
     <div className={className}>
-      {isAllowlisted ? (
-        <span
-          className={classNames(
-            'allowlist-status allowlist-status-allowlisted',
-            allowlistedClass,
+      {!isAutoDetectingTier && !mintLoading ? (
+        <>
+          {isAllowlisted ? (
+            <span
+              className={classNames(
+                'allowlist-status allowlist-status-allowlisted',
+                allowlistedClass,
+              )}
+            >
+              You are allowlisted
+            </span>
+          ) : (
+            hasAllowlist && (
+              <span
+                className={classNames(
+                  'allowlist-status allowlist-status-not-allowlisted',
+                  notAllowlistedClass,
+                )}
+              >
+                You are not allowlisted
+              </span>
+            )
           )}
-        >
-          You are allowlisted
-        </span>
-      ) : (
-        hasAllowlist && (
-          <span
-            className={classNames(
-              'allowlist-status allowlist-status-not-allowlisted',
-              notAllowlistedClass,
-            )}
-          >
-            You are not allowlisted
-          </span>
-        )
-      )}
+        </>
+      ) : null}
     </div>
   );
 };
