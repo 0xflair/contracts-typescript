@@ -21,6 +21,7 @@ type Config = {
 export const useSaleTiers = (config: Config) => {
   const [isLoading, setIsLoading] = useState(false);
   const [tiers, setTiers] = useState<Record<number, Tier>>([]);
+  const [initiallyFetched, setInitiallyFetched] = useState(false);
 
   const {
     data: supportsSimpleSales,
@@ -106,14 +107,21 @@ export const useSaleTiers = (config: Config) => {
   }, [fetchTierById, supportsSimpleSales, supportsTieredSales]);
 
   useMemo(() => {
-    if (supportsSimpleSalesLoading || supportsTieredSalesLoading) return;
+    if (
+      supportsSimpleSalesLoading ||
+      supportsTieredSalesLoading ||
+      initiallyFetched
+    ) {
+      return;
+    }
+
+    setInitiallyFetched(true);
     refetchTiers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    supportsSimpleSales,
-    supportsTieredSales,
     supportsSimpleSalesLoading,
     supportsTieredSalesLoading,
+    initiallyFetched,
+    refetchTiers,
   ]);
 
   return {

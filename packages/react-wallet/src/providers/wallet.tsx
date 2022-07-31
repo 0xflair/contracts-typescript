@@ -40,7 +40,7 @@ export const WalletProvider = ({
           try {
             return new providers.Web3Provider(
               window.ethereum as any,
-              Number(config.chainId)
+              Number(config.chainId),
             );
           } catch (e) {
             return providers.getDefaultProvider();
@@ -48,7 +48,7 @@ export const WalletProvider = ({
         }
       }
     },
-    [infuraId]
+    [infuraId],
   );
 
   const connectors = useCallback(
@@ -100,13 +100,13 @@ export const WalletProvider = ({
               },
               customHeaderText: appName,
             },
-          })
+          }),
         );
       }
 
       return connectors;
     },
-    [appName, custodialWallet, infuraId]
+    [appName, custodialWallet, infuraId],
   );
 
   const client = useMemo(
@@ -117,7 +117,7 @@ export const WalletProvider = ({
         provider,
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [appName, infuraId]
+    [appName, infuraId],
   );
 
   return (
