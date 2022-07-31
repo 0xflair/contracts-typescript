@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.88.0 (2022-07-31)
+
+
+### Features
+
+* bump up all contracts and their master copy addresses ([fb8afb3](https://github.com/0xflair/typescript-sdk/commit/fb8afb3bf2618e8b4009b53fe7a721f422af529c))
+
+
+
+
+
 ## 0.87.10 (2022-07-31)
 
 
