@@ -2,7 +2,7 @@ import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 
 import { useCollectionContext } from '../../../common/providers';
@@ -150,7 +150,13 @@ export const CollectionSalesMintingProvider = ({
       !mintLoading,
   );
 
-  useMemo(() => {
+  useEffect(() => {
+    if (autoDetectEligibleTier) {
+      setIsAutoDetectingTier(true);
+    }
+  }, [autoDetectEligibleTier, tiers, tiersLoading]);
+
+  useEffect(() => {
     if (!autoDetectEligibleTier) {
       // Should not auto-detect tier
       setIsAutoDetectingTier(false);
@@ -163,6 +169,7 @@ export const CollectionSalesMintingProvider = ({
       isActive === undefined ||
       isEligible === undefined
     ) {
+      setIsAutoDetectingTier(true);
       return;
     }
 
@@ -183,13 +190,13 @@ export const CollectionSalesMintingProvider = ({
       // Current tier is active and eligible
       setIsAutoDetectingTier(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     autoDetectEligibleTier,
     currentTierId,
     isActive,
     isEligible,
     mintLoading,
-    tiers,
     tiersLoading,
   ]);
 

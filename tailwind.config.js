@@ -16,5 +16,5 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
   ],
-  safelist: [],
+  safelist: ['bg-yellow-100'],
 };
