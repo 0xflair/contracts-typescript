@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.88.8 (2022-08-01)
+
+
+### Bug Fixes
+
+* skip the tier if user maxed their allowance or not allowlisted ([b19efa2](https://github.com/0xflair/typescript-sdk/commit/b19efa2641e23aebee62f5ae31b3bf16091aa641))
+
+
+
+
+
 ## 0.88.7 (2022-08-01)
 
 
