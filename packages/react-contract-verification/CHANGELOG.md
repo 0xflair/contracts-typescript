@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.88.6 (2022-08-01)
+
+
+### Bug Fixes
+
+* remove caching of sales and allowlist status ([e6dfb5d](https://github.com/0xflair/typescript-sdk/commit/e6dfb5dd5f2c3333066e93d2192fb33cf913c1ea))
+
+
+
+
+
 ## 0.88.5 (2022-08-01)
 
 
