@@ -169,7 +169,10 @@ export const CollectionSalesMintingProvider = ({
       isActive === undefined ||
       isEligible === undefined
     ) {
-      setIsAutoDetectingTier(true);
+      if (!isAutoDetectingTier) {
+        setCurrentTierId(0);
+        setIsAutoDetectingTier(true);
+      }
       return;
     }
 
