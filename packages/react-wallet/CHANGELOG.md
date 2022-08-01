@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.88.4 (2022-08-01)
+
+
+### Bug Fixes
+
+* show auto detection loading even when used cached ([392cecd](https://github.com/0xflair/typescript-sdk/commit/392cecdcd3727a53f574347839a3c60a8c092468))
+
+
+
+
+
 ## 0.88.3 (2022-07-31)
 
 
