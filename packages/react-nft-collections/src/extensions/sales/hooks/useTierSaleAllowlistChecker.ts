@@ -64,6 +64,8 @@ export const useTierSaleAllowlistChecker = ({
     contractFqn: 'collections/ERC721/extensions/ERC721TieringExtension',
     functionName: 'onTierAllowlist',
     contractAddress,
+    cacheOnBlock: false,
+    cacheTime: 1,
     args:
       tierId !== undefined &&
       minterAddress &&

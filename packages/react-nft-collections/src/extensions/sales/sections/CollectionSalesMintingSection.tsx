@@ -13,7 +13,7 @@ import {
   CollectionSalesPrice,
 } from '../components';
 import { CollectionSalesActiveStatus } from '../components/CollectionSalesActiveStatus';
-import { CollectionSalesMintingProvider } from '../providers';
+import { CollectionSalesMintingProvider } from '../providers/CollectionSalesMintingProvider';
 
 type Props = {};
 

@@ -71,6 +71,8 @@ export const usePreSaleAllowlistChecker = ({
     contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'onPreSaleAllowList',
     contractAddress,
+    cacheOnBlock: false,
+    cacheTime: 1,
     args:
       minterAddress && proofData?.merkleProof
         ? leafMode === 'address-only'

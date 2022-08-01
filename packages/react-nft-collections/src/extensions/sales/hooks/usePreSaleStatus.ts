@@ -7,6 +7,8 @@ export const usePreSaleStatus = (config: PredefinedReadContractConfig) => {
   return useContractRead<boolean>({
     contractFqn: 'collections/ERC721/extensions/ERC721PreSaleExtension',
     functionName: 'preSaleStatus',
+    cacheOnBlock: false,
+    cacheTime: 1,
     ...config,
   });
 };

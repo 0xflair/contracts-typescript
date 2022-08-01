@@ -6,13 +6,11 @@ import * as React from 'react';
 import { ReactNode } from 'react';
 import { Chain, useProvider } from 'wagmi';
 
-import {
-  useCollectionMetadataUri,
-  useMaxSupply,
-  useTotalSupply,
-} from '../../extensions';
+import { useCollectionMetadataUri } from '../../extensions/metadata/useCollectionMetadataUri';
+import { useMaxSupply } from '../../extensions/minting/useMaxSupply';
+import { useTotalSupply } from '../../extensions/minting/useTotalSupply';
 import { NftCollection, NftCollectionMetadata } from '../../types';
-import { useNftCollection } from '../hooks';
+import { useNftCollection } from '../hooks/useNftCollection';
 
 type CollectionContextValue = {
   data: {

@@ -32,18 +32,26 @@ export const WalletProvider = ({
   const provider = useCallback(
     (config: { chainId?: number }) => {
       try {
-        return new providers.InfuraProvider(config.chainId, infuraId);
+        const prv = new providers.InfuraProvider(config.chainId, infuraId);
+        prv.pollingInterval = 20_000;
+        return prv;
       } catch (e) {
         try {
-          return providers.getDefaultProvider(config.chainId);
+          const prv = providers.getDefaultProvider(config.chainId);
+          prv.pollingInterval = 20_000;
+          return prv;
         } catch (e) {
           try {
-            return new providers.Web3Provider(
+            const prv = new providers.Web3Provider(
               window.ethereum as any,
               Number(config.chainId),
             );
+            prv.pollingInterval = 20_000;
+            return prv;
           } catch (e) {
-            return providers.getDefaultProvider();
+            const prv = providers.getDefaultProvider();
+            prv.pollingInterval = 20_000;
+            return prv;
           }
         }
       }

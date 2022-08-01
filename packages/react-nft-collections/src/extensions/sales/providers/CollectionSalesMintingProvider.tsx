@@ -5,7 +5,7 @@ import * as React from 'react';
 import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 
-import { useCollectionContext } from '../../../common/providers';
+import { useCollectionContext } from '../../../common/providers/CollectionProvider';
 import { useSaleMinter } from '../../minting/useSaleMinter';
 import { useSaleTiers } from '../hooks/useSaleTiers';
 
@@ -151,28 +151,13 @@ export const CollectionSalesMintingProvider = ({
   );
 
   useEffect(() => {
-    if (autoDetectEligibleTier) {
-      setIsAutoDetectingTier(true);
-    }
-  }, [autoDetectEligibleTier, tiers, tiersLoading]);
-
-  useEffect(() => {
-    if (!autoDetectEligibleTier) {
-      // Should not auto-detect tier
-      setIsAutoDetectingTier(false);
-      return;
-    }
-
     if (
+      !autoDetectEligibleTier ||
       tiersLoading ||
       mintLoading ||
       isActive === undefined ||
       isEligible === undefined
     ) {
-      if (!isAutoDetectingTier) {
-        setCurrentTierId(0);
-        setIsAutoDetectingTier(true);
-      }
       return;
     }
 
@@ -193,7 +178,6 @@ export const CollectionSalesMintingProvider = ({
       // Current tier is active and eligible
       setIsAutoDetectingTier(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     autoDetectEligibleTier,
     currentTierId,
@@ -201,6 +185,8 @@ export const CollectionSalesMintingProvider = ({
     isEligible,
     mintLoading,
     tiersLoading,
+    tiers,
+    isAutoDetectingTier,
   ]);
 
   const value = {

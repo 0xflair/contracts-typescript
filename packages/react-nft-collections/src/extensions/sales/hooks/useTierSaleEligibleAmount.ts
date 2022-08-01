@@ -23,6 +23,8 @@ export const useTierSaleEligibleAmount = (config: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
     contractFqn: 'collections/ERC721/extensions/ERC721TieringExtension',
     functionName: 'eligibleForTier',
+    cacheOnBlock: false,
+    cacheTime: 1,
     args: [
       config.tierId || 0,
       config.minterAddress || ZERO_ADDRESS,
