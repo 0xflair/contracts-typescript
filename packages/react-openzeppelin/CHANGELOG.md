@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.88.7 (2022-08-01)
+
+
+### Bug Fixes
+
+* poll smart contract info while detecting ([464e334](https://github.com/0xflair/typescript-sdk/commit/464e334b51a12f1986ab427c6b6a6be914d62a3f))
+
+
+
+
+
 ## 0.88.6 (2022-08-01)
 
 
