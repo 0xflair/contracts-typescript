@@ -4,6 +4,7 @@ import {
   ZERO_ADDRESS,
 } from '@0xflair/react-common';
 import { BigNumberish, BytesLike } from 'ethers';
+import { useState } from 'react';
 
 type ArgsType = [
   tierId: BigNumberish,
@@ -20,7 +21,10 @@ type Config = {
 } & PredefinedReadContractConfig<ArgsType>;
 
 export const useTierSaleEligibleAmount = (config: Config) => {
-  return useContractRead<BigNumberish, ArgsType>({
+  const [data, setData] = useState<BigNumberish | undefined>();
+  const [error, setError] = useState();
+
+  const result = useContractRead<BigNumberish, ArgsType>({
     contractFqn: 'collections/ERC721/extensions/ERC721TieringExtension',
     functionName: 'eligibleForTier',
     cacheOnBlock: false,
@@ -35,6 +39,22 @@ export const useTierSaleEligibleAmount = (config: Config) => {
       config.enabled &&
       config.tierId !== undefined &&
       config.minterAddress !== undefined,
+    onError: (err: any) => {
+      if (
+        [
+          'NOT_STARTED',
+          'MAXED_ALLOWANCE',
+          'ALREADY_ENDED',
+          'NOT_ALLOWLISTED',
+        ].includes(err?.reason)
+      ) {
+        setData(0);
+      }
+
+      setError(err);
+    },
     ...config,
   });
+
+  return { ...result, error, data };
 };

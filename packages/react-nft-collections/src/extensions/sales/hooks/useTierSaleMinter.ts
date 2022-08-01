@@ -176,7 +176,9 @@ export const useTierSaleMinter = ({
       isAllowlisted,
       eligibleAmount,
       isEligible: Boolean(
-        eligibleAmount?.toString() && Number(eligibleAmount.toString()) > 0,
+        !eligibleAmountError &&
+          eligibleAmount?.toString() &&
+          Number(eligibleAmount.toString()) > 0,
       ),
     },
     error: {

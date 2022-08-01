@@ -40,7 +40,7 @@ export const CollectionSalesMintStatusBar = ({ className }: Props) => {
         <Errors title="Cannot resolve metadata" error={metadataError} />
       )} */}
           {!mintLoading && mintError && (
-            <Errors title="Minting error" error={mintError} />
+            <Errors title="Cannot mint" error={mintError} />
           )}
           {collectionMetadataError && (
             <Errors
