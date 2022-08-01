@@ -3,6 +3,7 @@ import axios from 'axios';
 import { QueryClient, useQuery } from 'react-query';
 import { createWebStoragePersister } from 'react-query/createWebStoragePersister';
 import { persistQueryClient } from 'react-query/persistQueryClient';
+import { useInterval } from 'react-use';
 
 import { FLAIR_SMART_CONTRACTS_BACKEND } from '../constants/backend';
 import { SmartContract } from '../types';
@@ -54,11 +55,12 @@ export function useSmartContract({
     const response = await axios.get<SmartContract>(url);
     return response.data;
   };
+  const canRequest = Boolean(
+    enabled && (smartContractId || (chainId && contractAddress)),
+  );
 
-  return useQuery(queryKey, queryFn, {
-    enabled: Boolean(
-      enabled && (smartContractId || (chainId && contractAddress)),
-    ),
+  const result = useQuery(queryKey, queryFn, {
+    enabled: canRequest,
     onSuccess(data: SmartContract) {
       const detectingFeatures =
         !data?.features ||
@@ -69,4 +71,17 @@ export function useSmartContract({
       }
     },
   });
+
+  useInterval(() => {
+    const detectingFeatures =
+      !result.data?.features ||
+      (result.data.analysisState !== 'succeeded' &&
+        result.data.analysisState !== 'failed');
+
+    if (detectingFeatures && canRequest) {
+      result.refetch();
+    }
+  }, 5000);
+
+  return result;
 }
