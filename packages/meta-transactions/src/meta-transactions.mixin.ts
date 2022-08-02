@@ -1,8 +1,8 @@
 import { Environment } from '@0xflair/common';
 import {
   ContractFqn,
-  FlairContract,
   ContractVersion,
+  FlairContract,
 } from '@0xflair/contracts-registry';
 import {
   Contract,
@@ -23,7 +23,7 @@ function buildMetaTransaction(
   chainId: number,
   metaTransactionsClient: MetaTransactionsClient,
   contract: Contract,
-  fragment: FunctionFragment
+  fragment: FunctionFragment,
 ): ContractFunction<MetaTransaction> {
   return async function (...args: Array<any>): Promise<MetaTransaction> {
     const from = await contract.signer.getAddress();
@@ -40,7 +40,7 @@ function buildMetaTransaction(
 export const applyMetaTransactions = <T extends EthersContract>(
   contract: T,
   chainId: number,
-  metaTransactionsClient: MetaTransactionsClient
+  metaTransactionsClient: MetaTransactionsClient,
 ): MetaTransactionsAugmentedContract<T> => {
   const castedContract = contract as MetaTransactionsAugmentedContract<T>;
 
@@ -56,8 +56,8 @@ export const applyMetaTransactions = <T extends EthersContract>(
           chainId,
           metaTransactionsClient,
           castedContract,
-          fragment
-        )
+          fragment,
+        ),
       );
     }
 
@@ -71,8 +71,8 @@ export const applyMetaTransactions = <T extends EthersContract>(
           chainId,
           metaTransactionsClient,
           castedContract,
-          fragment
-        )
+          fragment,
+        ),
       );
     }
   });
@@ -81,7 +81,7 @@ export const applyMetaTransactions = <T extends EthersContract>(
 };
 
 export const createFlairContractWithMetaTransactions = <
-  T extends EthersContract
+  T extends EthersContract,
 >(config: {
   env?: Environment;
   chainId: number;
@@ -90,11 +90,13 @@ export const createFlairContractWithMetaTransactions = <
   contractVersion?: ContractVersion;
   addressOrName?: string;
   signer?: Signer;
+  forwarder?: string;
 }): T => {
   const metaTxClient = new MetaTransactionsClient({
     env: config.env || Environment.PROD,
     chainId: config.chainId,
     flairClientId: config.flairClientId,
+    forwarder: config.forwarder,
   });
 
   const contract = new FlairContract(
@@ -102,13 +104,13 @@ export const createFlairContractWithMetaTransactions = <
     config.contractFqn,
     config.signer,
     config.contractVersion,
-    config.addressOrName
+    config.addressOrName,
   );
 
   const augmentedContract = applyMetaTransactions<T>(
     contract as unknown as T, // TODO fix this to get proper typing!
     config.chainId,
-    metaTxClient
+    metaTxClient,
   );
 
   return augmentedContract;

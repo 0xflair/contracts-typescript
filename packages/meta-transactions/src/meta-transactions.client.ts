@@ -42,21 +42,21 @@ export class MetaTransactionsClient {
       try {
         const forwarderDefinition = loadContract(
           'common/meta-transactions/UnorderedForwarder',
-          LATEST_VERSION
+          LATEST_VERSION,
         );
         this.forwarder = forwarderDefinition.address?.[
           String(config.chainId)
         ] as string;
       } catch (e) {
         console.warn(
-          `Could not load contract (chain ${config.chainId}) to determine forwarder: ${e}`
+          `Could not load contract (chain ${config.chainId}) to determine forwarder: ${e}`,
         );
       }
     }
 
     if (!this.forwarder) {
       throw new Error(
-        `Could not determine meta transactions forwarder address, please either specify chainId (given ${config.chainId}) or forwarder address (given ${config.forwarder})`
+        `Could not determine meta transactions forwarder address, please either specify chainId (given ${config.chainId}) or forwarder address (given ${config.forwarder})`,
       );
     }
   }
@@ -79,14 +79,14 @@ export class MetaTransactionsClient {
     metaTransactionSignedData: Required<
       Partial<MetaTransactionSignedData>,
       'from' | 'to' | 'data'
-    >
+    >,
   ): Promise<MetaTransaction> {
     const signedData = { ...this.defaults, ...metaTransactionSignedData };
 
     const signature = await this.signMetaTransaction(
       chainId,
       signer,
-      signedData
+      signedData,
     );
 
     const response = await axios.post<MetaTransaction>(
@@ -100,7 +100,7 @@ export class MetaTransactionsClient {
           Accept: 'application/json',
           'X-Flair-Client-Id': this.config.flairClientId,
         },
-      }
+      },
     );
 
     return response.data;
@@ -112,7 +112,7 @@ export class MetaTransactionsClient {
     metaTransactionSignedData: MetaTransactionSignedData,
     forwarderAddress?: string,
     forwarderName: string = 'UnorderedForwarder',
-    forwarderVersion: string = '0.0.1'
+    forwarderVersion: string = '0.0.1',
   ): Promise<string> {
     // @ts-ignore
     return await signer._signTypedData(
@@ -123,7 +123,7 @@ export class MetaTransactionsClient {
         verifyingContract: forwarderAddress || this.forwarder,
       },
       EIP712_MTX_TYPES,
-      metaTransactionSignedData
+      metaTransactionSignedData,
     );
   }
 }
