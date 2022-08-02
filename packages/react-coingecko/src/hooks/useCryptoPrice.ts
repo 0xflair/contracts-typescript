@@ -18,7 +18,7 @@ export const useCryptoPrice = ({
     priceDictionariesBySymbol &&
     symbol &&
     (Object.keys(priceDictionariesBySymbol).find((s) =>
-      symbol.endsWith(s)
+      symbol.endsWith(s),
     ) as CryptoSymbol);
 
   const price =
@@ -33,7 +33,7 @@ export const useCryptoPrice = ({
     Object.keys(priceDictionariesBySymbol).length > 0
   ) {
     console.info(
-      `Could not resolve price of symbol (${symbol}) in base currency (${baseCurrency}), make sure both are defined on <CoinGeckoProvider />`
+      `Could not resolve price of symbol (${symbol}) in base currency (${baseCurrency}), make sure both are defined on <CoinGeckoProvider />`,
     );
   }
 

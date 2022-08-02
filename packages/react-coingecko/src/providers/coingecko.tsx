@@ -65,7 +65,7 @@ export const CoinGeckoProvider = ({
           .map((c) => c.coinGeckoId?.toLowerCase())
           .join(',')}&vs_currencies=${baseCurrencies
           .map((c) => c.toLowerCase())
-          .join(',')}`
+          .join(',')}`,
       );
 
       const data: PricesDictionariesBySymbol = {} as PricesDictionariesBySymbol;

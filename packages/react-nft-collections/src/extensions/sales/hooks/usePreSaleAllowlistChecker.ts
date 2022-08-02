@@ -28,10 +28,12 @@ export const usePreSaleAllowlistChecker = ({
     enabled && minterAddress && contractAddress && chainId,
   );
 
-  const leafMode =
-    !contractVersion || versioning.gte(contractVersion, 'v1.19')
-      ? 'address-with-allowance'
-      : 'address-only';
+  const leafMode = 'address-only';
+  // TODO Use this when simple sale supports allowance in allowlists
+  // const leafMode =
+  //   !contractVersion || versioning.gte(contractVersion, 'v1.19')
+  //     ? 'address-with-allowance'
+  //     : 'address-only';
 
   const {
     data: merkleRoot,

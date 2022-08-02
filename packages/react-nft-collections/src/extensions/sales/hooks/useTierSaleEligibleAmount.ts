@@ -39,19 +39,24 @@ export const useTierSaleEligibleAmount = (config: Config) => {
       config.enabled &&
       config.tierId !== undefined &&
       config.minterAddress !== undefined,
-    onError: (err: any) => {
-      if (
-        [
-          'NOT_STARTED',
-          'MAXED_ALLOWANCE',
-          'ALREADY_ENDED',
-          'NOT_ALLOWLISTED',
-        ].includes(err?.reason)
-      ) {
-        setData(0);
-      }
+    onSettled(data, error: any) {
+      if (error) {
+        if (
+          [
+            'NOT_STARTED',
+            'MAXED_ALLOWANCE',
+            'ALREADY_ENDED',
+            'NOT_ALLOWLISTED',
+          ].includes(error?.reason)
+        ) {
+          setData(0);
+        }
 
-      setError(err);
+        setError(error);
+      } else {
+        setData(data);
+        setError(undefined);
+      }
     },
     ...config,
   });
