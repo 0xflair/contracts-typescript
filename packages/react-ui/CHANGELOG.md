@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.92.2 (2022-08-03)
+
+
+### Bug Fixes
+
+* pass owner account address to prepare hook ([393d038](https://github.com/0xflair/typescript-sdk/commit/393d038d5393a8d81cb7ba81a20ada61e8258079))
+
+
+
+
+
 ## 0.92.1 (2022-08-03)
 
 
