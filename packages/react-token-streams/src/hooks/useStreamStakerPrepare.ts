@@ -59,17 +59,16 @@ export const useStreamStakerPrepare = ({
     if (hasCustodialStaking) {
       if (!erc721Approver.data?.isApprovedForAll) {
         setNeedsPrepare(true);
+        return;
       }
     }
 
     if (needsPrepare) {
       setNeedsPrepare(false);
+      return;
     }
-  }, [
-    erc721Approver.data?.isApprovedForAll,
-    hasCustodialStaking,
-    needsPrepare,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [erc721Approver.data?.isApprovedForAll, hasCustodialStaking]);
 
   return {
     data: { needsPrepare, ...erc721Approver.data },
