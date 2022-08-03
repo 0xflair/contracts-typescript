@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.90.1 (2022-08-03)
+
+
+### Bug Fixes
+
+* add the new forwarder addresses ([d7a464c](https://github.com/0xflair/typescript-sdk/commit/d7a464c9bc0f0b35327eca7498136b7ffcc3f58b))
+
+
+
+
+
 # 0.90.0 (2022-08-02)
 
 
