@@ -22,9 +22,6 @@ export const StreamStakingSection = ({}: Props) => {
   const {
     data: { env, chainId, ticketTokenAddress },
   } = useStreamContext();
-  const {
-    data: { needsPrepare },
-  } = useStreamStakingContext();
 
   const { data: hasLockableExtension } = useHasAnyOfFeatures({
     env,
@@ -38,86 +35,88 @@ export const StreamStakingSection = ({}: Props) => {
 
   return (
     <StreamStakingProvider>
-      <main className="flex items-center">
-        <div className="min-w-full">
-          <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
-            <div className="lg:col-span-12">
-              <section className="flex flex-col gap-2 px-4 py-6 sm:p-6 lg:p-8 lg:mt-0 lg:col-span-5">
-                <dl className={'space-y-4'}>
-                  <div className="flex items-center justify-between gap-4">
-                    <dt className="flex flex-col gap-1 text-sm text-gray-600">
-                      <span>Your un-staked NFTs</span>
-                    </dt>
-                    <dd className="text-sm font-medium text-gray-900 whitespace-nowrap">
-                      {hasLockableExtension ? (
-                        <StreamUnlockedNfts />
-                      ) : (
-                        <StreamAccountTotalNfts />
-                      )}
-                    </dd>
-                  </div>
-                  <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
-                    <dt className="flex flex-col gap-1 text-sm text-gray-600">
-                      <span>Your staked NFTs</span>
-                    </dt>
-                    <dd className="text-sm font-medium text-gray-90 whitespace-nowrap">
-                      <StreamStakedNfts />
-                    </dd>
-                  </div>
-                  {hasLockableExtension ? (
-                    <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
+      {({ data: { needsPrepare } }) => (
+        <main className="flex items-center">
+          <div className="min-w-full">
+            <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
+              <div className="lg:col-span-12">
+                <section className="flex flex-col gap-2 px-4 py-6 sm:p-6 lg:p-8 lg:mt-0 lg:col-span-5">
+                  <dl className={'space-y-4'}>
+                    <div className="flex items-center justify-between gap-4">
                       <dt className="flex flex-col gap-1 text-sm text-gray-600">
-                        <span>Your locked NFTs</span>
-                        <small className="text-xs flex-shrink-0 text-gray-400">
-                          Might include tokens locked in other staking pools.
-                        </small>
+                        <span>Your un-staked NFTs</span>
                       </dt>
-                      <dd className="text-sm font-medium text-gray-90 whitespace-nowrap">
-                        <StreamLockedNfts />
+                      <dd className="text-sm font-medium text-gray-900 whitespace-nowrap">
+                        {hasLockableExtension ? (
+                          <StreamUnlockedNfts />
+                        ) : (
+                          <StreamAccountTotalNfts />
+                        )}
                       </dd>
                     </div>
-                  ) : null}
-                  <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
-                    <dt className="flex flex-col gap-1 text-sm text-gray-600">
-                      <span>Unstakeable NFTs</span>
-                      <small className="text-xs flex-shrink-0 text-gray-400">
-                        These passed the minimum lock-time so you can unstake.
-                      </small>
-                    </dt>
-                    <dd className="text-sm font-medium text-gray-900 whitespace-nowrap">
-                      <StreamUnstakeableNfts />
-                    </dd>
-                  </div>
-                </dl>
-
-                <div className="flex flex-col justify-center items-center">
-                  {/* Claim button */}
-                  <ConnectButton
-                    className={buttonClass}
-                    label="Connect to stake"
-                  >
-                    <SwitchChainButton
-                      requiredChainId={Number(chainId)}
-                      className={buttonClass}
-                    >
-                      <div className="w-full flex gap-3">
-                        <StreamUnstakeButton className={buttonClass} />
-                        {needsPrepare ? (
-                          <StreamPrepareButton className={buttonClass} />
-                        ) : (
-                          <StreamStakeButton className={buttonClass} />
-                        )}
+                    <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
+                      <dt className="flex flex-col gap-1 text-sm text-gray-600">
+                        <span>Your staked NFTs</span>
+                      </dt>
+                      <dd className="text-sm font-medium text-gray-90 whitespace-nowrap">
+                        <StreamStakedNfts />
+                      </dd>
+                    </div>
+                    {hasLockableExtension ? (
+                      <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
+                        <dt className="flex flex-col gap-1 text-sm text-gray-600">
+                          <span>Your locked NFTs</span>
+                          <small className="text-xs flex-shrink-0 text-gray-400">
+                            Might include tokens locked in other staking pools.
+                          </small>
+                        </dt>
+                        <dd className="text-sm font-medium text-gray-90 whitespace-nowrap">
+                          <StreamLockedNfts />
+                        </dd>
                       </div>
-                    </SwitchChainButton>
-                  </ConnectButton>
-                </div>
+                    ) : null}
+                    <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
+                      <dt className="flex flex-col gap-1 text-sm text-gray-600">
+                        <span>Unstakeable NFTs</span>
+                        <small className="text-xs flex-shrink-0 text-gray-400">
+                          These passed the minimum lock-time so you can unstake.
+                        </small>
+                      </dt>
+                      <dd className="text-sm font-medium text-gray-900 whitespace-nowrap">
+                        <StreamUnstakeableNfts />
+                      </dd>
+                    </div>
+                  </dl>
 
-                <StreamStakingStatusBar />
-              </section>
+                  <div className="flex flex-col justify-center items-center">
+                    {/* Claim button */}
+                    <ConnectButton
+                      className={buttonClass}
+                      label="Connect to stake"
+                    >
+                      <SwitchChainButton
+                        requiredChainId={Number(chainId)}
+                        className={buttonClass}
+                      >
+                        <div className="w-full flex gap-3">
+                          <StreamUnstakeButton className={buttonClass} />
+                          {needsPrepare ? (
+                            <StreamPrepareButton className={buttonClass} />
+                          ) : (
+                            <StreamStakeButton className={buttonClass} />
+                          )}
+                        </div>
+                      </SwitchChainButton>
+                    </ConnectButton>
+                  </div>
+
+                  <StreamStakingStatusBar />
+                </section>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+      )}
     </StreamStakingProvider>
   );
 };
