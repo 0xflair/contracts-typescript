@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.92.3 (2022-08-03)
+
+
+### Bug Fixes
+
+* enable approver fetch ([6549be4](https://github.com/0xflair/typescript-sdk/commit/6549be45401625c308d3abbb346c307a15bf8310))
+
+
+
+
+
 ## 0.92.2 (2022-08-03)
 
 
