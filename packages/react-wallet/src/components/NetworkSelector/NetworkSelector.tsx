@@ -21,6 +21,73 @@ export const NetworkSelector = (props: Props) => {
   const availableChains = chains || FLAIR_CHAINS;
   const selected = availableChains.find((c) => c.id === activeChain?.id);
 
+  const categorizedChains = availableChains.reduce<{
+    mainnet: Chain[];
+    testnet: Chain[];
+  }>(
+    (chains, currentChain) => {
+      // filtering hardhat and localhost
+      if ([31_337, 1_337].includes(currentChain.id)) {
+        return chains;
+      }
+
+      if (currentChain.testnet) {
+        chains.testnet.push(currentChain);
+      } else {
+        chains.mainnet.push(currentChain);
+      }
+      return chains;
+    },
+    { mainnet: [], testnet: [] },
+  );
+
+  // views
+  const ChainView = ({ chain }: { chain: Chain }) => {
+    return (
+      <Listbox.Option
+        key={chain.id}
+        className={({ active }) =>
+          classNames(
+            active ? 'text-white bg-indigo-600' : 'text-gray-900',
+            'cursor-default select-none relative py-2 pl-3 pr-9',
+          )
+        }
+        value={chain}
+      >
+        {({ selected, active }) => (
+          <>
+            <span
+              className={classNames(
+                selected ? 'font-semibold' : 'font-normal',
+                'block truncate',
+              )}
+            >
+              {chain.name}{' '}
+              {chain.nativeCurrency ? (
+                <small className="text-xs">
+                  ({chain.nativeCurrency.symbol})
+                </small>
+              ) : (
+                ''
+              )}
+            </span>
+
+            {selected ? (
+              <span
+                className={classNames(
+                  active ? 'text-white' : 'text-indigo-600',
+                  'absolute inset-y-0 right-0 flex items-center pr-4',
+                )}
+              >
+                <CheckIcon className="h-5 w-5" aria-hidden="true" />
+              </span>
+            ) : null}
+          </>
+        )}
+      </Listbox.Option>
+    );
+  };
+
   return (
     <Listbox
       value={selected}
@@ -52,49 +119,29 @@ export const NetworkSelector = (props: Props) => {
               leaveTo="opacity-0"
             >
               <Listbox.Options className="absolute z-20 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                {availableChains.map((chain) => (
-                  <Listbox.Option
-                    key={chain.id}
-                    className={({ active }) =>
-                      classNames(
-                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
-                        'cursor-default select-none relative py-2 pl-3 pr-9'
-                      )
-                    }
-                    value={chain}
+                <div>
+                  {categorizedChains.mainnet.map((chain) => {
+                    return <ChainView chain={chain} />;
+                  })}
+                </div>
+                <div className="relative py-2">
+                  <div
+                    className="absolute inset-0 flex items-center"
+                    aria-hidden="true"
                   >
-                    {({ selected, active }) => (
-                      <>
-                        <span
-                          className={classNames(
-                            selected ? 'font-semibold' : 'font-normal',
-                            'block truncate'
-                          )}
-                        >
-                          {chain.name}{' '}
-                          {chain.testnet ? (
-                            <small className="text-xs text-gray-400 italic">
-                              Testnet
-                            </small>
-                          ) : (
-                            ''
-                          )}
-                        </span>
-
-                        {selected ? (
-                          <span
-                            className={classNames(
-                              active ? 'text-white' : 'text-indigo-600',
-                              'absolute inset-y-0 right-0 flex items-center pr-4'
-                            )}
-                          >
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                          </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Listbox.Option>
-                ))}
+                    <div className="w-full border-t border-gray-300" />
+                  </div>
+                  <div className="relative flex justify-center">
+                    <span className="px-2 bg-white text-sm text-gray-500">
+                      Testnets
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  {categorizedChains.testnet.map((chain) => {
+                    return <ChainView chain={chain} />;
+                  })}
+                </div>
               </Listbox.Options>
             </Transition>
           </div>
