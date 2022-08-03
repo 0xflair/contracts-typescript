@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.92.5 (2022-08-03)
+
+
+### Bug Fixes
+
+* watch the approval status after approving ([db88b58](https://github.com/0xflair/typescript-sdk/commit/db88b58c36020b1868f2b1a1cf9d520b846df8cb))
+
+
+
+
+
 ## 0.92.4 (2022-08-03)
 
 
