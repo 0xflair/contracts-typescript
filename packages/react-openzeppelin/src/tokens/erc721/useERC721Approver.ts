@@ -18,9 +18,12 @@ type Config = {
   watch?: boolean;
   cacheOnBlock?: boolean;
 
+  // Args
+  owner?: BytesLike;
+  operator?: BytesLike;
+
   // Write-only
   signerOrProvider?: Signer | Provider | null;
-  operator?: BytesLike;
   writeOverrides?: WriteContractConfig['overrides'];
 };
 
@@ -32,6 +35,7 @@ export const useERC721Approver = ({
   watch,
   cacheOnBlock,
   signerOrProvider,
+  owner,
   operator,
   writeOverrides,
 }: Config) => {
@@ -44,6 +48,7 @@ export const useERC721Approver = ({
     chainId,
     contractAddress,
     contractVersion,
+    owner,
     operator,
     enabled,
     watch,

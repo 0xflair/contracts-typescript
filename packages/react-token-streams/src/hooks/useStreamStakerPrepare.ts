@@ -7,6 +7,7 @@ import { useERC721Approver } from '@0xflair/react-openzeppelin';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 import { useCallback, useEffect, useState } from 'react';
+import { useAccount } from 'wagmi';
 
 type Config = {
   env?: Environment;
@@ -23,6 +24,7 @@ export const useStreamStakerPrepare = ({
   ticketTokenAddress,
 }: Config) => {
   const chainId = useChainId(chainId_);
+  const { data: account } = useAccount();
   const [needsPrepare, setNeedsPrepare] = useState<boolean>();
 
   const {
@@ -39,6 +41,7 @@ export const useStreamStakerPrepare = ({
   const erc721Approver = useERC721Approver({
     contractAddress: ticketTokenAddress,
     operator: streamContractAddress,
+    owner: account?.address,
   });
 
   const prepare = useCallback(async () => {
