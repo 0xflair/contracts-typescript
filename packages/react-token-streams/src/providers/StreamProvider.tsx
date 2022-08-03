@@ -60,14 +60,17 @@ type StreamContextValue = {
     streamNativeBalanceError?: string | Error | null;
     streamERC20BalancesError?: string | Error | null;
   };
+
+  refetchNfts: () => Promise<any>;
+  refetchStreamERC20Balances: () => Promise<any>;
 };
 
 export const StreamContext = React.createContext<StreamContextValue | null>(
-  null
+  null,
 );
 
 type FunctionalChildren = (
-  contextValue: StreamContextValue
+  contextValue: StreamContextValue,
 ) => ReactNode | ReactNode[];
 
 type Props = {
@@ -121,6 +124,7 @@ export const StreamProvider = ({
     data: nfts,
     error: nftsError,
     isLoading: nftsLoading,
+    sendRequest: refetchNfts,
   } = useNftTokens({
     env,
     chainId,
@@ -146,12 +150,14 @@ export const StreamProvider = ({
     chainId,
     addressOrName: contractAddress,
     enabled: Boolean(contractAddress),
+    watch: true,
   });
 
   const {
     data: streamERC20Balances,
     error: streamERC20BalancesError,
     isLoading: streamERC20BalancesLoading,
+    sendRequest: refetchStreamERC20Balances,
   } = useTokenBalances({
     env,
     chainId,
@@ -205,12 +211,15 @@ export const StreamProvider = ({
       streamNativeBalanceError,
       streamERC20BalancesError,
     },
+
+    refetchNfts,
+    refetchStreamERC20Balances,
   };
 
   return React.createElement(
     StreamContext.Provider,
     { value },
-    typeof children === 'function' ? children(value) : children
+    typeof children === 'function' ? children(value) : children,
   );
 };
 

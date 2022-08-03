@@ -4,7 +4,7 @@ import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish } from 'ethers';
 import * as React from 'react';
-import { ReactNode } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { useSigner } from 'wagmi';
 
 import { useStreamStaker } from '../hooks/useStreamStaker';
@@ -96,6 +96,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
       ticketTokenIds,
     },
     isLoading: { nftsLoading },
+    refetchNfts,
   } = useStreamContext();
 
   const {
@@ -107,6 +108,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
     contractAddress: ticketTokenAddress as string,
     args: [ticketTokenIds || []],
     enabled: Boolean(ticketTokenAddress),
+    watch: true,
   });
 
   const unlockedNfts = nfts?.filter((t) =>
@@ -160,7 +162,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
     data: stakeData,
     error: stakeError,
     isLoading: stakeLoading,
-    writeAndWait: stake,
+    writeAndWait: stakeWriteAndWait,
   } = useStreamStaker({
     env,
     chainId,
@@ -173,7 +175,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
     data: unstakeData,
     error: unstakeError,
     isLoading: unstakeLoading,
-    writeAndWait: unstake,
+    writeAndWait: unstakeWriteAndWait,
   } = useStreamUnstaker({
     env,
     chainId,
@@ -197,6 +199,18 @@ export const StreamStakingProvider = ({ children }: Props) => {
       unstakeableNfts &&
       unstakeableNfts.length > 0,
   );
+
+  const stake = useCallback(() => {
+    return stakeWriteAndWait().then((result) => {
+      return refetchNfts().then(() => result);
+    });
+  }, [refetchNfts, stakeWriteAndWait]);
+
+  const unstake = useCallback(() => {
+    return unstakeWriteAndWait().then((result) => {
+      return refetchNfts().then(() => result);
+    });
+  }, [refetchNfts, unstakeWriteAndWait]);
 
   const value = {
     data: {
