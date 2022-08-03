@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.92.4 (2022-08-03)
+
+
+### Bug Fixes
+
+* how preparation is calculated ([34b07fe](https://github.com/0xflair/typescript-sdk/commit/34b07fe68b2e0403cca9a64cba0425db75f80f2e))
+
+
+
+
+
 ## 0.92.3 (2022-08-03)
 
 
