@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.92.0 (2022-08-03)
+
+
+### Features
+
+* add hooks and components for custodial staking ([#11](https://github.com/0xflair/typescript-sdk/issues/11)) ([854e0ab](https://github.com/0xflair/typescript-sdk/commit/854e0abf0297b79cfc8e7b2f3fe240649e174519))
+
+
+
+
+
 # 0.91.0 (2022-08-03)
 
 
