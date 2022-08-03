@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.92.1 (2022-08-03)
+
+
+### Bug Fixes
+
+* avoid fetching context too early ([bb739c5](https://github.com/0xflair/typescript-sdk/commit/bb739c5adeecc34fa25cb1e3a3c2f6a51cb3283a))
+
+
+
+
+
 # 0.92.0 (2022-08-03)
 
 
