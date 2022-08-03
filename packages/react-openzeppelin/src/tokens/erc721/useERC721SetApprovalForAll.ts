@@ -2,27 +2,25 @@ import { ContractVersion } from '@0xflair/contracts-registry';
 import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
 import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';
-import { BigNumberish, BytesLike, Signer } from 'ethers';
+import { BytesLike, Signer } from 'ethers';
 
 type Config = Partial<WriteContractConfig> & {
   contractVersion?: ContractVersion;
   enabled?: boolean;
   contractAddress?: string;
   signerOrProvider?: Signer | Provider | null;
-  from?: BytesLike;
-  to?: BytesLike;
-  tokenId?: BigNumberish;
+  operator?: BytesLike;
+  approved?: boolean;
 };
 
-type ArgsType = [from?: BytesLike, to?: BytesLike, tokenId?: BigNumberish];
+type ArgsType = [operator?: BytesLike, approved?: boolean];
 
-export const useERC721TransferFrom = ({
+export const useERC721SetApprovalForAll = ({
   contractVersion,
   contractAddress,
   signerOrProvider,
-  from,
-  to,
-  tokenId,
+  operator,
+  approved,
   ...restOfConfig
 }: Config) => {
   const contractInterface = useContractAbi({
@@ -32,8 +30,8 @@ export const useERC721TransferFrom = ({
 
   return useContractWriteAndWait<ArgsType>({
     contractInterface,
-    functionName: 'transferFrom',
-    args: [from, to, tokenId],
+    functionName: 'setApprovalForAll',
+    args: [operator, approved],
     contractAddress,
     signerOrProvider,
     ...restOfConfig,

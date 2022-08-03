@@ -8,6 +8,7 @@ import { ReactNode } from 'react';
 import { useSigner } from 'wagmi';
 
 import { useStreamStaker } from '../hooks/useStreamStaker';
+import { useStreamStakerPrepare } from '../hooks/useStreamStakerPrepare';
 import { useStreamUnlockingTime } from '../hooks/useStreamUnlockingTime';
 import { useStreamUnstaker } from '../hooks/useStreamUnstaker';
 import { useStreamContext } from './StreamProvider';
@@ -25,8 +26,13 @@ export type StreamStakingContextValue = {
     lockedTokenIds?: BigNumberish[];
     canStake?: boolean;
     canUnstake?: boolean;
+    needsPrepare?: boolean;
 
     // Transaction
+    prepareData?: {
+      txReceipt?: TransactionReceipt;
+      txResponse?: TransactionResponse;
+    };
     stakeData?: {
       txReceipt?: TransactionReceipt;
       txResponse?: TransactionResponse;
@@ -43,6 +49,7 @@ export type StreamStakingContextValue = {
     lockedNftsLoading?: boolean;
     unstakeableNftsLoading?: boolean;
     tokenUnlockingTimesLoading?: boolean;
+    prepareLoading?: boolean;
 
     // Transaction
     stakeLoading?: boolean;
@@ -53,12 +60,14 @@ export type StreamStakingContextValue = {
     // On-chain values
     unlockedNftsError?: string | Error | null;
     tokenUnlockingTimesError?: string | Error | null;
+    prepareError?: string | Error | null;
 
     // Transaction
     stakeError?: string | Error | null;
     unstakeError?: string | Error | null;
   };
 
+  prepare: ReturnType<typeof useStreamStakerPrepare>['prepare'];
   stake: ReturnType<typeof useStreamStaker>['writeAndWait'];
   unstake: ReturnType<typeof useStreamUnstaker>['writeAndWait'];
 };
@@ -67,7 +76,7 @@ export const StreamStakingContext =
   React.createContext<StreamStakingContextValue | null>(null);
 
 type FunctionalChildren = (
-  contextValue: StreamStakingContextValue
+  contextValue: StreamStakingContextValue,
 ) => ReactNode | ReactNode[];
 
 type Props = {
@@ -101,10 +110,10 @@ export const StreamStakingProvider = ({ children }: Props) => {
   });
 
   const unlockedNfts = nfts?.filter((t) =>
-    unlockedTokenIds.find((u) => u.toString() === t.tokenId)
+    unlockedTokenIds.find((u) => u.toString() === t.tokenId),
   );
   const lockedNfts = nfts?.filter(
-    (t) => !unlockedTokenIds.find((u) => u.toString() === t.tokenId)
+    (t) => !unlockedTokenIds.find((u) => u.toString() === t.tokenId),
   );
 
   const {
@@ -127,8 +136,25 @@ export const StreamStakingProvider = ({ children }: Props) => {
     ?.map((t, i) => (Number(t.toString()) < now ? nfts?.[i] : null))
     .filter((t) => t !== null)
     .filter((t) =>
-      stakedNfts.find((s) => s.tokenId.toString() === t?.tokenId.toString())
+      stakedNfts.find((s) => s.tokenId.toString() === t?.tokenId.toString()),
     ) || []) as NftToken[];
+
+  const {
+    data: {
+      needsPrepare,
+      txReceipt: prepareTxReceipt,
+      txResponse: prepareTxResponse,
+    },
+    error: prepareError,
+    isLoading: prepareLoading,
+    prepare,
+  } = useStreamStakerPrepare({
+    env,
+    chainId,
+    streamContractAddress: contractAddress,
+    ticketTokenAddress: ticketTokenAddress as string,
+    signerOrProvider: signer,
+  });
 
   const {
     data: stakeData,
@@ -161,7 +187,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
       !stakeLoading &&
       !unlockedNftsLoading &&
       unlockedNfts &&
-      unlockedNfts.length > 0
+      unlockedNfts.length > 0,
   );
 
   const canUnstake = Boolean(
@@ -169,7 +195,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
       !unstakeLoading &&
       !tokenUnlockingTimesLoading &&
       unstakeableNfts &&
-      unstakeableNfts.length > 0
+      unstakeableNfts.length > 0,
   );
 
   const value = {
@@ -186,8 +212,13 @@ export const StreamStakingProvider = ({ children }: Props) => {
       lockedTokenIds: lockedNfts?.map((t) => t.tokenId),
       canStake,
       canUnstake,
+      needsPrepare,
 
       // Transaction
+      prepareData: {
+        txReceipt: prepareTxReceipt,
+        txResponse: prepareTxResponse,
+      },
       stakeData,
       unstakeData,
     },
@@ -200,17 +231,23 @@ export const StreamStakingProvider = ({ children }: Props) => {
       tokenUnlockingTimesLoading,
 
       // Transaction
+      prepareLoading,
       stakeLoading,
       unstakeLoading,
     },
 
     error: {
+      // On-chain values
       unlockedNftsError,
       tokenUnlockingTimesError,
+
+      // Transaction
+      prepareError,
       stakeError,
       unstakeError,
     },
 
+    prepare,
     stake,
     unstake,
   };
@@ -218,7 +255,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
   return React.createElement(
     StreamStakingContext.Provider,
     { value },
-    typeof children === 'function' ? children(value) : children
+    typeof children === 'function' ? children(value) : children,
   );
 };
 

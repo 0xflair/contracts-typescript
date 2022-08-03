@@ -37,7 +37,11 @@ export function useSmartContract({
     enabled && (smartContractId || (chainId && contractAddress)),
   );
 
-  const result = useQuery(queryKey, queryFn, {
+  const result = useQuery<
+    SmartContract<any>,
+    string | Error | null,
+    SmartContract<any>
+  >(queryKey, queryFn, {
     enabled: canRequest,
     onSuccess(data: SmartContract) {
       const detectingFeatures =

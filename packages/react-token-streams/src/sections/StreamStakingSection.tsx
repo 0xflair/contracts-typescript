@@ -1,6 +1,9 @@
+import { useHasAnyOfFeatures } from '@0xflair/react-common';
 import { ConnectButton, SwitchChainButton } from '@0xflair/react-wallet';
 
+import { StreamAccountTotalNfts } from '../components';
 import { StreamLockedNfts } from '../components/StreamLockedNfts';
+import { StreamPrepareButton } from '../components/StreamPrepareButton';
 import { StreamStakeButton } from '../components/StreamStakeButton';
 import { StreamStakedNfts } from '../components/StreamStakedNfts';
 import { StreamStakingStatusBar } from '../components/StreamStakingStatusBar';
@@ -8,14 +11,27 @@ import { StreamUnlockedNfts } from '../components/StreamUnlockedNfts';
 import { StreamUnstakeableNfts } from '../components/StreamUnstakeableNfts';
 import { StreamUnstakeButton } from '../components/StreamUnstakeButton';
 import { useStreamContext } from '../providers/StreamProvider';
-import { StreamStakingProvider } from '../providers/StreamStakingProvider';
+import {
+  StreamStakingProvider,
+  useStreamStakingContext,
+} from '../providers/StreamStakingProvider';
 
 type Props = {};
 
 export const StreamStakingSection = ({}: Props) => {
   const {
-    data: { env, chainId, contractAddress },
+    data: { env, chainId, ticketTokenAddress },
   } = useStreamContext();
+  const {
+    data: { needsPrepare },
+  } = useStreamStakingContext();
+
+  const { data: hasLockableExtension } = useHasAnyOfFeatures({
+    env,
+    chainId,
+    contractAddress: ticketTokenAddress,
+    tags: ['erc721_lockable_extension'],
+  });
 
   const buttonClass =
     'mt-4 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
@@ -33,7 +49,11 @@ export const StreamStakingSection = ({}: Props) => {
                       <span>Your un-staked NFTs</span>
                     </dt>
                     <dd className="text-sm font-medium text-gray-900 whitespace-nowrap">
-                      <StreamUnlockedNfts />
+                      {hasLockableExtension ? (
+                        <StreamUnlockedNfts />
+                      ) : (
+                        <StreamAccountTotalNfts />
+                      )}
                     </dd>
                   </div>
                   <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
@@ -44,18 +64,19 @@ export const StreamStakingSection = ({}: Props) => {
                       <StreamStakedNfts />
                     </dd>
                   </div>
-                  {/* // TODO: only if locking extension is used */}
-                  <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
-                    <dt className="flex flex-col gap-1 text-sm text-gray-600">
-                      <span>Your locked NFTs</span>
-                      <small className="text-xs flex-shrink-0 text-gray-400">
-                        Might include tokens locked in other staking pools.
-                      </small>
-                    </dt>
-                    <dd className="text-sm font-medium text-gray-90 whitespace-nowrap">
-                      <StreamLockedNfts />
-                    </dd>
-                  </div>
+                  {hasLockableExtension ? (
+                    <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
+                      <dt className="flex flex-col gap-1 text-sm text-gray-600">
+                        <span>Your locked NFTs</span>
+                        <small className="text-xs flex-shrink-0 text-gray-400">
+                          Might include tokens locked in other staking pools.
+                        </small>
+                      </dt>
+                      <dd className="text-sm font-medium text-gray-90 whitespace-nowrap">
+                        <StreamLockedNfts />
+                      </dd>
+                    </div>
+                  ) : null}
                   <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
                     <dt className="flex flex-col gap-1 text-sm text-gray-600">
                       <span>Unstakeable NFTs</span>
@@ -81,7 +102,11 @@ export const StreamStakingSection = ({}: Props) => {
                     >
                       <div className="w-full flex gap-3">
                         <StreamUnstakeButton className={buttonClass} />
-                        <StreamStakeButton className={buttonClass} />
+                        {needsPrepare ? (
+                          <StreamPrepareButton className={buttonClass} />
+                        ) : (
+                          <StreamStakeButton className={buttonClass} />
+                        )}
                       </div>
                     </SwitchChainButton>
                   </ConnectButton>

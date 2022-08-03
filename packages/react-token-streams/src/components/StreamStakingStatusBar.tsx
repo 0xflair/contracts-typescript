@@ -12,10 +12,11 @@ export const StreamStakingStatusBar = ({
   children,
 }: Props) => {
   const {
-    data: { stakeData, unstakeData },
+    data: { prepareData, stakeData, unstakeData },
     error: {
       tokenUnlockingTimesError,
       unlockedNftsError,
+      prepareError,
       stakeError,
       unstakeError,
     },
@@ -24,6 +25,7 @@ export const StreamStakingStatusBar = ({
       lockedNftsLoading,
       unstakeableNftsLoading,
       tokenUnlockingTimesLoading,
+      prepareLoading,
       stakeLoading,
       unstakeLoading,
     },
@@ -31,7 +33,7 @@ export const StreamStakingStatusBar = ({
 
   return (
     <div className={className}>
-      {/* INIT */}
+      {/* COMMON LOADING */}
       {unlockedNftsLoading ||
       lockedNftsLoading ||
       unstakeableNftsLoading ||
@@ -40,6 +42,20 @@ export const StreamStakingStatusBar = ({
           <Spinner /> Loading staking information...
         </div>
       ) : null}
+
+      {/* PREPARING */}
+      {prepareLoading && (
+        <div className="flex items-center gap-2">
+          <Spinner /> {'Preparing...'}
+        </div>
+      )}
+      {prepareData?.txReceipt || prepareData?.txResponse ? (
+        <TransactionLink
+          txReceipt={prepareData?.txReceipt}
+          txResponse={prepareData?.txResponse}
+        />
+      ) : null}
+      {prepareError && <Errors title="Cannot prepare" error={prepareError} />}
 
       {/* STAKING */}
       {stakeLoading && (
@@ -75,7 +91,7 @@ export const StreamStakingStatusBar = ({
       ) : null}
       {unstakeError && <Errors title="Cannot unstake" error={unstakeError} />}
 
-      {/* ERRORS */}
+      {/* COMMON ERRORS */}
       {tokenUnlockingTimesError && (
         <Errors
           title="tokenUnlockingTimesError"
