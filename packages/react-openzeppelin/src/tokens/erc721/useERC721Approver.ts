@@ -69,9 +69,14 @@ export const useERC721Approver = ({
 
   const setApprovalForAll = useCallback(
     (approved: boolean = true) => {
-      return writeAndWait([operator, approved]);
+      return writeAndWait([operator, approved]).then(() => {
+        fetchIsApprovedForAll();
+        setTimeout(() => {
+          fetchIsApprovedForAll();
+        }, 500);
+      });
     },
-    [operator, writeAndWait],
+    [fetchIsApprovedForAll, operator, writeAndWait],
   );
 
   return {

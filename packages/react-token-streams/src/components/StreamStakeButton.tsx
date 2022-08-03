@@ -20,7 +20,7 @@ export const StreamStakeButton = ({ className, ticketTokenIds }: Props) => {
   return (
     <Button
       text={tokensToStake ? `Stake ${tokensToStake} NFTs` : `Stake`}
-      onClick={() => stake({ ticketTokenIds })}
+      onClick={() => stake(ticketTokenIds ? { ticketTokenIds } : undefined)}
       disabled={!canStake}
       className={className}
     />

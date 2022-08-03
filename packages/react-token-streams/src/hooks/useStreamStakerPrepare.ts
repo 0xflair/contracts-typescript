@@ -43,6 +43,7 @@ export const useStreamStakerPrepare = ({
     operator: streamContractAddress,
     owner: account?.address,
     enabled: true,
+    watch: true,
   });
 
   const prepare = useCallback(async () => {
