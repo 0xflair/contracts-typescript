@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.91.0 (2022-08-03)
+
+
+### Features
+
+* add new chains + update react wallet ui ([#10](https://github.com/0xflair/typescript-sdk/issues/10)) ([4227bcf](https://github.com/0xflair/typescript-sdk/commit/4227bcfc8890262085a82cb64c902873103ef26e))
+
+
+
+
+
 ## 0.90.2 (2022-08-03)
 
 
