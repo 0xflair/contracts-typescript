@@ -1,8 +1,6 @@
 import { Environment } from '@0xflair/common';
 import axios from 'axios';
-import { QueryClient, useQuery } from 'react-query';
-import { createWebStoragePersister } from 'react-query/createWebStoragePersister';
-import { persistQueryClient } from 'react-query/persistQueryClient';
+import { useQuery, useQueryClient } from 'react-query';
 import { useInterval } from 'react-use';
 
 import { FLAIR_SMART_CONTRACTS_BACKEND } from '../constants/backend';
@@ -16,27 +14,6 @@ type Config = {
   contractAddress?: string;
 };
 
-const localStoragePersister = createWebStoragePersister({
-  storage: window.localStorage,
-});
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      cacheTime: 1_000 * 60 * 60 * 24,
-      staleTime: 1_000 * 60 * 60 * 2,
-      networkMode: 'offlineFirst',
-      refetchOnWindowFocus: false,
-      retry: 0,
-    },
-  },
-});
-
-persistQueryClient({
-  queryClient,
-  persister: localStoragePersister,
-});
-
 export function useSmartContract({
   env = Environment.PROD,
   enabled = true,
@@ -44,6 +21,7 @@ export function useSmartContract({
   chainId,
   contractAddress,
 }: Config) {
+  const queryClient = useQueryClient();
   const url = smartContractId
     ? `${FLAIR_SMART_CONTRACTS_BACKEND[env]}/v1/smart-contracts/${smartContractId}`
     : `${FLAIR_SMART_CONTRACTS_BACKEND[env]}/v1/smart-contracts/${chainId}/${contractAddress}`;

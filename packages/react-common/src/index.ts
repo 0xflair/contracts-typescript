@@ -7,5 +7,6 @@ import React from 'react';
 export * from '@0xflair/common';
 
 export * from './constants';
+export * from './providers';
 export * from './hooks';
 export * from './types';

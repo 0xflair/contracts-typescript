@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 export const useStickyState = <S>(
   initialState: S,
   key: string,
-  ignoredKeys?: string[]
+  ignoredKeys?: string[],
 ): [S, Dispatch<SetStateAction<S>>] => {
   const supportsLocalStorage = typeof window.localStorage !== 'undefined';
 
