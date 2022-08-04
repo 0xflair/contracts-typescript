@@ -53,7 +53,6 @@ export function useSmartContract({
 
     if (detectingFeatures && canRequest) {
       queryClient.invalidateQueries({ queryKey });
-      result.refetch();
     }
   }, 5000);
 
