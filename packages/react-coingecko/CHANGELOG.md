@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.1 (2022-08-04)
+
+
+### Bug Fixes
+
+* include tokens in custody in nfts array ([d4c5a76](https://github.com/0xflair/typescript-sdk/commit/d4c5a766847efc3abc05e17b45b7fff39f254a99))
+
+
+
+
+
 # 0.95.0 (2022-08-04)
 
 
