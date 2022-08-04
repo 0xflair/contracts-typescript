@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.4 (2022-08-04)
+
+
+### Bug Fixes
+
+* remove refetch method from interval ([3c86d90](https://github.com/0xflair/typescript-sdk/commit/3c86d902abbb59ccd9d635f6471897775567e145))
+
+
+
+
+
 ## 0.95.3 (2022-08-04)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-openzeppelin",
-  "version": "0.95.3",
+  "version": "0.95.4",
   "private": false,
   "repository": {
     "type": "git",
@@ -45,8 +45,8 @@
     "wagmi": "^0.3.5"
   },
   "dependencies": {
-    "@0xflair/contracts-registry": "^0.95.3",
-    "@0xflair/react-common": "^0.95.3",
+    "@0xflair/contracts-registry": "^0.95.4",
+    "@0xflair/react-common": "^0.95.4",
     "ethers": "^5.6.5",
     "wagmi": "^0.3.5"
   },
