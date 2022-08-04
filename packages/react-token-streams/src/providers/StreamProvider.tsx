@@ -149,6 +149,7 @@ export const StreamProvider = ({
     error: ticketTokenSymbolError,
     isLoading: ticketTokenSymbolLoading,
   } = useERC721Symbol({
+    chainId,
     contractAddress: ticketTokenAddress,
     enabled: Boolean(ticketTokenAddress),
   });
