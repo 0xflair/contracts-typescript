@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.92.7 (2022-08-04)
+
+**Note:** Version bump only for package @0xflair/react-wallet
+
+
+
+
+
 ## 0.92.6 (2022-08-03)
 
 
