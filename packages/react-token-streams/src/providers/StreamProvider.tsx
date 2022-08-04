@@ -9,7 +9,7 @@ import {
 import { useERC721Symbol } from '@0xflair/react-openzeppelin';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { Chain, useAccount, useBalance } from 'wagmi';
 
 import { useStreamTicketToken, useTokenStream } from '../hooks';
@@ -32,6 +32,7 @@ type StreamContextValue = {
     ticketTokenSymbol?: BytesLike;
     streamNativeBalance?: ReturnType<typeof useBalance>['data'];
     streamERC20Balances?: TokenBalance[] | null;
+    tokenIdsInCustody?: BigNumberish[];
 
     // Helpers
     ticketTokenIds?: BigNumberish[];
@@ -40,7 +41,7 @@ type StreamContextValue = {
   isLoading: {
     // Resources
     streamLoading?: boolean;
-    nftsLoading?: boolean;
+    walletNftsLoading?: boolean;
 
     // On-chain values
     ticketTokenAddressLoading?: boolean;
@@ -52,7 +53,7 @@ type StreamContextValue = {
   error: {
     // Resources
     streamError?: string | Error | null;
-    nftsError?: string | Error | null;
+    walletNftsError?: string | Error | null;
 
     // On-chain values
     ticketTokenAddressError?: string | Error | null;
@@ -61,7 +62,7 @@ type StreamContextValue = {
     streamERC20BalancesError?: string | Error | null;
   };
 
-  refetchNfts: () => Promise<any>;
+  refetchWalletNfts: () => Promise<any>;
   refetchStreamERC20Balances: () => Promise<any>;
 };
 
@@ -121,10 +122,10 @@ export const StreamProvider = ({
     ticketTokenAddress_?.toString() || stream?.config?.ticketToken || '';
 
   const {
-    data: nfts,
-    error: nftsError,
-    isLoading: nftsLoading,
-    sendRequest: refetchNfts,
+    data: walletNfts,
+    error: walletNftsError,
+    isLoading: walletNftsLoading,
+    sendRequest: refetchWalletNfts,
   } = useNftTokens({
     env,
     chainId,
@@ -175,13 +176,28 @@ export const StreamProvider = ({
     enabled: Boolean(contractAddress),
   });
 
-  const ticketTokenIds = nfts?.map(({ tokenId }) => tokenId) || [];
-  ticketTokenIds.push(...(tokenIdsInCustody?.map((i) => i.toString()) || []));
+  const nfts = useMemo(() => {
+    return [
+      ...(walletNfts || []),
+      ...(tokenIdsInCustody || []).map(
+        (tokenId) =>
+          ({
+            tokenId,
+            contractAddress: ticketTokenAddress,
+            ownerAddress: stream?.contractAddress,
+          } as NftToken),
+      ),
+    ];
+  }, [
+    walletNfts,
+    tokenIdsInCustody,
+    ticketTokenAddress,
+    stream?.contractAddress,
+  ]);
 
-  console.log('ticketTokenIds === ', ticketTokenIds);
-  console.log('tokenIdsInCustody === ', tokenIdsInCustody);
-  console.log('tokenIdsInCustodyError === ', tokenIdsInCustodyError);
-  console.log('tokenIdsInCustodyLoading === ', tokenIdsInCustodyLoading);
+  const ticketTokenIds = useMemo(() => {
+    return nfts?.map(({ tokenId }) => tokenId) || [];
+  }, [nfts]);
 
   const value = {
     data: {
@@ -199,6 +215,7 @@ export const StreamProvider = ({
       ticketTokenSymbol,
       streamNativeBalance,
       streamERC20Balances,
+      tokenIdsInCustody,
 
       // Helpers
       ticketTokenIds,
@@ -207,28 +224,30 @@ export const StreamProvider = ({
     isLoading: {
       // Resources
       streamLoading,
-      nftsLoading,
+      walletNftsLoading,
 
       // On-chain values
       ticketTokenAddressLoading,
       ticketTokenSymbolLoading,
       streamNativeBalanceLoading,
       streamERC20BalancesLoading,
+      tokenIdsInCustodyLoading,
     },
 
     error: {
       // Resources
       streamError,
-      nftsError,
+      walletNftsError,
 
       // On-chain values
       ticketTokenAddressError,
       ticketTokenSymbolError,
       streamNativeBalanceError,
       streamERC20BalancesError,
+      tokenIdsInCustodyError,
     },
 
-    refetchNfts,
+    refetchWalletNfts,
     refetchStreamERC20Balances,
   };
 

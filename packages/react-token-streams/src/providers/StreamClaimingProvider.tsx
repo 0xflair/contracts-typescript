@@ -86,7 +86,7 @@ export const StreamClaimingProvider = ({
       streamERC20Balances,
       ticketTokenIds,
     },
-    isLoading: { nftsLoading },
+    isLoading: { walletNftsLoading },
   } = useStreamContext();
 
   const currentClaimTokenAddress =
@@ -165,7 +165,7 @@ export const StreamClaimingProvider = ({
 
   const canClaim = Boolean(
     !claimLoading &&
-      !nftsLoading &&
+      !walletNftsLoading &&
       totalClaimableAmountByAccount &&
       Number(totalClaimableAmountByAccount?.toString()) > 0,
   );

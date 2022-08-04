@@ -95,8 +95,8 @@ export const StreamStakingProvider = ({ children }: Props) => {
       ticketTokenAddress,
       ticketTokenIds,
     },
-    isLoading: { nftsLoading },
-    refetchNfts,
+    isLoading: { walletNftsLoading },
+    refetchWalletNfts,
   } = useStreamContext();
 
   const {
@@ -185,7 +185,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
   });
 
   const canStake = Boolean(
-    !nftsLoading &&
+    !walletNftsLoading &&
       !stakeLoading &&
       !unlockedNftsLoading &&
       unlockedNfts &&
@@ -193,7 +193,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
   );
 
   const canUnstake = Boolean(
-    !nftsLoading &&
+    !walletNftsLoading &&
       !unstakeLoading &&
       !tokenUnlockingTimesLoading &&
       unstakeableNfts &&
@@ -202,15 +202,15 @@ export const StreamStakingProvider = ({ children }: Props) => {
 
   const stake = useCallback(() => {
     return stakeWriteAndWait().then((result) => {
-      return refetchNfts().then(() => result);
+      return refetchWalletNfts().then(() => result);
     });
-  }, [refetchNfts, stakeWriteAndWait]);
+  }, [refetchWalletNfts, stakeWriteAndWait]);
 
   const unstake = useCallback(() => {
     return unstakeWriteAndWait().then((result) => {
-      return refetchNfts().then(() => result);
+      return refetchWalletNfts().then(() => result);
     });
-  }, [refetchNfts, unstakeWriteAndWait]);
+  }, [refetchWalletNfts, unstakeWriteAndWait]);
 
   const value = {
     data: {

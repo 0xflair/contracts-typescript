@@ -12,19 +12,19 @@ export const StreamCommonStatusBar = ({
   children,
 }: Props) => {
   const {
-    error: { nftsError, streamError },
-    isLoading: { nftsLoading },
+    error: { walletNftsError, streamError },
+    isLoading: { walletNftsLoading },
   } = useStreamContext();
 
   return (
     <div className={className}>
-      {nftsLoading && (
+      {walletNftsLoading && (
         <div className="flex items-center gap-2">
           <Spinner /> Loading your NFTs...
         </div>
       )}
       {streamError && <Errors title="streamError" error={streamError} />}
-      {nftsError && <Errors title="nftsError" error={nftsError} />}
+      {walletNftsError && <Errors title="walletNftsError" error={walletNftsError} />}
       {children}
     </div>
   );
