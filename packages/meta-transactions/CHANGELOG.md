@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.2 (2022-08-04)
+
+
+### Bug Fixes
+
+* specify chain for prepare and remove tokens in custody from unlocked array ([b7f4083](https://github.com/0xflair/typescript-sdk/commit/b7f4083292d8da821e027f2f2aad4a68064d9c1e))
+
+
+
+
+
 ## 0.95.1 (2022-08-04)
 
 
