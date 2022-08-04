@@ -43,15 +43,6 @@ export function useSmartContract({
     SmartContract<any>
   >(queryKey, queryFn, {
     enabled: canRequest,
-    onSuccess(data: SmartContract) {
-      const detectingFeatures =
-        !data?.features ||
-        (data.analysisState !== 'succeeded' && data.analysisState !== 'failed');
-
-      if (detectingFeatures) {
-        queryClient.invalidateQueries({ queryKey });
-      }
-    },
   });
 
   useInterval(() => {
@@ -61,6 +52,7 @@ export function useSmartContract({
         result.data.analysisState !== 'failed');
 
     if (detectingFeatures && canRequest) {
+      queryClient.invalidateQueries({ queryKey });
       result.refetch();
     }
   }, 5000);

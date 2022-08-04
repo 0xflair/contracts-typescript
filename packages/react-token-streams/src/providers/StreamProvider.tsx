@@ -13,6 +13,7 @@ import { ReactNode } from 'react';
 import { Chain, useAccount, useBalance } from 'wagmi';
 
 import { useStreamTicketToken, useTokenStream } from '../hooks';
+import { useStreamTokensInCustody } from '../hooks/useStreamTokensInCustody';
 import { TokenStream } from '../types';
 
 type StreamContextValue = {
@@ -23,7 +24,6 @@ type StreamContextValue = {
     chainId?: number;
     chainInfo?: Chain;
     contractAddress?: string;
-    contractVersion?: ContractVersion;
     stream?: TokenStream | null;
     nfts?: NftToken[] | null;
 
@@ -134,6 +134,16 @@ export const StreamProvider = ({
   });
 
   const {
+    data: tokenIdsInCustody,
+    error: tokenIdsInCustodyError,
+    isLoading: tokenIdsInCustodyLoading,
+  } = useStreamTokensInCustody({
+    chainId,
+    contractAddress,
+    ticketTokenAddress,
+  });
+
+  const {
     data: ticketTokenSymbol,
     error: ticketTokenSymbolError,
     isLoading: ticketTokenSymbolLoading,
@@ -165,7 +175,13 @@ export const StreamProvider = ({
     enabled: Boolean(contractAddress),
   });
 
-  const ticketTokenIds = nfts?.map(({ tokenId }) => tokenId);
+  const ticketTokenIds = nfts?.map(({ tokenId }) => tokenId) || [];
+  ticketTokenIds.push(...(tokenIdsInCustody?.map((i) => i.toString()) || []));
+
+  console.log('ticketTokenIds === ', ticketTokenIds);
+  console.log('tokenIdsInCustody === ', tokenIdsInCustody);
+  console.log('tokenIdsInCustodyError === ', tokenIdsInCustodyError);
+  console.log('tokenIdsInCustodyLoading === ', tokenIdsInCustodyLoading);
 
   const value = {
     data: {

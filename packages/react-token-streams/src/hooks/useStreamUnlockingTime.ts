@@ -7,7 +7,7 @@ import { BigNumberish } from 'ethers';
 type ArgsType = [BigNumberish | BigNumberish[] | []];
 
 export const useStreamUnlockingTime = (
-  config: PredefinedReadContractConfig<ArgsType>
+  config: PredefinedReadContractConfig<ArgsType>,
 ) => {
   return useContractRead<BigNumberish[], ArgsType>({
     contractFqn: 'streams/ERC721/extensions/ERC721StakingExtension',

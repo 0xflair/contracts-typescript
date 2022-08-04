@@ -60,7 +60,7 @@ export const StreamClaimingContext =
   React.createContext<StreamClaimingContextValue | null>(null);
 
 type FunctionalChildren = (
-  contextValue: StreamClaimingContextValue
+  contextValue: StreamClaimingContextValue,
 ) => ReactNode | ReactNode[];
 
 type Props = {
@@ -167,7 +167,7 @@ export const StreamClaimingProvider = ({
     !claimLoading &&
       !nftsLoading &&
       totalClaimableAmountByAccount &&
-      Number(totalClaimableAmountByAccount?.toString()) > 0
+      Number(totalClaimableAmountByAccount?.toString()) > 0,
   );
 
   const value = {
@@ -216,7 +216,7 @@ export const StreamClaimingProvider = ({
   return React.createElement(
     StreamClaimingContext.Provider,
     { value },
-    typeof children === 'function' ? children(value) : children
+    typeof children === 'function' ? children(value) : children,
   );
 };
 

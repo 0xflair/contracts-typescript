@@ -112,10 +112,10 @@ export const StreamStakingProvider = ({ children }: Props) => {
   });
 
   const unlockedNfts = nfts?.filter((t) =>
-    unlockedTokenIds.find((u) => u.toString() === t.tokenId),
+    unlockedTokenIds.find((u: any) => u.toString() === t.tokenId),
   );
   const lockedNfts = nfts?.filter(
-    (t) => !unlockedTokenIds.find((u) => u.toString() === t.tokenId),
+    (t) => !unlockedTokenIds.find((u: any) => u.toString() === t.tokenId),
   );
 
   const {

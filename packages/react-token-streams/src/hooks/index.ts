@@ -1,5 +1,6 @@
 export * from './useStreamClaimableAmount';
 export * from './useStreamClaimer';
+export * from './useStreamClaimLockedUntil';
 export * from './useStreamEmissionAmountUntil';
 export * from './useStreamEmissionEnd';
 export * from './useStreamEmissionRate';
@@ -11,6 +12,7 @@ export * from './useStreamRateByToken';
 export * from './useStreamShares';
 export * from './useStreamStaker';
 export * from './useStreamTicketToken';
+export * from './useStreamTokensInCustody';
 export * from './useStreamTotalClaimed';
 export * from './useStreamTotalShares';
 export * from './useStreamTotalStakedDurations';
