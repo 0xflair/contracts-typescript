@@ -85,6 +85,118 @@ const newChains = [
     },
     testnet: true,
   },
+  {
+    id: 250,
+    name: 'Fantom',
+    nativeCurrency: {
+      name: 'FTM',
+      symbol: 'FTM',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://rpc.ankr.com/fantom/',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Etherscan',
+        url: 'https://ftmscan.com/',
+      },
+      default: {
+        name: 'default',
+        url: 'https://ftmscan.com/',
+      },
+    },
+  },
+  {
+    id: 4002,
+    name: 'Fantom Testnet',
+    nativeCurrency: {
+      name: 'FTM',
+      symbol: 'FTM',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://rpc.testnet.fantom.network/',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Etherscan',
+        url: 'https://testnet.ftmscan.com/',
+      },
+      default: {
+        name: 'default',
+        url: 'https://testnet.ftmscan.com/',
+      },
+    },
+    testnet: true,
+  },
+  {
+    id: 1313161554,
+    name: 'Near (Aurora)',
+    nativeCurrency: {
+      name: 'ETH',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://mainnet.aurora.dev',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Etherscan',
+        url: 'https://aurorascan.dev/',
+      },
+      default: {
+        name: 'default',
+        url: 'https://aurorascan.dev/',
+      },
+    },
+  },
+  {
+    id: 1313161555,
+    name: 'Near (Aurora) Testnet',
+    nativeCurrency: {
+      name: 'ETH',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://testnet.aurora.dev/',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Etherscan',
+        url: 'https://testnet.aurorascan.dev/',
+      },
+      default: {
+        name: 'default',
+        url: 'https://testnet.aurorascan.dev/',
+      },
+    },
+    testnet: true,
+  },
+  {
+    id: 245022926,
+    name: 'Solana (Neon Devnet)',
+    nativeCurrency: {
+      name: 'NEON',
+      symbol: 'NEON',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://proxy.devnet.neonlabs.org/solana',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Etherscan',
+        url: 'https://neonscan.org/',
+      },
+      default: {
+        name: 'default',
+        url: 'https://neonscan.org/',
+      },
+    },
+  },
 ];
 
 export const FLAIR_CHAINS: Chain[] = [...WagmiChains, ...newChains];
