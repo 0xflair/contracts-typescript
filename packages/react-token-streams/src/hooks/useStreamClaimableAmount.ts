@@ -21,7 +21,7 @@ export const useStreamClaimableAmount = ({
     contractFqn: 'streams/ERC721/base/ERC721MultiTokenStream',
     functionName: 'streamClaimableAmount(uint256[],address)',
     args: ticketTokenIds ? [ticketTokenIds, claimToken] : [[], claimToken],
-    enabled: ticketTokenIds && ticketTokenIds.length > 0 && enabled,
+    enabled: Boolean(ticketTokenIds && ticketTokenIds.length > 0 && enabled),
     ...restOfConfig,
   });
 };

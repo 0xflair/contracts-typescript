@@ -39,6 +39,7 @@ export const useStreamStakerPrepare = ({
   });
 
   const erc721Approver = useERC721Approver({
+    chainId,
     contractAddress: ticketTokenAddress,
     operator: streamContractAddress,
     owner: account?.address,

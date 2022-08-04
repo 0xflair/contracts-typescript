@@ -4,7 +4,7 @@ import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish } from 'ethers';
 import * as React from 'react';
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import { useSigner } from 'wagmi';
 
 import { useStreamStaker } from '../hooks/useStreamStaker';
@@ -94,6 +94,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
       nfts,
       ticketTokenAddress,
       ticketTokenIds,
+      tokenIdsInCustody,
     },
     isLoading: { walletNftsLoading },
     refetchWalletNfts,
@@ -111,11 +112,21 @@ export const StreamStakingProvider = ({ children }: Props) => {
     watch: true,
   });
 
-  const unlockedNfts = nfts?.filter((t) =>
-    unlockedTokenIds.find((u: any) => u.toString() === t.tokenId),
+  const unlockedNfts = useMemo(
+    () =>
+      nfts?.filter(
+        (t) =>
+          unlockedTokenIds.find((u: any) => u.toString() === t.tokenId) &&
+          !tokenIdsInCustody?.find((id: any) => id.toString() === t.tokenId),
+      ),
+    [nfts, tokenIdsInCustody, unlockedTokenIds],
   );
-  const lockedNfts = nfts?.filter(
-    (t) => !unlockedTokenIds.find((u: any) => u.toString() === t.tokenId),
+  const lockedNfts = useMemo(
+    () =>
+      nfts?.filter(
+        (t) => !unlockedTokenIds.find((id: any) => id.toString() === t.tokenId),
+      ),
+    [nfts, unlockedTokenIds],
   );
 
   const {
@@ -129,17 +140,26 @@ export const StreamStakingProvider = ({ children }: Props) => {
   });
 
   const now = Math.floor(+new Date() / 1000);
-  const stakedNfts =
-    (tokenUnlockingTimes
-      ?.map((t, i) => (Number(t.toString()) > 0 ? nfts?.[i] : null))
-      .filter((i) => i !== null) as NftToken[]) || [];
+  const stakedNfts = useMemo(
+    () =>
+      (tokenUnlockingTimes
+        ?.map((t, i) => (Number(t.toString()) > 0 ? nfts?.[i] : null))
+        .filter((i) => i !== null) as NftToken[]) || [],
+    [nfts, tokenUnlockingTimes],
+  );
 
-  const unstakeableNfts = (tokenUnlockingTimes
-    ?.map((t, i) => (Number(t.toString()) < now ? nfts?.[i] : null))
-    .filter((t) => t !== null)
-    .filter((t) =>
-      stakedNfts.find((s) => s.tokenId.toString() === t?.tokenId.toString()),
-    ) || []) as NftToken[];
+  const unstakeableNfts = useMemo(
+    () =>
+      (tokenUnlockingTimes
+        ?.map((t, i) => (Number(t.toString()) < now ? nfts?.[i] : null))
+        .filter((t) => t !== null)
+        .filter((t) =>
+          stakedNfts.find(
+            (s) => s.tokenId.toString() === t?.tokenId.toString(),
+          ),
+        ) || []) as NftToken[],
+    [nfts, now, stakedNfts, tokenUnlockingTimes],
+  );
 
   const {
     data: {
