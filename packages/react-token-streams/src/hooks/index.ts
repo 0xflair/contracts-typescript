@@ -6,6 +6,8 @@ export * from './useStreamEmissionEnd';
 export * from './useStreamEmissionRate';
 export * from './useStreamEmissionStart';
 export * from './useStreamEmissionTimeUnit';
+export * from './useStreamMinStakingDuration';
+export * from './useStreamMaxStakingTotalDuration';
 export * from './useStreamReleasedAmountUntil';
 export * from './useStreamRewardAmountByToken';
 export * from './useStreamRateByToken';
