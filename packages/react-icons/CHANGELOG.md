@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.93.0 (2022-08-04)
+
+
+### Features
+
+* bump up the contracts registry ([0fda302](https://github.com/0xflair/typescript-sdk/commit/0fda3021a58847edbd31b90d286b859739c12ff8))
+
+
+
+
+
 ## 0.92.7 (2022-08-04)
 
 **Note:** Version bump only for package @0xflair/react-icons
