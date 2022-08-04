@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.95.0 (2022-08-04)
+
+
+### Features
+
+* add staking duration hooks ([f08465d](https://github.com/0xflair/typescript-sdk/commit/f08465dc3082e79652e3f2f0261d4da9c131fdd1))
+
+
+
+
+
 # 0.94.0 (2022-08-04)
 
 
