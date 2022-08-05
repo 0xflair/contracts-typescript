@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.5 (2022-08-05)
+
+
+### Bug Fixes
+
+* add key for chain view component ([904c12f](https://github.com/0xflair/typescript-sdk/commit/904c12fe9688b5aeaba337e03119069a9dbb3ab3))
+
+
+
+
+
 ## 0.95.4 (2022-08-04)
 
 
