@@ -1,4 +1,3 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
 import { Environment, useChainInfo } from '@0xflair/react-common';
 import {
   NftToken,
@@ -38,22 +37,11 @@ type StreamContextValue = {
     ticketTokenIds?: BigNumberish[];
   };
 
-  isLoading: {
-    // Resources
-    streamLoading?: boolean;
-    walletNftsLoading?: boolean;
-
-    // On-chain values
-    ticketTokenAddressLoading?: boolean;
-    ticketTokenSymbolLoading?: boolean;
-    streamNativeBalanceLoading?: boolean;
-    streamERC20BalancesLoading?: boolean;
-  };
-
   error: {
     // Resources
     streamError?: string | Error | null;
     walletNftsError?: string | Error | null;
+    tokenIdsInCustodyError?: string | Error | null;
 
     // On-chain values
     ticketTokenAddressError?: string | Error | null;
@@ -62,6 +50,20 @@ type StreamContextValue = {
     streamERC20BalancesError?: string | Error | null;
   };
 
+  isLoading: {
+    // Resources
+    streamLoading?: boolean;
+    walletNftsLoading?: boolean;
+    tokenIdsInCustodyLoading?: boolean;
+
+    // On-chain values
+    ticketTokenAddressLoading?: boolean;
+    ticketTokenSymbolLoading?: boolean;
+    streamNativeBalanceLoading?: boolean;
+    streamERC20BalancesLoading?: boolean;
+  };
+
+  refetchTokensInCustody: () => Promise<any>;
   refetchWalletNfts: () => Promise<any>;
   refetchStreamERC20Balances: () => Promise<any>;
 };
@@ -138,6 +140,7 @@ export const StreamProvider = ({
     data: tokenIdsInCustody,
     error: tokenIdsInCustodyError,
     isLoading: tokenIdsInCustodyLoading,
+    refetchTokensInCustody,
   } = useStreamTokensInCustody({
     chainId,
     contractAddress,
@@ -222,19 +225,6 @@ export const StreamProvider = ({
       ticketTokenIds,
     },
 
-    isLoading: {
-      // Resources
-      streamLoading,
-      walletNftsLoading,
-
-      // On-chain values
-      ticketTokenAddressLoading,
-      ticketTokenSymbolLoading,
-      streamNativeBalanceLoading,
-      streamERC20BalancesLoading,
-      tokenIdsInCustodyLoading,
-    },
-
     error: {
       // Resources
       streamError,
@@ -248,6 +238,20 @@ export const StreamProvider = ({
       tokenIdsInCustodyError,
     },
 
+    isLoading: {
+      // Resources
+      streamLoading,
+      walletNftsLoading,
+
+      // On-chain values
+      ticketTokenAddressLoading,
+      ticketTokenSymbolLoading,
+      streamNativeBalanceLoading,
+      streamERC20BalancesLoading,
+      tokenIdsInCustodyLoading,
+    },
+
+    refetchTokensInCustody,
     refetchWalletNfts,
     refetchStreamERC20Balances,
   };

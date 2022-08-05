@@ -96,8 +96,9 @@ export const StreamStakingProvider = ({ children }: Props) => {
       ticketTokenIds,
       tokenIdsInCustody,
     },
-    isLoading: { walletNftsLoading },
+    isLoading: { walletNftsLoading, tokenIdsInCustodyLoading },
     refetchWalletNfts,
+    refetchTokensInCustody,
   } = useStreamContext();
 
   const {
@@ -206,6 +207,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
 
   const canStake = Boolean(
     !walletNftsLoading &&
+      !tokenIdsInCustodyLoading &&
       !stakeLoading &&
       !unlockedNftsLoading &&
       unlockedNfts &&
@@ -214,6 +216,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
 
   const canUnstake = Boolean(
     !walletNftsLoading &&
+      !tokenIdsInCustodyLoading &&
       !unstakeLoading &&
       !tokenUnlockingTimesLoading &&
       unstakeableNfts &&
@@ -221,16 +224,20 @@ export const StreamStakingProvider = ({ children }: Props) => {
   );
 
   const stake = useCallback(() => {
-    return stakeWriteAndWait().then((result) => {
-      return refetchWalletNfts().then(() => result);
-    });
-  }, [refetchWalletNfts, stakeWriteAndWait]);
+    return stakeWriteAndWait().then((result) =>
+      refetchWalletNfts().then(() =>
+        refetchTokensInCustody().then(() => result),
+      ),
+    );
+  }, [refetchTokensInCustody, refetchWalletNfts, stakeWriteAndWait]);
 
   const unstake = useCallback(() => {
-    return unstakeWriteAndWait().then((result) => {
-      return refetchWalletNfts().then(() => result);
-    });
-  }, [refetchWalletNfts, unstakeWriteAndWait]);
+    return unstakeWriteAndWait().then((result) =>
+      refetchWalletNfts().then(() =>
+        refetchTokensInCustody().then(() => result),
+      ),
+    );
+  }, [refetchTokensInCustody, refetchWalletNfts, unstakeWriteAndWait]);
 
   const value = {
     data: {
@@ -257,6 +264,17 @@ export const StreamStakingProvider = ({ children }: Props) => {
       unstakeData,
     },
 
+    error: {
+      // On-chain values
+      unlockedNftsError,
+      tokenUnlockingTimesError,
+
+      // Transaction
+      prepareError,
+      stakeError,
+      unstakeError,
+    },
+
     isLoading: {
       // On-chain values
       unlockedNftsLoading,
@@ -268,17 +286,6 @@ export const StreamStakingProvider = ({ children }: Props) => {
       prepareLoading,
       stakeLoading,
       unstakeLoading,
-    },
-
-    error: {
-      // On-chain values
-      unlockedNftsError,
-      tokenUnlockingTimesError,
-
-      // Transaction
-      prepareError,
-      stakeError,
-      unstakeError,
     },
 
     prepare,
