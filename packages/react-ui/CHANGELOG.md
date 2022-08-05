@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.6 (2022-08-05)
+
+
+### Bug Fixes
+
+* avoid fetching smart contract multiple times ([b5f9eba](https://github.com/0xflair/typescript-sdk/commit/b5f9eba762a1cdbe135e5d4694f5e5be74bfc649))
+
+
+
+
+
 ## 0.95.5 (2022-08-05)
 
 
