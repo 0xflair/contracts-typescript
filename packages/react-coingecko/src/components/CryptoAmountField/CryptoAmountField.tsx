@@ -37,15 +37,17 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
       <label className="block text-sm font-medium text-gray-700">{label}</label>
       <div className="mt-1 relative rounded-md">
         <input
-          type="text"
+          type="number"
           className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"
           placeholder="0.00"
           value={etherValue}
           onChange={(e) => {
+            if (Number(e.target.value) == NaN) return;
+
             setEtherValue(e.target.value);
             onChange &&
               onChange(
-                utils.formatUnits(utils.parseEther(e.target.value), unit)
+                utils.formatUnits(utils.parseEther(e.target.value), unit),
               );
           }}
         />
