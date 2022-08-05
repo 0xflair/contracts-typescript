@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.9 (2022-08-05)
+
+
+### Bug Fixes
+
+* default to 0 value ([959f05c](https://github.com/0xflair/typescript-sdk/commit/959f05ce9294ea040535371c35b11b143f14a70a))
+
+
+
+
+
 ## 0.95.8 (2022-08-05)
 
 
