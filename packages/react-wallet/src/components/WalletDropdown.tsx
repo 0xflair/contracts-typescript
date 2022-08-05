@@ -135,7 +135,7 @@ export const WalletDropdown = ({
                 target={'_blank'}
                 className={classNames(
                   active ? 'bg-gray-100' : '',
-                  'block px-4 py-2 text-sm text-gray-700'
+                  'block px-4 py-2 text-sm text-gray-700',
                 )}
               >
                 Buy {activeChain?.nativeCurrency?.symbol || 'Crypto'}
@@ -147,7 +147,7 @@ export const WalletDropdown = ({
               <DisconnectButton
                 className={classNames(
                   active ? 'bg-gray-100' : '',
-                  'block px-4 py-2 text-sm text-gray-700 w-full text-left'
+                  'block px-4 py-2 text-sm text-gray-700 w-full text-left',
                 )}
               />
             )}
