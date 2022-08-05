@@ -12,6 +12,8 @@ export type CryptoAmountFieldProps = {
   value: string | BigNumberish;
   unit?: CryptoUnits;
   symbol?: CryptoSymbol;
+  min?: number;
+  max?: number;
   onChange?: (value: string) => void;
 };
 
@@ -22,6 +24,8 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
     value,
     unit = CryptoUnits.ETHER,
     symbol,
+    min,
+    max,
     onChange,
   } = props;
 
@@ -41,6 +45,8 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
           className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"
           placeholder="0.00"
           value={etherValue}
+          min={min || 0}
+          max={max || Infinity}
           onChange={(e) => {
             if (Number(e.target.value) == NaN) return;
 
