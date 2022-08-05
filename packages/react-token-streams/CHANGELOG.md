@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.7 (2022-08-05)
+
+
+### Bug Fixes
+
+* refetch tokens in custody after staking ([6edc5d1](https://github.com/0xflair/typescript-sdk/commit/6edc5d1f606a792a156049ee063c645c4c725b31))
+
+
+
+
+
 ## 0.95.6 (2022-08-05)
 
 
