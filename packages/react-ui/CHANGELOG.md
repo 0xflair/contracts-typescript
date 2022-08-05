@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.8 (2022-08-05)
+
+
+### Bug Fixes
+
+* avoid failing if letters are used in price field ([23a31b8](https://github.com/0xflair/typescript-sdk/commit/23a31b8424236104963bf111d679ff6e7909f190))
+
+
+
+
+
 ## 0.95.7 (2022-08-05)
 
 
