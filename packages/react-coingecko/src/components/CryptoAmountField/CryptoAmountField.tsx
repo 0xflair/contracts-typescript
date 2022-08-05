@@ -53,7 +53,10 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
             setEtherValue(e.target.value);
             onChange &&
               onChange(
-                utils.formatUnits(utils.parseEther(e.target.value), unit),
+                utils.formatUnits(
+                  utils.parseEther(e.target.value || '0'),
+                  unit,
+                ),
               );
           }}
         />
