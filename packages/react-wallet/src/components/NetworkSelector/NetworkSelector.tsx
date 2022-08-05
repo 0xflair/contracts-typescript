@@ -121,7 +121,7 @@ export const NetworkSelector = (props: Props) => {
               <Listbox.Options className="absolute z-20 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                 <div>
                   {categorizedChains.mainnet.map((chain) => {
-                    return <ChainView chain={chain} />;
+                    return <ChainView key={chain.id} chain={chain} />;
                   })}
                 </div>
                 <div className="relative py-2">
@@ -139,7 +139,7 @@ export const NetworkSelector = (props: Props) => {
                 </div>
                 <div className="">
                   {categorizedChains.testnet.map((chain) => {
-                    return <ChainView chain={chain} />;
+                    return <ChainView key={chain.id} chain={chain} />;
                   })}
                 </div>
               </Listbox.Options>
