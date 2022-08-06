@@ -19,7 +19,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     symbol: 'AVAX',
     name: 'AVAX',
     icon: 'AVAX',
-    coinGeckoId: 'avalanche',
+    coinGeckoId: 'avalanche-2',
   },
   {
     symbol: 'NEON',
@@ -38,5 +38,11 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     name: 'FTM',
     icon: 'FTM',
     coinGeckoId: 'fantom',
+  },
+  {
+    symbol: 'EVMOS',
+    name: 'EVMOS',
+    icon: 'EVMOS',
+    coinGeckoId: 'evmos',
   },
 ];

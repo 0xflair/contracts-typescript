@@ -198,6 +198,51 @@ const newChains = [
     },
     testnet: true,
   },
+  {
+    id: 9000,
+    name: 'Evmos Testnet',
+    nativeCurrency: {
+      name: 'tEVMOS',
+      symbol: 'tEVMOS',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://eth.bd.evmos.dev:8545',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Etherscan',
+        url: 'https://evm.evmos.dev',
+      },
+      default: {
+        name: 'default',
+        url: 'https://evm.evmos.dev',
+      },
+    },
+    testnet: true,
+  },
+  {
+    id: 9001,
+    name: 'Evmos Mainnet',
+    nativeCurrency: {
+      name: 'EVMOS',
+      symbol: 'EVMOS',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://eth.bd.evmos.org:8545',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Etherscan',
+        url: 'https://evm.evmos.org',
+      },
+      default: {
+        name: 'default',
+        url: 'https://evm.evmos.org',
+      },
+    },
+  },
 ];
 
 export const FLAIR_CHAINS: Chain[] = [...WagmiChains, ...newChains];
