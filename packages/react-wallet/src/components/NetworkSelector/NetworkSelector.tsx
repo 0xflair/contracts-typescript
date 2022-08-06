@@ -1,9 +1,8 @@
+import { FLAIR_CHAINS } from '@0xflair/react-common/src/constants/chains';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';
 import { Chain, useNetwork } from 'wagmi';
-
-import { FLAIR_CHAINS } from '../../constants/chains';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');

@@ -1,8 +1,8 @@
+import { FLAIR_CHAINS } from '@0xflair/react-common/src/constants/chains';
 import { ExclamationIcon, LinkIcon, XCircleIcon } from '@heroicons/react/solid';
 import React, { ReactNode } from 'react';
 import { useNetwork } from 'wagmi';
 
-import { FLAIR_CHAINS } from '../../constants/chains';
 import { ConnectButton } from '../ConnectButton/ConnectButton';
 
 type Props = {

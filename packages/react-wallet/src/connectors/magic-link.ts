@@ -1,6 +1,7 @@
+import { FLAIR_CHAINS } from '@0xflair/react-common';
 import { MagicConnector } from '@everipedia/wagmi-magic-connector';
 import { UserRejectedRequestError } from '@wagmi/core';
-import { allChains, Chain } from 'wagmi';
+import { Chain } from 'wagmi';
 
 export class MagicLinkConnector extends MagicConnector {
   currentChain!: Chain;
@@ -78,7 +79,7 @@ export class MagicLinkConnector extends MagicConnector {
   }
 
   private updateMagicOptionsForChain(chainId: number): Chain {
-    const chains = [...this.chains, ...allChains];
+    const chains = [...this.chains, ...FLAIR_CHAINS];
     const selectedChain = chains.find((x) => x.id === chainId) ?? {
       id: chainId,
       name: `Chain ${chainId}`,
