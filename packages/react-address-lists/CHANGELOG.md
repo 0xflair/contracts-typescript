@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.13 (2022-08-06)
+
+
+### Bug Fixes
+
+* hide the price if no price info ([51e31bc](https://github.com/0xflair/typescript-sdk/commit/51e31bcad3ce1b3ee593c25b57c29e56fa3c69ec))
+
+
+
+
+
 ## 0.95.12 (2022-08-06)
 
 
