@@ -46,7 +46,7 @@ export const CryptoValue = (props: Props) => {
     <>
       {Number(Number(etherValue).toFixed(fractions)).toLocaleString()}{' '}
       {data.info?.icon || symbol}
-      {showPrice && (
+      {showPrice && data.price && Number(data.price) > 0 ? (
         <>
           {' '}
           (~
@@ -58,7 +58,7 @@ export const CryptoValue = (props: Props) => {
           />{' '}
           USD)
         </>
-      )}
+      ) : null}
     </>
   );
 };
