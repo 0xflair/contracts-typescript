@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.96.0 (2022-08-06)
+
+
+### Features
+
+* add evmos and correct avalanche code ([2c23245](https://github.com/0xflair/typescript-sdk/commit/2c2324506762cafb827b7b92b02c1f63afc609ae))
+
+
+
+
+
 ## 0.95.13 (2022-08-06)
 
 
