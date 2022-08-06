@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.11 (2022-08-06)
+
+
+### Bug Fixes
+
+* read flair chains in chain info hook ([a91436c](https://github.com/0xflair/typescript-sdk/commit/a91436cb27ca80ab507d82572b9eab108d8cc9f5))
+
+
+
+
+
 ## 0.95.10 (2022-08-06)
 
 
