@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.95.10 (2022-08-06)
+
+
+### Bug Fixes
+
+* deploy okc factories + various chain issues ([8dd564c](https://github.com/0xflair/typescript-sdk/commit/8dd564c33ec98162f98ca7576badb30371bc6753))
+
+
+
+
+
 ## 0.95.9 (2022-08-05)
 
 
