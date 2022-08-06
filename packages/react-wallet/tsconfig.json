@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "../react-common/src/constants/chains.ts"]
+  "include": ["src"]
 }

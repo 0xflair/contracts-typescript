@@ -1,4 +1,4 @@
-import { FLAIR_CHAINS } from '@0xflair/react-common/src/constants/chains';
+import { FLAIR_CHAINS } from '@0xflair/react-common';
 import { ExclamationIcon, LinkIcon, XCircleIcon } from '@heroicons/react/solid';
 import React, { ReactNode } from 'react';
 import { useNetwork } from 'wagmi';
