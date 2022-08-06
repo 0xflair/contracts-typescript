@@ -15,4 +15,28 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     icon: 'MATIC',
     coinGeckoId: 'matic-network',
   },
+  {
+    symbol: 'AVAX',
+    name: 'AVAX',
+    icon: 'AVAX',
+    coinGeckoId: 'avalanche',
+  },
+  {
+    symbol: 'NEON',
+    name: 'NEON',
+    icon: 'NEON',
+    coinGeckoId: 'solana', // TODO change to neon labs
+  },
+  {
+    symbol: 'NEAR',
+    name: 'NEAR',
+    icon: 'NEAR',
+    coinGeckoId: 'near',
+  },
+  {
+    symbol: 'FTM',
+    name: 'FTM',
+    icon: 'FTM',
+    coinGeckoId: 'fantom',
+  },
 ];

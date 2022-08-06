@@ -13,11 +13,11 @@ const newChains = [
     blockExplorers: {
       etherscan: {
         name: 'Etherscan',
-        url: 'https://www.oklink.com/okc/',
+        url: 'https://www.oklink.com/en/okc',
       },
       default: {
         name: 'default',
-        url: 'https://www.oklink.com/okc/',
+        url: 'https://www.oklink.com/en/okc',
       },
     },
   },
@@ -31,11 +31,11 @@ const newChains = [
     blockExplorers: {
       etherscan: {
         name: 'Etherscan',
-        url: 'https://www.oklink.com/okc-test/',
+        url: 'https://www.oklink.com/en/okc-test',
       },
       default: {
         name: 'default',
-        url: 'https://www.oklink.com/okc-test/',
+        url: 'https://www.oklink.com/en/okc-test',
       },
     },
     testnet: true,
@@ -54,11 +54,11 @@ const newChains = [
     blockExplorers: {
       etherscan: {
         name: 'Etherscan',
-        url: 'https://snowtrace.io/',
+        url: 'https://snowtrace.io',
       },
       default: {
         name: 'default',
-        url: 'https://snowtrace.io/',
+        url: 'https://snowtrace.io',
       },
     },
   },
@@ -76,11 +76,11 @@ const newChains = [
     blockExplorers: {
       etherscan: {
         name: 'Etherscan',
-        url: 'https://testnet.snowtrace.io/',
+        url: 'https://testnet.snowtrace.io',
       },
       default: {
         name: 'default',
-        url: 'https://testnet.snowtrace.io/',
+        url: 'https://testnet.snowtrace.io',
       },
     },
     testnet: true,
@@ -99,11 +99,11 @@ const newChains = [
     blockExplorers: {
       etherscan: {
         name: 'Etherscan',
-        url: 'https://ftmscan.com/',
+        url: 'https://ftmscan.com',
       },
       default: {
         name: 'default',
-        url: 'https://ftmscan.com/',
+        url: 'https://ftmscan.com',
       },
     },
   },
@@ -121,11 +121,11 @@ const newChains = [
     blockExplorers: {
       etherscan: {
         name: 'Etherscan',
-        url: 'https://testnet.ftmscan.com/',
+        url: 'https://testnet.ftmscan.com',
       },
       default: {
         name: 'default',
-        url: 'https://testnet.ftmscan.com/',
+        url: 'https://testnet.ftmscan.com',
       },
     },
     testnet: true,
@@ -144,11 +144,11 @@ const newChains = [
     blockExplorers: {
       etherscan: {
         name: 'Etherscan',
-        url: 'https://aurorascan.dev/',
+        url: 'https://aurorascan.dev',
       },
       default: {
         name: 'default',
-        url: 'https://aurorascan.dev/',
+        url: 'https://aurorascan.dev',
       },
     },
   },
@@ -166,11 +166,11 @@ const newChains = [
     blockExplorers: {
       etherscan: {
         name: 'Etherscan',
-        url: 'https://testnet.aurorascan.dev/',
+        url: 'https://testnet.aurorascan.dev',
       },
       default: {
         name: 'default',
-        url: 'https://testnet.aurorascan.dev/',
+        url: 'https://testnet.aurorascan.dev',
       },
     },
     testnet: true,
@@ -189,13 +189,14 @@ const newChains = [
     blockExplorers: {
       etherscan: {
         name: 'Etherscan',
-        url: 'https://neonscan.org/',
+        url: 'https://neonscan.org',
       },
       default: {
         name: 'default',
-        url: 'https://neonscan.org/',
+        url: 'https://neonscan.org',
       },
     },
+    testnet: true,
   },
 ];
 

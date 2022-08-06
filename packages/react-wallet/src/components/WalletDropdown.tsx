@@ -91,7 +91,8 @@ export const WalletDropdown = ({
           </span>
           {balance?.value ? (
             <span className="text-gray-500 truncate">
-              {Number(balance.formatted).toFixed(4)} {balance.symbol}
+              {Number(balance.formatted).toFixed(4)}{' '}
+              {activeChain?.nativeCurrency?.symbol || balance.symbol}
             </span>
           ) : null}
           <ChevronDownIcon
@@ -120,7 +121,9 @@ export const WalletDropdown = ({
                 <p className="text-xs capitalize text-gray-400 mt-3">Balance</p>
                 <p className="text-sm font-medium text-gray-900">
                   <CryptoValue
-                    symbol={balance.symbol}
+                    symbol={
+                      activeChain?.nativeCurrency?.symbol || balance.symbol
+                    }
                     unit={CryptoUnits.WEI}
                     value={balance.value}
                   />
