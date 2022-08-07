@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.96.2 (2022-08-07)
+
+
+### Bug Fixes
+
+* multiplexing of smart contract information ([4e421ab](https://github.com/0xflair/typescript-sdk/commit/4e421ab72efdece97a639924197443186d6ebda3))
+
+
+
+
+
 ## 0.96.1 (2022-08-07)
 
 
