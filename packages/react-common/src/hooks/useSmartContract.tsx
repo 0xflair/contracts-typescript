@@ -14,7 +14,7 @@ type Config = {
   contractAddress?: string;
 };
 
-let requestPromise: any;
+let requestPromise: any = {};
 
 export function useSmartContract({
   env = Environment.PROD,
@@ -33,12 +33,12 @@ export function useSmartContract({
   ];
 
   const queryFn = async () => {
-    if (!requestPromise) {
-      requestPromise = axios.get<SmartContract>(url);
+    if (!requestPromise[url]) {
+      requestPromise[url] = axios.get<SmartContract>(url);
     }
 
-    const response = await requestPromise;
-    requestPromise = null;
+    const response = await requestPromise[url];
+    requestPromise[url] = null;
 
     return response.data;
   };

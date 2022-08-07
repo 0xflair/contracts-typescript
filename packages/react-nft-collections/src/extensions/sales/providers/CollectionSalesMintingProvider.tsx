@@ -151,6 +151,11 @@ export const CollectionSalesMintingProvider = ({
   );
 
   useEffect(() => {
+    if (!autoDetectEligibleTier || !account?.address) {
+      setIsAutoDetectingTier(false);
+      return;
+    }
+
     if (
       !autoDetectEligibleTier ||
       tiersLoading ||
@@ -187,6 +192,7 @@ export const CollectionSalesMintingProvider = ({
     tiersLoading,
     tiers,
     isAutoDetectingTier,
+    account?.address,
   ]);
 
   const value = {

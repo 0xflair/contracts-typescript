@@ -16,8 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src",
-    "../../../dashboard/src/features/token-streams/__MOVE_TO_SDK/src/components/StreamEmissionAmount.tsx"
-  ]
+  "include": ["src"]
 }

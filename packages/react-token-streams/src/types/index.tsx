@@ -1,7 +1,7 @@
 import { ContractFqn, ContractVersion } from '@0xflair/contracts-registry';
 
 export type TokenStream<
-  TConfig extends Record<string, any> = Record<string, any>
+  TConfig extends Record<string, any> = Record<string, any>,
 > = {
   _id: string;
 
