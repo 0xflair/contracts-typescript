@@ -1,3 +1,4 @@
+import { useHasAnyOfFeatures } from '@0xflair/react-common';
 import { NftToken } from '@0xflair/react-data-query';
 import { useFilterUnlockedTokens } from '@0xflair/react-nft-collections';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
@@ -101,6 +102,17 @@ export const StreamStakingProvider = ({ children }: Props) => {
     refetchTokensInCustody,
   } = useStreamContext();
 
+  const { data: hasLockableExtension } = useHasAnyOfFeatures({
+    env,
+    chainId,
+    contractAddress: ticketTokenAddress,
+    tags: [
+      'erc721_lockable_extension',
+      'lock_single_token',
+      'unlock_single_token',
+    ],
+  });
+
   const {
     data: unlockedTokenIds,
     error: unlockedNftsError,
@@ -110,10 +122,16 @@ export const StreamStakingProvider = ({ children }: Props) => {
     contractAddress: ticketTokenAddress as string,
     args: [ticketTokenIds || []],
     enabled: Boolean(
-      ticketTokenAddress && ticketTokenIds && ticketTokenIds.length > 0,
+      hasLockableExtension &&
+        ticketTokenAddress &&
+        ticketTokenIds &&
+        ticketTokenIds.length > 0,
     ),
     watch: Boolean(
-      ticketTokenAddress && ticketTokenIds && ticketTokenIds.length > 0,
+      hasLockableExtension &&
+        ticketTokenAddress &&
+        ticketTokenIds &&
+        ticketTokenIds.length > 0,
     ),
   });
 

@@ -243,6 +243,50 @@ const newChains = [
       },
     },
   },
+  {
+    id: 1284,
+    name: 'Moonbeam',
+    nativeCurrency: {
+      name: 'GLMR',
+      symbol: 'GLMR',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://rpc.api.moonbeam.network',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Etherscan',
+        url: 'https://moonscan.io',
+      },
+      default: {
+        name: 'default',
+        url: 'https://moonscan.io',
+      },
+    },
+  },
+  {
+    id: 1285,
+    name: 'Moonriver',
+    nativeCurrency: {
+      name: 'MOVR',
+      symbol: 'MOVR',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://rpc.api.moonriver.moonbeam.network',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Etherscan',
+        url: 'https://moonriver.moonscan.io',
+      },
+      default: {
+        name: 'default',
+        url: 'https://moonriver.moonscan.io',
+      },
+    },
+  },
 ];
 
 export const FLAIR_CHAINS: Chain[] = [...WagmiChains, ...newChains];

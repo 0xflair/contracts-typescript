@@ -45,4 +45,16 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     icon: 'EVMOS',
     coinGeckoId: 'evmos',
   },
+  {
+    symbol: 'GLMR',
+    name: 'GLMR',
+    icon: 'GLMR',
+    coinGeckoId: 'moonbeam',
+  },
+  {
+    symbol: 'MOVR',
+    name: 'MOVR',
+    icon: 'MOVR',
+    coinGeckoId: 'moonriver',
+  },
 ];
