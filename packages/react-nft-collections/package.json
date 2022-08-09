@@ -36,6 +36,7 @@
   "peerDependencies": {
     "@0xflair/common": "0.*",
     "@0xflair/contracts-registry": "0.*",
+    "@0xflair/evm-contracts": "1.*",
     "@0xflair/ipfs": "0.*",
     "@0xflair/react-address-lists": "0.*",
     "@0xflair/react-coingecko": "0.*",
@@ -54,6 +55,7 @@
   "dependencies": {
     "@0xflair/common": "^0.97.0",
     "@0xflair/contracts-registry": "^0.97.0",
+    "@0xflair/evm-contracts": "^1.19.9",
     "@0xflair/ipfs": "^0.97.0",
     "@0xflair/react-address-lists": "^0.97.0",
     "@0xflair/react-coingecko": "^0.97.0",

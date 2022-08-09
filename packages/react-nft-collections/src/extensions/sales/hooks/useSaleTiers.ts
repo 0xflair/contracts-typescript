@@ -1,5 +1,6 @@
 import { Environment } from '@0xflair/common';
 import { loadContract } from '@0xflair/contracts-registry';
+import { ERC721TieringExtension__factory } from '@0xflair/evm-contracts';
 import {
   PredefinedReadContractConfig,
   useContractRead,
@@ -8,6 +9,7 @@ import {
 import { readContract } from '@wagmi/core';
 import { BigNumberish } from 'ethers';
 import { useCallback, useMemo, useState } from 'react';
+import { useProvider } from 'wagmi';
 
 import { Tier } from '../types';
 
@@ -48,31 +50,30 @@ export const useSaleTiers = (config: Config) => {
     tags: ['erc721_tiering_extension', 'mint_by_tier_with_allowance_and_proof'],
   });
 
+  const provider = useProvider({
+    chainId: config.chainId,
+  });
+  const contract = useMemo(() => {
+    if (!config.contractAddress || !provider) {
+      return;
+    }
+    return ERC721TieringExtension__factory.connect(
+      config.contractAddress,
+      provider,
+    );
+  }, [config.contractAddress, provider]);
+
   const fetchTierById = useCallback(
     async (tierId: BigNumberish) => {
-      if (!config.contractAddress) {
+      if (!contract) {
         return;
       }
 
-      const contractDefinition = loadContract(
-        'collections/ERC721/extensions/ERC721TieringExtension',
-        config.contractVersion,
-      );
-      const result = await readContract(
-        {
-          addressOrName: config.contractAddress,
-          contractInterface: contractDefinition.artifact.abi,
-        },
-        'tiers',
-        {
-          args: [tierId],
-          chainId: config.chainId,
-        },
-      );
+      const result = await contract.tiers(tierId);
 
-      return { ...(result as unknown as Tier), isSavedOnChain: true };
+      return { ...(result as Tier), isSavedOnChain: true };
     },
-    [config.chainId, config.contractAddress, config.contractVersion],
+    [contract],
   );
 
   const refetchTiers = useCallback(async () => {
