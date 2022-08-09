@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.97.0 (2022-08-09)
+
+
+### Features
+
+* get provider from hooks ([f2be6b4](https://github.com/0xflair/typescript-sdk/commit/f2be6b4c997066e0ebe84c03a531d93b609ba09b))
+
+
+
+
+
 ## 0.96.4 (2022-08-09)
 
 
