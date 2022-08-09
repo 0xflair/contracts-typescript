@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.97.4 (2022-08-09)
+
+
+### Bug Fixes
+
+* only fetch unlocked if supports lockable extension ([a64cbf2](https://github.com/0xflair/typescript-sdk/commit/a64cbf2720ac7ceabbf7c6c5a3a4ff0ae8f70ecf))
+
+
+
+
+
 ## 0.97.3 (2022-08-09)
 
 
