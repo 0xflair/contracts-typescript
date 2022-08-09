@@ -6,7 +6,7 @@ import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish } from 'ethers';
 import * as React from 'react';
 import { ReactNode, useCallback, useMemo } from 'react';
-import { useSigner } from 'wagmi';
+import { useBlockNumber, useNetwork, useSigner } from 'wagmi';
 
 import { useStreamStaker } from '../hooks/useStreamStaker';
 import { useStreamStakerPrepare } from '../hooks/useStreamStakerPrepare';
@@ -86,6 +86,7 @@ type Props = {
 
 export const StreamStakingProvider = ({ children }: Props) => {
   const { data: signer } = useSigner();
+  const { data: blockNumber } = useBlockNumber();
 
   const {
     data: {
@@ -251,12 +252,23 @@ export const StreamStakingProvider = ({ children }: Props) => {
       unstakeableNfts.length > 0,
   );
 
+  useMemo(() => {
+    if (walletNftsLoading) {
+      return;
+    }
+
+    refetchWalletNfts();
+
+    return blockNumber;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blockNumber]);
+
   const stake = useCallback(
     () =>
       stakeWriteAndWait().then((result) =>
         refetchTokensInCustody().then(() =>
-          refetchWalletNfts().then(() =>
-            fetchTokenUnlockingTimes().then(() => result),
+          fetchTokenUnlockingTimes().then(() =>
+            refetchWalletNfts().then(() => result),
           ),
         ),
       ),
@@ -272,8 +284,8 @@ export const StreamStakingProvider = ({ children }: Props) => {
     () =>
       unstakeWriteAndWait().then((result) =>
         refetchTokensInCustody().then(() =>
-          refetchWalletNfts().then(() =>
-            fetchTokenUnlockingTimes().then(() => result),
+          fetchTokenUnlockingTimes().then(() =>
+            refetchWalletNfts().then(() => result),
           ),
         ),
       ),
