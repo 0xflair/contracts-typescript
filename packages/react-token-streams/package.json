@@ -45,6 +45,7 @@
     "@0xflair/react-wallet": "0.*",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",
+    "humanize-duration": "^3.27.2",
     "moment": "^2.29.3",
     "react": "^16 || ^17 || ^18",
     "react-dom": "^16 || ^17 || ^18",
