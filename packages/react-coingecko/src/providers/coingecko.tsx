@@ -36,11 +36,12 @@ export type CoinGeckoProviderProps = {
 };
 
 function convertCoinGeckoSymbol(coinGeckoSymbol: string): CryptoSymbol {
-  switch (coinGeckoSymbol) {
-    case 'ethereum':
-      return 'ETH';
-    case 'matic-network':
-      return 'MATIC';
+  const currency = KNOWN_CRYPTO_CURRENCIES.find(
+    ({ coinGeckoId }) => coinGeckoId === coinGeckoSymbol,
+  );
+
+  if (currency) {
+    return currency.symbol;
   }
 
   return coinGeckoSymbol;
