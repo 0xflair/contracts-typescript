@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.96.3 (2022-08-09)
+
+
+### Bug Fixes
+
+* use defined rpc urls vs default providers ([59b7151](https://github.com/0xflair/typescript-sdk/commit/59b7151af19fe5938742b6c9f0efaf27dbd94ebf))
+
+
+
+
+
 ## 0.96.2 (2022-08-07)
 
 
