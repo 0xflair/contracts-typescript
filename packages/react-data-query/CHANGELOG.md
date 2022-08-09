@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.97.2 (2022-08-09)
+
+
+### Bug Fixes
+
+* add humanize lib in peer deeps ([77d7bb0](https://github.com/0xflair/typescript-sdk/commit/77d7bb05e4c65d9963a988ee639ca4711f321680))
+
+
+
+
+
 ## 0.97.1 (2022-08-09)
 
 
