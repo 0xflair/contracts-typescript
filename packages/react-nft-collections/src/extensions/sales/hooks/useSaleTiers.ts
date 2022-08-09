@@ -1,9 +1,7 @@
 import { Environment } from '@0xflair/common';
-import { loadContract } from '@0xflair/contracts-registry';
-import { ERC721TieringExtension__factory } from '@0xflair/evm-contracts';
+import { V1_19_ERC721TieringExtension__factory } from '@0xflair/contracts-registry';
 import {
   PredefinedReadContractConfig,
-  useContractRead,
   useHasAnyOfFeatures,
 } from '@0xflair/react-common';
 import { readContract } from '@wagmi/core';
@@ -57,7 +55,7 @@ export const useSaleTiers = (config: Config) => {
     if (!config.contractAddress || !provider) {
       return;
     }
-    return ERC721TieringExtension__factory.connect(
+    return V1_19_ERC721TieringExtension__factory.connect(
       config.contractAddress,
       provider,
     );

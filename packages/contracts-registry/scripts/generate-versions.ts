@@ -31,7 +31,7 @@ const main = async () => {
     `${path.resolve(__dirname, '../node_modules')}/flair-contracts-*`,
     {
       nodir: false,
-    }
+    },
   );
 
   const versionToContractToChainAddress: Record<
@@ -92,7 +92,7 @@ const main = async () => {
           sourceName
             .slice(0, sourceName.lastIndexOf('.'))
             .replace(/^contracts\//i, '')
-            .replace(/^@openzeppelin\/contracts\//i, '')
+            .replace(/^@openzeppelin\/contracts\//i, ''),
         ) +
         '/' +
         contractName;
@@ -123,12 +123,12 @@ const main = async () => {
 
   fse.writeJSONSync(
     path.resolve(__dirname, '../src/registry-mapping.json'),
-    registry
+    registry,
   );
 
   fse.writeJSONSync(
     path.resolve(__dirname, '../src/build-info.json'),
-    versionToBuildInfo
+    versionToBuildInfo,
   );
 
   const typeNames: Record<string, any> = {};
@@ -151,8 +151,8 @@ ${Object.entries(registry)
             path.resolve(
               packagePaths[versionTag],
               'typechain',
-              basename(key) + '.d.ts'
-            )
+              basename(key) + '.d.ts',
+            ),
           )
         ) {
           typeNames[versionTag][key] = 'any';
@@ -161,7 +161,8 @@ ${Object.entries(registry)
 
         typeNames[versionTag][key] = `${safeVersionPrefix}${basename(key)}`;
 
-        return `${basename(key)} as ${typeNames[versionTag][key]}
+        return `${basename(key)} as ${typeNames[versionTag][key]},
+        ${basename(key)}__factory as ${typeNames[versionTag][key]}__factory
       `;
       })
       .filter((key) => !!key)
@@ -174,6 +175,9 @@ ${Object.entries(registry)
   .map(([versionTag]) => {
     return `export type { ${Object.values(typeNames[versionTag])
       .filter((key) => key !== 'any')
+      .join(',')} }; export { ${Object.values(typeNames[versionTag])
+      .filter((key) => key !== 'any')
+      .map((key) => `${key}__factory`)
       .join(',')} };`;
   })
   .join(';')}
@@ -182,7 +186,7 @@ ${Object.entries(registry)
   .map(([versionTag, artifacts]) => {
     const safeVersionPrefix = getSafeVersionPrefix(versionTag);
     return `export type ${safeVersionPrefix}CONTRACTS = "${Object.keys(
-      artifacts
+      artifacts,
     ).join('" | "')}"`;
   })
   .join(';\n')};
@@ -201,7 +205,7 @@ export type ContractVersion = ${Object.entries(registry)
       .join(' | ')};
 
 export const LATEST_VERSION: ContractVersion = "${lastVersion}";
-`
+`,
   );
 };
 
