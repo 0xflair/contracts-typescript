@@ -1,4 +1,4 @@
-import { loadContract } from '@0xflair/contracts-registry';
+import { ERC721CustodialStakingExtension__factory } from '@0xflair/evm-contracts';
 import {
   Environment,
   PredefinedReadContractConfig,
@@ -6,10 +6,9 @@ import {
 } from '@0xflair/react-common';
 import { useERC721TotalSupply } from '@0xflair/react-openzeppelin';
 import { BytesLike } from '@ethersproject/bytes';
-import { readContract } from '@wagmi/core';
 import { BigNumber, BigNumberish } from 'ethers';
 import { useCallback, useMemo, useState } from 'react';
-import { useAccount } from 'wagmi';
+import { useAccount, useProvider } from 'wagmi';
 
 type ArgsType = [tierId: BigNumberish];
 
@@ -46,26 +45,29 @@ export const useStreamTokensInCustody = (config: Config) => {
     enabled: Boolean(config.ticketTokenAddress && supportsTokensInCustody),
   });
 
+  const provider = useProvider({
+    chainId: config.chainId,
+  });
+  const contract = useMemo(() => {
+    if (!config.contractAddress || !provider) {
+      return;
+    }
+    return ERC721CustodialStakingExtension__factory.connect(
+      config.contractAddress,
+      provider,
+    );
+  }, [config.contractAddress, provider]);
+
   const fetchTokensInCustodyInRange = useCallback(
     async (startTokenId: BigNumberish, endTokenId: BigNumberish) => {
-      if (!config.contractAddress) {
+      if (!contract || !account?.address) {
         return;
       }
 
-      const contractDefinition = loadContract(
-        'streams/ERC721/extensions/ERC721CustodialStakingExtension',
-        config.contractVersion,
-      );
-      const result = await readContract(
-        {
-          addressOrName: config.contractAddress,
-          contractInterface: contractDefinition.artifact.abi,
-        },
-        'tokensInCustody',
-        {
-          args: [account?.address, startTokenId, endTokenId],
-          chainId: config.chainId,
-        },
+      const result = await contract.tokensInCustody(
+        account?.address,
+        startTokenId,
+        endTokenId,
       );
 
       return result.reduce<BigNumberish[]>(
@@ -79,12 +81,7 @@ export const useStreamTokensInCustody = (config: Config) => {
         [],
       );
     },
-    [
-      account?.address,
-      config.chainId,
-      config.contractAddress,
-      config.contractVersion,
-    ],
+    [account?.address, contract],
   );
 
   const refetchTokensInCustody = useCallback(async () => {

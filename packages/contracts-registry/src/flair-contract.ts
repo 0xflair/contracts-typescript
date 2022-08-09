@@ -14,7 +14,7 @@ export class FlairContract extends EthersContract {
     contractFqn: ContractFqn,
     signerOrProvider?: Signer | Provider,
     contractVersion: ContractVersion = LATEST_VERSION,
-    addressOrName?: string
+    addressOrName?: string,
   ) {
     const contractDefinition = loadContract(contractFqn, contractVersion);
     const contractAddressOrName =
@@ -22,14 +22,14 @@ export class FlairContract extends EthersContract {
 
     if (!contractAddressOrName) {
       throw new Error(
-        `Could not determine contract address from constructor (${addressOrName}) nor from definition (${contractDefinition.address})`
+        `Could not determine contract address from constructor (${addressOrName}) nor from definition (${contractDefinition.address})`,
       );
     }
 
     super(
       contractAddressOrName,
       contractDefinition.artifact.abi,
-      signerOrProvider
+      signerOrProvider,
     );
   }
 }

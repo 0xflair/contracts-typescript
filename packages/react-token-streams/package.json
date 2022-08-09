@@ -35,6 +35,7 @@
   },
   "peerDependencies": {
     "@0xflair/contracts-registry": "0.*",
+    "@0xflair/evm-contracts": "1.*",
     "@0xflair/react-coingecko": "0.*",
     "@0xflair/react-common": "0.*",
     "@0xflair/react-data-query": "0.*",
@@ -52,6 +53,7 @@
   },
   "dependencies": {
     "@0xflair/contracts-registry": "^0.96.4",
+    "@0xflair/evm-contracts": "^1.19.9",
     "@0xflair/react-coingecko": "^0.96.4",
     "@0xflair/react-common": "^0.96.4",
     "@0xflair/react-data-query": "^0.96.4",

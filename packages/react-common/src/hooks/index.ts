@@ -3,6 +3,7 @@ export * from './useAddressOfSigner';
 export * from './useChainId';
 export * from './useChainInfo';
 export * from './useContractAbi';
+export * from './useContractDefinition';
 export * from './useContractRead';
 export * from './useContractWriteAndWait';
 export * from './useFeatureRead';
