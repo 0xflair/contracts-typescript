@@ -7,6 +7,7 @@ export * from './StreamEmissionAmount';
 export * from './StreamEmissionRate';
 export * from './StreamEmissionTimeUnit';
 export * from './StreamLockedNfts';
+export * from './StreamMinStakingDuration';
 export * from './StreamRateByTokens';
 export * from './StreamRewardAmount';
 export * from './StreamSharesAllocation';

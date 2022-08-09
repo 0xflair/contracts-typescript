@@ -139,10 +139,15 @@ export const StreamStakingProvider = ({ children }: Props) => {
     () =>
       nfts?.filter(
         (t) =>
-          unlockedTokenIds.find((u: any) => u.toString() === t.tokenId) &&
-          !tokenIdsInCustody?.find((id: any) => id.toString() === t.tokenId),
+          (!hasLockableExtension ||
+            unlockedTokenIds.find(
+              (u: any) => u.toString() === t.tokenId?.toString(),
+            )) &&
+          !tokenIdsInCustody?.find(
+            (id: any) => id.toString() === t.tokenId?.toString(),
+          ),
       ),
-    [nfts, tokenIdsInCustody, unlockedTokenIds],
+    [hasLockableExtension, nfts, tokenIdsInCustody, unlockedTokenIds],
   );
   const lockedNfts = useMemo(
     () =>

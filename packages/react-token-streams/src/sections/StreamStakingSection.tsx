@@ -1,8 +1,8 @@
 import { useHasAnyOfFeatures } from '@0xflair/react-common';
 import { ConnectButton, SwitchChainButton } from '@0xflair/react-wallet';
 
-import { StreamAccountTotalNfts } from '../components';
 import { StreamLockedNfts } from '../components/StreamLockedNfts';
+import { StreamMinStakingDuration } from '../components/StreamMinStakingDuration';
 import { StreamPrepareButton } from '../components/StreamPrepareButton';
 import { StreamStakeButton } from '../components/StreamStakeButton';
 import { StreamStakedNfts } from '../components/StreamStakedNfts';
@@ -44,11 +44,7 @@ export const StreamStakingSection = ({}: Props) => {
                         <span>Your un-staked NFTs</span>
                       </dt>
                       <dd className="text-sm font-medium text-gray-900 whitespace-nowrap">
-                        {hasLockableExtension ? (
-                          <StreamUnlockedNfts />
-                        ) : (
-                          <StreamAccountTotalNfts />
-                        )}
+                        <StreamUnlockedNfts />
                       </dd>
                     </div>
                     <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
@@ -72,6 +68,17 @@ export const StreamStakingSection = ({}: Props) => {
                         </dd>
                       </div>
                     ) : null}
+                    <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
+                      <dt className="flex flex-col gap-1 text-sm text-gray-600">
+                        <span>Minimum lock-time</span>
+                        <small className="text-xs flex-shrink-0 text-gray-400">
+                          Shortest duration NFTs must be staked.
+                        </small>
+                      </dt>
+                      <dd className="text-sm font-medium text-gray-900 whitespace-nowrap">
+                        <StreamMinStakingDuration />
+                      </dd>
+                    </div>
                     <div className="border-t border-gray-200 pt-4 flex items-center justify-between gap-4">
                       <dt className="flex flex-col gap-1 text-sm text-gray-600">
                         <span>Unstakeable NFTs</span>
