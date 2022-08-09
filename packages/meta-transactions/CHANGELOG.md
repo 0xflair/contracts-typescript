@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.97.6 (2022-08-09)
+
+
+### Bug Fixes
+
+* correctly account for unstaked tokens ([e301839](https://github.com/0xflair/typescript-sdk/commit/e301839ba577aa8e8803cb06776f98dc2bb5aa23))
+
+
+
+
+
 ## 0.97.5 (2022-08-09)
 
 
