@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.97.5 (2022-08-09)
+
+
+### Bug Fixes
+
+* coingecko mapping for crypto prices ([057f60c](https://github.com/0xflair/typescript-sdk/commit/057f60c01d276446da9da00dd55817f67e636e1a))
+
+
+
+
+
 ## 0.97.4 (2022-08-09)
 
 
