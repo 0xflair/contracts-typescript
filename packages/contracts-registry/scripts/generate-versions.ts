@@ -138,7 +138,6 @@ const main = async () => {
     path.resolve(__dirname, '../src/generated-versions.ts'),
     `/* THIS AN AUTO-GENERATED FILE, DO NOT EDIT MANUALLY */
 /* eslint-disable */
-
 ${Object.entries(registry)
   .filter(([v]) => v === lastVersion)
   .map(([versionTag, artifacts]) => {

@@ -4,7 +4,6 @@ import {
   PredefinedReadContractConfig,
   useHasAnyOfFeatures,
 } from '@0xflair/react-common';
-import { readContract } from '@wagmi/core';
 import { BigNumberish } from 'ethers';
 import { useCallback, useMemo, useState } from 'react';
 import { useProvider } from 'wagmi';

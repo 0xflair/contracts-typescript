@@ -1,6 +1,5 @@
 /* THIS AN AUTO-GENERATED FILE, DO NOT EDIT MANUALLY */
 /* eslint-disable */
-
 import { ERC721AutoIdMinterExtension as V1_19_ERC721AutoIdMinterExtension,
         ERC721AutoIdMinterExtension__factory as V1_19_ERC721AutoIdMinterExtension__factory
       ,ERC721BulkifyExtension as V1_19_ERC721BulkifyExtension,

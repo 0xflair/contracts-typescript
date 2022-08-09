@@ -14,5 +14,9 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["src", "scripts", "node_modules/**/typechain/**/*"]
+  "include": [
+    "src",
+    "scripts",
+    "node_modules/flair-contracts-v1.19/typechain/**/*"
+  ]
 }
