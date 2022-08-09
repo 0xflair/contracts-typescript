@@ -250,21 +250,25 @@ export const StreamStakingProvider = ({ children }: Props) => {
       unstakeableNfts.length > 0,
   );
 
-  const stake = useCallback(() => {
-    return stakeWriteAndWait().then((result) =>
-      refetchWalletNfts().then(() =>
-        refetchTokensInCustody().then(() => result),
+  const stake = useCallback(
+    () =>
+      stakeWriteAndWait().then((result) =>
+        refetchTokensInCustody().then(() =>
+          refetchWalletNfts().then(() => result),
+        ),
       ),
-    );
-  }, [refetchTokensInCustody, refetchWalletNfts, stakeWriteAndWait]);
+    [refetchTokensInCustody, refetchWalletNfts, stakeWriteAndWait],
+  );
 
-  const unstake = useCallback(() => {
-    return unstakeWriteAndWait().then((result) =>
-      refetchWalletNfts().then(() =>
-        refetchTokensInCustody().then(() => result),
+  const unstake = useCallback(
+    () =>
+      unstakeWriteAndWait().then((result) =>
+        refetchTokensInCustody().then(() =>
+          refetchWalletNfts().then(() => result),
+        ),
       ),
-    );
-  }, [refetchTokensInCustody, refetchWalletNfts, unstakeWriteAndWait]);
+    [refetchTokensInCustody, refetchWalletNfts, unstakeWriteAndWait],
+  );
 
   const value = {
     data: {

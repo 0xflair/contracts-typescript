@@ -43,16 +43,16 @@ export const useFeatureWrite = <ArgsType extends Record<string, any>>({
   const writeAndWait = useCallback(
     async (
       inputArgs?: ArgsType,
-      overrides?: Partial<WriteContractConfig['overrides']>
+      overrides?: Partial<WriteContractConfig['overrides']>,
     ) => {
       const call = normalizeFunctionCall(
         feature?.signature || '',
-        inputArgs || args
+        inputArgs || args,
       );
 
       return result.writeAndWait(call.args, overrides);
     },
-    [args, feature?.signature, result]
+    [args, feature?.signature, result],
   );
 
   return {

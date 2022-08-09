@@ -64,11 +64,11 @@ export const useStreamTokensInCustody = (config: Config) => {
         return;
       }
 
-      const result = await contract.tokensInCustody(
+      const result = (await contract.tokensInCustody(
         account?.address,
         startTokenId,
         endTokenId,
-      );
+      )) as any[];
 
       return result.reduce<BigNumberish[]>(
         (list, inCustody, tokenIdMinusStartTokenId) =>
