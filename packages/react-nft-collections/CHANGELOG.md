@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.97.9 (2022-08-09)
+
+
+### Bug Fixes
+
+* less aggressive query for wallet nfts ([80157e5](https://github.com/0xflair/typescript-sdk/commit/80157e5eaf1a4f07e2ae58ea365897e0d4da2b43))
+
+
+
+
+
 ## 0.97.8 (2022-08-09)
 
 
