@@ -37,7 +37,7 @@ export const WalletProvider = ({
           const rpcUrl = FLAIR_CHAINS.find((x) => x.id === config.chainId)
             ?.rpcUrls.default;
           if (rpcUrl) {
-            return new providers.JsonRpcProvider(rpcUrl, 'any');
+            return new providers.JsonRpcProvider(rpcUrl, config.chainId);
           } else {
             throw new Error(
               `No configured RPC URL for chain ${config.chainId}`,
@@ -52,7 +52,7 @@ export const WalletProvider = ({
             try {
               const prv = new providers.Web3Provider(
                 window.ethereum as any,
-                'any',
+                config.chainId,
               );
               prv.pollingInterval = 20_000;
               return prv;
