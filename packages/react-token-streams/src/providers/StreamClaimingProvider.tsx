@@ -81,6 +81,7 @@ export const StreamClaimingProvider = ({
       env,
       chainId,
       contractAddress,
+      nfts,
       stream,
       streamNativeBalance,
       streamERC20Balances,
@@ -165,7 +166,7 @@ export const StreamClaimingProvider = ({
 
   const canClaim = Boolean(
     !claimLoading &&
-      !walletNftsLoading &&
+      (!walletNftsLoading || nfts !== undefined) &&
       totalClaimableAmountByAccount &&
       Number(totalClaimableAmountByAccount?.toString()) > 0,
   );

@@ -235,7 +235,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
   });
 
   const canStake = Boolean(
-    !walletNftsLoading &&
+    (!walletNftsLoading || nfts !== undefined) &&
       !tokenIdsInCustodyLoading &&
       !stakeLoading &&
       !unlockedNftsLoading &&
@@ -244,7 +244,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
   );
 
   const canUnstake = Boolean(
-    !walletNftsLoading &&
+    (!walletNftsLoading || nfts !== undefined) &&
       !tokenIdsInCustodyLoading &&
       !unstakeLoading &&
       !tokenUnlockingTimesLoading &&

@@ -145,6 +145,7 @@ export const StreamProvider = ({
     chainId,
     contractAddress,
     ticketTokenAddress,
+    watch: Boolean(account?.address && ticketTokenAddress),
   });
 
   const {
