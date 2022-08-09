@@ -161,6 +161,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
     data: tokenUnlockingTimes,
     error: tokenUnlockingTimesError,
     isLoading: tokenUnlockingTimesLoading,
+    refetch: fetchTokenUnlockingTimes,
   } = useStreamUnlockingTime({
     chainId,
     contractAddress,
@@ -254,20 +255,34 @@ export const StreamStakingProvider = ({ children }: Props) => {
     () =>
       stakeWriteAndWait().then((result) =>
         refetchTokensInCustody().then(() =>
-          refetchWalletNfts().then(() => result),
+          refetchWalletNfts().then(() =>
+            fetchTokenUnlockingTimes().then(() => result),
+          ),
         ),
       ),
-    [refetchTokensInCustody, refetchWalletNfts, stakeWriteAndWait],
+    [
+      fetchTokenUnlockingTimes,
+      refetchTokensInCustody,
+      refetchWalletNfts,
+      stakeWriteAndWait,
+    ],
   );
 
   const unstake = useCallback(
     () =>
       unstakeWriteAndWait().then((result) =>
         refetchTokensInCustody().then(() =>
-          refetchWalletNfts().then(() => result),
+          refetchWalletNfts().then(() =>
+            fetchTokenUnlockingTimes().then(() => result),
+          ),
         ),
       ),
-    [refetchTokensInCustody, refetchWalletNfts, unstakeWriteAndWait],
+    [
+      fetchTokenUnlockingTimes,
+      refetchTokensInCustody,
+      refetchWalletNfts,
+      unstakeWriteAndWait,
+    ],
   );
 
   const value = {

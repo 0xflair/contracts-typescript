@@ -58,6 +58,7 @@ export const useStreamUnstaker = ({
     signerOrProvider,
     tag: feature?.tag,
     args: feature?.args,
+    confirmations: 5,
   });
 
   const writeAndWait = useCallback(

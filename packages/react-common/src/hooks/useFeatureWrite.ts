@@ -17,6 +17,7 @@ type Config<ArgsType extends Record<string, any>> =
     signerOrProvider?: Signer | Provider | null;
     feature?: FeatureFunction;
     args?: ArgsType;
+    confirmations?: number;
   };
 
 export const useFeatureWrite = <ArgsType extends Record<string, any>>({

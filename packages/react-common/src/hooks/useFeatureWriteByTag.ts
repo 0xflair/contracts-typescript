@@ -15,6 +15,7 @@ export type FeatureWriteByTagConfig<ArgsType extends Record<string, any>> =
     signerOrProvider?: Signer | Provider | null;
     tag?: string;
     args?: ArgsType;
+    confirmations?: number;
   };
 
 export const useFeatureWriteByTag = <ArgsType extends Record<string, any>>({

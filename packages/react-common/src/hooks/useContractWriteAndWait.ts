@@ -20,7 +20,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   signerOrProvider,
   functionName,
   args,
-  confirmations = 2,
+  confirmations = 5,
   ...restOfConfig
 }: ContractWriteConfig<ArgsType>) => {
   const {
