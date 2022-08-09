@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.97.8 (2022-08-09)
+
+
+### Bug Fixes
+
+* load wallet nfts on new blocks ([c31f742](https://github.com/0xflair/typescript-sdk/commit/c31f742ca4b6e5bc8be4181072c83187ca811f54))
+
+
+
+
+
 ## 0.97.7 (2022-08-09)
 
 
