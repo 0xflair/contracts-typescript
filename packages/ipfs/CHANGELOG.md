@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.97.3 (2022-08-09)
+
+
+### Bug Fixes
+
+* import factories from contracts registry ([c7b9baf](https://github.com/0xflair/typescript-sdk/commit/c7b9baf11bafd7b22245242c6cf35733dec111dd))
+
+
+
+
+
 ## 0.97.2 (2022-08-09)
 
 
