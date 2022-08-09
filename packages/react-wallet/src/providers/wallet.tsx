@@ -34,21 +34,33 @@ export const WalletProvider = ({
         return prv;
       } catch (e) {
         try {
-          const prv = providers.getDefaultProvider(config.chainId);
-          prv.pollingInterval = 20_000;
-          return prv;
+          const rpcUrl = FLAIR_CHAINS.find((x) => x.id === config.chainId)
+            ?.rpcUrls.default;
+          if (rpcUrl) {
+            return new providers.JsonRpcProvider(rpcUrl, 'any');
+          } else {
+            throw new Error(
+              `No configured RPC URL for chain ${config.chainId}`,
+            );
+          }
         } catch (e) {
           try {
-            const prv = new providers.Web3Provider(
-              window.ethereum as any,
-              Number(config.chainId),
-            );
+            const prv = providers.getDefaultProvider(config.chainId);
             prv.pollingInterval = 20_000;
             return prv;
           } catch (e) {
-            const prv = providers.getDefaultProvider();
-            prv.pollingInterval = 20_000;
-            return prv;
+            try {
+              const prv = new providers.Web3Provider(
+                window.ethereum as any,
+                'any',
+              );
+              prv.pollingInterval = 20_000;
+              return prv;
+            } catch (e) {
+              const prv = providers.getDefaultProvider();
+              prv.pollingInterval = 20_000;
+              return prv;
+            }
           }
         }
       }

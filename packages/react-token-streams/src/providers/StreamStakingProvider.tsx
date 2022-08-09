@@ -109,8 +109,12 @@ export const StreamStakingProvider = ({ children }: Props) => {
     chainId,
     contractAddress: ticketTokenAddress as string,
     args: [ticketTokenIds || []],
-    enabled: Boolean(ticketTokenAddress),
-    watch: true,
+    enabled: Boolean(
+      ticketTokenAddress && ticketTokenIds && ticketTokenIds.length > 0,
+    ),
+    watch: Boolean(
+      ticketTokenAddress && ticketTokenIds && ticketTokenIds.length > 0,
+    ),
   });
 
   const unlockedNfts = useMemo(
