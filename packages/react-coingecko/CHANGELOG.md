@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.96.4 (2022-08-09)
+
+
+### Bug Fixes
+
+* specify network id to avoid breaking wagmi ([939eefb](https://github.com/0xflair/typescript-sdk/commit/939eefbaab6e21904aff75ce0045bc163b30a077))
+
+
+
+
+
 ## 0.96.3 (2022-08-09)
 
 
