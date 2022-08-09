@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.97.7 (2022-08-09)
+
+
+### Bug Fixes
+
+* correct order of hooks ([23d7d5c](https://github.com/0xflair/typescript-sdk/commit/23d7d5c7abf416076eec6b0a04ad30a0312b8698))
+
+
+
+
+
 ## 0.97.6 (2022-08-09)
 
 
