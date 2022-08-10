@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.98.0 (2022-08-10)
+
+
+### Features
+
+* add binance chain info ([69800d2](https://github.com/0xflair/typescript-sdk/commit/69800d22117d183deccf50a2976d75e4d2e061b5))
+
+
+
+
+
 ## 0.97.9 (2022-08-09)
 
 
