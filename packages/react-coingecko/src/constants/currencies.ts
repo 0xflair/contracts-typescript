@@ -57,4 +57,10 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     icon: 'MOVR',
     coinGeckoId: 'moonriver',
   },
+  {
+    symbol: 'BNB',
+    name: 'BNB',
+    icon: 'BNB',
+    coinGeckoId: 'binancecoin',
+  },
 ];

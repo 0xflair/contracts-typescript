@@ -4,6 +4,43 @@ import { allChains as WagmiChains, Chain } from 'wagmi';
 // https://github.com/wagmi-dev/wagmi/blob/0.3.x/packages/core/src/constants/chains.ts#L234
 const newChains = [
   {
+    id: 56,
+    name: 'Binance Mainnet',
+    nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
+    rpcUrls: {
+      default: 'https://bsc-dataseed1.binance.org',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'BSC Scan',
+        url: 'https://testnet.bscscan.com',
+      },
+      default: {
+        name: 'BSC Scan',
+        url: 'https://testnet.bscscan.com',
+      },
+    },
+  },
+  {
+    id: 97,
+    name: 'Binance Testnet',
+    nativeCurrency: { name: 'tBNB', symbol: 'tBNB', decimals: 18 },
+    rpcUrls: {
+      default: 'https://data-seed-prebsc-1-s3.binance.org:8545',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'BSC Scan',
+        url: 'https://testnet.bscscan.com',
+      },
+      default: {
+        name: 'BSC Scan',
+        url: 'https://testnet.bscscan.com',
+      },
+    },
+    testnet: true,
+  },
+  {
     id: 66,
     name: 'OKC Mainnet',
     nativeCurrency: { name: 'OKT', symbol: 'OKT', decimals: 18 },
