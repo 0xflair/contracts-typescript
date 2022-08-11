@@ -8,6 +8,6 @@ type Config = {
 
 export function useMerkleLeafAddressOnly({ address }: Config) {
   return useMemo(() => {
-    return utils.keccak256(address || ZERO_ADDRESS);
+    return utils.keccak256(address?.toString().toLowerCase() || ZERO_ADDRESS);
   }, [address]);
 }

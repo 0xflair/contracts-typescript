@@ -15,7 +15,10 @@ export function useMerkleLeafAddressWithAllowance({
   return useMemo(() => {
     return utils.solidityKeccak256(
       ['address', 'uint256'],
-      [address || ZERO_ADDRESS, maxAllowance?.toString() || '0'],
+      [
+        address?.toString().toLowerCase() || ZERO_ADDRESS,
+        maxAllowance?.toString() || '0',
+      ],
     );
   }, [address, maxAllowance]);
 }

@@ -19,7 +19,9 @@ export function useAddressListMerkleMetadata({
 }: Config) {
   const url = `${
     FLAIR_ADDRESS_LISTS_BACKEND[env]
-  }/v1/address-list-merkle-trees/${rootHash?.toString()}/metadata/${address?.toString()}`;
+  }/v1/address-list-merkle-trees/${rootHash?.toString()}/metadata/${address
+    ?.toString()
+    .toLowerCase()}`;
 
   return useAxiosGet<{ maxAllowance: number }>({
     url,
