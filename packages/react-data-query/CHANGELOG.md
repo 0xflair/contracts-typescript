@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.98.2 (2022-08-11)
+
+
+### Bug Fixes
+
+* always lower-case the merkle tree ([f164833](https://github.com/0xflair/typescript-sdk/commit/f164833f9cac4bc3a3933ee527661df91549d430))
+
+
+
+
+
 ## 0.98.1 (2022-08-11)
 
 
