@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.99.3 (2022-08-12)
+
+
+### Bug Fixes
+
+* detect tiers even if wallet is not connected ([7488e17](https://github.com/0xflair/typescript-sdk/commit/7488e1725a39807c923812a19c2a4483c96f52cf))
+
+
+
+
+
 ## 0.99.2 (2022-08-12)
 
 
