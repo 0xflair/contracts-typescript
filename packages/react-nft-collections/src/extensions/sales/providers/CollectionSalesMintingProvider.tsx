@@ -151,7 +151,7 @@ export const CollectionSalesMintingProvider = ({
   );
 
   useEffect(() => {
-    if (!autoDetectEligibleTier || !account?.address) {
+    if (!autoDetectEligibleTier) {
       setIsAutoDetectingTier(false);
       return;
     }
