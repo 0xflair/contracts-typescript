@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.99.1 (2022-08-12)
+
+
+### Bug Fixes
+
+* use undefined until eligiblity is actually checked ([6e0ed51](https://github.com/0xflair/typescript-sdk/commit/6e0ed51bfe241ce6cc593852402e3ee05e631881))
+
+
+
+
+
 # 0.99.0 (2022-08-12)
 
 
