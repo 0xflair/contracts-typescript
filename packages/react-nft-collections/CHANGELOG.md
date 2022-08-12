@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.99.0 (2022-08-12)
+
+
+### Features
+
+* allow passing default tier to minting section component ([0be78d5](https://github.com/0xflair/typescript-sdk/commit/0be78d5a4e38becc4dc8c2cf3acbebe5f8889730))
+
+
+
+
+
 ## 0.98.2 (2022-08-11)
 
 
