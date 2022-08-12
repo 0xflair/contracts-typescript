@@ -15,9 +15,15 @@ import {
 import { CollectionSalesActiveStatus } from '../components/CollectionSalesActiveStatus';
 import { CollectionSalesMintingProvider } from '../providers/CollectionSalesMintingProvider';
 
-type Props = {};
+type Props = {
+  autoDetectEligibleTier?: boolean;
+  defaultTier?: BigNumberish;
+};
 
-export const CollectionSalesMintingSection = ({}: Props) => {
+export const CollectionSalesMintingSection = ({
+  autoDetectEligibleTier = true,
+  defaultTier = 0,
+}: Props) => {
   const {
     data: { chainId },
   } = useCollectionContext();
@@ -29,7 +35,10 @@ export const CollectionSalesMintingSection = ({}: Props) => {
     'w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
 
   return (
-    <CollectionSalesMintingProvider>
+    <CollectionSalesMintingProvider
+      autoDetectEligibleTier={autoDetectEligibleTier}
+      defaultTier={defaultTier}
+    >
       <main className="flex flex-col gap-x-8">
         <div>
           {/* Sale Information */}
