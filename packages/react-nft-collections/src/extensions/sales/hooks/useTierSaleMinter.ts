@@ -175,9 +175,12 @@ export const useTierSaleMinter = ({
       hasAllowlist,
       isAllowlisted,
       eligibleAmount,
-      isEligible: eligibleAmount
-        ? Boolean(!eligibleAmountError && Number(eligibleAmount.toString()) > 0)
-        : undefined,
+      isEligible:
+        eligibleAmount !== undefined
+          ? Boolean(
+              !eligibleAmountError && Number(eligibleAmount.toString()) > 0,
+            )
+          : undefined,
     },
     error: {
       tierError,
