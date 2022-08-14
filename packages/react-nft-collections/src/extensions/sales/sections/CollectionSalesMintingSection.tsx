@@ -1,5 +1,5 @@
 import { ConnectButton, SwitchChainButton } from '@0xflair/react-wallet';
-import { BigNumberish } from 'ethers';
+import { BigNumberish, BytesLike } from 'ethers';
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
 
@@ -18,11 +18,13 @@ import { CollectionSalesMintingProvider } from '../providers/CollectionSalesMint
 type Props = {
   autoDetectEligibleTier?: boolean;
   defaultTier?: BigNumberish;
+  minterAddress?: BytesLike;
 };
 
 export const CollectionSalesMintingSection = ({
   autoDetectEligibleTier = true,
   defaultTier = 0,
+  minterAddress,
 }: Props) => {
   const {
     data: { chainId },
@@ -38,6 +40,7 @@ export const CollectionSalesMintingSection = ({
     <CollectionSalesMintingProvider
       autoDetectEligibleTier={autoDetectEligibleTier}
       defaultTier={defaultTier}
+      minterAddress={minterAddress}
     >
       <main className="flex flex-col gap-x-8">
         <div>
@@ -48,7 +51,9 @@ export const CollectionSalesMintingSection = ({
 
               <CollectionSalesActiveStatus />
 
-              {account && <CollectionSalesAllowlistStatus />}
+              {account || minterAddress ? (
+                <CollectionSalesAllowlistStatus />
+              ) : null}
             </div>
 
             <CollectionSalesPrice className="text-xl font-medium text-gray-900" />

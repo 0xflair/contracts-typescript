@@ -1,8 +1,9 @@
+import { ZERO_ADDRESS } from '@0xflair/common';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
-import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 
 import { useCollectionContext } from '../../../common/providers/CollectionProvider';
@@ -83,12 +84,15 @@ type Props = {
   defaultTier?: BigNumberish;
 
   autoDetectEligibleTier?: boolean;
+
+  minterAddress?: BytesLike;
 };
 
 export const CollectionSalesMintingProvider = ({
   children,
   defaultTier = 0,
   autoDetectEligibleTier = true,
+  minterAddress,
 }: Props) => {
   const { data: account } = useAccount();
   const { data, isLoading, error } = useCollectionContext();
@@ -133,7 +137,7 @@ export const CollectionSalesMintingProvider = ({
     contractVersion: data.contractVersion,
     contractAddress: data.contractAddress,
     tierId: currentTierId,
-    minterAddress: account?.address,
+    minterAddress: minterAddress || account?.address || ZERO_ADDRESS,
   });
 
   const soldOut = Boolean(
@@ -151,6 +155,8 @@ export const CollectionSalesMintingProvider = ({
   );
 
   useEffect(() => {
+    const tierIds = Object.keys(tiers || {}).map((id) => Number(id));
+
     if (!autoDetectEligibleTier) {
       setIsAutoDetectingTier(false);
       return;
@@ -161,19 +167,15 @@ export const CollectionSalesMintingProvider = ({
       tiersLoading ||
       mintLoading ||
       isActive === undefined ||
-      isEligible === undefined
+      isEligible === undefined ||
+      !tierIds.length
     ) {
       return;
     }
 
     if (!isActive || !isEligible) {
       const nextTierId = Number(currentTierId) + 1;
-
-      if (
-        Object.keys(tiers)
-          .map((id) => Number(id))
-          .includes(Number(nextTierId))
-      ) {
+      if (tierIds.includes(Number(nextTierId))) {
         setCurrentTierId(nextTierId);
       } else {
         // No more tiers to check

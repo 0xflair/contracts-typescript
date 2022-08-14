@@ -28,7 +28,8 @@ export const useTierSaleEligibleAmount = (config: Config) => {
     contractFqn: 'collections/ERC721/extensions/ERC721TieringExtension',
     functionName: 'eligibleForTier',
     cacheOnBlock: false,
-    cacheTime: 1,
+    cacheTime: 0,
+    staleTime: 0,
     args: [
       config.tierId || 0,
       config.minterAddress || ZERO_ADDRESS,
