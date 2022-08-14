@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.99.4 (2022-08-14)
+
+
+### Bug Fixes
+
+* allow testing a wallet address and remove cache for eligibility ([4e0c643](https://github.com/0xflair/typescript-sdk/commit/4e0c6436f1c2109859b13c70b454bb51174344c0))
+
+
+
+
+
 ## 0.99.3 (2022-08-12)
 
 
