@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.100.1 (2022-08-15)
+
+
+### Bug Fixes
+
+* reset eligiblity when tier id is changed ([81a9d3d](https://github.com/0xflair/typescript-sdk/commit/81a9d3d7d0183ed6680155ddb9c468a765d6f7d0))
+
+
+
+
+
 # 0.100.0 (2022-08-15)
 
 
