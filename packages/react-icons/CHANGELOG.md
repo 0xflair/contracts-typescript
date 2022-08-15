@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.100.2 (2022-08-15)
+
+
+### Bug Fixes
+
+* select a no allowlist tier if active ([ea844fc](https://github.com/0xflair/typescript-sdk/commit/ea844fca0bf7bdf192a26caeb2efacb2a0d407dc))
+
+
+
+
+
 ## 0.100.1 (2022-08-15)
 
 
