@@ -44,6 +44,14 @@ export function translateContractError(message: string) {
     return 'Too early, you can claim only once every 1 hour.';
   } else if (message.includes('DISTRIBUTOR/NOT_LAUNCHED')) {
     return 'Claiming is not enabled yet.';
+  } else if (message.includes('MAXED_ALLOWANCE')) {
+    return 'You have minted your maximum allocation.';
+  } else if (message.includes('ALREADY_ENDED')) {
+    return 'Sale is finished.';
+  } else if (message.includes('NOT_STARTED')) {
+    return 'Sale is not started yet.';
+  } else if (message.includes('NOT_ALLOWLISTED')) {
+    return 'This wallet address is not allowlisted.';
   }
 
   return message;
