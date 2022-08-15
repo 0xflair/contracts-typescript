@@ -177,7 +177,14 @@ export const CollectionSalesMintingProvider = ({
       return Boolean(tiers[id].isActive && tiers[id].isEligible);
     });
 
-    // If not found, look for a tier that is active
+    // If not found, look for a tier that is active and does nto have allowlist
+    if (!tierId) {
+      tierId = tierIds.find((id) => {
+        return Boolean(tiers[id].isActive && !tiers[id].hasAllowlist);
+      });
+    }
+
+    // If not found, look for a tier that is just active
     if (!tierId) {
       tierId = tierIds.find((id) => {
         return Boolean(tiers[id].isActive);
