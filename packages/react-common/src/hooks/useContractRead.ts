@@ -7,8 +7,9 @@ import {
   loadContract,
 } from '@0xflair/contracts-registry';
 import { ReadContractConfig as ReadContractConfigWagmi } from '@wagmi/core';
-import { useMemo } from 'react';
-import { useContractRead as useContractReadWagmi } from 'wagmi';
+import { ethers } from 'ethers';
+import { useCallback, useMemo } from 'react';
+import { useContractRead as useContractReadWagmi, useProvider } from 'wagmi';
 import { UseContractReadConfig } from 'wagmi/dist/declarations/src/hooks/contracts/useContractRead';
 
 export type ReadContractConfig<ArgsType = []> = Partial<
@@ -40,7 +41,7 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
   cacheOnBlock,
   ...restOfConfig
 }: ReadContractConfig<ArgsType>) => {
-  const contract = useMemo(
+  const contractDefinition = useMemo(
     () => loadContract(contractFqn, contractVersion),
     [contractFqn, contractVersion],
   );
@@ -51,7 +52,7 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
   const result = useContractReadWagmi(
     {
       addressOrName: contractAddress as string,
-      contractInterface: contract.artifact.abi,
+      contractInterface: contractDefinition.artifact.abi,
     },
     functionName as string,
     {
@@ -63,8 +64,43 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
     },
   );
 
+  const provider = useProvider({
+    chainId: restOfConfig.chainId,
+  });
+  const contract = useMemo(() => {
+    if (!contractAddress || !provider || !contractDefinition.artifact.abi) {
+      return;
+    }
+
+    return new ethers.Contract(
+      contractAddress,
+      contractDefinition.artifact.abi,
+      provider,
+    );
+  }, [contractAddress, contractDefinition.artifact.abi, provider]);
+
+  const call = useCallback(
+    async (overrides?: { args?: ArgsType }) => {
+      if (!contract || !functionName) {
+        return;
+      }
+
+      const finalArgs = overrides?.args ?? args;
+
+      return (await contract.functions[functionName](
+        ...(Array.isArray(finalArgs)
+          ? finalArgs
+          : finalArgs
+          ? [finalArgs]
+          : []),
+      )) as unknown as ResultType;
+    },
+    [args, contract, functionName],
+  );
+
   return {
     ...result,
+    call,
     data: result.data as ResultType | undefined,
   } as const;
 };

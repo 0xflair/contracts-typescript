@@ -6,8 +6,12 @@ type Config = {
   address?: BytesLike;
 };
 
+export const generateMerkleLeadAddressOnly = (address?: BytesLike) => {
+  return utils.keccak256(address?.toString().toLowerCase() || ZERO_ADDRESS);
+};
+
 export function useMerkleLeafAddressOnly({ address }: Config) {
   return useMemo(() => {
-    return utils.keccak256(address?.toString().toLowerCase() || ZERO_ADDRESS);
+    return generateMerkleLeadAddressOnly(address);
   }, [address]);
 }

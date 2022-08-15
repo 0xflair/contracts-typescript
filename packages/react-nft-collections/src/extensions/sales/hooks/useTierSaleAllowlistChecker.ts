@@ -2,6 +2,7 @@ import { ContractVersion } from '@0xflair/contracts-registry';
 import { useAddressListMerkleProof } from '@0xflair/react-address-lists';
 import { Environment, useContractRead } from '@0xflair/react-common';
 import { BigNumberish, BytesLike } from 'ethers';
+import { useCallback } from 'react';
 
 type Config = {
   env?: Environment;
@@ -36,7 +37,8 @@ export const useTierSaleAllowlistChecker = ({
     data: { merkleProof, merkleMetadata },
     error: merkleProofError,
     isLoading: merkleProofLoading,
-    refetch: merkleProofRefetch,
+    refetch: refetchMerkleProof,
+    call: getMerkleProof,
   } = useAddressListMerkleProof({
     env,
     address: minterAddress,
@@ -48,6 +50,8 @@ export const useTierSaleAllowlistChecker = ({
     data: isTierAllowlisted,
     error: onTierAllowlistError,
     isLoading: onTierAllowlistLoading,
+    refetch: refetchOnTierAllowlist,
+    call: callOnTierAllowlist,
   } = useContractRead<
     boolean,
     [BigNumberish, BytesLike, BigNumberish, BytesLike[]]
@@ -76,6 +80,54 @@ export const useTierSaleAllowlistChecker = ({
         : undefined,
   });
 
+  const refetch = useCallback(
+    () => refetchMerkleProof().then(() => refetchOnTierAllowlist()),
+    [refetchMerkleProof, refetchOnTierAllowlist],
+  );
+
+  const call = useCallback(
+    async (overrides?: {
+      merkleRoot?: BytesLike;
+      tierId?: BigNumberish;
+      minterAddress?: BytesLike;
+    }) => {
+      const proof = await getMerkleProof({
+        address: minterAddress,
+        rootHash: merkleRoot,
+      });
+
+      if (
+        !proof ||
+        (!overrides?.tierId && !tierId) ||
+        (!overrides?.minterAddress && !minterAddress) ||
+        (!proof.merkleMetadata?.maxAllowance &&
+          !merkleMetadata?.maxAllowance) ||
+        (!proof.merkleProof && !merkleProof)
+      ) {
+        return;
+      }
+
+      return callOnTierAllowlist({
+        args: [
+          (overrides?.tierId || tierId) as BigNumberish,
+          (overrides?.minterAddress || minterAddress) as BytesLike,
+          (proof.merkleMetadata?.maxAllowance ||
+            merkleMetadata?.maxAllowance) as BigNumberish,
+          (proof.merkleProof || merkleProof) as BytesLike[],
+        ],
+      });
+    },
+    [
+      callOnTierAllowlist,
+      getMerkleProof,
+      merkleMetadata?.maxAllowance,
+      merkleProof,
+      merkleRoot,
+      minterAddress,
+      tierId,
+    ],
+  );
+
   return {
     data: {
       isAllowlisted: isTierAllowlisted,
@@ -84,6 +136,7 @@ export const useTierSaleAllowlistChecker = ({
     },
     error: onTierAllowlistError || merkleProofError,
     isLoading: onTierAllowlistLoading || merkleProofLoading,
-    refetch: merkleProofRefetch,
+    refetch,
+    call,
   } as const;
 };

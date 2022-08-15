@@ -1,10 +1,17 @@
 import { Environment, useAxiosGet } from '@0xflair/react-common';
 import { BytesLike } from 'ethers';
+import { useCallback } from 'react';
 
 import { FLAIR_ADDRESS_LISTS_BACKEND } from '../constants';
 import { useAddressListMerkleMetadata } from './useAddressListMerkleMetadata';
-import { useMerkleLeafAddressOnly } from './useMerkleLeafAddressOnly';
-import { useMerkleLeafAddressWithAllowance } from './useMerkleLeafAddressWithAllowance';
+import {
+  generateMerkleLeadAddressOnly,
+  useMerkleLeafAddressOnly,
+} from './useMerkleLeafAddressOnly';
+import {
+  generateMerkleLeadAddressWithAllowance,
+  useMerkleLeafAddressWithAllowance,
+} from './useMerkleLeafAddressWithAllowance';
 
 type Config = {
   env?: Environment;
@@ -25,7 +32,7 @@ export function useAddressListMerkleProof({
     data: merkleMetadata,
     error: merkleMetadataError,
     isLoading: merkleMetadataLoading,
-    sendRequest: getMerkleMetadata,
+    refetch: getMerkleMetadata,
   } = useAddressListMerkleMetadata({
     env,
     address,
@@ -51,6 +58,7 @@ export function useAddressListMerkleProof({
     data: merkleProofData,
     error: merkleProofError,
     isLoading: merkleProofLoading,
+    sendRequest: getMerkleProof,
   } = useAxiosGet<{ proof: BytesLike[] }>({
     url: `${
       FLAIR_ADDRESS_LISTS_BACKEND[env]
@@ -58,10 +66,72 @@ export function useAddressListMerkleProof({
     enabled: Boolean(enabled && rootHash && address && merkleLeaf),
   });
 
+  const refetch = useCallback(
+    () => getMerkleMetadata().then(() => getMerkleProof()),
+    [getMerkleMetadata, getMerkleProof],
+  );
+
+  const call = useCallback(
+    async (overrides?: {
+      rootHash?: Config['rootHash'];
+      address?: Config['address'];
+      leafMode?: Config['leafMode'];
+    }) => {
+      const rootHashFinal = overrides?.rootHash || rootHash;
+      const addressFinal = overrides?.address || address;
+
+      const overrideMetadataResponse =
+        overrides?.rootHash || overrides?.address
+          ? await getMerkleMetadata({
+              rootHash: rootHashFinal,
+              address: addressFinal,
+            })
+          : undefined;
+
+      const maxAllowanceFinal =
+        overrideMetadataResponse?.maxAllowance || merkleMetadata?.maxAllowance;
+
+      const overrideMerkleLeaf =
+        overrides?.leafMode === 'address-only'
+          ? generateMerkleLeadAddressOnly(addressFinal)
+          : generateMerkleLeadAddressWithAllowance(
+              addressFinal,
+              maxAllowanceFinal,
+            );
+
+      const proofResponse = await getMerkleProof({
+        url: `${
+          FLAIR_ADDRESS_LISTS_BACKEND[env]
+        }/v2/address-list-merkle-trees/${
+          overrides?.rootHash || rootHash
+        }/proof/${overrideMerkleLeaf || merkleLeaf}`,
+      });
+
+      return {
+        merkleProof: proofResponse?.data.proof || merkleProofData?.proof,
+        merkleMetadata: overrideMetadataResponse || merkleMetadata,
+      };
+    },
+    [
+      address,
+      env,
+      getMerkleMetadata,
+      getMerkleProof,
+      merkleLeaf,
+      merkleMetadata,
+      merkleProofData?.proof,
+      rootHash,
+    ],
+  );
+
   return {
-    data: { merkleProof: merkleProofData?.proof || undefined, merkleMetadata },
+    data: {
+      merkleProof: merkleProofData?.proof || undefined,
+      merkleMetadata: merkleMetadata || undefined,
+    },
     error: merkleProofError || merkleMetadataError,
     isLoading: merkleProofLoading || merkleMetadataLoading,
-    refetch: getMerkleMetadata,
-  };
+    refetch,
+    call,
+  } as const;
 }

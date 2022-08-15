@@ -1,6 +1,7 @@
 import { Environment, useAxiosGet } from '@0xflair/react-common';
 import * as axios from 'axios';
 import { BytesLike } from 'ethers';
+import { useCallback } from 'react';
 
 import { FLAIR_ADDRESS_LISTS_BACKEND } from '../constants';
 
@@ -23,8 +24,28 @@ export function useAddressListMerkleMetadata({
     ?.toString()
     .toLowerCase()}`;
 
-  return useAxiosGet<{ maxAllowance: number }>({
+  const hook = useAxiosGet<{ maxAllowance: number }>({
     url,
     enabled: Boolean(enabled && rootHash && address),
   });
+
+  const refetch = useCallback(
+    async (overrides?: { rootHash?: BytesLike; address?: BytesLike }) => {
+      const response = await hook.sendRequest({
+        url: `${
+          FLAIR_ADDRESS_LISTS_BACKEND[env]
+        }/v1/address-list-merkle-trees/${
+          overrides?.rootHash?.toString() || rootHash?.toString()
+        }/metadata/${
+          overrides?.address?.toString().toLowerCase() ||
+          address?.toString().toLowerCase()
+        }`,
+      });
+
+      return response?.data;
+    },
+    [address, env, hook, rootHash],
+  );
+
+  return { ...hook, refetch } as const;
 }

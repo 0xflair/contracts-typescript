@@ -3,7 +3,7 @@ import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useLayoutEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 
 import { useCollectionContext } from '../../../common/providers/CollectionProvider';
@@ -113,6 +113,7 @@ export const CollectionSalesMintingProvider = ({
     chainId: Number(data.chainId),
     contractVersion: data.contractVersion,
     contractAddress: data.contractAddress,
+    minterAddress,
   });
 
   const {
@@ -154,40 +155,46 @@ export const CollectionSalesMintingProvider = ({
       !mintLoading,
   );
 
-  useEffect(() => {
-    const tierIds = Object.keys(tiers || {}).map((id) => Number(id));
+  console.log('tiers === ', tiers);
 
+  useEffect(() => {
     if (!autoDetectEligibleTier) {
       setIsAutoDetectingTier(false);
       return;
     }
 
-    if (
-      !autoDetectEligibleTier ||
-      tiersLoading ||
-      mintLoading ||
-      isActive === undefined ||
-      isEligible === undefined ||
-      !tierIds.length
-    ) {
-      return;
-    }
+    const tierIds = Object.keys(tiers || {}).map((id) => Number(id));
 
-    if (!isActive || !isEligible) {
-      const nextTierId = Number(currentTierId) + 1;
-      if (tierIds.includes(Number(nextTierId))) {
-        setCurrentTierId(nextTierId);
-      } else {
-        // No more tiers to check
-        setIsAutoDetectingTier(false);
-      }
-    } else {
-      // Current tier is active and eligible
-      setIsAutoDetectingTier(false);
-    }
+    // if (
+    //   !autoDetectEligibleTier ||
+    //   tiersLoading ||
+    //   mintLoading ||
+    //   isActive === undefined ||
+    //   isEligible === undefined ||
+    //   !tierIds.length
+    // ) {
+    //   return;
+    // }
+
+    // if (!isActive || !isEligible) {
+    //   setCurrentTierId((oldValue) => {
+    //     const nextTierId = Number(oldValue.toString()) + 1;
+
+    //     if (tierIds.includes(nextTierId)) {
+    //       return nextTierId;
+    //     } else {
+    //       // No more tiers to check
+    //       setIsAutoDetectingTier(false);
+    //     }
+
+    //     return oldValue;
+    //   });
+    // } else {
+    //   // Current tier is active and eligible
+    //   setIsAutoDetectingTier(false);
+    // }
   }, [
     autoDetectEligibleTier,
-    currentTierId,
     isActive,
     isEligible,
     mintLoading,

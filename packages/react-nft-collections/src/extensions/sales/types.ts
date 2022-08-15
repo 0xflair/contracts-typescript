@@ -1,6 +1,7 @@
 import { BigNumberish, BytesLike } from 'ethers';
 
 export type Tier = {
+  // On-chain
   start: BigNumberish;
   end: BigNumberish;
   currency: BytesLike;
@@ -9,5 +10,15 @@ export type Tier = {
   merkleRoot: BytesLike;
   reserved: BigNumberish;
   maxAllocation: BigNumberish;
+
+  // Off-chain helpers
   isSavedOnChain?: boolean;
+  isActive?: boolean;
+  hasAllowlist?: boolean;
+
+  // Wallet-specific
+  minterAddress?: BytesLike;
+  isAllowlisted?: boolean;
+  isEligible?: boolean;
+  eligibleAmount?: BigNumberish;
 };

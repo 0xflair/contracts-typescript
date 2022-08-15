@@ -3,18 +3,20 @@ import { V1_19_ERC721TieringExtension__factory } from '@0xflair/contracts-regist
 import {
   PredefinedReadContractConfig,
   useHasAnyOfFeatures,
+  ZERO_BYTES32,
 } from '@0xflair/react-common';
-import { BigNumberish } from 'ethers';
+import { BigNumberish, BytesLike } from 'ethers';
 import { useCallback, useMemo, useState } from 'react';
 import { useProvider } from 'wagmi';
 
 import { Tier } from '../types';
+import { useTierSaleAllowlistChecker } from './useTierSaleAllowlistChecker';
 
 type ArgsType = [tierId: BigNumberish];
 
 type Config = {
   env?: Environment;
-  tierId?: BigNumberish;
+  minterAddress?: BytesLike;
 } & PredefinedReadContractConfig<ArgsType>;
 
 export const useSaleTiers = (config: Config) => {
@@ -47,6 +49,18 @@ export const useSaleTiers = (config: Config) => {
     tags: ['erc721_tiering_extension', 'mint_by_tier_with_allowance_and_proof'],
   });
 
+  const {
+    error: allowlistCheckerError,
+    isLoading: allowlistCheckerLoading,
+    call: checkAllowlist,
+  } = useTierSaleAllowlistChecker({
+    env: config.env,
+    chainId: config.chainId,
+    contractAddress: config.contractAddress,
+    minterAddress: config.minterAddress,
+    enabled: false,
+  });
+
   const provider = useProvider({
     chainId: config.chainId,
   });
@@ -66,11 +80,34 @@ export const useSaleTiers = (config: Config) => {
         return;
       }
 
-      const result = await contract.tiers(tierId);
+      const tier = (await contract.tiers(tierId)) as Tier;
 
-      return { ...(result as Tier), isSavedOnChain: true };
+      const now = new Date();
+
+      const start =
+        tier?.start !== undefined
+          ? new Date(Number(tier?.start.toString()) * 1000)
+          : undefined;
+      const end =
+        tier?.end !== undefined
+          ? new Date(Number(tier?.end.toString()) * 1000)
+          : undefined;
+      const isActive = start && end ? start <= now && end > now : undefined;
+      const hasAllowlist = tier?.merkleRoot
+        ? tier.merkleRoot !== ZERO_BYTES32
+        : undefined;
+
+      tier.isSavedOnChain = true;
+      tier.isActive = isActive;
+      tier.hasAllowlist = hasAllowlist;
+      tier.isAllowlisted = await checkAllowlist({
+        tierId,
+        merkleRoot: tier.merkleRoot,
+      });
+
+      return tier;
     },
-    [contract],
+    [checkAllowlist, contract],
   );
 
   const refetchTiers = useCallback(async () => {
