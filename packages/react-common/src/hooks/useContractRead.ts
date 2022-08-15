@@ -8,6 +8,7 @@ import {
 } from '@0xflair/contracts-registry';
 import { ReadContractConfig as ReadContractConfigWagmi } from '@wagmi/core';
 import { ethers } from 'ethers';
+import { Result } from 'ethers/lib/utils';
 import { useCallback, useMemo } from 'react';
 import { useContractRead as useContractReadWagmi, useProvider } from 'wagmi';
 import { UseContractReadConfig } from 'wagmi/dist/declarations/src/hooks/contracts/useContractRead';
@@ -87,13 +88,19 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
 
       const finalArgs = overrides?.args ?? args;
 
-      return (await contract.functions[functionName](
+      const result = (await contract.functions[functionName](
         ...(Array.isArray(finalArgs)
           ? finalArgs
           : finalArgs
           ? [finalArgs]
           : []),
       )) as unknown as ResultType;
+
+      if (Array.isArray(result) && result.length === 1) {
+        return result[0];
+      }
+
+      return result;
     },
     [args, contract, functionName],
   );

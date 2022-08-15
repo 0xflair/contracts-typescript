@@ -80,6 +80,10 @@ export function useAddressListMerkleProof({
       const rootHashFinal = overrides?.rootHash || rootHash;
       const addressFinal = overrides?.address || address;
 
+      if (!addressFinal || !rootHashFinal) {
+        return;
+      }
+
       const overrideMetadataResponse =
         overrides?.rootHash || overrides?.address
           ? await getMerkleMetadata({

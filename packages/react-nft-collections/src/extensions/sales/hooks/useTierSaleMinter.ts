@@ -80,7 +80,7 @@ export const useTierSaleMinter = ({
     chainId,
     contractAddress,
     enabled: Boolean(
-      enabled && minterAddress && hasAllowlist && tier?.merkleRoot,
+      false && enabled && minterAddress && hasAllowlist && tier?.merkleRoot,
     ),
     merkleRoot: tier?.merkleRoot,
     tierId,

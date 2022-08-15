@@ -155,8 +155,6 @@ export const CollectionSalesMintingProvider = ({
       !mintLoading,
   );
 
-  console.log('tiers === ', tiers);
-
   useEffect(() => {
     if (!autoDetectEligibleTier) {
       setIsAutoDetectingTier(false);
@@ -165,43 +163,45 @@ export const CollectionSalesMintingProvider = ({
 
     const tierIds = Object.keys(tiers || {}).map((id) => Number(id));
 
-    // if (
-    //   !autoDetectEligibleTier ||
-    //   tiersLoading ||
-    //   mintLoading ||
-    //   isActive === undefined ||
-    //   isEligible === undefined ||
-    //   !tierIds.length
-    // ) {
-    //   return;
-    // }
+    if (
+      !autoDetectEligibleTier ||
+      tiersLoading ||
+      mintLoading ||
+      !tierIds.length
+    ) {
+      return;
+    }
 
-    // if (!isActive || !isEligible) {
-    //   setCurrentTierId((oldValue) => {
-    //     const nextTierId = Number(oldValue.toString()) + 1;
+    // Find the first tier that is eligible and is active then set it as current tier
+    let tierId = tierIds.find((id) => {
+      return Boolean(tiers[id].isActive && tiers[id].isEligible);
+    });
 
-    //     if (tierIds.includes(nextTierId)) {
-    //       return nextTierId;
-    //     } else {
-    //       // No more tiers to check
-    //       setIsAutoDetectingTier(false);
-    //     }
+    // If not found, look for a tier that is active
+    if (!tierId) {
+      tierId = tierIds.find((id) => {
+        return Boolean(tiers[id].isActive);
+      });
+    }
 
-    //     return oldValue;
-    //   });
-    // } else {
-    //   // Current tier is active and eligible
-    //   setIsAutoDetectingTier(false);
-    // }
+    // If not found, look for a tier that is eligible
+    if (!tierId) {
+      tierId = tierIds.find((id) => {
+        return Boolean(tiers[id].isEligible);
+      });
+    }
+
+    if (tierId) {
+      setCurrentTierId(tierId);
+      setIsAutoDetectingTier(false);
+    }
   }, [
     autoDetectEligibleTier,
     isActive,
     isEligible,
     mintLoading,
-    tiersLoading,
     tiers,
-    isAutoDetectingTier,
-    account?.address,
+    tiersLoading,
   ]);
 
   const value = {

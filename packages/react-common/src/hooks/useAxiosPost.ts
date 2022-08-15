@@ -76,5 +76,10 @@ export const useAxiosPost = <T>({
     }
   }, [url, data, timeout, enabled, sendRequest]);
 
-  return { data: response, isLoading, error, sendRequest } as const;
+  return {
+    data: response || undefined,
+    isLoading,
+    error,
+    sendRequest,
+  } as const;
 };

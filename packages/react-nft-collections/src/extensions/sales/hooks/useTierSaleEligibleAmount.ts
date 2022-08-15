@@ -4,7 +4,7 @@ import {
   ZERO_ADDRESS,
 } from '@0xflair/react-common';
 import { BigNumberish, BytesLike } from 'ethers';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 type ArgsType = [
   tierId: BigNumberish,
@@ -62,5 +62,40 @@ export const useTierSaleEligibleAmount = (config: Config) => {
     ...config,
   });
 
-  return { ...result, error, data };
+  const call = useCallback(
+    async (overrides?: {
+      tierId?: BigNumberish;
+      minterAddress?: BytesLike;
+      maxAllowance?: BigNumberish;
+      merkleProof?: BytesLike[];
+    }) => {
+      try {
+        return await result.call({
+          args: [
+            overrides?.tierId || config.tierId || 0,
+            overrides?.minterAddress || config.minterAddress || ZERO_ADDRESS,
+            overrides?.maxAllowance || config.maxAllowance || 1,
+            overrides?.merkleProof || config.merkleProof || [],
+          ] as ArgsType,
+        });
+      } catch (error: any) {
+        if (
+          [
+            'NOT_STARTED',
+            'MAXED_ALLOWANCE',
+            'ALREADY_ENDED',
+            'NOT_ALLOWLISTED',
+          ].includes(error?.reason)
+        ) {
+          return 0;
+        }
+
+        setData(undefined);
+        setError(undefined);
+      }
+    },
+    [config, result],
+  );
+
+  return { ...result, error, data, call } as const;
 };

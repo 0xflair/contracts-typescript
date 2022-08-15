@@ -91,40 +91,53 @@ export const useTierSaleAllowlistChecker = ({
       tierId?: BigNumberish;
       minterAddress?: BytesLike;
     }) => {
+      const minterAddressFinal = overrides?.minterAddress || minterAddress;
+      const merkleRootFinal = overrides?.merkleRoot || merkleRoot;
+      const tierIdFinal = overrides?.tierId || tierId;
+
       const proof = await getMerkleProof({
-        address: minterAddress,
-        rootHash: merkleRoot,
+        address: minterAddressFinal,
+        rootHash: merkleRootFinal,
       });
+
+      const merkleProofFinal = proof.merkleProof || merkleProof;
+      const merkleMetadataFinal = proof?.merkleMetadata || merkleMetadata;
+      const maxAllowanceFinal = merkleMetadataFinal?.maxAllowance;
 
       if (
         !proof ||
-        (!overrides?.tierId && !tierId) ||
-        (!overrides?.minterAddress && !minterAddress) ||
-        (!proof.merkleMetadata?.maxAllowance &&
-          !merkleMetadata?.maxAllowance) ||
-        (!proof.merkleProof && !merkleProof)
+        !tierIdFinal ||
+        !minterAddressFinal ||
+        !maxAllowanceFinal ||
+        !merkleProofFinal
       ) {
-        return;
+        return {};
       }
 
-      return callOnTierAllowlist({
+      const response = await callOnTierAllowlist({
         args: [
-          (overrides?.tierId || tierId) as BigNumberish,
-          (overrides?.minterAddress || minterAddress) as BytesLike,
-          (proof.merkleMetadata?.maxAllowance ||
-            merkleMetadata?.maxAllowance) as BigNumberish,
-          (proof.merkleProof || merkleProof) as BytesLike[],
+          tierIdFinal as BigNumberish,
+          minterAddressFinal as BytesLike,
+          maxAllowanceFinal as BigNumberish,
+          merkleProofFinal as BytesLike[],
         ],
       });
+
+      return {
+        isAllowlisted: response,
+        merkleMetadata: merkleMetadataFinal,
+        merkleProof: merkleProofFinal,
+      };
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
-      callOnTierAllowlist,
-      getMerkleProof,
-      merkleMetadata?.maxAllowance,
-      merkleProof,
-      merkleRoot,
-      minterAddress,
-      tierId,
+      // callOnTierAllowlist,
+      // getMerkleProof,
+      // merkleMetadata?.maxAllowance,
+      // merkleProof,
+      // merkleRoot,
+      // minterAddress,
+      // tierId,
     ],
   );
 

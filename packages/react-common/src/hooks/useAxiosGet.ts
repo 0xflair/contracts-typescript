@@ -70,5 +70,10 @@ export const useAxiosGet = <T>({
     }
   }, [url, params, timeout, enabled, sendRequest]);
 
-  return { data: response, isLoading, error, sendRequest } as const;
+  return {
+    data: response || undefined,
+    isLoading,
+    error,
+    sendRequest,
+  } as const;
 };

@@ -11,6 +11,7 @@ import { useProvider } from 'wagmi';
 
 import { Tier } from '../types';
 import { useTierSaleAllowlistChecker } from './useTierSaleAllowlistChecker';
+import { useTierSaleEligibleAmount } from './useTierSaleEligibleAmount';
 
 type ArgsType = [tierId: BigNumberish];
 
@@ -61,6 +62,18 @@ export const useSaleTiers = (config: Config) => {
     enabled: false,
   });
 
+  const {
+    data: eligibleAmount,
+    error: eligibleAmountError,
+    isLoading: eligibleAmountLoading,
+    call: getEligibleAmount,
+  } = useTierSaleEligibleAmount({
+    chainId: config.chainId,
+    contractAddress: config.contractAddress,
+    minterAddress: config.minterAddress,
+    enabled: false,
+  });
+
   const provider = useProvider({
     chainId: config.chainId,
   });
@@ -97,17 +110,39 @@ export const useSaleTiers = (config: Config) => {
         ? tier.merkleRoot !== ZERO_BYTES32
         : undefined;
 
-      tier.isSavedOnChain = true;
-      tier.isActive = isActive;
-      tier.hasAllowlist = hasAllowlist;
-      tier.isAllowlisted = await checkAllowlist({
-        tierId,
-        merkleRoot: tier.merkleRoot,
-      });
+      const { isAllowlisted, merkleMetadata, merkleProof } =
+        isActive && hasAllowlist
+          ? await checkAllowlist({
+              tierId,
+              merkleRoot: tier.merkleRoot,
+            })
+          : ({} as any);
 
-      return tier;
+      const eligibleAmount = isActive
+        ? await getEligibleAmount({
+            tierId,
+            maxAllowance: merkleMetadata?.maxAllowance,
+            merkleProof,
+          })
+        : undefined;
+
+      return {
+        ...tier,
+        isSavedOnChain: true,
+        isActive,
+        hasAllowlist,
+        isAllowlisted,
+        eligibleAmount,
+        isEligible:
+          eligibleAmount !== undefined
+            ? Boolean(
+                !eligibleAmountError && Number(eligibleAmount.toString()) > 0,
+              )
+            : undefined,
+      };
     },
-    [checkAllowlist, contract],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [contract, config.minterAddress],
   );
 
   const refetchTiers = useCallback(async () => {
