@@ -4,7 +4,7 @@ import {
   ZERO_ADDRESS,
 } from '@0xflair/react-common';
 import { BigNumberish, BytesLike } from 'ethers';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 type ArgsType = [
   tierId: BigNumberish,
@@ -24,6 +24,12 @@ export const useTierSaleEligibleAmount = (config: Config) => {
   const [data, setData] = useState<BigNumberish | undefined>();
   const [error, setError] = useState();
 
+  useMemo(() => {
+    setData(undefined);
+    setError(undefined);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [config.tierId]);
+
   const result = useContractRead<BigNumberish, ArgsType>({
     contractFqn: 'collections/ERC721/extensions/ERC721TieringExtension',
     functionName: 'eligibleForTier',
@@ -42,18 +48,9 @@ export const useTierSaleEligibleAmount = (config: Config) => {
       config.minterAddress !== undefined,
     onSettled(data, error: any) {
       if (error) {
-        if (
-          [
-            'NOT_STARTED',
-            'MAXED_ALLOWANCE',
-            'ALREADY_ENDED',
-            'NOT_ALLOWLISTED',
-          ].includes(error?.reason)
-        ) {
-          setData(0);
+        if (!['NOT_STARTED', 'NOT_ALLOWLISTED'].includes(error?.reason)) {
+          setError(error);
         }
-
-        setError(error);
       } else {
         setData(data);
         setError(undefined);
@@ -69,6 +66,9 @@ export const useTierSaleEligibleAmount = (config: Config) => {
       maxAllowance?: BigNumberish;
       merkleProof?: BytesLike[];
     }) => {
+      setData(undefined);
+      setError(undefined);
+
       try {
         return await result.call({
           args: [

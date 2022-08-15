@@ -100,7 +100,7 @@ export const useTierSaleAllowlistChecker = ({
         rootHash: merkleRootFinal,
       });
 
-      const merkleProofFinal = proof.merkleProof || merkleProof;
+      const merkleProofFinal = proof?.merkleProof || merkleProof;
       const merkleMetadataFinal = proof?.merkleMetadata || merkleMetadata;
       const maxAllowanceFinal = merkleMetadataFinal?.maxAllowance;
 
