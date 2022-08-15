@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.100.0 (2022-08-15)
+
+
+### Features
+
+* allow calling hook actions async ([44640e1](https://github.com/0xflair/typescript-sdk/commit/44640e1e161ee87f3c2db36eef4e7ba81edd56d4))
+
+
+
+
+
 ## 0.99.5 (2022-08-15)
 
 
