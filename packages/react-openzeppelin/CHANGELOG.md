@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.99.5 (2022-08-15)
+
+
+### Bug Fixes
+
+* disable caching for status, eligiblity and allowlist checking ([3200cd3](https://github.com/0xflair/typescript-sdk/commit/3200cd30c44dc31d7089ed0406356c34c30cfa84))
+
+
+
+
+
 ## 0.99.4 (2022-08-14)
 
 
