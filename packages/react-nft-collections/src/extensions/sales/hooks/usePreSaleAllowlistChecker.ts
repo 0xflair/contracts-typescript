@@ -74,7 +74,8 @@ export const usePreSaleAllowlistChecker = ({
     functionName: 'onPreSaleAllowList',
     contractAddress,
     cacheOnBlock: false,
-    cacheTime: 1,
+    cacheTime: 0,
+    staleTime: 0,
     args:
       minterAddress && proofData?.merkleProof
         ? leafMode === 'address-only'

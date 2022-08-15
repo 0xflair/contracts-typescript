@@ -68,7 +68,7 @@ export const useTierSaleMinter = ({
       : undefined;
   const isActive = start && end ? start <= now && end > now : undefined;
   const hasAllowlist = tier?.merkleRoot
-    ? tier?.merkleRoot !== ZERO_BYTES32
+    ? tier.merkleRoot !== ZERO_BYTES32
     : undefined;
 
   const {
@@ -101,7 +101,8 @@ export const useTierSaleMinter = ({
     enabled: Boolean(
       enabled &&
         minterAddress &&
-        (!hasAllowlist || (hasAllowlist && merkleProof)) &&
+        (hasAllowlist === false ||
+          (hasAllowlist === true && merkleProof !== undefined)) &&
         (merkleMetadata?.maxAllowance || mintCount || 1),
     ),
   });

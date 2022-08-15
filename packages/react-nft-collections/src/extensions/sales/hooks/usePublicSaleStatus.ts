@@ -8,7 +8,8 @@ export const usePublicSaleStatus = (config: PredefinedReadContractConfig) => {
     contractFqn: 'collections/ERC721/extensions/ERC721PublicSaleExtension',
     functionName: 'publicSaleStatus',
     cacheOnBlock: false,
-    cacheTime: 1,
+    cacheTime: 0,
+    staleTime: 0,
     ...config,
   });
 };
