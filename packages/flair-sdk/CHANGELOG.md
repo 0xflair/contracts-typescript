@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.101.0 (2022-08-16)
+
+
+### Features
+
+* automatically detect simple sales tiers ([#13](https://github.com/0xflair/typescript-sdk/issues/13)) ([d475cd5](https://github.com/0xflair/typescript-sdk/commit/d475cd5c48e4549e92fbc85ec3b369e849ba9cb0))
+
+
+
+
+
 ## 0.100.3 (2022-08-15)
 
 
