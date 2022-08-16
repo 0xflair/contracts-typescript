@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.102.1 (2022-08-16)
+
+
+### Bug Fixes
+
+* export reserved supply component ([40481a6](https://github.com/0xflair/typescript-sdk/commit/40481a6f7dc6dac0ae9a6fedf50636a2e645d77a))
+
+
+
+
+
 # 0.102.0 (2022-08-16)
 
 
