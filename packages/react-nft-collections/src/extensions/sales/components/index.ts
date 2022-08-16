@@ -7,4 +7,5 @@ export * from './CollectionSalesPrice';
 export * from './CollectionTierEligibleAmount';
 export * from './CollectionTierMaxSupply';
 export * from './CollectionTierRemainingSupply';
+export * from './CollectionTierReservedSupply';
 export * from './CollectionTierTotalSupply';
