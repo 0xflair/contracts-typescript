@@ -4,3 +4,6 @@ export * from './CollectionSalesMintButton';
 export * from './CollectionSalesMintInput';
 export * from './CollectionSalesMintStatusBar';
 export * from './CollectionSalesPrice';
+export * from './CollectionTierEligibleAmount';
+export * from './CollectionTierRemainingAmount';
+export * from './CollectionTierSupplyAmount';

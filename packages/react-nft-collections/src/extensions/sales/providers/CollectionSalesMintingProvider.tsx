@@ -9,12 +9,15 @@ import { useAccount } from 'wagmi';
 import { useCollectionContext } from '../../../common/providers/CollectionProvider';
 import { useSaleMinter } from '../../minting/useSaleMinter';
 import { useSaleTiers } from '../hooks/useSaleTiers';
+import { Tier } from '../types';
 
 type CollectionSalesMintingContextValue = {
   data: ReturnType<typeof useCollectionContext>['data'] & {
-    currentTierId?: BigNumberish;
-
     // On-chain values
+    tiers?: Record<number, Tier>;
+
+    // Current tier
+    currentTierId?: BigNumberish;
     start?: Date;
     end?: Date;
     price?: BigNumberish;
@@ -43,6 +46,7 @@ type CollectionSalesMintingContextValue = {
     metadataUriLoading?: boolean;
     maxSupplyLoading?: boolean;
     totalSupplyLoading?: boolean;
+    tiersLoading?: boolean;
 
     // Transaction
     mintLoading?: boolean;
@@ -57,6 +61,7 @@ type CollectionSalesMintingContextValue = {
     metadataUriError?: string | Error | null;
     maxSupplyError?: string | Error | null;
     totalSupplyError?: string | Error | null;
+    tiersError?: string | Error | null;
 
     // Transaction
     mintError?: string | Error | null;
@@ -163,12 +168,12 @@ export const CollectionSalesMintingProvider = ({
 
     const tierIds = Object.keys(tiers || {}).map((id) => Number(id));
 
-    if (
-      !autoDetectEligibleTier ||
-      tiersLoading ||
-      mintLoading ||
-      !tierIds.length
-    ) {
+    if (!autoDetectEligibleTier || tiersLoading || mintLoading) {
+      return;
+    }
+
+    if (!tierIds.length) {
+      setIsAutoDetectingTier(false);
       return;
     }
 
@@ -213,9 +218,12 @@ export const CollectionSalesMintingProvider = ({
     data: {
       // Common
       ...data,
-      currentTierId,
 
       // On-chain values
+      tiers,
+
+      // Current tier
+      currentTierId,
       start,
       end,
       price,
@@ -237,8 +245,10 @@ export const CollectionSalesMintingProvider = ({
     isLoading: {
       // Common
       ...isLoading,
-      tiersLoading,
+
+      // Helpers
       isAutoDetectingTier,
+      tiersLoading,
 
       // Transaction
       mintLoading,
@@ -247,6 +257,9 @@ export const CollectionSalesMintingProvider = ({
     error: {
       // Common
       ...error,
+      tiersError,
+
+      // Helpers
       tiersError,
 
       // Transaction

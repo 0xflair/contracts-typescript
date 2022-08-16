@@ -11,6 +11,9 @@ import {
   CollectionSalesMintInput,
   CollectionSalesMintStatusBar,
   CollectionSalesPrice,
+  CollectionTierEligibleAmount,
+  CollectionTierRemainingAmount,
+  CollectionTierSupplyAmount,
 } from '../components';
 import { CollectionSalesActiveStatus } from '../components/CollectionSalesActiveStatus';
 import { CollectionSalesMintingProvider } from '../providers/CollectionSalesMintingProvider';
@@ -96,6 +99,12 @@ export const CollectionSalesMintingSection = ({
                 </SwitchChainButton>
               </div>
             </ConnectButton>
+
+            {/* Maximum eligible amount */}
+            <small className="block font-light mt-2 text-xs">
+              (You can mint up to{' '}
+              <CollectionTierEligibleAmount className="inline" />)
+            </small>
           </div>
 
           <CollectionSalesMintStatusBar className="mt-4 flex flex-col gap-2" />

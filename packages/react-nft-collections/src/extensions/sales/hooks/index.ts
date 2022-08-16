@@ -13,7 +13,10 @@ export * from './usePublicSaleStatus';
 export * from './useTierSaleAllowlistChecker';
 export * from './useTierSaleEligibleAmount';
 export * from './useTierSaleInformation';
-export * from './useTierSaleTotalMints';
+export * from './useTierSaleRemaining';
+export * from './useTierSaleReserved';
+export * from './useTierSaleTotalMinted';
+export * from './useTierSaleTotalSupply';
 
 export * from './useSaleTiers';
 
