@@ -2,15 +2,15 @@ import { PredefinedReadContractConfig } from '@0xflair/react-common';
 import { BigNumber, BigNumberish } from 'ethers';
 import { useMemo } from 'react';
 
-import { useTierSaleReserved } from '.';
-import { useTierSaleRemaining } from './useTierSaleRemaining';
-import { useTierSaleTotalMinted } from './useTierSaleTotalMinted';
+import { useTierSaleReservedSupply } from '.';
+import { useTierSaleRemainingSupply } from './useTierSaleRemainingSupply';
+import { useTierSaleTotalSupply } from './useTierSaleTotalSupply';
 
 type Config = {
   tierId?: BigNumberish;
 } & PredefinedReadContractConfig<any>;
 
-export const useTierSaleTotalSupply = ({
+export const useTierSaleMaxSupply = ({
   tierId,
   chainId,
   contractAddress,
@@ -21,7 +21,7 @@ export const useTierSaleTotalSupply = ({
     data: totalMinted,
     error: totalMintedError,
     isLoading: totalMintedLoading,
-  } = useTierSaleTotalMinted({
+  } = useTierSaleTotalSupply({
     chainId,
     contractAddress,
     contractVersion,
@@ -33,7 +33,7 @@ export const useTierSaleTotalSupply = ({
     data: totalRemaining,
     error: totalRemainingError,
     isLoading: totalRemainingLoading,
-  } = useTierSaleRemaining({
+  } = useTierSaleRemainingSupply({
     chainId,
     contractAddress,
     contractVersion,
@@ -45,7 +45,7 @@ export const useTierSaleTotalSupply = ({
     data: totalReserved,
     error: totalReservedError,
     isLoading: totalReservedLoading,
-  } = useTierSaleReserved({
+  } = useTierSaleReservedSupply({
     chainId,
     contractAddress,
     contractVersion,

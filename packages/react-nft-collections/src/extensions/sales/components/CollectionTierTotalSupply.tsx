@@ -7,7 +7,7 @@ type Props = {
   tierId?: number;
 };
 
-export const CollectionTierSupplyAmount = ({ className, tierId }: Props) => {
+export const CollectionTierTotalSupply = ({ className, tierId }: Props) => {
   const {
     data: { chainId, contractAddress, contractVersion },
   } = useCollectionContext();

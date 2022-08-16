@@ -12,8 +12,6 @@ import {
   CollectionSalesMintStatusBar,
   CollectionSalesPrice,
   CollectionTierEligibleAmount,
-  CollectionTierRemainingAmount,
-  CollectionTierSupplyAmount,
 } from '../components';
 import { CollectionSalesActiveStatus } from '../components/CollectionSalesActiveStatus';
 import { CollectionSalesMintingProvider } from '../providers/CollectionSalesMintingProvider';

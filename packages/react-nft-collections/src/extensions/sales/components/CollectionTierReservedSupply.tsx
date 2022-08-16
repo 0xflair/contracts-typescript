@@ -1,5 +1,5 @@
 import { useCollectionContext } from '../../../common/providers/CollectionProvider';
-import { useTierSaleRemaining } from '../hooks/useTierSaleRemaining';
+import { useTierSaleReservedSupply } from '../hooks';
 import { useCollectionSalesMintingContext } from '../providers/CollectionSalesMintingProvider';
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   tierId?: number;
 };
 
-export const CollectionTierRemainingAmount = ({ className, tierId }: Props) => {
+export const CollectionTierReservedSupply = ({ className, tierId }: Props) => {
   const {
     data: { chainId, contractAddress, contractVersion },
   } = useCollectionContext();
@@ -16,7 +16,7 @@ export const CollectionTierRemainingAmount = ({ className, tierId }: Props) => {
     data: { currentTierId },
   } = useCollectionSalesMintingContext();
 
-  const { data: totalRemaining } = useTierSaleRemaining({
+  const { data: reservedSupply } = useTierSaleReservedSupply({
     chainId,
     contractAddress,
     contractVersion,
@@ -24,6 +24,6 @@ export const CollectionTierRemainingAmount = ({ className, tierId }: Props) => {
   });
 
   return (
-    <div className={className}>{totalRemaining?.toLocaleString() || '...'}</div>
+    <div className={className}>{reservedSupply?.toLocaleString() || '...'}</div>
   );
 };

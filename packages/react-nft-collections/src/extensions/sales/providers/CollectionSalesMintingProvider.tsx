@@ -257,7 +257,6 @@ export const CollectionSalesMintingProvider = ({
     error: {
       // Common
       ...error,
-      tiersError,
 
       // Helpers
       tiersError,

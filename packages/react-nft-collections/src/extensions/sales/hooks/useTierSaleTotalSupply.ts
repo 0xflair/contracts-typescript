@@ -10,10 +10,10 @@ type Config = {
   tierId?: BigNumberish;
 } & PredefinedReadContractConfig<ArgsType>;
 
-export const useTierSaleRemaining = (config: Config) => {
+export const useTierSaleTotalSupply = (config: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
     contractFqn: 'collections/ERC721/extensions/ERC721TieringExtension',
-    functionName: 'remainingForTier',
+    functionName: 'tierMints',
     args: [config.tierId] as ArgsType,
     enabled: config.enabled && config.tierId !== undefined,
     ...config,
