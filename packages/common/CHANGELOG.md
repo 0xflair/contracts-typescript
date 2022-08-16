@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.101.1 (2022-08-16)
+
+
+### Bug Fixes
+
+* use consistent naming for tier supply hooks and components ([7f5b58f](https://github.com/0xflair/typescript-sdk/commit/7f5b58f7f813759caecb573e50e5338d9261367b))
+
+
+
+
+
 # 0.101.0 (2022-08-16)
 
 
