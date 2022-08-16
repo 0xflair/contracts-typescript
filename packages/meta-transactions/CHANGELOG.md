@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.102.0 (2022-08-16)
+
+
+### Features
+
+* allow passing number of mints when calculating the price ([a497c91](https://github.com/0xflair/typescript-sdk/commit/a497c910f46f9f455d3c1fb6bf8dfded23a25a3f))
+
+
+
+
+
 ## 0.101.1 (2022-08-16)
 
 
