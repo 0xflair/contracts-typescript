@@ -198,10 +198,8 @@ export const CollectionSalesMintingProvider = ({
       });
     }
 
-    if (tierId) {
-      setCurrentTierId(tierId);
-      setIsAutoDetectingTier(false);
-    }
+    setCurrentTierId(tierId || 0);
+    setIsAutoDetectingTier(false);
   }, [
     autoDetectEligibleTier,
     isActive,
@@ -239,6 +237,7 @@ export const CollectionSalesMintingProvider = ({
     isLoading: {
       // Common
       ...isLoading,
+      tiersLoading,
       isAutoDetectingTier,
 
       // Transaction
@@ -248,6 +247,7 @@ export const CollectionSalesMintingProvider = ({
     error: {
       // Common
       ...error,
+      tiersError,
 
       // Transaction
       mintError: mintError as Error,
