@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.106.0 (2022-08-19)
+
+
+### Features
+
+* export total and max supply components ([7170f4b](https://github.com/0xflair/typescript-sdk/commit/7170f4b9ceb47bd41b166caf4f6eab9f88536336))
+
+
+
+
+
 # 0.105.0 (2022-08-19)
 
 
