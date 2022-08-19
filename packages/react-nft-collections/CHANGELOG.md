@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.105.0 (2022-08-19)
+
+
+### Features
+
+* allow passing wallet provider props ([e7381b9](https://github.com/0xflair/typescript-sdk/commit/e7381b9e615155e432a265832da71e41f3f05c7c))
+
+
+
+
+
 # 0.104.0 (2022-08-19)
 
 
