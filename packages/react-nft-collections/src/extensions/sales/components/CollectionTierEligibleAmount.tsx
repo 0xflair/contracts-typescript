@@ -1,29 +1,39 @@
-import { useCollectionContext } from '../../../common/providers/CollectionProvider';
-import { useTierSaleEligibleAmount } from '../hooks';
-import { useCollectionSalesMintingContext } from '../providers/CollectionSalesMintingProvider';
+import { Fragment } from 'react';
 
-type Props = {
-  className?: string;
+import { useCollectionSalesMintingContext } from '../providers/CollectionSalesMintingProvider';
+import { BareComponentProps } from '../types';
+
+type Props = BareComponentProps & {
+  loadingMask?: React.ReactNode;
   tierId?: number;
 };
 
-export const CollectionTierEligibleAmount = ({ className, tierId }: Props) => {
+export const CollectionTierEligibleAmount = ({
+  as = Fragment,
+  loadingMask = '...',
+  tierId,
+  ...attributes
+}: Props) => {
   const {
-    data: { chainId, contractAddress, contractVersion },
-  } = useCollectionContext();
-
-  const {
-    data: { currentTierId },
+    data: { currentTierId, tiers },
+    isLoading: { isAutoDetectingTier, tiersLoading },
   } = useCollectionSalesMintingContext();
+  const resolvedTierId = Number(tierId || currentTierId?.toString() || '0');
+  const eligibleAmount = tiers?.[resolvedTierId]
+    ? tiers[resolvedTierId].eligibleAmount
+    : undefined;
 
-  const { data: eligibleAmount } = useTierSaleEligibleAmount({
-    chainId,
-    contractAddress,
-    contractVersion,
-    tierId: tierId || currentTierId,
-  });
+  const Component = as;
 
   return (
-    <div className={className}>{eligibleAmount?.toLocaleString() || '...'}</div>
+    <Component {...attributes}>
+      {loadingMask &&
+      (isAutoDetectingTier || tiersLoading) &&
+      tiers == undefined ? (
+        <>{loadingMask}</>
+      ) : (
+        eligibleAmount?.toLocaleString()
+      )}
+    </Component>
   );
 };

@@ -1,13 +1,29 @@
+import { Fragment } from 'react';
+
+import { BareComponentProps } from '../../extensions';
 import { useCollectionContext } from '../providers/CollectionProvider';
 
-type Props = {
+type Props = BareComponentProps & {
   loadingMask?: React.ReactNode;
 };
 
-export const CollectionTotalSupply = ({ loadingMask = '...' }: Props) => {
+export const CollectionTotalSupply = ({
+  as = Fragment,
+  loadingMask = '...',
+  ...attributes
+}: Props) => {
   const {
     data: { totalSupply },
+    isLoading: { totalSupplyLoading },
   } = useCollectionContext();
 
-  return <>{totalSupply?.toString() || loadingMask}</>;
+  const Component = as;
+
+  return (
+    <Component {...attributes}>
+      {loadingMask && totalSupplyLoading && totalSupply === undefined
+        ? loadingMask
+        : totalSupply?.toString()}
+    </Component>
+  );
 };

@@ -1,18 +1,32 @@
-import { useCollectionSalesMintingContext } from '../providers';
+import { Fragment } from 'react';
 
-type Props = {
-  className?: string;
+import { useCollectionSalesMintingContext } from '../providers';
+import { BareComponentProps } from '../types';
+
+type Props = BareComponentProps & {
+  loadingMask?: React.ReactNode;
+  soldOutClassName?: string;
+  activeClassName?: string;
+  notActiveClassName?: string;
 };
 
-export const CollectionSalesActiveStatus = ({ className }: Props) => {
+export const CollectionSalesActiveStatus = ({
+  as = Fragment,
+  loadingMask = '...',
+  ...attributes
+}: Props) => {
   const {
     data: { isActive, soldOut },
     isLoading: { mintLoading, isAutoDetectingTier },
   } = useCollectionSalesMintingContext();
 
+  const Component = as;
+
   return (
-    <div className={className}>
-      {!isAutoDetectingTier ? (
+    <Component {...attributes}>
+      {loadingMask && isAutoDetectingTier ? (
+        <>{loadingMask}</>
+      ) : (
         <>
           {soldOut ? (
             <span className="sale-status sold-out inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
@@ -30,7 +44,7 @@ export const CollectionSalesActiveStatus = ({ className }: Props) => {
             </span>
           ) : null}
         </>
-      ) : null}
-    </div>
+      )}
+    </Component>
   );
 };

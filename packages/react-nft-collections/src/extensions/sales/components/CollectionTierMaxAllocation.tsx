@@ -1,13 +1,21 @@
+import { Fragment } from 'react';
+
 import { useCollectionContext } from '../../../common/providers/CollectionProvider';
 import { useTierSaleMaxAllocation } from '../hooks/useTierSaleMaxAllocation';
 import { useCollectionSalesMintingContext } from '../providers/CollectionSalesMintingProvider';
+import { BareComponentProps } from '../types';
 
-type Props = {
+type Props = BareComponentProps & {
   loadingMask?: React.ReactNode;
   tierId?: number;
 };
 
-export const CollectionTierMaxAllocation = ({ loadingMask, tierId }: Props) => {
+export const CollectionTierMaxAllocation = ({
+  as = Fragment,
+  loadingMask = '...',
+  tierId,
+  ...attributes
+}: Props) => {
   const {
     data: { chainId, contractAddress, contractVersion },
   } = useCollectionContext();
@@ -16,12 +24,22 @@ export const CollectionTierMaxAllocation = ({ loadingMask, tierId }: Props) => {
     data: { currentTierId },
   } = useCollectionSalesMintingContext();
 
-  const { data: maxAllocation } = useTierSaleMaxAllocation({
+  const { data, isLoading } = useTierSaleMaxAllocation({
     chainId,
     contractAddress,
     contractVersion,
     tierId: tierId || currentTierId,
   });
 
-  return <>{maxAllocation?.toLocaleString() || loadingMask}</>;
+  const Component = as;
+
+  return (
+    <Component {...attributes}>
+      {loadingMask && isLoading && data === undefined ? (
+        <>{loadingMask}</>
+      ) : (
+        data?.toLocaleString()
+      )}
+    </Component>
+  );
 };

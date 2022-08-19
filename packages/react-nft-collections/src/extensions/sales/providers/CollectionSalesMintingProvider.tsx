@@ -30,6 +30,7 @@ type CollectionSalesMintingContextValue = {
     // Helpers
     canMint?: boolean;
     soldOut?: boolean;
+    minterAddress?: BytesLike;
 
     // Transaction
     txReceipt?: TransactionReceipt;
@@ -236,6 +237,7 @@ export const CollectionSalesMintingProvider = ({
       // Helpers
       canMint,
       soldOut,
+      minterAddress,
 
       // Transaction
       txReceipt,

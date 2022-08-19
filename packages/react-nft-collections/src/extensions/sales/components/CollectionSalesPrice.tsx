@@ -1,11 +1,12 @@
 import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
 import { BigNumber } from 'ethers';
-import { ReactNode } from 'react';
+import { Fragment, ReactNode } from 'react';
 
 import { useCollectionSalesMintingContext } from '../providers';
+import { BareComponentProps } from '../types';
 
-type Props = {
-  className?: string;
+type Props = BareComponentProps & {
+  loadingMask?: ReactNode;
   showPrice?: boolean;
   showSymbol?: boolean;
   freeElement?: ReactNode;
@@ -13,11 +14,13 @@ type Props = {
 };
 
 export const CollectionSalesPrice = ({
-  className,
+  as = Fragment,
+  loadingMask = '...',
   showPrice = true,
   showSymbol = true,
   freeElement = <>Free</>,
   mintCount = 1,
+  ...attributes
 }: Props) => {
   const {
     data: { price, chainInfo, currentTierId },
@@ -30,9 +33,11 @@ export const CollectionSalesPrice = ({
       ? BigNumber.from(price).mul(mintNo === NaN ? 1 : mintNo)
       : undefined;
 
+  const Component = as;
+
   return (
-    <div className={className} title={`Tier #${currentTierId?.toString()}`}>
-      {finalPrice && !isAutoDetectingTier ? (
+    <Component {...attributes}>
+      {finalPrice !== undefined && !isAutoDetectingTier ? (
         Number(finalPrice.toString()) > 0 ? (
           <CryptoValue
             symbol={chainInfo?.nativeCurrency?.symbol}
@@ -45,8 +50,8 @@ export const CollectionSalesPrice = ({
           freeElement
         )
       ) : (
-        '...'
+        loadingMask
       )}
-    </div>
+    </Component>
   );
 };

@@ -2,8 +2,8 @@ import { PredefinedReadContractConfig } from '@0xflair/react-common';
 import { BigNumber, BigNumberish } from 'ethers';
 import { useMemo } from 'react';
 
-import { useTierSaleReservedSupply } from '.';
 import { useTierSaleRemainingSupply } from './useTierSaleRemainingSupply';
+import { useTierSaleReservedSupply } from './useTierSaleReservedSupply';
 import { useTierSaleTotalSupply } from './useTierSaleTotalSupply';
 
 type Config = {

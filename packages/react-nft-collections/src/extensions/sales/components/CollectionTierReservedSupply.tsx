@@ -1,13 +1,21 @@
-import { useCollectionContext } from '../../../common/providers/CollectionProvider';
-import { useTierSaleReservedSupply } from '../hooks';
-import { useCollectionSalesMintingContext } from '../providers/CollectionSalesMintingProvider';
+import { Fragment } from 'react';
 
-type Props = {
-  className?: string;
+import { useCollectionContext } from '../../../common/providers/CollectionProvider';
+import { useTierSaleReservedSupply } from '../hooks/useTierSaleReservedSupply';
+import { useCollectionSalesMintingContext } from '../providers/CollectionSalesMintingProvider';
+import { BareComponentProps } from '../types';
+
+type Props = BareComponentProps & {
+  loadingMask?: React.ReactNode;
   tierId?: number;
 };
 
-export const CollectionTierReservedSupply = ({ className, tierId }: Props) => {
+export const CollectionTierReservedSupply = ({
+  as = Fragment,
+  loadingMask = '...',
+  tierId,
+  ...attributes
+}: Props) => {
   const {
     data: { chainId, contractAddress, contractVersion },
   } = useCollectionContext();
@@ -16,14 +24,22 @@ export const CollectionTierReservedSupply = ({ className, tierId }: Props) => {
     data: { currentTierId },
   } = useCollectionSalesMintingContext();
 
-  const { data: reservedSupply } = useTierSaleReservedSupply({
+  const { data, isLoading } = useTierSaleReservedSupply({
     chainId,
     contractAddress,
     contractVersion,
     tierId: tierId || currentTierId,
   });
 
+  const Component = as;
+
   return (
-    <div className={className}>{reservedSupply?.toLocaleString() || '...'}</div>
+    <Component {...attributes}>
+      {loadingMask && isLoading && data === undefined ? (
+        <>{loadingMask}</>
+      ) : (
+        data?.toLocaleString()
+      )}
+    </Component>
   );
 };

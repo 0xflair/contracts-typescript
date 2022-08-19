@@ -1,32 +1,35 @@
 import { BigNumberish } from 'ethers';
+import { PropsWithChildren } from 'react';
 
 import { useCollectionSalesMintingContext } from '../providers';
+import { BareComponentProps } from '../types';
 
-type Props = {
-  children?: React.ReactNode;
-  soldOutText?: React.ReactNode;
+type Props = PropsWithChildren<BareComponentProps> & {
+  soldOutContent?: React.ReactNode;
   mintCount?: BigNumberish;
-  className?: string;
 };
 
 export const CollectionSalesMintButton = ({
+  as = 'button',
   children = 'Mint',
-  soldOutText = 'Sold Out',
-  mintCount = '1',
-  className,
+  soldOutContent = 'Sold Out',
+  mintCount = 1,
+  ...attributes
 }: Props) => {
   const {
     data: { canMint, soldOut },
     mint,
   } = useCollectionSalesMintingContext();
 
+  const Component = as;
+
   return (
-    <button
-      className={className}
+    <Component
       onClick={() => mint({ mintCount })}
       disabled={!canMint}
+      {...attributes}
     >
-      {soldOut ? soldOutText : children}
-    </button>
+      {soldOut && soldOutContent ? soldOutContent : children}
+    </Component>
   );
 };

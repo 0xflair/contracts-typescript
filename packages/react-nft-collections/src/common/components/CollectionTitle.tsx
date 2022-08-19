@@ -1,20 +1,31 @@
+import { Fragment } from 'react';
+
+import { BareComponentProps } from '../../extensions';
 import { useCollectionContext } from '../providers/CollectionProvider';
 
-type Props = {
-  className?: string;
+type Props = BareComponentProps & {
+  loadingMask?: React.ReactNode;
 };
 
-export const CollectionTitle = ({ className }: Props) => {
+export const CollectionTitle = ({
+  as = Fragment,
+  loadingMask = '...',
+  ...attributes
+}: Props) => {
   const {
-    data: { contractAddress, collection, collectionMetadata },
+    data: { collection, collectionMetadata },
+    isLoading: { collectionLoading, collectionMetadataLoading },
   } = useCollectionContext();
 
+  const Component = as;
+
   return (
-    <h1 className={className}>
-      {collectionMetadata?.name ||
-        collection?.config?.collectionName ||
-        contractAddress?.substring(0, 8) ||
-        '...'}
-    </h1>
+    <Component {...attributes}>
+      {loadingMask &&
+      (collectionLoading || collectionMetadataLoading) &&
+      !collectionMetadata?.name
+        ? loadingMask
+        : collectionMetadata?.name || collection?.config?.collectionName}
+    </Component>
   );
 };

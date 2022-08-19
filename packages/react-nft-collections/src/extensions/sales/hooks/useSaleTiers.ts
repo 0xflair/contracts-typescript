@@ -65,7 +65,6 @@ export const useSaleTiers = (config: Config) => {
   });
 
   const {
-    data: eligibleAmount,
     error: eligibleAmountError,
     isLoading: eligibleAmountLoading,
     call: getEligibleAmount,

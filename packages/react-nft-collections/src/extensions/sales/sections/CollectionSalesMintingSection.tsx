@@ -48,7 +48,10 @@ export const CollectionSalesMintingSection = ({
           {/* Sale Information */}
           <div className="mt-4 flex justify-between">
             <div className="flex flex-col flex-wrap sm:flex-row sm:items-center gap-4">
-              <CollectionSupplyCounter className="text-sm text-gray-700" />
+              <CollectionSupplyCounter
+                as="div"
+                className="text-sm text-gray-700"
+              />
 
               <CollectionSalesActiveStatus />
 
@@ -56,8 +59,10 @@ export const CollectionSalesMintingSection = ({
                 <CollectionSalesAllowlistStatus />
               ) : null}
             </div>
-
-            <CollectionSalesPrice className="text-xl font-medium text-gray-900" />
+            <CollectionSalesPrice
+              as="div"
+              className="text-xl font-medium text-gray-900"
+            />
           </div>
         </div>
 
@@ -101,7 +106,7 @@ export const CollectionSalesMintingSection = ({
             {/* Maximum eligible amount */}
             <small className="block font-light mt-2 text-xs">
               (You can mint up to{' '}
-              <CollectionTierEligibleAmount className="inline" />)
+              <CollectionTierEligibleAmount as="div" className="inline" />)
             </small>
           </div>
 

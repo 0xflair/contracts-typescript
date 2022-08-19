@@ -4,7 +4,7 @@ import {
   ZERO_ADDRESS,
 } from '@0xflair/react-common';
 import { BigNumberish, BytesLike } from 'ethers';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 type ArgsType = [
   tierId: BigNumberish,

@@ -30,15 +30,6 @@ export const CollectionSalesMintStatusBar = ({ className }: Props) => {
           {txReceipt || txResponse ? (
             <TransactionLink txReceipt={txReceipt} txResponse={txResponse} />
           ) : null}
-          {/* {collectionError && (
-        <Errors
-          title="Cannot fetch collection"
-          error={collectionError}
-        />
-      )} */}
-          {/* {!metadataLoading && metadataError && (
-        <Errors title="Cannot resolve metadata" error={metadataError} />
-      )} */}
           {!mintLoading && mintError && (
             <Errors title="Cannot mint" error={mintError} />
           )}

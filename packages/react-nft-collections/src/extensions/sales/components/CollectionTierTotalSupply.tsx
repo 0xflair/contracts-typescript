@@ -1,13 +1,21 @@
+import { Fragment } from 'react';
+
 import { useCollectionContext } from '../../../common/providers/CollectionProvider';
 import { useTierSaleTotalSupply } from '../hooks/useTierSaleTotalSupply';
 import { useCollectionSalesMintingContext } from '../providers/CollectionSalesMintingProvider';
+import { BareComponentProps } from '../types';
 
-type Props = {
-  className?: string;
+type Props = BareComponentProps & {
+  loadingMask?: React.ReactNode;
   tierId?: number;
 };
 
-export const CollectionTierTotalSupply = ({ className, tierId }: Props) => {
+export const CollectionTierTotalSupply = ({
+  as = Fragment,
+  loadingMask = '...',
+  tierId,
+  ...attributes
+}: Props) => {
   const {
     data: { chainId, contractAddress, contractVersion },
   } = useCollectionContext();
@@ -16,14 +24,22 @@ export const CollectionTierTotalSupply = ({ className, tierId }: Props) => {
     data: { currentTierId },
   } = useCollectionSalesMintingContext();
 
-  const { data: totalSupply } = useTierSaleTotalSupply({
+  const { data, isLoading } = useTierSaleTotalSupply({
     chainId,
     contractAddress,
     contractVersion,
     tierId: tierId || currentTierId,
   });
 
+  const Component = as;
+
   return (
-    <div className={className}>{totalSupply?.toLocaleString() || '...'}</div>
+    <Component {...attributes}>
+      {loadingMask && isLoading && data === undefined ? (
+        <>{loadingMask}</>
+      ) : (
+        data?.toLocaleString()
+      )}
+    </Component>
   );
 };
