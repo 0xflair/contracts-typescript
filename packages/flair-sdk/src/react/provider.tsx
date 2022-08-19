@@ -1,26 +1,20 @@
 import { CoinGeckoProvider } from '@0xflair/react-coingecko';
 import { CommonProvider } from '@0xflair/react-common';
-import { WalletProvider } from '@0xflair/react-wallet';
+import { WalletProvider, WalletProviderProps } from '@0xflair/react-wallet';
 import * as React from 'react';
 
 type Props = {
   children?: React.ReactNode;
-  custodialWallet?: boolean;
-  wagmiOverrides?: Record<string, any>;
+  walletProviderProps?: WalletProviderProps;
 };
 
 export const FlairProvider = (props: Props) => {
-  const { children, custodialWallet, wagmiOverrides } = props;
+  const { children, walletProviderProps } = props;
 
   return (
     <CommonProvider>
       <CoinGeckoProvider>
-        <WalletProvider
-          custodialWallet={custodialWallet}
-          wagmiOverrides={wagmiOverrides}
-        >
-          {children}
-        </WalletProvider>
+        <WalletProvider {...walletProviderProps}>{children}</WalletProvider>
       </CoinGeckoProvider>
     </CommonProvider>
   );

@@ -10,7 +10,7 @@ import { MagicLinkConnector } from '../connectors/magic-link';
 import { FLAIR_INFURA_PROJECT_ID } from '../constants';
 import stylesheet from '../index.css';
 
-type Props = {
+export type WalletProviderProps = {
   children?: ReactNode;
   appName?: string;
   infuraId?: string;
@@ -28,7 +28,7 @@ export const WalletProvider = ({
   custodialWallet = false,
   injectStyles = true,
   wagmiOverrides,
-}: Props) => {
+}: WalletProviderProps) => {
   const provider = useCallback(
     (config: { chainId?: number }) => {
       try {
