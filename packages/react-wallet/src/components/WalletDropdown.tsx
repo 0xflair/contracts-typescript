@@ -1,68 +1,32 @@
-import {
-  CryptoPrice,
-  CryptoUnits,
-  CryptoValue,
-} from '@0xflair/react-coingecko';
+import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
 import { classNames } from '@0xflair/react-common';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';
-import Blockies from 'react-blockies';
 import { useCopyToClipboard } from 'react-use';
-import {
-  useAccount,
-  useBalance,
-  useEnsAvatar,
-  useEnsName,
-  useNetwork,
-} from 'wagmi';
+import { useAccount, useBalance, useNetwork } from 'wagmi';
 
 import { DisconnectButton } from './DisconnectButton';
 import { WalletComponentWrapper } from './WalletComponentWrapper';
+import { WalletProfile, WalletProfileProps } from './WalletProfile';
 
 type Props = {
   as?: keyof JSX.IntrinsicElements;
   className?: string;
-  blockieSize?: number;
-  blockieScale?: number;
+  walletProfileProps?: WalletProfileProps;
 };
 
 export const WalletDropdown = ({
   as,
   className,
-  blockieSize = 8,
-  blockieScale = 3,
+  walletProfileProps,
 }: Props) => {
   const { activeChain } = useNetwork();
-  const {
-    data: account,
-    error: accountError,
-    isLoading: accountLoading,
-  } = useAccount();
-  const {
-    data: balance,
-    error: balanceError,
-    isLoading: balanceLoading,
-  } = useBalance({
+  const { data: account } = useAccount();
+  const { data: balance } = useBalance({
     addressOrName: account?.address,
     formatUnits: 'ether',
     watch: false,
-  });
-  const {
-    data: avatar,
-    error: avatarError,
-    isLoading: avatarLoading,
-  } = useEnsAvatar({
-    addressOrName: account?.address,
-    chainId: 1,
-  });
-  const {
-    data: ens,
-    error: ensError,
-    isLoading: ensLoading,
-  } = useEnsName({
-    address: account?.address,
-    chainId: 1,
   });
   const [, copyToClipboard] = useCopyToClipboard();
 
@@ -77,33 +41,10 @@ export const WalletDropdown = ({
       >
         <div>
           <Menu.Button className="wallet-dropdown-button max-w-xs rounded-full flex gap-2 items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 p-2 lg:rounded-md lg:hover:bg-gray-50">
-            {avatar?.toString() ? (
-              <img
-                className="h-8 w-8 rounded-full"
-                src={avatar?.toString()}
-                alt=""
-              />
-            ) : (
-              <Blockies
-                seed={account?.address?.toLowerCase() || ''}
-                size={blockieSize}
-                scale={blockieScale}
-                className={'wallet-dropdown-blockies rounded-full'}
-              />
-            )}{' '}
-            <span className="wallet-dropdown-label hidden text-gray-700 text-sm font-medium lg:block">
-              <span className="sr-only">Open wallet menu</span>
-              {ens?.toString() ||
-                account?.address?.slice(0, 4) +
-                  '...' +
-                  account?.address?.slice(-4)}
-            </span>
-            {balance?.value ? (
-              <span className="wallet-dropdown-balance text-gray-500 truncate">
-                {Number(balance.formatted).toFixed(4)}{' '}
-                {activeChain?.nativeCurrency?.symbol || balance.symbol}
-              </span>
-            ) : null}
+            <WalletProfile
+              className="flex gap-2 items-center"
+              {...walletProfileProps}
+            />
             <ChevronDownIcon
               className="wallet-dropdown-icon flex-shrink-0 h-5 w-5 text-gray-400 block"
               aria-hidden="true"

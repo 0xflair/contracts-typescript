@@ -6,7 +6,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
   {
     symbol: 'ETH',
     name: 'Ethereum',
-    icon: 'Ξ',
+    icon: 'ETH',
     coinGeckoId: 'ethereum',
   },
   {
