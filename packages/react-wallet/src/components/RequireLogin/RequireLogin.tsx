@@ -4,8 +4,10 @@ import React, { ReactNode } from 'react';
 
 import { useLoginContext } from '../../providers/login';
 import { LoginButton } from '../LoginButton/LoginButton';
+import { WalletComponentWrapper } from '../WalletComponentWrapper';
 
 type Props = {
+  as?: keyof JSX.IntrinsicElements;
   notLoggedInView?: ReactNode;
   children?: ReactNode;
 };
@@ -20,7 +22,10 @@ export const RequireLogin = (props: Props) => {
     return notLoggedInView ? (
       <>{notLoggedInView}</>
     ) : (
-      <div className="flex items-center justify-center h-full">
+      <WalletComponentWrapper
+        as={props.as}
+        className="flex items-center justify-center h-full"
+      >
         <div className="text-center">
           <LinkIcon
             className="mx-auto h-8 w-8 text-gray-400"
@@ -41,7 +46,7 @@ export const RequireLogin = (props: Props) => {
             <LoginButton label="Login" className={ACTION_BUTTON} />
           </div>
         </div>
-      </div>
+      </WalletComponentWrapper>
     );
   }
 

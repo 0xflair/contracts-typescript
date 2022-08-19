@@ -1,10 +1,10 @@
 import React from 'react';
 
-export interface Props {
+type Props = {
   hoverContent?: JSX.Element | string;
   className?: string;
   children: JSX.Element | JSX.Element[] | string | (JSX.Element | string)[];
-}
+};
 
 export const Tooltip = (props: Props) => {
   // initialization

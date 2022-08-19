@@ -20,7 +20,10 @@ export const CopyButton = ({ label, content, className }: Props) => {
       text={label || 'Copy to clipboard'}
       icon={
         recentlyCopied ? (
-          <CheckCircleIcon className="text-green-500" aria-hidden="true" />
+          <CheckCircleIcon
+            className="h-4 w-4 text-green-500"
+            aria-hidden="true"
+          />
         ) : null
       }
       className={className || classNames(SECONDARY_BUTTON, 'text-sm')}

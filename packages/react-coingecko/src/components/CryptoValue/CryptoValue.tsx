@@ -12,6 +12,7 @@ type Props = {
   unit?: CryptoUnits;
   symbol?: CryptoSymbol;
   showPrice?: boolean;
+  showSymbol?: boolean;
   loadingContent?: ReactNode;
 };
 
@@ -22,6 +23,7 @@ export const CryptoValue = (props: Props) => {
     unit = CryptoUnits.ETHER,
     symbol = 'ETH',
     showPrice = true,
+    showSymbol = true,
     loadingContent = '...',
   } = props;
 
@@ -45,7 +47,7 @@ export const CryptoValue = (props: Props) => {
   ) : (
     <>
       {Number(Number(etherValue).toFixed(fractions)).toLocaleString()}{' '}
-      {data.info?.icon || symbol}
+      {showSymbol ? data.info?.icon || symbol : null}
       {showPrice && data.price && Number(data.price) > 0 ? (
         <>
           {' '}

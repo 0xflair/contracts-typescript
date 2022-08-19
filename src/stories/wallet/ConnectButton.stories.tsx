@@ -5,13 +5,14 @@ import {
   LoginProvider,
   WalletProvider,
 } from '@0xflair/react-wallet';
+import React from 'react';
 import { useAccount, useBalance, useNetwork, useSigner } from 'wagmi';
 
 export default {
   title: 'ConnectButton Component',
   decorators: [
     (Story: any) => (
-      <WalletProvider custodialWallet={false}>
+      <WalletProvider custodialWallet={true}>
         <LoginProvider>
           <Story />
         </LoginProvider>

@@ -7,6 +7,7 @@ import { useCollectionSalesMintingContext } from '../providers';
 type Props = {
   className?: string;
   showPrice?: boolean;
+  showSymbol?: boolean;
   freeElement?: ReactNode;
   mintCount?: number;
 };
@@ -14,6 +15,7 @@ type Props = {
 export const CollectionSalesPrice = ({
   className,
   showPrice = true,
+  showSymbol = true,
   freeElement = <>Free</>,
   mintCount = 1,
 }: Props) => {
@@ -37,6 +39,7 @@ export const CollectionSalesPrice = ({
             value={finalPrice}
             unit={CryptoUnits.WEI}
             showPrice={showPrice}
+            showSymbol={showSymbol}
           />
         ) : (
           freeElement

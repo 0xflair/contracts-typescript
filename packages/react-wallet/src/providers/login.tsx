@@ -118,7 +118,7 @@ export const LoginProvider = ({
         {
           cancelToken: source.token,
           timeout: timeout,
-        }
+        },
       );
       if (didCancel) return;
 

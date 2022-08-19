@@ -1,6 +1,6 @@
 import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from '@0xflair/react-common';
 import { providers } from 'ethers';
-import { ReactNode, useCallback, useMemo } from 'react';
+import { ReactNode, useCallback, useLayoutEffect, useMemo } from 'react';
 import { createClient, Provider } from 'wagmi';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
@@ -8,12 +8,14 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
 import { MagicLinkConnector } from '../connectors/magic-link';
 import { FLAIR_INFURA_PROJECT_ID } from '../constants';
+import stylesheet from '../index.css';
 
 type Props = {
   children?: ReactNode;
   appName?: string;
   infuraId?: string;
   custodialWallet?: boolean;
+  injectStyles?: boolean;
   wagmiOverrides?: Record<string, any>;
 };
 
@@ -24,6 +26,7 @@ export const WalletProvider = ({
   appName = 'Flair',
   infuraId = FLAIR_INFURA_PROJECT_ID,
   custodialWallet = false,
+  injectStyles = true,
   wagmiOverrides,
 }: Props) => {
   const provider = useCallback(
@@ -99,17 +102,6 @@ export const WalletProvider = ({
 
       if (custodialWallet) {
         connectors.push(
-          // new MagicConnector({
-          //   chains: FLAIR_CHAINS,
-          //   options: {
-          //     apiKey: FLAIR_MAGIC_API_KEY,
-          //     oauthOptions: {
-          //       providers: ['google', 'twitter', 'github'],
-          //     },
-          //     customHeaderText: appName,
-          //     additionalMagicOptions: {},
-          //   },
-          // }),
           new MagicLinkConnector({
             chains: FLAIR_CHAINS,
             options: {
@@ -138,6 +130,20 @@ export const WalletProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [appName, infuraId],
   );
+
+  useLayoutEffect(() => {
+    if (!injectStyles) {
+      return;
+    }
+
+    let style = document.getElementById('flair-wallet-styles');
+    if (!style) {
+      style = document.createElement('style');
+      style.id = 'flair-wallet-styles';
+      document.head.appendChild(style);
+    }
+    style.innerHTML = stylesheet;
+  }, [injectStyles]);
 
   return (
     <Provider client={client} {...wagmiOverrides}>

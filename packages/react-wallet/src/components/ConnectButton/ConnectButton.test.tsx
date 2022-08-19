@@ -6,9 +6,9 @@ import { ConnectButton } from './ConnectButton';
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-    <WalletProvider>
+    <WalletProvider custodialWallet={true}>
       <ConnectButton label="Connect me" />
     </WalletProvider>,
-    div
+    div,
   );
 });
