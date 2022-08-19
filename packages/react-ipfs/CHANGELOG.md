@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.106.1 (2022-08-19)
+
+
+### Bug Fixes
+
+* consider tier max allocation when calculating remaining supply ([856467c](https://github.com/0xflair/typescript-sdk/commit/856467cca8ec9a0ffa8234a926a5412cbdbccd0c))
+
+
+
+
+
 # 0.106.0 (2022-08-19)
 
 
