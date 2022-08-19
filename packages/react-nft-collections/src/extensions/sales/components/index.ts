@@ -5,6 +5,7 @@ export * from './CollectionSalesMintInput';
 export * from './CollectionSalesMintStatusBar';
 export * from './CollectionSalesPrice';
 export * from './CollectionTierEligibleAmount';
+export * from './CollectionTierMaxAllocation';
 export * from './CollectionTierMaxSupply';
 export * from './CollectionTierRemainingSupply';
 export * from './CollectionTierReservedSupply';
