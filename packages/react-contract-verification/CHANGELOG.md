@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.107.0 (2022-08-19)
+
+
+### Features
+
+* make components less opinionated and fix tier eligible amount component ([#16](https://github.com/0xflair/typescript-sdk/issues/16)) ([3f428a5](https://github.com/0xflair/typescript-sdk/commit/3f428a5baa63bcc15c0559b297b187135706634e))
+
+
+
+
+
 ## 0.106.2 (2022-08-19)
 
 
