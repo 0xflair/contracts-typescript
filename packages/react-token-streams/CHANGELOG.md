@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.106.2 (2022-08-19)
+
+
+### Bug Fixes
+
+* add collection tier max allocation component ([9af3075](https://github.com/0xflair/typescript-sdk/commit/9af307567cf316e47ffd271e3af03fd8eade6a2c))
+
+
+
+
+
 ## 0.106.1 (2022-08-19)
 
 
