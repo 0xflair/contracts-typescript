@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.104.0 (2022-08-19)
+
+
+### Features
+
+* extract wallet profile for isolated use ([#15](https://github.com/0xflair/typescript-sdk/issues/15)) ([e2f911b](https://github.com/0xflair/typescript-sdk/commit/e2f911b79ff953f5f010a7c0b350fc9050cb1b1c))
+
+
+
+
+
 # 0.103.0 (2022-08-19)
 
 
