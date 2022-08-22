@@ -162,6 +162,14 @@ export const CollectionSalesMintingProvider = ({
   );
 
   useEffect(() => {
+    if (!autoDetectEligibleTier && defaultTier !== undefined) {
+      if (defaultTier !== currentTierId) {
+        setCurrentTierId(defaultTier);
+      }
+    }
+  }, [autoDetectEligibleTier, currentTierId, defaultTier]);
+
+  useEffect(() => {
     if (!autoDetectEligibleTier) {
       setIsAutoDetectingTier(false);
       return;
