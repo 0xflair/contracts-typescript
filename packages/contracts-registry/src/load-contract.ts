@@ -9,7 +9,7 @@ import { CONTRACT_REGISTRY } from './registry';
 
 export const loadContract = (
   contractFqn: ContractFqn,
-  contractVersion: ContractVersion = LATEST_VERSION
+  contractVersion: ContractVersion = LATEST_VERSION,
 ) => {
   if (!CONTRACT_REGISTRY[contractVersion]) {
     throw new FlairInvalidVersionError(contractVersion);
