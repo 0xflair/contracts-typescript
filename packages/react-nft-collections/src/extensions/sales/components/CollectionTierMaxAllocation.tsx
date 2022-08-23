@@ -28,7 +28,7 @@ export const CollectionTierMaxAllocation = ({
     chainId,
     contractAddress,
     contractVersion,
-    tierId: tierId || currentTierId,
+    tierId: tierId !== undefined ? tierId : currentTierId || '0',
   });
 
   const Component = as;

@@ -91,9 +91,16 @@ export const useTierSaleAllowlistChecker = ({
       tierId?: BigNumberish;
       minterAddress?: BytesLike;
     }) => {
-      const minterAddressFinal = overrides?.minterAddress || minterAddress;
-      const merkleRootFinal = overrides?.merkleRoot || merkleRoot;
-      const tierIdFinal = overrides?.tierId || tierId;
+      const minterAddressFinal =
+        overrides?.minterAddress !== undefined
+          ? overrides?.minterAddress
+          : minterAddress;
+      const merkleRootFinal =
+        overrides?.merkleRoot !== undefined
+          ? overrides?.merkleRoot
+          : merkleRoot;
+      const tierIdFinal =
+        overrides?.tierId !== undefined ? overrides?.tierId : tierId;
 
       const proof = await getMerkleProof({
         address: minterAddressFinal,
@@ -105,11 +112,11 @@ export const useTierSaleAllowlistChecker = ({
       const maxAllowanceFinal = merkleMetadataFinal?.maxAllowance;
 
       if (
-        !proof ||
-        !tierIdFinal ||
-        !minterAddressFinal ||
-        !maxAllowanceFinal ||
-        !merkleProofFinal
+        proof == undefined ||
+        tierIdFinal == undefined ||
+        minterAddressFinal == undefined ||
+        maxAllowanceFinal == undefined ||
+        merkleProofFinal == undefined
       ) {
         return {};
       }
@@ -133,11 +140,11 @@ export const useTierSaleAllowlistChecker = ({
     [
       // callOnTierAllowlist,
       // getMerkleProof,
-      // merkleMetadata?.maxAllowance,
-      // merkleProof,
-      // merkleRoot,
-      // minterAddress,
-      // tierId,
+      merkleMetadata,
+      merkleProof,
+      merkleRoot,
+      minterAddress,
+      tierId,
     ],
   );
 

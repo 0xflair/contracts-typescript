@@ -183,6 +183,10 @@ export const useSaleTiers = (config: Config) => {
   );
 
   const refetchTiers = useCallback(async () => {
+    if (isLoading) {
+      return;
+    }
+
     setIsLoading(true);
     setError(undefined);
 
@@ -253,19 +257,8 @@ export const useSaleTiers = (config: Config) => {
     }
 
     setIsLoading(false);
-  }, [
-    config.minterAddress,
-    fetchTierById,
-    preSaleIsAllowlisted,
-    preSaleMaxMintPerWallet,
-    preSalePrice,
-    preSaleStatus,
-    publicSaleMaxMintPerTx,
-    publicSalePrice,
-    publicSaleStatus,
-    supportsSimpleSales,
-    supportsTieredSales,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [config.minterAddress, supportsSimpleSales, supportsTieredSales]);
 
   useMemo(() => {
     if (supportsSimpleSalesLoading || supportsTieredSalesLoading) {
@@ -273,7 +266,12 @@ export const useSaleTiers = (config: Config) => {
     }
 
     refetchTiers();
-  }, [supportsSimpleSalesLoading, supportsTieredSalesLoading, refetchTiers]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    config.minterAddress,
+    supportsSimpleSalesLoading,
+    supportsTieredSalesLoading,
+  ]);
 
   return {
     data: tiers,

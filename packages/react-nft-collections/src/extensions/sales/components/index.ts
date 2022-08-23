@@ -10,3 +10,4 @@ export * from './CollectionTierMaxSupply';
 export * from './CollectionTierRemainingSupply';
 export * from './CollectionTierReservedSupply';
 export * from './CollectionTierTotalSupply';
+export * from './CollectionTierWalletMints';

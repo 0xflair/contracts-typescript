@@ -1,19 +1,22 @@
+import { BytesLike } from 'ethers';
 import { Fragment } from 'react';
 
 import { useCollectionContext } from '../../../common/providers/CollectionProvider';
-import { useTierSaleMaxSupply } from '../hooks/useTierSaleMaxSupply';
+import { useTierSaleWalletMints } from '../hooks/useTierSaleWalletMints';
 import { useCollectionSalesMintingContext } from '../providers/CollectionSalesMintingProvider';
 import { BareComponentProps } from '../types';
 
 type Props = BareComponentProps & {
   loadingMask?: React.ReactNode;
   tierId?: number;
+  walletAddress?: BytesLike;
 };
 
-export const CollectionTierMaxSupply = ({
+export const CollectionTierWalletMints = ({
   as = Fragment,
   loadingMask = '...',
   tierId,
+  walletAddress,
   ...attributes
 }: Props) => {
   const {
@@ -21,14 +24,21 @@ export const CollectionTierMaxSupply = ({
   } = useCollectionContext();
 
   const {
-    data: { currentTierId },
+    data: { currentTierId, minterAddress },
   } = useCollectionSalesMintingContext();
 
-  const { data, isLoading } = useTierSaleMaxSupply({
+  const finalTierId = tierId !== undefined ? tierId : currentTierId || '0';
+  const finalWalletAddress = walletAddress || minterAddress;
+
+  const canCheck = Boolean(finalTierId !== undefined && finalWalletAddress);
+  const { data, isLoading } = useTierSaleWalletMints({
     chainId,
     contractAddress,
     contractVersion,
-    tierId: tierId !== undefined ? tierId : currentTierId || '0',
+    tierId: finalTierId,
+    walletAddress: finalWalletAddress,
+    watch: canCheck,
+    enabled: canCheck,
   });
 
   const Component = as;

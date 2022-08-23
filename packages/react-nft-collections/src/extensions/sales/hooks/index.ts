@@ -10,15 +10,17 @@ export * from './usePublicSaleMinter';
 export * from './usePublicSalePrice';
 export * from './usePublicSaleStatus';
 
-export * from './useTierSaleAllowlistChecker';
-export * from './useTierSaleEligibleAmount';
-export * from './useTierSaleInformation';
-export * from './useTierSaleMaxSupply';
-export * from './useTierSaleRemainingSupply';
-export * from './useTierSaleReservedSupply';
-export * from './useTierSaleTotalSupply';
-
 export * from './useSaleTiers';
 
 export * from './useSimpleSaleMinter';
 export * from './useTierSaleMinter';
+
+export * from './useTierSaleAllowlistChecker';
+export * from './useTierSaleEligibleAmount';
+export * from './useTierSaleInformation';
+export * from './useTierSaleMaxAllocation';
+export * from './useTierSaleMaxSupply';
+export * from './useTierSaleRemainingSupply';
+export * from './useTierSaleReservedSupply';
+export * from './useTierSaleTotalSupply';
+export * from './useTierSaleWalletMints';

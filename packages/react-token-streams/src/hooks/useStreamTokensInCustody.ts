@@ -85,6 +85,10 @@ export const useStreamTokensInCustody = (config: Config) => {
   );
 
   const refetchTokensInCustody = useCallback(async () => {
+    if (isLoading) {
+      return;
+    }
+
     if (supportsTokensInCustody) {
       try {
         setError(undefined);
@@ -111,7 +115,12 @@ export const useStreamTokensInCustody = (config: Config) => {
 
       setIsLoading(false);
     }
-  }, [fetchTokensInCustodyInRange, supportsTokensInCustody, totalSupply]);
+  }, [
+    fetchTokensInCustodyInRange,
+    isLoading,
+    supportsTokensInCustody,
+    totalSupply,
+  ]);
 
   useMemo(() => {
     if (!supportsTokensInCustody) {

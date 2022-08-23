@@ -1,3 +1,4 @@
+import { useHasAnyOfFeatures } from '@0xflair/react-common';
 import { ConnectButton, SwitchChainButton } from '@0xflair/react-wallet';
 import { BigNumberish, BytesLike } from 'ethers';
 import { useState } from 'react';
@@ -12,6 +13,7 @@ import {
   CollectionSalesMintStatusBar,
   CollectionSalesPrice,
   CollectionTierEligibleAmount,
+  CollectionTierWalletMints,
 } from '../components';
 import { CollectionSalesActiveStatus } from '../components/CollectionSalesActiveStatus';
 import { CollectionSalesMintingProvider } from '../providers/CollectionSalesMintingProvider';
@@ -28,11 +30,18 @@ export const CollectionSalesMintingSection = ({
   minterAddress,
 }: Props) => {
   const {
-    data: { chainId },
+    data: { env, chainId, contractAddress },
   } = useCollectionContext();
 
   const { data: account } = useAccount();
   const [mintCount, setMintCount] = useState<BigNumberish>('1');
+
+  const { data: supportsTieredSales } = useHasAnyOfFeatures({
+    env,
+    chainId,
+    contractAddress,
+    tags: ['erc721_tiering_extension', 'mint_by_tier_with_allowance_and_proof'],
+  });
 
   const mintButtonClass =
     'w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
@@ -105,8 +114,14 @@ export const CollectionSalesMintingSection = ({
 
             {/* Maximum eligible amount */}
             <small className="block font-light mt-2 text-xs">
-              (You can mint up to{' '}
-              <CollectionTierEligibleAmount as="div" className="inline" />)
+              You can mint up to{' '}
+              <CollectionTierEligibleAmount as="div" className="inline" />.{' '}
+              {supportsTieredSales ? (
+                <>
+                  You have minted <CollectionTierWalletMints /> NFTs in this
+                  tier.
+                </>
+              ) : null}
             </small>
           </div>
 

@@ -72,7 +72,9 @@ export const useTierSaleEligibleAmount = (config: Config) => {
       try {
         return await result.call({
           args: [
-            overrides?.tierId || config.tierId || 0,
+            overrides?.tierId !== undefined
+              ? overrides?.tierId
+              : config.tierId || 0,
             overrides?.minterAddress || config.minterAddress || ZERO_ADDRESS,
             overrides?.maxAllowance || config.maxAllowance || 1,
             overrides?.merkleProof || config.merkleProof || [],
@@ -94,7 +96,13 @@ export const useTierSaleEligibleAmount = (config: Config) => {
         setError(undefined);
       }
     },
-    [config, result],
+    [
+      config.maxAllowance,
+      config.merkleProof,
+      config.minterAddress,
+      config.tierId,
+      result,
+    ],
   );
 
   return { ...result, error, data, call } as const;

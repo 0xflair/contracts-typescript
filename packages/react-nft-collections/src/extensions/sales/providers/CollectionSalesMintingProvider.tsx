@@ -3,7 +3,14 @@ import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
-import { ReactNode, useEffect, useLayoutEffect, useState } from 'react';
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { useAccount } from 'wagmi';
 
 import { useCollectionContext } from '../../../common/providers/CollectionProvider';
@@ -68,6 +75,7 @@ type CollectionSalesMintingContextValue = {
     mintError?: string | Error | null;
   };
 
+  refetchTiers: () => void;
   setCurrentTierId: (currentTierId: BigNumberish) => void;
 
   mint: (args?: {
@@ -109,6 +117,10 @@ export const CollectionSalesMintingProvider = ({
     autoDetectEligibleTier,
   );
 
+  const finalMinterAddress = useMemo(() => {
+    return minterAddress || account?.address || ZERO_ADDRESS;
+  }, [account?.address, minterAddress]);
+
   const {
     data: tiers,
     error: tiersError,
@@ -119,7 +131,7 @@ export const CollectionSalesMintingProvider = ({
     chainId: Number(data.chainId),
     contractVersion: data.contractVersion,
     contractAddress: data.contractAddress,
-    minterAddress,
+    minterAddress: finalMinterAddress,
   });
 
   const {
@@ -137,14 +149,14 @@ export const CollectionSalesMintingProvider = ({
     },
     error: mintError,
     isLoading: mintLoading,
-    mint,
+    mint: doMint,
   } = useSaleMinter({
     env: data.env,
     chainId: Number(data.chainId),
     contractVersion: data.contractVersion,
     contractAddress: data.contractAddress,
     tierId: currentTierId,
-    minterAddress: minterAddress || account?.address || ZERO_ADDRESS,
+    minterAddress: finalMinterAddress,
   });
 
   const soldOut = Boolean(
@@ -192,21 +204,21 @@ export const CollectionSalesMintingProvider = ({
     });
 
     // If not found, look for a tier that is active and does nto have allowlist
-    if (!tierId) {
+    if (tierId === undefined) {
       tierId = tierIds.find((id) => {
         return Boolean(tiers[id].isActive && !tiers[id].hasAllowlist);
       });
     }
 
     // If not found, look for a tier that is just active
-    if (!tierId) {
+    if (tierId === undefined) {
       tierId = tierIds.find((id) => {
         return Boolean(tiers[id].isActive);
       });
     }
 
     // If not found, look for a tier that is eligible
-    if (!tierId) {
+    if (tierId === undefined) {
       tierId = tierIds.find((id) => {
         return Boolean(tiers[id].isEligible);
       });
@@ -222,6 +234,14 @@ export const CollectionSalesMintingProvider = ({
     tiers,
     tiersLoading,
   ]);
+
+  const mint = useCallback(
+    async (args?: { mintCount: BigNumberish }) => {
+      await doMint(args);
+      await refetchTiers();
+    },
+    [doMint, refetchTiers],
+  );
 
   const value = {
     data: {
@@ -245,7 +265,7 @@ export const CollectionSalesMintingProvider = ({
       // Helpers
       canMint,
       soldOut,
-      minterAddress,
+      minterAddress: finalMinterAddress,
 
       // Transaction
       txReceipt,
@@ -275,6 +295,7 @@ export const CollectionSalesMintingProvider = ({
       mintError: mintError as Error,
     },
 
+    refetchTiers,
     setCurrentTierId,
     mint,
   };
