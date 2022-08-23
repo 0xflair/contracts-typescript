@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.107.4 (2022-08-23)
+
+
+### Bug Fixes
+
+* upadte sdk ([aceabf3](https://github.com/0xflair/typescript-sdk/commit/aceabf3aced88c554f8e8956f07de4cbd5e37b60))
+
+
+
+
+
 ## 0.107.3 (2022-08-23)
 
 
