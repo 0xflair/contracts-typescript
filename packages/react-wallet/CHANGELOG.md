@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.107.3 (2022-08-23)
+
+
+### Bug Fixes
+
+* refetch eligible amount after mint ([#17](https://github.com/0xflair/typescript-sdk/issues/17)) ([2b178c2](https://github.com/0xflair/typescript-sdk/commit/2b178c2872a84a0812374a167adb430618dafdc0))
+
+
+
+
+
 ## 0.107.2 (2022-08-23)
 
 
