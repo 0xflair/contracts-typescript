@@ -251,8 +251,6 @@ export const StreamProvider = ({
   useEffect(() => {
     if (
       selectedTicketTokens !== undefined ||
-      !ticketTokens ||
-      ticketTokens.length == 0 ||
       tokenIdsInCustodyLoading ||
       walletNftsLoading
     ) {
