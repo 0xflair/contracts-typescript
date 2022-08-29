@@ -18,7 +18,7 @@ type Props = {
 
 export const CryptoValue = (props: Props) => {
   const {
-    value = '1',
+    value = '0',
     fractionDigits,
     unit = CryptoUnits.ETHER,
     symbol = 'ETH',
