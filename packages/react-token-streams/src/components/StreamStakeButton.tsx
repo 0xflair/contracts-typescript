@@ -1,14 +1,18 @@
-import { Button } from '@0xflair/react-ui';
+import { BareComponentProps } from '@0xflair/react-common';
 import { BigNumberish } from 'ethers';
 
 import { useStreamStakingContext } from '../providers/StreamStakingProvider';
 
 type Props = {
-  className?: string;
   ticketTokenIds?: BigNumberish[];
-};
+} & BareComponentProps;
 
-export const StreamStakeButton = ({ className, ticketTokenIds }: Props) => {
+export const StreamStakeButton = ({
+  as,
+  ticketTokenIds,
+  children,
+  ...attributes
+}: Props) => {
   const {
     data: { canStake, unlockedNfts },
     stake,
@@ -16,12 +20,14 @@ export const StreamStakeButton = ({ className, ticketTokenIds }: Props) => {
 
   const tokensToStake = (ticketTokenIds || unlockedNfts || [])?.length;
 
+  const Component = as || 'button';
+
   return (
-    <Button
-      text={tokensToStake ? `Stake ${tokensToStake} NFTs` : `Stake`}
+    <Component
       onClick={() => stake(ticketTokenIds ? { ticketTokenIds } : undefined)}
       disabled={!canStake}
-      className={className}
+      children={tokensToStake ? `Stake ${tokensToStake} NFTs` : `Stake`}
+      {...attributes}
     />
   );
 };

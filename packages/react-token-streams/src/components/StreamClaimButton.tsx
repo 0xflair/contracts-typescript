@@ -12,6 +12,7 @@ export const StreamClaimButton = ({
   as,
   ticketTokenIds,
   claimToken,
+  children,
   ...attributes
 }: Props) => {
   const {
@@ -23,9 +24,9 @@ export const StreamClaimButton = ({
 
   return (
     <Component
-      text="Claim"
       onClick={() => claim({ ticketTokenIds, claimToken })}
       disabled={!canClaim}
+      children={`Claim`}
       {...attributes}
     />
   );
