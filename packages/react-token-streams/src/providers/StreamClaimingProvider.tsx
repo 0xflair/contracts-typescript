@@ -91,7 +91,12 @@ export const StreamClaimingProvider = ({
       ticketTokenIds,
       selectedTicketTokenIds,
     },
-    isLoading: { walletNftsLoading },
+    isLoading: {
+      walletNftsLoading,
+      streamLoading,
+      streamERC20BalancesLoading,
+      streamNativeBalanceLoading,
+    },
   } = useStreamContext();
 
   const {
@@ -167,9 +172,9 @@ export const StreamClaimingProvider = ({
   useEffect(() => {
     if (
       currentClaimTokenAddress !== undefined ||
-      !stream ||
-      !streamNativeBalance ||
-      !streamERC20Balances
+      streamLoading ||
+      streamERC20BalancesLoading ||
+      streamNativeBalanceLoading
     ) {
       return;
     }
@@ -189,8 +194,11 @@ export const StreamClaimingProvider = ({
     stream,
     stream?.config?.primaryClaimToken,
     streamERC20Balances,
+    streamERC20BalancesLoading,
+    streamLoading,
     streamNativeBalance,
     streamNativeBalance?.value,
+    streamNativeBalanceLoading,
   ]);
 
   const canClaim = Boolean(
