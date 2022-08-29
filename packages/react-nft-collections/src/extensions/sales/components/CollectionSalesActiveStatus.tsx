@@ -11,7 +11,7 @@ type Props = BareComponentProps & {
 };
 
 export const CollectionSalesActiveStatus = ({
-  as = Fragment,
+  as,
   loadingMask = '...',
   ...attributes
 }: Props) => {
@@ -20,7 +20,8 @@ export const CollectionSalesActiveStatus = ({
     isLoading: { mintLoading, isAutoDetectingTier },
   } = useCollectionSalesMintingContext();
 
-  const Component = as;
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component {...attributes}>

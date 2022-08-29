@@ -14,7 +14,7 @@ type Props = BareComponentProps & {
 };
 
 export const CollectionSalesPrice = ({
-  as = Fragment,
+  as,
   loadingMask = '...',
   showPrice = true,
   showSymbol = true,
@@ -33,7 +33,8 @@ export const CollectionSalesPrice = ({
       ? BigNumber.from(price).mul(mintNo === NaN ? 1 : mintNo)
       : undefined;
 
-  const Component = as;
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component {...attributes}>

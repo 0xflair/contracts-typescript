@@ -11,7 +11,7 @@ type Props = BareComponentProps & {
 };
 
 export const CollectionTierMaxAllocation = ({
-  as = Fragment,
+  as,
   loadingMask = '...',
   tierId,
   ...attributes
@@ -31,7 +31,8 @@ export const CollectionTierMaxAllocation = ({
     tierId: tierId !== undefined ? tierId : currentTierId || '0',
   });
 
-  const Component = as;
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component {...attributes}>

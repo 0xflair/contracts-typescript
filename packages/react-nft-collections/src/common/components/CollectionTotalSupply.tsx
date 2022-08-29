@@ -8,7 +8,7 @@ type Props = BareComponentProps & {
 };
 
 export const CollectionTotalSupply = ({
-  as = Fragment,
+  as,
   loadingMask = '...',
   ...attributes
 }: Props) => {
@@ -17,7 +17,8 @@ export const CollectionTotalSupply = ({
     isLoading: { totalSupplyLoading },
   } = useCollectionContext();
 
-  const Component = as;
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component {...attributes}>

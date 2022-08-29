@@ -9,7 +9,7 @@ type Props = BareComponentProps & {
 };
 
 export const CollectionSupplyCounter = ({
-  as = Fragment,
+  as,
   loadingMask,
   separator = <>&nbsp;/&nbsp;</>,
   ...attributes
@@ -19,7 +19,8 @@ export const CollectionSupplyCounter = ({
     isLoading: { maxSupplyLoading, totalSupplyLoading },
   } = useCollectionContext();
 
-  const Component = as;
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component {...attributes}>

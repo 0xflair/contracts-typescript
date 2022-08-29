@@ -21,7 +21,8 @@ export const CollectionSalesMintButton = ({
     mint,
   } = useCollectionSalesMintingContext();
 
-  const Component = as;
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component

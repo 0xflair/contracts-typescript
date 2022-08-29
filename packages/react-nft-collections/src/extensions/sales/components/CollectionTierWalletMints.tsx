@@ -13,7 +13,7 @@ type Props = BareComponentProps & {
 };
 
 export const CollectionTierWalletMints = ({
-  as = Fragment,
+  as,
   loadingMask = '...',
   tierId,
   walletAddress,
@@ -41,7 +41,8 @@ export const CollectionTierWalletMints = ({
     enabled: canCheck,
   });
 
-  const Component = as;
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component {...attributes}>

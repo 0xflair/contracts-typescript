@@ -8,7 +8,7 @@ type Props = BareComponentProps & {
 };
 
 export const CollectionMaxSupply = ({
-  as = Fragment,
+  as,
   loadingMask = '...',
   ...attributes
 }: Props) => {
@@ -17,7 +17,8 @@ export const CollectionMaxSupply = ({
     isLoading: { maxSupplyLoading },
   } = useCollectionContext();
 
-  const Component = as;
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component {...attributes}>

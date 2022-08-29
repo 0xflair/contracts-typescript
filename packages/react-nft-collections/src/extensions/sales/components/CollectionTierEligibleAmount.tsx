@@ -9,7 +9,7 @@ type Props = BareComponentProps & {
 };
 
 export const CollectionTierEligibleAmount = ({
-  as = Fragment,
+  as,
   loadingMask = '...',
   tierId,
   ...attributes
@@ -25,7 +25,8 @@ export const CollectionTierEligibleAmount = ({
     ? tiers[resolvedTierId].eligibleAmount
     : undefined;
 
-  const Component = as;
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component {...attributes}>
