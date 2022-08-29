@@ -1,15 +1,15 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import { Errors, Spinner, TransactionLink } from '@0xflair/react-ui';
+import { Fragment, PropsWithChildren } from 'react';
 
 import { useStreamClaimingContext } from '../providers/StreamClaimingProvider';
 
-type Props = {
-  className?: string;
-  children?: React.ReactNode;
-};
+type Props = PropsWithChildren<BareComponentProps>;
 
 export const StreamClaimingStatusBar = ({
-  className = 'flex flex-col gap-2',
+  as,
   children,
+  ...attributes
 }: Props) => {
   const {
     data: { txReceipt, txResponse },
@@ -27,8 +27,11 @@ export const StreamClaimingStatusBar = ({
     },
   } = useStreamClaimingContext();
 
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
   return (
-    <div className={className}>
+    <Component {...attributes}>
       {totalClaimedAmountByAccountLoading ||
       totalClaimableAmountByAccountLoading ||
       totalClaimedOverallLoading ? (
@@ -64,6 +67,6 @@ export const StreamClaimingStatusBar = ({
         />
       )}
       {children}
-    </div>
+    </Component>
   );
 };

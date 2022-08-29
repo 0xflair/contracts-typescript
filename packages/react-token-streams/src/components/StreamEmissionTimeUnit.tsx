@@ -1,13 +1,13 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import humanizeDuration from 'humanize-duration';
+import { Fragment } from 'react';
 
 import { useStreamEmissionTimeUnit } from '../hooks/useStreamEmissionTimeUnit';
 import { useStreamContext } from '../providers/StreamProvider';
 
-type Props = {
-  className?: string;
-};
+type Props = BareComponentProps;
 
-export const StreamEmissionTimeUnit = ({ className }: Props) => {
+export const StreamEmissionTimeUnit = ({ as, ...attributes }: Props) => {
   const {
     data: { env, chainId, contractAddress },
   } = useStreamContext();
@@ -18,12 +18,15 @@ export const StreamEmissionTimeUnit = ({ className }: Props) => {
     contractAddress,
   });
 
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
   return (
-    <div className={className}>
+    <Component {...attributes}>
       every{' '}
       {emissionTimeUnit
         ? humanizeDuration(Number(emissionTimeUnit.toString()) * 1000)
         : '...'}
-    </div>
+    </Component>
   );
 };

@@ -5,8 +5,8 @@ import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish } from 'ethers';
 import * as React from 'react';
-import { ReactNode, useCallback, useMemo } from 'react';
-import { useBlockNumber, useNetwork, useSigner } from 'wagmi';
+import { ReactNode, useCallback, useEffect, useMemo } from 'react';
+import { useBlockNumber, useSigner } from 'wagmi';
 
 import { useStreamStaker } from '../hooks/useStreamStaker';
 import { useStreamStakerPrepare } from '../hooks/useStreamStakerPrepare';
@@ -93,9 +93,9 @@ export const StreamStakingProvider = ({ children }: Props) => {
       env,
       chainId,
       contractAddress,
-      nfts,
+      selectedTicketTokens,
       ticketTokenAddress,
-      ticketTokenIds,
+      selectedTicketTokenIds,
       tokenIdsInCustody,
     },
     isLoading: { walletNftsLoading, tokenIdsInCustodyLoading },
@@ -121,24 +121,24 @@ export const StreamStakingProvider = ({ children }: Props) => {
   } = useFilterUnlockedTokens({
     chainId,
     contractAddress: ticketTokenAddress as string,
-    args: [ticketTokenIds || []],
+    args: [selectedTicketTokenIds || []],
     enabled: Boolean(
       hasLockableExtension &&
         ticketTokenAddress &&
-        ticketTokenIds &&
-        ticketTokenIds.length > 0,
+        selectedTicketTokenIds &&
+        selectedTicketTokenIds.length > 0,
     ),
     watch: Boolean(
       hasLockableExtension &&
         ticketTokenAddress &&
-        ticketTokenIds &&
-        ticketTokenIds.length > 0,
+        selectedTicketTokenIds &&
+        selectedTicketTokenIds.length > 0,
     ),
   });
 
   const unlockedNfts = useMemo(
     () =>
-      nfts?.filter(
+      selectedTicketTokens?.filter(
         (t) =>
           (!hasLockableExtension ||
             unlockedTokenIds.find(
@@ -148,14 +148,19 @@ export const StreamStakingProvider = ({ children }: Props) => {
             (id: any) => id.toString() === t.tokenId?.toString(),
           ),
       ),
-    [hasLockableExtension, nfts, tokenIdsInCustody, unlockedTokenIds],
+    [
+      hasLockableExtension,
+      selectedTicketTokens,
+      tokenIdsInCustody,
+      unlockedTokenIds,
+    ],
   );
   const lockedNfts = useMemo(
     () =>
-      nfts?.filter(
+      selectedTicketTokens?.filter(
         (t) => !unlockedTokenIds.find((id: any) => id.toString() === t.tokenId),
       ),
-    [nfts, unlockedTokenIds],
+    [selectedTicketTokens, unlockedTokenIds],
   );
 
   const {
@@ -166,29 +171,33 @@ export const StreamStakingProvider = ({ children }: Props) => {
   } = useStreamUnlockingTime({
     chainId,
     contractAddress,
-    args: [ticketTokenIds || []],
+    args: [selectedTicketTokenIds || []],
   });
 
   const now = Math.floor(+new Date() / 1000);
   const stakedNfts = useMemo(
     () =>
       (tokenUnlockingTimes
-        ?.map((t, i) => (Number(t.toString()) > 0 ? nfts?.[i] : null))
+        ?.map((t, i) =>
+          Number(t.toString()) > 0 ? selectedTicketTokens?.[i] : null,
+        )
         .filter((i) => i !== null) as NftToken[]) || [],
-    [nfts, tokenUnlockingTimes],
+    [selectedTicketTokens, tokenUnlockingTimes],
   );
 
   const unstakeableNfts = useMemo(
     () =>
       (tokenUnlockingTimes
-        ?.map((t, i) => (Number(t.toString()) < now ? nfts?.[i] : null))
+        ?.map((t, i) =>
+          Number(t.toString()) < now ? selectedTicketTokens?.[i] : null,
+        )
         .filter((t) => t !== null)
         .filter((t) =>
           stakedNfts.find(
             (s) => s.tokenId.toString() === t?.tokenId.toString(),
           ),
         ) || []) as NftToken[],
-    [nfts, now, stakedNfts, tokenUnlockingTimes],
+    [selectedTicketTokens, now, stakedNfts, tokenUnlockingTimes],
   );
 
   const {
@@ -235,7 +244,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
   });
 
   const canStake = Boolean(
-    (!walletNftsLoading || nfts !== undefined) &&
+    (!walletNftsLoading || selectedTicketTokens !== undefined) &&
       !tokenIdsInCustodyLoading &&
       !stakeLoading &&
       !unlockedNftsLoading &&
@@ -244,7 +253,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
   );
 
   const canUnstake = Boolean(
-    (!walletNftsLoading || nfts !== undefined) &&
+    (!walletNftsLoading || selectedTicketTokens !== undefined) &&
       !tokenIdsInCustodyLoading &&
       !unstakeLoading &&
       !tokenUnlockingTimesLoading &&
@@ -252,14 +261,12 @@ export const StreamStakingProvider = ({ children }: Props) => {
       unstakeableNfts.length > 0,
   );
 
-  useMemo(() => {
+  useEffect(() => {
     if (walletNftsLoading) {
       return;
     }
 
     refetchWalletNfts();
-
-    return blockNumber;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blockNumber]);
 

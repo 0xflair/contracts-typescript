@@ -7,6 +7,7 @@ import {
   StreamRateByTokens,
 } from '../components';
 import { StreamClaimButton } from '../components/StreamClaimButton';
+import { StreamClaimTokenSelector } from '../components/StreamClaimTokenSelector';
 import { StreamEmissionTimeUnit } from '../components/StreamEmissionTimeUnit';
 import { StreamRewardAmount } from '../components/StreamRewardAmount';
 import { StreamSharesAllocation } from '../components/StreamSharesAllocation';
@@ -20,7 +21,7 @@ type Props = {};
 
 export const StreamClaimingSection = ({}: Props) => {
   const {
-    data: { env, chainId, contractAddress },
+    data: { env, chainId, contractAddress, tokenBalances },
   } = useStreamContext();
 
   const buttonClass =
@@ -59,6 +60,19 @@ export const StreamClaimingSection = ({}: Props) => {
             <div className="lg:col-span-12">
               <section className="flex flex-col gap-2 px-4 py-6 sm:p-6 lg:p-8 lg:mt-0 lg:col-span-5">
                 <dl className={'space-y-4'}>
+                  {tokenBalances && tokenBalances?.length > 1 ? (
+                    <div className="flex flex-col align-items-start justify-between gap-2">
+                      <dt className="flex flex-col gap-1 text-sm text-gray-600">
+                        <span>Available tokens</span>
+                        <small className="text-xs flex-shrink-0 text-gray-400">
+                          Choose which token you want to claim?
+                        </small>
+                      </dt>
+                      <dd className="text-sm font-medium text-gray-900">
+                        <StreamClaimTokenSelector />
+                      </dd>
+                    </div>
+                  ) : null}
                   <div className="flex items-center justify-between gap-4">
                     <dt className="flex flex-col gap-1 text-sm text-gray-600">
                       <span>Your total claimed</span>
@@ -155,10 +169,10 @@ export const StreamClaimingSection = ({}: Props) => {
                   </div>
                 </dl>
 
-                <div className="flex flex-col justify-center items-center">
-                  {/* Claim button */}
+                <div className="flex flex-col justify-center items-center mt-4">
                   <ConnectButton
                     className={buttonClass}
+                    wrapperClassName="w-full"
                     label="Connect to claim"
                   >
                     <SwitchChainButton

@@ -1,25 +1,26 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import { BigNumberish } from 'ethers';
+import { Fragment } from 'react';
 
 import { useStreamShares } from '../hooks/useStreamShares';
 import { useStreamTotalShares } from '../hooks/useStreamTotalShares';
-import { useStreamClaimingContext } from '../providers';
 import { useStreamContext } from '../providers/StreamProvider';
 
 type Props = {
-  className?: string;
   ticketTokenIds?: BigNumberish[];
-};
+} & BareComponentProps;
 
 export const StreamSharesAllocation = ({
-  className,
   ticketTokenIds,
+  as,
+  ...attributes
 }: Props) => {
   const {
     data: {
       env,
       chainId,
       contractAddress,
-      ticketTokenIds: accountTicketTokenIds,
+      selectedTicketTokenIds: accountTicketTokenIds,
     },
   } = useStreamContext();
 
@@ -50,9 +51,12 @@ export const StreamSharesAllocation = ({
       return Number(acc) + Number(curr);
     }, 0) || 0;
 
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
   return (
-    <span className={className}>
+    <Component {...attributes}>
       {sumOfShares?.toString()} / {totalShares?.toString()}
-    </span>
+    </Component>
   );
 };

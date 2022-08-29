@@ -1,8 +1,8 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import { BigNumberish } from 'ethers';
 import { PropsWithChildren } from 'react';
 
 import { useCollectionSalesMintingContext } from '../providers';
-import { BareComponentProps } from '../types';
 
 type Props = PropsWithChildren<BareComponentProps> & {
   soldOutContent?: React.ReactNode;

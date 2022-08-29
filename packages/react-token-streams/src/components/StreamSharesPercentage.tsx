@@ -1,24 +1,26 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import { BigNumberish } from 'ethers';
+import { Fragment } from 'react';
 
 import { useStreamShares } from '../hooks/useStreamShares';
 import { useStreamTotalShares } from '../hooks/useStreamTotalShares';
 import { useStreamContext } from '../providers/StreamProvider';
 
 type Props = {
-  className?: string;
   ticketTokenIds?: BigNumberish[];
-};
+} & BareComponentProps;
 
 export const StreamSharesPercentage = ({
-  className,
+  as,
   ticketTokenIds,
+  ...attributes
 }: Props) => {
   const {
     data: {
       env,
       chainId,
       contractAddress,
-      ticketTokenIds: accountTicketTokenIds,
+      selectedTicketTokenIds: accountTicketTokenIds,
     },
   } = useStreamContext();
 
@@ -51,5 +53,8 @@ export const StreamSharesPercentage = ({
 
   const percentage = (sumOfShares / Number(totalShares?.toString() || 1)) * 100;
 
-  return <span className={className}>{percentage}%</span>;
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
+  return <Component {...attributes}>{percentage}%</Component>;
 };

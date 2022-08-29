@@ -1,4 +1,4 @@
-import { Environment, useChainInfo } from '@0xflair/react-common';
+import { Environment, useChainInfo, ZERO_ADDRESS } from '@0xflair/react-common';
 import {
   NftToken,
   TokenBalance,
@@ -6,9 +6,10 @@ import {
   useTokenBalances,
 } from '@0xflair/react-data-query';
 import { useERC721Symbol } from '@0xflair/react-openzeppelin';
-import { BigNumberish, BytesLike } from 'ethers';
+import { BigNumber, BigNumberish, BytesLike } from 'ethers';
+import _ from 'lodash';
 import * as React from 'react';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { Chain, useAccount, useBalance } from 'wagmi';
 
 import { useStreamTicketToken, useTokenStream } from '../hooks';
@@ -20,21 +21,24 @@ type StreamContextValue = {
     env?: Environment;
 
     // Resources
-    chainId?: number;
+    chainId: number;
     chainInfo?: Chain;
     contractAddress?: string;
-    stream?: TokenStream | null;
-    nfts?: NftToken[] | null;
+    stream?: TokenStream;
+    ticketTokens?: NftToken[];
 
     // On-chain values
     ticketTokenAddress?: BytesLike;
     ticketTokenSymbol?: BytesLike;
     streamNativeBalance?: ReturnType<typeof useBalance>['data'];
-    streamERC20Balances?: TokenBalance[] | null;
+    streamERC20Balances?: TokenBalance[];
     tokenIdsInCustody?: BigNumberish[];
 
     // Helpers
+    tokenBalances?: TokenBalance[];
     ticketTokenIds?: BigNumberish[];
+    selectedTicketTokens?: NftToken[];
+    selectedTicketTokenIds?: BigNumberish[];
   };
 
   error: {
@@ -66,6 +70,8 @@ type StreamContextValue = {
   refetchTokensInCustody: () => Promise<any>;
   refetchWalletNfts: () => Promise<any>;
   refetchStreamERC20Balances: () => Promise<any>;
+
+  setSelectedTicketTokens: (tokens: NftToken[]) => void;
 };
 
 export const StreamContext = React.createContext<StreamContextValue | null>(
@@ -99,6 +105,9 @@ export const StreamProvider = ({
   const chainId = Number(rawChainId);
   const chainInfo = useChainInfo(chainId);
   const { data: account } = useAccount();
+
+  const [selectedTicketTokens, setSelectedTicketTokens] =
+    useState<NftToken[]>();
 
   const {
     data: stream,
@@ -181,18 +190,22 @@ export const StreamProvider = ({
     enabled: Boolean(contractAddress),
   });
 
-  const nfts = useMemo(() => {
-    return [
-      ...(walletNfts || []),
-      ...(tokenIdsInCustody || []).map(
-        (tokenId) =>
-          ({
-            tokenId,
-            contractAddress: ticketTokenAddress,
-            ownerAddress: stream?.contractAddress,
-          } as NftToken),
-      ),
-    ];
+  const ticketTokens = useMemo(() => {
+    return _.uniqBy(
+      [
+        ...(walletNfts || []),
+        ...(tokenIdsInCustody || []).map(
+          (tokenId) =>
+            ({
+              tokenId,
+              contractAddress: ticketTokenAddress,
+              ownerAddress: stream?.contractAddress,
+            } as NftToken),
+        ),
+      ],
+      'tokenId',
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     walletNfts,
     tokenIdsInCustody,
@@ -200,9 +213,63 @@ export const StreamProvider = ({
     stream?.contractAddress,
   ]);
 
+  const tokenBalances = useMemo(() => {
+    const tokens: TokenBalance[] = [];
+    if (streamNativeBalance && streamNativeBalance.value.gt(0)) {
+      tokens.push({
+        chainId,
+        ownerAddress: contractAddress as string,
+        balance: streamNativeBalance.value.toString(),
+        tokenAddress: ZERO_ADDRESS,
+        decimals: chainInfo?.nativeCurrency?.decimals.toString() || '18',
+        symbol: streamNativeBalance.symbol,
+        icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png',
+        name: chainInfo?.nativeCurrency?.name || streamNativeBalance.symbol,
+      });
+    }
+
+    tokens.push(
+      ...(streamERC20Balances?.filter((token) =>
+        BigNumber.from(token.balance).gt(0),
+      ) || []),
+    );
+
+    return tokens;
+  }, [
+    streamNativeBalance,
+    streamERC20Balances,
+    chainId,
+    contractAddress,
+    chainInfo?.nativeCurrency?.decimals,
+    chainInfo?.nativeCurrency?.name,
+  ]);
+
   const ticketTokenIds = useMemo(() => {
-    return nfts?.map(({ tokenId }) => tokenId) || [];
-  }, [nfts]);
+    return ticketTokens?.map(({ tokenId }) => tokenId) || [];
+  }, [ticketTokens]);
+
+  useEffect(() => {
+    if (
+      selectedTicketTokens !== undefined ||
+      !ticketTokens ||
+      ticketTokens.length == 0 ||
+      tokenIdsInCustodyLoading ||
+      walletNftsLoading
+    ) {
+      return;
+    }
+
+    setSelectedTicketTokens(ticketTokens);
+  }, [
+    ticketTokens,
+    selectedTicketTokens,
+    tokenIdsInCustodyLoading,
+    walletNftsLoading,
+  ]);
+
+  const selectedTicketTokenIds = useMemo(() => {
+    return selectedTicketTokens?.map(({ tokenId }) => tokenId) || [];
+  }, [selectedTicketTokens]);
 
   const value = {
     data: {
@@ -213,7 +280,7 @@ export const StreamProvider = ({
       chainInfo,
       contractAddress,
       stream,
-      nfts,
+      ticketTokens,
 
       // On-chain values
       ticketTokenAddress,
@@ -223,7 +290,10 @@ export const StreamProvider = ({
       tokenIdsInCustody,
 
       // Helpers
+      tokenBalances,
       ticketTokenIds,
+      selectedTicketTokens,
+      selectedTicketTokenIds,
     },
 
     error: {
@@ -255,6 +325,8 @@ export const StreamProvider = ({
     refetchTokensInCustody,
     refetchWalletNfts,
     refetchStreamERC20Balances,
+
+    setSelectedTicketTokens,
   };
 
   return React.createElement(

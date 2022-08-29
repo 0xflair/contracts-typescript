@@ -1,14 +1,14 @@
 import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
+import { BareComponentProps } from '@0xflair/react-common';
+import { Fragment } from 'react';
 
 import { useStreamEmissionAmountUntil } from '../hooks';
 import { useStreamClaimingContext } from '../providers';
 import { useStreamContext } from '../providers/StreamProvider';
 
-type Props = {
-  className?: string;
-};
+type Props = BareComponentProps;
 
-export const StreamEmissionAmount = ({ className }: Props) => {
+export const StreamEmissionAmount = ({ as, ...attributes }: Props) => {
   const {
     data: { chainInfo, env, chainId, contractAddress },
   } = useStreamContext();
@@ -30,8 +30,11 @@ export const StreamEmissionAmount = ({ className }: Props) => {
     },
   });
 
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
   return (
-    <div className={className}>
+    <Component {...attributes}>
       <CryptoValue
         symbol={
           currentClaimTokenSymbol?.toString() ||
@@ -41,6 +44,6 @@ export const StreamEmissionAmount = ({ className }: Props) => {
         unit={CryptoUnits.WEI}
         showPrice={false}
       />
-    </div>
+    </Component>
   );
 };

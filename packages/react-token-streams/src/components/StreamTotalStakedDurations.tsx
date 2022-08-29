@@ -1,33 +1,38 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import humanizeDuration from 'humanize-duration';
+import { Fragment } from 'react';
 
 import { useStreamTotalStakedDurations } from '../hooks/useStreamTotalStakedDurations';
 import { useStreamContext } from '../providers/StreamProvider';
 
-type Props = {
-  className?: string;
-};
+type Props = BareComponentProps;
 
-export const StreamTotalStakedDurations = ({ className }: Props) => {
+export const StreamTotalStakedDurations = ({ as, ...attributes }: Props) => {
   const {
-    data: { env, chainId, contractAddress, ticketTokenIds },
+    data: { env, chainId, contractAddress, selectedTicketTokenIds },
   } = useStreamContext();
 
   const { data: totalDurations } = useStreamTotalStakedDurations({
     env,
     chainId,
     contractAddress,
-    args: { ticketTokenIds },
-    enabled: Boolean(ticketTokenIds && ticketTokenIds.length > 0),
+    args: { ticketTokenIds: selectedTicketTokenIds },
+    enabled: Boolean(
+      selectedTicketTokenIds && selectedTicketTokenIds.length > 0,
+    ),
   });
 
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
   return (
-    <span className={className}>
+    <Component {...attributes}>
       ~
       {totalDurations
         ? humanizeDuration(Number(totalDurations.toString()) * 1000, {
             largest: 2,
           })
         : '...'}
-    </span>
+    </Component>
   );
 };

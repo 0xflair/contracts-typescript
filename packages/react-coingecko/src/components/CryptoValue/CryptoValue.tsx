@@ -29,14 +29,17 @@ export const CryptoValue = (props: Props) => {
 
   const { data, error, loading } = useCryptoCurrency({ symbol });
 
-  const fractions =
+  const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
+  const etherValue = ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
+
+  const fractions = Math.max(
     fractionDigits !== undefined
       ? fractionDigits
       : symbol?.toString().toLowerCase().endsWith('eth')
       ? 4
-      : 2;
-  const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
-  const etherValue = ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
+      : 2,
+    (etherValue?.match(/^(0|\.)+/)?.[0]?.length || 3) - 1,
+  );
 
   if (error) {
     console.warn(`Could not fetch price for ${symbol}: `, error);
@@ -46,7 +49,7 @@ export const CryptoValue = (props: Props) => {
     <>{loadingContent}</>
   ) : (
     <>
-      {Number(Number(etherValue).toFixed(fractions)).toLocaleString()}{' '}
+      {Number(etherValue).toFixed(fractions)}{' '}
       {showSymbol ? data.info?.icon || symbol : null}
       {showPrice && data.price && Number(data.price) > 0 ? (
         <>

@@ -1,20 +1,21 @@
 import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
+import { BareComponentProps } from '@0xflair/react-common';
 import moment from 'moment';
-import { ReactNode } from 'react';
+import { Fragment, ReactNode } from 'react';
 
 import { useStreamEmissionRate } from '../hooks/useStreamEmissionRate';
 import { useStreamEmissionTimeUnit } from '../hooks/useStreamEmissionTimeUnit';
 import { useStreamClaimingContext } from '../providers';
 import { useStreamContext } from '../providers/StreamProvider';
 
-type Props = {
-  className?: string;
+type Props = BareComponentProps & {
   separator?: ReactNode;
 };
 
 export const StreamEmissionRate = ({
-  className,
+  as,
   separator = <>/</>,
+  ...attributes
 }: Props) => {
   const {
     data: { env, chainId, contractAddress },
@@ -36,8 +37,11 @@ export const StreamEmissionRate = ({
       contractAddress,
     });
 
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
   return (
-    <div className={className}>
+    <Component {...attributes}>
       {emissionRateLoading ? (
         '...'
       ) : (
@@ -54,6 +58,6 @@ export const StreamEmissionRate = ({
         : moment
             .duration(emissionTimeUnit?.toString(), 'seconds')
             .humanize(false)}
-    </div>
+    </Component>
   );
 };

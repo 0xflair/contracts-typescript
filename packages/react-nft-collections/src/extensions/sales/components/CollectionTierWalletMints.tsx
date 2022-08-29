@@ -1,10 +1,10 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import { BytesLike } from 'ethers';
 import { Fragment } from 'react';
 
 import { useCollectionContext } from '../../../common/providers/CollectionProvider';
 import { useTierSaleWalletMints } from '../hooks/useTierSaleWalletMints';
 import { useCollectionSalesMintingContext } from '../providers/CollectionSalesMintingProvider';
-import { BareComponentProps } from '../types';
 
 type Props = BareComponentProps & {
   loadingMask?: React.ReactNode;

@@ -22,7 +22,3 @@ export type Tier = {
   isEligible?: boolean;
   eligibleAmount?: BigNumberish;
 };
-
-export type BareComponentProps<T extends HTMLElement = HTMLElement> = {
-  as?: React.ElementType;
-} & React.HTMLAttributes<T>;

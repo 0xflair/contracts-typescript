@@ -1,23 +1,26 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import { Errors, Spinner } from '@0xflair/react-ui';
+import { Fragment, PropsWithChildren } from 'react';
 
 import { useStreamContext } from '../providers/StreamProvider';
 
-type Props = {
-  className?: string;
-  children?: React.ReactNode;
-};
+type Props = PropsWithChildren<BareComponentProps>;
 
 export const StreamCommonStatusBar = ({
-  className = 'flex flex-col gap-2',
+  as,
   children,
+  ...attributes
 }: Props) => {
   const {
     error: { walletNftsError, tokenIdsInCustodyError, streamError },
     isLoading: { walletNftsLoading, tokenIdsInCustodyLoading },
   } = useStreamContext();
 
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
   return (
-    <div className={className}>
+    <Component {...attributes}>
       {walletNftsLoading || tokenIdsInCustodyLoading ? (
         <div className="flex items-center gap-2">
           <Spinner /> Loading your NFTs...
@@ -31,6 +34,6 @@ export const StreamCommonStatusBar = ({
         <Errors title="tokenIdsInCustodyError" error={tokenIdsInCustodyError} />
       )}
       {children}
-    </div>
+    </Component>
   );
 };

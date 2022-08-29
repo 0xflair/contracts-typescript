@@ -4,7 +4,7 @@ import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
-import { ReactNode } from 'react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useSigner } from 'wagmi';
 
 import { useStreamClaimableAmount } from '../hooks/useStreamClaimableAmount';
@@ -53,6 +53,7 @@ export type StreamClaimingContextValue = {
     claimError?: string | Error | null;
   };
 
+  setCurrentClaimTokenAddress: (address: BytesLike) => void;
   claim: ReturnType<typeof useStreamClaimer>['writeAndWait'];
 };
 
@@ -75,28 +76,23 @@ export const StreamClaimingProvider = ({
   children,
 }: Props) => {
   const { data: signer } = useSigner();
+  const [currentClaimTokenAddress, setCurrentClaimTokenAddress] =
+    useState<BytesLike>();
 
   const {
     data: {
       env,
       chainId,
       contractAddress,
-      nfts,
+      selectedTicketTokens,
       stream,
       streamNativeBalance,
       streamERC20Balances,
       ticketTokenIds,
+      selectedTicketTokenIds,
     },
     isLoading: { walletNftsLoading },
   } = useStreamContext();
-
-  const currentClaimTokenAddress =
-    primaryClaimToken ||
-    stream?.config?.primaryClaimToken ||
-    (streamNativeBalance?.value?.gt(0)
-      ? ZERO_ADDRESS
-      : streamERC20Balances?.[0]?.tokenAddress) ||
-    ZERO_ADDRESS;
 
   const {
     data: currentClaimTokenSymbol,
@@ -104,17 +100,19 @@ export const StreamClaimingProvider = ({
     isLoading: currentClaimTokenSymbolLoading,
   } = useERC20Symbol({
     chainId: Number(chainId),
-    contractAddress: currentClaimTokenAddress,
+    contractAddress: currentClaimTokenAddress?.toString() as string,
+    enabled: Boolean(currentClaimTokenAddress),
   });
 
   const {
     data: totalClaimedAmountByAccount,
     error: totalClaimedAmountByAccountError,
     isLoading: totalClaimedAmountByAccountLoading,
+    refetch: refetchTotalClaimedAmountByAccount,
   } = useStreamTotalClaimed({
     chainId,
     contractAddress,
-    ticketTokenIds: ticketTokenIds || [],
+    ticketTokenIds: selectedTicketTokenIds || [],
     claimToken: currentClaimTokenAddress,
   });
 
@@ -122,6 +120,7 @@ export const StreamClaimingProvider = ({
     data: totalClaimedAmountOverall,
     error: totalClaimedAmountOverallError,
     isLoading: totalClaimedAmountOverallLoading,
+    refetch: refetchTotalClaimedAmountOverall,
   } = useStreamTotalClaimed({
     chainId,
     contractAddress,
@@ -142,33 +141,85 @@ export const StreamClaimingProvider = ({
     data: totalClaimableAmountByAccount,
     error: totalClaimableAmountByAccountError,
     isLoading: totalClaimableAmountByAccountLoading,
+    refetch: refetchTotalClaimableAmountByAccount,
   } = useStreamClaimableAmount({
     chainId,
     contractAddress,
-    ticketTokenIds,
+    ticketTokenIds: selectedTicketTokenIds,
     claimToken: currentClaimTokenAddress,
-    enabled: ticketTokenIds && ticketTokenIds.length > 0,
+    enabled: selectedTicketTokenIds && selectedTicketTokenIds.length > 0,
   });
 
   const {
     data: { txReceipt, txResponse },
     error: claimError,
     isLoading: claimLoading,
-    writeAndWait: claim,
+    writeAndWait: doClaim,
   } = useStreamClaimer({
     env,
     chainId,
     contractAddress,
     signerOrProvider: signer,
-    ticketTokenIds,
+    ticketTokenIds: selectedTicketTokenIds,
     claimToken: currentClaimTokenAddress,
   });
 
+  useEffect(() => {
+    if (
+      currentClaimTokenAddress !== undefined ||
+      !stream ||
+      !streamNativeBalance ||
+      !streamERC20Balances
+    ) {
+      return;
+    }
+
+    const address =
+      primaryClaimToken ||
+      stream?.config?.primaryClaimToken ||
+      (streamNativeBalance?.value?.gt(0)
+        ? ZERO_ADDRESS
+        : streamERC20Balances?.[0]?.tokenAddress) ||
+      ZERO_ADDRESS;
+
+    setCurrentClaimTokenAddress(address);
+  }, [
+    currentClaimTokenAddress,
+    primaryClaimToken,
+    stream,
+    stream?.config?.primaryClaimToken,
+    streamERC20Balances,
+    streamNativeBalance,
+    streamNativeBalance?.value,
+  ]);
+
   const canClaim = Boolean(
     !claimLoading &&
-      (!walletNftsLoading || nfts !== undefined) &&
+      (!walletNftsLoading || selectedTicketTokens !== undefined) &&
       totalClaimableAmountByAccount &&
       Number(totalClaimableAmountByAccount?.toString()) > 0,
+  );
+
+  const claim = useCallback(
+    async (args?: {
+      ticketTokenIds?: BigNumberish | BigNumberish[];
+      claimToken?: BytesLike;
+      owner?: BytesLike;
+    }) => {
+      const result = await doClaim(args);
+
+      refetchTotalClaimedAmountByAccount();
+      refetchTotalClaimedAmountOverall();
+      refetchTotalClaimableAmountByAccount();
+
+      return result;
+    },
+    [
+      doClaim,
+      refetchTotalClaimableAmountByAccount,
+      refetchTotalClaimedAmountByAccount,
+      refetchTotalClaimedAmountOverall,
+    ],
   );
 
   const value = {
@@ -211,6 +262,7 @@ export const StreamClaimingProvider = ({
       claimError,
     },
 
+    setCurrentClaimTokenAddress,
     claim,
   };
 

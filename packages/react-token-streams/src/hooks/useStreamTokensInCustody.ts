@@ -129,7 +129,7 @@ export const useStreamTokensInCustody = (config: Config) => {
 
     refetchTokensInCustody();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [supportsTokensInCustody, refetchTokensInCustody, totalSupply]);
+  }, [supportsTokensInCustody, account?.address]);
 
   return {
     data,

@@ -1,9 +1,9 @@
 import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
+import { BareComponentProps } from '@0xflair/react-common';
 import { BigNumber } from 'ethers';
 import { Fragment, ReactNode } from 'react';
 
 import { useCollectionSalesMintingContext } from '../providers';
-import { BareComponentProps } from '../types';
 
 type Props = BareComponentProps & {
   loadingMask?: ReactNode;

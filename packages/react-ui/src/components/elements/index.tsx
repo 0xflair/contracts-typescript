@@ -2,6 +2,7 @@ export * from './CodeBlock/CodeBlock';
 export * from './AddressScannerLink';
 export * from './Badge';
 export * from './Button';
+export * from './ButtonWithDialog';
 export * from './ChainBadge';
 export * from './CopyButton';
 export * from './Errors';

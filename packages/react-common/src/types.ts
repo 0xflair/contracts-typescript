@@ -57,3 +57,7 @@ export type FunctionCall = {
 };
 
 export type Feature = FeatureFunction | FeatureInterface;
+
+export type BareComponentProps<T extends HTMLElement = HTMLElement> = {
+  as?: React.ElementType;
+} & React.HTMLAttributes<T>;

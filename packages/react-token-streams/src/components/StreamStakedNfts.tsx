@@ -1,12 +1,14 @@
+import { BareComponentProps } from '@0xflair/react-common';
+import { Fragment } from 'react';
+
 import { useStreamContext } from '../providers/StreamProvider';
 import { useStreamStakingContext } from '../providers/StreamStakingProvider';
 
 type Props = {
-  className?: string;
   hideSymbol?: boolean;
-};
+} & BareComponentProps;
 
-export const StreamStakedNfts = ({ className, hideSymbol }: Props) => {
+export const StreamStakedNfts = ({ hideSymbol, as, ...attributes }: Props) => {
   const {
     data: { ticketTokenSymbol },
   } = useStreamContext();
@@ -14,12 +16,15 @@ export const StreamStakedNfts = ({ className, hideSymbol }: Props) => {
     data: { stakedNfts },
   } = useStreamStakingContext();
 
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
   return (
-    <div className={className}>
+    <Component {...attributes}>
       {stakedNfts === undefined || stakedNfts === null
         ? '...'
         : stakedNfts.length}{' '}
       {hideSymbol ? null : ticketTokenSymbol?.toString() || '...'}
-    </div>
+    </Component>
   );
 };

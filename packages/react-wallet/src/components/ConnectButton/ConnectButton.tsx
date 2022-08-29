@@ -60,6 +60,7 @@ export const ConnectButton = (props: ConnectButtonProps) => {
         </button>
       )}
       <Modal
+        ariaHideApp={false}
         closeTimeoutMS={150}
         isOpen={dialogOpen}
         onRequestClose={() => setDialogOpen(false)}

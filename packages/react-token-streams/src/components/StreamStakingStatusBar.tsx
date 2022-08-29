@@ -1,15 +1,15 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import { Errors, Spinner, TransactionLink } from '@0xflair/react-ui';
+import { Fragment, PropsWithChildren } from 'react';
 
 import { useStreamStakingContext } from '../providers/StreamStakingProvider';
 
-type Props = {
-  className?: string;
-  children?: React.ReactNode;
-};
+type Props = PropsWithChildren<BareComponentProps>;
 
 export const StreamStakingStatusBar = ({
-  className = 'flex flex-col gap-2',
   children,
+  as,
+  ...attributes
 }: Props) => {
   const {
     data: { prepareData, stakeData, unstakeData },
@@ -31,8 +31,11 @@ export const StreamStakingStatusBar = ({
     },
   } = useStreamStakingContext();
 
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
   return (
-    <div className={className}>
+    <Component {...attributes}>
       {/* COMMON LOADING */}
       {unlockedNftsLoading ||
       lockedNftsLoading ||
@@ -102,6 +105,6 @@ export const StreamStakingStatusBar = ({
         <Errors title="unlockedNftsError" error={unlockedNftsError} />
       )}
       {children}
-    </div>
+    </Component>
   );
 };

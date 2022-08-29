@@ -1,6 +1,6 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import { Fragment } from 'react';
 
-import { BareComponentProps } from '../../extensions';
 import { useCollectionContext } from '../providers/CollectionProvider';
 
 type Props = BareComponentProps & {

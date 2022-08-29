@@ -1,6 +1,12 @@
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  purge: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/@0xflair/*/{src,dist}/**/*.{js,jsx,ts,tsx}',
+  ],
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/@0xflair/*/{src,dist}/**/*.{js,jsx,ts,tsx}',
+  ],
   theme: {
     extend: {},
   },
@@ -8,5 +14,5 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
   ],
-  safelist: ['bg-green-600'],
+  // safelist: ['bg-green-600'],
 };

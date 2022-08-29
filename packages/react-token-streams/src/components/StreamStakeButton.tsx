@@ -1,7 +1,6 @@
 import { Button } from '@0xflair/react-ui';
-import { BigNumberish, BytesLike } from 'ethers';
+import { BigNumberish } from 'ethers';
 
-import { useStreamClaimingContext } from '../providers/StreamClaimingProvider';
 import { useStreamStakingContext } from '../providers/StreamStakingProvider';
 
 type Props = {

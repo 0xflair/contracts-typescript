@@ -1,9 +1,9 @@
+import { BareComponentProps } from '@0xflair/react-common';
 import { Fragment } from 'react';
 
 import { useCollectionContext } from '../../../common/providers/CollectionProvider';
 import { useTierSaleTotalSupply } from '../hooks/useTierSaleTotalSupply';
 import { useCollectionSalesMintingContext } from '../providers/CollectionSalesMintingProvider';
-import { BareComponentProps } from '../types';
 
 type Props = BareComponentProps & {
   loadingMask?: React.ReactNode;

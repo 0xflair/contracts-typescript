@@ -1,18 +1,19 @@
 import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
-import { useChainInfo } from '@0xflair/react-common';
+import { BareComponentProps } from '@0xflair/react-common';
 import { BigNumber } from 'ethers';
+import { Fragment } from 'react';
 
 import { useStreamClaimingContext } from '../providers';
 import { useStreamContext } from '../providers/StreamProvider';
 
 type Props = {
-  className?: string;
   calculationMode?: 'BY_ACCOUNT' | 'OVERALL';
-};
+} & BareComponentProps;
 
 export const StreamClaimableAmount = ({
-  className,
+  as,
   calculationMode = 'BY_ACCOUNT',
+  ...attributes
 }: Props) => {
   const {
     data: { chainInfo },
@@ -26,8 +27,11 @@ export const StreamClaimableAmount = ({
     },
   } = useStreamClaimingContext();
 
+  const Component =
+    as || (attributes.className || attributes.style ? 'span' : Fragment);
+
   return (
-    <div className={className}>
+    <Component {...attributes}>
       <CryptoValue
         symbol={
           currentClaimTokenSymbol?.toString() ||
@@ -43,6 +47,6 @@ export const StreamClaimableAmount = ({
         unit={CryptoUnits.WEI}
         showPrice={false}
       />
-    </div>
+    </Component>
   );
 };
