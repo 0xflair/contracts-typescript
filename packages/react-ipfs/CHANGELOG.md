@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.107.6 (2022-08-29)
+
+
+### Bug Fixes
+
+* use 0 as default for crypto value component ([16dd17d](https://github.com/0xflair/typescript-sdk/commit/16dd17da2241e0c1064258f0cb8dbc68ccdd2c6e))
+
+
+
+
+
 ## 0.107.5 (2022-08-29)
 
 
