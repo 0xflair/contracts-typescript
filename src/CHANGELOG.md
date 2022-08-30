@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.107.8 (2022-08-30)
+
+
+### Bug Fixes
+
+* export useful types and components ([f6cb302](https://github.com/0xflair/typescript-sdk/commit/f6cb302e68a20a96ca7a1e89afb88c840fe5ce1e))
+
+
+
+
+
 ## 0.107.7 (2022-08-29)
 
 
