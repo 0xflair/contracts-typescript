@@ -91,7 +91,7 @@ export const createFlairContractWithMetaTransactions = <
   addressOrName?: string;
   signer?: Signer;
   forwarder?: string;
-}): T => {
+}): MetaTransactionsAugmentedContract<T> => {
   const metaTxClient = new MetaTransactionsClient({
     env: config.env || Environment.PROD,
     chainId: config.chainId,
