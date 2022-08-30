@@ -20,7 +20,7 @@ export const useAxiosGet = <T>({
 }: Config) => {
   const [response, setResponse] = useState<T | null>(null);
   const [error, setError] = useState<Error>();
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(enabled);
 
   const cancelQuery = useCancel();
   const sendRequest = useCallback(
