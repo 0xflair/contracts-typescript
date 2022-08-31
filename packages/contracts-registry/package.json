@@ -12,7 +12,8 @@
   },
   "scripts": {
     "generate-versions": "ts-node ./scripts/generate-versions.ts",
-    "build": "npm run generate-versions && rollup -c"
+    "build": "npm run generate-versions && rollup -c",
+    "postinstall": "npm run generate-versions"
   },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
