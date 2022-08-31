@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.109.2 (2022-08-31)
+
+
+### Bug Fixes
+
+* deep equal before setting axios response ([b65a70f](https://github.com/0xflair/typescript-sdk/commit/b65a70fa432d79c6be06dcbb402bb2263c46102f))
+
+
+
+
+
 ## 0.109.1 (2022-08-31)
 
 
