@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.107.13 (2022-08-31)
+
+
+### Bug Fixes
+
+* remove post install ([e1ced40](https://github.com/0xflair/typescript-sdk/commit/e1ced40aa29041910bd30ec9a8bd4ccb66400cf0))
+
+
+
+
+
 ## 0.107.12 (2022-08-31)
 
 
