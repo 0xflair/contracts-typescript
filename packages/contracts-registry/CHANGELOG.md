@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.109.0 (2022-08-31)
+
+
+### Features
+
+* make nft hooks specific to wallet or collection ([91ab1b5](https://github.com/0xflair/typescript-sdk/commit/91ab1b55e6f374232f22e01e429e911b5eee20f8))
+
+
+
+
+
 ## 0.108.2 (2022-08-31)
 
 
