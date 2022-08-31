@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.107.12 (2022-08-31)
+
+
+### Bug Fixes
+
+* bump contracts registry ([0053123](https://github.com/0xflair/typescript-sdk/commit/00531234203098dd627398eed1221742afa1ce74))
+
+
+
+
+
 ## 0.107.11 (2022-08-31)
 
 
