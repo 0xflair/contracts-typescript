@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.108.2 (2022-08-31)
+
+
+### Bug Fixes
+
+* only fetch wallet nfts if connected ([b191f82](https://github.com/0xflair/typescript-sdk/commit/b191f8261db4482cd94dc246b3d080dca24faf60))
+
+
+
+
+
 ## 0.108.1 (2022-08-31)
 
 
