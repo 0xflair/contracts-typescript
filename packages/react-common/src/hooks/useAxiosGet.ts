@@ -1,4 +1,5 @@
 import axios, { AxiosRequestHeaders } from 'axios';
+import _ from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useCancel } from './useCancel';
@@ -45,7 +46,9 @@ export const useAxiosGet = <T>({
           headers: overrides?.headers || headers,
         });
         if (!didCancel) {
-          setResponse(response.data);
+          if (!_.isEqual(response.data, response)) {
+            setResponse(response.data);
+          }
           setLoading(false);
         }
         return response;
