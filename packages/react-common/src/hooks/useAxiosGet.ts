@@ -39,19 +39,19 @@ export const useAxiosGet = <T>({
       try {
         setLoading(true);
         setError(undefined);
-        const response = await axios.get<T>(overrides?.url || url, {
+        const resp = await axios.get<T>(overrides?.url || url, {
           params: overrides?.params || params,
           cancelToken: source.token,
           timeout: overrides?.timeout || timeout,
           headers: overrides?.headers || headers,
         });
         if (!didCancel) {
-          if (!_.isEqual(response.data, response)) {
-            setResponse(response.data);
+          if (!_.isEqual(resp.data, response)) {
+            setResponse(resp.data);
           }
           setLoading(false);
         }
-        return response;
+        return resp;
       } catch (error: any) {
         if (!didCancel) {
           setError(error);
@@ -64,7 +64,7 @@ export const useAxiosGet = <T>({
         }
       }
     },
-    [cancelQuery, url, params, timeout, headers],
+    [cancelQuery, url, params, timeout, headers, response],
   );
 
   useEffect(() => {
