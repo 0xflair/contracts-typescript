@@ -45,12 +45,16 @@ export const CryptoValue = (props: Props) => {
     console.warn(`Could not fetch price for ${symbol}: `, error);
   }
 
+  const valueToRender = Number(etherValue)
+    .toFixed(fractions)
+    .toString()
+    .replace(/[0\.]+$/, '');
+
   return loading ? (
     <>{loadingContent}</>
   ) : (
     <>
-      {Number(etherValue).toFixed(fractions)}{' '}
-      {showSymbol ? data.info?.icon || symbol : null}
+      {valueToRender} {showSymbol ? data.info?.icon || symbol : null}
       {showPrice && data.price && Number(data.price) > 0 ? (
         <>
           {' '}

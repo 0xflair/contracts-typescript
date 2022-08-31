@@ -11,6 +11,7 @@ type Props = BareComponentProps & {
   showSymbol?: boolean;
   freeElement?: ReactNode;
   mintCount?: number;
+  fractionDigits?: number;
 };
 
 export const CollectionSalesPrice = ({
@@ -20,6 +21,7 @@ export const CollectionSalesPrice = ({
   showSymbol = true,
   freeElement = <>Free</>,
   mintCount = 1,
+  fractionDigits,
   ...attributes
 }: Props) => {
   const {
@@ -39,13 +41,14 @@ export const CollectionSalesPrice = ({
   return (
     <Component {...attributes}>
       {finalPrice !== undefined && !isAutoDetectingTier ? (
-        Number(finalPrice.toString()) > 0 ? (
+        Number(finalPrice.toString()) > 0 || !freeElement ? (
           <CryptoValue
             symbol={chainInfo?.nativeCurrency?.symbol}
             value={finalPrice}
             unit={CryptoUnits.WEI}
             showPrice={showPrice}
             showSymbol={showSymbol}
+            fractionDigits={fractionDigits}
           />
         ) : (
           freeElement
