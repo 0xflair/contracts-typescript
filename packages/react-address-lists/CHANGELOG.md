@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.107.11 (2022-08-31)
+
+
+### Bug Fixes
+
+* remove extra zeros after fractions ([5c3c0ca](https://github.com/0xflair/typescript-sdk/commit/5c3c0caeaeaab331057921cc0cf9471c7506ec1a))
+
+
+
+
+
 ## 0.107.10 (2022-08-31)
 
 
