@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.108.1 (2022-08-31)
+
+
+### Bug Fixes
+
+* avoid updating selected tickets on loading ([4b78bb7](https://github.com/0xflair/typescript-sdk/commit/4b78bb72b8087e47185f399fd69b4b6152c3b87c))
+
+
+
+
+
 # 0.108.0 (2022-08-31)
 
 
