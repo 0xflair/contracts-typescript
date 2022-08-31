@@ -7,7 +7,7 @@ import { BytesLike } from '@ethersproject/bytes';
 import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';
 import { BigNumberish, Signer } from 'ethers';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useAccount } from 'wagmi';
 
 type ArgsType = {
@@ -25,7 +25,7 @@ type Config = {
 
 function selectClaimFeature({ ticketTokenIds, claimToken, owner }: ArgsType) {
   if (ticketTokenIds && Array.isArray(ticketTokenIds)) {
-    if (ticketTokenIds.length === 1) {
+    if (ticketTokenIds.length === 1 && !owner) {
       if (!claimToken) {
         return {
           tag: 'claim_by_single_token',
@@ -43,7 +43,7 @@ function selectClaimFeature({ ticketTokenIds, claimToken, owner }: ArgsType) {
         };
       }
     } else {
-      if (!claimToken) {
+      if (!claimToken && !owner) {
         return {
           tag: 'claim_by_multiple_tokens',
           args: {
@@ -78,7 +78,10 @@ export const useStreamClaimer = ({
   const chainId = useChainId(chainId_);
   const { data: account } = useAccount();
   const owner = owner_ || account?.address;
-  const feature = selectClaimFeature({ ticketTokenIds, claimToken, owner });
+  const feature = useMemo(
+    () => selectClaimFeature({ ticketTokenIds, claimToken, owner }),
+    [claimToken, owner, ticketTokenIds],
+  );
 
   const result = useFeatureWriteByTag({
     env,
@@ -95,7 +98,18 @@ export const useStreamClaimer = ({
       overrides?: Partial<WriteContractConfig['overrides']>,
     ) => {
       if (inputArgs) {
-        const f = selectClaimFeature(inputArgs);
+        Object.keys(inputArgs).forEach((key) => {
+          if ((inputArgs as any)[key] === undefined) {
+            delete (inputArgs as any)[key];
+          }
+        });
+
+        const f = selectClaimFeature({
+          ticketTokenIds,
+          claimToken,
+          owner,
+          ...inputArgs,
+        });
 
         if (f?.args) {
           return result.writeAndWait(
@@ -107,7 +121,7 @@ export const useStreamClaimer = ({
 
       return result.writeAndWait(undefined, overrides);
     },
-    [feature?.args, result],
+    [claimToken, feature?.args, owner, result, ticketTokenIds],
   );
 
   return { ...result, writeAndWait } as const;

@@ -15,6 +15,7 @@ type ArgsType = [tierId: BigNumberish];
 type Config = {
   env?: Environment;
   ticketTokenAddress?: BytesLike;
+  walletAddress?: BytesLike;
 } & PredefinedReadContractConfig<ArgsType>;
 
 export const useStreamTokensInCustody = (config: Config) => {
@@ -23,6 +24,9 @@ export const useStreamTokensInCustody = (config: Config) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<BigNumberish[]>();
   const [error, setError] = useState<string | Error | null>();
+
+  const finalWalletAddress =
+    config.walletAddress?.toString() || account?.address;
 
   const {
     data: supportsTokensInCustody,
@@ -60,12 +64,12 @@ export const useStreamTokensInCustody = (config: Config) => {
 
   const fetchTokensInCustodyInRange = useCallback(
     async (startTokenId: BigNumberish, endTokenId: BigNumberish) => {
-      if (!contract || !account?.address) {
+      if (!contract || !finalWalletAddress) {
         return;
       }
 
       const result = (await contract.tokensInCustody(
-        account?.address,
+        finalWalletAddress,
         startTokenId,
         endTokenId,
       )) as any[];
@@ -81,7 +85,7 @@ export const useStreamTokensInCustody = (config: Config) => {
         [],
       );
     },
-    [account?.address, contract],
+    [finalWalletAddress, contract],
   );
 
   const refetchTokensInCustody = useCallback(async () => {
@@ -129,7 +133,7 @@ export const useStreamTokensInCustody = (config: Config) => {
 
     refetchTokensInCustody();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [supportsTokensInCustody, account?.address]);
+  }, [supportsTokensInCustody, finalWalletAddress]);
 
   return {
     data,

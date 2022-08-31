@@ -54,7 +54,7 @@ export const CryptoValue = (props: Props) => {
     <>{loadingContent}</>
   ) : (
     <>
-      {valueToRender} {showSymbol ? data.info?.icon || symbol : null}
+      {valueToRender || '0'} {showSymbol ? data.info?.icon || symbol : null}
       {showPrice && data.price && Number(data.price) > 0 ? (
         <>
           {' '}

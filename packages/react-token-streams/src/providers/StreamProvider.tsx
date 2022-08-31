@@ -26,6 +26,7 @@ type StreamContextValue = {
     contractAddress?: string;
     stream?: TokenStream;
     ticketTokens?: NftToken[];
+    walletAddress?: BytesLike;
 
     // On-chain values
     ticketTokenAddress?: BytesLike;
@@ -92,6 +93,9 @@ type Props = {
   /** Contract address of the token stream */
   contractAddress: string;
 
+  /** Optional custom wallet address to claim on behalf of */
+  walletAddress?: BytesLike;
+
   /** Child elements or a factory function that returns child elements */
   children: FunctionalChildren | ReactNode | ReactNode[];
 };
@@ -100,6 +104,7 @@ export const StreamProvider = ({
   env = Environment.PROD,
   chainId: rawChainId,
   contractAddress,
+  walletAddress,
   children,
 }: Props) => {
   const chainId = Number(rawChainId);
@@ -108,6 +113,8 @@ export const StreamProvider = ({
 
   const [selectedTicketTokens, setSelectedTicketTokens] =
     useState<NftToken[]>();
+
+  const finalWalletAddress = walletAddress?.toString() ?? account?.address;
 
   const {
     data: stream,
@@ -141,8 +148,8 @@ export const StreamProvider = ({
     env,
     chainId,
     collectionAddress: ticketTokenAddress,
-    walletAddress: account?.address,
-    enabled: Boolean(account?.address && ticketTokenAddress),
+    walletAddress: finalWalletAddress,
+    enabled: Boolean(finalWalletAddress && ticketTokenAddress),
   });
 
   const {
@@ -154,7 +161,8 @@ export const StreamProvider = ({
     chainId,
     contractAddress,
     ticketTokenAddress,
-    watch: Boolean(account?.address && ticketTokenAddress),
+    walletAddress: finalWalletAddress,
+    watch: Boolean(finalWalletAddress && ticketTokenAddress),
   });
 
   const {
@@ -211,6 +219,7 @@ export const StreamProvider = ({
     tokenIdsInCustody,
     ticketTokenAddress,
     stream?.contractAddress,
+    finalWalletAddress,
   ]);
 
   const tokenBalances = useMemo(() => {
@@ -249,18 +258,19 @@ export const StreamProvider = ({
   }, [ticketTokens]);
 
   useEffect(() => {
-    if (
-      selectedTicketTokens !== undefined ||
-      tokenIdsInCustodyLoading ||
-      walletNftsLoading
-    ) {
+    if (tokenIdsInCustodyLoading || walletNftsLoading) {
       return;
     }
 
-    setSelectedTicketTokens(ticketTokens);
+    if (ticketTokens) {
+      setSelectedTicketTokens(ticketTokens);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     ticketTokens,
-    selectedTicketTokens,
+    ticketTokens.length,
+    walletAddress,
+    account?.address,
     tokenIdsInCustodyLoading,
     walletNftsLoading,
   ]);
@@ -279,6 +289,7 @@ export const StreamProvider = ({
       contractAddress,
       stream,
       ticketTokens,
+      walletAddress: finalWalletAddress,
 
       // On-chain values
       ticketTokenAddress,

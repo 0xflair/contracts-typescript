@@ -66,8 +66,9 @@ type FunctionalChildren = (
 
 type Props = {
   /** Optional primary claim token to use when claiming */
-  primaryClaimToken?: string;
+  primaryClaimToken?: BytesLike;
 
+  /** Content to render */
   children: FunctionalChildren | ReactNode | ReactNode[];
 };
 
@@ -90,6 +91,7 @@ export const StreamClaimingProvider = ({
       streamERC20Balances,
       ticketTokenIds,
       selectedTicketTokenIds,
+      walletAddress,
     },
     isLoading: {
       walletNftsLoading,
@@ -167,6 +169,7 @@ export const StreamClaimingProvider = ({
     signerOrProvider: signer,
     ticketTokenIds: selectedTicketTokenIds,
     claimToken: currentClaimTokenAddress,
+    owner: walletAddress,
   });
 
   useEffect(() => {
