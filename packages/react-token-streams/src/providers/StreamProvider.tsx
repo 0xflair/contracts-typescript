@@ -258,22 +258,11 @@ export const StreamProvider = ({
   }, [ticketTokens]);
 
   useEffect(() => {
-    if (tokenIdsInCustodyLoading || walletNftsLoading) {
-      return;
-    }
-
     if (ticketTokens) {
       setSelectedTicketTokens(ticketTokens);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    ticketTokens,
-    ticketTokens.length,
-    walletAddress,
-    account?.address,
-    tokenIdsInCustodyLoading,
-    walletNftsLoading,
-  ]);
+  }, [ticketTokens, ticketTokens.length, walletAddress, account?.address]);
 
   const selectedTicketTokenIds = useMemo(() => {
     return selectedTicketTokens?.map(({ tokenId }) => tokenId) || [];
