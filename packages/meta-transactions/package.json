@@ -45,7 +45,8 @@
     "@0xflair/contracts-registry": "^0.107.9",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",
-    "randombytes": "^2.1.0"
+    "randombytes": "^2.1.0",
+    "utility-types": "^3.10.0"
   },
   "devDependencies": {
     "@types/randombytes": "^2.0.0"
