@@ -97,6 +97,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
       ticketTokenAddress,
       selectedTicketTokenIds,
       tokenIdsInCustody,
+      walletAddress,
     },
     isLoading: { walletNftsLoading, tokenIdsInCustodyLoading },
     refetchWalletNfts,
@@ -262,7 +263,7 @@ export const StreamStakingProvider = ({ children }: Props) => {
   );
 
   useEffect(() => {
-    if (walletNftsLoading) {
+    if (walletNftsLoading || !walletAddress || !signer) {
       return;
     }
 
