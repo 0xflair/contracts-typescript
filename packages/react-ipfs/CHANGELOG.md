@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.108.0 (2022-08-31)
+
+
+### Features
+
+* allow claiming as other addresses and pay gas fees ([#20](https://github.com/0xflair/typescript-sdk/issues/20)) ([02615cc](https://github.com/0xflair/typescript-sdk/commit/02615ccdda283d9a06d1b058f0558f946315104a))
+
+
+
+
+
 ## 0.107.13 (2022-08-31)
 
 
