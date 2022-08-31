@@ -2,7 +2,7 @@ import { Environment, useChainInfo, ZERO_ADDRESS } from '@0xflair/react-common';
 import {
   NftToken,
   TokenBalance,
-  useNftTokens,
+  useNftTokensByWallet,
   useTokenBalances,
 } from '@0xflair/react-data-query';
 import { useERC721Symbol } from '@0xflair/react-openzeppelin';
@@ -144,7 +144,7 @@ export const StreamProvider = ({
     error: walletNftsError,
     isLoading: walletNftsLoading,
     sendRequest: refetchWalletNfts,
-  } = useNftTokens({
+  } = useNftTokensByWallet({
     env,
     chainId,
     collectionAddress: ticketTokenAddress,

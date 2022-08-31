@@ -15,7 +15,7 @@ type Props = {
   enabled?: boolean;
 };
 
-export const useNftTokens = ({
+export const useNftTokensByWallet = ({
   env = Environment.PROD,
   clientId = 'none',
   chainId,
@@ -23,7 +23,7 @@ export const useNftTokens = ({
   walletAddress,
   enabled = true,
 }: Props) => {
-  const url = `${FLAIR_DATA_QUERY_BACKEND[env]}/v1/data-query/nft-tokens`;
+  const url = `${FLAIR_DATA_QUERY_BACKEND[env]}/v1/data-query/nft-tokens/by-wallet`;
 
   const params = useMemo(() => {
     return {
