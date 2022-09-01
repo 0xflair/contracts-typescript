@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.109.3 (2022-09-01)
+
+
+### Bug Fixes
+
+* preserve significcant zeros on value render ([9a0aaad](https://github.com/0xflair/typescript-sdk/commit/9a0aaad62c3bbc856929b35b87cf5158c2180bc5))
+
+
+
+
+
 ## 0.109.2 (2022-08-31)
 
 
