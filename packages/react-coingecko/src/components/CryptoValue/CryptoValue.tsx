@@ -45,16 +45,19 @@ export const CryptoValue = (props: Props) => {
     console.warn(`Could not fetch price for ${symbol}: `, error);
   }
 
-  const valueToRender = Number(etherValue)
-    .toFixed(fractions)
-    .toString()
-    .replace(/[0\.]+$/, '');
+  const valueToRender = parseFloat(etherValue).toFixed(fractions).toString();
+
+  let [leading, trailing] = valueToRender.split('.');
+  trailing = trailing?.replace(/0+$/, '');
+
+  const valueToRenderFormatted = `${leading}${trailing ? `.${trailing}` : ''}`;
 
   return loading ? (
     <>{loadingContent}</>
   ) : (
     <>
-      {valueToRender || '0'} {showSymbol ? data.info?.icon || symbol : null}
+      {valueToRenderFormatted || '0'}{' '}
+      {showSymbol ? data.info?.icon || symbol : null}
       {showPrice && data.price && Number(data.price) > 0 ? (
         <>
           {' '}
