@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.111.2 (2022-09-02)
+
+
+### Bug Fixes
+
+* re-evaluate sale tiers when statuses change ([de7d747](https://github.com/0xflair/typescript-sdk/commit/de7d74700bfc2e0e65a1fb88cfdb6bfd5d8b68b5))
+
+
+
+
+
 ## 0.111.1 (2022-09-02)
 
 
