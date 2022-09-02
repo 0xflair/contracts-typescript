@@ -282,6 +282,9 @@ export const useSaleTiers = (config: Config) => {
     config.minterAddress,
     supportsSimpleSalesLoading,
     supportsTieredSalesLoading,
+    preSaleStatus,
+    preSaleIsAllowlisted,
+    publicSaleStatus,
   ]);
 
   return {
