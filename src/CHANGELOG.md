@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.111.0 (2022-09-02)
+
+
+### Features
+
+* add gnosis safe custom app integration ([#21](https://github.com/0xflair/typescript-sdk/issues/21)) ([3c2f33b](https://github.com/0xflair/typescript-sdk/commit/3c2f33b5eb25c462dc5385151f6a891c5c654725))
+
+
+
+
+
 # 0.110.0 (2022-09-01)
 
 
