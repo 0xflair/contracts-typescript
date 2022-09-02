@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.111.3 (2022-09-02)
+
+
+### Bug Fixes
+
+* re-generate tiers when statuses change ([5431d77](https://github.com/0xflair/typescript-sdk/commit/5431d7750b27c117de6dd5fc75ca18c320fd89e1))
+
+
+
+
+
 ## 0.111.2 (2022-09-02)
 
 
