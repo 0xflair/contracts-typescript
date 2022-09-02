@@ -6,6 +6,7 @@ import { useCancel } from './useCancel';
 type Config = {
   url: string;
   data: any;
+  params?: any;
   headers?: AxiosRequestHeaders;
   timeout?: number;
   enabled?: boolean;
@@ -14,6 +15,7 @@ type Config = {
 export const useAxiosPatch = <T>({
   url,
   data,
+  params,
   headers,
   timeout,
   enabled = false,
@@ -37,6 +39,7 @@ export const useAxiosPatch = <T>({
         cancelToken: source.token,
         timeout: timeout,
         headers,
+        params,
       });
       if (!didCancel) {
         setResponse(response.data);
@@ -54,7 +57,7 @@ export const useAxiosPatch = <T>({
         }
       }
     }
-  }, [cancelQuery, url, data, timeout, headers]);
+  }, [cancelQuery, url, data, params, timeout, headers]);
 
   useEffect(() => {
     if (enabled) {
