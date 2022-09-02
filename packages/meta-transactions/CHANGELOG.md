@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.111.1 (2022-09-02)
+
+
+### Bug Fixes
+
+* accept params in put hook ([9568416](https://github.com/0xflair/typescript-sdk/commit/95684165d5bd8697f30cc8aaf48a3b8b7b626a62))
+
+
+
+
+
 # 0.111.0 (2022-09-02)
 
 
