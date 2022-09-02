@@ -258,7 +258,15 @@ export const useSaleTiers = (config: Config) => {
 
     setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [config.minterAddress, supportsSimpleSales, supportsTieredSales]);
+  }, [
+    config.minterAddress,
+    supportsSimpleSales,
+    supportsTieredSales,
+    preSaleAllowlistCheckerLoading,
+    preSaleMintLoading,
+    preSaleStatusLoading,
+    publicSaleStatusLoading,
+  ]);
 
   useMemo(() => {
     if (supportsSimpleSalesLoading || supportsTieredSalesLoading) {

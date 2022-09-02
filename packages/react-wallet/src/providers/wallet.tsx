@@ -1,13 +1,21 @@
 import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from '@0xflair/react-common';
 import { providers } from 'ethers';
-import { ReactNode, useCallback, useLayoutEffect, useMemo } from 'react';
+import {
+  PropsWithChildren,
+  ReactNode,
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+} from 'react';
 import { createClient, Provider } from 'wagmi';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
+import { SafeConnector } from '../connectors/gnosis-safe';
 import { MagicLinkConnector } from '../connectors/magic-link';
 import { FLAIR_INFURA_PROJECT_ID } from '../constants';
+import { useAutoConnect } from '../hooks/useAutoConnect';
 import stylesheet from '../index.css';
 
 export type WalletProviderProps = {
@@ -20,6 +28,12 @@ export type WalletProviderProps = {
 };
 
 const FLAIR_MAGIC_API_KEY = 'pk_live_8B82089A89462668';
+
+const AutoConnectWrapper = ({ children }: PropsWithChildren) => {
+  useAutoConnect();
+
+  return <>{children}</>;
+};
 
 export const WalletProvider = ({
   children,
@@ -98,6 +112,12 @@ export const WalletProvider = ({
             jsonRpcUrl: `${rpcUrl}/${infuraId}`,
           },
         }),
+        new SafeConnector({
+          chains: FLAIR_CHAINS,
+          options: {
+            debug: true,
+          },
+        }),
       ];
 
       if (custodialWallet) {
@@ -120,10 +140,10 @@ export const WalletProvider = ({
     [appName, custodialWallet, infuraId],
   );
 
-  const client = useMemo(
+  const wagmiClient = useMemo(
     () =>
       createClient({
-        autoConnect: true,
+        autoConnect: false,
         connectors,
         provider,
       }),
@@ -146,8 +166,8 @@ export const WalletProvider = ({
   }, [injectStyles]);
 
   return (
-    <Provider client={client} {...wagmiOverrides}>
-      {children}
+    <Provider client={wagmiClient} {...wagmiOverrides}>
+      <AutoConnectWrapper>{children}</AutoConnectWrapper>
     </Provider>
   );
 };

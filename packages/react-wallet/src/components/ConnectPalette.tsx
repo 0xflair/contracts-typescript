@@ -1,5 +1,6 @@
 import { classNames } from '@0xflair/react-common';
 import {
+  GnosisSafeIcon,
   MagicLinkIcon,
   MetaMaskIcon,
   WalletConnectIcon,
@@ -22,6 +23,8 @@ export type ConnectPaletteProps = {
   metamaskButtonDescription?: React.ReactNode;
   coinbaseButtonLabel?: React.ReactNode;
   coinbaseButtonDescription?: React.ReactNode;
+  gnosisSafeButtonLabel?: React.ReactNode;
+  gnosisSafeButtonDescription?: React.ReactNode;
   walletConnectButtonLabel?: React.ReactNode;
   walletConnectButtonDescription?: React.ReactNode;
   custodialWalletButtonLabel?: React.ReactNode;
@@ -34,10 +37,15 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const activeButtonRef = useRef(null);
   const { connectors, connect } = useConnect();
 
-  const connectorMetamask = connectors[0];
-  const connectorWalletConnect = connectors[1];
-  const connectorCoinbaseWallet = connectors[2];
-  const connectorMagic = connectors[3];
+  const connectorMetamask = connectors.find((c) => c.id == 'injected');
+  const connectorWalletConnect = connectors.find(
+    (c) => c.id == 'walletConnect',
+  );
+  const connectorCoinbaseWallet = connectors.find(
+    (c) => c.id == 'coinbaseWallet',
+  );
+  const connectorGnosisSafe = connectors.find((c) => c.id == 'safe');
+  const connectorMagic = connectors.find((c) => c.id == 'magic');
 
   const metamaskInstalled = MetaMaskOnboarding.isMetaMaskInstalled();
 
@@ -52,20 +60,133 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
 
   return (
     <WalletComponentWrapper as={props.as} className={paletteClassName}>
+      {connectorMetamask && (
+        <>
+          {metamaskInstalled ? (
+            <button
+              ref={activeButtonRef}
+              type="button"
+              className={classNames(
+                'flair connect-button connector-metamask',
+                buttonClassName,
+              )}
+              onClick={() => connect(connectorMetamask)}
+            >
+              <MetaMaskIcon className={iconClassName} />
+              {props.metamaskButtonLabel || 'MetaMask'}
+              {props.metamaskButtonDescription ? (
+                <span className={descriptionClassName}>
+                  {props.metamaskButtonDescription}
+                </span>
+              ) : null}
+            </button>
+          ) : (
+            <a
+              target={'_blank'}
+              href={`https://metamask.app.link/dapp/${window.location.href}`}
+              type="button"
+              className={classNames(
+                'flair connect-button connector-metamask',
+                buttonClassName,
+              )}
+              rel="noreferrer"
+            >
+              <MetaMaskIcon className={iconClassName} />
+              {props.metamaskButtonLabel || 'MetaMask'}
+              {props.metamaskButtonDescription ? (
+                <span className={descriptionClassName}>
+                  {props.metamaskButtonDescription}
+                </span>
+              ) : null}
+            </a>
+          )}
+        </>
+      )}
+      {connectorWalletConnect && (
+        <button
+          type="button"
+          ref={!metamaskInstalled ? activeButtonRef : undefined}
+          className={classNames(
+            'flair connect-button connector-wallet-connect',
+            buttonClassName,
+          )}
+          onClick={() => connect(connectorWalletConnect)}
+        >
+          <WalletConnectIcon className={iconClassName} />
+          {props.walletConnectButtonLabel || 'WalletConnect'}
+          {props.walletConnectButtonDescription ? (
+            <span className={descriptionClassName}>
+              {props.walletConnectButtonDescription}
+            </span>
+          ) : null}
+        </button>
+      )}
+      {connectorCoinbaseWallet && (
+        <button
+          type="button"
+          className={classNames(
+            'flair connect-button connector-coinbase',
+            buttonClassName,
+          )}
+          onClick={() => connect(connectorCoinbaseWallet)}
+        >
+          <WalletLinkIcon className={iconClassName} />
+          {props.coinbaseButtonLabel || 'Coinbase Wallet'}
+          {props.coinbaseButtonDescription ? (
+            <span className={descriptionClassName}>
+              {props.coinbaseButtonDescription}
+            </span>
+          ) : null}
+        </button>
+      )}
+
+      {connectorGnosisSafe && (
+        <>
+          {connectorGnosisSafe.ready ? (
+            <button
+              type="button"
+              className={classNames(
+                'flair connect-button connector-gnosis-safe',
+                buttonClassName,
+              )}
+              onClick={() => connect(connectorGnosisSafe)}
+            >
+              <GnosisSafeIcon className={iconClassName} />
+              {props.gnosisSafeButtonLabel || 'Gnosis Safe'}
+              {props.gnosisSafeButtonDescription ? (
+                <span className={descriptionClassName}>
+                  {props.gnosisSafeButtonDescription}
+                </span>
+              ) : null}
+            </button>
+          ) : (
+            <a
+              target={'_blank'}
+              href={`https://help.gnosis-safe.io/en/articles/4022030-add-a-custom-safe-app`}
+              type="button"
+              className={classNames(
+                'flair connect-button connector-metamask',
+                buttonClassName,
+              )}
+              rel="noreferrer"
+            >
+              <GnosisSafeIcon className={iconClassName} />
+              {props.gnosisSafeButtonLabel || 'Gnosis Safe'}
+              <small className="text-xs italic text-slate-300">
+                Must open as GnosisSafe custom app
+              </small>
+              {props.gnosisSafeButtonDescription ? (
+                <span className={descriptionClassName}>
+                  {props.gnosisSafeButtonDescription}
+                </span>
+              ) : null}
+            </a>
+          )}
+        </>
+      )}
+
       {connectorMagic && (
         <>
-          <button
-            type="button"
-            className={buttonClassName}
-            onClick={() => connect(connectorMagic)}
-          >
-            <MagicLinkIcon className={iconClassName} />
-            {props.custodialWalletButtonLabel || 'Quick wallet'}
-            <span className={descriptionClassName}>
-              {props.custodialWalletButtonDescription ||
-                'via Email, Github, Google, Twitter.'}
-            </span>
-          </button>
           {props.custodialWalletSeparator ? (
             props.custodialWalletSeparator
           ) : (
@@ -81,78 +202,20 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               </div>
             </div>
           )}
+          <button
+            type="button"
+            className={buttonClassName}
+            onClick={() => connect(connectorMagic)}
+          >
+            <MagicLinkIcon className={iconClassName} />
+            {props.custodialWalletButtonLabel || 'Quick wallet'}
+            <span className={descriptionClassName}>
+              {props.custodialWalletButtonDescription ||
+                'via Email, Github, Google, Twitter.'}
+            </span>
+          </button>
         </>
       )}
-      {metamaskInstalled ? (
-        <button
-          ref={activeButtonRef}
-          type="button"
-          className={classNames(
-            'flair connect-button connector-metamask',
-            buttonClassName,
-          )}
-          onClick={() => connect(connectorMetamask)}
-        >
-          <MetaMaskIcon className={iconClassName} />
-          {props.metamaskButtonLabel || 'MetaMask'}
-          {props.metamaskButtonDescription ? (
-            <span className={descriptionClassName}>
-              {props.metamaskButtonDescription}
-            </span>
-          ) : null}
-        </button>
-      ) : (
-        <a
-          target={'_blank'}
-          href={`https://metamask.app.link/dapp/${window.location.href}`}
-          type="button"
-          className={classNames(
-            'flair connect-button connector-metamask',
-            buttonClassName,
-          )}
-        >
-          <MetaMaskIcon className={iconClassName} />
-          {props.metamaskButtonLabel || 'MetaMask'}
-          {props.metamaskButtonDescription ? (
-            <span className={descriptionClassName}>
-              {props.metamaskButtonDescription}
-            </span>
-          ) : null}
-        </a>
-      )}
-      <button
-        type="button"
-        ref={!metamaskInstalled ? activeButtonRef : undefined}
-        className={classNames(
-          'flair connect-button connector-wallet-connect',
-          buttonClassName,
-        )}
-        onClick={() => connect(connectorWalletConnect)}
-      >
-        <WalletConnectIcon className={iconClassName} />
-        {props.walletConnectButtonLabel || 'WalletConnect'}
-        {props.walletConnectButtonDescription ? (
-          <span className={descriptionClassName}>
-            {props.walletConnectButtonDescription}
-          </span>
-        ) : null}
-      </button>
-      <button
-        type="button"
-        className={classNames(
-          'flair connect-button connector-coinbase',
-          buttonClassName,
-        )}
-        onClick={() => connect(connectorCoinbaseWallet)}
-      >
-        <WalletLinkIcon className={iconClassName} />
-        {props.coinbaseButtonLabel || 'Coinbase Wallet'}
-        {props.coinbaseButtonDescription ? (
-          <span className={descriptionClassName}>
-            {props.coinbaseButtonDescription}
-          </span>
-        ) : null}
-      </button>
     </WalletComponentWrapper>
   );
 };
