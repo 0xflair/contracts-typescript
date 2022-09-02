@@ -266,6 +266,9 @@ export const useSaleTiers = (config: Config) => {
     preSaleMintLoading,
     preSaleStatusLoading,
     publicSaleStatusLoading,
+    preSaleStatus,
+    preSaleIsAllowlisted,
+    publicSaleStatus,
   ]);
 
   useMemo(() => {
