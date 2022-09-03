@@ -39,10 +39,7 @@ export const RequireLogin = (props: Props) => {
               Gnosis support is coming soon
             </h3>
             <p className="mt-1 text-sm text-gray-500">
-              This section is not yet supported on Gnosis Safes until Safe
-              support [gasless
-              signing](https://help.gnosis-safe.io/en/articles/3940875-gas-less-signatures)
-              in their SDK for multi-sig wallets.
+              This section is not yet supported on Gnosis Safe.
             </p>
           </div>
         ) : (
