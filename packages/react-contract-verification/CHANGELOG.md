@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.112.1 (2022-09-03)
+
+
+### Bug Fixes
+
+* update login wallet for gnosis safe ([65247b3](https://github.com/0xflair/typescript-sdk/commit/65247b378713a7a0c479f940c5765c4464f349ec))
+
+
+
+
+
 # 0.112.0 (2022-09-03)
 
 

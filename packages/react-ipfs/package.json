@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-ipfs",
-  "version": "0.112.0",
+  "version": "0.112.1",
   "private": false,
   "repository": {
     "type": "git",
@@ -42,8 +42,8 @@
     "react": "^17.0.2||^18.0.0"
   },
   "dependencies": {
-    "@0xflair/ipfs": "^0.112.0",
-    "@0xflair/react-common": "^0.112.0",
+    "@0xflair/ipfs": "^0.112.1",
+    "@0xflair/react-common": "^0.112.1",
     "axios": "^0.26.1"
   },
   "devDependencies": {
