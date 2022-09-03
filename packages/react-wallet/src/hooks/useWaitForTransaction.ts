@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useInterval } from 'react-use';
 import {
   useConnect,
   useWaitForTransaction as useWaitForTransactionWagmi,
@@ -13,7 +14,7 @@ import { SafeConnector } from '../connectors/gnosis-safe';
 export const useWaitForTransaction = (
   config?: UseWaitForTransactionArgs & UseWaitForTransactionConfig,
 ) => {
-  const { connectors } = useConnect();
+  const { connectors, activeConnector } = useConnect();
   const [actualHash, setActualHash] = useState<string>();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,32 +27,40 @@ export const useWaitForTransaction = (
     hash: actualHash,
   });
 
-  useEffect(() => {
-    (async () => {
-      if (!config?.hash) {
-        setIsLoading(false);
-        return;
-      }
-
-      setIsLoading(true);
-
-      try {
-        const actualTx = await gnosisSafeConnector?.getTransactionBySafeHash(
-          config?.hash,
-        );
-
-        if (actualTx?.txHash) {
-          setActualHash(actualTx.txHash);
-        } else {
-          setActualHash(config?.hash);
-        }
-      } catch (error) {
-        console.error('Could not fetch safe hash: ', error);
-      }
-
+  const checkSafeTransaction = useCallback(async () => {
+    if (!config?.hash) {
       setIsLoading(false);
-    })();
-  }, [config?.hash, gnosisSafeConnector]);
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      if (activeConnector?.id == gnosisSafeConnector?.id) {
+        if (gnosisSafeConnector?.ready) {
+          const actualTx = await gnosisSafeConnector?.getTransactionBySafeHash(
+            config?.hash,
+          );
+
+          if (actualTx?.txHash) {
+            setActualHash(actualTx.txHash);
+          }
+        }
+      } else {
+        setActualHash(config?.hash);
+      }
+    } catch (error) {
+      console.error('Could not fetch safe hash: ', error);
+    }
+
+    setIsLoading(false);
+  }, [activeConnector?.id, config?.hash, gnosisSafeConnector]);
+
+  useEffect(() => {
+    checkSafeTransaction();
+  }, [checkSafeTransaction]);
+
+  useInterval(checkSafeTransaction, !actualHash ? 2000 : null);
 
   return { ...result, isLoading: result.isLoading || isLoading } as const;
 };
