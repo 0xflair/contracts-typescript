@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.112.2 (2022-09-03)
+
+
+### Bug Fixes
+
+* remove the gnosis safe link ([83f89bb](https://github.com/0xflair/typescript-sdk/commit/83f89bbf7e6733a33f795bc5649248f63cf140b6))
+
+
+
+
+
 ## 0.112.1 (2022-09-03)
 
 
