@@ -324,6 +324,29 @@ const newChains = [
       },
     },
   },
+  {
+    id: 280,
+    name: 'zkSync 2.0 Testnet',
+    nativeCurrency: {
+      name: 'ETH',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://zksync2-testnet.zksync.dev',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Etherscan',
+        url: 'https://zksync2-testnet.zkscan.io',
+      },
+      default: {
+        name: 'default',
+        url: 'https://zksync2-testnet.zkscan.io',
+      },
+    },
+    testnet: true,
+  },
 ];
 
 export const FLAIR_CHAINS: Chain[] = [...WagmiChains, ...newChains];
