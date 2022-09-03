@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.112.4 (2022-09-03)
+
+
+### Bug Fixes
+
+* poll safe tx by hash when not resolved yet ([de23b78](https://github.com/0xflair/typescript-sdk/commit/de23b78069a31534f40728085bedb4ffea711a4f))
+
+
+
+
+
 ## 0.112.3 (2022-09-03)
 
 
