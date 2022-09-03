@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.112.0 (2022-09-03)
+
+
+### Features
+
+* add wait for tx for gnosis safe ([ebeb4e4](https://github.com/0xflair/typescript-sdk/commit/ebeb4e41c76ed71da190dac4f60b68dedb02793b))
+
+
+
+
+
 ## 0.111.3 (2022-09-02)
 
 
