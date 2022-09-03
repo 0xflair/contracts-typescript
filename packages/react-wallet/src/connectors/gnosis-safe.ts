@@ -32,6 +32,16 @@ class SafeConnector extends Connector<SafeAppProvider, SafeOpts | undefined> {
     super({ ...config, options: config?.options });
 
     this.#sdk = new SafeAppsSDK(config.options);
+
+    // const onTransactionConfirmation = ({ requestId, safeTxHash }) => {
+    //   appsSdk.txs.getBySafeTxHash(e.safeTxHash).then((tx) => {
+    //       console.log({ tx }) // { tx: { detail: 'Not found' } }
+    //   })
+    // };
+
+    // this.#sdk.wallet.addListeners({
+    //   onTransactionConfirmation,
+    // })
   }
 
   async connect() {
@@ -80,6 +90,10 @@ class SafeConnector extends Connector<SafeAppProvider, SafeOpts | undefined> {
     }
 
     return normalizeChainId(this.#provider.chainId);
+  }
+
+  async getTransactionBySafeHash(safeTxHash: string) {
+    return this.#sdk.txs.getBySafeTxHash(safeTxHash);
   }
 
   async #getSafeInfo(): Promise<SafeInfo> {
