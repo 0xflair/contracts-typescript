@@ -93,7 +93,12 @@ class SafeConnector extends Connector<SafeAppProvider, SafeOpts | undefined> {
   }
 
   async getTransactionBySafeHash(safeTxHash: string) {
-    return this.#sdk.txs.getBySafeTxHash(safeTxHash);
+    const result = await Promise.race([
+      this.#sdk.txs.getBySafeTxHash(safeTxHash),
+      new Promise<undefined>((resolve) => setTimeout(resolve, 3000)),
+    ]);
+
+    return result;
   }
 
   async #getSafeInfo(): Promise<SafeInfo> {
