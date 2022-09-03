@@ -1,6 +1,7 @@
 import { ACTION_BUTTON, Errors } from '@0xflair/react-ui';
 import { LinkIcon } from '@heroicons/react/solid';
 import React, { ReactNode } from 'react';
+import { useConnect } from 'wagmi';
 
 import { useLoginContext } from '../../providers/login';
 import { LoginButton } from '../LoginButton/LoginButton';
@@ -18,6 +19,8 @@ export const RequireLogin = (props: Props) => {
     state: { data: signedInWallet, error },
   } = useLoginContext();
 
+  const { activeConnector } = useConnect();
+
   if (!signedInWallet) {
     return notLoggedInView ? (
       <>{notLoggedInView}</>
@@ -26,26 +29,47 @@ export const RequireLogin = (props: Props) => {
         as={props.as}
         className="flex items-center justify-center h-full"
       >
-        <div className="text-center">
-          <LinkIcon
-            className="mx-auto h-8 w-8 text-gray-400"
-            aria-hidden="true"
-          />
-          <h3 className="mt-2 text-sm font-medium text-gray-900">
-            OK, now login...
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">
-            Please login using your wallet first, then you can see this section.
-          </p>
-          {error && (
-            <div className="mt-1 text-sm">
-              <Errors error={error} />
-            </div>
-          )}
-          <div className="mt-6">
-            <LoginButton label="Login" className={ACTION_BUTTON} />
+        {activeConnector && activeConnector.id === 'safe' ? (
+          <div className="text-center">
+            <LinkIcon
+              className="mx-auto h-8 w-8 text-gray-400"
+              aria-hidden="true"
+            />
+            <h3 className="mt-2 text-sm font-medium text-gray-900">
+              Gnosis support is coming soon
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">
+              This section is not yet supported on Gnosis Safes until Safe
+              support [gasless
+              signing](https://help.gnosis-safe.io/en/articles/3940875-gas-less-signatures)
+              in their SDK for multi-sig wallets.
+            </p>
           </div>
-        </div>
+        ) : (
+          <>
+            <div className="text-center">
+              <LinkIcon
+                className="mx-auto h-8 w-8 text-gray-400"
+                aria-hidden="true"
+              />
+              <h3 className="mt-2 text-sm font-medium text-gray-900">
+                OK, now login...
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                Please login using your wallet first, then you can see this
+                section.
+              </p>
+              {error && (
+                <div className="mt-1 text-sm">
+                  <Errors error={error} />
+                </div>
+              )}
+              <div className="mt-6">
+                <LoginButton label="Login" className={ACTION_BUTTON} />
+              </div>
+            </div>
+          </>
+        )}
       </WalletComponentWrapper>
     );
   }
