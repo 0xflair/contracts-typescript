@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.113.0 (2022-09-04)
+
+
+### Features
+
+* bump contracts to include zkSync ([e0f899c](https://github.com/0xflair/typescript-sdk/commit/e0f899c4a0d828352beeb252af4e5684e458a7c2))
+
+
+
+
+
 ## 0.112.4 (2022-09-03)
 
 
