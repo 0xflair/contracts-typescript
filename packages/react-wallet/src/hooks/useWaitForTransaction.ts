@@ -28,12 +28,12 @@ export const useWaitForTransaction = (
   });
 
   const checkSafeTransaction = useCallback(async () => {
+    setIsLoading(true);
+
     if (!config?.hash) {
       setIsLoading(false);
       return;
     }
-
-    setIsLoading(true);
 
     try {
       if (activeConnector?.id == gnosisSafeConnector?.id) {
@@ -44,23 +44,24 @@ export const useWaitForTransaction = (
 
           if (actualTx?.txHash) {
             setActualHash(actualTx.txHash);
+            setIsLoading(false);
           }
         }
       } else {
         setActualHash(config?.hash);
+        setIsLoading(false);
       }
     } catch (error) {
+      setIsLoading(false);
       console.error('Could not fetch safe hash: ', error);
     }
-
-    setIsLoading(false);
   }, [activeConnector?.id, config?.hash, gnosisSafeConnector]);
 
   useEffect(() => {
     checkSafeTransaction();
   }, [checkSafeTransaction]);
 
-  useInterval(checkSafeTransaction, !actualHash ? 2000 : null);
+  useInterval(checkSafeTransaction, config?.hash && !actualHash ? 2000 : null);
 
   return { ...result, isLoading: result.isLoading || isLoading } as const;
 };
