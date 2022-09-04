@@ -2,7 +2,9 @@ import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';
 import { ContractInterface, Signer } from 'ethers';
 import { useCallback } from 'react';
-import { useContractWrite, useWaitForTransaction } from 'wagmi';
+import { useConnect, useContractWrite, useNetwork } from 'wagmi';
+
+import { useWaitForTransaction } from './useWaitForTransaction';
 
 export type ContractWriteConfig<ArgsType extends any[]> =
   WriteContractConfig & {
@@ -23,6 +25,9 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   confirmations = 3,
   ...restOfConfig
 }: ContractWriteConfig<ArgsType>) => {
+  const { isConnected } = useConnect();
+  const { activeChain } = useNetwork();
+
   const {
     data: responseData,
     error: responseError,
@@ -54,6 +59,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   } = useWaitForTransaction({
     hash: responseData?.hash,
     confirmations,
+    enabled: Boolean(isConnected && activeChain),
   });
 
   const writeAndWait = useCallback(

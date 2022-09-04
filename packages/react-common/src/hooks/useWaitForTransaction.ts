@@ -1,3 +1,4 @@
+import { SafeConnector } from '@0xflair/common';
 import { useCallback, useEffect, useState } from 'react';
 import { useInterval } from 'react-use';
 import {
@@ -9,11 +10,10 @@ import {
   UseWaitForTransactionConfig,
 } from 'wagmi/dist/declarations/src/hooks/transactions/useWaitForTransaction';
 
-import { SafeConnector } from '../connectors/gnosis-safe';
-
-export const useWaitForTransaction = (
-  config?: UseWaitForTransactionArgs & UseWaitForTransactionConfig,
-) => {
+export const useWaitForTransaction = ({
+  enabled = true,
+  ...config
+}: UseWaitForTransactionArgs & UseWaitForTransactionConfig) => {
   const { connectors, activeConnector } = useConnect();
   const [actualHash, setActualHash] = useState<string>();
   const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +61,10 @@ export const useWaitForTransaction = (
     checkSafeTransaction();
   }, [checkSafeTransaction]);
 
-  useInterval(checkSafeTransaction, config?.hash && !actualHash ? 2000 : null);
+  useInterval(
+    checkSafeTransaction,
+    enabled && config?.hash && !actualHash ? 2000 : null,
+  );
 
   return { ...result, isLoading: result.isLoading || isLoading } as const;
 };

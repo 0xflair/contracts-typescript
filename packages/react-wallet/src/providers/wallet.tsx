@@ -1,3 +1,4 @@
+import { MagicLinkConnector, SafeConnector } from '@0xflair/common';
 import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from '@0xflair/react-common';
 import { providers } from 'ethers';
 import {
@@ -12,8 +13,6 @@ import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
-import { SafeConnector } from '../connectors/gnosis-safe';
-import { MagicLinkConnector } from '../connectors/magic-link';
 import { FLAIR_INFURA_PROJECT_ID } from '../constants';
 import { useAutoConnect } from '../hooks/useAutoConnect';
 import stylesheet from '../index.css';

@@ -15,6 +15,7 @@ export * from './useHasAnyOfFeatures';
 export * from './useNormalizedFunctionCall';
 export * from './useSmartContract';
 export * from './useSupportsInterface';
+export * from './useWaitForTransaction';
 
 // web2
 export * from './useAxiosGet';
