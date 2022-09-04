@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.113.4 (2022-09-04)
+
+
+### Bug Fixes
+
+* resolve tx waiting if hash is already actual ([edfc222](https://github.com/0xflair/typescript-sdk/commit/edfc22287640b7a15d5dffdf492feea6961fedef))
+
+
+
+
+
 ## 0.113.3 (2022-09-04)
 
 
