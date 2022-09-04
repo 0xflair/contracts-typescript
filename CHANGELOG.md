@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.113.1 (2022-09-04)
+
+
+### Bug Fixes
+
+* zksync factory and gnosis safe wait for tx ([4f2513f](https://github.com/0xflair/typescript-sdk/commit/4f2513f233e247e3d3f4b8f2105427bac541137a))
+
+
+
+
+
 # 0.113.0 (2022-09-04)
 
 
