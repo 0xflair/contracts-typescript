@@ -22,18 +22,30 @@ export const useWaitForTransaction = ({
     | SafeConnector
     | undefined;
 
-  const result = useWaitForTransactionWagmi({
+  const resultInput = useWaitForTransactionWagmi({
+    ...config,
+    hash: config?.hash,
+    enabled: Boolean(enabled && !actualHash),
+  });
+
+  const resultActual = useWaitForTransactionWagmi({
     ...config,
     hash: actualHash,
   });
 
   const checkSafeTransaction = useCallback(async () => {
-    setIsLoading(true);
-
     if (!config?.hash) {
       setIsLoading(false);
       return;
     }
+
+    if (!resultInput.isLoading && resultInput.data?.transactionHash) {
+      setActualHash(resultInput.data.transactionHash);
+      setIsLoading(false);
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
       if (activeConnector?.id == gnosisSafeConnector?.id) {
@@ -55,7 +67,13 @@ export const useWaitForTransaction = ({
       setIsLoading(false);
       console.error('Could not fetch safe hash: ', error);
     }
-  }, [activeConnector?.id, config?.hash, gnosisSafeConnector]);
+  }, [
+    activeConnector?.id,
+    config?.hash,
+    gnosisSafeConnector,
+    resultInput.data?.transactionHash,
+    resultInput.isLoading,
+  ]);
 
   useEffect(() => {
     checkSafeTransaction();
@@ -66,5 +84,8 @@ export const useWaitForTransaction = ({
     enabled && config?.hash && !actualHash ? 2000 : null,
   );
 
-  return { ...result, isLoading: result.isLoading || isLoading } as const;
+  return {
+    ...resultActual,
+    isLoading: resultActual.isLoading || isLoading,
+  } as const;
 };
