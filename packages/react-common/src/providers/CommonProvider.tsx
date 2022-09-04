@@ -3,7 +3,7 @@ import { createWebStoragePersister } from 'react-query/createWebStoragePersister
 import { persistQueryClient } from 'react-query/persistQueryClient';
 
 const localStoragePersister = createWebStoragePersister({
-  storage: window.localStorage,
+  storage: window?.localStorage,
 });
 
 const queryClient = new QueryClient({

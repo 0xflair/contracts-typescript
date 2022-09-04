@@ -49,11 +49,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'OKLink',
         url: 'https://www.oklink.com/en/okc',
       },
       default: {
-        name: 'default',
+        name: 'OKLink',
         url: 'https://www.oklink.com/en/okc',
       },
     },
@@ -67,11 +67,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'OKLink',
         url: 'https://www.oklink.com/en/okc-test',
       },
       default: {
-        name: 'default',
+        name: 'OKLink',
         url: 'https://www.oklink.com/en/okc-test',
       },
     },
@@ -90,11 +90,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'Snowtrace',
         url: 'https://snowtrace.io',
       },
       default: {
-        name: 'default',
+        name: 'Snowtrace',
         url: 'https://snowtrace.io',
       },
     },
@@ -112,11 +112,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'Snowtrace',
         url: 'https://testnet.snowtrace.io',
       },
       default: {
-        name: 'default',
+        name: 'Snowtrace',
         url: 'https://testnet.snowtrace.io',
       },
     },
@@ -135,11 +135,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'FtmScan',
         url: 'https://ftmscan.com',
       },
       default: {
-        name: 'default',
+        name: 'FtmScan',
         url: 'https://ftmscan.com',
       },
     },
@@ -157,11 +157,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'FtmScan',
         url: 'https://testnet.ftmscan.com',
       },
       default: {
-        name: 'default',
+        name: 'FtmScan',
         url: 'https://testnet.ftmscan.com',
       },
     },
@@ -180,11 +180,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'AuroraScan',
         url: 'https://aurorascan.dev',
       },
       default: {
-        name: 'default',
+        name: 'AuroraScan',
         url: 'https://aurorascan.dev',
       },
     },
@@ -202,11 +202,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'AuroraScan',
         url: 'https://testnet.aurorascan.dev',
       },
       default: {
-        name: 'default',
+        name: 'AuroraScan',
         url: 'https://testnet.aurorascan.dev',
       },
     },
@@ -225,11 +225,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'NeonScan',
         url: 'https://neonscan.org',
       },
       default: {
-        name: 'default',
+        name: 'NeonScan',
         url: 'https://neonscan.org',
       },
     },
@@ -248,11 +248,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'Evmos explorer',
         url: 'https://evm.evmos.dev',
       },
       default: {
-        name: 'default',
+        name: 'Evmos explorer',
         url: 'https://evm.evmos.dev',
       },
     },
@@ -271,11 +271,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'Evmos explorer',
         url: 'https://evm.evmos.org',
       },
       default: {
-        name: 'default',
+        name: 'Evmos explorer',
         url: 'https://evm.evmos.org',
       },
     },
@@ -293,11 +293,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'Moonscan',
         url: 'https://moonscan.io',
       },
       default: {
-        name: 'default',
+        name: 'Moonscan',
         url: 'https://moonscan.io',
       },
     },
@@ -315,11 +315,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'Moonscan',
         url: 'https://moonriver.moonscan.io',
       },
       default: {
-        name: 'default',
+        name: 'Moonscan',
         url: 'https://moonriver.moonscan.io',
       },
     },
@@ -337,11 +337,11 @@ const newChains = [
     },
     blockExplorers: {
       etherscan: {
-        name: 'Etherscan',
+        name: 'zkScan',
         url: 'https://zksync2-testnet.zkscan.io',
       },
       default: {
-        name: 'default',
+        name: 'zkScan',
         url: 'https://zksync2-testnet.zkscan.io',
       },
     },
