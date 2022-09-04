@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.113.3 (2022-09-04)
+
+
+### Bug Fixes
+
+* move chains to non-react common pkg ([55ce3ff](https://github.com/0xflair/typescript-sdk/commit/55ce3ff9088e76fed7452f8d782883f76b496b42))
+
+
+
+
+
 ## 0.113.2 (2022-09-04)
 
 
