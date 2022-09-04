@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.113.2 (2022-09-04)
+
+
+### Bug Fixes
+
+* explorer names and window instance on nodejs ([0832e81](https://github.com/0xflair/typescript-sdk/commit/0832e810cca5fd2b048f185f4c30adc1fb9c4b9f))
+
+
+
+
+
 ## 0.113.1 (2022-09-04)
 
 
