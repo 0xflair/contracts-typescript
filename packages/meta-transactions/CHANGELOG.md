@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.114.1 (2022-09-05)
+
+
+### Bug Fixes
+
+* siwtch to es5 in the sdk ([f4e2a93](https://github.com/0xflair/typescript-sdk/commit/f4e2a930ae403cd7235d2e0b424fbd1e00da3808))
+
+
+
+
+
 # 0.114.0 (2022-09-05)
 
 
