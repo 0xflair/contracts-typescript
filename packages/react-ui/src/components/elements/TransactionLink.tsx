@@ -18,7 +18,7 @@ export const TransactionLink = ({
 }: Props) => {
   const { activeChain } = useNetwork();
 
-  const txHash = txResponse?.hash || txReceipt?.transactionHash;
+  const txHash = txReceipt?.transactionHash || txResponse?.hash;
   const scannerChain = chain || activeChain;
   const explorer = scannerChain?.blockExplorers?.default;
 
