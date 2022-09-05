@@ -16,4 +16,4 @@ export * from '@0xflair/react-token-streams';
 export * from '@0xflair/react-ui';
 export * from '@0xflair/react-wallet';
 
-export * from './react';
+export * from './react/provider';
