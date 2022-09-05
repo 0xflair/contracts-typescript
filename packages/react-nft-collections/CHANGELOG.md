@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.114.2 (2022-09-05)
+
+
+### Bug Fixes
+
+* use esnext as module ([c4c55d6](https://github.com/0xflair/typescript-sdk/commit/c4c55d6a7371b944f4f0531c471810b7afedd58f))
+
+
+
+
+
 ## 0.114.1 (2022-09-05)
 
 
