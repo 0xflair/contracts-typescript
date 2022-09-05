@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.114.0 (2022-09-05)
+
+
+### Features
+
+* use es6 as target ([a65d5d7](https://github.com/0xflair/typescript-sdk/commit/a65d5d7ded7cb1e89ec522d833f10eef9c0be559))
+
+
+
+
+
 ## 0.113.4 (2022-09-04)
 
 
