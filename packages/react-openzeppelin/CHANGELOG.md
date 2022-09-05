@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.114.4 (2022-09-05)
+
+
+### Bug Fixes
+
+* use es6 for new operator ([0cbcc78](https://github.com/0xflair/typescript-sdk/commit/0cbcc787f2f358ce1aaad5d9f1def98fe1de6fe4))
+
+
+
+
+
 ## 0.114.3 (2022-09-05)
 
 
