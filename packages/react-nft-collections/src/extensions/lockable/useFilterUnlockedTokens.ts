@@ -19,7 +19,7 @@ export const useFilterUnlockedTokens = (
   // The way filterUnlocked works is to return 0 if the token is not locked,
   // this means if collection has a token ID zero and it is passed in args, we have to take care of it separately.
   const hasTokenTokenZero =
-    config.args?.[0].find((arg) => arg.toString() === '0') !== undefined;
+    config.args?.[0].find((arg: any) => arg.toString() === '0') !== undefined;
   const tokenZero = useContractRead<boolean, [BigNumberish]>({
     contractFqn: 'collections/ERC721/extensions/ERC721LockableExtension',
     functionName: 'locked',

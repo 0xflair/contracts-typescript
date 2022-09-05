@@ -8,15 +8,14 @@ import {
 } from '@0xflair/contracts-registry';
 import { ReadContractConfig as ReadContractConfigWagmi } from '@wagmi/core';
 import { ethers } from 'ethers';
-import { Result } from 'ethers/lib/utils';
 import { useCallback, useMemo } from 'react';
 import { useContractRead as useContractReadWagmi, useProvider } from 'wagmi';
-import { UseContractReadConfig } from 'wagmi/dist/declarations/src/hooks/contracts/useContractRead';
+// import { UseContractReadConfig } from 'wagmi/dist/declarations/src/hooks/contracts/useContractRead';
 
 export type ReadContractConfig<ArgsType = []> = Partial<
   Omit<ReadContractConfigWagmi, 'args'>
 > &
-  UseContractReadConfig & {
+  /*UseContractReadConfig*/any & {
     contractVersion?: ContractVersion;
     contractFqn: ContractFqn;
     contractAddress?: string;

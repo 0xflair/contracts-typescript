@@ -5,15 +5,15 @@ import {
   useConnect,
   useWaitForTransaction as useWaitForTransactionWagmi,
 } from 'wagmi';
-import {
-  UseWaitForTransactionArgs,
-  UseWaitForTransactionConfig,
-} from 'wagmi/dist/declarations/src/hooks/transactions/useWaitForTransaction';
+// import {
+//   UseWaitForTransactionArgs,
+//   UseWaitForTransactionConfig,
+// } from 'wagmi/dist/declarations/src/hooks/transactions/useWaitForTransaction';
 
 export const useWaitForTransaction = ({
   enabled = true,
   ...config
-}: UseWaitForTransactionArgs & UseWaitForTransactionConfig) => {
+}: any/*UseWaitForTransactionArgs & UseWaitForTransactionConfig*/) => {
   const { connectors, activeConnector } = useConnect();
   const [actualHash, setActualHash] = useState<string>();
   const [isLoading, setIsLoading] = useState(true);

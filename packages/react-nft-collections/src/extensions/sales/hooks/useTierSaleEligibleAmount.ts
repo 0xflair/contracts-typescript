@@ -46,7 +46,7 @@ export const useTierSaleEligibleAmount = (config: Config) => {
       config.enabled &&
       config.tierId !== undefined &&
       config.minterAddress !== undefined,
-    onSettled(data, error: any) {
+    onSettled(data: any, error: any) {
       if (error) {
         if (!['NOT_STARTED', 'NOT_ALLOWLISTED'].includes(error?.reason)) {
           setError(error);
