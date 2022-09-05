@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.114.6 (2022-09-05)
+
+
+### Bug Fixes
+
+* correct order of getting tx hash (for gnosis) ([d577600](https://github.com/0xflair/typescript-sdk/commit/d5776007c0abe68a95a698db8bac33d9a093fc7d))
+
+
+
+
+
 ## 0.114.5 (2022-09-05)
 
 
