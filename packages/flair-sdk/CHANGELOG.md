@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.114.5 (2022-09-05)
+
+
+### Bug Fixes
+
+* comment out deep imported types ([d60923d](https://github.com/0xflair/typescript-sdk/commit/d60923d6f2cb459df424451353eaaaa829a4db37))
+
+
+
+
+
 ## 0.114.4 (2022-09-05)
 
 
