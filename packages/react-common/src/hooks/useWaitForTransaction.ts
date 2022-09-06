@@ -10,13 +10,15 @@ import {
 //   UseWaitForTransactionConfig,
 // } from 'wagmi/dist/declarations/src/hooks/transactions/useWaitForTransaction';
 
-export const useWaitForTransaction = ({
-  enabled = true,
-  ...config
-}: any/*UseWaitForTransactionArgs & UseWaitForTransactionConfig*/) => {
+export const useWaitForTransaction = (
+  {
+    enabled = true,
+    ...config
+  }: any /*UseWaitForTransactionArgs & UseWaitForTransactionConfig*/,
+) => {
   const { connectors, activeConnector } = useConnect();
   const [actualHash, setActualHash] = useState<string>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(Boolean(config?.hash));
 
   const gnosisSafeConnector = connectors.find(({ id }) => id === 'safe') as
     | SafeConnector
