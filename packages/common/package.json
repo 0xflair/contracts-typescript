@@ -13,6 +13,14 @@
   "scripts": {
     "build": "rollup -c"
   },
+  "peerDependencies": {
+    "@ethersproject/providers": "*",
+    "@gnosis.pm/safe-apps-provider": "*",
+    "@gnosis.pm/safe-apps-sdk": "*",
+    "@everipedia/wagmi-magic-connector": "*",
+    "@wagmi/core": "*",
+    "ethers": "*"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/types.d.ts",
