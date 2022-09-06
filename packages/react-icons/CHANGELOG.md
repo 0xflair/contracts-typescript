@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.114.8 (2022-09-06)
+
+
+### Bug Fixes
+
+* add peer deps to avoid packaging ([553774f](https://github.com/0xflair/typescript-sdk/commit/553774f64079edf57b997a2f63cf9808735f843f))
+
+
+
+
+
 ## 0.114.7 (2022-09-06)
 
 
