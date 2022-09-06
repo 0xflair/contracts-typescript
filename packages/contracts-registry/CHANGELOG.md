@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.114.7 (2022-09-06)
+
+
+### Bug Fixes
+
+* initial loading only if hash exists ([d22a9c0](https://github.com/0xflair/typescript-sdk/commit/d22a9c0778bedb9f8206127c79f43cd07b6aa8bc))
+
+
+
+
+
 ## 0.114.6 (2022-09-05)
 
 
