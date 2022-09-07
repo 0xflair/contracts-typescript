@@ -1,8 +1,4 @@
-import {
-  DisconnectButton,
-  LoginProvider,
-  WalletProvider,
-} from '@0xflair/react-wallet';
+import { DisconnectButton, WalletProvider } from '@0xflair/react-wallet';
 import { useAccount, useNetwork } from 'wagmi';
 
 export default {
@@ -10,9 +6,7 @@ export default {
   decorators: [
     (Story: any) => (
       <WalletProvider>
-        <LoginProvider>
-          <Story />
-        </LoginProvider>
+        <Story />
       </WalletProvider>
     ),
   ],

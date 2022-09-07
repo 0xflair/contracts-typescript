@@ -2,7 +2,12 @@ import {
   ConnectButton,
   ConnectButtonProps,
   DisconnectButton,
+<<<<<<< Updated upstream
   LoginProvider,
+=======
+  IfWalletConnected,
+  IfWalletNotConnected,
+>>>>>>> Stashed changes
   WalletProvider,
 } from '@0xflair/react-wallet';
 import React from 'react';
