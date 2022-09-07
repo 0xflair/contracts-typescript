@@ -1,5 +1,5 @@
 import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
-import { classNames } from '@0xflair/react-common';
+import { BareComponentProps, classNames } from '@0xflair/react-common';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';
@@ -10,15 +10,16 @@ import { DisconnectButton } from './DisconnectButton';
 import { WalletComponentWrapper } from './WalletComponentWrapper';
 import { WalletProfile, WalletProfileProps } from './WalletProfile';
 
-type Props = {
-  as?: keyof JSX.IntrinsicElements;
+type Props = BareComponentProps & {
   className?: string;
+  wrapperClassName?: string;
   walletProfileProps?: WalletProfileProps;
 };
 
 export const WalletDropdown = ({
   as,
   className,
+  wrapperClassName,
   walletProfileProps,
 }: Props) => {
   const { activeChain } = useNetwork();
@@ -31,16 +32,19 @@ export const WalletDropdown = ({
   const [, copyToClipboard] = useCopyToClipboard();
 
   return (
-    <WalletComponentWrapper as={as} className={'wallet-dropdown-wrapper'}>
+    <WalletComponentWrapper
+      as={as}
+      className={classNames('wallet-dropdown-wrapper', wrapperClassName)}
+    >
       <Menu
         as="div"
         className={classNames(
           `wallet-dropdown-menu relative inline-block`,
-          className || '',
+          className,
         )}
       >
         <div>
-          <Menu.Button className="wallet-dropdown-button max-w-xs rounded-full flex gap-2 items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 p-2 lg:rounded-md lg:hover:bg-gray-50">
+          <Menu.Button className="wallet-dropdown-button max-w-xs rounded-full flex gap-2 items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 p-2 lg:rounded-md">
             <WalletProfile
               className="flex gap-2 items-center"
               {...walletProfileProps}

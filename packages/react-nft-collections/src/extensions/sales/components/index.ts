@@ -1,3 +1,4 @@
+export * from './CollectionIfWalletCanMint';
 export * from './CollectionSalesActiveStatus';
 export * from './CollectionSalesAllowlistStatus';
 export * from './CollectionSalesMintButton';

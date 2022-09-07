@@ -51,6 +51,7 @@
     "react": "^16 || ^17 || ^18",
     "react-dom": "^16 || ^17 || ^18",
     "react-query": "*",
+    "@wagmi/core": "^0.2.5",
     "wagmi": "^0.3.5"
   },
   "dependencies": {
@@ -68,6 +69,7 @@
     "humanize-duration": "^3.27.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
+    "@wagmi/core": "^0.2.5",
     "wagmi": "^0.3.5"
   },
   "devDependencies": {

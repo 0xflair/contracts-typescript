@@ -4,8 +4,9 @@ import SafeAppsSDK, {
   Opts as SafeOpts,
   SafeInfo,
 } from '@gnosis.pm/safe-apps-sdk';
-import { Chain, Connector, ConnectorNotFoundError } from '@wagmi/core';
+import { Connector, ConnectorNotFoundError } from '@wagmi/core';
 import { utils } from 'ethers';
+import { Chain } from 'wagmi';
 
 function normalizeChainId(chainId: string | number) {
   if (typeof chainId === 'string') {
