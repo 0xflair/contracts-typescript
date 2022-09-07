@@ -2,6 +2,8 @@ import {
   ConnectButton,
   ConnectButtonProps,
   DisconnectButton,
+  IfChain,
+  IfChainNot,
   IfWalletConnected,
   IfWalletNotConnected,
   WalletProvider,
@@ -46,6 +48,12 @@ export const Default = (args: ConnectButtonProps) => {
         ) : (
           ''
         )}
+        <IfChain connectedTo={1}>
+          <li>Connected to Ethereum Mainnet</li>
+        </IfChain>
+        <IfChainNot connectedTo={1}>
+          <li>NOT connected to Ethereum Mainnet</li>
+        </IfChainNot>
         <li>
           Account: error={account.error} loading=
           {account.isLoading}
