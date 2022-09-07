@@ -95,7 +95,6 @@ export const StreamStakingSection = ({}: Props) => {
                   <div className="flex flex-col justify-center items-center mt-4">
                     <ConnectButton
                       className={buttonClass}
-                      wrapperClassName="w-full"
                       label="Connect to stake"
                     >
                       <SwitchChainButton

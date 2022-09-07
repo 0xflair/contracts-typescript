@@ -5,6 +5,8 @@ export * from './RequireLogin/RequireLogin';
 export * from './RequireChain/RequireChain';
 export * from './LoginButton/LoginButton';
 export * from './DisconnectButton';
+export * from './IfChain';
+export * from './IfChainNot';
 export * from './IfWalletConnected';
 export * from './IfWalletNotConnected';
 export * from './SwitchChainButton';

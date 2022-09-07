@@ -1,4 +1,4 @@
-import { FLAIR_CHAINS } from '@0xflair/react-common';
+import { FLAIR_CHAINS } from '@0xflair/common';
 import { ExclamationIcon, LinkIcon, XCircleIcon } from '@heroicons/react/solid';
 import React, { ReactNode } from 'react';
 import { useNetwork } from 'wagmi';
@@ -7,7 +7,7 @@ import { ConnectButton } from '../ConnectButton/ConnectButton';
 import { WalletComponentWrapper } from '../WalletComponentWrapper';
 
 type Props = {
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
   notConnectedView?: ReactNode;
   children?: ReactNode;
   preventUnsupported?: boolean;

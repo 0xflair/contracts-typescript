@@ -1,19 +1,24 @@
-import { useChainInfo } from '@0xflair/react-common';
-import { Button } from '@0xflair/react-ui';
+import { BareComponentProps, useChainInfo } from '@0xflair/react-common';
 import React from 'react';
 import { useNetwork } from 'wagmi';
 
-type Props = {
-  requiredChainId: number;
+type Props = BareComponentProps & {
   label?: React.ReactNode;
   children?: React.ReactNode;
-  className?: string;
+  requiredChainId: number;
 };
 
-export const SwitchChainButton = (props: Props) => {
-  const { requiredChainId, children, className, label } = props;
+export const SwitchChainButton = ({
+  as,
+  label,
+  children,
+  requiredChainId,
+  ...attributes
+}: Props) => {
   const { activeChain, switchNetwork } = useNetwork();
   const requiredChain = useChainInfo(Number(requiredChainId));
+
+  const Component = as || 'button';
 
   if (
     !activeChain?.id ||
@@ -21,14 +26,13 @@ export const SwitchChainButton = (props: Props) => {
     activeChain.id.toString() !== requiredChainId.toString()
   ) {
     return (
-      <Button
+      <Component
         disabled={!switchNetwork}
-        className={className}
-        text={
-          label || `Switch to ${requiredChain?.name || requiredChainId} chain`
-        }
         onClick={() => switchNetwork && switchNetwork(requiredChainId)}
-      ></Button>
+        {...attributes}
+      >
+        {label || `Switch to ${requiredChain?.name || requiredChainId} chain`}
+      </Component>
     );
   }
 

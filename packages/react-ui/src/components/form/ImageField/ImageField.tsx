@@ -31,7 +31,7 @@ export const ImageField = (props: ImageFieldProps) => {
       setImageFile(acceptedFiles[0]);
       setImagePreview(base64Url);
     },
-    [setImageFile, setImagePreview]
+    [setImageFile, setImagePreview],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -43,7 +43,7 @@ export const ImageField = (props: ImageFieldProps) => {
     <div
       className={classNames(
         className || '',
-        disabled ? 'opacity-50 cursor-not-allowed' : ''
+        disabled ? 'opacity-50 cursor-not-allowed' : '',
       )}
     >
       <label className="block text-sm font-medium text-gray-700">{label}</label>
@@ -90,7 +90,9 @@ export const ImageField = (props: ImageFieldProps) => {
                 </label>
                 <p className="pl-1">or drag and drop</p>
               </div>
-              <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+              <p className="text-xs text-gray-500">
+                Any Videos, Images, HTML up to 50MB
+              </p>
             </div>
           </div>
         </div>

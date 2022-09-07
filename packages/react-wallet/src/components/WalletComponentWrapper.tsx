@@ -1,8 +1,8 @@
-import { classNames } from '@0xflair/react-common';
+import { classNames } from '@0xflair/common';
 import { PropsWithChildren } from 'react';
 
 type Props = {
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
   className: string;
 } & PropsWithChildren;
 

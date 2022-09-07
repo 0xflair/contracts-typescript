@@ -2,12 +2,8 @@ import {
   ConnectButton,
   ConnectButtonProps,
   DisconnectButton,
-<<<<<<< Updated upstream
-  LoginProvider,
-=======
   IfWalletConnected,
   IfWalletNotConnected,
->>>>>>> Stashed changes
   WalletProvider,
 } from '@0xflair/react-wallet';
 import React from 'react';
@@ -18,9 +14,7 @@ export default {
   decorators: [
     (Story: any) => (
       <WalletProvider custodialWallet={true}>
-        <LoginProvider>
-          <Story />
-        </LoginProvider>
+        <Story />
       </WalletProvider>
     ),
   ],
@@ -37,10 +31,13 @@ export const Default = (args: ConnectButtonProps) => {
 
   return (
     <div className="bg-gray-100 p-8">
-      <ConnectButton {...args}>
+      <IfWalletNotConnected>
+        <ConnectButton {...args} />
+      </IfWalletNotConnected>
+      <IfWalletConnected>
         Yay! Connected!
         <DisconnectButton />
-      </ConnectButton>
+      </IfWalletConnected>
       <ul className="mt-5">
         {account?.data ? (
           <li>

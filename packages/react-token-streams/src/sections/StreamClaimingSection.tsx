@@ -171,9 +171,8 @@ export const StreamClaimingSection = ({}: Props) => {
 
                 <div className="flex flex-col justify-center items-center mt-4">
                   <ConnectButton
-                    className={buttonClass}
-                    wrapperClassName="w-full"
                     label="Connect to claim"
+                    className={buttonClass}
                   >
                     <SwitchChainButton
                       requiredChainId={Number(chainId)}
