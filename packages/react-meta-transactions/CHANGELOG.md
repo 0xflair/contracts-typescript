@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.115.2 (2022-09-07)
+
+**Note:** Version bump only for package @0xflair/react-meta-transactions
+
+
+
+
+
 ## 0.115.1 (2022-09-07)
 
 **Note:** Version bump only for package @0xflair/react-meta-transactions
