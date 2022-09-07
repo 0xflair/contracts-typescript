@@ -24,7 +24,7 @@ export type ConnectButtonProps = BareComponentProps & {
 
 export const ConnectButton = ({
   as,
-  label,
+  label = 'Connect',
   children,
   dialogProps,
   connectPalletteProps,
