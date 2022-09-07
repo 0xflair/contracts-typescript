@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.115.0 (2022-09-07)
+
+
+### Features
+
+* make connect and switch chain buttons headless add if wallet can mint component ([#22](https://github.com/0xflair/typescript-sdk/issues/22)) ([0b18be4](https://github.com/0xflair/typescript-sdk/commit/0b18be41243140cf4b7a3d9442bd8c945b5deaba))
+
+
+
+
+
 ## 0.114.8 (2022-09-06)
 
 
