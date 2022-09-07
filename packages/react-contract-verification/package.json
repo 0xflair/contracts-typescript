@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-contract-verification",
-  "version": "0.115.2",
+  "version": "0.115.3",
   "private": false,
   "repository": {
     "type": "git",
@@ -46,10 +46,10 @@
     "wagmi": "^0.3.5"
   },
   "dependencies": {
-    "@0xflair/common": "^0.115.2",
-    "@0xflair/contracts-registry": "^0.115.2",
-    "@0xflair/react-common": "^0.115.2",
-    "@0xflair/react-wallet": "^0.115.2",
+    "@0xflair/common": "^0.115.3",
+    "@0xflair/contracts-registry": "^0.115.3",
+    "@0xflair/react-common": "^0.115.3",
+    "@0xflair/react-wallet": "^0.115.3",
     "@wagmi/core": "^0.2.5",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",

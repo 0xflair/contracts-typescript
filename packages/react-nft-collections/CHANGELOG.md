@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.115.3 (2022-09-07)
+
+
+### Bug Fixes
+
+* add a default label for connect button ([0890351](https://github.com/0xflair/typescript-sdk/commit/0890351172f1b70d318569d53245f9327b14fd50))
+
+
+
+
+
 ## 0.115.2 (2022-09-07)
 
 **Note:** Version bump only for package @0xflair/react-nft-collections
