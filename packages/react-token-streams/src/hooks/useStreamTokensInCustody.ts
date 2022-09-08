@@ -1,4 +1,4 @@
-import { V1_19_ERC721CustodialStakingExtension__factory } from '@0xflair/contracts-registry';
+import { V1_20_ERC721CustodialStakingExtension__factory } from '@0xflair/contracts-registry';
 import {
   Environment,
   PredefinedReadContractConfig,
@@ -56,7 +56,7 @@ export const useStreamTokensInCustody = (config: Config) => {
     if (!config.contractAddress || !provider) {
       return;
     }
-    return V1_19_ERC721CustodialStakingExtension__factory.connect(
+    return V1_20_ERC721CustodialStakingExtension__factory.connect(
       config.contractAddress,
       provider,
     );

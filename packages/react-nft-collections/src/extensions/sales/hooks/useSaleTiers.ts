@@ -1,5 +1,5 @@
 import { Environment } from '@0xflair/common';
-import { V1_19_ERC721TieringExtension__factory } from '@0xflair/contracts-registry';
+import { V1_20_ERC721TieringExtension__factory } from '@0xflair/contracts-registry';
 import {
   PredefinedReadContractConfig,
   useHasAnyOfFeatures,
@@ -118,7 +118,7 @@ export const useSaleTiers = (config: Config) => {
     if (!config.contractAddress || !provider) {
       return;
     }
-    return V1_19_ERC721TieringExtension__factory.connect(
+    return V1_20_ERC721TieringExtension__factory.connect(
       config.contractAddress,
       provider,
     );
