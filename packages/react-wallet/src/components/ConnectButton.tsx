@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useConnect } from 'wagmi';
 
-import { ConnectPalette, ConnectPaletteProps } from '../ConnectPalette';
+import { ConnectPalette, ConnectPaletteProps } from './ConnectPalette';
 
 export type ConnectButtonProps = BareComponentProps & {
   label?: React.ReactNode;

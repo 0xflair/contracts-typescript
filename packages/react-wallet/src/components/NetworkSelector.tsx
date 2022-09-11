@@ -4,7 +4,7 @@ import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';
 import { Chain, useNetwork } from 'wagmi';
 
-import { WalletComponentWrapper } from '../WalletComponentWrapper';
+import { WalletComponentWrapper } from './WalletComponentWrapper';
 
 type Props = {
   className?: string;

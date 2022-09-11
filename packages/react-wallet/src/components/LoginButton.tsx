@@ -2,7 +2,7 @@ import { useCancel } from '@0xflair/react-common';
 import React, { useEffect } from 'react';
 import { useAccount } from 'wagmi';
 
-import { useLoginContext } from '../../providers/login';
+import { useLoginContext } from '../providers/login';
 
 export type LoginButtonProps = {
   label?: string;

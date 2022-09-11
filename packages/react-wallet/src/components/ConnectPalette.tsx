@@ -1,8 +1,10 @@
 import { classNames } from '@0xflair/react-common';
 import {
+  GenericWalletIcon,
   GnosisSafeIcon,
   MagicLinkIcon,
   MetaMaskIcon,
+  TrustWalletIcon,
   WalletConnectIcon,
   WalletLinkIcon,
 } from '@0xflair/react-icons';
@@ -37,7 +39,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const activeButtonRef = useRef(null);
   const { connectors, connect } = useConnect();
 
-  const connectorMetamask = connectors.find((c) => c.id == 'injected');
+  const connectorInjected = connectors.find((c) => c.id == 'injected');
   const connectorWalletConnect = connectors.find(
     (c) => c.id == 'walletConnect',
   );
@@ -47,7 +49,8 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const connectorGnosisSafe = connectors.find((c) => c.id == 'safe');
   const connectorMagic = connectors.find((c) => c.id == 'magic');
 
-  const metamaskInstalled = MetaMaskOnboarding.isMetaMaskInstalled();
+  const injectedAvailable =
+    window?.['ethereum'] || MetaMaskOnboarding.isMetaMaskInstalled();
 
   const paletteClassName =
     props.paletteClassName || 'inline-flex flex-col gap-4';
@@ -60,20 +63,32 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
 
   return (
     <WalletComponentWrapper as={props.as} className={paletteClassName}>
-      {connectorMetamask && (
+      {connectorInjected && (
         <>
-          {metamaskInstalled ? (
+          {injectedAvailable ? (
             <button
               ref={activeButtonRef}
               type="button"
               className={classNames(
-                'flair connect-button connector-metamask',
+                'flair connect-button connector-injected',
+                `connector-${connectorInjected.name
+                  .replaceAll(' ', '-')
+                  .toLowerCase()}`,
                 buttonClassName,
               )}
-              onClick={() => connect(connectorMetamask)}
+              onClick={() => connect(connectorInjected)}
             >
-              <MetaMaskIcon className={iconClassName} />
-              {props.metamaskButtonLabel || 'MetaMask'}
+              {!connectorInjected.name ||
+              connectorInjected.name == 'MetaMask' ? (
+                <MetaMaskIcon className={iconClassName} />
+              ) : connectorInjected.name == 'Trust Wallet' ? (
+                <TrustWalletIcon className={iconClassName} />
+              ) : (
+                <GenericWalletIcon className={iconClassName} />
+              )}
+              {props.metamaskButtonLabel ||
+                connectorInjected.name ||
+                'MetaMask'}
               {props.metamaskButtonDescription ? (
                 <span className={descriptionClassName}>
                   {props.metamaskButtonDescription}
@@ -105,7 +120,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
       {connectorWalletConnect && (
         <button
           type="button"
-          ref={!metamaskInstalled ? activeButtonRef : undefined}
+          ref={!injectedAvailable ? activeButtonRef : undefined}
           className={classNames(
             'flair connect-button connector-wallet-connect',
             buttonClassName,

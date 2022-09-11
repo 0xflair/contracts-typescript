@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react';
 type Props = {
   as?: React.ElementType;
   className: string;
-} & PropsWithChildren;
+} & PropsWithChildren<any>;
 
 export const WalletComponentWrapper = ({ children, as, className }: Props) => {
   const Component = as || 'span';

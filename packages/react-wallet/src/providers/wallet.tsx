@@ -28,7 +28,7 @@ export type WalletProviderProps = {
 
 const FLAIR_MAGIC_API_KEY = 'pk_live_8B82089A89462668';
 
-const AutoConnectWrapper = ({ children }: PropsWithChildren) => {
+const AutoConnectWrapper = ({ children }: PropsWithChildren<any>) => {
   useAutoConnect();
 
   return <>{children}</>;
