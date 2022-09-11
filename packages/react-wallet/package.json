@@ -1,6 +1,6 @@
 {
   "name": "@0xflair/react-wallet",
-  "version": "0.116.0",
+  "version": "0.116.1",
   "private": false,
   "repository": {
     "type": "git",
@@ -65,11 +65,11 @@
     "@types/react-modal": "^3.13.1"
   },
   "dependencies": {
-    "@0xflair/common": "^0.116.0",
-    "@0xflair/react-coingecko": "^0.116.0",
-    "@0xflair/react-common": "^0.116.0",
-    "@0xflair/react-icons": "^0.116.0",
-    "@0xflair/react-ui": "^0.116.0",
+    "@0xflair/common": "^0.116.1",
+    "@0xflair/react-coingecko": "^0.116.1",
+    "@0xflair/react-common": "^0.116.1",
+    "@0xflair/react-icons": "^0.116.1",
+    "@0xflair/react-ui": "^0.116.1",
     "@headlessui/react": "^1.6.0",
     "@heroicons/react": "^1.0.6",
     "@metamask/onboarding": "^1.0.1",

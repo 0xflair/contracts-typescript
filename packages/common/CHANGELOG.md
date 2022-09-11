@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.116.1 (2022-09-11)
+
+
+### Bug Fixes
+
+* detect injected wallet name and use correct icon for trust wallet ([#23](https://github.com/0xflair/typescript-sdk/issues/23)) ([175e773](https://github.com/0xflair/typescript-sdk/commit/175e77392d3c62552ee8009e749e82a43d96b392))
+
+
+
+
+
 # 0.116.0 (2022-09-08)
 
 
