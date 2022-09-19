@@ -1,3 +1,5 @@
+export * from '@flair-sdk/common';
+
 export * from './address-lists';
 export * from './common';
 export * from './contract-verification';
