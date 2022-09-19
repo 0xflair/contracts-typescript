@@ -14,3 +14,4 @@ export * from './features/openzeppelin';
 export * from './features/token-streams';
 export * from './features/ui';
 export * from './features/wallet';
+export * from './providers';
