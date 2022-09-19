@@ -1,4 +1,4 @@
-import { FLAIR_CHAINS } from '@0xflair/common';
+import { FLAIR_CHAINS } from '@flair-sdk/common';
 import * as React from 'react';
 
 export const useChainInfo = (chainId?: number) => {

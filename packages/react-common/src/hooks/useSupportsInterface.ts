@@ -1,5 +1,5 @@
-import { getInterfaceId } from '@0xflair/common';
-import { ContractFqn, loadContract } from '@0xflair/contracts-registry';
+import { getInterfaceId } from '@flair-sdk/common';
+import { ContractFqn, loadContract } from '@flair-sdk/contracts-registry';
 import { BigNumberish, ethers } from 'ethers';
 import { useMemo } from 'react';
 import reactQuery from 'react-query';
@@ -26,7 +26,7 @@ export const useSupportsInterface = ({
 
     try {
       const definition = loadContract(extensionFqn, contractVersion);
-      const iface = new ethers.utils.Interface(definition.artifact.abi);
+      const iface = new ethers.utils.Interface(definition?.artifact.abi || []);
 
       return getInterfaceId(iface);
     } catch (e) {

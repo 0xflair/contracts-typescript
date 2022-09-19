@@ -1,10 +1,10 @@
 {
-  "name": "@0xflair/contracts-registry",
-  "version": "0.116.1",
+  "name": "@flair-sdk/contracts-registry",
+  "version": "2.0.0",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/0xflair/typescript-sdk.git"
+    "url": "git+https://github.com/flair-sdk/typescript.git"
   },
   "publishConfig": {
     "access": "public",
@@ -24,17 +24,7 @@
     "ethers": "^5.6.5"
   },
   "dependencies": {
-    "flair-contracts-v1.10": "npm:@0xflair/evm-contracts@1.10.*",
-    "flair-contracts-v1.11": "npm:@0xflair/evm-contracts@1.11.*",
-    "flair-contracts-v1.12": "npm:@0xflair/evm-contracts@1.12.8",
-    "flair-contracts-v1.13": "npm:@0xflair/evm-contracts@1.13.*",
-    "flair-contracts-v1.14": "npm:@0xflair/evm-contracts@1.14.*",
-    "flair-contracts-v1.15": "npm:@0xflair/evm-contracts@1.15.*",
-    "flair-contracts-v1.16": "npm:@0xflair/evm-contracts@1.16.*",
-    "flair-contracts-v1.18": "npm:@0xflair/evm-contracts@1.18.*",
-    "flair-contracts-v1.19": "npm:@0xflair/evm-contracts@1.19.*",
-    "flair-contracts-v1.20": "npm:@0xflair/evm-contracts@1.20.*",
-    "flair-contracts-v1.8": "npm:@0xflair/evm-contracts@1.8.*",
-    "flair-contracts-v1.9": "npm:@0xflair/evm-contracts@1.9.*"
+    "flair-contracts-v1": "npm:@0xflair/evm-contracts@1.*",
+    "flair-contracts-v2": "npm:@flair-sdk/contracts@2.*"
   }
 }

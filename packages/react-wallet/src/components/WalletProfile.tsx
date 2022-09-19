@@ -1,4 +1,4 @@
-import { classNames } from '@0xflair/react-common';
+import { classNames } from '@flair-sdk/react-common';
 import Blockies from 'react-blockies';
 import {
   useAccount,

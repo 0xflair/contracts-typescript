@@ -91,6 +91,7 @@ const main = async () => {
         dirname(
           sourceName
             .slice(0, sourceName.lastIndexOf('.'))
+            .replace(/^src\//i, '')
             .replace(/^contracts\//i, '')
             .replace(/^@openzeppelin\/contracts\//i, ''),
         ) +
@@ -132,6 +133,7 @@ const main = async () => {
   );
 
   const typeNames: Record<string, any> = {};
+  const alreadyImported: Record<string, string[]> = { v1: [], v2: [] };
 
   // TODO Extend ContractFqn type to export keys per version not just latest
   fse.writeFileSync(
@@ -139,12 +141,16 @@ const main = async () => {
     `/* THIS AN AUTO-GENERATED FILE, DO NOT EDIT MANUALLY */
 /* eslint-disable */
 ${Object.entries(registry)
-  .filter(([v]) => v === lastVersion)
+  // .filter(([v]) => v === lastVersion)
   .map(([versionTag, artifacts]) => {
     const safeVersionPrefix = getSafeVersionPrefix(versionTag);
     typeNames[versionTag] = {};
     return `import { ${Object.keys(artifacts)
       .map((key) => {
+        if (alreadyImported[versionTag].includes(basename(key))) {
+          return;
+        }
+
         if (
           !fse.existsSync(
             path.resolve(
@@ -160,6 +166,8 @@ ${Object.entries(registry)
 
         typeNames[versionTag][key] = `${safeVersionPrefix}${basename(key)}`;
 
+        alreadyImported[versionTag].push(basename(key));
+
         return `${basename(key)} as ${typeNames[versionTag][key]},
         ${basename(key)}__factory as ${typeNames[versionTag][key]}__factory
       `;
@@ -170,7 +178,7 @@ ${Object.entries(registry)
   .join(';')}
 
 ${Object.entries(registry)
-  .filter(([v]) => v === lastVersion)
+  // .filter(([v]) => v === lastVersion)
   .map(([versionTag]) => {
     return `export type { ${Object.values(typeNames[versionTag])
       .filter((key) => key !== 'any')

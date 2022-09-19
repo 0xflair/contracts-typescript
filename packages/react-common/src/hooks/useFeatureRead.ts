@@ -1,4 +1,4 @@
-import { ZERO_ADDRESS } from '@0xflair/common';
+import { ZERO_ADDRESS } from '@flair-sdk/common';
 import { ReadContractConfig } from '@wagmi/core';
 import { useContractRead } from 'wagmi';
 

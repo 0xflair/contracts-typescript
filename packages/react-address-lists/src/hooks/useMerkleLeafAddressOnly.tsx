@@ -1,4 +1,4 @@
-import { ZERO_ADDRESS } from '@0xflair/react-common';
+import { ZERO_ADDRESS } from '@flair-sdk/react-common';
 import { BytesLike, utils } from 'ethers';
 import { useMemo } from 'react';
 

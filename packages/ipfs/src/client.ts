@@ -1,4 +1,4 @@
-import { Environment } from '@0xflair/common';
+import { Environment } from '@flair-sdk/common';
 import * as axios from 'axios';
 
 import { FLAIR_IPFS_BACKEND } from './constants';

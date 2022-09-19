@@ -1,5 +1,5 @@
-import { BareComponentProps } from '@0xflair/react-common';
-import { Errors, Spinner, TransactionLink } from '@0xflair/react-ui';
+import { BareComponentProps } from '@flair-sdk/react-common';
+import { Errors, Spinner, TransactionLink } from '@flair-sdk/react-ui';
 import { Fragment, PropsWithChildren } from 'react';
 
 import { useStreamClaimingContext } from '../providers/StreamClaimingProvider';

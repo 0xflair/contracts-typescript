@@ -31,5 +31,6 @@ export type ContractRegistry = Partial<
 >;
 export type BuildInfoRegistry = Partial<Record<ContractVersion, BuildInfo>>;
 
+export const FACET_REGISTRY: ContractRegistry = ContractRegistryJson;
 export const CONTRACT_REGISTRY: ContractRegistry = ContractRegistryJson;
 export const BUILD_INFO_REGISTRY: BuildInfoRegistry = BuildInfoJson;

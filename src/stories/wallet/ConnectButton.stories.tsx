@@ -7,7 +7,7 @@ import {
   IfWalletConnected,
   IfWalletNotConnected,
   WalletProvider,
-} from '@0xflair/react-wallet';
+} from '@flair-sdk/react-wallet';
 import React from 'react';
 import { useAccount, useBalance, useNetwork, useSigner } from 'wagmi';
 

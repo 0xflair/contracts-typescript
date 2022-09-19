@@ -1,11 +1,11 @@
-import { Environment, useChainInfo, ZERO_ADDRESS } from '@0xflair/react-common';
+import { Environment, useChainInfo, ZERO_ADDRESS } from '@flair-sdk/react-common';
 import {
   NftToken,
   TokenBalance,
   useNftTokensByWallet,
   useTokenBalances,
-} from '@0xflair/react-data-query';
-import { useERC721Symbol } from '@0xflair/react-openzeppelin';
+} from '@flair-sdk/react-data-query';
+import { useERC721Symbol } from '@flair-sdk/react-openzeppelin';
 import { BigNumber, BigNumberish, BytesLike } from 'ethers';
 import _ from 'lodash';
 import * as React from 'react';

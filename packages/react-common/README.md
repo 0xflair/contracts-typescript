@@ -9,5 +9,5 @@ Useful common React components and hooks.
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-common
+   npm install @flair-sdk/react-common
    ```

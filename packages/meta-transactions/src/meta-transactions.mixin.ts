@@ -1,9 +1,9 @@
-import { Environment } from '@0xflair/common';
+import { Environment } from '@flair-sdk/common';
 import {
   ContractFqn,
   ContractVersion,
   FlairContract,
-} from '@0xflair/contracts-registry';
+} from '@flair-sdk/contracts-registry';
 import {
   Contract,
   Contract as EthersContract,

@@ -9,7 +9,7 @@ Tailwind and React components and hooks that helps building a web3 dApp dashboar
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-ui
+   npm install @flair-sdk/react-ui
    ```
 
 2. Install peer dependencies if not already done:
@@ -27,7 +27,7 @@ Tailwind and React components and hooks that helps building a web3 dApp dashboar
        "./src/**/*.{js,jsx,ts,tsx,vue}",
 
        // This line tells Tailwind to look into SDK files
-       "./node_modules/@0xflair/**/*.{js,jsx,ts,tsx,vue}",
+       "./node_modules/@flair-sdk/**/*.{js,jsx,ts,tsx,vue}",
      ],
      content: ["./src/**/*.{js,jsx,ts,tsx}"],
      plugins: [
@@ -41,7 +41,7 @@ Tailwind and React components and hooks that helps building a web3 dApp dashboar
 ### Example
 
 ```ts
-import { FormSection } from "@0xflair/react-ui";
+import { FormSection } from "@flair-sdk/react-ui";
 
 function CreatePage() {
   return (

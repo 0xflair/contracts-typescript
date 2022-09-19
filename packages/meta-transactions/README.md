@@ -9,11 +9,11 @@ A typescript (and Node.js) library to help construct and submit meta transaction
 Install the package using NPM or Yarn:
 
    ```sh
-   npm install @0xflair/meta-transactions
+   npm install @flair-sdk/meta-transactions
 
    // or
 
-   yarn add @0xflair/meta-transactions
+   yarn add @flair-sdk/meta-transactions
    ```
 
 ## Examples

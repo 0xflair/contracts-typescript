@@ -1,4 +1,4 @@
-import { ZERO_ADDRESS } from '@0xflair/react-common';
+import { ZERO_ADDRESS } from '@flair-sdk/react-common';
 import * as axios from 'axios';
 import { BigNumberish, BytesLike, utils } from 'ethers';
 import { useMemo } from 'react';

@@ -2,13 +2,13 @@ import {
   ContractVersion,
   LATEST_VERSION,
   loadContract,
-} from '@0xflair/contracts-registry';
-import { useChainId, ZERO_ADDRESS } from '@0xflair/react-common';
+} from '@flair-sdk/contracts-registry';
+import { useChainId, ZERO_ADDRESS } from '@flair-sdk/react-common';
 import { useMemo } from 'react';
 
 export const useUnorderedForwarderAddress = (
   chainId?: number,
-  contractVersion: ContractVersion = LATEST_VERSION
+  contractVersion: ContractVersion = LATEST_VERSION,
 ) => {
   const resolvedChainId = useChainId(chainId);
 
@@ -19,15 +19,15 @@ export const useUnorderedForwarderAddress = (
 
     try {
       const definition = loadContract(
-        'common/meta-transactions/UnorderedForwarder',
-        contractVersion
+        'common/UnorderedForwarder',
+        contractVersion,
       );
 
-      return definition.address?.[resolvedChainId] ?? ZERO_ADDRESS;
+      return definition?.address?.[resolvedChainId] ?? ZERO_ADDRESS;
     } catch (e) {
       console.warn(
         `Could not load UnorderedForwarder contract for chain ${resolvedChainId}: `,
-        e
+        e,
       );
       return ZERO_ADDRESS;
     }

@@ -1,4 +1,4 @@
-import { Environment, useAxiosGet } from '@0xflair/react-common';
+import { Environment, useAxiosGet } from '@flair-sdk/react-common';
 
 import { FLAIR_NFT_COLLECTIONS_BACKEND } from '../../constants';
 import { NftCollection } from '../../types';

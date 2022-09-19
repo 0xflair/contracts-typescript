@@ -1,4 +1,4 @@
-import { useCancel } from '@0xflair/react-common';
+import { useCancel } from '@flair-sdk/react-common';
 import React, { useEffect } from 'react';
 import { useAccount } from 'wagmi';
 

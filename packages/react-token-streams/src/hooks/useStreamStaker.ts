@@ -2,7 +2,7 @@ import {
   Environment,
   useChainId,
   useFeatureWriteByTag,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';
 import { BigNumberish, Signer } from 'ethers';

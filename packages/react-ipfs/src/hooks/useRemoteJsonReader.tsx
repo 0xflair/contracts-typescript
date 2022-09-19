@@ -1,5 +1,5 @@
-import { normalizeIpfsUrl } from '@0xflair/ipfs';
-import { useAxiosGet } from '@0xflair/react-common';
+import { normalizeIpfsUrl } from '@flair-sdk/ipfs';
+import { useAxiosGet } from '@flair-sdk/react-common';
 import { useMemo } from 'react';
 
 type Config = {

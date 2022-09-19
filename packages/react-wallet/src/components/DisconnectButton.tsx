@@ -1,4 +1,4 @@
-import { SECONDARY_BUTTON } from '@0xflair/react-ui';
+import { SECONDARY_BUTTON } from '@flair-sdk/react-ui';
 import React from 'react';
 import { useDisconnect } from 'wagmi';
 

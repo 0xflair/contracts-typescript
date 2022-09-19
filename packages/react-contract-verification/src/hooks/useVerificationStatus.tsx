@@ -1,5 +1,5 @@
-import { Environment, useAxiosGet } from '@0xflair/react-common';
-import { useLoginJwt } from '@0xflair/react-wallet';
+import { Environment, useAxiosGet } from '@flair-sdk/react-common';
+import { useLoginJwt } from '@flair-sdk/react-wallet';
 import axios from 'axios';
 import { useMemo } from 'react';
 import { useInterval } from 'usehooks-ts';

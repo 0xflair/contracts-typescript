@@ -10,15 +10,27 @@ import { CONTRACT_REGISTRY } from './registry';
 export const loadContract = (
   contractFqn: ContractFqn,
   contractVersion: ContractVersion = LATEST_VERSION,
+  throwOnError = true,
 ) => {
   if (!CONTRACT_REGISTRY[contractVersion]) {
-    throw new FlairInvalidVersionError(contractVersion);
+    if (throwOnError) {
+      throw new FlairInvalidVersionError(contractVersion);
+    } else {
+      return undefined;
+    }
   }
 
   const contract = CONTRACT_REGISTRY[contractVersion]?.[contractFqn as string];
 
   if (!contract) {
-    throw new FlairInvalidArtifactError(contractFqn as string, contractVersion);
+    if (throwOnError) {
+      throw new FlairInvalidArtifactError(
+        contractFqn as string,
+        contractVersion,
+      );
+    } else {
+      return undefined;
+    }
   }
 
   return contract;

@@ -2,7 +2,7 @@ import {
   ContractFqn,
   ContractVersion,
   loadContract,
-} from '@0xflair/contracts-registry';
+} from '@flair-sdk/contracts-registry';
 import { useMemo } from 'react';
 
 export type Config = {
@@ -13,8 +13,8 @@ export type Config = {
 export const useContractAbi = ({ contractVersion, contractFqn }: Config) => {
   const contract = useMemo(
     () => loadContract(contractFqn, contractVersion),
-    [contractFqn, contractVersion]
+    [contractFqn, contractVersion],
   );
 
-  return contract.artifact.abi;
+  return contract?.artifact.abi || [];
 };

@@ -1,4 +1,4 @@
-import { normalizeIpfsUrl } from '@0xflair/ipfs';
+import { normalizeIpfsUrl } from '@flair-sdk/ipfs';
 
 import { useCollectionContext } from '../providers/CollectionProvider';
 

@@ -9,7 +9,7 @@ Ready-made React components and hooks to create and manage a list of addresses (
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-address-lists
+   npm install @flair-sdk/react-address-lists
    ```
 
 2. Install peer dependencies if not installed yet:
@@ -28,7 +28,7 @@ Ready-made React components and hooks to create and manage a list of addresses (
        "./src/**/*.{js,jsx,ts,tsx,vue}",
 
        // This line tells Tailwind to look into SDK files
-       "./node_modules/@0xflair/**/*.{js,jsx,ts,tsx,vue}",
+       "./node_modules/@flair-sdk/**/*.{js,jsx,ts,tsx,vue}",
      ],
      content: ["./src/**/*.{js,jsx,ts,tsx}"],
      plugins: [

@@ -1,4 +1,4 @@
-import { DisconnectButton, WalletProvider } from '@0xflair/react-wallet';
+import { DisconnectButton, WalletProvider } from '@flair-sdk/react-wallet';
 import { useAccount, useNetwork } from 'wagmi';
 
 export default {

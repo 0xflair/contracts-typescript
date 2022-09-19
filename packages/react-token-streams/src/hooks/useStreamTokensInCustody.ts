@@ -1,11 +1,11 @@
-import { V1_20_ERC721CustodialStakingExtension__factory } from '@0xflair/contracts-registry';
+import { BytesLike } from '@ethersproject/bytes';
+import { V1_ERC721CustodialStakingExtension__factory } from '@flair-sdk/contracts-registry';
 import {
   Environment,
   PredefinedReadContractConfig,
   useHasAnyOfFeatures,
-} from '@0xflair/react-common';
-import { useERC721TotalSupply } from '@0xflair/react-openzeppelin';
-import { BytesLike } from '@ethersproject/bytes';
+} from '@flair-sdk/react-common';
+import { useERC721TotalSupply } from '@flair-sdk/react-openzeppelin';
 import { BigNumber, BigNumberish } from 'ethers';
 import { useCallback, useMemo, useState } from 'react';
 import { useAccount, useProvider } from 'wagmi';
@@ -56,7 +56,7 @@ export const useStreamTokensInCustody = (config: Config) => {
     if (!config.contractAddress || !provider) {
       return;
     }
-    return V1_20_ERC721CustodialStakingExtension__factory.connect(
+    return V1_ERC721CustodialStakingExtension__factory.connect(
       config.contractAddress,
       provider,
     );

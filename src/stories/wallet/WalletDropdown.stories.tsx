@@ -1,10 +1,10 @@
-import { CoinGeckoProvider } from '@0xflair/react-coingecko';
+import { CoinGeckoProvider } from '@flair-sdk/react-coingecko';
 import {
   NetworkSelector,
   RequireConnect,
   WalletDropdown,
   WalletProvider,
-} from '@0xflair/react-wallet';
+} from '@flair-sdk/react-wallet';
 import React from 'react';
 import { useAccount, useBalance, useNetwork } from 'wagmi';
 

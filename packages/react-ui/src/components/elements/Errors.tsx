@@ -1,7 +1,7 @@
 import {
   extractHumanReadableError,
   translateContractError,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 import * as React from 'react';
 
 interface Props {

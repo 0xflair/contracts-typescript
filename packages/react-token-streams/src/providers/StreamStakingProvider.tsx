@@ -1,6 +1,6 @@
-import { useHasAnyOfFeatures } from '@0xflair/react-common';
-import { NftToken } from '@0xflair/react-data-query';
-import { useFilterUnlockedTokens } from '@0xflair/react-nft-collections';
+import { useHasAnyOfFeatures } from '@flair-sdk/react-common';
+import { NftToken } from '@flair-sdk/react-data-query';
+import { useFilterUnlockedTokens } from '@flair-sdk/react-nft-collections';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish } from 'ethers';

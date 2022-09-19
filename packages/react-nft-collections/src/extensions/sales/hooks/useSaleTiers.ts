@@ -1,10 +1,10 @@
-import { Environment } from '@0xflair/common';
-import { V1_20_ERC721TieringExtension__factory } from '@0xflair/contracts-registry';
+import { Environment } from '@flair-sdk/common';
+import { V1_ERC721TieringExtension__factory } from '@flair-sdk/contracts-registry';
 import {
   PredefinedReadContractConfig,
   useHasAnyOfFeatures,
   ZERO_BYTES32,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 import { BigNumberish, BytesLike } from 'ethers';
 import { useCallback, useMemo, useState } from 'react';
 import { useProvider } from 'wagmi';
@@ -118,7 +118,7 @@ export const useSaleTiers = (config: Config) => {
     if (!config.contractAddress || !provider) {
       return;
     }
-    return V1_20_ERC721TieringExtension__factory.connect(
+    return V1_ERC721TieringExtension__factory.connect(
       config.contractAddress,
       provider,
     );

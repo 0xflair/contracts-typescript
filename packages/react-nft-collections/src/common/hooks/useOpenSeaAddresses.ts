@@ -1,4 +1,4 @@
-import { useChainId, ZERO_ADDRESS } from '@0xflair/react-common';
+import { useChainId, ZERO_ADDRESS } from '@flair-sdk/react-common';
 
 import {
   FLAIR_OPENSEA_ADDRESSES,

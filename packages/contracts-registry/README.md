@@ -9,5 +9,5 @@ A registry of versioned Flair contract ABIs and ByteCodes ready for use with abi
 1. Install the package:
 
    ```sh
-   npm install @0xflair/contracts-registry
+   npm install @flair-sdk/contracts-registry
    ```

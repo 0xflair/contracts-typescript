@@ -2,8 +2,8 @@ import {
   Environment,
   useChainId,
   useHasAnyOfFeatures,
-} from '@0xflair/react-common';
-import { useERC721Approver } from '@0xflair/react-openzeppelin';
+} from '@flair-sdk/react-common';
+import { useERC721Approver } from '@flair-sdk/react-openzeppelin';
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 import { useCallback, useEffect, useState } from 'react';

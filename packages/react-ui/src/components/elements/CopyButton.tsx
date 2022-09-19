@@ -1,4 +1,4 @@
-import { classNames } from '@0xflair/react-common';
+import { classNames } from '@flair-sdk/react-common';
 import { CheckCircleIcon } from '@heroicons/react/outline';
 import { useState } from 'react';
 import { useCopyToClipboard } from 'usehooks-ts';

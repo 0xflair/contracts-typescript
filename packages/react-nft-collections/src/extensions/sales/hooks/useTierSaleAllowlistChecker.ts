@@ -1,6 +1,6 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { useAddressListMerkleProof } from '@0xflair/react-address-lists';
-import { Environment, useContractRead } from '@0xflair/react-common';
+import { ContractVersion } from '@flair-sdk/contracts-registry';
+import { useAddressListMerkleProof } from '@flair-sdk/react-address-lists';
+import { Environment, useContractRead } from '@flair-sdk/react-common';
 import { BigNumberish, BytesLike } from 'ethers';
 import { useCallback } from 'react';
 

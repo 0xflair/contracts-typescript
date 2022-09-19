@@ -1,4 +1,4 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@flair-sdk/contracts-registry';
 import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';
 import { BytesLike, Signer } from 'ethers';

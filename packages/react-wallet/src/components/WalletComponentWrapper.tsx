@@ -1,4 +1,4 @@
-import { classNames } from '@0xflair/common';
+import { classNames } from '@flair-sdk/common';
 import { PropsWithChildren } from 'react';
 
 type Props = {

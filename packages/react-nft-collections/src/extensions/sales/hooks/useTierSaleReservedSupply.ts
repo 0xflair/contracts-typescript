@@ -1,4 +1,4 @@
-import { PredefinedReadContractConfig } from '@0xflair/react-common';
+import { PredefinedReadContractConfig } from '@flair-sdk/react-common';
 import { BigNumberish } from 'ethers';
 
 import { useTierSaleInformation } from './useTierSaleInformation';

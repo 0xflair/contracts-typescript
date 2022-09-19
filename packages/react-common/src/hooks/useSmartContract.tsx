@@ -1,4 +1,4 @@
-import { Environment } from '@0xflair/common';
+import { Environment } from '@flair-sdk/common';
 import axios from 'axios';
 import { useQuery, useQueryClient } from 'react-query';
 import { useInterval } from 'react-use';

@@ -1,11 +1,11 @@
-import { Environment } from '@0xflair/common';
+import { Provider } from '@ethersproject/providers';
+import { Environment } from '@flair-sdk/common';
 import {
   ContractFqn,
+  ContractVersion,
   LATEST_VERSION,
   loadContract,
-  ContractVersion,
-} from '@0xflair/contracts-registry';
-import { Provider } from '@ethersproject/providers';
+} from '@flair-sdk/contracts-registry';
 import {
   BaseContract,
   Contract,
@@ -22,7 +22,7 @@ function buildMetaTransaction(
   chainId: number,
   metaTransactionsClient: MetaTransactionsClient,
   contract: Contract,
-  fragment: FunctionFragment
+  fragment: FunctionFragment,
 ): ContractFunction<MetaTransaction> {
   return async function (...args: Array<any>): Promise<MetaTransaction> {
     const from = await contract.signer.getAddress();
@@ -37,7 +37,7 @@ function buildMetaTransaction(
 }
 
 export class MetaContract<
-  T extends EthersContract = EthersContract
+  T extends EthersContract = EthersContract,
 > extends EthersContract {
   readonly metaTransaction:
     | { [name: string]: ContractFunction<any> }
@@ -49,22 +49,22 @@ export class MetaContract<
     contractFqn: ContractFqn,
     contractVersion: ContractVersion = LATEST_VERSION,
     addressOrName?: string,
-    signerOrProvider?: Signer | Provider
+    signerOrProvider?: Signer | Provider,
   ) {
     const contractDefinition = loadContract(contractFqn, contractVersion);
     const contractAddressOrName =
-      addressOrName || contractDefinition.address?.[String(chainId)];
+      addressOrName || contractDefinition?.address?.[String(chainId)];
 
     if (!contractAddressOrName) {
       throw new Error(
-        `Could not determine contract address from constructor (${addressOrName}) nor from definition (${contractDefinition.address})`
+        `Could not determine contract address from constructor (${addressOrName}) nor from definition (${contractDefinition?.address})`,
       );
     }
 
     super(
       contractAddressOrName,
-      contractDefinition.artifact.abi,
-      signerOrProvider
+      contractDefinition?.artifact.abi || [],
+      signerOrProvider,
     );
 
     this.metaTransaction = {};
@@ -75,7 +75,7 @@ export class MetaContract<
         defineReadOnly<any, any>(
           this.metaTransaction,
           signature,
-          buildMetaTransaction(chainId, metaTransactionsClient, this, fragment)
+          buildMetaTransaction(chainId, metaTransactionsClient, this, fragment),
         );
       }
 
@@ -85,7 +85,7 @@ export class MetaContract<
         defineReadOnly<any, any>(
           this.metaTransaction,
           name,
-          buildMetaTransaction(chainId, metaTransactionsClient, this, fragment)
+          buildMetaTransaction(chainId, metaTransactionsClient, this, fragment),
         );
       }
     });
@@ -112,7 +112,7 @@ export class MetaContract<
       config.contractFqn,
       config.contractVersion,
       config.addressOrName,
-      config.signerOrProvider
+      config.signerOrProvider,
     ) as unknown as T;
   }
 }

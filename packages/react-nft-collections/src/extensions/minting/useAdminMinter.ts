@@ -1,6 +1,6 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { Environment } from '@0xflair/react-common';
-import { useOzHasRole, useOzOwner } from '@0xflair/react-openzeppelin';
+import { ContractVersion } from '@flair-sdk/contracts-registry';
+import { Environment } from '@flair-sdk/react-common';
+import { useOzHasRole, useOzOwner } from '@flair-sdk/react-openzeppelin';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 import { keccak256, toUtf8Bytes } from 'ethers/lib/utils';

@@ -1,4 +1,4 @@
-import { Environment, useAxiosPost } from '@0xflair/react-common';
+import { Environment, useAxiosPost } from '@flair-sdk/react-common';
 import * as axios from 'axios';
 import { useMemo } from 'react';
 

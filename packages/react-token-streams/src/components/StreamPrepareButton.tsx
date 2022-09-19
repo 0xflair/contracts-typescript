@@ -1,4 +1,4 @@
-import { Button } from '@0xflair/react-ui';
+import { Button } from '@flair-sdk/react-ui';
 
 import { useStreamStakingContext } from '../providers/StreamStakingProvider';
 

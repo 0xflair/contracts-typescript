@@ -9,7 +9,7 @@ React hooks to get prices of cryptocurrency coins and tokens from CoinGecko.
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-coingecko
+   npm install @flair-sdk/react-coingecko
    ```
 
 2. Install peer dependencies:
@@ -30,7 +30,7 @@ React hooks to get prices of cryptocurrency coins and tokens from CoinGecko.
        "./src/**/*.{js,jsx,ts,tsx,vue}",
 
        // This line tells Tailwind to look into SDK files
-       "./node_modules/@0xflair/**/*.{js,jsx,ts,tsx,vue}",
+       "./node_modules/@flair-sdk/**/*.{js,jsx,ts,tsx,vue}",
      ],
      content: ["./src/**/*.{js,jsx,ts,tsx}"],
      plugins: [
@@ -67,7 +67,7 @@ React hooks to get prices of cryptocurrency coins and tokens from CoinGecko.
 #### Simple Price
 
 ```tsx
-import { CryptoPrice, CryptoUnits } from "@0xflair/react-coingecko";
+import { CryptoPrice, CryptoUnits } from "@flair-sdk/react-coingecko";
 
 function App() {
   return (
@@ -80,7 +80,7 @@ function App() {
 #### Price Hook
 
 ```tsx
-import { useCryptoPrice } from "@0xflair/react-coingecko";
+import { useCryptoPrice } from "@flair-sdk/react-coingecko";
 
 function App() {
   const [{data, error, loading}, fetchPrice] = useCryptoPrice({

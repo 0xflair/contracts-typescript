@@ -1,5 +1,5 @@
-import { ZERO_ADDRESS } from '@0xflair/react-common';
-import { useERC20Symbol } from '@0xflair/react-openzeppelin';
+import { ZERO_ADDRESS } from '@flair-sdk/react-common';
+import { useERC20Symbol } from '@flair-sdk/react-openzeppelin';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish, BytesLike } from 'ethers';

@@ -1,4 +1,4 @@
-import { ZERO_ADDRESS } from '@0xflair/common';
+import { ZERO_ADDRESS } from '@flair-sdk/common';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { BigNumberish, BytesLike } from 'ethers';

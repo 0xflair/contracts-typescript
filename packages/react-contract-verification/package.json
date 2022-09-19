@@ -1,10 +1,10 @@
 {
-  "name": "@0xflair/react-contract-verification",
-  "version": "0.116.1",
+  "name": "@flair-sdk/react-contract-verification",
+  "version": "2.0.0",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/0xflair/typescript-sdk.git"
+    "url": "git+https://github.com/flair-sdk/typescript.git"
   },
   "publishConfig": {
     "access": "public",
@@ -34,10 +34,10 @@
     ]
   },
   "peerDependencies": {
-    "@0xflair/common": "0.*",
-    "@0xflair/contracts-registry": "0.*",
-    "@0xflair/react-common": "0.*",
-    "@0xflair/react-wallet": "0.*",
+    "@flair-sdk/common": "0.*",
+    "@flair-sdk/contracts-registry": "0.*",
+    "@flair-sdk/react-common": "0.*",
+    "@flair-sdk/react-wallet": "0.*",
     "@wagmi/core": "^0.2.5",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",
@@ -46,10 +46,10 @@
     "wagmi": "^0.3.5"
   },
   "dependencies": {
-    "@0xflair/common": "^0.116.1",
-    "@0xflair/contracts-registry": "^0.116.1",
-    "@0xflair/react-common": "^0.116.1",
-    "@0xflair/react-wallet": "^0.116.1",
+    "@flair-sdk/common": "^2.0.0",
+    "@flair-sdk/contracts-registry": "^2.0.0",
+    "@flair-sdk/react-common": "^2.0.0",
+    "@flair-sdk/react-wallet": "^2.0.0",
     "@wagmi/core": "^0.2.5",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",

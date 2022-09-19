@@ -1,5 +1,5 @@
-import { PredefinedReadContractConfig } from '@0xflair/react-common';
-import { useRemoteJsonReader } from '@0xflair/react-ipfs';
+import { PredefinedReadContractConfig } from '@flair-sdk/react-common';
+import { useRemoteJsonReader } from '@flair-sdk/react-ipfs';
 import { useCallback } from 'react';
 
 import { NftCollectionMetadata } from '../../types';

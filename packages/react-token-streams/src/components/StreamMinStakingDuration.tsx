@@ -1,4 +1,4 @@
-import { BareComponentProps } from '@0xflair/react-common';
+import { BareComponentProps } from '@flair-sdk/react-common';
 import humanizeDuration from 'humanize-duration';
 import { Fragment } from 'react';
 

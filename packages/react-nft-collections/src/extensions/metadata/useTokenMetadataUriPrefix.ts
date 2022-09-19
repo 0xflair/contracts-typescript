@@ -1,7 +1,7 @@
 import {
   FeatureReadByTagConfig,
   useFeatureReadByTag,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 import { BytesLike } from 'ethers';
 
 export const useTokenMetadataUriPrefix = (config: FeatureReadByTagConfig) => {

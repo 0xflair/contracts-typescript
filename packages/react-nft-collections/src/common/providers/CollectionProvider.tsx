@@ -1,6 +1,6 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { Environment, useChainInfo } from '@0xflair/react-common';
-import { useRemoteJsonReader } from '@0xflair/react-ipfs';
+import { ContractVersion } from '@flair-sdk/contracts-registry';
+import { Environment, useChainInfo } from '@flair-sdk/react-common';
+import { useRemoteJsonReader } from '@flair-sdk/react-ipfs';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
 import { ReactNode } from 'react';

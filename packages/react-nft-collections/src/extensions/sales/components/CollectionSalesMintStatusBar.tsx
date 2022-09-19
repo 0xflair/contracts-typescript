@@ -1,4 +1,4 @@
-import { Errors, Spinner, TransactionLink } from '@0xflair/react-ui';
+import { Errors, Spinner, TransactionLink } from '@flair-sdk/react-ui';
 
 import { useCollectionSalesMintingContext } from '../providers';
 

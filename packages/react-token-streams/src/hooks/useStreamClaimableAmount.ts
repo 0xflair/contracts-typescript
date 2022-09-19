@@ -2,7 +2,7 @@ import {
   PredefinedReadContractConfig,
   useContractRead,
   ZERO_ADDRESS,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 import { BytesLike } from '@ethersproject/bytes';
 import { BigNumberish } from 'ethers';
 

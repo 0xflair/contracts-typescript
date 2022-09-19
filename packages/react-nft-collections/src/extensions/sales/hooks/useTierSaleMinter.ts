@@ -1,10 +1,10 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
+import { ContractVersion } from '@flair-sdk/contracts-registry';
 import {
   Environment,
   useContractAbi,
   useContractWriteAndWait,
   ZERO_BYTES32,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
 import { useCallback } from 'react';

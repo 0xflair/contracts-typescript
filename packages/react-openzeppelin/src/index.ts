@@ -1,4 +1,4 @@
-import '@0xflair/react-common';
+import '@flair-sdk/react-common';
 import '@ethersproject/abi';
 import 'ethers';
 import 'react-query';

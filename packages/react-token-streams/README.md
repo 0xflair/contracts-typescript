@@ -9,7 +9,7 @@ Ready-made React components and hooks for working with Flair's NFT-based token s
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-token-streams
+   npm install @flair-sdk/react-token-streams
    ```
 
 2. Install peer dependencies if not installed yet:
@@ -30,7 +30,7 @@ Ready-made React components and hooks for working with Flair's NFT-based token s
        "./src/**/*.{js,jsx,ts,tsx,vue}",
 
        // This line tells Tailwind to look into SDK files
-       "./node_modules/@0xflair/**/*.{js,jsx,ts,tsx,vue}",
+       "./node_modules/@flair-sdk/**/*.{js,jsx,ts,tsx,vue}",
      ],
      content: ["./src/**/*.{js,jsx,ts,tsx}"],
      plugins: [

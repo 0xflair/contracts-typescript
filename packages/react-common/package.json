@@ -1,10 +1,10 @@
 {
-  "name": "@0xflair/react-common",
-  "version": "0.116.1",
+  "name": "@flair-sdk/react-common",
+  "version": "2.0.0",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/0xflair/typescript-sdk.git"
+    "url": "git+https://github.com/flair-sdk/typescript.git"
   },
   "publishConfig": {
     "access": "public",
@@ -34,8 +34,8 @@
     ]
   },
   "peerDependencies": {
-    "@0xflair/common": "0.*",
-    "@0xflair/contracts-registry": "0.*",
+    "@flair-sdk/common": "0.*",
+    "@flair-sdk/contracts-registry": "0.*",
     "@wagmi/core": "^0.2.5",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",
@@ -46,8 +46,8 @@
     "wagmi": "^0.3.5"
   },
   "dependencies": {
-    "@0xflair/common": "^0.116.1",
-    "@0xflair/contracts-registry": "^0.116.1",
+    "@flair-sdk/common": "^2.0.0",
+    "@flair-sdk/contracts-registry": "^2.0.0",
     "@tanstack/query-sync-storage-persister": "^4.0.10",
     "@tanstack/react-query-persist-client": "^4.0.10",
     "@wagmi/core": "^0.2.5",

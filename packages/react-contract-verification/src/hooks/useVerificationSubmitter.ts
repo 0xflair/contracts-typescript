@@ -1,11 +1,11 @@
-import { Environment } from '@0xflair/common';
+import { Environment } from '@flair-sdk/common';
 import {
   ContractFqn,
   ContractVersion,
   loadContract,
-} from '@0xflair/contracts-registry';
-import { useAxiosPost } from '@0xflair/react-common';
-import { useLoginJwt } from '@0xflair/react-wallet';
+} from '@flair-sdk/contracts-registry';
+import { useAxiosPost } from '@flair-sdk/react-common';
+import { useLoginJwt } from '@flair-sdk/react-wallet';
 import * as axios from 'axios';
 import { ethers } from 'ethers';
 import { useMemo } from 'react';
@@ -37,7 +37,7 @@ export const useVerificationSubmitter = ({
         return '';
       }
       const definition = loadContract(contractFqn, contractVersion);
-      const iface = new ethers.utils.Interface(definition.artifact.abi);
+      const iface = new ethers.utils.Interface(definition?.artifact.abi || []);
 
       return iface.encodeDeploy(constructorArguments);
     } catch (e) {

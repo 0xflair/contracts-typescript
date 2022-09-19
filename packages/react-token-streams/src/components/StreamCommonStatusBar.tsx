@@ -1,5 +1,5 @@
-import { BareComponentProps } from '@0xflair/react-common';
-import { Errors, Spinner } from '@0xflair/react-ui';
+import { BareComponentProps } from '@flair-sdk/react-common';
+import { Errors, Spinner } from '@flair-sdk/react-ui';
 import { Fragment, PropsWithChildren } from 'react';
 
 import { useStreamContext } from '../providers/StreamProvider';

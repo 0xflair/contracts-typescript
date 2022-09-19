@@ -9,7 +9,7 @@ Ready-made drop-in web3 wallet React components and hooks.
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-wallet
+   npm install @flair-sdk/react-wallet
    ```
 
 2. Install peer dependencies:
@@ -27,7 +27,7 @@ Ready-made drop-in web3 wallet React components and hooks.
        "./src/**/*.{js,jsx,ts,tsx,vue}",
 
        // This line tells Tailwind to look into SDK files
-       "./node_modules/@0xflair/**/*.{js,jsx,ts,tsx,vue}",
+       "./node_modules/@flair-sdk/**/*.{js,jsx,ts,tsx,vue}",
      ],
      content: ["./src/**/*.{js,jsx,ts,tsx}"],
      plugins: [
@@ -44,7 +44,7 @@ Ready-made drop-in web3 wallet React components and hooks.
 ### Usage
 
 ```ts
-import { NetworkSelector } from "@0xflair/react-wallet";
+import { NetworkSelector } from "@flair-sdk/react-wallet";
 
 function App() {
   return (

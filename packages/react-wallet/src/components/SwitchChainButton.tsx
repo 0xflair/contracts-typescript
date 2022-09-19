@@ -1,4 +1,4 @@
-import { BareComponentProps, useChainInfo } from '@0xflair/react-common';
+import { BareComponentProps, useChainInfo } from '@flair-sdk/react-common';
 import React from 'react';
 import { useNetwork } from 'wagmi';
 

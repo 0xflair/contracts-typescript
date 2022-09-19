@@ -1,4 +1,4 @@
-import { classNames } from '@0xflair/react-common';
+import { classNames } from '@flair-sdk/react-common';
 import { Switch } from '@headlessui/react';
 import { ReactNode, useCallback, useState } from 'react';
 

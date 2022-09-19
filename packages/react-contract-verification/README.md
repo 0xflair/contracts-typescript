@@ -7,5 +7,5 @@ Ready-made React hooks to verify contracts deployed using [Flair](https://flair.
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-contract-verification
+   npm install @flair-sdk/react-contract-verification
    ```

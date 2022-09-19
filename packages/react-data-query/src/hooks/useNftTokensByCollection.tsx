@@ -1,6 +1,6 @@
 import 'axios';
 
-import { Environment, useAxiosGet } from '@0xflair/react-common';
+import { Environment, useAxiosGet } from '@flair-sdk/react-common';
 import { useMemo } from 'react';
 
 import { FLAIR_DATA_QUERY_BACKEND } from '../constants';

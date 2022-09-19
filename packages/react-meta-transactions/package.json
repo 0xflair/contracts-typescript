@@ -1,10 +1,10 @@
 {
-  "name": "@0xflair/react-meta-transactions",
-  "version": "0.116.1",
+  "name": "@flair-sdk/react-meta-transactions",
+  "version": "2.0.0",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/0xflair/typescript-sdk.git"
+    "url": "git+https://github.com/flair-sdk/typescript.git"
   },
   "publishConfig": {
     "access": "public",
@@ -34,9 +34,9 @@
     ]
   },
   "peerDependencies": {
-    "@0xflair/contracts-registry": "0.*",
-    "@0xflair/meta-transactions": "0.*",
-    "@0xflair/react-common": "0.*",
+    "@flair-sdk/contracts-registry": "0.*",
+    "@flair-sdk/meta-transactions": "0.*",
+    "@flair-sdk/react-common": "0.*",
     "ethers": "^5.6.5",
     "react": "^16 || ^17 || ^18",
     "react-dom": "^16 || ^17 || ^18",
@@ -44,9 +44,9 @@
     "wagmi": "^0.3.5"
   },
   "dependencies": {
-    "@0xflair/contracts-registry": "^0.116.1",
-    "@0xflair/meta-transactions": "^0.116.1",
-    "@0xflair/react-common": "^0.116.1",
+    "@flair-sdk/contracts-registry": "^2.0.0",
+    "@flair-sdk/meta-transactions": "^2.0.0",
+    "@flair-sdk/react-common": "^2.0.0",
     "ethers": "^5.6.5",
     "wagmi": "^0.3.5"
   },

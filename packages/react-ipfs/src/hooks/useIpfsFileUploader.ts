@@ -1,5 +1,5 @@
-import { FLAIR_IPFS_BACKEND, IpfsUploadResult } from '@0xflair/ipfs';
-import { Environment, useCancel } from '@0xflair/react-common';
+import { FLAIR_IPFS_BACKEND, IpfsUploadResult } from '@flair-sdk/ipfs';
+import { Environment, useCancel } from '@flair-sdk/react-common';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 

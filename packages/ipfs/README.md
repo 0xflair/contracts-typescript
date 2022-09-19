@@ -9,9 +9,9 @@ A typescript (and Node.js) library to upload, retrieve and pin files and directo
 Install the package using NPM or Yarn:
 
    ```sh
-   npm install @0xflair/ipfs
+   npm install @flair-sdk/ipfs
 
    // or
 
-   yarn add @0xflair/ipfs
+   yarn add @flair-sdk/ipfs
    ```

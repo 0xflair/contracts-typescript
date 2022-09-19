@@ -2,7 +2,7 @@ import {
   Environment,
   useChainId,
   useFeatureWriteByTag,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 import { BytesLike } from '@ethersproject/bytes';
 import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';

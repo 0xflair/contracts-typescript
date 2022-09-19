@@ -1,4 +1,4 @@
-import { Environment } from '@0xflair/common';
+import { Environment } from '@flair-sdk/common';
 import { ContractInterface } from 'ethers';
 import { useMemo } from 'react';
 

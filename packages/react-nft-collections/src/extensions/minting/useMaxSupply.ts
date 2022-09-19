@@ -1,7 +1,7 @@
 import {
   PredefinedReadContractConfig,
   useContractRead,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 import { BigNumberish } from 'ethers';
 
 export const useMaxSupply = (config: PredefinedReadContractConfig) => {

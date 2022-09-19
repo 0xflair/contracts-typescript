@@ -1,5 +1,5 @@
-import { ContractVersion } from '@0xflair/contracts-registry';
-import { useContractAbi, useContractWriteAndWait } from '@0xflair/react-common';
+import { ContractVersion } from '@flair-sdk/contracts-registry';
+import { useContractAbi, useContractWriteAndWait } from '@flair-sdk/react-common';
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 

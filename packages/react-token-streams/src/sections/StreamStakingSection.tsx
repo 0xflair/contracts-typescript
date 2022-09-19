@@ -1,5 +1,5 @@
-import { useHasAnyOfFeatures } from '@0xflair/react-common';
-import { ConnectButton, SwitchChainButton } from '@0xflair/react-wallet';
+import { useHasAnyOfFeatures } from '@flair-sdk/react-common';
+import { ConnectButton, SwitchChainButton } from '@flair-sdk/react-wallet';
 
 import { StreamLockedNfts } from '../components/StreamLockedNfts';
 import { StreamMinStakingDuration } from '../components/StreamMinStakingDuration';

@@ -1,7 +1,7 @@
 import 'react';
 
-import { CoinGeckoProvider, CryptoAmountField } from '@0xflair/react-coingecko';
-import { WalletProvider } from '@0xflair/react-wallet';
+import { CoinGeckoProvider, CryptoAmountField } from '@flair-sdk/react-coingecko';
+import { WalletProvider } from '@flair-sdk/react-wallet';
 
 export default {
   title: 'CryptoAmountField Component',

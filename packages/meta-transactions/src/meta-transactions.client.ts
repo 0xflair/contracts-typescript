@@ -1,9 +1,9 @@
-import { Environment } from '@0xflair/common';
+import { Environment } from '@flair-sdk/common';
 import {
   ContractVersion,
   LATEST_VERSION,
   loadContract,
-} from '@0xflair/contracts-registry';
+} from '@flair-sdk/contracts-registry';
 import axios from 'axios';
 import { Signer } from 'ethers';
 import { Required } from 'utility-types';
@@ -41,10 +41,10 @@ export class MetaTransactionsClient {
     if (!config.forwarder && config.chainId) {
       try {
         const forwarderDefinition = loadContract(
-          'common/meta-transactions/UnorderedForwarder',
+          'common/UnorderedForwarder',
           LATEST_VERSION,
         );
-        this.forwarder = forwarderDefinition.address?.[
+        this.forwarder = forwarderDefinition?.address?.[
           String(config.chainId)
         ] as string;
       } catch (e) {

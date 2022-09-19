@@ -1,5 +1,5 @@
-import { Environment, useAxiosPatch } from '@0xflair/react-common';
-import { useLoginJwt } from '@0xflair/react-wallet';
+import { Environment, useAxiosPatch } from '@flair-sdk/react-common';
+import { useLoginJwt } from '@flair-sdk/react-wallet';
 import { useMemo } from 'react';
 
 import { FLAIR_TOKEN_STREAMS_BACKEND } from '../constants/backend';

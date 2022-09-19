@@ -4,7 +4,7 @@ import {
   ContractVersion,
   LATEST_VERSION,
   loadContract,
-} from '@0xflair/contracts-registry';
+} from '@flair-sdk/contracts-registry';
 import { useEffect, useState } from 'react';
 
 type Config = {

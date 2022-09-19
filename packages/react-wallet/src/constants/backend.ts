@@ -1,4 +1,4 @@
-import { Environment } from '@0xflair/react-common';
+import { Environment } from '@flair-sdk/react-common';
 
 export const FLAIR_WALLET_BACKEND = {
   [Environment.PROD]: {

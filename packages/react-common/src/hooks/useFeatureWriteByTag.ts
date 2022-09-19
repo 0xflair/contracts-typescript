@@ -1,4 +1,4 @@
-import { Environment } from '@0xflair/common';
+import { Environment } from '@flair-sdk/common';
 import { Provider } from '@ethersproject/providers';
 import { WriteContractConfig } from '@wagmi/core';
 import { Signer } from 'ethers';

@@ -1,4 +1,4 @@
-import { BareComponentProps } from '@0xflair/react-common';
+import { BareComponentProps } from '@flair-sdk/react-common';
 import { XIcon } from '@heroicons/react/solid';
 import React, { Fragment, PropsWithChildren, useState } from 'react';
 import Modal from 'react-modal';

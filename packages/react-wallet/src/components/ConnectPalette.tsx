@@ -1,4 +1,4 @@
-import { classNames } from '@0xflair/react-common';
+import { classNames } from '@flair-sdk/react-common';
 import {
   GenericWalletIcon,
   GnosisSafeIcon,
@@ -7,7 +7,7 @@ import {
   TrustWalletIcon,
   WalletConnectIcon,
   WalletLinkIcon,
-} from '@0xflair/react-icons';
+} from '@flair-sdk/react-icons';
 import MetaMaskOnboarding from '@metamask/onboarding';
 import React, { useRef } from 'react';
 import { useConnect } from 'wagmi';

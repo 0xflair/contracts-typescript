@@ -1,4 +1,4 @@
-import { Environment, useAxiosGet } from '@0xflair/react-common';
+import { Environment, useAxiosGet } from '@flair-sdk/react-common';
 import * as axios from 'axios';
 import { BytesLike } from 'ethers';
 import { useCallback } from 'react';

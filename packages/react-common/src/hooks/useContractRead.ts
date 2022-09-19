@@ -1,11 +1,11 @@
 import 'react-query';
 
-import { ZERO_ADDRESS } from '@0xflair/common';
+import { ZERO_ADDRESS } from '@flair-sdk/common';
 import {
   ContractFqn,
   ContractVersion,
   loadContract,
-} from '@0xflair/contracts-registry';
+} from '@flair-sdk/contracts-registry';
 import { ReadContractConfig as ReadContractConfigWagmi } from '@wagmi/core';
 import { ethers } from 'ethers';
 import { useCallback, useMemo } from 'react';
@@ -15,7 +15,7 @@ import { useContractRead as useContractReadWagmi, useProvider } from 'wagmi';
 export type ReadContractConfig<ArgsType = []> = Partial<
   Omit<ReadContractConfigWagmi, 'args'>
 > &
-  /*UseContractReadConfig*/any & {
+  /*UseContractReadConfig*/ any & {
     contractVersion?: ContractVersion;
     contractFqn: ContractFqn;
     contractAddress?: string;
@@ -52,7 +52,7 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
   const result = useContractReadWagmi(
     {
       addressOrName: contractAddress as string,
-      contractInterface: contractDefinition.artifact.abi,
+      contractInterface: contractDefinition?.artifact.abi || [],
     },
     functionName as string,
     {
@@ -68,7 +68,7 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
     chainId: restOfConfig.chainId,
   });
   const contract = useMemo(() => {
-    if (!contractAddress || !provider || !contractDefinition.artifact.abi) {
+    if (!contractAddress || !provider || !contractDefinition?.artifact.abi) {
       return;
     }
 
@@ -77,7 +77,7 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
       contractDefinition.artifact.abi,
       provider,
     );
-  }, [contractAddress, contractDefinition.artifact.abi, provider]);
+  }, [contractAddress, contractDefinition?.artifact.abi, provider]);
 
   const call = useCallback(
     async (overrides?: { args?: ArgsType }) => {

@@ -1,5 +1,5 @@
-import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
-import { BareComponentProps } from '@0xflair/react-common';
+import { CryptoUnits, CryptoValue } from '@flair-sdk/react-coingecko';
+import { BareComponentProps } from '@flair-sdk/react-common';
 import { BigNumber } from 'ethers';
 import { Fragment } from 'react';
 

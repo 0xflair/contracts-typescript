@@ -1,10 +1,10 @@
 {
-  "name": "@0xflair/common",
-  "version": "0.116.1",
+  "name": "@flair-sdk/common",
+  "version": "2.0.0",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/0xflair/typescript-sdk.git"
+    "url": "git+https://github.com/flair-sdk/typescript.git"
   },
   "publishConfig": {
     "access": "public",

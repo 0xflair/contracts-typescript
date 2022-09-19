@@ -9,7 +9,7 @@ React components and hooks to work with IPFS. This library uses Flair's APIs to 
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-ipfs
+   npm install @flair-sdk/react-ipfs
    ```
 
 2. Install peer dependencies:
@@ -30,7 +30,7 @@ React components and hooks to work with IPFS. This library uses Flair's APIs to 
        "./src/**/*.{js,jsx,ts,tsx,vue}",
 
        // This line tells Tailwind to look into SDK files
-       "./node_modules/@0xflair/**/*.{js,jsx,ts,tsx,vue}",
+       "./node_modules/@flair-sdk/**/*.{js,jsx,ts,tsx,vue}",
      ],
      content: ["./src/**/*.{js,jsx,ts,tsx}"],
      plugins: [
@@ -46,7 +46,7 @@ React components and hooks to work with IPFS. This library uses Flair's APIs to 
 #### IPFS Uploader Hook
 
 ```tsx
-import { useIpfsFileUploader } from "@0xflair/react-ipfs";
+import { useIpfsFileUploader } from "@flair-sdk/react-ipfs";
 
 function App() {
   const [userFile, serUserFile] = useState<File>();

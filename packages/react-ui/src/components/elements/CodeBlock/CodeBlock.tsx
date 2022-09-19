@@ -1,4 +1,4 @@
-import { classNames } from '@0xflair/react-common';
+import { classNames } from '@flair-sdk/react-common';
 import { CheckCircleIcon, ClipboardCopyIcon } from '@heroicons/react/solid';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/vsDark';

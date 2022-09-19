@@ -1,4 +1,4 @@
-import { BareComponentProps, classNames } from '@0xflair/react-common';
+import { BareComponentProps, classNames } from '@flair-sdk/react-common';
 import { RadioGroup } from '@headlessui/react';
 
 import { useStreamClaimingContext } from '../providers/StreamClaimingProvider';

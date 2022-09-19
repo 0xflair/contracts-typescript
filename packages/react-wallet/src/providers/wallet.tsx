@@ -1,5 +1,5 @@
-import { MagicLinkConnector, SafeConnector } from '@0xflair/common';
-import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from '@0xflair/react-common';
+import { MagicLinkConnector, SafeConnector } from '@flair-sdk/common';
+import { FLAIR_CHAINS, FLAIR_DEFAULT_CHAIN } from '@flair-sdk/react-common';
 import { providers } from 'ethers';
 import {
   PropsWithChildren,

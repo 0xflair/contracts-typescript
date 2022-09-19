@@ -1,4 +1,4 @@
-import { Environment, useCancel } from '@0xflair/react-common';
+import { Environment, useCancel } from '@flair-sdk/react-common';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import * as React from 'react';

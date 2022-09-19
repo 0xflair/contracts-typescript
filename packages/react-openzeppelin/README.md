@@ -7,7 +7,7 @@ Ready-made React hooks on top of OpenZeppelin smart contracts. This library is b
 ### Installation
 
 ```sh
-npm install @0xflair/react-openzeppelin
+npm install @flair-sdk/react-openzeppelin
 ```
 
 The dependencies:
@@ -23,7 +23,7 @@ Check if a certain address has a specific Openzeppelin's AccessControl role or n
 
 ```ts
 import { keccak256, toUtf8Bytes } from "ethers/lib/utils";
-import { useOzHasRole } from "@0xflair/react-openzeppelin";
+import { useOzHasRole } from "@flair-sdk/react-openzeppelin";
 
 const { data, error, isLoading } = useOzHasRole({
   // You contract address that is using Openzeppelin's AccessControl

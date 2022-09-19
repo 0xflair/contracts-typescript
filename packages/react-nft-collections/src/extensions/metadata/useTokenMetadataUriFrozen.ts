@@ -1,7 +1,7 @@
 import {
   FeatureReadByTagConfig,
   useFeatureReadByTag,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 
 export const useTokenMetadataUriFrozen = (config: FeatureReadByTagConfig) => {
   return useFeatureReadByTag<boolean>({

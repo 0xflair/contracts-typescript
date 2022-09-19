@@ -1,4 +1,4 @@
-import { classNames } from '@0xflair/react-common';
+import { classNames } from '@flair-sdk/react-common';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 

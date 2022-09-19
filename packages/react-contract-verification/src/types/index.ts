@@ -1,4 +1,4 @@
-import { ContractFqn, ContractVersion } from '@0xflair/contracts-registry';
+import { ContractFqn, ContractVersion } from '@flair-sdk/contracts-registry';
 
 export type ContractVerification = {
   chainId: number;

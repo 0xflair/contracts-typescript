@@ -9,5 +9,5 @@ A package that exports useful Web3 icons and assets as react components.
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-icons
+   npm install @flair-sdk/react-icons
    ```

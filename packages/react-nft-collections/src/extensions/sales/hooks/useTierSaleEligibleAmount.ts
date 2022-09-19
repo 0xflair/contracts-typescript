@@ -2,7 +2,7 @@ import {
   PredefinedReadContractConfig,
   useContractRead,
   ZERO_ADDRESS,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 import { BigNumberish, BytesLike } from 'ethers';
 import { useCallback, useMemo, useState } from 'react';
 

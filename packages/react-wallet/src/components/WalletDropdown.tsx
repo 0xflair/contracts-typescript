@@ -1,5 +1,5 @@
-import { CryptoUnits, CryptoValue } from '@0xflair/react-coingecko';
-import { BareComponentProps, classNames } from '@0xflair/react-common';
+import { CryptoUnits, CryptoValue } from '@flair-sdk/react-coingecko';
+import { BareComponentProps, classNames } from '@flair-sdk/react-common';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';

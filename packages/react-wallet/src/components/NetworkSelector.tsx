@@ -1,4 +1,4 @@
-import { classNames, FLAIR_CHAINS } from '@0xflair/react-common';
+import { classNames, FLAIR_CHAINS } from '@flair-sdk/react-common';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';

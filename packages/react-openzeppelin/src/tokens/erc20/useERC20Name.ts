@@ -1,7 +1,7 @@
 import {
   PredefinedReadContractConfig,
   useContractRead,
-} from '@0xflair/react-common';
+} from '@flair-sdk/react-common';
 import { BytesLike } from 'ethers';
 
 export const useERC20Name = (config: PredefinedReadContractConfig) => {

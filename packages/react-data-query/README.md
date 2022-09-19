@@ -9,7 +9,7 @@ Ready-made React components and hooks for fetching blockchain data such as NFT t
 1. Install the package:
 
    ```sh
-   npm install @0xflair/react-data-query
+   npm install @flair-sdk/react-data-query
    ```
 
 ## Documentation

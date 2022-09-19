@@ -1,4 +1,4 @@
-import { SafeConnector } from '@0xflair/common';
+import { SafeConnector } from '@flair-sdk/common';
 import { useCallback, useEffect, useState } from 'react';
 import { useInterval } from 'react-use';
 import {
