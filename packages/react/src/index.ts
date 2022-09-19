@@ -1,6 +1,7 @@
 export * from '@flair-sdk/common';
 export * from '@flair-sdk/contracts-registry';
 export * from '@flair-sdk/ipfs';
+export * from '@flair-sdk/meta-transactions';
 
 export * from './common';
 export * from './features/address-lists';
