@@ -33,9 +33,9 @@
       "last 1 safari version"
     ]
   },
+  "@flair-sdk/common": "*",
+  "@flair-sdk/contracts-registry": "*",
   "peerDependencies": {
-    "@flair-sdk/common": "0.*",
-    "@flair-sdk/contracts-registry": "0.*",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",
     "randombytes": "^2.1.0"

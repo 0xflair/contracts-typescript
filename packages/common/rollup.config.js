@@ -22,7 +22,7 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [peerDepsExternal(), resolve(), commonjs(), typescript(), json()],
+    plugins: [peerDepsExternal(), resolve(), json(), commonjs(), typescript()],
   },
   {
     input: 'src/index.ts',

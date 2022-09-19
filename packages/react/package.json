@@ -1,0 +1,82 @@
+{
+  "name": "@flair-sdk/react",
+  "version": "2.0.0",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flair-sdk/typescript.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "test": "react-scripts test",
+    "test:watch": "jest --watch"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "peerDependencies": {
+    "@wagmi/core": "^0.2.5",
+    "axios": "^0.26.1",
+    "ethers": "^5.6.5",
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0",
+    "react-query": "*",
+    "versioning": "^1.1.2",
+    "wagmi": "^0.3.5"
+  },
+  "dependencies": {
+    "@flair-sdk/common": "^2.0.0",
+    "@flair-sdk/contracts": "^2.0.0",
+    "@flair-sdk/contracts-registry": "^2.0.0",
+    "@flair-sdk/ipfs": "^2.0.0",
+    "@flair-sdk/react-icons": "^2.0.0",
+    "@headlessui/react": "^1.7.2",
+    "@heroicons/react": "^2.0.11",
+    "@metamask/onboarding": "^1.0.1",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tanstack/react-query": "^4.3.9",
+    "@tanstack/react-query-persist-client": "^4.0.10",
+    "@wagmi/core": "^0.2.5",
+    "axios": "^0.26.1",
+    "ethers": "^5.6.5",
+    "humanize-duration": "^3.27.3",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
+    "prism-react-renderer": "^1.3.5",
+    "react-blockies": "^1.4.1",
+    "react-dropzone": "^14.2.2",
+    "react-modal": "^3.15.1",
+    "react-query": "4.0.0-beta.9",
+    "react-use": "^17.4.0",
+    "tailwindcss": "^3.1.8",
+    "versioning": "^1.1.2",
+    "wagmi": "^0.3.5"
+  },
+  "devDependencies": {
+    "@types/humanize-duration": "^3.27.1",
+    "@types/react": "^18.0.10",
+    "@types/react-blockies": "^1.4.1",
+    "@types/react-dom": "^18.0.5",
+    "@types/react-modal": "^3.13.1",
+    "postcss-add-root-selector": "^1.0.5"
+  }
+}

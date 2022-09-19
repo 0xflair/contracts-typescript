@@ -26,9 +26,9 @@ export default [
     plugins: [
       peerDepsExternal(),
       resolve(),
+      json(),
       commonjs(),
       typescript(),
-      json(),
       string({
         include: ['**/*.sol'],
       }),
