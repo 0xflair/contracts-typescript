@@ -1,5 +1,5 @@
 {
-  "name": "@flair-sdk/contracts-registry",
+  "name": "@flair-sdk/registry",
   "version": "2.0.13",
   "private": false,
   "repository": {

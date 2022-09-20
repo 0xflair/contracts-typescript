@@ -1,5 +1,5 @@
 import { getInterfaceId } from '@flair-sdk/common';
-import { ContractFqn, loadContract } from '@flair-sdk/contracts-registry';
+import { ContractFqn, loadContract } from '@flair-sdk/registry';
 import { BigNumberish, ethers } from 'ethers';
 import { useMemo } from 'react';
 import reactQuery from 'react-query';

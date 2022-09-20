@@ -5,7 +5,7 @@ import {
   ContractFqn,
   ContractVersion,
   loadContract,
-} from '@flair-sdk/contracts-registry';
+} from '@flair-sdk/registry';
 import { ReadContractConfig as ReadContractConfigWagmi } from '@wagmi/core';
 import { ethers } from 'ethers';
 import { useCallback, useMemo } from 'react';

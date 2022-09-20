@@ -2,7 +2,7 @@ import {
   ContractFqn,
   ContractVersion,
   loadContract,
-} from '@flair-sdk/contracts-registry';
+} from '@flair-sdk/registry';
 import { useMemo } from 'react';
 
 export type Config = {

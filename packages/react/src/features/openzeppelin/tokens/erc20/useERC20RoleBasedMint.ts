@@ -1,5 +1,5 @@
 import { Provider } from '@ethersproject/providers';
-import { ContractVersion } from '@flair-sdk/contracts-registry';
+import { ContractVersion } from '@flair-sdk/registry';
 import { ReadContractConfig } from '@wagmi/core';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 

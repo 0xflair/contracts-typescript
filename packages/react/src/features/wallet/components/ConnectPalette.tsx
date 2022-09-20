@@ -7,7 +7,7 @@ import {
   TrustWalletIcon,
   WalletConnectIcon,
   WalletLinkIcon,
-} from '@flair-sdk/react-icons';
+} from '@flair-sdk/icons';
 import MetaMaskOnboarding from '@metamask/onboarding';
 import React, { useRef } from 'react';
 import { useConnect } from 'wagmi';

@@ -3,7 +3,7 @@ import {
   ContractFqn,
   ContractVersion,
   loadContract,
-} from '@flair-sdk/contracts-registry';
+} from '@flair-sdk/registry';
 import * as axios from 'axios';
 import { ethers } from 'ethers';
 import { useMemo } from 'react';

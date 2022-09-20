@@ -1,5 +1,5 @@
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
-import { V1_ERC721TieringExtension__factory } from '@flair-sdk/contracts-registry';
+import { V1_ERC721TieringExtension__factory } from '@flair-sdk/registry';
 import { BigNumberish, BytesLike } from 'ethers';
 import { useCallback, useMemo, useState } from 'react';
 import { useProvider } from 'wagmi';

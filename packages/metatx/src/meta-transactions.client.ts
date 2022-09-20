@@ -3,7 +3,7 @@ import {
   ContractVersion,
   LATEST_VERSION,
   loadContract,
-} from '@flair-sdk/contracts-registry';
+} from '@flair-sdk/registry';
 import axios from 'axios';
 import { Signer } from 'ethers';
 import { Required } from 'utility-types';

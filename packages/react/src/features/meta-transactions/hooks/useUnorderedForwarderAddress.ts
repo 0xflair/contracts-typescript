@@ -3,7 +3,7 @@ import {
   ContractVersion,
   LATEST_VERSION,
   loadContract,
-} from '@flair-sdk/contracts-registry';
+} from '@flair-sdk/registry';
 import { useMemo } from 'react';
 
 import { useChainId } from '../../../common';

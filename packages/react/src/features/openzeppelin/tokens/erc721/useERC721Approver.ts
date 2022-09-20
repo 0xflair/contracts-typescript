@@ -1,5 +1,5 @@
 import { Provider } from '@ethersproject/providers';
-import { ContractVersion } from '@flair-sdk/contracts-registry';
+import { ContractVersion } from '@flair-sdk/registry';
 import { WriteContractConfig } from '@wagmi/core';
 import { BytesLike, Signer } from 'ethers';
 import { useCallback } from 'react';

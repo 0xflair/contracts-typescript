@@ -3,7 +3,7 @@ import {
   ContractFqn,
   ContractVersion,
   loadContract,
-} from '@flair-sdk/contracts-registry';
+} from '@flair-sdk/registry';
 import { useEffect, useState } from 'react';
 
 type Config = {

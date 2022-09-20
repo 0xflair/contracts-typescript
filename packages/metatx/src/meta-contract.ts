@@ -5,7 +5,7 @@ import {
   ContractVersion,
   LATEST_VERSION,
   loadContract,
-} from '@flair-sdk/contracts-registry';
+} from '@flair-sdk/registry';
 import {
   BaseContract,
   Contract,

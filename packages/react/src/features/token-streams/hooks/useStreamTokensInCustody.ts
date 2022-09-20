@@ -1,6 +1,6 @@
 import { BytesLike } from '@ethersproject/bytes';
 import { Environment } from '@flair-sdk/common';
-import { V1_ERC721CustodialStakingExtension__factory } from '@flair-sdk/contracts-registry';
+import { V1_ERC721CustodialStakingExtension__factory } from '@flair-sdk/registry';
 import { BigNumber, BigNumberish } from 'ethers';
 import { useCallback, useMemo, useState } from 'react';
 import { useAccount, useProvider } from 'wagmi';

@@ -1,6 +1,6 @@
 import { Provider } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
-import { ContractVersion } from '@flair-sdk/contracts-registry';
+import { ContractVersion } from '@flair-sdk/registry';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 import { useCallback } from 'react';
 

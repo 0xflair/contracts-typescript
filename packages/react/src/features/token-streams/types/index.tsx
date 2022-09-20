@@ -1,4 +1,4 @@
-import { ContractFqn, ContractVersion } from '@flair-sdk/contracts-registry';
+import { ContractFqn, ContractVersion } from '@flair-sdk/registry';
 
 export type TokenStream<
   TConfig extends Record<string, any> = Record<string, any>,

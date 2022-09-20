@@ -3,7 +3,7 @@ import {
   ContractFqn,
   ContractVersion,
   FlairContract,
-} from '@flair-sdk/contracts-registry';
+} from '@flair-sdk/registry';
 import {
   Contract,
   Contract as EthersContract,

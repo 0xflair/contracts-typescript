@@ -1,4 +1,4 @@
-# Flair SDK: `react-icons`
+# Flair SDK: `icons`
 
 A package that exports useful Web3 icons and assets as react components.
 
@@ -9,5 +9,5 @@ A package that exports useful Web3 icons and assets as react components.
 1. Install the package:
 
    ```sh
-   npm install @flair-sdk/react-icons
+   npm install @flair-sdk/icons
    ```

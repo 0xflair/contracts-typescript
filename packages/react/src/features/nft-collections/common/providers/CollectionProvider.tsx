@@ -1,5 +1,5 @@
 import { Environment } from '@flair-sdk/common';
-import { ContractVersion } from '@flair-sdk/contracts-registry';
+import { ContractVersion } from '@flair-sdk/registry';
 import { BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
 import { ReactNode } from 'react';
