@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/react",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "private": false,
   "repository": {
     "type": "git",
@@ -67,12 +67,12 @@
     "wagmi": "^0.3.5"
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.0.7",
+    "@flair-sdk/common": "^2.0.8",
     "@flair-sdk/contracts": "^2.0.0",
-    "@flair-sdk/contracts-registry": "^2.0.7",
-    "@flair-sdk/ipfs": "^2.0.7",
-    "@flair-sdk/meta-transactions": "^2.0.7",
-    "@flair-sdk/react-icons": "^2.0.7",
+    "@flair-sdk/contracts-registry": "^2.0.8",
+    "@flair-sdk/ipfs": "^2.0.8",
+    "@flair-sdk/meta-transactions": "^2.0.8",
+    "@flair-sdk/react-icons": "^2.0.8",
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^2.0.11",
     "@metamask/onboarding": "^1.0.1",
