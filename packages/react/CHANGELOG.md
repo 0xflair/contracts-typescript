@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.13 (2022-09-20)
+
+
+### Bug Fixes
+
+* use v1 by default in contract hooks ([6a0f1af](https://github.com/flair-sdk/typescript/commit/6a0f1af692a1a5ad668559ea5d6deeb3d5cf8c00))
+
+
+
+
+
 ## 2.0.12 (2022-09-20)
 
 
