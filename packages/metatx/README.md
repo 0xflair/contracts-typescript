@@ -1,4 +1,4 @@
-# Flair SDK: `meta-transactions`
+# `@flair-sdk/metatx`
 
 A typescript (and Node.js) library to help construct and submit meta transactions using Flair's forwarder contracts.
 

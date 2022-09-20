@@ -1,4 +1,4 @@
-# Flair SDK: `ipfs`
+# `@flair-sdk/ipfs`
 
 A typescript (and Node.js) library to upload, retrieve and pin files and directories to IPFS decentralized storage network.
 

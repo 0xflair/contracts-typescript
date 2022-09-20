@@ -1,4 +1,4 @@
-# Flair SDK: `icons`
+# `@flair-sdk/icons`
 
 A package that exports useful Web3 icons and assets as react components.
 
