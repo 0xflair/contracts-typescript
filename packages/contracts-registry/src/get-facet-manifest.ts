@@ -5,14 +5,14 @@ import {
   ContractVersion,
   LATEST_VERSION,
 } from './generated-versions';
-import { CONTRACT_REGISTRY } from './registry';
+import { FACET_REGISTRY } from './registry';
 
-export const loadContract = (
+export const getFacetManifest = (
   contractFqn: ContractFqn,
   contractVersion: ContractVersion = LATEST_VERSION,
   throwOnError = true,
 ) => {
-  if (!CONTRACT_REGISTRY[contractVersion]) {
+  if (!FACET_REGISTRY[contractVersion]) {
     if (throwOnError) {
       throw new FlairInvalidVersionError(contractVersion);
     } else {
@@ -20,7 +20,7 @@ export const loadContract = (
     }
   }
 
-  const contract = CONTRACT_REGISTRY[contractVersion]?.[contractFqn];
+  const contract = FACET_REGISTRY[contractVersion]?.[contractFqn];
 
   if (!contract) {
     if (throwOnError) {

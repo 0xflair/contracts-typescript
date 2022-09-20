@@ -60,6 +60,17 @@ const main = async () => {
     }
   }
 
+  const versionToFacets: Record<string, Record<string, any>> = {};
+
+  for (const pkg of contractPackages) {
+    const version = pkg.slice(pkg.lastIndexOf('-') + 1);
+    const facetsPath = path.resolve(pkg, 'facets.json');
+
+    if (fse.existsSync(facetsPath)) {
+      versionToFacets[version] = fse.readJsonSync(facetsPath);
+    }
+  }
+
   const packagePaths: Record<string, string> = {};
   const importNames: Record<string, string> = {};
 
@@ -130,6 +141,11 @@ const main = async () => {
   fse.writeJSONSync(
     path.resolve(__dirname, '../src/build-info.json'),
     versionToBuildInfo,
+  );
+
+  fse.writeJSONSync(
+    path.resolve(__dirname, '../src/facets.json'),
+    versionToFacets,
   );
 
   const typeNames: Record<string, any> = {};
