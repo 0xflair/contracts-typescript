@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.11 (2022-09-20)
+
+
+### Bug Fixes
+
+* use react-query package ([2a0c275](https://github.com/flair-sdk/typescript/commit/2a0c2752633f9d6072acc97fb98e34b8479a4cf0))
+
+
+
+
+
 ## 2.0.10 (2022-09-20)
 
 
