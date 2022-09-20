@@ -31,7 +31,7 @@ export type PredefinedReadContractConfig<ArgsType = []> = Omit<
 >;
 
 export const useContractRead = <ResultType = any, ArgsType = []>({
-  contractVersion,
+  contractVersion = 'v1',
   enabled = true,
   contractFqn,
   contractAddress,

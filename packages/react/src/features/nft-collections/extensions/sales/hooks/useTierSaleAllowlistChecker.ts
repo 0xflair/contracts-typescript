@@ -3,8 +3,8 @@ import { ContractVersion } from '@flair-sdk/contracts-registry';
 import { BigNumberish, BytesLike } from 'ethers';
 import { useCallback } from 'react';
 
-import { useAddressListMerkleProof } from '../../../../address-lists';
 import { useContractRead } from '../../../../../common';
+import { useAddressListMerkleProof } from '../../../../address-lists';
 
 type Config = {
   env?: Environment;

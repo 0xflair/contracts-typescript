@@ -2,7 +2,6 @@ import { Environment } from '@flair-sdk/common';
 import { ContractVersion } from '@flair-sdk/contracts-registry';
 import { BigNumberish, BytesLike } from 'ethers';
 import { useCallback } from 'react';
-import versioning from 'versioning';
 
 import { useContractRead } from '../../../../../common';
 import { useAddressListMerkleProof } from '../../../../address-lists';
