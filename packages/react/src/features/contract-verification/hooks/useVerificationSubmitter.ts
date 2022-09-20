@@ -25,7 +25,7 @@ export const useVerificationSubmitter = ({
   env = Environment.PROD,
   chainId,
   contractFqn,
-  contractVersion,
+  contractVersion = 'v1',
   contractAddress,
   constructorArguments,
 }: Props) => {

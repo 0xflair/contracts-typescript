@@ -2,7 +2,6 @@ import {
   ContractDefinition,
   ContractFqn,
   ContractVersion,
-  LATEST_VERSION,
   loadContract,
 } from '@flair-sdk/contracts-registry';
 import { useEffect, useState } from 'react';
@@ -14,7 +13,7 @@ type Config = {
 
 export const useContractDefinition = ({
   contractFqn,
-  contractVersion = LATEST_VERSION,
+  contractVersion = 'v1',
 }: Config) => {
   const [definition, setDefinition] = useState<ContractDefinition>();
 

@@ -15,7 +15,7 @@ type Config = PredefinedReadContractConfig<[BigNumberish]> & {
 
 export const useSupportsInterface = ({
   contractAddress,
-  contractVersion,
+  contractVersion = 'v1',
   extensionFqn,
   ...restOfConfig
 }: Config) => {

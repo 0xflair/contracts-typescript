@@ -10,7 +10,10 @@ export type Config = {
   contractFqn: ContractFqn;
 };
 
-export const useContractAbi = ({ contractVersion, contractFqn }: Config) => {
+export const useContractAbi = ({
+  contractVersion = 'v1',
+  contractFqn,
+}: Config) => {
   const contract = useMemo(
     () => loadContract(contractFqn, contractVersion),
     [contractFqn, contractVersion],
