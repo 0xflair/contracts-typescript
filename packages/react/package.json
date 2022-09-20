@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/react",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": false,
   "repository": {
     "type": "git",
@@ -36,10 +36,10 @@
   "peerDependencies": {
     "@flair-sdk/common": "*",
     "@flair-sdk/contracts": "*",
-    "@flair-sdk/registry": "*",
+    "@flair-sdk/icons": "*",
     "@flair-sdk/ipfs": "*",
     "@flair-sdk/metatx": "*",
-    "@flair-sdk/icons": "*",
+    "@flair-sdk/registry": "*",
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^1.0.6",
     "@metamask/onboarding": "^1.0.1",
@@ -65,12 +65,12 @@
     "wagmi": "^0.3.5"
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.0.0",
+    "@flair-sdk/common": "^2.0.1",
     "@flair-sdk/contracts": "^2.0.0",
-    "@flair-sdk/registry": "^2.0.0",
-    "@flair-sdk/ipfs": "^2.0.0",
-    "@flair-sdk/metatx": "^2.0.0",
-    "@flair-sdk/icons": "^2.0.0",
+    "@flair-sdk/icons": "^2.0.1",
+    "@flair-sdk/ipfs": "^2.0.1",
+    "@flair-sdk/metatx": "^2.0.1",
+    "@flair-sdk/registry": "^2.0.1",
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^1.0.6",
     "@metamask/onboarding": "^1.0.1",
