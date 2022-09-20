@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.12 (2022-09-20)
+
+
+### Bug Fixes
+
+* use v1 as default version ([4206ecc](https://github.com/flair-sdk/typescript/commit/4206ecc2a32e773545c04b5ccca876b5cc58646f))
+
+
+
+
+
 ## 2.0.11 (2022-09-20)
 
 
