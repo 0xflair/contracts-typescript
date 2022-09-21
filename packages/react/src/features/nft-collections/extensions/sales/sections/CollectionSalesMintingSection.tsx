@@ -39,7 +39,11 @@ export const CollectionSalesMintingSection = ({
     env,
     chainId,
     contractAddress,
-    tags: ['erc721_tiering_extension', 'mint_by_tier_with_allowance_and_proof'],
+    tags: [
+      'erc721_tiering_extension',
+      'mint_by_tier_with_allowance_and_proof',
+      'tiered_sales_facet',
+    ],
   });
 
   const mintButtonClass =
