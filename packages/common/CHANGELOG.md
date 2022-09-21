@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.2.0 (2022-09-21)
+
+
+### Features
+
+* bump up contracts to add new facets ([7e22a59](https://github.com/flair-sdk/typescript/commit/7e22a590c4c4779f9382a48fee9b4a8c31be7f4e))
+
+
+
+
+
 ## 2.1.2 (2022-09-21)
 
 
