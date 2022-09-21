@@ -1,7 +1,7 @@
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { V1_ERC721TieringExtension__factory } from '@flair-sdk/registry';
 import { BigNumberish, BytesLike } from 'ethers';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useProvider } from 'wagmi';
 
 import { PredefinedReadContractConfig } from '../../../../../common';
@@ -13,6 +13,7 @@ type ArgsType = [tierId: BigNumberish];
 
 type Config = {
   env?: Environment;
+  enabled?: boolean;
   minterAddress?: BytesLike;
 } & PredefinedReadContractConfig<ArgsType>;
 
@@ -148,6 +149,13 @@ export const useSaleTiers = (config: Config) => {
     setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config.minterAddress]);
+
+  useEffect(() => {
+    if (config.enabled && !isLoading && !error && tiers === undefined) {
+      refetchTiers();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [config.enabled, config.env, config.chainId, config.contractAddress]);
 
   return {
     data: tiers,
