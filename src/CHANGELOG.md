@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.2.1 (2022-09-21)
+
+**Note:** Version bump only for package @flair-sdk/stories
+
+
+
+
+
 # 2.2.0 (2022-09-21)
 
 
