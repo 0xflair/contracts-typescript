@@ -16,7 +16,7 @@ type Config = {
 
 let requestPromise: any = {};
 
-export function useSmartContract<TInitialConfig, TInfo>({
+export function useSmartContract<TInitialConfig = any, TInfo = any>({
   env = Environment.PROD,
   enabled = true,
   smartContractId,
