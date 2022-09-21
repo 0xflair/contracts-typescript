@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.1.2 (2022-09-21)
+
+
+### Bug Fixes
+
+* enable fetching tiers by default ([db7f3e0](https://github.com/flair-sdk/typescript/commit/db7f3e07beb811a1463c5553d60842bd5c9451be))
+
+
+
+
+
 ## 2.1.1 (2022-09-21)
 
 
