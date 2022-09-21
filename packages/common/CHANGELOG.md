@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.1.1 (2022-09-21)
+
+
+### Bug Fixes
+
+* auto fetch tiers when contract address is available ([7c4cee4](https://github.com/flair-sdk/typescript/commit/7c4cee4c34a83835682643c09d97f07d2465da4a))
+
+
+
+
+
 # 2.1.0 (2022-09-21)
 
 
