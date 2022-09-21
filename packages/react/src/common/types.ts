@@ -1,11 +1,12 @@
 import { ContractInterface } from 'ethers';
 
-export type SmartContract<TInfo = any> = {
+export type SmartContract<TInitialConfig = any, TInfo = any> = {
   chainId: number;
   contractAddress: string;
   type?: ContractType;
   bytecode?: string;
   abi?: string;
+  initialConfig?: TInitialConfig;
   features?: Feature[];
   info?: TInfo;
   analysisState?:

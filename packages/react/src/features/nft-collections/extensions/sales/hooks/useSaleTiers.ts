@@ -13,24 +13,32 @@ type ArgsType = [tierId: BigNumberish];
 
 type Config = {
   env?: Environment;
+  chainId?: number;
+  contractAddress?: string;
   enabled?: boolean;
   minterAddress?: BytesLike;
 } & PredefinedReadContractConfig<ArgsType>;
 
-export const useSaleTiers = (config: Config) => {
+export const useSaleTiers = ({
+  env,
+  chainId,
+  contractAddress,
+  enabled,
+  minterAddress,
+}: Config) => {
   const [error, setError] = useState<Error | string>();
   const [isLoading, setIsLoading] = useState(false);
-  const [tiers, setTiers] = useState<Record<number, Tier>>([]);
+  const [tiers, setTiers] = useState<Record<number, Tier>>({});
 
   const {
     error: allowlistCheckerError,
     isLoading: allowlistCheckerLoading,
     call: checkAllowlist,
   } = useTierSaleAllowlistChecker({
-    env: config.env,
-    chainId: config.chainId,
-    contractAddress: config.contractAddress,
-    minterAddress: config.minterAddress,
+    env,
+    chainId,
+    contractAddress,
+    minterAddress,
     enabled: false,
   });
 
@@ -39,24 +47,24 @@ export const useSaleTiers = (config: Config) => {
     isLoading: eligibleAmountLoading,
     call: getEligibleAmount,
   } = useTierSaleEligibleAmount({
-    chainId: config.chainId,
-    contractAddress: config.contractAddress,
-    minterAddress: config.minterAddress,
+    chainId,
+    contractAddress,
+    minterAddress,
     enabled: false,
   });
 
   const provider = useProvider({
-    chainId: config.chainId,
+    chainId,
   });
   const contract = useMemo(() => {
-    if (!config.contractAddress || !provider) {
+    if (!contractAddress || !provider) {
       return;
     }
     return V1_ERC721TieringExtension__factory.connect(
-      config.contractAddress,
+      contractAddress,
       provider,
     );
-  }, [config.contractAddress, provider]);
+  }, [contractAddress, provider]);
 
   const fetchTierById = useCallback(
     async (tierId: BigNumberish) => {
@@ -113,7 +121,7 @@ export const useSaleTiers = (config: Config) => {
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [contract, config.minterAddress],
+    [contract, minterAddress],
   );
 
   const refetchTiers = useCallback(async () => {
@@ -148,14 +156,19 @@ export const useSaleTiers = (config: Config) => {
 
     setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [config.minterAddress]);
+  }, [minterAddress]);
 
   useEffect(() => {
-    if (config.enabled && !isLoading && !error && tiers === undefined) {
+    if (
+      enabled &&
+      !isLoading &&
+      !error &&
+      (!tiers || !Object.keys(tiers).length)
+    ) {
       refetchTiers();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [config.enabled, config.env, config.chainId, config.contractAddress]);
+  }, [enabled, env, chainId, contractAddress]);
 
   return {
     data: tiers,

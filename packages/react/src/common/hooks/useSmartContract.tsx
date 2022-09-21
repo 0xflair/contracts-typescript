@@ -16,7 +16,7 @@ type Config = {
 
 let requestPromise: any = {};
 
-export function useSmartContract({
+export function useSmartContract<TInitialConfig, TInfo>({
   env = Environment.PROD,
   enabled = true,
   smartContractId,
@@ -34,7 +34,8 @@ export function useSmartContract({
 
   const queryFn = async () => {
     if (!requestPromise[url]) {
-      requestPromise[url] = axios.get<SmartContract>(url);
+      requestPromise[url] =
+        axios.get<SmartContract<TInitialConfig, TInfo>>(url);
     }
 
     const response = await requestPromise[url];
@@ -47,9 +48,9 @@ export function useSmartContract({
   );
 
   const result = useQuery<
-    SmartContract<any>,
+    SmartContract<TInitialConfig, TInfo>,
     string | Error | null,
-    SmartContract<any>
+    SmartContract<TInitialConfig, TInfo>
   >(queryKey, queryFn, {
     enabled: canRequest,
   });
