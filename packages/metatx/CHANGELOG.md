@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2022-09-21)
+
+
+### Features
+
+* remove simple sales and support new architecture ([#1](https://github.com/flair-sdk/typescript/issues/1)) ([80d87aa](https://github.com/flair-sdk/typescript/commit/80d87aaa72c2bf1f927118b218348290377845c1))
+
+
+
+
+
 ## 2.0.18 (2022-09-20)
 
 
