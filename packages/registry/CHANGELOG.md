@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2022-09-22)
+
+
+### Features
+
+* update contracts for new functions ([263798f](https://github.com/flair-sdk/typescript/commit/263798ff51eabe14c73a14a2cfb50493183fa4f3))
+
+
+
+
+
 ## 2.2.1 (2022-09-21)
 
 **Note:** Version bump only for package @flair-sdk/registry
