@@ -87,19 +87,19 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
 
       const finalArgs = overrides?.args ?? args;
 
-      const result = (await contract.functions[functionName](
+      const result = await contract.functions[functionName](
         ...(Array.isArray(finalArgs)
           ? finalArgs
           : finalArgs
           ? [finalArgs]
           : []),
-      )) as unknown as ResultType;
+      );
 
       if (Array.isArray(result) && result.length === 1) {
-        return result[0];
+        return result[0] as ResultType;
       }
 
-      return result;
+      return result as ResultType;
     },
     [args, contract, functionName],
   );
