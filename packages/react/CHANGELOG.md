@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.3.3 (2022-09-22)
+
+
+### Bug Fixes
+
+* correct type for contract read ([0b5619e](https://github.com/flair-sdk/typescript/commit/0b5619ed802da0d8db092034416e554f58b1f365))
+
+
+
+
+
 ## 2.3.2 (2022-09-22)
 
 **Note:** Version bump only for package @flair-sdk/react
