@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.4.0 (2022-09-23)
+
+
+### Features
+
+* add batch operations for supply tracking ([791d4bd](https://github.com/flair-sdk/typescript/commit/791d4bd1340f4d9570a4d0a62cc085017aa03927))
+
+
+
+
+
 ## 2.3.4 (2022-09-23)
 
 
