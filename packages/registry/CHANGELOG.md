@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.3.4 (2022-09-23)
+
+
+### Bug Fixes
+
+* use consistent name for address ([72ff623](https://github.com/flair-sdk/typescript/commit/72ff62370ff95fa484535315f361a2552f7716e0))
+
+
+
+
+
 ## 2.3.3 (2022-09-22)
 
 
