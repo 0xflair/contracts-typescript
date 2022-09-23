@@ -11,7 +11,7 @@ type Props = {
   env?: Environment;
   clientId?: string;
   chainId?: number;
-  collectionAddress?: string;
+  contractAddress?: string;
   walletAddress?: string;
   enabled?: boolean;
 };
@@ -20,7 +20,7 @@ export const useNftTokensByWallet = ({
   env = Environment.PROD,
   clientId = 'none',
   chainId,
-  collectionAddress,
+  contractAddress,
   walletAddress,
   enabled = true,
 }: Props) => {
@@ -29,10 +29,10 @@ export const useNftTokensByWallet = ({
   const params = useMemo(() => {
     return {
       chainId,
-      collectionAddress,
+      contractAddress,
       walletAddress,
     };
-  }, [chainId, collectionAddress, walletAddress]);
+  }, [chainId, contractAddress, walletAddress]);
 
   const headers = useMemo(() => {
     return {

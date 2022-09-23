@@ -11,7 +11,7 @@ type Props = {
   env?: Environment;
   clientId?: string;
   chainId?: number;
-  collectionAddress?: string;
+  contractAddress?: string;
   walletAddress?: string;
   enabled?: boolean;
 };
@@ -20,7 +20,7 @@ export const useNftTokensByCollection = ({
   env = Environment.PROD,
   clientId = 'none',
   chainId,
-  collectionAddress,
+  contractAddress,
   enabled = true,
 }: Props) => {
   const url = `${FLAIR_DATA_QUERY_BACKEND[env]}/v1/data-query/nft-tokens/by-collection`;
@@ -28,9 +28,9 @@ export const useNftTokensByCollection = ({
   const params = useMemo(() => {
     return {
       chainId,
-      collectionAddress,
+      contractAddress,
     };
-  }, [chainId, collectionAddress]);
+  }, [chainId, contractAddress]);
 
   const headers = useMemo(() => {
     return {

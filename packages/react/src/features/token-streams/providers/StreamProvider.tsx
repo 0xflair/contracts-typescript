@@ -148,7 +148,7 @@ export const StreamProvider = ({
   } = useNftTokensByWallet({
     env,
     chainId,
-    collectionAddress: ticketTokenAddress,
+    contractAddress: ticketTokenAddress,
     walletAddress: finalWalletAddress,
     enabled: Boolean(finalWalletAddress && ticketTokenAddress),
   });
