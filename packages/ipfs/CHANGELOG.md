@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.5.3 (2022-09-24)
+
+
+### Bug Fixes
+
+* allow setting current tier when auto detection is off ([30a48b5](https://github.com/flair-sdk/typescript/commit/30a48b5240692892cb28ab56701d515be24f179d))
+
+
+
+
+
 ## 2.5.2 (2022-09-24)
 
 
