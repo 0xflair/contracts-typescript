@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.5.0 (2022-09-24)
+
+
+### Features
+
+* allow overriding patch request call ([41d4751](https://github.com/flair-sdk/typescript/commit/41d4751e07a5370f8d9631f85e1f986eeabcaee4))
+
+
+
+
+
 ## 2.4.1 (2022-09-23)
 
 
