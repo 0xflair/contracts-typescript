@@ -39,7 +39,7 @@ export const useTierSaleMinter = ({
   tierId,
   minterAddress,
   mintCount,
-  enabled,
+  enabled = true,
 }: Config) => {
   const {
     data: tier,
