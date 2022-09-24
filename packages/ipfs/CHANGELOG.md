@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.5.2 (2022-09-24)
+
+
+### Bug Fixes
+
+* enable fetching of sale tiers in minting provider ([32210e8](https://github.com/flair-sdk/typescript/commit/32210e80c272d3124a70628b6885a33ced9a8161))
+
+
+
+
+
 ## 2.5.1 (2022-09-24)
 
 
