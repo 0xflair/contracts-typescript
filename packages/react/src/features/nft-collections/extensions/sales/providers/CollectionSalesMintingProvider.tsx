@@ -125,6 +125,7 @@ export const CollectionSalesMintingProvider = ({
     contractVersion: data.contractVersion,
     contractAddress: data.contractAddress,
     minterAddress: finalMinterAddress,
+    enabled: Boolean(data.chainId && data.contractAddress),
   });
 
   const {
