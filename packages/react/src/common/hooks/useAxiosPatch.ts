@@ -25,39 +25,50 @@ export const useAxiosPatch = <T>({
   const [isLoading, setLoading] = useState(false);
 
   const cancelQuery = useCancel();
-  const sendRequest = useCallback(async () => {
-    let didCancel = false;
-    let source = axios.CancelToken.source();
-    cancelQuery(() => {
-      didCancel = true;
-      source.cancel('Cancelling in cleanup');
-    });
-    try {
-      setLoading(true);
-      setError(undefined);
-      const response = await axios.patch<T>(url, data, {
-        cancelToken: source.token,
-        timeout: timeout,
-        headers,
-        params,
+  const sendRequest = useCallback(
+    async (
+      overrides?: Partial<
+        Pick<Config, 'url' | 'data' | 'params' | 'headers' | 'timeout'>
+      >,
+    ) => {
+      let didCancel = false;
+      let source = axios.CancelToken.source();
+      cancelQuery(() => {
+        didCancel = true;
+        source.cancel('Cancelling in cleanup');
       });
-      if (!didCancel) {
-        setResponse(response.data);
-        setLoading(false);
-      }
-      return response;
-    } catch (error: any) {
-      if (!didCancel) {
-        setError(error);
-        setLoading(false);
-        if (axios.isCancel(error)) {
-          console.log(`request cancelled: ${error.message}`);
-        } else {
-          console.log(`another error happened: ${error.message}`);
+      try {
+        setLoading(true);
+        setError(undefined);
+        const response = await axios.patch<T>(
+          overrides?.url || url,
+          overrides?.data || data,
+          {
+            cancelToken: source.token,
+            timeout: overrides?.timeout || timeout,
+            headers: overrides?.headers || headers,
+            params: overrides?.params || params,
+          },
+        );
+        if (!didCancel) {
+          setResponse(response.data);
+          setLoading(false);
+        }
+        return response;
+      } catch (error: any) {
+        if (!didCancel) {
+          setError(error);
+          setLoading(false);
+          if (axios.isCancel(error)) {
+            console.log(`request cancelled: ${error.message}`);
+          } else {
+            console.log(`another error happened: ${error.message}`);
+          }
         }
       }
-    }
-  }, [cancelQuery, url, data, params, timeout, headers]);
+    },
+    [cancelQuery, url, data, params, timeout, headers],
+  );
 
   useEffect(() => {
     if (enabled) {
