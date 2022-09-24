@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.5.1 (2022-09-24)
+
+
+### Bug Fixes
+
+* enable sale minter by default ([dfb3d55](https://github.com/flair-sdk/typescript/commit/dfb3d554553f20476e9ddc41350621edbc2c5c9a))
+
+
+
+
+
 # 2.5.0 (2022-09-24)
 
 
