@@ -28,6 +28,7 @@ type CollectionSalesMintingContextValue = {
     eligibleAmount?: BigNumberish;
 
     // Helpers
+    autoDetectedTierId?: BigNumberish;
     canMint?: boolean;
     soldOut?: boolean;
     minterAddress?: BytesLike;
@@ -88,7 +89,7 @@ type Props = {
   /** Child elements or a factory function that returns child elements */
   children: FunctionalChildren | ReactNode | ReactNode[];
 
-  defaultTier?: BigNumberish;
+  tierId?: BigNumberish;
 
   autoDetectEligibleTier?: boolean;
 
@@ -97,15 +98,16 @@ type Props = {
 
 export const CollectionSalesMintingProvider = ({
   children,
-  defaultTier = 0,
+  tierId,
   autoDetectEligibleTier = true,
   minterAddress,
 }: Props) => {
   const { data: account } = useAccount();
   const { data, isLoading, error } = useCollectionContext();
-  const [currentTierId, setCurrentTierId] = useState<BigNumberish>(
-    Number(defaultTier.toString()),
+  const [currentTierId, setCurrentTierId] = useState<BigNumberish | undefined>(
+    tierId ? Number(tierId.toString()) : undefined,
   );
+  const [autoDetectedTierId, setAutoDetectedTierId] = useState<BigNumberish>();
   const [isAutoDetectingTier, setIsAutoDetectingTier] = useState(
     autoDetectEligibleTier,
   );
@@ -168,22 +170,21 @@ export const CollectionSalesMintingProvider = ({
   );
 
   useEffect(() => {
-    if (!autoDetectEligibleTier && defaultTier !== undefined) {
-      if (defaultTier !== currentTierId) {
-        setCurrentTierId(defaultTier);
+    if (!autoDetectEligibleTier && tierId !== undefined) {
+      if (tierId !== currentTierId) {
+        setCurrentTierId(tierId);
+      }
+    } else if (autoDetectEligibleTier && autoDetectedTierId !== undefined) {
+      if (currentTierId === undefined) {
+        setCurrentTierId(autoDetectedTierId);
       }
     }
-  }, [autoDetectEligibleTier, currentTierId, defaultTier]);
+  }, [autoDetectEligibleTier, autoDetectedTierId, currentTierId, tierId]);
 
   useEffect(() => {
-    if (!autoDetectEligibleTier) {
-      setIsAutoDetectingTier(false);
-      return;
-    }
-
     const tierIds = Object.keys(tiers || {}).map((id) => Number(id));
 
-    if (!autoDetectEligibleTier || tiersLoading || mintLoading) {
+    if (tiersLoading || mintLoading) {
       return;
     }
 
@@ -218,7 +219,7 @@ export const CollectionSalesMintingProvider = ({
       });
     }
 
-    setCurrentTierId(tierId || 0);
+    setAutoDetectedTierId(tierId);
     setIsAutoDetectingTier(false);
   }, [
     autoDetectEligibleTier,
@@ -257,6 +258,7 @@ export const CollectionSalesMintingProvider = ({
       isEligible,
 
       // Helpers
+      autoDetectedTierId,
       canMint,
       soldOut,
       minterAddress: finalMinterAddress,

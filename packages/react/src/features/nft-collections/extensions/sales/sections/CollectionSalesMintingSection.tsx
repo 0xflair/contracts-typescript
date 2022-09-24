@@ -19,13 +19,13 @@ import { CollectionSalesMintingProvider } from '../providers/CollectionSalesMint
 
 type Props = {
   autoDetectEligibleTier?: boolean;
-  defaultTier?: BigNumberish;
+  tierId?: BigNumberish;
   minterAddress?: BytesLike;
 };
 
 export const CollectionSalesMintingSection = ({
   autoDetectEligibleTier = true,
-  defaultTier = 0,
+  tierId,
   minterAddress,
 }: Props) => {
   const {
@@ -52,7 +52,7 @@ export const CollectionSalesMintingSection = ({
   return (
     <CollectionSalesMintingProvider
       autoDetectEligibleTier={autoDetectEligibleTier}
-      defaultTier={defaultTier}
+      tierId={tierId}
       minterAddress={minterAddress}
     >
       <main className="flex flex-col gap-x-8">
