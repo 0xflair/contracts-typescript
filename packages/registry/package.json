@@ -11,8 +11,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "generate-versions": "ts-node ./scripts/generate-versions.ts",
-    "build": "npm run generate-versions && rollup -c"
+    "build": "rollup -c"
   },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -21,18 +20,12 @@
     "dist"
   ],
   "peerDependencies": {
-    "@flair-sdk/common": "*",
     "ethers": "*"
   },
-  "dependencies": {
-    "@flair-sdk/common": "^2.6.0",
-    "flair-contracts-v1": "npm:@0xflair/evm-contracts@1.*",
-    "flair-contracts-v2": "npm:@flair-sdk/contracts@2.*"
+  "devDependencies": {
+    "ethers": "^5.6.5"
   },
   "peerDependenciesMeta": {
-    "@flair-sdk/common": {
-      "optional": true
-    },
     "ethers": {
       "optional": true
     }

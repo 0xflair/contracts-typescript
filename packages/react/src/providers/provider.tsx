@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { CommonProvider } from '../common';
-import { CoinGeckoProvider } from '../features/crypto-currency';
-import { WalletProvider, WalletProviderProps } from '../features/wallet';
+import { CoinGeckoProvider } from '../core/crypto-currency';
+import { WalletProvider, WalletProviderProps } from '../core/wallet';
 
 type Props = {
   children?: React.ReactNode;

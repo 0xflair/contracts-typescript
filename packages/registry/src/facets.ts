@@ -1,5 +1,4 @@
-export type SemanticVersion = string;
-// examples: 1.2.0   ...   1.2.5-alpha.1
+import { SemanticVersion } from './common';
 
 export type FacetFqn = string;
 // examples: flair-sdk:token/ERC1155/ERC1155 openzeppelin:token/ERC1155/ERC1155
@@ -38,4 +37,29 @@ export type FacetManifest = {
   notice?: string;
   icon?: string;
   source?: string;
+};
+
+const FACETS_REGISTRY: FacetManifest[] = [];
+
+export const generateFacetId = (manifest: FacetManifest) => {
+  return `${manifest.fqn}:${manifest.version}`;
+};
+
+export const getFacetsRegistry: () => Promise<FacetManifest[]> =
+  async function () {
+    return FACETS_REGISTRY;
+  };
+
+export const registerFacet = (facet: FacetManifest) => {
+  if (
+    FACETS_REGISTRY.find((f) => generateFacetId(f) === generateFacetId(facet))
+  ) {
+    console.error(
+      `Facet ${generateFacetId(facet)} already registered, skipping. `,
+      facet,
+    );
+    return;
+  }
+
+  FACETS_REGISTRY.push(facet);
 };
