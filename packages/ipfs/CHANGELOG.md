@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.7.0 (2022-09-25)
+
+
+### Features
+
+* use the new registry and contract reference model ([733b4aa](https://github.com/flair-sdk/typescript/commit/733b4aa2a0ed5777bd8514ac9b2c31df9e473a5b))
+
+
+
+
+
 # 2.6.0 (2022-09-25)
 
 
