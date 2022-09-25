@@ -2,6 +2,8 @@
   "name": "@flair-sdk/metatx",
   "version": "2.7.0",
   "private": false,
+  "author": "flair.dev",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flair-sdk/typescript.git"

@@ -1,6 +1,8 @@
 {
   "name": "@flair-sdk/typescript",
   "private": false,
+  "author": "flair.dev",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flair-sdk/typescript.git"

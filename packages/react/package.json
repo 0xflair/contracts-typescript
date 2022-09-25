@@ -2,6 +2,8 @@
   "name": "@flair-sdk/react",
   "version": "2.7.0",
   "private": false,
+  "author": "flair.dev",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flair-sdk/typescript.git"
@@ -155,7 +157,7 @@
   },
   "dependencies": {
     "@flair-sdk/common": "^2.7.0",
-    "@flair-sdk/contracts": "^2.0.0",
+    "@flair-sdk/contracts": "^2.4.5",
     "@flair-sdk/icons": "^2.7.0",
     "@flair-sdk/ipfs": "^2.7.0",
     "@flair-sdk/metatx": "^2.7.0",
