@@ -1,23 +1,22 @@
 import {
-  ContractFqn,
-  ContractVersion,
-  loadContract,
+  ContractReference,
+  findContractByReference,
 } from '@flair-sdk/registry';
 import { useMemo } from 'react';
 
 export type Config = {
-  contractVersion?: ContractVersion;
-  contractFqn: ContractFqn;
+  contractReference: ContractReference;
 };
 
-export const useContractAbi = ({
-  contractVersion = 'v1',
-  contractFqn,
-}: Config) => {
-  const contract = useMemo(
-    () => loadContract(contractFqn, contractVersion),
-    [contractFqn, contractVersion],
-  );
+export const useContractAbi = ({ contractReference }: Config) => {
+  const contract = useMemo(() => {
+    try {
+      return findContractByReference(contractReference);
+    } catch (error) {
+      console.warn(`Failed to find contract manifest for ${contractReference}`);
+      return undefined;
+    }
+  }, [contractReference]);
 
-  return contract?.artifact.abi || [];
+  return contract?.artifact?.abi;
 };

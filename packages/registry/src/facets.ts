@@ -45,10 +45,9 @@ export const generateFacetId = (manifest: FacetManifest) => {
   return `${manifest.fqn}:${manifest.version}`;
 };
 
-export const getFacetsRegistry: () => Promise<FacetManifest[]> =
-  async function () {
-    return FACETS_REGISTRY;
-  };
+export const getFacetsRegistry: () => FacetManifest[] = () => {
+  return FACETS_REGISTRY;
+};
 
 export const registerFacet = (facet: FacetManifest) => {
   if (

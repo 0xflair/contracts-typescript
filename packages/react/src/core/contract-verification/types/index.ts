@@ -1,11 +1,9 @@
-import { ContractFqn, ContractVersion } from '@flair-sdk/registry';
-
 export type ContractVerification = {
   chainId: number;
   ownerAddress: string;
   address: string;
-  contractFqn: ContractFqn;
-  contractVersion?: ContractVersion;
+  contractFqn: string;
+  contractVersion?: string;
   encodedConstructorArguments?: string;
   guid?: string;
   state?: 'submitted' | 'pending' | 'failed' | 'succeeded';

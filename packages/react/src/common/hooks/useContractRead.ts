@@ -2,9 +2,8 @@ import 'react-query';
 
 import { ZERO_ADDRESS } from '@flair-sdk/common';
 import {
-  ContractFqn,
-  ContractVersion,
-  loadContract,
+  ContractReference,
+  findContractByReference,
 } from '@flair-sdk/registry';
 import { ReadContractConfig as ReadContractConfigWagmi } from '@wagmi/core';
 import { ethers } from 'ethers';
@@ -16,8 +15,7 @@ export type ReadContractConfig<ArgsType = []> = Partial<
   Omit<ReadContractConfigWagmi, 'args'>
 > &
   UseContractReadConfig & {
-    contractVersion?: ContractVersion;
-    contractFqn: ContractFqn;
+    contractReference?: ContractReference;
     contractAddress?: string;
     functionName: string;
     args?: ArgsType;
@@ -27,13 +25,12 @@ export type ReadContractConfig<ArgsType = []> = Partial<
 
 export type PredefinedReadContractConfig<ArgsType = []> = Omit<
   ReadContractConfig<ArgsType>,
-  'contractFqn' | 'functionName'
+  'contractReference' | 'functionName'
 >;
 
 export const useContractRead = <ResultType = any, ArgsType = []>({
-  contractVersion = 'v1',
   enabled = true,
-  contractFqn,
+  contractReference,
   contractAddress,
   functionName,
   args,
@@ -41,10 +38,19 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
   cacheOnBlock,
   ...restOfConfig
 }: ReadContractConfig<ArgsType>) => {
-  const contractDefinition = useMemo(
-    () => loadContract(contractFqn, contractVersion),
-    [contractFqn, contractVersion],
-  );
+  const contractDefinition = useMemo(() => {
+    try {
+      return contractReference
+        ? findContractByReference(contractReference)
+        : undefined;
+    } catch (e) {
+      console.warn(
+        `Failed to find contract definition for ${contractReference}`,
+      );
+      return undefined;
+    }
+  }, [contractReference]);
+
   const readyToRead = Boolean(
     enabled && contractAddress && contractAddress !== ZERO_ADDRESS,
   );
@@ -52,7 +58,9 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
   const result = useContractReadWagmi(
     {
       addressOrName: contractAddress as string,
-      contractInterface: contractDefinition?.artifact.abi || [],
+      contractInterface: contractDefinition?.artifact?.abi || [
+        `function ${functionName}`,
+      ],
     },
     functionName as string,
     {
@@ -68,16 +76,21 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
     chainId: restOfConfig.chainId,
   });
   const contract = useMemo(() => {
-    if (!contractAddress || !provider || !contractDefinition?.artifact.abi) {
+    if (!contractAddress || !provider) {
       return;
     }
 
     return new ethers.Contract(
       contractAddress,
-      contractDefinition.artifact.abi,
+      contractDefinition?.artifact?.abi || ['function ' + functionName],
       provider,
     );
-  }, [contractAddress, contractDefinition?.artifact.abi, provider]);
+  }, [
+    contractAddress,
+    contractDefinition?.artifact?.abi,
+    functionName,
+    provider,
+  ]);
 
   const call = useCallback(
     async (overrides?: { args?: ArgsType }) => {

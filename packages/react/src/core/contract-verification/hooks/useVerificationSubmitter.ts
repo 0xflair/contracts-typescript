@@ -1,8 +1,7 @@
 import { Environment } from '@flair-sdk/common';
 import {
-  ContractFqn,
-  ContractVersion,
-  loadContract,
+  ContractReference,
+  findContractByReference,
 } from '@flair-sdk/registry';
 import * as axios from 'axios';
 import { ethers } from 'ethers';
@@ -15,8 +14,7 @@ import { FLAIR_CONTRACT_VERIFICATION_BACKEND } from '../constants';
 type Props = {
   env?: Environment;
   chainId?: number;
-  contractFqn?: ContractFqn;
-  contractVersion?: ContractVersion;
+  contractReference?: ContractReference;
   contractAddress?: string;
   constructorArguments?: any[];
 };
@@ -24,8 +22,7 @@ type Props = {
 export const useVerificationSubmitter = ({
   env = Environment.PROD,
   chainId,
-  contractFqn,
-  contractVersion = 'v1',
+  contractReference,
   contractAddress,
   constructorArguments,
 }: Props) => {
@@ -33,18 +30,18 @@ export const useVerificationSubmitter = ({
 
   const encodedConstructorArguments = useMemo(() => {
     try {
-      if (!contractFqn || !constructorArguments) {
+      if (!contractReference || !constructorArguments) {
         return '';
       }
-      const definition = loadContract(contractFqn, contractVersion);
-      const iface = new ethers.utils.Interface(definition?.artifact.abi || []);
+      const definition = findContractByReference(contractReference);
+      const iface = new ethers.utils.Interface(definition?.artifact?.abi || []);
 
       return iface.encodeDeploy(constructorArguments);
     } catch (e) {
       console.warn(e);
       return '';
     }
-  }, [contractFqn, contractVersion, constructorArguments]);
+  }, [contractReference, constructorArguments]);
 
   const headers = useMemo(() => {
     return {
@@ -56,15 +53,13 @@ export const useVerificationSubmitter = ({
     return {
       chainId,
       contractAddress,
-      contractFqn,
-      contractVersion,
+      contractReference,
       encodedConstructorArguments,
     };
   }, [
     chainId,
     contractAddress,
-    contractFqn,
-    contractVersion,
+    contractReference,
     encodedConstructorArguments,
   ]);
 

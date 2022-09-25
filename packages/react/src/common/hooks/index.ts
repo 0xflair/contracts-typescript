@@ -3,7 +3,7 @@ export * from './useAddressOfSigner';
 export * from './useChainId';
 export * from './useChainInfo';
 export * from './useContractAbi';
-export * from './useContractDefinition';
+export * from './useContractManifest';
 export * from './useContractRead';
 export * from './useContractWriteAndWait';
 export * from './useFeatureRead';
@@ -14,7 +14,6 @@ export * from './useFunctionFeature';
 export * from './useHasAnyOfFeatures';
 export * from './useNormalizedFunctionCall';
 export * from './useSmartContract';
-export * from './useSupportsInterface';
 export * from './useWaitForTransaction';
 
 // web2

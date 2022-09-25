@@ -1,11 +1,6 @@
 import { Provider } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
-import {
-  ContractFqn,
-  ContractVersion,
-  LATEST_VERSION,
-  loadContract,
-} from '@flair-sdk/registry';
+import { ContractFqn } from '@flair-sdk/registry';
 import {
   BaseContract,
   Contract,
@@ -46,26 +41,11 @@ export class MetaContract<
   constructor(
     metaTransactionsClient: MetaTransactionsClient,
     chainId: number,
-    contractFqn: ContractFqn,
-    contractVersion: ContractVersion = LATEST_VERSION,
-    addressOrName?: string,
+    addressOrName: string,
+    abi: any,
     signerOrProvider?: Signer | Provider,
   ) {
-    const contractDefinition = loadContract(contractFqn, contractVersion);
-    const contractAddressOrName =
-      addressOrName || contractDefinition?.address?.[String(chainId)];
-
-    if (!contractAddressOrName) {
-      throw new Error(
-        `Could not determine contract address from constructor (${addressOrName}) nor from definition (${contractDefinition?.address})`,
-      );
-    }
-
-    super(
-      contractAddressOrName,
-      contractDefinition?.artifact.abi || [],
-      signerOrProvider,
-    );
+    super(addressOrName, abi, signerOrProvider);
 
     this.metaTransaction = {};
     Object.keys(this.interface.functions).forEach((signature) => {
@@ -95,23 +75,22 @@ export class MetaContract<
     env?: Environment;
     chainId: number;
     flairClientId: string;
-    contractFqn: ContractFqn;
-    contractVersion?: ContractVersion;
-    addressOrName?: string;
+    forwarder: string;
+    addressOrName: string;
+    abi: any;
     signerOrProvider?: Signer | Provider;
   }): T {
     const metaTxClient = new MetaTransactionsClient({
       env: config.env || Environment.PROD,
-      chainId: config.chainId,
       flairClientId: config.flairClientId,
+      forwarder: config.forwarder,
     });
 
     return new MetaContract(
       metaTxClient,
       config.chainId,
-      config.contractFqn,
-      config.contractVersion,
       config.addressOrName,
+      config.abi,
       config.signerOrProvider,
     ) as unknown as T;
   }

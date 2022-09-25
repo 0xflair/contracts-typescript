@@ -1,9 +1,4 @@
 import { Environment } from '@flair-sdk/common';
-import {
-  ContractVersion,
-  LATEST_VERSION,
-  loadContract,
-} from '@flair-sdk/registry';
 import axios from 'axios';
 import { Signer } from 'ethers';
 import { Required } from 'utility-types';
@@ -14,23 +9,12 @@ import { generateRandomUint256 } from './random-uint256';
 import { MetaTransactionSignedData } from './types';
 import { MetaTransaction } from './types/meta-transaction';
 
-type Config =
-  | {
-      env?: Environment;
-      chainId: number;
-      contractVersion?: ContractVersion;
-      forwarder?: string;
-      flairClientId: string;
-      defaults?: Partial<MetaTransaction>;
-    }
-  | {
-      env?: Environment;
-      chainId?: number;
-      contractVersion?: ContractVersion;
-      forwarder: string;
-      flairClientId: string;
-      defaults?: Partial<MetaTransaction>;
-    };
+type Config = {
+  env?: Environment;
+  forwarder: string;
+  flairClientId: string;
+  defaults?: Partial<MetaTransaction>;
+};
 
 export class MetaTransactionsClient {
   public forwarder: string;
@@ -38,25 +22,9 @@ export class MetaTransactionsClient {
   constructor(private readonly config: Config) {
     this.forwarder = config.forwarder as string;
 
-    if (!config.forwarder && config.chainId) {
-      try {
-        const forwarderDefinition = loadContract(
-          'common/UnorderedForwarder',
-          LATEST_VERSION,
-        );
-        this.forwarder = forwarderDefinition?.address?.[
-          String(config.chainId)
-        ] as string;
-      } catch (e) {
-        console.warn(
-          `Could not load contract (chain ${config.chainId}) to determine forwarder: ${e}`,
-        );
-      }
-    }
-
     if (!this.forwarder) {
       throw new Error(
-        `Could not determine meta transactions forwarder address, please either specify chainId (given ${config.chainId}) or forwarder address (given ${config.forwarder})`,
+        `Could not determine meta transactions forwarder address, please specify forwarder address (given ${config.forwarder})`,
       );
     }
   }

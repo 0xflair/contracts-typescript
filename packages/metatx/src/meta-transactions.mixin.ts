@@ -1,10 +1,5 @@
 import { Environment } from '@flair-sdk/common';
 import {
-  ContractFqn,
-  ContractVersion,
-  FlairContract,
-} from '@flair-sdk/registry';
-import {
   Contract,
   Contract as EthersContract,
   ContractFunction,
@@ -80,35 +75,25 @@ export const applyMetaTransactions = <T extends EthersContract>(
   return castedContract;
 };
 
-export const createFlairContractWithMetaTransactions = <
+export const augmentContractWithMetaTransactions = <
   T extends EthersContract,
 >(config: {
   env?: Environment;
   chainId: number;
   flairClientId: string;
-  contractFqn: ContractFqn;
-  contractVersion?: ContractVersion;
+  contract: T;
+  forwarder: string;
   addressOrName?: string;
   signer?: Signer;
-  forwarder?: string;
 }): MetaTransactionsAugmentedContract<T> => {
   const metaTxClient = new MetaTransactionsClient({
     env: config.env || Environment.PROD,
-    chainId: config.chainId,
     flairClientId: config.flairClientId,
     forwarder: config.forwarder,
   });
 
-  const contract = new FlairContract(
-    config.chainId,
-    config.contractFqn,
-    config.signer,
-    config.contractVersion,
-    config.addressOrName,
-  );
-
   const augmentedContract = applyMetaTransactions<T>(
-    contract as unknown as T, // TODO fix this to get proper typing!
+    config.contract,
     config.chainId,
     metaTxClient,
   );
