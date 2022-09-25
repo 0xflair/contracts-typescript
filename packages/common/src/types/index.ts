@@ -1,4 +1,2 @@
-export enum Environment {
-  DEV = 'dev',
-  PROD = 'prod',
-}
+export * from './env';
+export * from './facets';

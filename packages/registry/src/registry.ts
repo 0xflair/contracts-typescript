@@ -1,8 +1,9 @@
+import { FacetManifest } from '@flair-sdk/common';
+
 import BuildInfoJson from './build-info.json';
 import FacetsJson from './facets.json';
 import { ContractFqn, ContractVersion } from './generated-versions';
 import ContractRegistryJson from './registry-mapping.json';
-import { FacetManifest } from './types';
 
 export type ContractDefinition = {
   address?: {

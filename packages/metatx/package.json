@@ -40,6 +40,23 @@
     "ethers": "*",
     "randombytes": "*"
   },
+  "peerDependenciesMeta": {
+    "@flair-sdk/common": {
+      "optional": true
+    },
+    "@flair-sdk/registry": {
+      "optional": true
+    },
+    "axios": {
+      "optional": true
+    },
+    "ethers": {
+      "optional": true
+    },
+    "randombytes": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "@flair-sdk/common": "^2.5.4",
     "@flair-sdk/registry": "^2.5.4",
