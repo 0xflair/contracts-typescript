@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.5.4 (2022-09-25)
+
+
+### Bug Fixes
+
+* avoid calling when tierId is null ([27c1e5a](https://github.com/flair-sdk/typescript/commit/27c1e5a5ea8e1d50c3e9a0d146f1d5f287d36c62))
+
+
+
+
+
 ## 2.5.3 (2022-09-24)
 
 
