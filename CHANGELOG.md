@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.6.0 (2022-09-25)
+
+
+### Features
+
+* update facet manifest and set all peers deps as optional ([b5d344b](https://github.com/flair-sdk/typescript/commit/b5d344b4f8b1fc9190ad498a8fb1786b12ca7b49))
+
+
+
+
+
 ## 2.5.4 (2022-09-25)
 
 

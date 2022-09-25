@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/registry",
-  "version": "2.5.4",
+  "version": "2.6.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
     "ethers": "*"
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.5.4",
+    "@flair-sdk/common": "^2.6.0",
     "flair-contracts-v1": "npm:@0xflair/evm-contracts@1.*",
     "flair-contracts-v2": "npm:@flair-sdk/contracts@2.*"
   },
