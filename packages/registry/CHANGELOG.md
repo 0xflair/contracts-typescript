@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.9.2 (2022-09-26)
+
+
+### Bug Fixes
+
+* fetching tiers of a tiered sales ([d501712](https://github.com/flair-sdk/typescript/commit/d50171271d570fdbffa5963d5c3f6d22e357fe2b))
+
+
+
+
+
 ## 2.9.1 (2022-09-26)
 
 
