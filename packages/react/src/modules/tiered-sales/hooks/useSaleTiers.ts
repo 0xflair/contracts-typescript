@@ -1,10 +1,13 @@
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
-import { TieredSales__factory } from '@flair-sdk/contracts';
-import { BigNumberish, BytesLike } from 'ethers';
+import { TieredSales } from '@flair-sdk/contracts';
+import { BigNumberish, BytesLike, ethers } from 'ethers';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useProvider } from 'wagmi';
 
-import { PredefinedReadContractConfig } from '../../../common';
+import {
+  PredefinedReadContractConfig,
+  useContractManifest,
+} from '../../../common';
 import { Tier } from '../types';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
 import { useTieredSalesEligibleAmount } from './useTieredSalesEligibleAmount';
@@ -53,15 +56,22 @@ export const useSaleTiers = ({
     enabled: false,
   });
 
+  const manifest = useContractManifest({
+    contractReference: 'flair-sdk:finance/sales/ITieredSales',
+  });
   const provider = useProvider({
     chainId,
   });
   const contract = useMemo(() => {
-    if (!contractAddress || !provider) {
+    if (!contractAddress || !provider || manifest?.artifact?.abi) {
       return;
     }
-    return TieredSales__factory.connect(contractAddress, provider);
-  }, [contractAddress, provider]);
+    return new ethers.Contract(
+      contractAddress,
+      manifest?.artifact?.abi || [],
+      provider,
+    ) as TieredSales;
+  }, [contractAddress, manifest?.artifact?.abi, provider]);
 
   const fetchTierById = useCallback(
     async (tierId: BigNumberish) => {
