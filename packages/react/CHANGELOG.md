@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.9.3 (2022-09-26)
+
+
+### Bug Fixes
+
+* fetch tiers after contract is constructed ([7d9ceef](https://github.com/flair-sdk/typescript/commit/7d9ceef6c21e41937a4a15af4f5b36700c0f1407))
+
+
+
+
+
 ## 2.9.2 (2022-09-26)
 
 
