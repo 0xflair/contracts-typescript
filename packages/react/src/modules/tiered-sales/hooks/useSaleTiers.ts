@@ -128,7 +128,7 @@ export const useSaleTiers = ({
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [contract, minterAddress],
+    [contract, manifest?.artifact?.abi, minterAddress],
   );
 
   const refetchTiers = useCallback(async () => {
@@ -163,7 +163,7 @@ export const useSaleTiers = ({
 
     setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [minterAddress]);
+  }, [contract, manifest?.artifact?.abi, minterAddress]);
 
   useEffect(() => {
     if (
@@ -176,7 +176,7 @@ export const useSaleTiers = ({
       refetchTiers();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enabled, contract]);
+  }, [enabled, contract, manifest?.artifact?.abi, minterAddress]);
 
   return {
     data: tiers,
