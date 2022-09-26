@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.9.4 (2022-09-26)
+
+
+### Bug Fixes
+
+* fetch tiers after contract abi is loaded ([7a76e91](https://github.com/flair-sdk/typescript/commit/7a76e91f1f7abdbedad9e61c29cbba6ecf58e0b9))
+
+
+
+
+
 ## 2.9.3 (2022-09-26)
 
 
