@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.9.0 (2022-09-26)
+
+
+### Features
+
+* add tiered sales module ([9fb9aa8](https://github.com/flair-sdk/typescript/commit/9fb9aa839161195f21e744e5f8676ed98e106ae5))
+
+
+
+
+
 # 2.8.0 (2022-09-26)
 
 
