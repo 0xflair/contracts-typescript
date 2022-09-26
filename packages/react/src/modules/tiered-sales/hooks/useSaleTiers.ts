@@ -170,12 +170,13 @@ export const useSaleTiers = ({
       enabled &&
       !isLoading &&
       !error &&
+      contract &&
       (!tiers || !Object.keys(tiers).length)
     ) {
       refetchTiers();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enabled, env, chainId, contractAddress]);
+  }, [enabled, contract]);
 
   return {
     data: tiers,
