@@ -63,7 +63,7 @@ export const useSaleTiers = ({
     chainId,
   });
   const contract = useMemo(() => {
-    if (!contractAddress || !provider || manifest?.artifact?.abi) {
+    if (!contractAddress || !provider || !manifest?.artifact?.abi) {
       return;
     }
     return new ethers.Contract(
