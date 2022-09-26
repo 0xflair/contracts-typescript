@@ -1,4 +1,4 @@
-import { BytesLike, version } from 'ethers';
+import { BytesLike } from 'ethers';
 import _ from 'lodash';
 
 import { SemanticVersion } from './common';
@@ -68,7 +68,7 @@ export const findContractByReference = (
   if (scope && path && versionTarget) {
     if (versionTarget.match(/^\d+\.\d+\.\d+$/)) {
       const contract = registry.find(
-        (c) => c.fqn === `${scope}:${path}` && c.version === version,
+        (c) => c.fqn === `${scope}:${path}` && c.version === versionTarget,
       );
 
       if (contract) {
