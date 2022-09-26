@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.9.1 (2022-09-26)
+
+
+### Bug Fixes
+
+* create contract from abi vs typechain factory ([a09a2b5](https://github.com/flair-sdk/typescript/commit/a09a2b5b1cccf390ef2b5fadc38655422270ba46))
+
+
+
+
+
 # 2.9.0 (2022-09-26)
 
 
