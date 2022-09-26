@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.8.0 (2022-09-26)
+
+
+### Features
+
+* add func to find facet by reference ([050aee7](https://github.com/flair-sdk/typescript/commit/050aee7dade2dc8bb3b882aaf2f709ed806117de))
+
+
+
+
+
 ## 2.7.2 (2022-09-25)
 
 **Note:** Version bump only for package @flair-sdk/react
