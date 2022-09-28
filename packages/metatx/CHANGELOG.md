@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.9.8 (2022-09-28)
+
+
+### Bug Fixes
+
+* set loading to true initially when fetching tiers ([bcd5fbb](https://github.com/flair-sdk/typescript/commit/bcd5fbb0201620c095935cdab7afb758a347bbee))
+
+
+
+
+
 ## 2.9.7 (2022-09-28)
 
 **Note:** Version bump only for package @flair-sdk/metatx
