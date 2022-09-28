@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.9.9 (2022-09-28)
+
+
+### Bug Fixes
+
+* remove check for loading in refetch hook ([04865cb](https://github.com/flair-sdk/typescript/commit/04865cbb92cb59baac8aa82939c4060a98458e4d))
+
+
+
+
+
 ## 2.9.8 (2022-09-28)
 
 
