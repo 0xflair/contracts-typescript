@@ -164,7 +164,6 @@ export const useSaleTiers = ({
   useEffect(() => {
     if (
       enabled &&
-      !isLoading &&
       !error &&
       contract &&
       (!tiers || !Object.keys(tiers).length)
