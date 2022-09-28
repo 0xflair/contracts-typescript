@@ -30,8 +30,8 @@ export const useSaleTiers = ({
   minterAddress,
 }: Config) => {
   const [error, setError] = useState<Error | string>();
-  const [isLoading, setIsLoading] = useState(false);
-  const [tiers, setTiers] = useState<Record<number, Tier>>({});
+  const [isLoading, setIsLoading] = useState(enabled);
+  const [tiers, setTiers] = useState<Record<number, Tier>>();
 
   const {
     error: allowlistCheckerError,
@@ -132,10 +132,6 @@ export const useSaleTiers = ({
   );
 
   const refetchTiers = useCallback(async () => {
-    if (isLoading) {
-      return;
-    }
-
     setIsLoading(true);
     setError(undefined);
 

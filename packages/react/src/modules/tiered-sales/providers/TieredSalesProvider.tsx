@@ -174,7 +174,7 @@ export const TieredSalesProvider = ({
   useEffect(() => {
     const tierIds = Object.keys(tiers || {}).map((id) => Number(id));
 
-    if (tiersLoading || mintLoading) {
+    if (!tiers || tiersLoading || mintLoading) {
       return;
     }
 
