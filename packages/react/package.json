@@ -157,7 +157,7 @@
   },
   "dependencies": {
     "@flair-sdk/common": "^2.9.5",
-    "@flair-sdk/contracts": "^2.4.6",
+    "@flair-sdk/contracts": "^2.6.4",
     "@flair-sdk/icons": "^2.9.5",
     "@flair-sdk/ipfs": "^2.9.5",
     "@flair-sdk/metatx": "^2.9.5",
