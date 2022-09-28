@@ -157,7 +157,6 @@
   },
   "dependencies": {
     "@flair-sdk/common": "^2.9.6",
-    "@flair-sdk/contracts": "^2.6.4",
     "@flair-sdk/icons": "^2.9.6",
     "@flair-sdk/ipfs": "^2.9.6",
     "@flair-sdk/metatx": "^2.9.6",
@@ -188,6 +187,7 @@
     "@types/react-blockies": "^1.4.1",
     "@types/react-dom": "^18.0.5",
     "@types/react-modal": "^3.13.1",
+    "@flair-sdk/contracts": "^2.6.4",
     "postcss-add-root-selector": "^1.0.5"
   }
 }
