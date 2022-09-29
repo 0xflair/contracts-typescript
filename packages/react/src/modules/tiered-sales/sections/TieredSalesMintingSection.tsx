@@ -7,6 +7,7 @@ import { ConnectButton, SwitchChainButton } from '../../../core/wallet';
 import {
   TieredSalesAllowlistStatus,
   TieredSalesEligibleAmount,
+  TieredSalesIfWalletCanMint,
   TieredSalesMintButton,
   TieredSalesMintInput,
   TieredSalesMintStatusBar,
@@ -20,7 +21,7 @@ type Props = {};
 
 export const TieredSalesMintingSection = ({}: Props) => {
   const {
-    data: { env, chainId, contractAddress },
+    data: { env, chainId, contractAddress, minterAddress },
   } = useTieredSalesContext();
 
   const { data: account } = useAccount();
@@ -95,15 +96,19 @@ export const TieredSalesMintingSection = ({}: Props) => {
           </ConnectButton>
 
           {/* Maximum eligible amount */}
-          <small className="block font-light mt-2 text-xs">
-            You can mint up to{' '}
-            <TieredSalesEligibleAmount as="div" className="inline" />.{' '}
-            {supportsTieredSales ? (
-              <>
-                You have minted <TieredSalesWalletMints /> NFTs in this tier.
-              </>
-            ) : null}
-          </small>
+          {account || minterAddress ? (
+            <small className="block font-light mt-2 text-xs">
+              <TieredSalesIfWalletCanMint>
+                You can mint up to{' '}
+                <TieredSalesEligibleAmount as="div" className="inline" />.{' '}
+              </TieredSalesIfWalletCanMint>
+              {supportsTieredSales ? (
+                <>
+                  You have minted <TieredSalesWalletMints /> NFTs in this tier.
+                </>
+              ) : null}
+            </small>
+          ) : null}
         </div>
 
         <TieredSalesMintStatusBar className="mt-4 flex flex-col gap-2" />

@@ -31,7 +31,7 @@ export const TieredSalesEligibleAmount = ({
   return (
     <Component {...attributes}>
       {loadingMask &&
-      (isAutoDetectingTier || tiersLoading) &&
+      (isAutoDetectingTier || tiersLoading || eligibleAmount == undefined) &&
       eligibleAmount == undefined ? (
         <>{loadingMask}</>
       ) : (

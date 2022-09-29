@@ -109,9 +109,7 @@ export const TieredSalesProvider = ({
     autoDetectEligibleTier,
   );
 
-  const finalMinterAddress = useMemo(() => {
-    return minterAddress || account?.address || ZERO_ADDRESS;
-  }, [account?.address, minterAddress]);
+  const finalMinterAddress = minterAddress || account?.address;
 
   const {
     data: tiers,

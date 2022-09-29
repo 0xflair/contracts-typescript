@@ -104,13 +104,17 @@ export const useSaleTiers = ({
             })
           : ({} as any);
 
-      const eligibleAmount = isActive
-        ? await getEligibleAmount({
-            tierId,
-            maxAllowance: merkleMetadata?.maxAllowance,
-            merkleProof,
-          })
-        : undefined;
+      const eligibleAmount =
+        isActive &&
+        minterAddress &&
+        (merkleProof !== undefined || !hasAllowlist)
+          ? await getEligibleAmount({
+              tierId,
+              minterAddress: minterAddress,
+              maxAllowance: merkleMetadata?.maxAllowance,
+              merkleProof,
+            })
+          : undefined;
 
       return {
         ...tier,
@@ -127,8 +131,13 @@ export const useSaleTiers = ({
             : undefined,
       };
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [contract, manifest?.artifact?.abi, minterAddress],
+    [
+      contract,
+      checkAllowlist,
+      minterAddress,
+      getEligibleAmount,
+      eligibleAmountError,
+    ],
   );
 
   const refetchTiers = useCallback(async () => {
@@ -158,8 +167,7 @@ export const useSaleTiers = ({
     }
 
     setIsLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [contract, manifest?.artifact?.abi, minterAddress]);
+  }, [fetchTierById]);
 
   useEffect(() => {
     if (
@@ -170,8 +178,15 @@ export const useSaleTiers = ({
     ) {
       refetchTiers();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enabled, contract, manifest?.artifact?.abi, minterAddress]);
+  }, [
+    enabled,
+    contract,
+    manifest?.artifact?.abi,
+    minterAddress,
+    error,
+    tiers,
+    refetchTiers,
+  ]);
 
   return {
     data: tiers,
