@@ -21,22 +21,11 @@ type Props = {};
 
 export const TieredSalesMintingSection = ({}: Props) => {
   const {
-    data: { env, chainId, contractAddress, minterAddress },
+    data: { chainId, minterAddress },
   } = useTieredSalesContext();
 
   const { data: account } = useAccount();
   const [mintCount, setMintCount] = useState<BigNumberish>('1');
-
-  const { data: supportsTieredSales } = useHasAnyOfFeatures({
-    env,
-    chainId,
-    contractAddress,
-    tags: [
-      'erc721_tiering_extension',
-      'mint_by_tier_with_allowance_and_proof',
-      'tiered_sales_facet',
-    ],
-  });
 
   const mintButtonClass =
     'w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
@@ -96,19 +85,17 @@ export const TieredSalesMintingSection = ({}: Props) => {
           </ConnectButton>
 
           {/* Maximum eligible amount */}
-          {account || minterAddress ? (
-            <small className="block font-light mt-2 text-xs">
-              <TieredSalesIfWalletCanMint>
-                You can mint up to{' '}
-                <TieredSalesEligibleAmount as="div" className="inline" />.{' '}
-              </TieredSalesIfWalletCanMint>
-              {supportsTieredSales ? (
-                <>
-                  You have minted <TieredSalesWalletMints /> NFTs in this tier.
-                </>
-              ) : null}
-            </small>
-          ) : null}
+          <small className="block font-light mt-2 text-xs">
+            <TieredSalesIfWalletCanMint>
+              You can mint up to{' '}
+              <TieredSalesEligibleAmount as="div" className="inline" />.{' '}
+            </TieredSalesIfWalletCanMint>
+            {account || minterAddress ? (
+              <>
+                You have minted <TieredSalesWalletMints /> NFTs in this tier.
+              </>
+            ) : null}
+          </small>
         </div>
 
         <TieredSalesMintStatusBar className="mt-4 flex flex-col gap-2" />

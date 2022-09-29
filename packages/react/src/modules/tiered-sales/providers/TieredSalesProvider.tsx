@@ -244,6 +244,10 @@ export const TieredSalesProvider = ({
 
   const value = {
     data: {
+      env,
+      chainId,
+      contractAddress,
+
       // On-chain values
       tiers,
 
