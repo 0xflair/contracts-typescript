@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.10.0 (2022-09-29)
+
+
+### Features
+
+* add mint success handler ([d40ea32](https://github.com/flair-sdk/typescript/commit/d40ea326460e0ae1b06e1332a8a085a65ebd3454))
+
+
+
+
+
 ## 2.9.10 (2022-09-29)
 
 **Note:** Version bump only for package @flair-sdk/registry
