@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.10.2 (2022-09-29)
+
+
+### Bug Fixes
+
+* decouple auto-detection from auto-selection of tiers ([f4abfe1](https://github.com/flair-sdk/typescript/commit/f4abfe1cfe96353c4d3de55b9b050a0543405edc))
+
+
+
+
+
 ## 2.10.1 (2022-09-29)
 
 
