@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.10.1 (2022-09-29)
+
+
+### Bug Fixes
+
+* add missing vars in sales provider ([fe3bb0b](https://github.com/flair-sdk/typescript/commit/fe3bb0b42659a0bf95fb21726b1c37f2164ee05a))
+
+
+
+
+
 # 2.10.0 (2022-09-29)
 
 
