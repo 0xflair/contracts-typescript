@@ -63,7 +63,7 @@ type TieredSalesContextValue = {
   setCurrentTierId: (currentTierId: BigNumberish) => void;
   // setMaxSupply: (maxSupply: BigNumberish) => void;
 
-  mint: (args?: {
+  mint: (args: {
     mintCount: BigNumberish;
     allowlistProof?: BytesLike[];
   }) => void;
@@ -84,6 +84,11 @@ type Props = {
   tierId?: BigNumberish;
   autoDetectEligibleTier?: boolean;
   minterAddress?: BytesLike;
+  onMintSuccess?: (args: {
+    mintCount: BigNumberish;
+    txResponse: TransactionResponse;
+    txReceipt: TransactionReceipt;
+  }) => void;
 
   children: FunctionalChildren | ReactNode | ReactNode[];
 };
@@ -96,6 +101,7 @@ export const TieredSalesProvider = ({
   tierId,
   autoDetectEligibleTier = true,
   minterAddress,
+  onMintSuccess,
 }: Props) => {
   const chainId = Number(rawChainId);
 
@@ -219,11 +225,21 @@ export const TieredSalesProvider = ({
   ]);
 
   const mint = useCallback(
-    async (args?: { mintCount: BigNumberish }) => {
-      await doMint(args);
+    async (args: { mintCount: BigNumberish }) => {
+      const result = await doMint(args);
+
+      if (result) {
+        onMintSuccess &&
+          onMintSuccess({
+            ...args,
+            txReceipt: result.receipt,
+            txResponse: result.response,
+          });
+      }
+
       await refetchTiers();
     },
-    [doMint, refetchTiers],
+    [doMint, onMintSuccess, refetchTiers],
   );
 
   const value = {

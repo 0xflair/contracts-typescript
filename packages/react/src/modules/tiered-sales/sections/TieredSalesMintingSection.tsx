@@ -1,4 +1,4 @@
-import { BigNumberish, BytesLike } from 'ethers';
+import { BigNumberish } from 'ethers';
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
 
