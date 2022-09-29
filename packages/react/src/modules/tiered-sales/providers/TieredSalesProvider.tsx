@@ -82,7 +82,7 @@ type Props = {
   contractAddress: string;
 
   tierId?: BigNumberish;
-  autoDetectEligibleTier?: boolean;
+  autoSelectEligibleTier?: boolean;
   minterAddress?: BytesLike;
   onMintSuccess?: (args: {
     mintCount: BigNumberish;
@@ -99,7 +99,7 @@ export const TieredSalesProvider = ({
   contractAddress,
   children,
   tierId,
-  autoDetectEligibleTier = true,
+  autoSelectEligibleTier = true,
   minterAddress,
   onMintSuccess,
 }: Props) => {
@@ -111,9 +111,7 @@ export const TieredSalesProvider = ({
   );
   const [maxSupply, setMaxSupply] = useState<BigNumberish>(Infinity);
   const [autoDetectedTierId, setAutoDetectedTierId] = useState<BigNumberish>();
-  const [isAutoDetectingTier, setIsAutoDetectingTier] = useState(
-    autoDetectEligibleTier,
-  );
+  const [isAutoDetectingTier, setIsAutoDetectingTier] = useState(true);
 
   const finalMinterAddress = minterAddress || account?.address;
 
@@ -164,28 +162,24 @@ export const TieredSalesProvider = ({
   );
 
   useEffect(() => {
-    if (!autoDetectEligibleTier && tierId !== undefined) {
+    if (autoSelectEligibleTier) {
+      if (autoDetectedTierId !== undefined && currentTierId === undefined) {
+        setCurrentTierId(autoDetectedTierId);
+      }
+    } else if (tierId !== undefined) {
       if (tierId !== currentTierId) {
         setCurrentTierId(tierId);
       }
-    } else if (autoDetectEligibleTier && autoDetectedTierId !== undefined) {
-      if (currentTierId === undefined) {
-        setCurrentTierId(autoDetectedTierId);
-      }
     }
-  }, [autoDetectEligibleTier, autoDetectedTierId, currentTierId, tierId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoSelectEligibleTier, autoDetectedTierId, tierId]);
 
   useEffect(() => {
-    const tierIds = Object.keys(tiers || {}).map((id) => Number(id));
-
-    if (!tiers || tiersLoading || mintLoading) {
+    if (tiers === undefined || tiersLoading || mintLoading) {
       return;
     }
 
-    if (!tierIds.length) {
-      setIsAutoDetectingTier(false);
-      return;
-    }
+    const tierIds = Object.keys(tiers).map((id) => Number(id));
 
     // Find the first tier that is eligible and is active then set it as current tier
     let tierId = tierIds.find((id) => {
@@ -213,16 +207,12 @@ export const TieredSalesProvider = ({
       });
     }
 
-    setAutoDetectedTierId(tierId);
+    if (tierId !== undefined) {
+      setAutoDetectedTierId(tierId);
+    }
+
     setIsAutoDetectingTier(false);
-  }, [
-    autoDetectEligibleTier,
-    isActive,
-    isEligible,
-    mintLoading,
-    tiers,
-    tiersLoading,
-  ]);
+  }, [isActive, isEligible, mintLoading, tiers, tiersLoading]);
 
   const mint = useCallback(
     async (args: { mintCount: BigNumberish }) => {

@@ -8,13 +8,13 @@ type Props = {
 export const TieredSalesMintStatusBar = ({ className }: Props) => {
   const {
     data: { txReceipt, txResponse },
-    isLoading: { isAutoDetectingTier, mintLoading },
+    isLoading: { isAutoDetectingTier, tiersLoading, mintLoading },
     error: { mintError },
   } = useTieredSalesContext();
 
   return (
     <div className={className}>
-      {isAutoDetectingTier ? (
+      {isAutoDetectingTier || tiersLoading ? (
         <div className="flex items-center gap-2">
           <Spinner /> Checking your wallet eligibility...
         </div>
