@@ -1,7 +1,7 @@
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { TieredSales } from '@flair-sdk/contracts';
 import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useProvider } from 'wagmi';
 
@@ -74,11 +74,12 @@ export const useSaleTiers = ({
   }, [contractAddress, manifest?.artifact?.abi, provider]);
 
   const fetchTierById = useCallback(
-    async (tierId: BigNumberish) => {
+    async (tierId: BigNumberish, forAddress?: BytesLike) => {
       if (!contract) {
         return;
       }
 
+      const finalAddress = forAddress || minterAddress;
       const tier = (await contract.tiers(tierId)) as Tier;
 
       const now = new Date();
@@ -96,21 +97,18 @@ export const useSaleTiers = ({
         ? tier.merkleRoot !== ZERO_BYTES32
         : undefined;
 
-      const { isAllowlisted, merkleMetadata, merkleProof } =
-        isActive && hasAllowlist
-          ? await checkAllowlist({
-              tierId,
-              merkleRoot: tier.merkleRoot,
-            })
-          : ({} as any);
+      const { isAllowlisted, merkleMetadata, merkleProof } = hasAllowlist
+        ? await checkAllowlist({
+            tierId,
+            merkleRoot: tier.merkleRoot,
+          })
+        : ({} as any);
 
       const eligibleAmount =
-        isActive &&
-        minterAddress &&
-        (merkleProof !== undefined || !hasAllowlist)
+        finalAddress && (merkleProof !== undefined || !hasAllowlist)
           ? await getEligibleAmount({
               tierId,
-              minterAddress: minterAddress,
+              minterAddress: finalAddress,
               maxAllowance: merkleMetadata?.maxAllowance,
               merkleProof,
             })
@@ -130,6 +128,7 @@ export const useSaleTiers = ({
           eligibleAmount !== undefined
             ? BigNumber.from(eligibleAmount).lt(0)
             : undefined,
+        __forAddress: finalAddress,
       };
     },
     [
@@ -163,14 +162,14 @@ export const useSaleTiers = ({
     return fetchedTiers;
   }, [fetchTierById]);
 
-  const queryFn = async () => {
+  const queryFn = useCallback(async () => {
     if (!requestPromise) {
       requestPromise = refetchTiers();
     }
     const result = await requestPromise;
     requestPromise = null;
     return result;
-  };
+  }, [refetchTiers]);
 
   // useEffect(() => {
   //   if (enabled && !error && contract && tiers === undefined) {

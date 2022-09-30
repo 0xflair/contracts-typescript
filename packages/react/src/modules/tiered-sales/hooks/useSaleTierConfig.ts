@@ -10,17 +10,18 @@ type Config = {
 } & PredefinedReadContractConfig<ArgsType>;
 
 export const useSaleTierConfig = (config: Config) => {
+  const isValid =
+    config.tierId !== undefined &&
+    config.tierId !== null &&
+    config.tierId !== '';
+
   const result = useContractRead<Tier & any[], ArgsType>({
     contractReference: 'flair-sdk:finance/sales/ITieredSales',
     cacheTime: 60,
     staleTime: 5,
     functionName: 'tiers',
-    args: [config.tierId] as ArgsType,
-    enabled:
-      config.enabled &&
-      config.tierId !== undefined &&
-      config.tierId !== null &&
-      config.tierId !== '',
+    args: isValid ? ([config.tierId] as ArgsType) : undefined,
+    enabled: config.enabled && isValid,
     ...config,
   });
 
