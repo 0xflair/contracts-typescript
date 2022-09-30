@@ -33,8 +33,8 @@ export const useTieredSalesEligibleAmount = (config: Config) => {
     contractReference: 'flair-sdk:finance/sales/ITieredSales',
     functionName: 'eligibleForTier',
     cacheOnBlock: false,
-    cacheTime: 0,
-    staleTime: 0,
+    cacheTime: 10,
+    staleTime: 2,
     args: [
       config.tierId || 0,
       config.minterAddress || ZERO_ADDRESS,

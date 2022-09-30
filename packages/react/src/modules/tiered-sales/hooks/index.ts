@@ -1,4 +1,4 @@
-export * from './useSaleTier';
+export * from './useSaleTierConfig';
 export * from './useSaleTiers';
 export * from './useTieredSalesAllowlistChecker';
 export * from './useTieredSalesEligibleAmount';

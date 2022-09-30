@@ -1,7 +1,7 @@
 import { BigNumberish } from 'ethers';
 
 import { PredefinedReadContractConfig } from '../../../common';
-import { useSaleTier } from './useSaleTier';
+import { useSaleTierConfig } from './useSaleTierConfig';
 
 type ArgsType = [tierId: BigNumberish];
 
@@ -16,7 +16,7 @@ export const useTieredSalesMaxAllocation = ({
   tierId,
   ...restOfConfig
 }: Config) => {
-  const result = useSaleTier({
+  const result = useSaleTierConfig({
     chainId,
     contractAddress,
     tierId,

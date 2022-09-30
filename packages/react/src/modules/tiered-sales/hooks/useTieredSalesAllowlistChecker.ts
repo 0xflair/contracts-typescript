@@ -67,8 +67,8 @@ export const useTieredSalesAllowlistChecker = ({
     functionName: 'onTierAllowlist',
     contractAddress,
     cacheOnBlock: false,
-    cacheTime: 0,
-    staleTime: 0,
+    cacheTime: 10,
+    staleTime: 2,
     args:
       tierId !== undefined &&
       minterAddress &&

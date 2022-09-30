@@ -4,7 +4,7 @@ import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
 import { useCallback } from 'react';
 
 import { useContractAbi, useContractWriteAndWait } from '../../../common';
-import { useSaleTier } from './useSaleTier';
+import { useSaleTierConfig } from './useSaleTierConfig';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
 import { useTieredSalesEligibleAmount } from './useTieredSalesEligibleAmount';
 
@@ -43,7 +43,7 @@ export const useTieredSalesMinter = ({
     data: tier,
     error: tierError,
     isLoading: tierLoading,
-  } = useSaleTier({
+  } = useSaleTierConfig({
     chainId,
     contractAddress,
     tierId,

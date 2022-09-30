@@ -8,6 +8,7 @@ export type SmartContract<TInitialConfig = any, TInfo = any> = {
   abi?: string;
   initialConfig?: TInitialConfig;
   features?: Feature[];
+  facets?: Feature[];
   info?: TInfo;
   analysisState?:
     | 'submitted'

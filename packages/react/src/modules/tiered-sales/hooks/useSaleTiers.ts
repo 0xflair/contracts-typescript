@@ -11,6 +11,7 @@ import {
 import { Tier } from '../types';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
 import { useTieredSalesEligibleAmount } from './useTieredSalesEligibleAmount';
+import { useTieredSalesRemainingSupply } from './useTieredSalesRemainingSupply';
 
 type ArgsType = [tierId: BigNumberish];
 
@@ -53,6 +54,16 @@ export const useSaleTiers = ({
     chainId,
     contractAddress,
     minterAddress,
+    enabled: false,
+  });
+
+  const {
+    error: tierSupplyError,
+    isLoading: tierSupplyLoading,
+    call: getTierRemainingSupply,
+  } = useTieredSalesRemainingSupply({
+    chainId,
+    contractAddress,
     enabled: false,
   });
 
@@ -116,6 +127,8 @@ export const useSaleTiers = ({
             })
           : undefined;
 
+      const remainingSupply = await getTierRemainingSupply(tierId);
+
       return {
         ...tier,
         isSavedOnChain: true,
@@ -123,6 +136,7 @@ export const useSaleTiers = ({
         hasAllowlist,
         isAllowlisted,
         eligibleAmount,
+        remainingSupply,
         isEligible:
           eligibleAmount !== undefined
             ? Boolean(
@@ -136,6 +150,7 @@ export const useSaleTiers = ({
       checkAllowlist,
       minterAddress,
       getEligibleAmount,
+      getTierRemainingSupply,
       eligibleAmountError,
     ],
   );
@@ -170,12 +185,7 @@ export const useSaleTiers = ({
   }, [fetchTierById]);
 
   useEffect(() => {
-    if (
-      enabled &&
-      !error &&
-      contract &&
-      (!tiers || !Object.keys(tiers).length)
-    ) {
+    if (enabled && !error && contract && tiers === undefined) {
       refetchTiers();
     }
   }, [
@@ -191,17 +201,12 @@ export const useSaleTiers = ({
   return {
     data: tiers,
     error:
-      // top-level
-      error ||
-      // tiered sales
-      allowlistCheckerError ||
-      eligibleAmountError,
+      error || allowlistCheckerError || eligibleAmountError || tierSupplyError,
     isLoading:
-      // top-level
       isLoading ||
-      // tiered sales
       allowlistCheckerLoading ||
-      eligibleAmountLoading,
+      eligibleAmountLoading ||
+      tierSupplyLoading,
     refetchTiers,
   };
 };

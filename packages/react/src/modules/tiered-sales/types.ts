@@ -12,6 +12,7 @@ export type Tier = {
   maxAllocation: BigNumberish;
 
   // Off-chain helpers
+  remainingSupply?: BigNumberish;
   isSavedOnChain?: boolean;
   isActive?: boolean;
   hasAllowlist?: boolean;

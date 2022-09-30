@@ -9,9 +9,11 @@ type Config = {
   tierId?: BigNumberish;
 } & PredefinedReadContractConfig<ArgsType>;
 
-export const useSaleTier = (config: Config) => {
-  const result = useContractRead<any[], ArgsType>({
+export const useSaleTierConfig = (config: Config) => {
+  const result = useContractRead<Tier & any[], ArgsType>({
     contractReference: 'flair-sdk:finance/sales/ITieredSales',
+    cacheTime: 60,
+    staleTime: 5,
     functionName: 'tiers',
     args: [config.tierId] as ArgsType,
     enabled:
@@ -26,14 +28,14 @@ export const useSaleTier = (config: Config) => {
     ...result,
     data: result?.data
       ? ({
-          start: result.data[0],
-          end: result.data[1],
-          currency: result.data[2],
+          start: result.data[0].toString(),
+          end: result.data[1].toString(),
+          currency: result.data[2].toString(),
           price: result.data[3].toString(),
-          maxPerWallet: result.data[4],
-          merkleRoot: result.data[5],
-          reserved: result.data[6],
-          maxAllocation: result.data[7],
+          maxPerWallet: result.data[4].toString(),
+          merkleRoot: result.data[5].toString(),
+          reserved: result.data[6].toString(),
+          maxAllocation: result.data[7].toString(),
           isSavedOnChain: true,
         } as Tier)
       : undefined,
