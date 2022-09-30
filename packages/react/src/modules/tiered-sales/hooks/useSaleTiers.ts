@@ -2,7 +2,7 @@ import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { TieredSales } from '@flair-sdk/contracts';
 import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
 import { useCallback, useMemo } from 'react';
-import { useQuery } from 'react-query';
+import { QueryFunctionContext, QueryKey, useQuery } from 'react-query';
 import { useProvider } from 'wagmi';
 
 import {
@@ -73,6 +73,15 @@ export const useSaleTiers = ({
     ) as TieredSales;
   }, [contractAddress, manifest?.artifact?.abi, provider]);
 
+  const queryKey = [
+    {
+      type: 'tiers',
+      chainId,
+      contractAddress,
+      minterAddress,
+    },
+  ] as const;
+
   const fetchTierById = useCallback(
     async (tierId: BigNumberish, forAddress?: BytesLike) => {
       if (!contract) {
@@ -140,36 +149,42 @@ export const useSaleTiers = ({
     ],
   );
 
-  const refetchTiers = useCallback(async (): Promise<
-    TiersDictionary | undefined
-  > => {
-    const fetchedTiers: Record<number, Tier> = {};
+  const refetchTiers = useCallback(
+    async ([
+      { chainId, contractAddress, minterAddress },
+    ]: typeof queryKey): Promise<TiersDictionary | undefined> => {
+      const fetchedTiers: Record<number, Tier> = {};
 
-    for (let i = 0, l = 10; i < l; i++) {
-      const tier = await fetchTierById(i);
+      for (let i = 0, l = 10; i < l; i++) {
+        const tier = await fetchTierById(i, minterAddress);
 
-      if (
-        tier &&
-        tier.maxPerWallet &&
-        Number(tier.maxPerWallet.toString()) > 0
-      ) {
-        fetchedTiers[i] = tier;
-      } else {
-        break;
+        if (
+          tier &&
+          tier.maxPerWallet &&
+          Number(tier.maxPerWallet.toString()) > 0
+        ) {
+          fetchedTiers[i] = tier;
+        } else {
+          break;
+        }
       }
-    }
 
-    return fetchedTiers;
-  }, [fetchTierById]);
+      return fetchedTiers;
+    },
+    [fetchTierById],
+  );
 
-  const queryFn = useCallback(async () => {
-    if (!requestPromise) {
-      requestPromise = refetchTiers();
-    }
-    const result = await requestPromise;
-    requestPromise = null;
-    return result;
-  }, [refetchTiers]);
+  const queryFn = useCallback(
+    async (args: QueryFunctionContext) => {
+      if (!requestPromise) {
+        requestPromise = refetchTiers(args.queryKey as typeof queryKey);
+      }
+      const result = await requestPromise;
+      requestPromise = null;
+      return result;
+    },
+    [refetchTiers],
+  );
 
   // useEffect(() => {
   //   if (enabled && !error && contract && tiers === undefined) {
@@ -184,8 +199,6 @@ export const useSaleTiers = ({
   //   tiers,
   //   refetchTiers,
   // ]);
-
-  const queryKey = [{ type: 'tiers', chainId, contractAddress }];
 
   return useQuery<
     TiersDictionary | undefined,
