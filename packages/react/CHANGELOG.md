@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.5 (2022-09-30)
+
+
+### Bug Fixes
+
+* isEligible variable ([e635ce4](https://github.com/flair-sdk/typescript/commit/e635ce41be8602bfe2edd330279e0d0df3ccce21))
+
+
+
+
+
 ## 2.12.4 (2022-09-30)
 
 
