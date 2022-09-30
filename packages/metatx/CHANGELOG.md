@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.12.0 (2022-09-30)
+
+
+### Features
+
+* use react query when fetching tiers ([f591461](https://github.com/flair-sdk/typescript/commit/f59146158327948f34cd3966f2601531adb6d856))
+
+
+
+
+
 # 2.11.0 (2022-09-30)
 
 
