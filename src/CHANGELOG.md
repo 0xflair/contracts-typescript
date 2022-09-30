@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.4 (2022-09-30)
+
+
+### Bug Fixes
+
+* remove multiplexing when using react query ([718cc4d](https://github.com/flair-sdk/typescript/commit/718cc4df917ad69083b25535f65e2060998dea84))
+
+
+
+
+
 ## 2.12.3 (2022-09-30)
 
 
