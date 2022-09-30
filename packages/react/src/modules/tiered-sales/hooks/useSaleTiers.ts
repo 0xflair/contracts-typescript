@@ -1,6 +1,6 @@
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { TieredSales } from '@flair-sdk/contracts';
-import { BigNumberish, BytesLike, ethers } from 'ethers';
+import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useProvider } from 'wagmi';
@@ -35,11 +35,7 @@ export const useSaleTiers = ({
   enabled,
   minterAddress,
 }: Config) => {
-  const {
-    error: allowlistCheckerError,
-    isLoading: allowlistCheckerLoading,
-    call: checkAllowlist,
-  } = useTieredSalesAllowlistChecker({
+  const { call: checkAllowlist } = useTieredSalesAllowlistChecker({
     env,
     chainId,
     contractAddress,
@@ -47,22 +43,14 @@ export const useSaleTiers = ({
     enabled: false,
   });
 
-  const {
-    error: eligibleAmountError,
-    isLoading: eligibleAmountLoading,
-    call: getEligibleAmount,
-  } = useTieredSalesEligibleAmount({
+  const { call: getEligibleAmount } = useTieredSalesEligibleAmount({
     chainId,
     contractAddress,
     minterAddress,
     enabled: false,
   });
 
-  const {
-    error: tierSupplyError,
-    isLoading: tierSupplyLoading,
-    call: getTierRemainingSupply,
-  } = useTieredSalesRemainingSupply({
+  const { call: getTierRemainingSupply } = useTieredSalesRemainingSupply({
     chainId,
     contractAddress,
     enabled: false,
@@ -140,9 +128,7 @@ export const useSaleTiers = ({
         remainingSupply,
         isEligible:
           eligibleAmount !== undefined
-            ? Boolean(
-                !eligibleAmountError && Number(eligibleAmount.toString()) > 0,
-              )
+            ? BigNumber.from(eligibleAmount).lt(0)
             : undefined,
       };
     },
@@ -152,7 +138,6 @@ export const useSaleTiers = ({
       minterAddress,
       getEligibleAmount,
       getTierRemainingSupply,
-      eligibleAmountError,
     ],
   );
 
