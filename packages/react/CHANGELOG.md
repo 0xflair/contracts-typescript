@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.1 (2022-09-30)
+
+
+### Bug Fixes
+
+* remove unnecessary variables from sale tiers hook ([b9ce0ce](https://github.com/flair-sdk/typescript/commit/b9ce0cecafb4f950a55fcdc3148fc29658d6b6c9))
+
+
+
+
+
 # 2.12.0 (2022-09-30)
 
 
