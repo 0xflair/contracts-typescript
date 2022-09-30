@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.6 (2022-09-30)
+
+
+### Bug Fixes
+
+* check if tier id is undefined ([5dc359d](https://github.com/flair-sdk/typescript/commit/5dc359d5b8b07fa9489e5bd6a74ca4efe69e2339))
+
+
+
+
+
 ## 2.12.5 (2022-09-30)
 
 
