@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.11.0 (2022-09-30)
+
+
+### Features
+
+* update detection to consider more rules ([cd90765](https://github.com/flair-sdk/typescript/commit/cd90765c7a91b08e7d352305cae23140deda791e))
+
+
+
+
+
 ## 2.10.2 (2022-09-29)
 
 
