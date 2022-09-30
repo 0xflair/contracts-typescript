@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.2 (2022-09-30)
+
+
+### Bug Fixes
+
+* always calculate allowlist and eligible amount ([8c18dd9](https://github.com/flair-sdk/typescript/commit/8c18dd9756fe6c72f0f951cec8319a78a4044b26))
+
+
+
+
+
 ## 2.12.1 (2022-09-30)
 
 
