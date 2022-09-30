@@ -1,9 +1,9 @@
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
-import { Environment, ZERO_ADDRESS } from '@flair-sdk/common';
+import { Environment } from '@flair-sdk/common';
 import { BigNumber, BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
-import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 
 import { useTieredSalesMinter as useTieredSalesMinter } from '../hooks';
@@ -107,7 +107,7 @@ export const TieredSalesProvider = ({
 
   const { data: account } = useAccount();
   const [currentTierId, setCurrentTierId] = useState<BigNumberish | undefined>(
-    tierId ? Number(tierId.toString()) : undefined,
+    tierId !== undefined ? Number(tierId.toString()) : undefined,
   );
   const [maxSupply, setMaxSupply] = useState<BigNumberish>(Infinity);
   const [autoDetectedTierId, setAutoDetectedTierId] = useState<BigNumberish>();

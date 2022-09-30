@@ -2,7 +2,6 @@ import { BigNumber, BigNumberish } from 'ethers';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { PredefinedReadContractConfig, useContractRead } from '../../../common';
-import { Tier } from '../types';
 import { useSaleTierConfig } from './useSaleTierConfig';
 import { useTieredSalesTotalMinted } from './useTieredSalesTotalMinted';
 
@@ -54,13 +53,13 @@ export const useTieredSalesRemainingSupply = ({
         setError(undefined);
 
         const remainingSupply = await hook.call(
-          tierId ? { args: [tierId] } : undefined,
+          tierId !== undefined ? { args: [tierId] } : undefined,
         );
         const tierInfo = await getTierInfo(
-          tierId ? { args: [tierId] } : undefined,
+          tierId !== undefined ? { args: [tierId] } : undefined,
         );
         const tierMinted = await getTierTotalMinted(
-          tierId ? { args: [tierId] } : undefined,
+          tierId !== undefined ? { args: [tierId] } : undefined,
         );
 
         if (
