@@ -2,6 +2,7 @@ import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { TieredSales } from '@flair-sdk/contracts';
 import { BigNumberish, BytesLike, ethers } from 'ethers';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useProvider } from 'wagmi';
 
 import {
@@ -23,6 +24,10 @@ type Config = {
   minterAddress?: BytesLike;
 } & PredefinedReadContractConfig<ArgsType>;
 
+type TiersDictionary = Record<number, Tier>;
+
+let requestPromise: Promise<TiersDictionary | undefined> | null;
+
 export const useSaleTiers = ({
   env,
   chainId,
@@ -30,10 +35,6 @@ export const useSaleTiers = ({
   enabled,
   minterAddress,
 }: Config) => {
-  const [error, setError] = useState<Error | string>();
-  const [isLoading, setIsLoading] = useState(enabled);
-  const [tiers, setTiers] = useState<Record<number, Tier>>();
-
   const {
     error: allowlistCheckerError,
     isLoading: allowlistCheckerLoading,
@@ -155,58 +156,70 @@ export const useSaleTiers = ({
     ],
   );
 
-  const refetchTiers = useCallback(async () => {
-    setIsLoading(true);
-    setError(undefined);
+  const refetchTiers = useCallback(async (): Promise<
+    TiersDictionary | undefined
+  > => {
+    const fetchedTiers: Record<number, Tier> = {};
 
-    try {
-      const fetchedTiers: Record<number, Tier> = {};
+    for (let i = 0, l = 10; i < l; i++) {
+      const tier = await fetchTierById(i);
 
-      for (let i = 0, l = 10; i < l; i++) {
-        const tier = await fetchTierById(i);
-
-        if (
-          tier &&
-          tier.maxPerWallet &&
-          Number(tier.maxPerWallet.toString()) > 0
-        ) {
-          fetchedTiers[i] = tier;
-        } else {
-          break;
-        }
+      if (
+        tier &&
+        tier.maxPerWallet &&
+        Number(tier.maxPerWallet.toString()) > 0
+      ) {
+        fetchedTiers[i] = tier;
+      } else {
+        break;
       }
-
-      setTiers(fetchedTiers);
-    } catch (error: any) {
-      setError(error);
     }
 
-    setIsLoading(false);
+    return fetchedTiers;
   }, [fetchTierById]);
 
-  useEffect(() => {
-    if (enabled && !error && contract && tiers === undefined) {
-      refetchTiers();
+  const queryFn = async () => {
+    if (!requestPromise) {
+      requestPromise = refetchTiers();
     }
-  }, [
-    enabled,
-    contract,
-    manifest?.artifact?.abi,
-    minterAddress,
-    error,
-    tiers,
-    refetchTiers,
-  ]);
-
-  return {
-    data: tiers,
-    error:
-      error || allowlistCheckerError || eligibleAmountError || tierSupplyError,
-    isLoading:
-      isLoading ||
-      allowlistCheckerLoading ||
-      eligibleAmountLoading ||
-      tierSupplyLoading,
-    refetchTiers,
+    const result = await requestPromise;
+    requestPromise = null;
+    return result;
   };
+
+  // useEffect(() => {
+  //   if (enabled && !error && contract && tiers === undefined) {
+  //     refetchTiers();
+  //   }
+  // }, [
+  //   enabled,
+  //   contract,
+  //   manifest?.artifact?.abi,
+  //   minterAddress,
+  //   error,
+  //   tiers,
+  //   refetchTiers,
+  // ]);
+
+  const queryKey = [{ type: 'tiers', chainId, contractAddress }];
+
+  return useQuery<
+    TiersDictionary | undefined,
+    string | Error | null,
+    TiersDictionary | undefined
+  >(queryKey, queryFn, {
+    enabled: Boolean(enabled && contract),
+  });
+
+  // return {
+  //   data: tiers,
+  //   error:
+  //     error || allowlistCheckerError || eligibleAmountError || tierSupplyError,
+  //   isLoading:
+  //     isLoading ||
+  //     allowlistCheckerLoading ||
+  //     eligibleAmountLoading ||
+  //     tierSupplyLoading,
+  //   refetchTiers,
+  // };
 };

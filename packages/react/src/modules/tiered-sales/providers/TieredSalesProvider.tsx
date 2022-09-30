@@ -119,7 +119,7 @@ export const TieredSalesProvider = ({
     data: tiers,
     error: tiersError,
     isLoading: tiersLoading,
-    refetchTiers,
+    refetch: refetchTiers,
   } = useSaleTiers({
     env,
     chainId,
