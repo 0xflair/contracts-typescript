@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.3 (2022-09-30)
+
+
+### Bug Fixes
+
+* pass minter address as part of query context ([c803109](https://github.com/flair-sdk/typescript/commit/c80310975ac1e7f179856324ae0cc88e39694924))
+
+
+
+
+
 ## 2.12.2 (2022-09-30)
 
 
