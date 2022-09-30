@@ -150,13 +150,13 @@ export const useSaleTiers = ({
   );
 
   const refetchTiers = useCallback(
-    async ([
-      { chainId, contractAddress, minterAddress },
-    ]: typeof queryKey): Promise<TiersDictionary | undefined> => {
+    async (
+      args: QueryFunctionContext<any>,
+    ): Promise<TiersDictionary | undefined> => {
       const fetchedTiers: Record<number, Tier> = {};
 
       for (let i = 0, l = 10; i < l; i++) {
-        const tier = await fetchTierById(i, minterAddress);
+        const tier = await fetchTierById(i, args.queryKey[0].minterAddress);
 
         if (
           tier &&
@@ -172,18 +172,6 @@ export const useSaleTiers = ({
       return fetchedTiers;
     },
     [fetchTierById],
-  );
-
-  const queryFn = useCallback(
-    async (args: QueryFunctionContext) => {
-      if (!requestPromise) {
-        requestPromise = refetchTiers(args.queryKey as typeof queryKey);
-      }
-      const result = await requestPromise;
-      requestPromise = null;
-      return result;
-    },
-    [refetchTiers],
   );
 
   // useEffect(() => {
@@ -204,7 +192,7 @@ export const useSaleTiers = ({
     TiersDictionary | undefined,
     string | Error | null,
     TiersDictionary | undefined
-  >(queryKey, queryFn, {
+  >(queryKey, refetchTiers, {
     enabled: Boolean(enabled && contract),
   });
 
