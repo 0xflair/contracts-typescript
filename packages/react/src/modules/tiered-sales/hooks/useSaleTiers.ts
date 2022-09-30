@@ -135,7 +135,7 @@ export const useSaleTiers = ({
         remainingSupply,
         isEligible:
           eligibleAmount !== undefined
-            ? BigNumber.from(eligibleAmount).lt(0)
+            ? BigNumber.from(eligibleAmount).gt(0)
             : undefined,
         __forAddress: finalAddress,
       };
