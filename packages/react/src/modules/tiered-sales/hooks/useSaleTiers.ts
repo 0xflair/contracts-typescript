@@ -9,7 +9,8 @@ import {
   PredefinedReadContractConfig,
   useContractManifest,
 } from '../../../common';
-import { Tier } from '../types';
+import { Tier, TiersDictionary } from '../types';
+import { normalizeTiers } from '../util';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
 import { useTieredSalesEligibleAmount } from './useTieredSalesEligibleAmount';
 import { useTieredSalesRemainingSupply } from './useTieredSalesRemainingSupply';
@@ -23,8 +24,6 @@ type Config = {
   enabled?: boolean;
   minterAddress?: BytesLike;
 } & PredefinedReadContractConfig<ArgsType>;
-
-type TiersDictionary = Record<number, Tier>;
 
 export const useSaleTiers = ({
   env,
@@ -192,10 +191,13 @@ export const useSaleTiers = ({
     TiersDictionary | undefined
   >(queryKey, refetchTiers, {
     enabled: Boolean(enabled && contract),
+    cacheTime: 20,
+    staleTime: 2,
   });
 
   return {
     ...result,
+    data: normalizeTiers(result.data),
     isLoading: result.isLoading && result?.fetchStatus !== 'idle',
   };
 };

@@ -1,9 +1,6 @@
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import {
-  Persister,
-  persistQueryClient,
-} from '@tanstack/react-query-persist-client';
+import { persistQueryClient } from '@tanstack/react-query-persist-client';
 
 const localStoragePersister =
   typeof window !== 'undefined'
