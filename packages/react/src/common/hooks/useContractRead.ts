@@ -1,4 +1,4 @@
-import 'react-query';
+import '@tanstack/react-query';
 
 import { ZERO_ADDRESS } from '@flair-sdk/common';
 import {

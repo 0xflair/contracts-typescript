@@ -1,6 +1,6 @@
 import { Environment } from '@flair-sdk/common';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { useQuery, useQueryClient } from 'react-query';
 import { useInterval } from 'react-use';
 
 import { FLAIR_SMART_CONTRACTS_BACKEND } from '../constants/backend';
@@ -66,5 +66,8 @@ export function useSmartContract<TInitialConfig = any, TInfo = any>({
     }
   }, 5000);
 
-  return result;
+  return {
+    ...result,
+    isLoading: result.isLoading || result.fetchStatus !== 'idle',
+  };
 }

@@ -1,4 +1,4 @@
-import 'react-query';
+import '@tanstack/react-query';
 import 'ethers';
 
 import axios from 'axios';

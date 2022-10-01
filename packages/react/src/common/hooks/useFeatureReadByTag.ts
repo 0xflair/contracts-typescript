@@ -1,4 +1,4 @@
-import 'react-query';
+import '@tanstack/react-query';
 
 import { Environment } from '@flair-sdk/common';
 import { ReadContractConfig } from '@wagmi/core';

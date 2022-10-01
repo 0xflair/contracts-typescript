@@ -1,10 +1,17 @@
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
-import { createWebStoragePersister } from 'react-query/createWebStoragePersister';
-import { persistQueryClient } from 'react-query/persistQueryClient';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  Persister,
+  persistQueryClient,
+} from '@tanstack/react-query-persist-client';
 
-const localStoragePersister = createWebStoragePersister({
-  storage: window?.localStorage,
-});
+const localStoragePersister =
+  typeof window !== 'undefined'
+    ? createSyncStoragePersister({
+        key: 'flair.cache',
+        storage: window.localStorage,
+      })
+    : undefined;
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,10 +27,12 @@ const queryClient = new QueryClient({
   },
 });
 
-persistQueryClient({
-  queryClient,
-  persister: localStoragePersister,
-});
+if (localStoragePersister) {
+  persistQueryClient({
+    queryClient,
+    persister: localStoragePersister,
+  });
+}
 
 type Props = {
   children?: React.ReactNode;

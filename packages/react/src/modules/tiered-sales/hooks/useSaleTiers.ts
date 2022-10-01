@@ -1,8 +1,8 @@
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { TieredSales } from '@flair-sdk/contracts';
+import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
 import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
 import { useCallback, useMemo } from 'react';
-import { QueryFunctionContext, QueryKey, useQuery } from 'react-query';
 import { useProvider } from 'wagmi';
 
 import {
@@ -25,8 +25,6 @@ type Config = {
 } & PredefinedReadContractConfig<ArgsType>;
 
 type TiersDictionary = Record<number, Tier>;
-
-let requestPromise: Promise<TiersDictionary | undefined> | null;
 
 export const useSaleTiers = ({
   env,
@@ -188,7 +186,7 @@ export const useSaleTiers = ({
   //   refetchTiers,
   // ]);
 
-  return useQuery<
+  const result = useQuery<
     TiersDictionary | undefined,
     string | Error | null,
     TiersDictionary | undefined
@@ -196,6 +194,10 @@ export const useSaleTiers = ({
     enabled: Boolean(enabled && contract),
   });
 
+  return {
+    ...result,
+    isLoading: result.isLoading && result?.fetchStatus !== 'idle',
+  };
   // return {
   //   data: tiers,
   //   error:
