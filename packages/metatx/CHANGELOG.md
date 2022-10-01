@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.9 (2022-10-01)
+
+
+### Bug Fixes
+
+* normalize tiers dictrionary and set sane cache defaults ([3bec871](https://github.com/flair-sdk/typescript/commit/3bec871615934aa945f5f3eb5c8ac567d14a3a50))
+
+
+
+
+
 ## 2.12.8 (2022-10-01)
 
 **Note:** Version bump only for package @flair-sdk/metatx
