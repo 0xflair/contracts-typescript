@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.7 (2022-10-01)
+
+
+### Bug Fixes
+
+* backward compatible react-query behavior ([b7cdb43](https://github.com/flair-sdk/typescript/commit/b7cdb433c71f444739d199a09bd42c9b0942a71e))
+
+
+
+
+
 ## 2.12.6 (2022-09-30)
 
 
