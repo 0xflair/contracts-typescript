@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.11 (2022-10-01)
+
+**Note:** Version bump only for package @flair-sdk/registry
+
+
+
+
+
 ## 2.12.10 (2022-10-01)
 
 
