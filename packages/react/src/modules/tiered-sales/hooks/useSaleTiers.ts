@@ -198,15 +198,4 @@ export const useSaleTiers = ({
     ...result,
     isLoading: result.isLoading && result?.fetchStatus !== 'idle',
   };
-  // return {
-  //   data: tiers,
-  //   error:
-  //     error || allowlistCheckerError || eligibleAmountError || tierSupplyError,
-  //   isLoading:
-  //     isLoading ||
-  //     allowlistCheckerLoading ||
-  //     eligibleAmountLoading ||
-  //     tierSupplyLoading,
-  //   refetchTiers,
-  // };
 };
