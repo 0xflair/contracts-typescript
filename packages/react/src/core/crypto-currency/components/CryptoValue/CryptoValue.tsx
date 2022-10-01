@@ -1,6 +1,6 @@
 import * as ethers from 'ethers';
 import { BigNumberish } from 'ethers';
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 import { useCryptoCurrency } from '../../hooks';
 import { CryptoSymbol, CryptoUnits } from '../../types';
@@ -29,34 +29,64 @@ export const CryptoValue = (props: Props) => {
 
   const { data, error, loading } = useCryptoCurrency({ symbol });
 
-  const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
-  const etherValue = ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
+  const etherValue = useMemo(() => {
+    try {
+      const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
+      return ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
+    } catch (e) {
+      debugger;
+      console.error(`Error parsing value: ${value}`, e);
+    }
+  }, [unit, value]);
 
-  const fractions = Math.max(
-    fractionDigits !== undefined
-      ? fractionDigits
-      : symbol?.toString().toLowerCase().endsWith('eth')
-      ? 4
-      : 2,
-    (etherValue?.match(/^(0|\.)+/)?.[0]?.length || 3) - 1,
-  );
+  const fractions = useMemo(() => {
+    try {
+      return Math.max(
+        fractionDigits !== undefined
+          ? fractionDigits
+          : symbol?.toString().toLowerCase().endsWith('eth')
+          ? 4
+          : 2,
+        (etherValue?.match(/^(0|\.)+/)?.[0]?.length || 3) - 1,
+      );
+    } catch (e) {
+      debugger;
+      console.error(
+        `Error guessing fractions: `,
+        fractionDigits,
+        etherValue,
+        e,
+      );
+    }
+  }, [etherValue, fractionDigits, symbol]);
 
   if (error) {
     console.warn(`Could not fetch price for ${symbol}: `, error);
   }
 
-  const valueToRender = parseFloat(etherValue).toFixed(fractions).toString();
+  const valueToRenderFormatted = useMemo(() => {
+    try {
+      if (!etherValue) return;
 
-  let [leading, trailing] = valueToRender.split('.');
-  trailing = trailing?.replace(/0+$/, '');
+      const valueToRender = parseFloat(etherValue)
+        .toFixed(fractions)
+        .toString();
 
-  const valueToRenderFormatted = `${leading}${trailing ? `.${trailing}` : ''}`;
+      let [leading, trailing] = valueToRender.split('.');
+      trailing = trailing?.replace(/0+$/, '');
+
+      return `${leading}${trailing ? `.${trailing}` : ''}`;
+    } catch (e) {
+      debugger;
+      console.error(`Error formatting value: `, etherValue, fractions, e);
+    }
+  }, [etherValue, fractions]);
 
   return loading ? (
     <>{loadingContent}</>
   ) : (
     <>
-      {valueToRenderFormatted || '0'}{' '}
+      {valueToRenderFormatted || '...'}{' '}
       {showSymbol ? data.info?.icon || symbol : null}
       {showPrice && data.price && Number(data.price) > 0 ? (
         <>

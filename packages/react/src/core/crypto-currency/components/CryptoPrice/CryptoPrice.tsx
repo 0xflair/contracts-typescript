@@ -1,7 +1,8 @@
 import * as ethers from 'ethers';
 import { BigNumberish } from 'ethers';
+import { useMemo } from 'react';
 
-import { useCryptoCurrency, useCryptoPrice } from '../../hooks';
+import { useCryptoCurrency } from '../../hooks';
 import { CryptoSymbol, CryptoUnits } from '../../types';
 
 type Props = {
@@ -19,14 +20,26 @@ export const CryptoPrice = (props: Props) => {
     symbol = 'ETH',
   } = props;
 
-  const { data, error, loading } = useCryptoCurrency({
+  const { data } = useCryptoCurrency({
     symbol,
   });
 
-  const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
-  const etherValue = ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
+  const etherValue = useMemo(() => {
+    try {
+      const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
+      return ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
+    } catch (e) {
+      console.error(
+        `Error parsing value: `,
+        { value, fractionDigits, unit, symbol },
+        e,
+      );
+    }
+  }, [fractionDigits, symbol, unit, value]);
 
-  return (
+  return etherValue !== undefined &&
+    data.price !== undefined &&
+    fractionDigits !== undefined ? (
     <>{(Number(etherValue) * Number(data.price)).toFixed(fractionDigits)}</>
-  );
+  ) : null;
 };
