@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.15.0 (2022-10-02)
+
+
+### Features
+
+* separate injected from metamask wallet ([be4b07a](https://github.com/flair-sdk/typescript/commit/be4b07ae0c15f5a9c865d35efb639d4587941336))
+
+
+
+
+
 # 2.14.0 (2022-10-02)
 
 
