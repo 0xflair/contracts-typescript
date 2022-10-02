@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.13.0 (2022-10-02)
+
+
+### Features
+
+* pass prepared data via hook ([80d97fe](https://github.com/flair-sdk/typescript/commit/80d97fec4adbff6429004e2beb5633791224522e))
+
+
+
+
+
 ## 2.12.13 (2022-10-02)
 
 
