@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.14.0 (2022-10-02)
+
+
+### Features
+
+* add multicall hooks and update sale tiers ([b37ed6e](https://github.com/flair-sdk/typescript/commit/b37ed6e7a651c5efa69d1649a66582fc5683c265))
+
+
+
+
+
 # 2.13.0 (2022-10-02)
 
 
