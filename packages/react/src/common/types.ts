@@ -1,6 +1,7 @@
 import { ContractInterface } from 'ethers';
 
 export type SmartContract<TInitialConfig = any, TInfo = any> = {
+  _id: string;
   chainId: number;
   contractAddress: string;
   type?: ContractType;

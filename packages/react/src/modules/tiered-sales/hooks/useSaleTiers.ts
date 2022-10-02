@@ -161,8 +161,6 @@ export const useSaleTiers = ({
           Number(tier.maxPerWallet.toString()) > 0
         ) {
           fetchedTiers[i] = tier;
-        } else {
-          break;
         }
       }
 
