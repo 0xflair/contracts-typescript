@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.15.1 (2022-10-02)
+
+
+### Bug Fixes
+
+* remove active chain dependency ([1950e22](https://github.com/flair-sdk/typescript/commit/1950e2266ca590f2ff4084d851a2ded62e7d0eb3))
+
+
+
+
+
 # 2.15.0 (2022-10-02)
 
 
