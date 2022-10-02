@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.13 (2022-10-02)
+
+
+### Bug Fixes
+
+* remove storybook for now ([d383a7f](https://github.com/flair-sdk/typescript/commit/d383a7f2488ca9e8d08af92f373305328427e9ae))
+
+
+
+
+
 ## 2.12.12 (2022-10-02)
 
 
