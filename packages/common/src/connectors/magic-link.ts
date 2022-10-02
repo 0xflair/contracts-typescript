@@ -83,6 +83,7 @@ export class MagicLinkConnector extends MagicConnector {
     const chains = [...this.chains, ...FLAIR_CHAINS];
     const selectedChain = chains.find((x) => x.id === chainId) ?? {
       id: chainId,
+      network: chainId.toString(),
       name: `Chain ${chainId}`,
       rpcUrls: { default: '' },
     };

@@ -4,6 +4,7 @@ import { SafeConnector } from '@flair-sdk/common';
 import { useCallback, useEffect, useState } from 'react';
 import { useInterval } from 'react-use';
 import {
+  useAccount,
   useConnect,
   useWaitForTransaction as useWaitForTransactionWagmi,
 } from 'wagmi';
@@ -18,7 +19,8 @@ export const useWaitForTransaction = (
     ...config
   }: any /*UseWaitForTransactionArgs & UseWaitForTransactionConfig*/,
 ) => {
-  const { connectors, activeConnector } = useConnect();
+  const { connector } = useAccount();
+  const { connectors } = useConnect();
   const [actualHash, setActualHash] = useState<string>();
   const [isLoading, setIsLoading] = useState(Boolean(config?.hash));
 
@@ -52,7 +54,7 @@ export const useWaitForTransaction = (
     setIsLoading(true);
 
     try {
-      if (activeConnector?.id == gnosisSafeConnector?.id) {
+      if (connector?.id == gnosisSafeConnector?.id) {
         if (gnosisSafeConnector?.ready) {
           const actualTx = await gnosisSafeConnector?.getTransactionBySafeHash(
             config?.hash,
@@ -72,7 +74,7 @@ export const useWaitForTransaction = (
       console.error('Could not fetch safe hash: ', error);
     }
   }, [
-    activeConnector?.id,
+    connector?.id,
     config?.hash,
     gnosisSafeConnector,
     resultInput.data?.transactionHash,

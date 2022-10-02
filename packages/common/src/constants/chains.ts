@@ -2,10 +2,11 @@ import { allChains as WagmiChains, Chain } from 'wagmi';
 
 // TODO: Move these to wagmi repo itself
 // https://github.com/wagmi-dev/wagmi/blob/0.3.x/packages/core/src/constants/chains.ts#L234
-const newChains = [
+const newChains: Chain[] = [
   {
     id: 56,
     name: 'Binance Mainnet',
+    network: 'bsc',
     nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
     rpcUrls: {
       default: 'https://bsc-dataseed1.binance.org',
@@ -24,6 +25,7 @@ const newChains = [
   {
     id: 97,
     name: 'Binance Testnet',
+    network: 'bscTestnet',
     nativeCurrency: { name: 'tBNB', symbol: 'tBNB', decimals: 18 },
     rpcUrls: {
       default: 'https://data-seed-prebsc-1-s3.binance.org:8545',
@@ -43,6 +45,7 @@ const newChains = [
   {
     id: 66,
     name: 'OKC Mainnet',
+    network: 'okcMainnet',
     nativeCurrency: { name: 'OKT', symbol: 'OKT', decimals: 18 },
     rpcUrls: {
       default: 'https://exchainrpc.okex.org',
@@ -61,6 +64,7 @@ const newChains = [
   {
     id: 65,
     name: 'OKC Testnet',
+    network: 'okcTestnet',
     nativeCurrency: { name: 'OKT', symbol: 'OKT', decimals: 18 },
     rpcUrls: {
       default: 'https://exchaintestrpc.okex.org',
@@ -80,6 +84,7 @@ const newChains = [
   {
     id: 43_114,
     name: 'Avalanche',
+    network: 'avalanche',
     nativeCurrency: {
       name: 'AVAX',
       symbol: 'AVAX',
@@ -102,6 +107,7 @@ const newChains = [
   {
     id: 43_113,
     name: 'Avalanche FUJI',
+    network: 'avalancheFuji',
     nativeCurrency: {
       name: 'AVAX',
       symbol: 'AVAX',
@@ -125,6 +131,7 @@ const newChains = [
   {
     id: 250,
     name: 'Fantom',
+    network: 'fantomOpera',
     nativeCurrency: {
       name: 'FTM',
       symbol: 'FTM',
@@ -147,6 +154,7 @@ const newChains = [
   {
     id: 4002,
     name: 'Fantom Testnet',
+    network: 'fantomTestnet',
     nativeCurrency: {
       name: 'FTM',
       symbol: 'FTM',
@@ -170,6 +178,7 @@ const newChains = [
   {
     id: 1313161554,
     name: 'Near (Aurora)',
+    network: 'aurora',
     nativeCurrency: {
       name: 'ETH',
       symbol: 'ETH',
@@ -192,6 +201,7 @@ const newChains = [
   {
     id: 1313161555,
     name: 'Near (Aurora) Testnet',
+    network: 'auroraTestnet',
     nativeCurrency: {
       name: 'ETH',
       symbol: 'ETH',
@@ -215,6 +225,7 @@ const newChains = [
   {
     id: 245022926,
     name: 'Solana (Neon Devnet)',
+    network: 'neonDevnet',
     nativeCurrency: {
       name: 'NEON',
       symbol: 'NEON',
@@ -238,6 +249,7 @@ const newChains = [
   {
     id: 9000,
     name: 'Evmos Testnet',
+    network: 'evmosTestnet',
     nativeCurrency: {
       name: 'tEVMOS',
       symbol: 'tEVMOS',
@@ -261,6 +273,7 @@ const newChains = [
   {
     id: 9001,
     name: 'Evmos Mainnet',
+    network: 'evmosMainnet',
     nativeCurrency: {
       name: 'EVMOS',
       symbol: 'EVMOS',
@@ -283,6 +296,7 @@ const newChains = [
   {
     id: 1284,
     name: 'Moonbeam',
+    network: 'moonbeam',
     nativeCurrency: {
       name: 'GLMR',
       symbol: 'GLMR',
@@ -305,6 +319,7 @@ const newChains = [
   {
     id: 1285,
     name: 'Moonriver',
+    network: 'moonriver',
     nativeCurrency: {
       name: 'MOVR',
       symbol: 'MOVR',
@@ -327,6 +342,7 @@ const newChains = [
   {
     id: 280,
     name: 'zkSync 2.0 Testnet',
+    network: 'zkSyncTestnet',
     nativeCurrency: {
       name: 'ETH',
       symbol: 'ETH',
@@ -354,12 +370,3 @@ export const FLAIR_CHAINS: Chain[] = [...WagmiChains, ...newChains];
 export const FLAIR_DEFAULT_CHAIN = FLAIR_CHAINS.find(
   (c) => c.id === 4 /* rinkeby */,
 ) as Chain;
-
-export const FLAIR_CHAIN_MACHINE_NAMES = {
-  1: 'mainnet',
-  3: 'ropsten',
-  4: 'rinkeby',
-  5: 'goerli',
-  137: 'matic',
-  80001: 'mumbai',
-};

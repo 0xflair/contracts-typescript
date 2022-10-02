@@ -41,19 +41,19 @@ export const WalletProfile = ({
   blockieSize = 8,
   blockieScale = 3,
 }: WalletProfileProps) => {
-  const { activeChain } = useNetwork();
-  const { data: account } = useAccount();
+  const { chain } = useNetwork();
+  const { address } = useAccount();
   const { data: balance } = useBalance({
-    addressOrName: account?.address,
+    addressOrName: address,
     formatUnits: 'ether',
     watch: false,
   });
   const { data: avatar } = useEnsAvatar({
-    addressOrName: account?.address,
+    addressOrName: address,
     chainId: 1,
   });
   const { data: ens } = useEnsName({
-    address: account?.address,
+    address: address,
     chainId: 1,
   });
 
@@ -74,7 +74,7 @@ export const WalletProfile = ({
           />
         ) : (
           <Blockies
-            seed={account?.address?.toLowerCase() || ''}
+            seed={address?.toLowerCase() || ''}
             size={blockieSize}
             scale={blockieScale}
             className={'wallet-avatar wallet-avatar--blockies rounded-full'}
@@ -83,8 +83,7 @@ export const WalletProfile = ({
       ) : null}
       {showLabel ? (
         <span className={labelClassName || 'wallet-label'}>
-          {ens?.toString() ||
-            account?.address?.slice(0, 4) + '...' + account?.address?.slice(-4)}
+          {ens?.toString() || address?.slice(0, 4) + '...' + address?.slice(-4)}
         </span>
       ) : null}
       {showBalance && balance?.value ? (
@@ -94,7 +93,7 @@ export const WalletProfile = ({
           }
         >
           {Number(balance.formatted).toFixed(balancePrecisionPoints)}{' '}
-          {activeChain?.nativeCurrency?.symbol || balance.symbol}
+          {chain?.nativeCurrency?.symbol || balance.symbol}
         </span>
       ) : null}
     </WalletComponentWrapper>

@@ -135,7 +135,7 @@ export const useTieredSalesMinter = ({
   const mint = useCallback(
     (args?: { mintCount: BigNumberish }) => {
       const count = args?.mintCount || mintCount;
-      return mintAndWait(
+      return mintAndWait?.(
         [
           tierId,
           count,
@@ -192,6 +192,6 @@ export const useTieredSalesMinter = ({
       eligibleAmountLoading,
       mintLoading,
     },
-    mint,
+    mint: mintAndWait ? mint : undefined,
   } as const;
 };

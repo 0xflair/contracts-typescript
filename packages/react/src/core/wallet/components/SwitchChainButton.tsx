@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNetwork } from 'wagmi';
+import { useNetwork, useSwitchNetwork } from 'wagmi';
 
 import { BareComponentProps, useChainInfo } from '../../../common';
 
@@ -16,15 +16,16 @@ export const SwitchChainButton = ({
   requiredChainId,
   ...attributes
 }: Props) => {
-  const { activeChain, switchNetwork } = useNetwork();
+  const { chain } = useNetwork();
+  const { switchNetwork } = useSwitchNetwork();
   const requiredChain = useChainInfo(Number(requiredChainId));
 
   const Component = as || 'button';
 
   if (
-    !activeChain?.id ||
+    !chain?.id ||
     !requiredChainId ||
-    activeChain.id.toString() !== requiredChainId.toString()
+    chain.id.toString() !== requiredChainId.toString()
   ) {
     return (
       <Component

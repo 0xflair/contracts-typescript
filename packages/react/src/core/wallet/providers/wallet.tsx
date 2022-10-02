@@ -1,10 +1,10 @@
 import {
   FLAIR_CHAINS,
-  FLAIR_DEFAULT_CHAIN,
   MagicLinkConnector,
   SafeConnector,
 } from '@flair-sdk/common';
-import { providers } from 'ethers';
+import { alchemyProvider } from '@wagmi/core/providers/alchemy';
+import { infuraProvider } from '@wagmi/core/providers/infura';
 import {
   PropsWithChildren,
   ReactNode,
@@ -12,25 +12,36 @@ import {
   useLayoutEffect,
   useMemo,
 } from 'react';
-import { createClient, Provider } from 'wagmi';
+import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { publicProvider } from 'wagmi/providers/public';
 
 import stylesheet from '../../../index.css';
-import { FLAIR_INFURA_PROJECT_ID } from '../constants';
+import { FLAIR_ALCHEMY_API_KEY, FLAIR_INFURA_PROJECT_ID } from '../constants';
 import { useAutoConnect } from '../hooks/useAutoConnect';
 
 export type WalletProviderProps = {
   children?: ReactNode;
   appName?: string;
-  infuraId?: string;
   custodialWallet?: boolean;
   injectStyles?: boolean;
   wagmiOverrides?: Record<string, any>;
 };
 
 const FLAIR_MAGIC_API_KEY = 'pk_live_8B82089A89462668';
+
+const { chains, provider, webSocketProvider } = configureChains(FLAIR_CHAINS, [
+  publicProvider(),
+  alchemyProvider({
+    apiKey: FLAIR_ALCHEMY_API_KEY,
+  }),
+  infuraProvider({
+    apiKey: FLAIR_INFURA_PROJECT_ID,
+  }),
+]);
 
 const AutoConnectWrapper = ({ children }: PropsWithChildren<any>) => {
   useAutoConnect();
@@ -41,107 +52,54 @@ const AutoConnectWrapper = ({ children }: PropsWithChildren<any>) => {
 export const WalletProvider = ({
   children,
   appName = 'Flair',
-  infuraId = FLAIR_INFURA_PROJECT_ID,
   custodialWallet = false,
   injectStyles = true,
   wagmiOverrides,
 }: WalletProviderProps) => {
-  const provider = useCallback(
-    (config: { chainId?: number }) => {
-      try {
-        const prv = new providers.InfuraProvider(config.chainId, infuraId);
-        prv.pollingInterval = 20_000;
-        return prv;
-      } catch (e) {
-        try {
-          const rpcUrl = FLAIR_CHAINS.find((x) => x.id === config.chainId)
-            ?.rpcUrls.default;
-          if (rpcUrl) {
-            const prv = new providers.JsonRpcProvider(rpcUrl, config.chainId);
-            prv.pollingInterval = 20_000;
-            return prv;
-          } else {
-            throw new Error(
-              `No configured RPC URL for chain ${config.chainId}`,
-            );
-          }
-        } catch (e) {
-          try {
-            const prv = providers.getDefaultProvider(config.chainId);
-            prv.pollingInterval = 20_000;
-            return prv;
-          } catch (e) {
-            try {
-              const prv = new providers.Web3Provider(
-                window.ethereum as any,
-                config.chainId,
-              );
-              prv.pollingInterval = 20_000;
-              return prv;
-            } catch (e) {
-              const prv = providers.getDefaultProvider();
-              prv.pollingInterval = 20_000;
-              return prv;
-            }
-          }
-        }
-      }
-    },
-    [infuraId],
-  );
+  const connectors = useCallback(() => {
+    const connectors: any[] = [
+      new MetaMaskConnector({ chains }),
+      new InjectedConnector({
+        chains,
+        options: { shimDisconnect: true },
+      }),
+      new WalletConnectConnector({
+        chains,
+        options: {
+          qrcode: true,
+        },
+      }),
+      new CoinbaseWalletConnector({
+        chains,
+        options: {
+          appName,
+        },
+      }),
+      new SafeConnector({
+        chains,
+        options: {
+          debug: true,
+        },
+      }),
+    ];
 
-  const connectors = useCallback(
-    ({ chainId }: any) => {
-      const rpcUrl =
-        FLAIR_CHAINS.find((x) => x.id === chainId)?.rpcUrls.default ??
-        FLAIR_DEFAULT_CHAIN.rpcUrls.default;
-
-      const connectors: any[] = [
-        new InjectedConnector({
-          chains: FLAIR_CHAINS,
-          options: { shimDisconnect: true },
-        }),
-        new WalletConnectConnector({
-          chains: FLAIR_CHAINS,
+    if (custodialWallet) {
+      connectors.push(
+        new MagicLinkConnector({
+          chains,
           options: {
-            infuraId,
-            qrcode: true,
-          },
-        }),
-        new CoinbaseWalletConnector({
-          chains: FLAIR_CHAINS,
-          options: {
-            appName,
-            jsonRpcUrl: `${rpcUrl}/${infuraId}`,
-          },
-        }),
-        new SafeConnector({
-          chains: FLAIR_CHAINS,
-          options: {
-            debug: true,
-          },
-        }),
-      ];
-
-      if (custodialWallet) {
-        connectors.push(
-          new MagicLinkConnector({
-            chains: FLAIR_CHAINS,
-            options: {
-              apiKey: FLAIR_MAGIC_API_KEY,
-              oauthOptions: {
-                providers: ['google', 'twitter', 'github'],
-              },
-              customHeaderText: appName,
+            apiKey: FLAIR_MAGIC_API_KEY,
+            oauthOptions: {
+              providers: ['google', 'twitter', 'github'],
             },
-          }),
-        );
-      }
+            customHeaderText: appName,
+          },
+        }),
+      );
+    }
 
-      return connectors;
-    },
-    [appName, custodialWallet, infuraId],
-  );
+    return connectors;
+  }, [appName, custodialWallet]);
 
   const wagmiClient = useMemo(
     () =>
@@ -149,9 +107,9 @@ export const WalletProvider = ({
         autoConnect: false,
         connectors,
         provider,
+        webSocketProvider,
       }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [appName, infuraId],
+    [connectors],
   );
 
   useLayoutEffect(() => {
@@ -169,8 +127,8 @@ export const WalletProvider = ({
   }, [injectStyles]);
 
   return (
-    <Provider client={wagmiClient} {...wagmiOverrides}>
+    <WagmiConfig client={wagmiClient} {...wagmiOverrides}>
       <AutoConnectWrapper>{children}</AutoConnectWrapper>
-    </Provider>
+    </WagmiConfig>
   );
 };

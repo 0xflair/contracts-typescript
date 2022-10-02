@@ -76,7 +76,7 @@ export const LoginProvider = ({
   loginStorageKey = 'flair.walletJwt',
   timeout = 5000,
 }: React.PropsWithChildren<LoginProviderProps>) => {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const { data: signer } = useSigner();
   const [walletJwt, setWalletJwt] = useLocalStorage<string>(loginStorageKey);
 
@@ -113,7 +113,7 @@ export const LoginProvider = ({
       const response = await axios.post<{ jwtToken: string }>(
         `${FLAIR_WALLET_BACKEND[env].host}${FLAIR_WALLET_BACKEND[env].loginEndpoint}`,
         {
-          walletAddress: account?.address,
+          walletAddress: address,
           signatureHex,
         },
         {
@@ -133,7 +133,7 @@ export const LoginProvider = ({
         setState((x) => ({ ...x, loginSigning: false, loginPosting: false }));
       }
     }
-  }, [cancelQuery, signer, env, account?.address, timeout, setWalletJwt]);
+  }, [cancelQuery, signer, env, address, timeout, setWalletJwt]);
 
   // Logout method that remove the wallet JWT from local storage
   const logout = useCallback(async () => {
@@ -160,26 +160,25 @@ export const LoginProvider = ({
   // Logout if connected wallet address is different than wallet JWT
   useEffect(() => {
     if (
-      account?.address &&
+      address &&
       state.data?.jwtClaims?.walletAddress &&
-      state.data.jwtClaims.walletAddress.toLowerCase() !==
-        account.address.toLowerCase()
+      state.data.jwtClaims.walletAddress.toLowerCase() !== address.toLowerCase()
     ) {
       logout();
     }
-  }, [account, state.data, logout]);
+  }, [state.data, logout, address]);
 
   // Automatically attempt to login if auto-login mode is ALWAYS.
   useEffect(() => {
     if (
       autoLogin === AutoLoginMode.ALWAYS &&
-      account?.address &&
+      address &&
       !walletJwt &&
       !state.data
     ) {
       login();
     }
-  }, [autoLogin, account?.address, walletJwt, login, state.data]);
+  }, [autoLogin, address, walletJwt, login, state.data]);
 
   // Refresh the state whenever wallet JWT is changed.
   useEffect(() => {

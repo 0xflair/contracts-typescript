@@ -23,10 +23,10 @@ export const WalletDropdown = ({
   wrapperClassName,
   walletProfileProps,
 }: Props) => {
-  const { activeChain } = useNetwork();
-  const { data: account } = useAccount();
+  const { chain } = useNetwork();
+  const { address } = useAccount();
   const { data: balance } = useBalance({
-    addressOrName: account?.address,
+    addressOrName: address,
     formatUnits: 'ether',
     watch: false,
   });
@@ -74,7 +74,7 @@ export const WalletDropdown = ({
                 <p
                   className="wallet-dropdown-address-value text-sm font-medium text-gray-900 cursor-pointer"
                   onClick={(e) => {
-                    account?.address && copyToClipboard(account.address);
+                    address && copyToClipboard(address);
 
                     const selection = window.getSelection();
                     const range = document.createRange();
@@ -83,11 +83,9 @@ export const WalletDropdown = ({
                     selection?.addRange(range);
                   }}
                 >
-                  {account?.address?.slice(0, 4)}
-                  <span className="text-[6px]">
-                    {account?.address?.slice(4, -4)}
-                  </span>
-                  {account?.address?.slice(-4)}
+                  {address?.slice(0, 4)}
+                  <span className="text-[6px]">{address?.slice(4, -4)}</span>
+                  {address?.slice(-4)}
                 </p>
               </span>
               {balance ? (
@@ -97,9 +95,7 @@ export const WalletDropdown = ({
                   </p>
                   <p className="wallet-dropdown-balance-value ext-sm font-medium text-gray-900">
                     <CryptoValue
-                      symbol={
-                        activeChain?.nativeCurrency?.symbol || balance.symbol
-                      }
+                      symbol={chain?.nativeCurrency?.symbol || balance.symbol}
                       unit={CryptoUnits.WEI}
                       value={balance.value}
                     />
@@ -110,7 +106,7 @@ export const WalletDropdown = ({
             <Menu.Item as="div">
               {({ active }: any) => (
                 <a
-                  href={`https://buy.ramp.network/?userAddress=${account?.address}&defaultAsset=${activeChain?.nativeCurrency?.symbol}`}
+                  href={`https://buy.ramp.network/?userAddress=${address}&defaultAsset=${chain?.nativeCurrency?.symbol}`}
                   target={'_blank'}
                   className={classNames(
                     'wallet-dropdown-item wallet-dropdown-item--buy',
@@ -118,7 +114,7 @@ export const WalletDropdown = ({
                     'block px-4 py-2 text-sm text-gray-700',
                   )}
                 >
-                  Buy {activeChain?.nativeCurrency?.symbol || 'Crypto'}
+                  Buy {chain?.nativeCurrency?.symbol || 'Crypto'}
                 </a>
               )}
             </Menu.Item>

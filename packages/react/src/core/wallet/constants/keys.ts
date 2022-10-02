@@ -1,1 +1,2 @@
 export const FLAIR_INFURA_PROJECT_ID = '21891c5f45de4147900a7539f5948dbf';
+export const FLAIR_ALCHEMY_API_KEY = '5tDx1qwZ7sjP-_IxzVhV03PYx5pIbDov';

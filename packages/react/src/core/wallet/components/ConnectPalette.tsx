@@ -76,7 +76,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                   .toLowerCase()}`,
                 buttonClassName,
               )}
-              onClick={() => connect(connectorInjected)}
+              onClick={() => connect({ connector: connectorInjected })}
             >
               {!connectorInjected.name ||
               connectorInjected.name == 'MetaMask' ? (
@@ -125,7 +125,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             'flair connect-button connector-wallet-connect',
             buttonClassName,
           )}
-          onClick={() => connect(connectorWalletConnect)}
+          onClick={() => connect({ connector: connectorWalletConnect })}
         >
           <WalletConnectIcon className={iconClassName} />
           {props.walletConnectButtonLabel || 'WalletConnect'}
@@ -143,7 +143,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             'flair connect-button connector-coinbase',
             buttonClassName,
           )}
-          onClick={() => connect(connectorCoinbaseWallet)}
+          onClick={() => connect({ connector: connectorCoinbaseWallet })}
         >
           <WalletLinkIcon className={iconClassName} />
           {props.coinbaseButtonLabel || 'Coinbase Wallet'}
@@ -164,7 +164,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                 'flair connect-button connector-gnosis-safe',
                 buttonClassName,
               )}
-              onClick={() => connect(connectorGnosisSafe)}
+              onClick={() => connect({ connector: connectorGnosisSafe })}
             >
               <GnosisSafeIcon className={iconClassName} />
               {props.gnosisSafeButtonLabel || 'Gnosis Safe'}
@@ -220,7 +220,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
           <button
             type="button"
             className={buttonClassName}
-            onClick={() => connect(connectorMagic)}
+            onClick={() => connect({ connector: connectorMagic })}
           >
             <MagicLinkIcon className={iconClassName} />
             {props.custodialWalletButtonLabel || 'Quick wallet'}

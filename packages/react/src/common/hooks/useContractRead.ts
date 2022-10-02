@@ -55,22 +55,18 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
     enabled && contractAddress && contractAddress !== ZERO_ADDRESS,
   );
 
-  const result = useContractReadWagmi(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface: contractDefinition?.artifact?.abi || [
-        `function ${functionName}`,
-      ],
-    },
-    functionName as string,
-    {
-      args,
-      enabled: readyToRead,
-      watch,
-      cacheOnBlock,
-      ...restOfConfig,
-    },
-  );
+  const result = useContractReadWagmi({
+    addressOrName: contractAddress as string,
+    contractInterface: contractDefinition?.artifact?.abi || [
+      `function ${functionName}`,
+    ],
+    functionName,
+    args,
+    enabled: readyToRead,
+    watch,
+    cacheOnBlock,
+    ...restOfConfig,
+  });
 
   const provider = useProvider({
     chainId: restOfConfig.chainId,

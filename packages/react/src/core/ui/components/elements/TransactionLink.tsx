@@ -1,3 +1,4 @@
+import { SendTransactionResult } from '@wagmi/core';
 import { ethers } from 'ethers';
 import { Chain, useNetwork } from 'wagmi';
 
@@ -6,7 +7,7 @@ import { CopyButton } from './CopyButton';
 type Props = {
   className?: string;
   chain?: Chain;
-  txResponse?: ethers.providers.TransactionResponse;
+  txResponse?: SendTransactionResult;
   txReceipt?: ethers.providers.TransactionReceipt;
 };
 
@@ -16,8 +17,7 @@ export const TransactionLink = ({
   txResponse,
   txReceipt,
 }: Props) => {
-  const { activeChain } = useNetwork();
-
+  const { chain: activeChain } = useNetwork();
   const txHash = txReceipt?.transactionHash || txResponse?.hash;
   const scannerChain = chain || activeChain;
   const explorer = scannerChain?.blockExplorers?.default;

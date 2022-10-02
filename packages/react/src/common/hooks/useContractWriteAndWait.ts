@@ -1,20 +1,32 @@
 import { Provider } from '@ethersproject/providers';
-import { WriteContractConfig } from '@wagmi/core';
+import { PrepareWriteContractConfig } from '@wagmi/core';
 import { ContractInterface, Signer } from 'ethers';
 import { useCallback } from 'react';
-import { useConnect, useContractWrite, useNetwork } from 'wagmi';
+import {
+  useAccount,
+  useConnect,
+  useContractWrite,
+  useNetwork,
+  usePrepareContractWrite,
+} from 'wagmi';
 
 import { useWaitForTransaction } from './useWaitForTransaction';
 
-export type ContractWriteConfig<ArgsType extends any[]> =
-  WriteContractConfig & {
-    contractInterface: ContractInterface;
-    contractAddress?: string;
-    signerOrProvider?: Signer | Provider | null;
-    functionName: string;
-    args?: ArgsType;
-    confirmations?: number;
-  };
+export type ContractWriteConfig<ArgsType extends any[]> = Omit<
+  PrepareWriteContractConfig,
+  | 'addressOrName'
+  | 'addressOrName'
+  | 'contractInterface'
+  | 'functionName'
+  | 'args'
+> & {
+  contractInterface: ContractInterface;
+  contractAddress?: string;
+  signerOrProvider?: Signer | Provider | null;
+  functionName: string;
+  args?: ArgsType;
+  confirmations?: number;
+};
 
 export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   contractInterface,
@@ -22,11 +34,19 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   signerOrProvider,
   functionName,
   args,
-  confirmations = 3,
+  confirmations = 1,
   ...restOfConfig
 }: ContractWriteConfig<ArgsType>) => {
-  const { isConnected } = useConnect();
-  const { activeChain } = useNetwork();
+  const { isConnected } = useAccount();
+  const { chain } = useNetwork();
+
+  const { config } = usePrepareContractWrite({
+    addressOrName: contractAddress as string,
+    contractInterface,
+    functionName,
+    args,
+    ...restOfConfig,
+  });
 
   const {
     data: responseData,
@@ -36,18 +56,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     isSuccess: responseIsSuccess,
     isError: responseIsError,
     writeAsync: doWrite,
-  } = useContractWrite(
-    {
-      addressOrName: contractAddress as string,
-      contractInterface,
-      ...(signerOrProvider ? { signerOrProvider } : {}),
-    },
-    functionName as string,
-    {
-      args,
-      ...restOfConfig,
-    },
-  );
+  } = useContractWrite(config);
 
   const {
     data: receiptData,
@@ -59,13 +68,13 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   } = useWaitForTransaction({
     hash: responseData?.hash,
     confirmations,
-    enabled: Boolean(isConnected && activeChain),
+    enabled: Boolean(isConnected && chain),
   });
 
   const writeAndWait = useCallback(
     async (
       inputArgs?: ArgsType,
-      overrides?: Partial<WriteContractConfig['overrides']>,
+      overrides?: Partial<PrepareWriteContractConfig['overrides']>,
     ) => {
       if (inputArgs && inputArgs instanceof Event) {
         throw new Error(
@@ -73,19 +82,27 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
         );
       }
 
-      const response = await doWrite({
-        args: inputArgs || args,
-        ...restOfConfig,
-        ...(overrides
-          ? { overrides: { ...(restOfConfig.overrides || {}), ...overrides } }
-          : {}),
-      });
+      const response = await doWrite?.(
+        inputArgs || overrides
+          ? {
+              recklesslySetUnpreparedArgs: inputArgs || args,
+              ...(overrides
+                ? {
+                    recklesslySetUnpreparedOverrides: {
+                      ...(restOfConfig.overrides || {}),
+                      ...overrides,
+                    },
+                  }
+                : {}),
+            }
+          : undefined,
+      );
 
       const receipt = await response?.wait(1);
 
       return { response, receipt };
     },
-    [doWrite, args, restOfConfig, functionName, contractAddress],
+    [args, contractAddress, doWrite, functionName, restOfConfig.overrides],
   );
 
   return {
@@ -98,6 +115,6 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     isLoading: responseIsLoading || receiptIsLoading,
     isSuccess: responseIsSuccess && receiptIsSuccess,
     isError: responseIsError || receiptIsError,
-    writeAndWait,
+    writeAndWait: doWrite ? writeAndWait : undefined,
   } as const;
 };

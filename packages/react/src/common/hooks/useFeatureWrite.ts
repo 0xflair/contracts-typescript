@@ -1,5 +1,5 @@
 import { Provider } from '@ethersproject/providers';
-import { WriteContractConfig } from '@wagmi/core';
+import { PrepareWriteContractConfig } from '@wagmi/core';
 import { Signer } from 'ethers';
 import { useCallback } from 'react';
 
@@ -11,7 +11,7 @@ import {
 } from './useNormalizedFunctionCall';
 
 type Config<ArgsType extends Record<string, any>> =
-  Partial<WriteContractConfig> & {
+  Partial<PrepareWriteContractConfig> & {
     enabled?: boolean;
     contractAddress?: string;
     signerOrProvider?: Signer | Provider | null;
@@ -44,20 +44,20 @@ export const useFeatureWrite = <ArgsType extends Record<string, any>>({
   const writeAndWait = useCallback(
     async (
       inputArgs?: ArgsType,
-      overrides?: Partial<WriteContractConfig['overrides']>,
+      overrides?: Partial<PrepareWriteContractConfig['overrides']>,
     ) => {
       const call = normalizeFunctionCall(
         feature?.signature || '',
         inputArgs || args,
       );
 
-      return result.writeAndWait(call.args, overrides);
+      return result.writeAndWait?.(call.args, overrides);
     },
     [args, feature?.signature, result],
   );
 
   return {
     ...result,
-    writeAndWait,
+    writeAndWait: result.writeAndWait ? writeAndWait : undefined,
   };
 };

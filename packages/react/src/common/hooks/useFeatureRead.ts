@@ -24,16 +24,12 @@ export const useFeatureRead = <ArgsType>({
     args,
   });
 
-  return useContractRead(
-    {
-      contractInterface: call.interface,
-      addressOrName: contractAddress || ZERO_ADDRESS,
-    },
-    call.functionName,
-    {
-      args: call.args,
-      enabled: Boolean(contractAddress && call.functionName && enabled),
-      ...restOfConfig,
-    }
-  );
+  return useContractRead({
+    contractInterface: call.interface,
+    addressOrName: contractAddress || ZERO_ADDRESS,
+    functionName: call.functionName,
+    args: call.args,
+    enabled: Boolean(contractAddress && call.functionName && enabled),
+    ...restOfConfig,
+  });
 };

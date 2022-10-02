@@ -1,7 +1,7 @@
 import { XIcon } from '@heroicons/react/solid';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import { useConnect } from 'wagmi';
+import { useAccount, useConnect } from 'wagmi';
 
 import { BareComponentProps } from '../../../common';
 import { ConnectPalette, ConnectPaletteProps } from './ConnectPalette';
@@ -31,7 +31,7 @@ export const ConnectButton = ({
   ...attributes
 }: ConnectButtonProps) => {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { isConnecting, isConnected } = useConnect();
+  const { isConnecting, isConnected } = useAccount();
 
   useEffect(() => {
     let didCancel = false;

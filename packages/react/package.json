@@ -169,11 +169,12 @@
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^1.0.6",
     "@metamask/onboarding": "^1.0.1",
+    "@gnosis.pm/safe-apps-wagmi": "^1.0.3",
     "@tailwindcss/forms": "^0.5.3",
     "@tanstack/query-sync-storage-persister": "^4.0.10",
     "@tanstack/react-query": "^4.0.10",
     "@tanstack/react-query-persist-client": "^4.0.10",
-    "@wagmi/core": "^0.2.5",
+    "@wagmi/core": "^0.5.7",
     "axios": "^0.26.1",
     "ethers": "^5.6.5",
     "humanize-duration": "^3.27.3",
@@ -186,7 +187,7 @@
     "react-use": "^17.4.0",
     "tailwindcss": "^3.1.8",
     "versioning": "^1.1.2",
-    "wagmi": "^0.3.5"
+    "wagmi": "^0.6.7"
   },
   "devDependencies": {
     "@flair-sdk/contracts": "^2.6.4",

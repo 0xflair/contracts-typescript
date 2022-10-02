@@ -25,8 +25,8 @@ export const TieredSalesMintButton = ({
 
   return (
     <Component
-      onClick={() => mint({ mintCount })}
-      disabled={!canMint}
+      onClick={() => mint?.({ mintCount })}
+      disabled={!canMint || !mint}
       {...attributes}
     >
       {children}

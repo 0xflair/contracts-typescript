@@ -12,7 +12,7 @@ export type LoginButtonProps = {
 };
 
 export const LoginButton = (props: LoginButtonProps) => {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const {
     state: { data, error, loginSigning, loginPosting },
     login,
@@ -28,7 +28,7 @@ export const LoginButton = (props: LoginButtonProps) => {
     // Attempt to login connect if wallet is connected
     if (
       props.autoLogin &&
-      account?.address &&
+      address &&
       !error &&
       !loginSigning &&
       !loginPosting
@@ -42,7 +42,7 @@ export const LoginButton = (props: LoginButtonProps) => {
       didCancel = true;
     };
   }, [
-    account?.address,
+    address,
     cancelQuery,
     error,
     login,

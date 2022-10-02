@@ -24,7 +24,7 @@ export const TieredSalesMintingSection = ({}: Props) => {
     data: { chainId, minterAddress },
   } = useTieredSalesContext();
 
-  const { data: account } = useAccount();
+  const { address, isConnected } = useAccount();
   const [mintCount, setMintCount] = useState<BigNumberish>('1');
 
   const mintButtonClass =
@@ -38,7 +38,7 @@ export const TieredSalesMintingSection = ({}: Props) => {
           <div className="flex flex-col flex-wrap sm:flex-row sm:items-center gap-4">
             <TieredSalesStatus />
 
-            {account ? <TieredSalesAllowlistStatus /> : null}
+            {address && isConnected ? <TieredSalesAllowlistStatus /> : null}
           </div>
           <TieredSalesPrice
             as="div"
@@ -90,7 +90,7 @@ export const TieredSalesMintingSection = ({}: Props) => {
               You can mint up to{' '}
               <TieredSalesEligibleAmount as="div" className="inline" />.{' '}
             </TieredSalesIfWalletCanMint>
-            {account || minterAddress ? (
+            {address || isConnected || minterAddress ? (
               <>
                 You have minted <TieredSalesWalletMints /> NFTs in this tier.
               </>

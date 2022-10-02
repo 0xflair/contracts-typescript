@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useClient, useConnect } from 'wagmi';
+import { useAccount, useClient, useConnect } from 'wagmi';
 
 const EAGER_CONNECTOR_IDS = ['safe'];
 
 function useAutoConnect() {
-  const { connect, connectors, isConnecting, isReconnecting } = useConnect();
+  const { connect, connectors } = useConnect();
+  const { isConnecting, isReconnecting } = useAccount();
   const [triedAutoConnect, setTriedAutoConnect] = useState(false);
   const wagmiClient = useClient();
 
@@ -18,7 +19,7 @@ function useAutoConnect() {
 
       if (connectorInstance) {
         try {
-          connect(connectorInstance);
+          connect({ connector: connectorInstance });
           eagerlyConnected = true;
         } catch (e) {
           console.error(`Could not eagerly connect to ${connector}`, e);

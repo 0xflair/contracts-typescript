@@ -1,5 +1,5 @@
 import { Fragment, PropsWithChildren } from 'react';
-import { useNetwork } from 'wagmi';
+import { useAccount, useNetwork } from 'wagmi';
 
 import { BareComponentProps } from '../../../common';
 
@@ -17,16 +17,17 @@ export const IfChainNot = ({
   connectedTo,
   ...attributes
 }: Props) => {
-  const { activeChain, isLoading } = useNetwork();
+  const { chain } = useNetwork();
+  const { isConnecting } = useAccount();
 
   const Component =
     as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component {...attributes}>
-      {loadingMask && (isLoading || !activeChain?.id) ? (
+      {loadingMask && (isConnecting || !chain?.id) ? (
         <>{loadingMask}</>
-      ) : activeChain?.id?.toString() !== connectedTo?.toString() ? (
+      ) : chain?.id?.toString() !== connectedTo?.toString() ? (
         children
       ) : null}
     </Component>

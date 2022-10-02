@@ -1,13 +1,13 @@
 import { Provider } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
-import { WriteContractConfig } from '@wagmi/core';
+import { PrepareWriteContractConfig } from '@wagmi/core';
 import { Signer } from 'ethers';
 
 import { useFeatureWrite } from './useFeatureWrite';
 import { useFunctionFeature } from './useFunctionFeature';
 
 export type FeatureWriteByTagConfig<ArgsType extends Record<string, any>> =
-  Partial<WriteContractConfig> & {
+  Partial<PrepareWriteContractConfig> & {
     env?: Environment;
     chainId?: number;
     enabled?: boolean;

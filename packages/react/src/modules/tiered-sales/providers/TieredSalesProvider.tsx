@@ -1,6 +1,6 @@
-import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
+import { SendTransactionResult } from '@wagmi/core';
 import { BigNumber, BigNumberish, BytesLike } from 'ethers';
 import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
@@ -39,7 +39,7 @@ type TieredSalesContextValue = {
 
     // Transaction
     txReceipt?: TransactionReceipt;
-    txResponse?: TransactionResponse;
+    txResponse?: SendTransactionResult;
   };
 
   isLoading: {
@@ -63,7 +63,7 @@ type TieredSalesContextValue = {
   setCurrentTierId: (currentTierId: BigNumberish) => void;
   // setMaxSupply: (maxSupply: BigNumberish) => void;
 
-  mint: (args: {
+  mint?: (args: {
     mintCount: BigNumberish;
     allowlistProof?: BytesLike[];
   }) => void;
@@ -86,8 +86,8 @@ type Props = {
   minterAddress?: BytesLike;
   onMintSuccess?: (args: {
     mintCount: BigNumberish;
-    txResponse: TransactionResponse;
-    txReceipt: TransactionReceipt;
+    txReceipt?: TransactionReceipt;
+    txResponse?: SendTransactionResult;
   }) => void;
 
   children: FunctionalChildren | ReactNode | ReactNode[];
@@ -105,7 +105,7 @@ export const TieredSalesProvider = ({
 }: Props) => {
   const chainId = Number(rawChainId);
 
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const [currentTierId, setCurrentTierId] = useState<BigNumberish | undefined>(
     tierId !== undefined ? Number(tierId.toString()) : undefined,
   );
@@ -113,7 +113,7 @@ export const TieredSalesProvider = ({
   const [autoDetectedTierId, setAutoDetectedTierId] = useState<BigNumberish>();
   const [isAutoDetectingTier, setIsAutoDetectingTier] = useState(true);
 
-  const finalMinterAddress = minterAddress || account?.address;
+  const finalMinterAddress = minterAddress || address;
 
   const {
     data: tiers,
@@ -248,7 +248,7 @@ export const TieredSalesProvider = ({
 
   const mint = useCallback(
     async (args: { mintCount: BigNumberish }) => {
-      const result = await doMint(args);
+      const result = await doMint?.(args);
 
       if (result) {
         onMintSuccess &&
@@ -319,7 +319,7 @@ export const TieredSalesProvider = ({
     refetchTiers,
     setCurrentTierId,
     // setMaxSupply,
-    mint,
+    mint: doMint ? mint : undefined,
   };
 
   return React.createElement(
