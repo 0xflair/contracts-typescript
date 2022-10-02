@@ -40,7 +40,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   const { isConnected } = useAccount();
   const { chain } = useNetwork();
 
-  const { config } = usePrepareContractWrite({
+  const { config, data } = usePrepareContractWrite({
     addressOrName: contractAddress as string,
     contractInterface,
     functionName,
@@ -107,6 +107,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
 
   return {
     data: {
+      ...data,
       txResponse: responseData,
       txReceipt: receiptData,
     },
