@@ -1,3 +1,5 @@
+import '@wagmi/core';
+
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { TieredSales } from '@flair-sdk/contracts';
 import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
