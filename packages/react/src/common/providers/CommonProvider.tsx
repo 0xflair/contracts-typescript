@@ -1,12 +1,15 @@
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { persistQueryClient } from '@tanstack/react-query-persist-client';
+import { deserialize, serialize } from 'wagmi';
 
 const localStoragePersister =
   typeof window !== 'undefined'
     ? createSyncStoragePersister({
         key: 'flair.cache',
         storage: window.localStorage,
+        serialize,
+        deserialize,
       })
     : undefined;
 
@@ -15,7 +18,7 @@ const queryClient = new QueryClient({
     queries: {
       cacheTime: 1_000 * 60 * 60 * 24,
       staleTime: 1_000 * 60 * 60 * 2,
-      // networkMode: 'offlineFirst',
+      networkMode: 'offlineFirst',
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,

@@ -118,8 +118,10 @@ export const useSaleTiers = ({
         isActive,
         hasAllowlist,
         isAllowlisted,
-        eligibleAmount,
-        remainingSupply,
+        eligibleAmount: eligibleAmount ? eligibleAmount.toString() : undefined,
+        remainingSupply: remainingSupply
+          ? remainingSupply.toString()
+          : undefined,
         isEligible:
           eligibleAmount !== undefined
             ? BigNumber.from(eligibleAmount).gt(0)
