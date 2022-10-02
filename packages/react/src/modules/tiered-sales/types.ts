@@ -1,6 +1,6 @@
 import { BigNumberish, BytesLike } from 'ethers';
 
-export type TiersDictionary = Record<number, Tier>;
+export type TiersDictionary = Record<string, Tier>;
 
 export type Tier = {
   // On-chain

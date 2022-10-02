@@ -1,18 +1,13 @@
 import '@wagmi/core';
 
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
-import { TieredSales } from '@flair-sdk/contracts';
 import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
 import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
-import { useCallback, useMemo } from 'react';
-import { useProvider } from 'wagmi';
+import { useCallback } from 'react';
 
-import {
-  PredefinedReadContractConfig,
-  useContractManifest,
-} from '../../../common';
+import { PredefinedReadContractConfig } from '../../../common';
 import { Tier, TiersDictionary } from '../types';
-import { normalizeTiers } from '../util';
+import { useSaleTiersConfigs } from './useSaleTiersConfigs';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
 import { useTieredSalesEligibleAmount } from './useTieredSalesEligibleAmount';
 import { useTieredSalesRemainingSupply } from './useTieredSalesRemainingSupply';
@@ -55,22 +50,15 @@ export const useSaleTiers = ({
     enabled: false,
   });
 
-  const manifest = useContractManifest({
-    contractReference: 'flair-sdk:finance/sales/ITieredSales',
-  });
-  const provider = useProvider({
+  const {
+    data: tiersConfigs,
+    isLoading: tiersConfigsLoading,
+    error: tiersConfigsError,
+  } = useSaleTiersConfigs({
     chainId,
+    contractAddress,
+    enabled,
   });
-  const contract = useMemo(() => {
-    if (!contractAddress || !provider || !manifest?.artifact?.abi) {
-      return;
-    }
-    return new ethers.Contract(
-      contractAddress,
-      manifest?.artifact?.abi || [],
-      provider,
-    ) as TieredSales;
-  }, [contractAddress, manifest?.artifact?.abi, provider]);
 
   const queryKey = [
     {
@@ -81,14 +69,14 @@ export const useSaleTiers = ({
     },
   ] as const;
 
-  const fetchTierById = useCallback(
+  const enrichTierById = useCallback(
     async (tierId: BigNumberish, forAddress?: BytesLike) => {
-      if (!contract) {
+      if (!tiersConfigs || !tiersConfigs[tierId.toString()]) {
         return;
       }
 
       const finalAddress = forAddress || minterAddress;
-      const tier = (await contract.tiers(tierId)) as Tier;
+      const tier = tiersConfigs[tierId.toString()];
 
       const now = new Date();
 
@@ -140,64 +128,53 @@ export const useSaleTiers = ({
       };
     },
     [
-      contract,
-      checkAllowlist,
+      tiersConfigs,
       minterAddress,
+      checkAllowlist,
       getEligibleAmount,
       getTierRemainingSupply,
     ],
   );
 
-  const refetchTiers = useCallback(
+  const enrichAllTiers = useCallback(
     async (
       args: QueryFunctionContext<any>,
     ): Promise<TiersDictionary | undefined> => {
-      const fetchedTiers: Record<number, Tier> = {};
+      const enrichedTiers: Record<string, Tier> = {};
 
-      for (let i = 0, l = 10; i < l; i++) {
-        const tier = await fetchTierById(i, args.queryKey[0].minterAddress);
+      for (const tierId in tiersConfigs) {
+        const tier = await enrichTierById(
+          tierId,
+          args.queryKey[0].minterAddress,
+        );
 
         if (
           tier &&
           tier.maxPerWallet &&
           Number(tier.maxPerWallet.toString()) > 0
         ) {
-          fetchedTiers[i] = tier;
+          enrichedTiers[tierId] = tier;
         }
       }
 
-      return fetchedTiers;
+      return enrichedTiers;
     },
-    [fetchTierById],
+    [enrichTierById, tiersConfigs],
   );
-
-  // useEffect(() => {
-  //   if (enabled && !error && contract && tiers === undefined) {
-  //     refetchTiers();
-  //   }
-  // }, [
-  //   enabled,
-  //   contract,
-  //   manifest?.artifact?.abi,
-  //   minterAddress,
-  //   error,
-  //   tiers,
-  //   refetchTiers,
-  // ]);
 
   const result = useQuery<
     TiersDictionary | undefined,
     string | Error | null,
     TiersDictionary | undefined
-  >(queryKey, refetchTiers, {
-    enabled: Boolean(enabled && contract),
+  >(queryKey, enrichAllTiers, {
+    enabled: Boolean(enabled && tiersConfigs && !tiersConfigsLoading),
     cacheTime: 20,
     staleTime: 2,
   });
 
   return {
     ...result,
-    data: normalizeTiers(result.data),
+    error: tiersConfigsError || result.error,
     isLoading: result.isLoading && result?.fetchStatus !== 'idle',
-  };
+  } as const;
 };

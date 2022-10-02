@@ -1,5 +1,6 @@
-export * from './useSaleTierConfig';
 export * from './useSaleTiers';
+export * from './useSaleTiersConfigs';
+export * from './useSaleTierConfig';
 export * from './useTieredSalesAllowlistChecker';
 export * from './useTieredSalesEligibleAmount';
 export * from './useTieredSalesMaxAllocation';

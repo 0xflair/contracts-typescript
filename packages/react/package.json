@@ -47,7 +47,6 @@
     "@metamask/onboarding": "*",
     "@tailwindcss/forms": "*",
     "@tanstack/query-sync-storage-persister": "*",
-    "@tanstack/react-query": "*",
     "@tanstack/react-query-persist-client": "*",
     "@wagmi/core": "*",
     "axios": "*",

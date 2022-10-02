@@ -12,6 +12,7 @@ export * from './useFeatureWrite';
 export * from './useFeatureWriteByTag';
 export * from './useFunctionFeature';
 export * from './useHasAnyOfFeatures';
+export * from './useMultiCallRead';
 export * from './useNormalizedFunctionCall';
 export * from './useSmartContract';
 export * from './useWaitForTransaction';
