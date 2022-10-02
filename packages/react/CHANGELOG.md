@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.12.12 (2022-10-02)
+
+
+### Bug Fixes
+
+* fetch all 10 tiers ([154a2c6](https://github.com/flair-sdk/typescript/commit/154a2c6a0dba907b81c48ea26d32bb7b24b09ea9))
+
+
+
+
+
 ## 2.12.11 (2022-10-01)
 
 **Note:** Version bump only for package @flair-sdk/react
