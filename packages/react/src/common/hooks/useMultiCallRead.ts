@@ -21,19 +21,10 @@ export const useMultiCallRead = <TData extends any[]>({
 }: Config) => {
   const [error, setError] = useState<Error>();
   const [resultData, setResultData] = useState<TData>();
-  const { chain: activeChain } = useNetwork();
 
   const callDataList = useMemo(() => {
-    if (!activeChain?.id) {
-      throw new Error('No active chain');
-    }
-
     return (calls
       ?.map((call) => {
-        if (!activeChain?.id) {
-          throw new Error('No active chain');
-        }
-
         if (!call.function) {
           console.error(
             new Error(`Function is not passed for call ${call.id}`),
@@ -68,7 +59,7 @@ export const useMultiCallRead = <TData extends any[]>({
         }
       })
       .filter((callData) => !!callData) || []) as string[];
-  }, [activeChain?.id, calls, contractInterface]);
+  }, [calls, contractInterface]);
 
   const result = useContractRead({
     contractInterface: [
