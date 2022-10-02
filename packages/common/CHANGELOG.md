@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.15.2 (2022-10-02)
+
+
+### Bug Fixes
+
+* correctly deserialize bignumber ([65b990a](https://github.com/flair-sdk/typescript/commit/65b990accd14fc2e615e1483f7b9eeba09456d41))
+
+
+
+
+
 ## 2.15.1 (2022-10-02)
 
 
