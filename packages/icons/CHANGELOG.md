@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.16.6 (2022-10-03)
+
+
+### Bug Fixes
+
+* prepare mint write only if all vars are ready and use correct price ([fbcbf09](https://github.com/flair-sdk/typescript/commit/fbcbf0995f7c743939dfd641027b3a36faae94c4))
+
+
+
+
+
 ## 2.16.5 (2022-10-03)
 
 **Note:** Version bump only for package @flair-sdk/icons
