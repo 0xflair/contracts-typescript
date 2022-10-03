@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.16.2 (2022-10-03)
+
+
+### Bug Fixes
+
+* remove unused deps and more robust window access ([a09621c](https://github.com/flair-sdk/typescript/commit/a09621cf95da6c296a553b317c29eb41c9880571))
+
+
+
+
+
 ## 2.16.1 (2022-10-03)
 
 
