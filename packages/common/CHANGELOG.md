@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.16.1 (2022-10-03)
+
+
+### Bug Fixes
+
+* sane defaults for tiered sales hooks ([6cfe4dd](https://github.com/flair-sdk/typescript/commit/6cfe4dd7f1f53103cca646a38781ca43828d90d0))
+
+
+
+
+
 # 2.16.0 (2022-10-03)
 
 
