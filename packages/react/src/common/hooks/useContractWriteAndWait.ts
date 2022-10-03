@@ -115,7 +115,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
           : undefined,
       );
 
-      const receipt = await response?.wait(1);
+      const receipt = await response?.wait();
 
       return { response, receipt };
     },
