@@ -1,7 +1,7 @@
 import { Provider } from '@ethersproject/providers';
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { useContractAbi, useContractWriteAndWait } from '../../../common';
 import { useSaleTierConfig } from './useSaleTierConfig';
@@ -105,6 +105,11 @@ export const useTieredSalesMinter = ({
     contractReference: 'flair-sdk:finance/sales/ITieredSales',
   });
 
+  const _tierId = tierId;
+  const _mintCount = mintCount || 1;
+  const _maxAllowance = merkleMetadata?.maxAllowance || mintCount;
+  const _merkleProof = useMemo(() => merkleProof || [], [merkleProof]);
+
   const {
     data: mintData,
     error: mintError,
@@ -118,16 +123,14 @@ export const useTieredSalesMinter = ({
     contractAddress,
     signerOrProvider,
     confirmations: 1,
-    args: [
-      tierId || 0,
-      mintCount || 1,
-      merkleMetadata?.maxAllowance || mintCount || 1,
-      merkleProof || [],
-    ] as ArgsType,
+    args: [_tierId, _mintCount, _maxAllowance, _merkleProof] as ArgsType,
+    prepare: Boolean(
+      _tierId !== undefined && typeof tier?.price !== 'undefined',
+    ),
     overrides: {
       value:
-        typeof tier?.price !== 'undefined' && mintCount
-          ? BigNumber.from(tier?.price).mul(BigNumber.from(mintCount))
+        typeof tier?.price !== 'undefined'
+          ? BigNumber.from(tier?.price).mul(BigNumber.from(_mintCount))
           : undefined,
     },
   });
@@ -135,17 +138,12 @@ export const useTieredSalesMinter = ({
   const mint = useCallback(
     (args?: { mintCount: BigNumberish }) => {
       if (args?.mintCount !== undefined) {
-        const count = args?.mintCount || mintCount || 1;
+        const _finalMintCount = args?.mintCount || _mintCount;
         return mintAndWait?.(
-          [
-            tierId,
-            count,
-            merkleMetadata?.maxAllowance || count,
-            merkleProof || [],
-          ] as ArgsType,
+          [_tierId, _finalMintCount, _maxAllowance, _merkleProof] as ArgsType,
           {
             value: tier?.price
-              ? BigNumber.from(tier?.price).mul(BigNumber.from(count))
+              ? BigNumber.from(tier?.price).mul(BigNumber.from(_finalMintCount))
               : undefined,
           },
         );
@@ -154,12 +152,12 @@ export const useTieredSalesMinter = ({
       }
     },
     [
-      merkleMetadata?.maxAllowance,
-      merkleProof,
+      _maxAllowance,
+      _merkleProof,
+      _mintCount,
+      _tierId,
       mintAndWait,
-      mintCount,
       tier?.price,
-      tierId,
     ],
   );
 

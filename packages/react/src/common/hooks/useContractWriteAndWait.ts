@@ -26,6 +26,7 @@ export type ContractWriteConfig<ArgsType extends any[]> = Omit<
   functionName: string;
   args?: ArgsType;
   confirmations?: number;
+  prepare?: boolean;
 };
 
 export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
@@ -35,6 +36,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   functionName,
   args,
   confirmations = 1,
+  prepare = true,
   ...restOfConfig
 }: ContractWriteConfig<ArgsType>) => {
   const { address, isConnected } = useAccount();
@@ -48,7 +50,8 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     isLoading: prepareLoading,
   } = usePrepareContractWrite({
     enabled: Boolean(
-      isConnected &&
+      prepare &&
+        isConnected &&
         address &&
         contractAddress &&
         contractInterface &&
