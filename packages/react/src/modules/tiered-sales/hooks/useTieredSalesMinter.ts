@@ -119,10 +119,10 @@ export const useTieredSalesMinter = ({
     signerOrProvider,
     confirmations: 1,
     args: [
-      tierId,
-      mintCount,
-      merkleMetadata?.maxAllowance,
-      merkleProof,
+      tierId || 0,
+      mintCount || 1,
+      merkleMetadata?.maxAllowance || mintCount || 1,
+      merkleProof || [],
     ] as ArgsType,
     overrides: {
       value:
@@ -134,20 +134,24 @@ export const useTieredSalesMinter = ({
 
   const mint = useCallback(
     (args?: { mintCount: BigNumberish }) => {
-      const count = args?.mintCount || mintCount;
-      return mintAndWait?.(
-        [
-          tierId,
-          count,
-          merkleMetadata?.maxAllowance || count || 1,
-          merkleProof || [],
-        ] as ArgsType,
-        {
-          value: tier?.price
-            ? BigNumber.from(tier?.price).mul(BigNumber.from(count))
-            : undefined,
-        },
-      );
+      if (args?.mintCount !== undefined) {
+        const count = args?.mintCount || mintCount || 1;
+        return mintAndWait?.(
+          [
+            tierId,
+            count,
+            merkleMetadata?.maxAllowance || count,
+            merkleProof || [],
+          ] as ArgsType,
+          {
+            value: tier?.price
+              ? BigNumber.from(tier?.price).mul(BigNumber.from(count))
+              : undefined,
+          },
+        );
+      } else {
+        return mintAndWait?.();
+      }
     },
     [
       merkleMetadata?.maxAllowance,

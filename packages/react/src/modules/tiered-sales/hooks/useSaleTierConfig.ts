@@ -20,7 +20,7 @@ export const useSaleTierConfig = (config: Config) => {
     cacheTime: 60,
     staleTime: 5,
     functionName: 'tiers',
-    args: isValid ? ([config.tierId] as ArgsType) : undefined,
+    args: isValid ? ([config.tierId] as ArgsType) : [0],
     enabled: config.enabled && isValid,
     ...config,
   });
