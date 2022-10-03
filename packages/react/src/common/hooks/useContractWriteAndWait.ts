@@ -40,7 +40,13 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   const { isConnected } = useAccount();
   const { chain } = useNetwork();
 
-  const { config, data } = usePrepareContractWrite({
+  const {
+    config,
+    data: prepareData,
+    error: prepareError,
+    isError: prepareIsError,
+    isLoading: prepareLoading,
+  } = usePrepareContractWrite({
     addressOrName: contractAddress as string,
     contractInterface,
     functionName,
@@ -107,15 +113,15 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
 
   return {
     data: {
-      ...data,
+      ...prepareData,
       txResponse: responseData,
       txReceipt: receiptData,
     },
-    error: responseError || receiptError,
+    error: prepareError || responseError || receiptError,
     isIdle: responseIsIdle && receiptIsIdle,
-    isLoading: responseIsLoading || receiptIsLoading,
+    isLoading: prepareLoading || responseIsLoading || receiptIsLoading,
     isSuccess: responseIsSuccess && receiptIsSuccess,
-    isError: responseIsError || receiptIsError,
+    isError: prepareIsError || responseIsError || receiptIsError,
     writeAndWait: doWrite ? writeAndWait : undefined,
   } as const;
 };
