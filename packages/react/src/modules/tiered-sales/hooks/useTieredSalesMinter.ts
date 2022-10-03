@@ -51,7 +51,6 @@ export const useTieredSalesMinter = ({
   });
 
   const now = new Date();
-
   const start =
     tier?.start !== undefined
       ? new Date(Number(tier?.start.toString()) * 1000)
@@ -81,6 +80,11 @@ export const useTieredSalesMinter = ({
     minterAddress,
   });
 
+  const _tierId = tierId;
+  const _mintCount = mintCount || 1;
+  const _maxAllowance = merkleMetadata?.maxAllowance || _mintCount;
+  const _merkleProof = useMemo(() => merkleProof || [], [merkleProof]);
+
   const {
     data: eligibleAmount,
     error: eligibleAmountError,
@@ -90,25 +94,20 @@ export const useTieredSalesMinter = ({
     contractAddress,
     tierId,
     minterAddress,
-    maxAllowance: merkleMetadata?.maxAllowance || mintCount || 1,
+    maxAllowance: _maxAllowance,
     merkleProof: merkleProof || [],
     enabled: Boolean(
       enabled &&
         minterAddress &&
         (hasAllowlist === false ||
           (hasAllowlist === true && merkleProof !== undefined)) &&
-        (merkleMetadata?.maxAllowance || mintCount || 1),
+        _maxAllowance,
     ),
   });
 
   const contractInterface = useContractAbi({
     contractReference: 'flair-sdk:finance/sales/ITieredSales',
   });
-
-  const _tierId = tierId;
-  const _mintCount = mintCount || 1;
-  const _maxAllowance = merkleMetadata?.maxAllowance || mintCount;
-  const _merkleProof = useMemo(() => merkleProof || [], [merkleProof]);
 
   const {
     data: mintData,
