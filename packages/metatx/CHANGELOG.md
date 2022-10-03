@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.16.7 (2022-10-03)
+
+
+### Bug Fixes
+
+* remove confirmations from wait method ([b309f81](https://github.com/flair-sdk/typescript/commit/b309f810d3e9cffd506aea9b023971c5b977f08d))
+
+
+
+
+
 ## 2.16.6 (2022-10-03)
 
 
