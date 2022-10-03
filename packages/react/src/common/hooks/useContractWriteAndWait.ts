@@ -37,7 +37,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   confirmations = 1,
   ...restOfConfig
 }: ContractWriteConfig<ArgsType>) => {
-  const { isConnected } = useAccount();
+  const { address, isConnected } = useAccount();
   const { chain } = useNetwork();
 
   const {
@@ -47,6 +47,14 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     isError: prepareIsError,
     isLoading: prepareLoading,
   } = usePrepareContractWrite({
+    enabled: Boolean(
+      isConnected &&
+        address &&
+        contractAddress &&
+        contractInterface &&
+        args !== undefined &&
+        functionName,
+    ),
     addressOrName: contractAddress as string,
     contractInterface,
     functionName,
