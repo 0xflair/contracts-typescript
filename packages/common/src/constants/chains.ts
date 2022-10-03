@@ -1,4 +1,4 @@
-import { allChains as WagmiChains, Chain } from 'wagmi';
+import { allChains as WagmiChains, Chain } from '@wagmi/core';
 
 // TODO: Move these to wagmi repo itself
 // https://github.com/wagmi-dev/wagmi/blob/0.3.x/packages/core/src/constants/chains.ts#L234

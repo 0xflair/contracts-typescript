@@ -1,6 +1,5 @@
 import { MagicConnector } from '@everipedia/wagmi-magic-connector';
-import { UserRejectedRequestError } from '@wagmi/core';
-import { Chain } from 'wagmi';
+import { Chain, UserRejectedRequestError } from '@wagmi/core';
 
 import { FLAIR_CHAINS } from '../constants';
 
