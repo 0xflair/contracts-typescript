@@ -5,11 +5,11 @@ export const useStickyState = <S>(
   key: string,
   ignoredKeys?: string[],
 ): [S, Dispatch<SetStateAction<S>>] => {
-  const supportsLocalStorage = typeof window.localStorage !== 'undefined';
+  const supportsLocalStorage = typeof window?.localStorage !== 'undefined';
 
   const [value, setValue] = React.useState<S>(() => {
     const stickyValue = supportsLocalStorage
-      ? window.localStorage.getItem(key)
+      ? window?.localStorage.getItem(key)
       : null;
     return stickyValue !== null ? JSON.parse(stickyValue) : initialState;
   });
@@ -24,9 +24,9 @@ export const useStickyState = <S>(
           cloneValue[key] = undefined;
         }
       });
-      window.localStorage.setItem(key, JSON.stringify(cloneValue));
+      window?.localStorage.setItem(key, JSON.stringify(cloneValue));
     } else {
-      window.localStorage.setItem(key, JSON.stringify(value));
+      window?.localStorage.setItem(key, JSON.stringify(value));
     }
   }, [ignoredKeys, key, supportsLocalStorage, value]);
 

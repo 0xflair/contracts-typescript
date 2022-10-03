@@ -7,7 +7,7 @@ const localStoragePersister =
   typeof window !== 'undefined'
     ? createSyncStoragePersister({
         key: 'flair.cache',
-        storage: window.localStorage,
+        storage: window?.localStorage,
         serialize,
         deserialize,
       })

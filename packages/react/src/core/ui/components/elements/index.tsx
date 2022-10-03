@@ -1,4 +1,3 @@
-export * from './CodeBlock/CodeBlock';
 export * from './AddressScannerLink';
 export * from './Badge';
 export * from './Button';

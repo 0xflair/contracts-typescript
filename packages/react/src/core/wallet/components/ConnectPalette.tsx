@@ -92,7 +92,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
           ) : (
             <a
               target={'_blank'}
-              href={`https://metamask.app.link/dapp/${window.location.href}`}
+              href={`https://metamask.app.link/dapp/${window?.location.href}`}
               type="button"
               className={classNames(
                 'flair connect-button connector-metamask',

@@ -50,7 +50,7 @@ export class MagicLinkConnector extends MagicConnector {
         if (output.oauthProvider) {
           await magic.oauth.loginWithRedirect({
             provider: output.oauthProvider,
-            redirectURI: this.oauthCallbackUrl || window.location.href,
+            redirectURI: this.oauthCallbackUrl || window?.location?.href,
           });
         }
 

@@ -214,6 +214,13 @@ export const TieredSalesProvider = ({
       });
     }
 
+    // If not found, look for a tier that is just eligible
+    if (tierId === undefined) {
+      tierId = tierIds.find((id) => {
+        return Boolean(tiers[id].isEligible);
+      });
+    }
+
     // If not found, look for a tier that is just active and has remaining supply
     if (tierId === undefined) {
       tierId = tierIds.find((id) => {
@@ -222,13 +229,6 @@ export const TieredSalesProvider = ({
             (tiers[id].remainingSupply === undefined ||
               BigNumber.from(tiers[id].remainingSupply).gt(0)),
         );
-      });
-    }
-
-    // If not found, look for a tier that is just eligible
-    if (tierId === undefined) {
-      tierId = tierIds.find((id) => {
-        return Boolean(tiers[id].isEligible);
       });
     }
 
