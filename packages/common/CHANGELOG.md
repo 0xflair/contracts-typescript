@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.16.0 (2022-10-03)
+
+
+### Features
+
+* add prepare error and loading variables to contract write hook ([31b1c0b](https://github.com/flair-sdk/typescript/commit/31b1c0b466fb39e3df655b823fa5a3e58380c584))
+
+
+
+
+
 ## 2.15.2 (2022-10-02)
 
 
