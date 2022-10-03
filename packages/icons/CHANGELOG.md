@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.16.4 (2022-10-03)
+
+
+### Bug Fixes
+
+* only prepare if all required params are provided ([591f968](https://github.com/flair-sdk/typescript/commit/591f968d9a14fdd0ae5f39e7d915fbed4cd1640f))
+
+
+
+
+
 ## 2.16.3 (2022-10-03)
 
 **Note:** Version bump only for package @flair-sdk/icons
