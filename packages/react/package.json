@@ -196,5 +196,10 @@
     "@types/react-dom": "^18.0.5",
     "@types/react-modal": "^3.13.1",
     "postcss-add-root-selector": "^1.0.5"
+  },
+  "overrides": {
+    "@gnosis.pm/safe-apps-wagmi": {
+      "@wagmi/core": "^0.5.7"
+    }
   }
 }
