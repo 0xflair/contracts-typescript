@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.16.8 (2022-10-03)
+
+
+### Bug Fixes
+
+* use correct variable for mint count ([f6e0151](https://github.com/flair-sdk/typescript/commit/f6e0151e382dfcc954bf14ebce556cfbb9e90487))
+
+
+
+
+
 ## 2.16.7 (2022-10-03)
 
 
