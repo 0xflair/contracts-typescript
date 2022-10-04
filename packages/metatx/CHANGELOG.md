@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.17.1 (2022-10-04)
+
+
+### Bug Fixes
+
+* more robust crypto value component ([d0b90e6](https://github.com/flair-sdk/typescript/commit/d0b90e6c225d31ec6476f7703bf1da9ed414b855))
+
+
+
+
+
 # 2.17.0 (2022-10-04)
 
 
