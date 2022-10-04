@@ -1,3 +1,4 @@
+import { FacetManifest } from '@flair-sdk/registry';
 import { ContractInterface } from 'ethers';
 
 export type SmartContract<TInitialConfig = any, TInfo = any> = {
@@ -9,7 +10,7 @@ export type SmartContract<TInitialConfig = any, TInfo = any> = {
   abi?: string;
   initialConfig?: TInitialConfig;
   features?: Feature[];
-  facets?: Feature[];
+  facets?: FacetManifest[];
   info?: TInfo;
   analysisState?:
     | 'submitted'

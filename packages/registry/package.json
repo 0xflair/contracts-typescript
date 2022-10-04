@@ -22,14 +22,19 @@
     "dist"
   ],
   "peerDependencies": {
+    "axios": "*",
     "ethers": "*"
   },
-  "devDependencies": {
-    "ethers": "^5.6.5"
-  },
   "peerDependenciesMeta": {
+    "axios": {
+      "optional": true
+    },
     "ethers": {
       "optional": true
     }
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "ethers": "^5.6.5"
   }
 }

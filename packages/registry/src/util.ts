@@ -1,3 +1,5 @@
+import { utils } from 'ethers';
+
 export const compareSemanticVersion = (a: string, b: string): -1 | 0 | 1 => {
   const pa = a.replace(/^v/i, '').split('.');
   const pb = b.replace(/^v/i, '').split('.');
@@ -10,4 +12,8 @@ export const compareSemanticVersion = (a: string, b: string): -1 | 0 | 1 => {
     if (isNaN(na) && !isNaN(nb)) return -1;
   }
   return 0;
+};
+
+export const encodeFunctionSignature = (signature: string) => {
+  return utils.keccak256(utils.toUtf8Bytes(signature)).slice(0, 10);
 };

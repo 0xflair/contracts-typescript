@@ -24,14 +24,9 @@ export const useSaleTiersConfigs = ({
   enabled,
 }: Config) => {
   const contractInterface = useMemo(() => {
-    const contractDefinition = findContractByReference(
-      'flair-sdk:finance/sales/ITieredSales',
-    );
-    return new ethers.utils.Interface(
-      contractDefinition?.artifact?.abi || [
-        'function tiers(uint256) view returns (bytes)',
-      ],
-    );
+    return new ethers.utils.Interface([
+      'function tiers(uint256) view returns (bytes)',
+    ]);
   }, []);
 
   // Create an array of calls to get tiers by index from 0 to 20
