@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.17.0 (2022-10-04)
+
+
+### Features
+
+* remove facet lookups and no dependency on contracts registry ([10bfee2](https://github.com/flair-sdk/typescript/commit/10bfee2333b69fd686b3d45e6e55d5549eefc182))
+
+
+
+
+
 ## 2.16.8 (2022-10-03)
 
 
