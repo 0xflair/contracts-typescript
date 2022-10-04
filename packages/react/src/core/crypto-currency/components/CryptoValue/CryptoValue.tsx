@@ -1,5 +1,5 @@
 import * as ethers from 'ethers';
-import { BigNumberish } from 'ethers';
+import { BigNumber, BigNumberish } from 'ethers';
 import { ReactNode, useMemo } from 'react';
 
 import { useCryptoCurrency } from '../../hooks';
@@ -31,11 +31,14 @@ export const CryptoValue = (props: Props) => {
 
   const etherValue = useMemo(() => {
     try {
-      const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
+      const valueBn = ethers.utils.parseUnits(
+        BigNumber.from(value || '0')?.toString() || '0',
+        unit,
+      );
       return ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
     } catch (e) {
       debugger;
-      console.error(`Error parsing value: ${value}`, e);
+      console.error(`Error parsing value: `, value, e);
     }
   }, [unit, value]);
 
