@@ -31,6 +31,7 @@ export type PredefinedReadContractConfig<ArgsType = []> = Omit<
 export const useContractRead = <ResultType = any, ArgsType = []>({
   enabled = true,
   contractReference,
+  contractInterface,
   contractAddress,
   functionName,
   args,
@@ -57,9 +58,8 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
 
   const result = useContractReadWagmi({
     addressOrName: contractAddress as string,
-    contractInterface: contractDefinition?.artifact?.abi || [
-      `function ${functionName}`,
-    ],
+    contractInterface: contractDefinition?.artifact?.abi ||
+      contractInterface || [`function ${functionName}`],
     functionName,
     args,
     enabled: readyToRead,
