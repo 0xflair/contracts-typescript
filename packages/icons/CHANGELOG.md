@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.19.1 (2022-10-05)
+
+
+### Bug Fixes
+
+* add correct return types for sale tiers configs hooks ([4d1b9ed](https://github.com/flair-sdk/typescript/commit/4d1b9eda71893ceecdf570f26b3549e6e6e72659))
+
+
+
+
+
 # 2.19.0 (2022-10-05)
 
 
