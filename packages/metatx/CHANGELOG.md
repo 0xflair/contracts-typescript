@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.19.4 (2022-10-05)
+
+
+### Bug Fixes
+
+* use named return vars for tiers configs ([b623ad4](https://github.com/flair-sdk/typescript/commit/b623ad4c7b45c1abf0ad5ce4faf00375e8501c87))
+
+
+
+
+
 ## 2.19.3 (2022-10-05)
 
 
