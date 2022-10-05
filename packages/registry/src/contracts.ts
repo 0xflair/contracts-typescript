@@ -1,4 +1,4 @@
-import { BytesLike } from 'ethers';
+import { BytesLike, ethers } from 'ethers';
 import _ from 'lodash';
 
 import { SemanticVersion } from './common';
@@ -15,6 +15,7 @@ export type ContractAddress = BytesLike;
 export type ContractCall = {
   id: string;
   contract?: ContractAddress | null; // Only allow contract address
+  interface?: string | ethers.utils.Interface | any[];
   function?: string | null;
   args?: any[] | null;
 };
