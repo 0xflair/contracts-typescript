@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.19.3 (2022-10-05)
+
+
+### Bug Fixes
+
+* remove dependency on contract abis ([1637502](https://github.com/flair-sdk/typescript/commit/1637502b51688849333e44c6cfb7f17745d712c7))
+
+
+
+
+
 ## 2.19.2 (2022-10-05)
 
 **Note:** Version bump only for package @flair-sdk/common
