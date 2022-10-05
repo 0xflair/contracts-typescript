@@ -3,7 +3,7 @@ import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
 import { useCallback, useMemo } from 'react';
 
-import { useContractAbi, useContractWriteAndWait } from '../../../common';
+import { useContractWriteAndWait } from '../../../common';
 import { useSaleTierConfig } from './useSaleTierConfig';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
 import { useTieredSalesEligibleAmount } from './useTieredSalesEligibleAmount';
@@ -105,17 +105,13 @@ export const useTieredSalesMinter = ({
     ),
   });
 
-  const contractInterface = useContractAbi({
-    contractReference: 'flair-sdk:finance/sales/ITieredSales',
-  });
-
   const {
     data: mintData,
     error: mintError,
     isLoading: mintLoading,
     writeAndWait: mintAndWait,
   } = useContractWriteAndWait<ArgsType>({
-    contractInterface: contractInterface || [
+    contractInterface: [
       'function mintByTier(uint256 tierId,uint256 count,uint256 maxAllowance,bytes32[] calldata proof) external payable',
     ],
     functionName: 'mintByTier',

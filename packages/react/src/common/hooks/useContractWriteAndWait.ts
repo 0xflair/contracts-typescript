@@ -4,7 +4,6 @@ import { ContractInterface, Signer } from 'ethers';
 import { useCallback } from 'react';
 import {
   useAccount,
-  useConnect,
   useContractWrite,
   useNetwork,
   usePrepareContractWrite,
