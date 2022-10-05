@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.19.0 (2022-10-05)
+
+
+### Features
+
+* allow defining the interface on call-level ([3f44765](https://github.com/flair-sdk/typescript/commit/3f44765c6dcfa273a3c18d3570382c9bc966da34))
+
+
+
+
+
 # 2.18.0 (2022-10-05)
 
 
