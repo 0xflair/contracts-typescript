@@ -25,7 +25,7 @@ export const useSaleTiersConfigs = ({
 }: Config) => {
   const contractInterface = useMemo(() => {
     return new ethers.utils.Interface([
-      'function tiers(uint256) view returns ((uint256,uint256,address,uint256,uint256,bytes32,uint256,uint256))',
+      'function tiers(uint256) view returns ((uint256 start,uint256 end,address currency,uint256 price,uint256 maxPerWallet,bytes32 merkleRoot,uint256 reserved,uint256 maxAllocation))',
     ]);
   }, []);
 
