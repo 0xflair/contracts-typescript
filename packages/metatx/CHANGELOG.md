@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.18.0 (2022-10-05)
+
+
+### Features
+
+* default to contractInterface if provided on useContractRead ([35c9f2a](https://github.com/flair-sdk/typescript/commit/35c9f2ace735455e338761bd8ae6394b00ffbd41))
+
+
+
+
+
 ## 2.17.1 (2022-10-04)
 
 
