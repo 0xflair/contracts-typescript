@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.20.0 (2022-10-06)
+
+
+### Features
+
+* port tiered sales components ([10fd9d3](https://github.com/flair-sdk/typescript/commit/10fd9d33388862260b46abadcb92dc5ad7fbf6d6))
+
+
+
+
+
 ## 2.19.6 (2022-10-06)
 
 
