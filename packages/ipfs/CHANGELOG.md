@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.20.3 (2022-10-06)
+
+
+### Bug Fixes
+
+* uriSuffix hook function name and remove feature hooks ([525d37e](https://github.com/flair-sdk/typescript/commit/525d37e1dd2f3426f31fa3588bd514a3961cb357))
+
+
+
+
+
 ## 2.20.2 (2022-10-06)
 
 
