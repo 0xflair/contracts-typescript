@@ -9,7 +9,7 @@ export const useTokenMetadataUriSuffix = (
 ) => {
   return useContractRead<BytesLike>({
     contractInterface: ['function uriSuffix() view returns (string)'],
-    functionName: 'uriSuffix',
+    functionName: 'uriSuffix()',
     ...config,
   });
 };

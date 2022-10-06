@@ -1,7 +1,10 @@
 import { BigNumber, BigNumberish } from 'ethers';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { PredefinedReadContractConfig, useContractRead } from '../../../../common';
+import {
+  PredefinedReadContractConfig,
+  useContractRead,
+} from '../../../../common';
 import { useSaleTierConfig } from './useSaleTierConfig';
 import { useTieredSalesTotalMinted } from './useTieredSalesTotalMinted';
 
