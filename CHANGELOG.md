@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.20.5 (2022-10-06)
+
+
+### Bug Fixes
+
+* preserve values in multicall read hook ([5cb66f6](https://github.com/flair-sdk/typescript/commit/5cb66f6a6b2414dc7095951c95a2c1e38938eebb))
+
+
+
+
+
 ## 2.20.4 (2022-10-06)
 
 
