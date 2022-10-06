@@ -53,8 +53,8 @@ export function useSmartContract<TInitialConfig = any, TInfo = any>({
     SmartContract<TInitialConfig, TInfo>
   >(queryKey, queryFn, {
     enabled: canRequest,
-    cacheTime: 30,
-    staleTime: 5,
+    cacheTime: 5,
+    staleTime: 3,
   });
 
   useInterval(() => {

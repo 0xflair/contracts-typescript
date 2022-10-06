@@ -170,7 +170,7 @@ export const useSaleTiers = ({
     TiersDictionary | undefined
   >(queryKey, enrichAllTiers, {
     enabled: Boolean(enabled && tiersConfigs && !tiersConfigsLoading),
-    cacheTime: 20,
+    cacheTime: 3,
     staleTime: 2,
   });
 
