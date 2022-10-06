@@ -1,11 +1,9 @@
-import {
-  classNames,
-  normalizeIpfsUrl,
-  useRemoteJsonReader,
-} from '@flair-sdk/react';
+import { classNames } from '@flair-sdk/common';
+import { normalizeIpfsUrl } from '@flair-sdk/ipfs';
 import { BigNumberish } from 'ethers';
 import { ReactNode, useMemo } from 'react';
 
+import { useRemoteJsonReader } from '../../../../../core';
 import { useTokenMetadataUri } from '../../../metadata';
 import { NftTokenMetadata } from '../../../metadata/types';
 import { ERC1155Token } from '../../types';
