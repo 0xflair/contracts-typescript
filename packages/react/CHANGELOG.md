@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.20.4 (2022-10-06)
+
+
+### Bug Fixes
+
+* add missing () for metadata hook ([ad30589](https://github.com/flair-sdk/typescript/commit/ad30589ae5276d6b85da631bc243e5109a4a0de3))
+
+
+
+
+
 ## 2.20.3 (2022-10-06)
 
 
