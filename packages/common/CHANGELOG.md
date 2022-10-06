@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.20.1 (2022-10-06)
+
+
+### Bug Fixes
+
+* correct import path for ipfs normalizer ([0cf6c3a](https://github.com/flair-sdk/typescript/commit/0cf6c3a31b6129022fdf57f33efcb77c73024123))
+
+
+
+
+
 # 2.20.0 (2022-10-06)
 
 
