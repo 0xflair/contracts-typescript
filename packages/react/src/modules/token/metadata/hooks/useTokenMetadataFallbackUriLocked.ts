@@ -7,9 +7,8 @@ export const useTokenMetadataFallbackUriLocked = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<boolean>({
-    contractReference:
-      'flair-sdk:token/ERC1155/facets/metadata/IERC1155MetadataExtra',
-    functionName: 'fallbackURILocked',
+    contractInterface: ['function fallbackURILocked() view returns (bool)'],
+    functionName: 'fallbackURILocked()',
     ...config,
   });
 };

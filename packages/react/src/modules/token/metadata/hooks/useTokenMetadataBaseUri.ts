@@ -8,9 +8,8 @@ export const useTokenMetadataBaseUri = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<BytesLike>({
-    contractReference:
-      'flair-sdk:token/ERC1155/facets/metadata/IERC1155MetadataExtra',
-    functionName: 'baseURI',
+    contractInterface: ['function baseURI() view returns (string)'],
+    functionName: 'baseURI()',
     ...config,
   });
 };

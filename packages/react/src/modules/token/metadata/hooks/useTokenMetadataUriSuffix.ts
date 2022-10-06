@@ -8,8 +8,7 @@ export const useTokenMetadataUriSuffix = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<BytesLike>({
-    contractReference:
-      'flair-sdk:token/ERC1155/facets/metadata/IERC1155MetadataExtra',
+    contractInterface: ['function uriSuffix() view returns (string)'],
     functionName: 'uriSuffix',
     ...config,
   });

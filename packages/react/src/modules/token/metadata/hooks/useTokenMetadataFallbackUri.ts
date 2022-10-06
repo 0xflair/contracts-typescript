@@ -8,9 +8,8 @@ export const useTokenMetadataFallbackUri = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<BytesLike>({
-    contractReference:
-      'flair-sdk:token/ERC1155/facets/metadata/IERC1155MetadataExtra',
-    functionName: 'fallbackURI',
+    contractInterface: ['function fallbackURI() view returns (string)'],
+    functionName: 'fallbackURI()',
     ...config,
   });
 };

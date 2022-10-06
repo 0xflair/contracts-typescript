@@ -7,8 +7,7 @@ export const useTokenMetadataUriSuffixLocked = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<boolean>({
-    contractReference:
-      'flair-sdk:token/ERC1155/facets/metadata/IERC1155MetadataExtra',
+    contractInterface: ['function uriSuffixLocked() view returns (bool)'],
     functionName: 'uriSuffixLocked',
     ...config,
   });

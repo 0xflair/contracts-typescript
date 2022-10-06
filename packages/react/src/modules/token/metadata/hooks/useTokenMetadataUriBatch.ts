@@ -1,8 +1,8 @@
-import {
-  PredefinedReadContractConfig,
-  useContractRead,
-} from '@flair-sdk/react';
-import { BigNumberish, BytesLike } from 'ethers';
+import { PredefinedReadContractConfig } from '@flair-sdk/react';
+import { BigNumberish, BytesLike, ethers } from 'ethers';
+import { useMemo } from 'react';
+
+import { useMultiCallRead } from '../../../../common';
 
 type ArgsType = [tokenIds: BigNumberish[]];
 
@@ -15,16 +15,27 @@ export const useTokenMetadataUriBatch = ({
   contractAddress,
   enabled = true,
   tokenIds,
+  contractInterface: _contractInterface,
   ...restOfConfig
 }: Config) => {
-  const result = useContractRead<BytesLike[], ArgsType>({
-    contractReference:
-      'flair-sdk:token/ERC1155/facets/metadata/IERC1155MetadataExtra',
-    functionName: 'uriBatch(uint256[])',
+  const contractInterface = useMemo(() => {
+    return new ethers.utils.Interface([
+      'function uri(uint256) view returns (string)',
+    ]);
+  }, []);
+
+  const result = useMultiCallRead<BytesLike[]>({
     chainId,
-    contractAddress,
-    args: (tokenIds?.length ? [tokenIds] : []) as ArgsType,
-    enabled: Boolean(enabled && tokenIds?.length),
+    addressOrName: contractAddress as string,
+    contractInterface,
+    enabled: Boolean(enabled && contractAddress),
+    calls: tokenIds?.length
+      ? tokenIds.map((tokenId) => ({
+          id: `token-${tokenId}`,
+          function: 'uri(uint256)',
+          args: [tokenId],
+        }))
+      : [],
     ...restOfConfig,
   });
 

@@ -7,9 +7,8 @@ export const useTokenMetadataBaseUriLocked = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<boolean>({
-    contractReference:
-      'flair-sdk:token/ERC1155/facets/metadata/IERC1155MetadataExtra',
-    functionName: 'baseURILocked',
+    contractInterface: ['function baseURILocked() view returns (bool)'],
+    functionName: 'baseURILocked()',
     ...config,
   });
 };
