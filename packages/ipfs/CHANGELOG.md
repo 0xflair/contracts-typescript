@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.19.6 (2022-10-06)
+
+
+### Bug Fixes
+
+* lower cache time ([9a3063e](https://github.com/flair-sdk/typescript/commit/9a3063eb84cdf543e4523440e537c900d9b296e8))
+
+
+
+
+
 ## 2.19.5 (2022-10-05)
 
 **Note:** Version bump only for package @flair-sdk/ipfs
