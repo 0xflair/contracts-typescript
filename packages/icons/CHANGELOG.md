@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.20.2 (2022-10-06)
+
+
+### Bug Fixes
+
+* remove dependency on contracts abis in metadata hooks ([a6b4a9c](https://github.com/flair-sdk/typescript/commit/a6b4a9c88cdfdef0856b6e5694ab45c90a87dc6f))
+
+
+
+
+
 ## 2.20.1 (2022-10-06)
 
 
