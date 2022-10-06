@@ -43,9 +43,7 @@ export const useTokenMetadataUriBatch = ({
   const mapping =
     tokenIds &&
     result.data?.reduce((acc, uri, index) => {
-      if (tokenIds[index]) {
-        acc[tokenIds[index].toString()] = uri;
-      }
+      acc[tokenIds[index].toString()] = uri;
       return acc;
     }, {} as Record<string, BytesLike>);
 

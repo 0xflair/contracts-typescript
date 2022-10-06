@@ -32,9 +32,7 @@ export const useERC1155MaxSupplyBatch = ({
   const mapping =
     tokenIds &&
     result.data?.reduce((acc, maxSupply, index) => {
-      if (tokenIds[index]) {
-        acc[tokenIds[index].toString()] = maxSupply?.toString();
-      }
+      acc[tokenIds[index].toString()] = maxSupply?.toString();
       return acc;
     }, {} as Record<string, BigNumberish>);
 

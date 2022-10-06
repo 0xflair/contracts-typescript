@@ -76,45 +76,43 @@ export const useMultiCallRead = <TData extends any[]>({
         return;
       }
 
-      const resultData = data
-        .map((result, index) => {
-          const call = calls[index];
-          if (!call) {
-            throw new Error(`Call not found for result ${index}`);
+      const resultData = data.map((result, index) => {
+        const call = calls[index];
+        if (!call) {
+          throw new Error(`Call not found for result ${index}`);
+        }
+
+        const iface =
+          contractInterface ||
+          new utils.Interface([`function ${call.function}`]);
+
+        if (!call.function || !iface.functions[call.function]) {
+          throw new Error(
+            `Function ${call.function} not found OR ambiguous in contract ${
+              call.contract
+            }, choose one of: ${Object.keys(iface.functions).join(' ')}`,
+          );
+        }
+
+        try {
+          const decodedResult = iface.decodeFunctionResult(
+            call.function,
+            result,
+          );
+
+          if (Array.isArray(decodedResult) && decodedResult.length === 1) {
+            return decodedResult[0];
+          } else {
+            return decodedResult;
           }
-
-          const iface =
-            contractInterface ||
-            new utils.Interface([`function ${call.function}`]);
-
-          if (!call.function || !iface.functions[call.function]) {
-            throw new Error(
-              `Function ${call.function} not found OR ambiguous in contract ${
-                call.contract
-              }, choose one of: ${Object.keys(iface.functions).join(' ')}`,
-            );
-          }
-
-          try {
-            const decodedResult = iface.decodeFunctionResult(
-              call.function,
-              result,
-            );
-
-            if (Array.isArray(decodedResult) && decodedResult.length === 1) {
-              return decodedResult[0];
-            } else {
-              return decodedResult;
-            }
-          } catch (err) {
-            debugger;
-            console.error(
-              `Could not decode function ${call.function} with result ${result}`,
-              err,
-            );
-          }
-        })
-        .filter((result) => !!result) as TData;
+        } catch (err) {
+          debugger;
+          console.error(
+            `Could not decode function ${call.function} with result ${result}`,
+            err,
+          );
+        }
+      }) as TData;
 
       setError(undefined);
       setResultData(resultData);
