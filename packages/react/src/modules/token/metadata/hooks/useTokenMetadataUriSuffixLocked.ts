@@ -8,7 +8,7 @@ export const useTokenMetadataUriSuffixLocked = (
 ) => {
   return useContractRead<boolean>({
     contractInterface: ['function uriSuffixLocked() view returns (bool)'],
-    functionName: 'uriSuffixLocked',
+    functionName: 'uriSuffixLocked()',
     ...config,
   });
 };
