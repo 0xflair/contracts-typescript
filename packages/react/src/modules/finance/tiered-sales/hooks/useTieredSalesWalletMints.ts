@@ -22,7 +22,7 @@ export const useTieredSalesWalletMints = ({
     contractInterface: [
       'function walletMintedByTier(uint256 tierId, address wallet) external view returns (uint256)',
     ],
-    functionName: 'walletMintedByTier(uint256)',
+    functionName: 'walletMintedByTier(uint256,address)',
     chainId,
     contractAddress,
     args: [tierId, walletAddress] as ArgsType,

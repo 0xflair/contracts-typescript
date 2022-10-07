@@ -56,10 +56,20 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
     enabled && contractAddress && contractAddress !== ZERO_ADDRESS,
   );
 
+  const finalContractInterface = useMemo(
+    () =>
+      contractDefinition?.artifact?.abi ||
+      contractInterface || [
+        `function ${
+          functionName.endsWith(')') ? functionName : `${functionName}()`
+        } view`,
+      ],
+    [contractDefinition?.artifact?.abi, contractInterface, functionName],
+  );
+
   const result = useContractReadWagmi({
     addressOrName: contractAddress as string,
-    contractInterface: contractDefinition?.artifact?.abi ||
-      contractInterface || [`function ${functionName}`],
+    contractInterface: finalContractInterface,
     functionName,
     args,
     enabled: readyToRead,
@@ -78,15 +88,10 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
 
     return new ethers.Contract(
       contractAddress,
-      contractDefinition?.artifact?.abi || ['function ' + functionName],
+      finalContractInterface,
       provider,
     );
-  }, [
-    contractAddress,
-    contractDefinition?.artifact?.abi,
-    functionName,
-    provider,
-  ]);
+  }, [contractAddress, finalContractInterface, provider]);
 
   const call = useCallback(
     async (overrides?: { args?: ArgsType }) => {

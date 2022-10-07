@@ -4,12 +4,11 @@ A complete suite of Flair reusable components and clients for frontend and backe
 
 ## Packages
 
-| Name                                       | Description                                                                                                                            |
-| :----------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| [@flair-sdk/react](./packages/react)       | React hooks and components for features like Wallet, NFT Collections, Token Streams, etc. (browser only)                               |
-| [@flair-sdk/metatx](./packages/metatx)     | Extension to ether.js `Contract` classm to make all functions compatible with native meta transactions standard. (node.js and browser) |
-| [@flair-sdk/registry](./packages/registry) | Compiled registry of Flair contract ABIs, bytecodes, addresses, and metadata for easy usage. (node.js and browser)                     |
-| [@flair-sdk/ipfs](./packages/ipfs)         | Utility functions to interact with IPFS, useful for NFT metadata storage. (node.js and browser)                                        |
+| Name                                   | Description                                                                                                                                                                                 |
+| :------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [@flair-sdk/react](./packages/react)   | React hooks and components for features like Wallet, NFT Collections, Token Streams, etc. (browser only)                                                                                    |
+| [@flair-sdk/metatx](./packages/metatx) | Extension to ether.js `Contract` class to make all functions compatible with native meta transactions standard ([ERC 2771](https://eips.ethereum.org/EIPS/eip-2771)). (node.js and browser) |
+| [@flair-sdk/ipfs](./packages/ipfs)     | Utility functions to interact with IPFS, useful for NFT metadata storage. (node.js and browser)                                                                                             |
 
 ## Documentation
 
