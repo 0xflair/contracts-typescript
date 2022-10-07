@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.22.0 (2022-10-07)
+
+
+### Features
+
+* add class names to minting section component ([792a99d](https://github.com/flair-sdk/typescript/commit/792a99d4533b2957dd16743e7ef318e531deb594))
+
+
+
+
+
 # 2.21.0 (2022-10-07)
 
 
