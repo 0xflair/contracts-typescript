@@ -1,5 +1,5 @@
 import { Fragment, PropsWithChildren } from 'react';
-import { useAccount, useConnect, useNetwork } from 'wagmi';
+import { useAccount } from 'wagmi';
 
 import { BareComponentProps } from '../../../common';
 

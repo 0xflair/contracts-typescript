@@ -45,6 +45,8 @@
     "@heroicons/react": "*",
     "@metamask/onboarding": "*",
     "@tailwindcss/forms": "*",
+    "@tanstack/query-core": "*",
+    "@tanstack/react-query": "*",
     "@tanstack/query-sync-storage-persister": "*",
     "@tanstack/react-query-persist-client": "*",
     "@wagmi/core": "*",
@@ -134,6 +136,9 @@
       "optional": true
     },
     "react-modal": {
+      "optional": true
+    },
+    "@tanstack/query-core": {
       "optional": true
     },
     "@tanstack/react-query": {

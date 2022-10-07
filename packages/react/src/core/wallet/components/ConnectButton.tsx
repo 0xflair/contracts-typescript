@@ -1,7 +1,7 @@
 import { XIcon } from '@heroicons/react/solid';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import { useAccount, useConnect } from 'wagmi';
+import { useAccount } from 'wagmi';
 
 import { BareComponentProps } from '../../../common';
 import { ConnectPalette, ConnectPaletteProps } from './ConnectPalette';
