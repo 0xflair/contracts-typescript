@@ -1,7 +1,7 @@
 import {
   PredefinedReadContractConfig,
   useContractRead,
-} from '@flair-sdk/react';
+} from '../../../../common';
 
 export const useTokenMetadataUriSuffixLocked = (
   config: PredefinedReadContractConfig,

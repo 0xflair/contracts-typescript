@@ -1,4 +1,4 @@
-import { Environment } from '@flair-sdk/react';
+import { Environment } from '@flair-sdk/common';
 import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
 

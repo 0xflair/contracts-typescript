@@ -1,10 +1,11 @@
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
-import { TransactionLink } from '@flair-sdk/react';
 import { Dialog, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/outline';
 import { BigNumberish } from 'ethers';
 import { Fragment, ReactNode } from 'react';
+
+import { TransactionLink } from '../../../../core';
 
 type Props = {
   mintCount?: BigNumberish;

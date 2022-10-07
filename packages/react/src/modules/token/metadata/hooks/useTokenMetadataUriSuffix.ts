@@ -1,8 +1,9 @@
+import { BytesLike } from 'ethers';
+
 import {
   PredefinedReadContractConfig,
   useContractRead,
-} from '@flair-sdk/react';
-import { BytesLike } from 'ethers';
+} from '../../../../common';
 
 export const useTokenMetadataUriSuffix = (
   config: PredefinedReadContractConfig,

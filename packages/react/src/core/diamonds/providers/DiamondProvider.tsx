@@ -1,15 +1,13 @@
+import { Environment } from '@flair-sdk/common';
 import {
   ContractCall,
   EIP165InterfaceID,
-  Environment,
   FacetManifest,
-  SmartContract,
-  useChainId,
-  useSmartContract,
-} from '@flair-sdk/react';
+} from '@flair-sdk/registry';
 import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 
+import { SmartContract, useChainId, useSmartContract } from '../../../common';
 import { useDiamond } from '../hooks/useDiamond';
 import { Diamond } from '../types';
 

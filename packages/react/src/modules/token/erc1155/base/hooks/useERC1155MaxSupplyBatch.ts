@@ -1,8 +1,9 @@
+import { BigNumberish } from 'ethers';
+
 import {
   PredefinedReadContractConfig,
   useContractRead,
-} from '@flair-sdk/react';
-import { BigNumberish } from 'ethers';
+} from '../../../../../common';
 
 type ArgsType = [tokenIds: BigNumberish[]];
 

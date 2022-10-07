@@ -96,9 +96,5 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  },
-  "dependencies": {
-    "@flair-sdk/contracts": "^2.6.4",
-    "@flair-sdk/react": "^2.13.0"
   }
 }

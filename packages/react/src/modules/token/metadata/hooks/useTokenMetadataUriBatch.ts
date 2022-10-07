@@ -1,8 +1,10 @@
-import { PredefinedReadContractConfig } from '@flair-sdk/react';
 import { BigNumberish, BytesLike, ethers } from 'ethers';
 import { useMemo } from 'react';
 
-import { useMultiCallRead } from '../../../../common';
+import {
+  PredefinedReadContractConfig,
+  useMultiCallRead,
+} from '../../../../common';
 
 type ArgsType = [tokenIds: BigNumberish[]];
 

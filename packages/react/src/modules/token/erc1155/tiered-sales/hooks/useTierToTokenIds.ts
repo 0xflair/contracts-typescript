@@ -1,8 +1,9 @@
+import { BigNumberish, BytesLike } from 'ethers';
+
 import {
   PredefinedReadContractConfig,
   useContractRead,
-} from '@flair-sdk/react';
-import { BigNumberish, BytesLike } from 'ethers';
+} from '../../../../../common';
 
 type ArgsType = [tierIds: BigNumberish[]];
 

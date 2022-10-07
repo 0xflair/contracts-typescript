@@ -1,5 +1,6 @@
-import { Environment, useAxiosGet } from '@flair-sdk/react';
+import { Environment } from '@flair-sdk/common';
 
+import { useAxiosGet } from '../../../common';
 import { FLAIR_DIAMONDS_BACKEND } from '../constants';
 import { Diamond } from '../types';
 

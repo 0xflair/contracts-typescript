@@ -1,4 +1,4 @@
-import { SmartContract } from '@flair-sdk/react';
+import { SmartContract } from '../../common';
 
 export type Diamond<TConfig = Record<string, any>> = {
   id?: string;
