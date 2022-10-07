@@ -1,6 +1,5 @@
 import '@tanstack/query-core';
 import '@wagmi/core';
-import '@flair-sdk/contracts';
 
 export * from '@flair-sdk/common';
 export * from '@flair-sdk/registry';

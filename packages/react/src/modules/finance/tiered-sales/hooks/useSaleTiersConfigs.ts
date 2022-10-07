@@ -1,6 +1,5 @@
 import '@wagmi/core';
 
-import { findContractByReference } from '@flair-sdk/registry';
 import { BigNumber, BigNumberish, ethers } from 'ethers';
 import _ from 'lodash';
 import { useMemo } from 'react';

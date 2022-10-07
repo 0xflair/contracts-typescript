@@ -37,7 +37,6 @@
   },
   "peerDependencies": {
     "@flair-sdk/common": "*",
-    "@flair-sdk/contracts": "*",
     "@flair-sdk/icons": "*",
     "@flair-sdk/ipfs": "*",
     "@flair-sdk/metatx": "*",
@@ -69,9 +68,6 @@
   },
   "peerDependenciesMeta": {
     "@flair-sdk/common": {
-      "optional": true
-    },
-    "@flair-sdk/contracts": {
       "optional": true
     },
     "@flair-sdk/icons": {
@@ -189,7 +185,6 @@
     "wagmi": "^0.6.7"
   },
   "devDependencies": {
-    "@flair-sdk/contracts": "^2.6.4",
     "@types/humanize-duration": "^3.27.1",
     "@types/react": "^18.0.10",
     "@types/react-blockies": "^1.4.1",
