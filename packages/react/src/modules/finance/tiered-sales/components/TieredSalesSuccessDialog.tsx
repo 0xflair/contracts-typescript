@@ -21,7 +21,7 @@ type Props = {
   }) => ReactNode;
 };
 
-export default function TieredSalesSuccessDialog({
+export function TieredSalesSuccessDialog({
   mintCount,
   txResponse,
   txReceipt,
