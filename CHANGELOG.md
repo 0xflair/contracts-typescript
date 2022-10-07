@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.22.3 (2022-10-07)
+
+
+### Bug Fixes
+
+* typo in class name ([60b9beb](https://github.com/flair-sdk/typescript/commit/60b9beb0e229b795a3c7c9976af173b9f28456fd))
+
+
+
+
+
 ## 2.22.2 (2022-10-07)
 
 
