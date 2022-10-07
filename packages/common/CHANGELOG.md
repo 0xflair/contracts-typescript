@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.22.2 (2022-10-07)
+
+
+### Bug Fixes
+
+* various imports and wrong dep on styled-components ([3c3e11b](https://github.com/flair-sdk/typescript/commit/3c3e11b6db8db30cbc0aeecd99a4435b45ac8fef))
+
+
+
+
+
 ## 2.22.1 (2022-10-07)
 
 **Note:** Version bump only for package @flair-sdk/common
