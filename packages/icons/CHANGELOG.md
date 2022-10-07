@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.23.3 (2022-10-07)
+
+
+### Bug Fixes
+
+* correct function interface for tier to token ids hook ([da59ec3](https://github.com/flair-sdk/typescript/commit/da59ec33630e249240ac467257751bf00f86da86))
+
+
+
+
+
 ## 2.23.2 (2022-10-07)
 
 
