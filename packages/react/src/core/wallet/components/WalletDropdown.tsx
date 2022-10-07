@@ -93,7 +93,7 @@ export const WalletDropdown = ({
                   <p className="wallet-dropdown-balance-label text-xs capitalize text-gray-400 mt-3">
                     Balance
                   </p>
-                  <p className="wallet-dropdown-balance-value ext-sm font-medium text-gray-900">
+                  <p className="wallet-dropdown-balance-value text-sm font-medium text-gray-900">
                     <CryptoValue
                       symbol={chain?.nativeCurrency?.symbol || balance.symbol}
                       unit={CryptoUnits.WEI}

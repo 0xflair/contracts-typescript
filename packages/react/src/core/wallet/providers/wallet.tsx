@@ -9,7 +9,7 @@ import {
   PropsWithChildren,
   ReactNode,
   useCallback,
-  useLayoutEffect,
+  useEffect,
   useMemo,
 } from 'react';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
@@ -112,7 +112,7 @@ export const WalletProvider = ({
     [connectors],
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!injectStyles) {
       return;
     }
