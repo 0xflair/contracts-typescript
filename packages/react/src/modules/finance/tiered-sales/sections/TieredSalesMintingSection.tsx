@@ -2,7 +2,11 @@ import { BigNumberish } from 'ethers';
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
 
-import { ConnectButton, SwitchChainButton } from '../../../../core/wallet';
+import {
+  ConnectButton,
+  IfWalletConnected,
+  SwitchChainButton,
+} from '../../../../core/wallet';
 import {
   TieredSalesAllowlistStatus,
   TieredSalesEligibleAmount,
@@ -86,17 +90,21 @@ export const TieredSalesMintingSection = ({}: Props) => {
             </ConnectButton>
 
             {/* Maximum eligible amount */}
-            <small className="tiered-sales-eligibility-bar block font-light mt-2 text-xs">
-              <TieredSalesIfWalletCanMint>
-                You can mint up to{' '}
-                <TieredSalesEligibleAmount as="div" className="inline" />.{' '}
-              </TieredSalesIfWalletCanMint>
-              {address || isConnected || minterAddress ? (
-                <>
-                  You have minted <TieredSalesWalletMints /> NFTs in this tier.
-                </>
-              ) : null}
-            </small>
+            <IfWalletConnected>
+              <small className="tiered-sales-eligibility-bar block font-light mt-2 text-xs">
+                <TieredSalesIfWalletCanMint>
+                  You can mint up to{' '}
+                  <TieredSalesEligibleAmount as="div" className="inline" />.{' '}
+                </TieredSalesIfWalletCanMint>
+
+                {address || isConnected || minterAddress ? (
+                  <>
+                    You have minted <TieredSalesWalletMints /> NFTs in this
+                    tier.
+                  </>
+                ) : null}
+              </small>
+            </IfWalletConnected>
           </div>
 
           <TieredSalesMintStatusBar className="tiered-sales-status-bar mt-4 flex flex-col gap-2" />

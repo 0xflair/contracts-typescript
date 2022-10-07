@@ -20,7 +20,7 @@ export const useTierToTokenIds = ({
 }: Config) => {
   const result = useContractRead<BigNumberish[], ArgsType>({
     contractInterface: [
-      'function tierToTokenIds(uint256 tierId) external view returns (uint256[] memory)',
+      'function tierToTokenId(uint256[] calldata tierIds) external view virtual returns (uint256[] memory)',
     ],
     functionName: 'tierToTokenId(uint256[])',
     chainId,
