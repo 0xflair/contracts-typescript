@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.21.0 (2022-10-07)
+
+
+### Features
+
+* port success dialog to sdk ([ebb78e8](https://github.com/flair-sdk/typescript/commit/ebb78e8da16f44b6d3693854422d6a0a8ee89b7a))
+
+
+
+
+
 ## 2.20.5 (2022-10-06)
 
 
