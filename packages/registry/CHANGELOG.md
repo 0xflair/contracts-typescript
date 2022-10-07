@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.23.1 (2022-10-07)
+
+
+### Bug Fixes
+
+* correct calculation of contract interface on read hook ([5081125](https://github.com/flair-sdk/typescript/commit/5081125e182424ac05fd2bc33e1c0a532c5ee72a))
+
+
+
+
+
 # 2.23.0 (2022-10-07)
 
 
