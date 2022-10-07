@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.23.2 (2022-10-07)
+
+
+### Bug Fixes
+
+* correctly export the success dialog ([2d4f26d](https://github.com/flair-sdk/typescript/commit/2d4f26d46804b15a7436f00ebb7d8fcadadbf6d3))
+
+
+
+
+
 ## 2.23.1 (2022-10-07)
 
 
