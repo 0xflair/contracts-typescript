@@ -11,5 +11,6 @@ export * from './TieredSalesRemainingSupply';
 export * from './TieredSalesReservedSupply';
 export * from './TieredSalesSelector';
 export * from './TieredSalesStatus';
+export * from './TieredSalesSuccessDialog';
 export * from './TieredSalesTotalMinted';
 export * from './TieredSalesWalletMints';
