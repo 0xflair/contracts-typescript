@@ -39,10 +39,12 @@ export const useTieredSalesRemainingSupply = ({
   });
 
   const hook = useContractRead<BigNumberish, ArgsType>({
-    contractReference: 'flair-sdk:finance/sales/ITieredSales',
+    contractInterface: [
+      'function remainingForTier(uint256 tierId) external view returns (uint256)',
+    ],
     cacheTime: 10,
     staleTime: 2,
-    functionName: 'remainingForTier',
+    functionName: 'remainingForTier(uint256)',
     chainId,
     contractAddress,
     args: [tierId] as ArgsType,

@@ -63,8 +63,10 @@ export const useTieredSalesAllowlistChecker = ({
         merkleMetadata?.maxAllowance !== undefined &&
         merkleProof,
     ),
-    contractReference: 'flair-sdk:finance/sales/ITieredSales',
-    functionName: 'onTierAllowlist',
+    contractInterface: [
+      'function onTierAllowlist(uint256 tierId, address minter, uint256 maxAllowance, bytes32[] calldata proof) external view returns (bool)',
+    ],
+    functionName: 'onTierAllowlist(uint256,address,uint256,bytes32[])',
     contractAddress,
     cacheOnBlock: false,
     cacheTime: 10,

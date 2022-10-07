@@ -19,11 +19,12 @@ export const useERC1155MaxSupply = ({
   ...restOfConfig
 }: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
-    contractReference:
-      'flair-sdk:token/ERC1155/extensions/supply/IERC1155Supply',
+    contractInterface: [
+      'function maxSupply(uint256 tokenId) external view returns (uint256)',
+    ],
     chainId,
     contractAddress,
-    functionName: 'maxSupply',
+    functionName: 'maxSupply(uint256)',
     args: [tokenId] as ArgsType,
     enabled: Boolean(enabled && tokenId),
     ...restOfConfig,

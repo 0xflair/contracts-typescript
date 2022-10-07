@@ -19,10 +19,12 @@ export const useSaleTierConfig = (config: Config) => {
     config.tierId !== '';
 
   const result = useContractRead<Tier & any[], ArgsType>({
-    contractReference: 'flair-sdk:finance/sales/ITieredSales',
+    contractInterface: [
+      'function tiers(uint256) view returns ((uint256 start,uint256 end,address currency,uint256 price,uint256 maxPerWallet,bytes32 merkleRoot,uint256 reserved,uint256 maxAllocation))',
+    ],
     cacheTime: 60,
     staleTime: 5,
-    functionName: 'tiers',
+    functionName: 'tiers(uint256)',
     args: isValid ? ([config.tierId] as ArgsType) : [0],
     enabled: config.enabled && isValid,
     ...config,

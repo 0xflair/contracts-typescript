@@ -11,10 +11,12 @@ type Config = {
 
 export const useTieredSalesTotalMinted = (config: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
-    contractReference: 'flair-sdk:finance/sales/ITieredSales',
+    contractInterface: [
+      'function tierMints(uint256 tierId) external view returns (uint256)',
+    ],
     cacheTime: 10,
     staleTime: 2,
-    functionName: 'tierMints',
+    functionName: 'tierMints(uint256)',
     args: [config.tierId] as ArgsType,
     enabled:
       config.enabled &&

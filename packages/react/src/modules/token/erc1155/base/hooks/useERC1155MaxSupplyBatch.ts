@@ -19,8 +19,9 @@ export const useERC1155MaxSupplyBatch = ({
   ...restOfConfig
 }: Config) => {
   const result = useContractRead<BigNumberish[], ArgsType>({
-    contractReference:
-      'flair-sdk:token/ERC1155/extensions/supply/IERC1155SupplyExtra',
+    contractInterface: [
+      'function maxSupplyBatch(uint256[] tokenIds) external view returns (uint256[])',
+    ],
     functionName: 'maxSupplyBatch(uint256[])',
     chainId,
     contractAddress,

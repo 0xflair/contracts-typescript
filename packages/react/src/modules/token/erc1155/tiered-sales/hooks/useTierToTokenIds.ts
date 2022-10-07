@@ -19,8 +19,9 @@ export const useTierToTokenIds = ({
   ...restOfConfig
 }: Config) => {
   const result = useContractRead<BigNumberish[], ArgsType>({
-    contractReference:
-      'flair-sdk:token/ERC1155/facets/sales/ERC1155TieredSales',
+    contractInterface: [
+      'function tierToTokenIds(uint256 tierId) external view returns (uint256[] memory)',
+    ],
     functionName: 'tierToTokenId(uint256[])',
     chainId,
     contractAddress,

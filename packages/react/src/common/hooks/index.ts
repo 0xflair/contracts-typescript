@@ -6,7 +6,6 @@ export * from './useAxiosPut';
 export * from './useCancel';
 export * from './useChainId';
 export * from './useChainInfo';
-export * from './useContractAbi';
 export * from './useContractManifest';
 export * from './useContractRead';
 export * from './useContractWriteAndWait';

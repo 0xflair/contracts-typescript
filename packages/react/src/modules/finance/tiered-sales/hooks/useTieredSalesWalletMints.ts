@@ -19,8 +19,10 @@ export const useTieredSalesWalletMints = ({
   ...restOfConfig
 }: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
-    contractReference: 'flair-sdk:finance/sales/ITieredSales',
-    functionName: 'walletMintedByTier',
+    contractInterface: [
+      'function walletMintedByTier(uint256 tierId, address wallet) external view returns (uint256)',
+    ],
+    functionName: 'walletMintedByTier(uint256)',
     chainId,
     contractAddress,
     args: [tierId, walletAddress] as ArgsType,

@@ -67,11 +67,11 @@ export const WalletDropdown = ({
         >
           <Menu.Items className="wallet-dropdown-items origin-top-right absolute z-10 right-0 mt-2 w-auto rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="wallet-dropdown-header px-4 py-3">
-              <span className="wallet-dropdown-info--address">
-                <p className="wallet-dropdown-address-label text-xs capitalize text-gray-400">
+              <div className="wallet-dropdown-info--address">
+                <div className="wallet-dropdown-address-label text-xs capitalize text-gray-400">
                   Wallet Address
-                </p>
-                <p
+                </div>
+                <div
                   className="wallet-dropdown-address-value text-sm font-medium text-gray-900 cursor-pointer"
                   onClick={(e) => {
                     address && copyToClipboard(address);
@@ -86,21 +86,21 @@ export const WalletDropdown = ({
                   {address?.slice(0, 4)}
                   <span className="text-[6px]">{address?.slice(4, -4)}</span>
                   {address?.slice(-4)}
-                </p>
-              </span>
+                </div>
+              </div>
               {balance ? (
-                <span className="wallet-dropdown-info--balance">
-                  <p className="wallet-dropdown-balance-label text-xs capitalize text-gray-400 mt-3">
+                <div className="wallet-dropdown-info--balance">
+                  <div className="wallet-dropdown-balance-label text-xs capitalize text-gray-400 mt-3">
                     Balance
-                  </p>
-                  <p className="wallet-dropdown-balance-value text-sm font-medium text-gray-900">
+                  </div>
+                  <div className="wallet-dropdown-balance-value text-sm font-medium text-gray-900">
                     <CryptoValue
                       symbol={chain?.nativeCurrency?.symbol || balance.symbol}
                       unit={CryptoUnits.WEI}
                       value={balance.value}
                     />
-                  </p>
-                </span>
+                  </div>
+                </div>
               ) : null}
             </div>
             <Menu.Item as="div">

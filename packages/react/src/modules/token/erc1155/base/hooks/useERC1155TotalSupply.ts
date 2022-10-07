@@ -19,8 +19,9 @@ export const useERC1155TotalSupply = ({
   ...restOfConfig
 }: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
-    contractReference:
-      'flair-sdk:token/ERC1155/extensions/supply/IERC1155Supply',
+    contractInterface: [
+      'function totalSupply(uint256 tokenId) external view returns (uint256)',
+    ],
     functionName: 'totalSupply',
     args: [tokenId] as ArgsType,
     enabled: Boolean(enabled && tokenId),

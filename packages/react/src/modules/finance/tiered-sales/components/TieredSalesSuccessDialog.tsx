@@ -82,15 +82,15 @@ export default function TieredSalesSuccessDialog({
                         {title}
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">
+                        <div className="text-sm text-gray-500">
                           {body({ mintCount, txResponse, txReceipt })}
-                        </p>
-                        <p className="mt-4">
+                        </div>
+                        <div className="mt-4">
                           <TransactionLink
                             txReceipt={txReceipt}
                             txResponse={txResponse}
                           />
-                        </p>
+                        </div>
                       </div>
                     </div>
                   </div>

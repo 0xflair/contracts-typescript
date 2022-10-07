@@ -30,8 +30,10 @@ export const useTieredSalesEligibleAmount = (config: Config) => {
   }, [config.tierId]);
 
   const result = useContractRead<BigNumberish, ArgsType>({
-    contractReference: 'flair-sdk:finance/sales/ITieredSales',
-    functionName: 'eligibleForTier',
+    contractInterface: [
+      'function eligibleForTier(uint256 tierId,address minter,uint256 maxAllowance,bytes32[] calldata proof) external view returns (uint256)',
+    ],
+    functionName: 'eligibleForTier(uint256,address,uint256,bytes32[])',
     cacheOnBlock: false,
     cacheTime: 10,
     staleTime: 2,
