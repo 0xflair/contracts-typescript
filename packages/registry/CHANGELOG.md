@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.24.2 (2022-10-09)
+
+
+### Bug Fixes
+
+* remove unnecessary import ([9f9888c](https://github.com/flair-sdk/typescript/commit/9f9888c54b111ea13cc24e0a947d9922158ca2af))
+
+
+
+
+
 ## 2.24.1 (2022-10-09)
 
 **Note:** Version bump only for package @flair-sdk/registry
