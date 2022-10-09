@@ -25,7 +25,7 @@ export type ReadContractConfig<ArgsType = []> = Partial<
 
 export type PredefinedReadContractConfig<ArgsType = []> = Omit<
   ReadContractConfig<ArgsType>,
-  'contractReference' | 'functionName'
+  'contractReference' | 'functionName' | 'addressOrName'
 >;
 
 export const useContractRead = <ResultType = any, ArgsType = []>({

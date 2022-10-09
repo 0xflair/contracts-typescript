@@ -23,16 +23,16 @@ type DiamondContextValue = {
 
     configValues?: Record<string, any>;
     proposedCalls?: ContractCall[];
-    processingCalls?: boolean;
-    processingError?: Error | string;
   };
 
   isLoading: {
+    proposedCallsLoading?: boolean;
     diamondLoading?: boolean;
     smartContractLoading?: boolean;
   };
 
   error: {
+    proposedCallsError?: Error | string | null;
     diamondError?: string | Error | null;
     smartContractError?: string | Error | null;
   };
@@ -73,8 +73,11 @@ export const DiamondProvider = ({
   const [configValues, setConfigValues] = useState<Record<string, any>>();
   const [contractFacets, setContractFacets] = useState<FacetManifest[]>();
   const [proposedCalls, setProposedCalls] = useState<ContractCall[]>([]);
-  const [processingCalls, setProcessingCalls] = useState<boolean>(false);
-  const [processingError, setProcessingError] = useState<Error | string>();
+  const [proposedCallsLoading, setProposedCallsLoading] =
+    useState<boolean>(false);
+  const [proposedCallsError, setProposedCallsError] = useState<
+    Error | string
+  >();
 
   const {
     data: diamond,
@@ -142,17 +145,16 @@ export const DiamondProvider = ({
    */
   const proposeCall = useCallback(
     (call: ContractCall) => {
-      if (processingCalls) {
+      if (proposedCallsLoading) {
         return;
       }
-
       setProposedCalls((calls) =>
         [...calls.filter((existing) => existing.id !== call.id), call].filter(
           (c) => c.contract && c.function && c.args !== undefined,
         ),
       );
     },
-    [processingCalls],
+    [proposedCallsLoading],
   );
 
   const refresh = useCallback(() => {
@@ -170,18 +172,16 @@ export const DiamondProvider = ({
       contractFacets,
       contractInterfaces,
       proposedCalls,
-      processingCalls,
-      processingError,
     },
 
-    isLoading: { diamondLoading, smartContractLoading },
+    isLoading: { proposedCallsLoading, diamondLoading, smartContractLoading },
 
-    error: { diamondError, smartContractError },
+    error: { proposedCallsError, diamondError, smartContractError },
 
     setConfigValues,
     setProposedCalls,
-    setProcessingCalls,
-    setProcessingError,
+    setProcessingCalls: setProposedCallsLoading,
+    setProcessingError: setProposedCallsError,
     proposeCall,
     refresh,
   };
