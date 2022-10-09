@@ -1,4 +1,8 @@
-import { Environment } from '@flair-sdk/common';
+import {
+  Environment,
+  TransactionData,
+  TransactionListener,
+} from '@flair-sdk/common';
 import {
   ContractCall,
   EIP165InterfaceID,
@@ -23,6 +27,7 @@ type DiamondContextValue = {
 
     configValues?: Record<string, any>;
     proposedCalls?: ContractCall[];
+    proposedCallsData?: TransactionData;
   };
 
   isLoading: {
@@ -39,10 +44,17 @@ type DiamondContextValue = {
 
   setConfigValues: React.Dispatch<React.SetStateAction<Record<string, any>>>;
   setProposedCalls: React.Dispatch<React.SetStateAction<ContractCall[]>>;
-  setProcessingCalls: React.Dispatch<React.SetStateAction<boolean>>;
-  setProcessingError: React.Dispatch<
+  setProposedCallsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setProposedCallsError: React.Dispatch<
     React.SetStateAction<Error | string | undefined>
   >;
+  setProposedCallsData: React.Dispatch<
+    React.SetStateAction<TransactionData | undefined>
+  >;
+
+  registerListener: (id: string, listener: TransactionListener) => void;
+  invokeListeners: (data: TransactionData) => void;
+
   proposeCall: (call: ContractCall) => void;
   refresh: () => void;
 };
@@ -70,9 +82,13 @@ export const DiamondProvider = ({
   diamondId,
   children,
 }: Props) => {
+  const [listeners, setListeners] = useState<
+    Record<string, TransactionListener>
+  >({});
   const [configValues, setConfigValues] = useState<Record<string, any>>();
   const [contractFacets, setContractFacets] = useState<FacetManifest[]>();
   const [proposedCalls, setProposedCalls] = useState<ContractCall[]>([]);
+  const [proposedCallsData, setProposedCallsData] = useState<TransactionData>();
   const [proposedCallsLoading, setProposedCallsLoading] =
     useState<boolean>(false);
   const [proposedCallsError, setProposedCallsError] = useState<
@@ -161,6 +177,22 @@ export const DiamondProvider = ({
     refreshDiamond().then(() => refreshSmartContract());
   }, [refreshDiamond, refreshSmartContract]);
 
+  const registerListener = useCallback(
+    (id: string, listener: TransactionListener) => {
+      setListeners((listeners) => ({ ...listeners, [id]: listener }));
+    },
+    [],
+  );
+
+  const invokeListeners = useCallback(
+    (data: TransactionData) => {
+      Object.values(listeners).forEach((listener) => {
+        listener(data);
+      });
+    },
+    [listeners],
+  );
+
   const value = {
     data: {
       env,
@@ -172,6 +204,7 @@ export const DiamondProvider = ({
       contractFacets,
       contractInterfaces,
       proposedCalls,
+      proposedCallsData,
     },
 
     isLoading: { proposedCallsLoading, diamondLoading, smartContractLoading },
@@ -180,8 +213,14 @@ export const DiamondProvider = ({
 
     setConfigValues,
     setProposedCalls,
-    setProcessingCalls: setProposedCallsLoading,
-    setProcessingError: setProposedCallsError,
+
+    setProposedCallsLoading,
+    setProposedCallsError,
+    setProposedCallsData,
+
+    registerListener,
+    invokeListeners,
+
     proposeCall,
     refresh,
   };
