@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.25.0 (2022-10-09)
+
+
+### Features
+
+* allow registering and invoking listeners for diamond provider ([49a985b](https://github.com/flair-sdk/typescript/commit/49a985b06fff39a5a67ad0e46c83b40a76d19996))
+
+
+
+
+
 ## 2.24.2 (2022-10-09)
 
 
