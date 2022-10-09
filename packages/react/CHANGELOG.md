@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.26.0 (2022-10-09)
+
+
+### Features
+
+* make listeners async and execute one by one ([bc80e02](https://github.com/flair-sdk/typescript/commit/bc80e02bb0c1297b61d3b2393279be243f538f59))
+
+
+
+
+
 # 2.25.0 (2022-10-09)
 
 
