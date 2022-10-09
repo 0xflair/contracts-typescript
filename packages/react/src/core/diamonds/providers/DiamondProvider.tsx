@@ -185,10 +185,10 @@ export const DiamondProvider = ({
   );
 
   const invokeListeners = useCallback(
-    (data: TransactionData) => {
-      Object.values(listeners).forEach((listener) => {
-        listener(data);
-      });
+    async (data: TransactionData) => {
+      for (const listener of Object.values(listeners)) {
+        await listener(data);
+      }
     },
     [listeners],
   );

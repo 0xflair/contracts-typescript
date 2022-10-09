@@ -6,4 +6,4 @@ export type TransactionData = {
   response?: SendTransactionResult;
 };
 
-export type TransactionListener = (data: TransactionData) => void;
+export type TransactionListener = (data: TransactionData) => Promise<void>;
