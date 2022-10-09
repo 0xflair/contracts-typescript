@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.23.4 (2022-10-09)
+
+
+### Bug Fixes
+
+* consistent naming for proposed calls vars ([85398ce](https://github.com/flair-sdk/typescript/commit/85398ceab037986982046ea8d80e925a71423764))
+
+
+
+
+
 ## 2.23.3 (2022-10-07)
 
 
