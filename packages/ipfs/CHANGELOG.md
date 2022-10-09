@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.23.5 (2022-10-09)
+
+
+### Bug Fixes
+
+* expose fetchStatus on tokens hook ([c49420b](https://github.com/flair-sdk/typescript/commit/c49420bdaeb2755804f4cb74320bce400426a8da))
+
+
+
+
+
 ## 2.23.4 (2022-10-09)
 
 
