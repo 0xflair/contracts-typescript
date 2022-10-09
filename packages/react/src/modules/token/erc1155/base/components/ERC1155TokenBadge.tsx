@@ -7,7 +7,7 @@ import { useRemoteJsonReader } from '../../../../../core';
 import { useTokenMetadataUri } from '../../../metadata';
 import { NftTokenMetadata } from '../../../metadata/types';
 import { ERC1155Token } from '../../types';
-import { useERC1155TokensByCollectionWithDiamondProvider } from '../hooks/useERC1155TokensByCollectionWithDiamondProvider';
+import { useERC1155TokensByCollection } from '../hooks';
 
 type Props = {
   chainId?: number;
@@ -28,11 +28,10 @@ export const ERC1155TokenBadge = ({
     <span className="text-xs text-gray-300">Select an option</span>
   ),
 }: Props) => {
-  const { data: existingTokens } =
-    useERC1155TokensByCollectionWithDiamondProvider({
-      chainId,
-      contractAddress,
-    });
+  const { data: existingTokens } = useERC1155TokensByCollection({
+    chainId,
+    contractAddress,
+  });
 
   const token = useMemo(() => {
     return (
