@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.24.0 (2022-10-09)
+
+
+### Features
+
+* merge states of multiple hooks for erc1155 tokens ([d7fa20e](https://github.com/flair-sdk/typescript/commit/d7fa20e94614f9e8120cc61588422a8b1980b918))
+
+
+
+
+
 ## 2.23.5 (2022-10-09)
 
 
