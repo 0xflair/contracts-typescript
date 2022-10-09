@@ -2,6 +2,7 @@ import { Environment } from '@flair-sdk/common';
 import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
 
+import { useMergeQueryStates } from '../../../../../core';
 import { useNftTokensByCollection } from '../../../../../core/data-query/hooks/useNftTokensByCollection';
 import {
   useTokenMetadataBaseUri,
@@ -28,17 +29,14 @@ export const useERC1155TokensByCollectionContractOnly = ({
   contractAddress,
   enabled = true,
 }: Props) => {
-  const {
-    data: collectionTokens,
-    error: collectionTokensError,
-    isLoading: collectionTokensLoading,
-  } = useNftTokensByCollection({
-    env,
-    clientId,
-    chainId,
-    contractAddress,
-    enabled,
-  });
+  const { data: collectionTokens, ...collectionTokensState } =
+    useNftTokensByCollection({
+      env,
+      clientId,
+      chainId,
+      contractAddress,
+      enabled,
+    });
 
   const tokenIds = useMemo(() => {
     return Array.from(Array(100).keys());
@@ -51,45 +49,41 @@ export const useERC1155TokensByCollectionContractOnly = ({
     //   : Array.from(Array(100).keys());
   }, []);
 
-  const {
-    data: collectionBaseUri,
-    error: collectionBaseUriError,
-    isLoading: collectionBaseUriLoading,
-  } = useTokenMetadataBaseUri({
-    chainId,
-    contractAddress,
-  });
+  const { data: collectionBaseUri, ...collectionBaseUriState } =
+    useTokenMetadataBaseUri({
+      chainId,
+      contractAddress,
+    });
 
-  const {
-    data: collectionFallbackUri,
-    error: collectionFallbackUriError,
-    isLoading: collectionFallbackUriLoading,
-  } = useTokenMetadataFallbackUri({
-    chainId,
-    contractAddress,
-  });
+  const { data: collectionFallbackUri, ...collectionFallbackUriState } =
+    useTokenMetadataFallbackUri({
+      chainId,
+      contractAddress,
+    });
 
-  const {
-    data: tokenIdToMaxSupplyMapping,
-    error: tokenIdToMaxSupplyMappingError,
-    isLoading: tokenIdToMaxSupplyMappingLoading,
-  } = useERC1155MaxSupplyBatch({
-    chainId,
-    contractAddress,
-    tokenIds,
-    enabled,
-  });
+  const { data: tokenIdToMaxSupplyMapping, ...tokenIdToMaxSupplyMappingState } =
+    useERC1155MaxSupplyBatch({
+      chainId,
+      contractAddress,
+      tokenIds,
+      enabled,
+    });
 
-  const {
-    data: tokenIdToUriMapping,
-    error: tokenIdToUriMappingError,
-    isLoading: tokenIdToUriMappingLoading,
-  } = useTokenMetadataUriBatch({
-    chainId,
-    contractAddress,
-    tokenIds,
-    enabled,
-  });
+  const { data: tokenIdToUriMapping, ...tokenIdToUriMappingState } =
+    useTokenMetadataUriBatch({
+      chainId,
+      contractAddress,
+      tokenIds,
+      enabled,
+    });
+
+  const mergedStates = useMergeQueryStates([
+    collectionTokensState,
+    collectionBaseUriState,
+    collectionFallbackUriState,
+    tokenIdToMaxSupplyMappingState,
+    tokenIdToUriMappingState,
+  ]);
 
   const combinedTokenIds = useMemo(() => {
     const combinedTokenIds: string[] =
@@ -138,14 +132,7 @@ export const useERC1155TokensByCollectionContractOnly = ({
   ]);
 
   return {
+    ...mergedStates,
     data: tokens,
-    error:
-      collectionTokensError ||
-      tokenIdToMaxSupplyMappingError ||
-      tokenIdToUriMappingError,
-    isLoading:
-      collectionTokensLoading ||
-      tokenIdToMaxSupplyMappingLoading ||
-      tokenIdToUriMappingLoading,
   } as const;
 };

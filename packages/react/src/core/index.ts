@@ -6,4 +6,5 @@ export * from './diamonds';
 export * from './ipfs';
 export * from './meta-transactions';
 export * from './ui';
+export * from './utils';
 export * from './wallet';
