@@ -123,7 +123,7 @@ export const useSaleTiers = ({
           eligibleAmount !== undefined
             ? BigNumber.from(eligibleAmount).gt(0)
             : undefined,
-        __forAddress: finalAddress,
+        minterAddress: finalAddress,
       };
     },
     [

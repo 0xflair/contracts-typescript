@@ -4,6 +4,7 @@ import { TiersDictionary } from './types';
 
 export const normalizeTiers = (
   tiers?: TiersDictionary,
+  configOnly?: boolean,
 ): TiersDictionary | undefined => {
   if (tiers === undefined) {
     return undefined;
@@ -45,20 +46,25 @@ export const normalizeTiers = (
           value.reserved !== undefined
             ? BigNumber.from(value.reserved).toString()
             : value.reserved,
-        eligibleAmount:
-          value.eligibleAmount !== undefined
-            ? BigNumber.from(value.eligibleAmount).toString()
-            : value.eligibleAmount,
-        hasAllowlist: value.hasAllowlist,
-        isActive: value.isActive,
-        isAllowlisted: value.isAllowlisted,
-        isEligible: value.isEligible,
-        remainingSupply:
-          value.remainingSupply !== undefined
-            ? BigNumber.from(value.remainingSupply).toString()
-            : undefined,
-        isSavedOnChain: value.isSavedOnChain,
-        minterAddress: value.minterAddress,
+        isSavedOnChain: Boolean(value.isSavedOnChain),
+
+        ...(configOnly
+          ? {}
+          : {
+              eligibleAmount:
+                value.eligibleAmount !== undefined
+                  ? BigNumber.from(value.eligibleAmount).toString()
+                  : value.eligibleAmount,
+              hasAllowlist: value.hasAllowlist,
+              isActive: value.isActive,
+              isAllowlisted: value.isAllowlisted,
+              isEligible: value.isEligible,
+              remainingSupply:
+                value.remainingSupply !== undefined
+                  ? BigNumber.from(value.remainingSupply).toString()
+                  : undefined,
+              minterAddress: value.minterAddress,
+            }),
       },
     };
   }, {});
