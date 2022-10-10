@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.27.2 (2022-10-10)
+
+
+### Bug Fixes
+
+* merge both configs and tiers enrichment states ([4d3f404](https://github.com/flair-sdk/typescript/commit/4d3f404f16e0dd827e9b81ca3b2a5509ff60aaab))
+
+
+
+
+
 ## 2.27.1 (2022-10-10)
 
 
