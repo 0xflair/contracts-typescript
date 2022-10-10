@@ -68,23 +68,24 @@ export const ConnectButton = ({
         closeTimeoutMS={150}
         isOpen={dialogOpen}
         onRequestClose={() => setDialogOpen(false)}
-        portalClassName={'flair-component connect-dialog-portal'}
+        portalClassName={'flair-component___ connect-dialog-portal'}
         className={
           dialogProps?.contentClassName ||
-          'align-bottom bg-white sm:rounded-lg px-4 sm:p-6 sm:my-8 text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-lg w-full h-full sm:h-auto justify-center inline-flex flex-col gap-4'
+          'w-full h-full sm:w-auto sm:h-auto absolute max-w-lg mx-auto overflow-scroll align-middle p-4 sm:rounded-lg bg-white shadow-xl top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2' // sm:align-middle justify-center inline-flex flex-col gap-4 transform transition-all
         }
         overlayClassName={
           dialogProps?.overlayClassName ||
-          'fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity flex items-center justify-center'
+          'fixed inset-0 filter backdrop-filter backdrop-blur transition-opacity w-screen h-screen overflow-scroll'
         }
         contentLabel={dialogProps?.title || 'Connect your wallet'}
       >
-        <div
+        <h3
           className={
-            dialogProps?.closeWrapperClassName ||
-            'block absolute top-0 right-0 pt-4 pr-4'
+            dialogProps?.headerClassName ||
+            'text-xl mb-4 leading-6 font-medium text-gray-900 flex justify-between'
           }
         >
+          <span>Connect your wallet</span>
           <button
             type="button"
             className={
@@ -96,18 +97,10 @@ export const ConnectButton = ({
             <span className="sr-only">Close</span>
             <XIcon className="close-icon h-6 w-6" aria-hidden="true" />
           </button>
-        </div>
-        <h3
-          className={
-            dialogProps?.headerClassName ||
-            'text-xl mb-2 leading-6 font-medium text-gray-900'
-          }
-        >
-          Connect your wallet
         </h3>
         {dialogProps?.contentPrepend}
         <ConnectPalette
-          paletteClassName="inline-flex flex-col gap-4"
+          paletteClassName="grid grid-cols-2 gap-2 w-full"
           {...connectPalletteProps}
         />
         {dialogProps?.contentAppend}

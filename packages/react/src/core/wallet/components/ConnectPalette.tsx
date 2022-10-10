@@ -10,8 +10,9 @@ import {
 } from '@flair-sdk/icons';
 import MetaMaskOnboarding from '@metamask/onboarding';
 import React, { useRef } from 'react';
-import { useConnect } from 'wagmi';
+import { useAccount, useConnect } from 'wagmi';
 
+import { Spinner } from '../../ui';
 import { WalletComponentWrapper } from './WalletComponentWrapper';
 
 export type ConnectPaletteProps = {
@@ -33,13 +34,15 @@ export type ConnectPaletteProps = {
   walletConnectButtonDescription?: React.ReactNode;
   custodialWalletButtonLabel?: React.ReactNode;
   custodialWalletButtonDescription?: React.ReactNode;
+  custodialWalletButtonClassName?: string;
 
   custodialWalletSeparator?: React.ReactNode;
 };
 
 export const ConnectPalette = (props: ConnectPaletteProps) => {
   const activeButtonRef = useRef(null);
-  const { connectors, connect } = useConnect();
+  const { connectors, connect, isLoading, pendingConnector } = useConnect();
+  const { connector, isConnecting } = useAccount();
 
   const connectorMetamask = connectors.find((c) => c.id == 'metaMask');
   const connectorInjected = connectors.find((c) => c.id == 'injected');
@@ -56,13 +59,13 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
     window?.['ethereum'] || MetaMaskOnboarding.isMetaMaskInstalled();
 
   const paletteClassName =
-    props.paletteClassName || 'inline-flex flex-col gap-4';
+    props.paletteClassName || 'inline-flex flex-col gap-2';
   const descriptionClassName =
     props.descriptionClassName || 'hidden sm:inline-block opacity-60';
   const buttonClassName =
     props.walletButtonClassName ||
     'inline-flex w-full gap-2 items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
-  const iconClassName = props.iconClassName || '-ml-0.5 mr-2 h-12 w-12';
+  const iconClassName = props.iconClassName || '-ml-0.5 h-6 w-6';
 
   return (
     <WalletComponentWrapper as={props.as} className={paletteClassName}>
@@ -72,6 +75,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             <button
               ref={activeButtonRef}
               type="button"
+              disabled={!connectorMetamask.ready}
               className={classNames(
                 'flair connect-button connector-metamask',
                 `connector-${connectorMetamask.name
@@ -81,7 +85,11 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               )}
               onClick={() => connect({ connector: connectorMetamask })}
             >
-              <MetaMaskIcon className={iconClassName} />
+              {isLoading && pendingConnector?.id == connectorMetamask.id ? (
+                <Spinner />
+              ) : (
+                <MetaMaskIcon className={iconClassName} />
+              )}
               {props.metamaskButtonLabel || 'MetaMask'}
               {props.metamaskButtonDescription ? (
                 <span className={descriptionClassName}>
@@ -116,6 +124,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
           <button
             ref={activeButtonRef}
             type="button"
+            disabled={!connectorInjected.ready}
             className={classNames(
               'flair connect-button connector-injected',
               `connector-${connectorInjected.name
@@ -125,10 +134,16 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             )}
             onClick={() => connect({ connector: connectorInjected })}
           >
-            {connectorInjected.name == 'Trust Wallet' ? (
-              <TrustWalletIcon className={iconClassName} />
+            {isLoading && pendingConnector?.id == connectorInjected.id ? (
+              <Spinner />
             ) : (
-              <GenericWalletIcon className={iconClassName} />
+              <>
+                {connectorInjected.name == 'Trust Wallet' ? (
+                  <TrustWalletIcon className={iconClassName} />
+                ) : (
+                  <GenericWalletIcon className={iconClassName} />
+                )}
+              </>
             )}
             {props.injectedButtonLabel ||
               connectorInjected.name ||
@@ -144,6 +159,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
       {connectorWalletConnect && (
         <button
           type="button"
+          disabled={!connectorWalletConnect.ready}
           ref={!metamaskAvailable ? activeButtonRef : undefined}
           className={classNames(
             'flair connect-button connector-wallet-connect',
@@ -151,7 +167,11 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
           )}
           onClick={() => connect({ connector: connectorWalletConnect })}
         >
-          <WalletConnectIcon className={iconClassName} />
+          {isLoading && pendingConnector?.id == connectorWalletConnect.id ? (
+            <Spinner />
+          ) : (
+            <WalletConnectIcon className={iconClassName} />
+          )}
           {props.walletConnectButtonLabel || 'WalletConnect'}
           {props.walletConnectButtonDescription ? (
             <span className={descriptionClassName}>
@@ -163,14 +183,19 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
       {connectorCoinbaseWallet && (
         <button
           type="button"
+          disabled={!connectorCoinbaseWallet.ready}
           className={classNames(
             'flair connect-button connector-coinbase',
             buttonClassName,
           )}
           onClick={() => connect({ connector: connectorCoinbaseWallet })}
         >
-          <WalletLinkIcon className={iconClassName} />
-          {props.coinbaseButtonLabel || 'Coinbase Wallet'}
+          {isLoading && pendingConnector?.id == connectorCoinbaseWallet.id ? (
+            <Spinner />
+          ) : (
+            <WalletLinkIcon className={iconClassName} />
+          )}
+          {props.coinbaseButtonLabel || 'Coinbase'}
           {props.coinbaseButtonDescription ? (
             <span className={descriptionClassName}>
               {props.coinbaseButtonDescription}
@@ -179,7 +204,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
         </button>
       )}
 
-      {connectorGnosisSafe && (
+      {/* {connectorGnosisSafe && (
         <>
           {connectorGnosisSafe.ready ? (
             <button
@@ -222,36 +247,28 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             </a>
           )}
         </>
-      )}
+      )} */}
 
       {connectorMagic && (
         <>
-          {props.custodialWalletSeparator ? (
-            props.custodialWalletSeparator
-          ) : (
-            <div className="relative">
-              <div
-                className="absolute inset-0 flex items-center"
-                aria-hidden="true"
-              >
-                <div className="w-full border-t border-gray-300" />
-              </div>
-              <div className="relative flex justify-center">
-                <span className="px-2 bg-white text-sm text-gray-500">OR</span>
-              </div>
-            </div>
-          )}
+          {props.custodialWalletSeparator
+            ? props.custodialWalletSeparator
+            : null}
           <button
             type="button"
-            className={buttonClassName}
+            className={classNames(
+              buttonClassName,
+              props.custodialWalletButtonClassName,
+            )}
             onClick={() => connect({ connector: connectorMagic })}
           >
             <MagicLinkIcon className={iconClassName} />
-            {props.custodialWalletButtonLabel || 'Quick wallet'}
-            <span className={descriptionClassName}>
-              {props.custodialWalletButtonDescription ||
-                'via Email, Github, Google, Twitter.'}
-            </span>
+            {props.custodialWalletButtonLabel || 'Email sign-in'}
+            {props.custodialWalletButtonDescription ? (
+              <span className={descriptionClassName}>
+                {props.custodialWalletButtonDescription}
+              </span>
+            ) : null}
           </button>
         </>
       )}
