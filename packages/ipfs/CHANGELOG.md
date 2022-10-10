@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.27.0 (2022-10-10)
+
+
+### Features
+
+* move supply and metadata hooks to modules ([14e5eaa](https://github.com/flair-sdk/typescript/commit/14e5eaa958ab683b49d30a33743ecf47e115ce1e))
+
+
+
+
+
 # 2.26.0 (2022-10-09)
 
 
