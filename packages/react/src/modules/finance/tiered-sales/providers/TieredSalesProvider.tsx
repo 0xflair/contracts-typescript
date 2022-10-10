@@ -120,6 +120,8 @@ export const TieredSalesProvider = ({
     error: tiersError,
     isLoading: tiersLoading,
     refetch: refetchTiers,
+    isStale: tiersIsStale,
+    fetchStatus: tiersFetchStatus,
   } = useSaleTiers({
     env,
     chainId,
@@ -175,7 +177,13 @@ export const TieredSalesProvider = ({
   }, [autoSelectEligibleTier, autoDetectedTierId, tierId]);
 
   useEffect(() => {
-    if (tiers === undefined || tiersLoading || mintLoading) {
+    if (
+      tiers === undefined ||
+      tiersLoading ||
+      mintLoading ||
+      tiersIsStale ||
+      tiersFetchStatus !== 'idle'
+    ) {
       return;
     }
 
@@ -244,7 +252,15 @@ export const TieredSalesProvider = ({
     }
 
     setIsAutoDetectingTier(false);
-  }, [isActive, isEligible, mintLoading, tiers, tiersLoading]);
+  }, [
+    isActive,
+    isEligible,
+    mintLoading,
+    tiers,
+    tiersFetchStatus,
+    tiersIsStale,
+    tiersLoading,
+  ]);
 
   const mint = useCallback(
     async (args: { mintCount: BigNumberish }) => {
