@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.29.0 (2022-10-10)
+
+
+### Features
+
+* hide tier selector if less than 2 available options ([8d5b780](https://github.com/flair-sdk/typescript/commit/8d5b78058d96d3af325bab098859260145a5318a))
+
+
+
+
+
 ## 2.28.1 (2022-10-10)
 
 
