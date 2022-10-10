@@ -6,6 +6,7 @@ import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
 import { useCallback } from 'react';
 
 import { PredefinedReadContractConfig } from '../../../../common';
+import { useMergeQueryStates } from '../../../../core';
 import { Tier, TiersDictionary } from '../types';
 import { useSaleTiersConfigs } from './useSaleTiersConfigs';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
@@ -50,11 +51,7 @@ export const useSaleTiers = ({
     enabled: false,
   });
 
-  const {
-    data: tiersConfigs,
-    isLoading: tiersConfigsLoading,
-    error: tiersConfigsError,
-  } = useSaleTiersConfigs({
+  const { data: tiersConfigs, ...tiersConfigsQuery } = useSaleTiersConfigs({
     chainId,
     contractAddress,
     enabled,
@@ -164,19 +161,27 @@ export const useSaleTiers = ({
     [enrichTierById, tiersConfigs],
   );
 
-  const result = useQuery<
+  const saleTiersQuery = useQuery<
     TiersDictionary | undefined,
     string | Error | null,
     TiersDictionary | undefined
   >(queryKey, enrichAllTiers, {
-    enabled: Boolean(enabled && tiersConfigs && !tiersConfigsLoading),
+    enabled: Boolean(
+      enabled &&
+        tiersConfigs &&
+        !tiersConfigsQuery.isLoading &&
+        tiersConfigsQuery.fetchStatus === 'idle',
+    ),
     cacheTime: 3,
     staleTime: 2,
   });
 
+  const mergedStates = useMergeQueryStates([saleTiersQuery, tiersConfigsQuery]);
+
   return {
-    ...result,
-    error: tiersConfigsError || result.error,
-    isLoading: result.isLoading && result?.fetchStatus !== 'idle',
+    ...tiersConfigsQuery,
+    ...mergedStates,
+    data: saleTiersQuery.data,
+    isLoading: mergedStates.isLoading || mergedStates?.fetchStatus !== 'idle',
   } as const;
 };

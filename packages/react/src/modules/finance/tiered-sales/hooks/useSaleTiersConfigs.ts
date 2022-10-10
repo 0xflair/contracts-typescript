@@ -63,5 +63,5 @@ export const useSaleTiersConfigs = ({
   return {
     ...result,
     data: normalizedTiers,
-  };
+  } as const;
 };
