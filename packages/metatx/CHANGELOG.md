@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.27.4 (2022-10-10)
+
+
+### Bug Fixes
+
+* remove isStale condition for tier detection ([7e3f5c6](https://github.com/flair-sdk/typescript/commit/7e3f5c6cec795abf12cb822dbc30c53d7ab4bd6b))
+
+
+
+
+
 ## 2.27.3 (2022-10-10)
 
 
