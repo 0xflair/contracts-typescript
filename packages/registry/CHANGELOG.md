@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.27.3 (2022-10-10)
+
+
+### Bug Fixes
+
+* disable caching of tiers temporarily ([fe9d021](https://github.com/flair-sdk/typescript/commit/fe9d021f344a03ac35353971cf90d881cbdde711))
+
+
+
+
+
 ## 2.27.2 (2022-10-10)
 
 
