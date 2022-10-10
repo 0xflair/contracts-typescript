@@ -121,7 +121,6 @@ export const TieredSalesProvider = ({
     isLoading: tiersLoading,
     refetch: refetchTiers,
     fetchStatus: tiersFetchStatus,
-    isStale: tiersIsStale,
     isPreviousData: tiersIsPreviousData,
   } = useSaleTiers({
     env,
@@ -182,7 +181,6 @@ export const TieredSalesProvider = ({
       tiers === undefined ||
       tiersLoading ||
       mintLoading ||
-      tiersIsStale ||
       tiersIsPreviousData ||
       tiersFetchStatus !== 'idle'
     ) {
@@ -261,7 +259,6 @@ export const TieredSalesProvider = ({
     tiers,
     tiersFetchStatus,
     tiersIsPreviousData,
-    tiersIsStale,
     tiersLoading,
   ]);
 
