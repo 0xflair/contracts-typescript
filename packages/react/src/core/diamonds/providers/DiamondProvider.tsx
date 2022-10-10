@@ -53,7 +53,7 @@ type DiamondContextValue = {
   >;
 
   registerListener: (id: string, listener: TransactionListener) => void;
-  invokeListeners: (data: TransactionData) => void;
+  invokeListeners: (data: TransactionData) => Promise<void>;
 
   proposeCall: (call: ContractCall) => void;
   refresh: () => void;
