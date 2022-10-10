@@ -1,7 +1,7 @@
 import { ContractCall } from '@flair-sdk/registry';
 import { ReadContractConfig } from '@wagmi/core';
 import { utils } from 'ethers';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useContractRead, useNetwork } from 'wagmi';
 
 type Config = Omit<
@@ -68,57 +68,69 @@ export const useMultiCallRead = <TData extends any[]>({
     functionName: 'multicall',
     enabled: Boolean(enabled && restOfConfig.addressOrName),
     args: [callDataList],
-    cacheTime: 10,
-    staleTime: 3,
-    onSettled(data, error) {
-      if (!data || !contractInterface || !calls || error) {
-        setError(error || new Error(`No data or contract interface or calls`));
-        return;
-      }
-
-      const resultData = data.map((result, index) => {
-        const call = calls[index];
-        if (!call) {
-          throw new Error(`Call not found for result ${index}`);
-        }
-
-        const iface =
-          contractInterface ||
-          new utils.Interface([`function ${call.function}`]);
-
-        if (!call.function || !iface.functions[call.function]) {
-          throw new Error(
-            `Function ${call.function} not found OR ambiguous in contract ${
-              call.contract
-            }, choose one of: ${Object.keys(iface.functions).join(' ')}`,
-          );
-        }
-
-        try {
-          const decodedResult = iface.decodeFunctionResult(
-            call.function,
-            result,
-          );
-
-          if (Array.isArray(decodedResult) && decodedResult.length === 1) {
-            return decodedResult[0];
-          } else {
-            return decodedResult;
-          }
-        } catch (err) {
-          debugger;
-          console.error(
-            `Could not decode function ${call.function} with result ${result}`,
-            err,
-          );
-        }
-      }) as TData;
-
-      setError(undefined);
-      setResultData(resultData);
-    },
+    cacheTime: 0,
+    staleTime: 0,
     ...restOfConfig,
   });
+
+  useEffect(() => {
+    if (
+      !contractInterface ||
+      !calls ||
+      !enabled ||
+      result.isLoading ||
+      result.fetchStatus !== 'idle' ||
+      result.isFetching ||
+      result.isRefetching
+    ) {
+      return;
+    }
+
+    if (!result.data || result.error) {
+      setError(
+        result.error || new Error(`No data or contract interface or calls`),
+      );
+      return;
+    }
+
+    const resultData = result.data.map((result, index) => {
+      const call = calls[index];
+      if (!call) {
+        throw new Error(`Call not found for result ${index}`);
+      }
+
+      const iface =
+        contractInterface || new utils.Interface([`function ${call.function}`]);
+
+      if (!call.function || !iface.functions[call.function]) {
+        throw new Error(
+          `Function ${call.function} not found OR ambiguous in contract ${
+            call.contract
+          }, choose one of: ${Object.keys(iface.functions).join(' ')}`,
+        );
+      }
+
+      try {
+        const decodedResult = iface.decodeFunctionResult(call.function, result);
+
+        if (Array.isArray(decodedResult) && decodedResult.length === 1) {
+          return decodedResult[0];
+        } else {
+          return decodedResult;
+        }
+      } catch (err) {
+        debugger;
+        console.error(
+          `Could not decode function ${call.function} with result ${result}`,
+          err,
+        );
+      }
+    }) as TData;
+
+    setError(undefined);
+    setResultData(resultData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result.data]);
 
   return {
     ...result,
