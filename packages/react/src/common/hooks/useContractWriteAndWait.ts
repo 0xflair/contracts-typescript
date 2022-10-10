@@ -114,11 +114,18 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
           : undefined,
       );
 
-      const receipt = await response?.wait();
+      const receipt = await response?.wait(confirmations);
 
       return { response, receipt };
     },
-    [args, contractAddress, doWrite, functionName, restOfConfig.overrides],
+    [
+      args,
+      confirmations,
+      contractAddress,
+      doWrite,
+      functionName,
+      restOfConfig.overrides,
+    ],
   );
 
   return {

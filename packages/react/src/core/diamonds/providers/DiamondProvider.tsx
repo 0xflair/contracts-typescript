@@ -186,7 +186,7 @@ export const DiamondProvider = ({
 
   const invokeListeners = useCallback(
     async (data: TransactionData) => {
-      for (const listener of Object.values(listeners)) {
+      for await (const listener of Object.values(listeners)) {
         await listener(data);
       }
     },

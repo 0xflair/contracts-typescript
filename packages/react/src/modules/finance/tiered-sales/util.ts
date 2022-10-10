@@ -46,11 +46,11 @@ export const normalizeTiers = (
           value.reserved !== undefined
             ? BigNumber.from(value.reserved).toString()
             : value.reserved,
-        isSavedOnChain: Boolean(value.isSavedOnChain),
 
         ...(configOnly
           ? {}
           : {
+              isSavedOnChain: Boolean(value.isSavedOnChain),
               eligibleAmount:
                 value.eligibleAmount !== undefined
                   ? BigNumber.from(value.eligibleAmount).toString()
