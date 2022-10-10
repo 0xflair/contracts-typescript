@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.27.5 (2022-10-10)
+
+
+### Bug Fixes
+
+* disable caching for multicall read by default ([09010a9](https://github.com/flair-sdk/typescript/commit/09010a967c0df4acec21cb7e0ee19bb3ddc044c6))
+
+
+
+
+
 ## 2.27.4 (2022-10-10)
 
 
