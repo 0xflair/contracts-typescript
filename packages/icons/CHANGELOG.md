@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.28.1 (2022-10-10)
+
+
+### Bug Fixes
+
+* use the same confirmations number within the write hook ([e116f40](https://github.com/flair-sdk/typescript/commit/e116f405925dc9d599b63d976376c6c4af9b0eec))
+
+
+
+
+
 # 2.28.0 (2022-10-10)
 
 
