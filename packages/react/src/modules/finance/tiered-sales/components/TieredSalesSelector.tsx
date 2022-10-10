@@ -29,6 +29,7 @@ type Props = {
   optionElement?: (props: RenderProps) => JSX.Element;
   optionClassName?: string | ((props: OptionClassProps) => string);
   labelElement?: (props: RenderProps) => JSX.Element;
+  alwaysShow?: boolean;
 };
 
 export const TieredSalesSelector = ({
@@ -42,6 +43,7 @@ export const TieredSalesSelector = ({
       'relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none',
     ),
   labelElement,
+  alwaysShow = false,
 }: Props) => {
   const {
     data: { chainId, autoDetectedTierId, currentTierId, tiers },
@@ -143,7 +145,7 @@ export const TieredSalesSelector = ({
         </>
       );
 
-  return visibleTiers.length > 0 ? (
+  return visibleTiers.length > 1 || alwaysShow ? (
     <RadioGroup
       value={currentTierId?.toString()}
       onChange={(newTierId: BigNumberish) => {
