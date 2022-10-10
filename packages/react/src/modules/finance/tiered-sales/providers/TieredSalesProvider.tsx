@@ -183,7 +183,6 @@ export const TieredSalesProvider = ({
       tiersLoading ||
       mintLoading ||
       tiersIsStale ||
-      tiersIsStale ||
       tiersIsPreviousData ||
       tiersFetchStatus !== 'idle'
     ) {

@@ -172,8 +172,9 @@ export const useSaleTiers = ({
         !tiersConfigsQuery.isLoading &&
         tiersConfigsQuery.fetchStatus === 'idle',
     ),
-    cacheTime: 3,
-    staleTime: 2,
+    // TODO Find a way to safely cache tiers data without causing issues when detecting eligible tier
+    cacheTime: 0,
+    staleTime: 0,
   });
 
   const mergedStates = useMergeQueryStates([saleTiersQuery, tiersConfigsQuery]);
