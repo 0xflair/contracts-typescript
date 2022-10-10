@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.27.1 (2022-10-10)
+
+
+### Bug Fixes
+
+* avoid detecting tier when data is stale ([7d028b3](https://github.com/flair-sdk/typescript/commit/7d028b3a4284b2c675fa34ecd9b78c7f130d004d))
+
+
+
+
+
 # 2.27.0 (2022-10-10)
 
 
