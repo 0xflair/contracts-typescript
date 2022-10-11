@@ -97,15 +97,23 @@ export const useSaleTiers = ({
           })
         : ({} as any);
 
-      const eligibleAmount =
-        finalAddress && (merkleProof !== undefined || !hasAllowlist)
-          ? await getEligibleAmount({
-              tierId,
-              minterAddress: finalAddress,
-              maxAllowance: merkleMetadata?.maxAllowance,
-              merkleProof,
-            })
-          : undefined;
+      let eligibleAmount;
+
+      try {
+        eligibleAmount =
+          finalAddress && (merkleProof !== undefined || !hasAllowlist)
+            ? await getEligibleAmount({
+                args: [
+                  tierId,
+                  finalAddress,
+                  merkleMetadata?.maxAllowance,
+                  merkleProof,
+                ],
+              })
+            : undefined;
+      } catch (e) {
+        console.warn(`Error when fetching eligible amount: `, e);
+      }
 
       const remainingSupply = await getTierRemainingSupply(tierId);
 
