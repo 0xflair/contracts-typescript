@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.31.2 (2022-10-11)
+
+
+### Bug Fixes
+
+* ignore analysis error ([7c2e1f0](https://github.com/flair-sdk/typescript/commit/7c2e1f0ffb9c1b6023ce1ae0478c793325b9f7dd))
+
+
+
+
+
 ## 2.31.1 (2022-10-11)
 
 
