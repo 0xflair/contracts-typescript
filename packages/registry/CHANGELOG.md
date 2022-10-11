@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.31.1 (2022-10-11)
+
+
+### Bug Fixes
+
+* put correct defaults when calculating eligible amount ([001ff23](https://github.com/flair-sdk/typescript/commit/001ff237b46529d0be402cdedd04885bba7a6ae5))
+
+
+
+
+
 # 2.31.0 (2022-10-11)
 
 
