@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.31.0 (2022-10-11)
+
+
+### Features
+
+* more robust eligible amount calculation ([4b431dd](https://github.com/flair-sdk/typescript/commit/4b431dd24422688d8325d252577a23625fcdfd2c))
+
+
+
+
+
 # 2.30.0 (2022-10-10)
 
 
