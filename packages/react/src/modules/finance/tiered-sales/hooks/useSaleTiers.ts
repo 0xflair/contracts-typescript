@@ -106,8 +106,8 @@ export const useSaleTiers = ({
                 args: [
                   tierId,
                   finalAddress,
-                  merkleMetadata?.maxAllowance,
-                  merkleProof,
+                  merkleMetadata?.maxAllowance || 1,
+                  merkleProof || [],
                 ],
               })
             : undefined;
