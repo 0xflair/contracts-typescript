@@ -1,4 +1,5 @@
 export * from './address-lists';
+export * from './balance-ramp';
 export * from './contract-verification';
 export * from './crypto-currency';
 export * from './data-query';

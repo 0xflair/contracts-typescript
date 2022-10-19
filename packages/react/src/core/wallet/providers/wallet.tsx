@@ -1,5 +1,4 @@
 import {
-  Environment,
   FLAIR_CHAINS,
   MagicLinkConnector,
   SafeConnector,
@@ -22,7 +21,6 @@ import { publicProvider } from 'wagmi/providers/public';
 
 import stylesheet from '../../../index.css';
 import { wrapWagmiClient } from '../../balance-ramp';
-import { createBalanceRampClient } from '../../balance-ramp/services/balance-ramp.factory';
 import { FLAIR_ALCHEMY_API_KEY, FLAIR_INFURA_PROJECT_ID } from '../constants';
 import { useAutoSwitch } from '../hooks';
 import { useAutoConnect } from '../hooks/useAutoConnect';
@@ -47,12 +45,6 @@ const { chains, provider, webSocketProvider } = configureChains(FLAIR_CHAINS, [
     apiKey: FLAIR_INFURA_PROJECT_ID,
   }),
 ]);
-
-createBalanceRampClient({
-  env: (process.env.REACT_APP_ENV as Environment) || Environment.PROD,
-  ignoreCurrentBalance: false,
-  requiresKyc: false,
-});
 
 const AutoWalletWrapper = ({
   preferredChainId,
