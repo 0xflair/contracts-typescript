@@ -46,7 +46,7 @@ export const WalletProfile = ({
   const { data: balance } = useBalance({
     addressOrName: address,
     formatUnits: 'ether',
-    watch: false,
+    watch: true,
   });
   const { data: avatar } = useEnsAvatar({
     addressOrName: address,
@@ -82,14 +82,17 @@ export const WalletProfile = ({
         )
       ) : null}
       {showLabel ? (
-        <span className={labelClassName || 'wallet-label'}>
+        <span
+          className={labelClassName || 'wallet-label hidden sm:inline-block'}
+        >
           {ens?.toString() || address?.slice(0, 4) + '...' + address?.slice(-4)}
         </span>
       ) : null}
       {showBalance && balance?.value ? (
         <span
           className={
-            balanceClassName || 'wallet-balance text-gray-500 truncate'
+            balanceClassName ||
+            'wallet-balance text-gray-500 truncate hidden md:inline-block'
           }
         >
           {Number(balance.formatted).toFixed(balancePrecisionPoints)}{' '}

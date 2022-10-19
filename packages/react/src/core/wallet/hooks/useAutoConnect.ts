@@ -3,7 +3,7 @@ import { useAccount, useClient, useConnect } from 'wagmi';
 
 const EAGER_CONNECTOR_IDS = ['safe'];
 
-function useAutoConnect() {
+export const useAutoConnect = () => {
   const { connect, connectors } = useConnect();
   const { isConnecting, isReconnecting } = useAccount();
   const [triedAutoConnect, setTriedAutoConnect] = useState(false);
@@ -38,6 +38,4 @@ function useAutoConnect() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connect, connectors]);
-}
-
-export { useAutoConnect };
+};

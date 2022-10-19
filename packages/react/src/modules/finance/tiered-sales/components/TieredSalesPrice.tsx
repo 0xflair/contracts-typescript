@@ -17,7 +17,7 @@ type Props = BareComponentProps & {
 export const TieredSalesPrice = ({
   as,
   loadingMask = '...',
-  showPrice = true,
+  showPrice = false,
   showSymbol = true,
   freeElement = <>Free</>,
   mintCount = 1,
@@ -34,7 +34,7 @@ export const TieredSalesPrice = ({
   const mintNo = Number(mintCount || '1');
   const finalPrice =
     price !== undefined && mintCount !== undefined
-      ? BigNumber.from(price).mul(mintNo === NaN ? 1 : mintNo)
+      ? BigNumber.from(price).mul(Number.isNaN(mintNo) ? 1 : mintNo)
       : undefined;
 
   const Component =

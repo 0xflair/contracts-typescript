@@ -1,4 +1,5 @@
 import {
+  Environment,
   FLAIR_CHAINS,
   MagicLinkConnector,
   SafeConnector,
@@ -20,12 +21,16 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { publicProvider } from 'wagmi/providers/public';
 
 import stylesheet from '../../../index.css';
+import { wrapWagmiClient } from '../../balance-ramp';
+import { createBalanceRampClient } from '../../balance-ramp/services/balance-ramp.factory';
 import { FLAIR_ALCHEMY_API_KEY, FLAIR_INFURA_PROJECT_ID } from '../constants';
+import { useAutoSwitch } from '../hooks';
 import { useAutoConnect } from '../hooks/useAutoConnect';
 
 export type WalletProviderProps = {
   children?: ReactNode;
   appName?: string;
+  preferredChainId?: number;
   custodialWallet?: boolean;
   injectStyles?: boolean;
   wagmiOverrides?: Record<string, any>;
@@ -43,8 +48,18 @@ const { chains, provider, webSocketProvider } = configureChains(FLAIR_CHAINS, [
   }),
 ]);
 
-const AutoConnectWrapper = ({ children }: PropsWithChildren<any>) => {
+createBalanceRampClient({
+  env: (process.env.REACT_APP_ENV as Environment) || Environment.PROD,
+  ignoreCurrentBalance: false,
+  requiresKyc: false,
+});
+
+const AutoWalletWrapper = ({
+  preferredChainId,
+  children,
+}: PropsWithChildren<any>) => {
   useAutoConnect();
+  useAutoSwitch(preferredChainId);
 
   return <>{children}</>;
 };
@@ -54,6 +69,7 @@ export const WalletProvider = ({
   appName = 'Flair',
   custodialWallet = false,
   injectStyles = true,
+  preferredChainId,
   wagmiOverrides,
 }: WalletProviderProps) => {
   const connectors = useCallback(() => {
@@ -103,12 +119,14 @@ export const WalletProvider = ({
 
   const wagmiClient = useMemo(
     () =>
-      createClient({
-        autoConnect: false,
-        connectors,
-        provider,
-        webSocketProvider,
-      }),
+      wrapWagmiClient(
+        createClient({
+          autoConnect: false,
+          connectors,
+          provider,
+          webSocketProvider,
+        }),
+      ),
     [connectors],
   );
 
@@ -128,7 +146,9 @@ export const WalletProvider = ({
 
   return (
     <WagmiConfig client={wagmiClient} {...wagmiOverrides}>
-      <AutoConnectWrapper>{children}</AutoConnectWrapper>
+      <AutoWalletWrapper preferredChainId={preferredChainId}>
+        {children}
+      </AutoWalletWrapper>
     </WagmiConfig>
   );
 };

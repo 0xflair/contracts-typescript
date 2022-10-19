@@ -14,6 +14,7 @@ export type CryptoAmountFieldProps = {
   symbol?: CryptoSymbol;
   min?: number;
   max?: number;
+  tabIndex?: number;
   onChange?: (value: string) => void;
 };
 
@@ -26,6 +27,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
     symbol,
     min,
     max,
+    tabIndex,
     onChange,
   } = props;
 
@@ -47,8 +49,9 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
           value={etherValue}
           min={min || 0}
           max={max || Infinity}
+          tabIndex={tabIndex}
           onChange={(e) => {
-            if (Number(e.target.value) == NaN) return;
+            if (Number.isNaN(Number(e.target.value))) return;
 
             setEtherValue(e.target.value);
             onChange &&
@@ -67,8 +70,9 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
               value={etherValue}
               symbol={symbol || (chain?.nativeCurrency?.symbol as CryptoSymbol)}
               unit={CryptoUnits.ETHER}
+              showCurrencySymbol={true}
             />{' '}
-            USD)
+            )
           </span>
         </div>
         <div className="mt-2 text-sm text-gray-500">{description}</div>

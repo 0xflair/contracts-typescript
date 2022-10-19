@@ -3,13 +3,15 @@ import { BigNumberish } from 'ethers';
 import { useMemo } from 'react';
 
 import { useCryptoCurrency } from '../../hooks';
-import { CryptoSymbol, CryptoUnits } from '../../types';
+import { BaseCurrency, CryptoSymbol, CryptoUnits } from '../../types';
 
 type Props = {
   value?: string | BigNumberish;
   fractionDigits?: number;
   unit?: CryptoUnits;
   symbol?: CryptoSymbol;
+  baseCurrency?: BaseCurrency;
+  showCurrencySymbol?: boolean;
 };
 
 export const CryptoPrice = (props: Props) => {
@@ -18,10 +20,13 @@ export const CryptoPrice = (props: Props) => {
     fractionDigits = 2,
     unit = CryptoUnits.ETHER,
     symbol = 'ETH',
+    baseCurrency = 'USD',
+    showCurrencySymbol = true,
   } = props;
 
   const { data } = useCryptoCurrency({
     symbol,
+    baseCurrency,
   });
 
   const etherValue = useMemo(() => {
@@ -40,6 +45,19 @@ export const CryptoPrice = (props: Props) => {
   return etherValue !== undefined &&
     data.price !== undefined &&
     fractionDigits !== undefined ? (
-    <>{(Number(etherValue) * Number(data.price)).toFixed(fractionDigits)}</>
+    showCurrencySymbol ? (
+      baseCurrency === 'USD' ? (
+        <>
+          ${(Number(etherValue) * Number(data.price)).toFixed(fractionDigits)}
+        </>
+      ) : (
+        <>
+          {(Number(etherValue) * Number(data.price)).toFixed(fractionDigits)}{' '}
+          {baseCurrency}
+        </>
+      )
+    ) : (
+      <>{(Number(etherValue) * Number(data.price)).toFixed(fractionDigits)}</>
+    )
   ) : null;
 };

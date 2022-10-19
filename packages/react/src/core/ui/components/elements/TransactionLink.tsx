@@ -2,11 +2,14 @@ import { SendTransactionResult } from '@wagmi/core';
 import { ethers } from 'ethers';
 import { Chain, useNetwork } from 'wagmi';
 
+import { useChainInfo } from '../../../../common';
 import { CopyButton } from './CopyButton';
 
 type Props = {
   className?: string;
   chain?: Chain;
+  chainId?: number;
+  txHash?: string;
   txResponse?: SendTransactionResult;
   txReceipt?: ethers.providers.TransactionReceipt;
 };
@@ -14,12 +17,15 @@ type Props = {
 export const TransactionLink = ({
   className = 'text-sm text-indigo-700',
   chain,
+  chainId,
+  txHash: txHash_,
   txResponse,
   txReceipt,
 }: Props) => {
   const { chain: activeChain } = useNetwork();
-  const txHash = txReceipt?.transactionHash || txResponse?.hash;
-  const scannerChain = chain || activeChain;
+  const targetChain = useChainInfo(chainId);
+  const txHash = txHash_ || txReceipt?.transactionHash || txResponse?.hash;
+  const scannerChain = chainId ? targetChain : chain || activeChain;
   const explorer = scannerChain?.blockExplorers?.default;
 
   return (

@@ -1,7 +1,11 @@
+import { NftTokenMetadata } from '../../../modules/token/metadata/types';
+
 export type NftToken = {
   tokenId: string;
   contractAddress: string;
   ownerAddress: string;
+  tokenUri?: string;
+  metadata?: NftTokenMetadata;
 };
 
 export type TokenBalance = {

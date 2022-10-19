@@ -25,8 +25,12 @@ export const Button = (props: Props) => {
       type="button"
       className={props.className || PRIMARY_BUTTON}
     >
-      {props.text}
-      {props.icon && <span className="ml-2 h-6 w-6">{props.icon}</span>}
+      <span>{props.text}</span>
+      {props.icon && (
+        <span className="flex items-center justify-center h-6 w-6">
+          {props.icon}
+        </span>
+      )}
     </button>
   );
 };
