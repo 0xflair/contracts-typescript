@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.32.1 (2022-10-19)
+
+
+### Bug Fixes
+
+* export balance package ([7d59e3d](https://github.com/flair-sdk/typescript/commit/7d59e3d9e6181abaa2ce708bf2ffd0ed38566848))
+
+
+
+
+
 # 2.32.0 (2022-10-19)
 
 
