@@ -1,11 +1,16 @@
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
+import { classNames } from '@flair-sdk/common';
 import { Dialog, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/outline';
 import { BigNumberish } from 'ethers';
-import { Fragment, ReactNode } from 'react';
+import { Fragment, HTMLAttributeAnchorTarget, ReactNode } from 'react';
 
-import { TransactionLink } from '../../../../core';
+import {
+  PRIMARY_BUTTON,
+  SECONDARY_BUTTON,
+  TransactionLink,
+} from '../../../../core';
 
 type Props = {
   mintCount?: BigNumberish;
@@ -19,6 +24,14 @@ type Props = {
     txResponse?: TransactionResponse;
     txReceipt?: TransactionReceipt;
   }) => ReactNode;
+  ctaButtonText?: string;
+  ctaButtonOnClick?: () => void;
+  ctaButtonUrl?: string;
+  ctaButtonClassName?: string;
+  ctaButtonTarget?: HTMLAttributeAnchorTarget;
+  closeButtonClassName?: string;
+  closeButtonText?: string;
+  onClose?: () => void;
 };
 
 export function TieredSalesSuccessDialog({
@@ -34,6 +47,14 @@ export function TieredSalesSuccessDialog({
       the transaction with the link below.
     </>
   ),
+  ctaButtonText,
+  ctaButtonUrl,
+  ctaButtonOnClick,
+  ctaButtonClassName,
+  ctaButtonTarget,
+  closeButtonClassName,
+  closeButtonText,
+  onClose,
 }: Props) {
   return (
     <div className="flair-component">
@@ -94,13 +115,56 @@ export function TieredSalesSuccessDialog({
                       </div>
                     </div>
                   </div>
-                  <div className="mt-5 sm:mt-6">
+                  <div className="mt-5 sm:mt-6 flex flex-col gap-2">
+                    {ctaButtonUrl || ctaButtonOnClick || ctaButtonText ? (
+                      ctaButtonOnClick ? (
+                        <button
+                          type="button"
+                          className={
+                            ctaButtonClassName ||
+                            classNames(
+                              PRIMARY_BUTTON,
+                              'w-full text-center justify-center px-4 py-2',
+                            )
+                          }
+                          onClick={() => {
+                            setOpen(false);
+                            ctaButtonOnClick();
+                          }}
+                        >
+                          {ctaButtonText || 'OK'}
+                        </button>
+                      ) : (
+                        <a
+                          href={ctaButtonUrl}
+                          className={
+                            ctaButtonClassName ||
+                            classNames(
+                              PRIMARY_BUTTON,
+                              'w-full text-center justify-center px-4 py-2',
+                            )
+                          }
+                          target={ctaButtonTarget}
+                        >
+                          {ctaButtonText || 'OK'}
+                        </a>
+                      )
+                    ) : null}
                     <button
                       type="button"
-                      className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
-                      onClick={() => setOpen(false)}
+                      className={
+                        closeButtonClassName ||
+                        classNames(
+                          SECONDARY_BUTTON,
+                          'w-full text-center justify-center px-4 py-2',
+                        )
+                      }
+                      onClick={() => {
+                        setOpen(false);
+                        onClose && onClose();
+                      }}
                     >
-                      Close
+                      {closeButtonText || 'Close'}
                     </button>
                   </div>
                 </Dialog.Panel>

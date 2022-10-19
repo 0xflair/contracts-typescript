@@ -1,4 +1,4 @@
-import { BigNumberish } from 'ethers';
+import { BigNumberish, BytesLike } from 'ethers';
 
 import {
   PredefinedReadContractConfig,
@@ -12,7 +12,7 @@ type Config = PredefinedReadContractConfig & {
 type ArgsType = [tokenId?: BigNumberish];
 
 export const useERC721TokenUri = ({ tokenId, enabled, ...config }: Config) => {
-  return useContractRead<BigNumberish, ArgsType>({
+  return useContractRead<BytesLike, ArgsType>({
     contractInterface: ['function tokenURI(uint256) view returns (string)'],
     functionName: 'tokenURI(uint256)',
     args: tokenId !== undefined ? [tokenId] : undefined,

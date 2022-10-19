@@ -97,7 +97,7 @@ export const NetworkSelector = (props: Props) => {
         {({ open }) => (
           <>
             <div className="relative">
-              <Listbox.Button className="bg-white relative w-48 border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <Listbox.Button className="bg-white relative w-24 sm:w-32 md:w-48 border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <span className="block truncate">
                   {(chain?.name ?? chain?.id) || '<wallet not connected>'}
                 </span>
@@ -116,7 +116,7 @@ export const NetworkSelector = (props: Props) => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Listbox.Options className="absolute z-20 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                <Listbox.Options className="absolute z-20 mt-1 w-48 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                   <div>
                     {categorizedChains.mainnet.map((chain) => {
                       return <ChainView key={chain.id} chain={chain} />;

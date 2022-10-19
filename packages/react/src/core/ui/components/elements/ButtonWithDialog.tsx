@@ -4,11 +4,10 @@ import Modal from 'react-modal';
 
 import { BareComponentProps } from '../../../../common';
 
-export type ButtonWithDialogProps<T extends HTMLElement = HTMLElement> =
+export type ButtonWithDialogProps<T extends HTMLElement = HTMLButtonElement> =
   PropsWithChildren<
     BareComponentProps<T> & {
-      label?: React.ReactNode;
-      buttonAttributes?: React.ButtonHTMLAttributes<HTMLButtonElement>;
+      text?: React.ReactNode;
       dialogTitle?: string;
       dialogTitleClassName?: string;
       dialogOverlayClassName?: string;
@@ -21,7 +20,7 @@ export type ButtonWithDialogProps<T extends HTMLElement = HTMLElement> =
 
 export function ButtonWithDialog<T extends HTMLElement = HTMLElement>({
   as,
-  label,
+  text,
   children,
   dialogTitle,
   dialogTitleClassName,
@@ -39,7 +38,7 @@ export function ButtonWithDialog<T extends HTMLElement = HTMLElement>({
   return (
     <>
       <Component onClick={() => setDialogOpen(true)} {...attributes}>
-        {label}
+        {text}
       </Component>
       <Modal
         ariaHideApp={false}

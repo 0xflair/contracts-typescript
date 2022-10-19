@@ -28,6 +28,15 @@ export type ContractWriteConfig<ArgsType extends any[]> = Omit<
   prepare?: boolean;
 };
 
+export type PredefinedContractWriteConfig<ArgsType extends any[] = any[]> =
+  Omit<
+    ContractWriteConfig<ArgsType>,
+    'args' | 'contractInterface' | 'functionName'
+  > & {
+    contractAddress?: string;
+    prepare?: boolean;
+  };
+
 export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   contractInterface,
   contractAddress,
@@ -136,6 +145,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     },
     error: prepareError || responseError || receiptError,
     isIdle: responseIsIdle && receiptIsIdle,
+    isPreparing: prepareLoading,
     isLoading: prepareLoading || responseIsLoading || receiptIsLoading,
     isSuccess: responseIsSuccess && receiptIsSuccess,
     isError: prepareIsError || responseIsError || receiptIsError,

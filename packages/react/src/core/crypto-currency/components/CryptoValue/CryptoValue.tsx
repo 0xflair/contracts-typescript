@@ -10,6 +10,7 @@ type Props = {
   value?: BigNumberish;
   fractionDigits?: number;
   unit?: CryptoUnits;
+  targetUnit?: CryptoUnits;
   symbol?: CryptoSymbol;
   showPrice?: boolean;
   showSymbol?: boolean;
@@ -21,26 +22,27 @@ export const CryptoValue = (props: Props) => {
     value = '0',
     fractionDigits,
     unit = CryptoUnits.ETHER,
+    targetUnit = CryptoUnits.ETHER,
     symbol = 'ETH',
-    showPrice = true,
+    showPrice = false,
     showSymbol = true,
     loadingContent = '...',
   } = props;
 
-  const { data, error, loading } = useCryptoCurrency({ symbol });
+  const { data, error, isLoading: loading } = useCryptoCurrency({ symbol });
 
-  const etherValue = useMemo(() => {
+  const targetUnitValue = useMemo(() => {
     try {
       const valueBn = ethers.utils.parseUnits(
         BigNumber.from(value || '0')?.toString() || '0',
         unit,
       );
-      return ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
+      return ethers.utils.formatUnits(valueBn, targetUnit);
     } catch (e) {
       debugger;
       console.error(`Error parsing value: `, value, e);
     }
-  }, [unit, value]);
+  }, [targetUnit, unit, value]);
 
   const fractions = useMemo(() => {
     try {
@@ -48,20 +50,22 @@ export const CryptoValue = (props: Props) => {
         fractionDigits !== undefined
           ? fractionDigits
           : symbol?.toString().toLowerCase().endsWith('eth')
-          ? 4
+          ? targetUnit === CryptoUnits.ETHER
+            ? 4
+            : 0
           : 2,
-        (etherValue?.match(/^(0|\.)+/)?.[0]?.length || 3) - 1,
+        (targetUnitValue?.match(/^(0|\.)+/)?.[0]?.length || 3) - 1,
       );
     } catch (e) {
       debugger;
       console.error(
         `Error guessing fractions: `,
         fractionDigits,
-        etherValue,
+        targetUnitValue,
         e,
       );
     }
-  }, [etherValue, fractionDigits, symbol]);
+  }, [fractionDigits, symbol, targetUnit, targetUnitValue]);
 
   if (error) {
     console.warn(`Could not fetch price for ${symbol}: `, error);
@@ -69,9 +73,9 @@ export const CryptoValue = (props: Props) => {
 
   const valueToRenderFormatted = useMemo(() => {
     try {
-      if (!etherValue) return;
+      if (!targetUnitValue) return;
 
-      const valueToRender = parseFloat(etherValue)
+      const valueToRender = parseFloat(targetUnitValue)
         .toFixed(fractions)
         .toString();
 
@@ -81,27 +85,31 @@ export const CryptoValue = (props: Props) => {
       return `${leading}${trailing ? `.${trailing}` : ''}`;
     } catch (e) {
       debugger;
-      console.error(`Error formatting value: `, etherValue, fractions, e);
+      console.error(`Error formatting value: `, targetUnitValue, fractions, e);
     }
-  }, [etherValue, fractions]);
+  }, [targetUnitValue, fractions]);
 
   return loading ? (
     <>{loadingContent}</>
   ) : (
     <>
       {valueToRenderFormatted || '...'}{' '}
-      {showSymbol ? data.info?.icon || symbol : null}
+      {showSymbol
+        ? targetUnit === CryptoUnits.ETHER
+          ? data.info?.icon || symbol
+          : targetUnit
+        : null}
       {showPrice && data.price && Number(data.price) > 0 ? (
         <>
           {' '}
           (~
           <CryptoPrice
             value={value}
-            fractionDigits={0}
+            fractionDigits={1}
             symbol={symbol}
             unit={unit}
-          />{' '}
-          USD)
+          />
+          )
         </>
       ) : null}
     </>

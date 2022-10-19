@@ -1,17 +1,23 @@
+import { BigNumber, BigNumberish, ethers, utils } from 'ethers';
+
 import { useCryptoPricesContext } from '../providers';
-import { BaseCurrency, CryptoSymbol } from '../types';
+import { BaseCurrency, CryptoSymbol, CryptoUnits } from '../types';
 
 type Config = {
+  amount?: BigNumberish;
+  amountUnit?: CryptoUnits;
   symbol?: CryptoSymbol;
   baseCurrency?: BaseCurrency;
 };
 
 export const useCryptoPrice = ({
+  amount = 1,
+  amountUnit = CryptoUnits.ETHER,
   symbol = 'ETH',
   baseCurrency = 'USD',
 }: Config = {}) => {
   const {
-    state: { data: priceDictionariesBySymbol, error, loading },
+    state: { data: priceDictionariesBySymbol, error, loading: isLoading },
   } = useCryptoPricesContext();
 
   const normalizedSymbol =
@@ -37,9 +43,21 @@ export const useCryptoPrice = ({
     );
   }
 
+  const amountRaw = amount
+    ? ethers.utils.parseUnits(amount.toString(), amountUnit)
+    : undefined;
+  const convertedAmountEther = amountRaw
+    ? ethers.utils.formatEther(amountRaw)
+    : undefined;
+
+  const total =
+    price && convertedAmountEther
+      ? Number(convertedAmountEther.toString()) * price
+      : undefined;
+
   return {
-    data: price,
+    data: total,
     error,
-    loading,
+    isLoading,
   } as const;
 };

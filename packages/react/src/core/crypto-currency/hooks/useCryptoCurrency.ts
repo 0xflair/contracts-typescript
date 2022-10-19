@@ -15,7 +15,7 @@ export const useCryptoCurrency = ({
   const {
     data: price,
     error,
-    loading,
+    isLoading,
   } = useCryptoPrice({
     symbol,
     baseCurrency,
@@ -27,6 +27,6 @@ export const useCryptoCurrency = ({
       price,
     },
     error,
-    loading,
+    isLoading,
   } as const;
 };

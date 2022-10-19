@@ -113,6 +113,7 @@ export const WalletDropdown = ({
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
                   )}
+                  rel="noreferrer"
                 >
                   Buy {chain?.nativeCurrency?.symbol || 'Crypto'}
                 </a>

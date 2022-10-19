@@ -1,3 +1,6 @@
+export * from './useContractName';
+export * from './useContractNameAndSymbolLocked';
+export * from './useContractSymbol';
 export * from './useTokenMetadataBaseUri';
 export * from './useTokenMetadataBaseUriLocked';
 export * from './useTokenMetadataBasics';
