@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.32.0 (2022-10-19)
+
+
+### Features
+
+* port various improvements from new dashboard ([#2](https://github.com/flair-sdk/typescript/issues/2)) ([b2230e4](https://github.com/flair-sdk/typescript/commit/b2230e408631b109a8ce4a8dca74a776a7a294ca))
+
+
+
+
+
 ## 2.31.2 (2022-10-11)
 
 
