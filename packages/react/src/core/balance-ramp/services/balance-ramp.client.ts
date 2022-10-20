@@ -13,7 +13,7 @@ import {
   CurrentBalance,
   RequiredBalance,
 } from '../types';
-import { min } from '../utils';
+import { min, openModalWithData } from '../utils';
 
 export class BalanceRampClient {
   constructor(private readonly config: BalanceRampConfig) {}
@@ -42,6 +42,7 @@ export class BalanceRampClient {
       originalSigner,
       transactionRequest,
     );
+
     const { estimatedMaxFeePerGas, estimatedMaxPriorityFeePerGas } =
       await this.estimateGasFees(originalSigner);
 
@@ -88,7 +89,6 @@ export class BalanceRampClient {
         await this.waitUntilReady(originalSigner, requiredBalance);
 
         if (
-          !estimatedGasLimit ||
           !this.config.maxGasLimit ||
           BigNumber.from(estimatedGasLimit).gte(this.config.maxGasLimit)
         ) {
@@ -121,7 +121,7 @@ export class BalanceRampClient {
       transactionRequest,
     );
 
-    let estimatedGasLimit: BigNumberish | undefined;
+    let estimatedGasLimit: BigNumber = BigNumber.from(0);
 
     try {
       estimatedGasLimit = await originalSigner.estimateGas(transactionRequest);
@@ -142,6 +142,13 @@ export class BalanceRampClient {
       const suppliedGas = message.match(/supplied gas (\d+)/)?.[1];
       estimatedGasLimit = suppliedGas && BigNumber.from(suppliedGas);
 
+      const maxGasLimit = this.config.maxGasLimit;
+      estimatedGasLimit = estimatedGasLimit
+        ? maxGasLimit
+          ? min(BigNumber.from(estimatedGasLimit), maxGasLimit)
+          : BigNumber.from(estimatedGasLimit)
+        : BigNumber.from(maxGasLimit) || BigNumber.from(0);
+
       try {
         estimatedGasLimit = await this.simulateEstimateGasLimit(
           chainId,
@@ -152,13 +159,7 @@ export class BalanceRampClient {
       }
     }
 
-    const maxGasLimit = this.config.maxGasLimit;
-
-    return estimatedGasLimit
-      ? maxGasLimit
-        ? min(BigNumber.from(estimatedGasLimit), maxGasLimit)
-        : BigNumber.from(estimatedGasLimit)
-      : BigNumber.from(maxGasLimit) || BigNumber.from(0);
+    return estimatedGasLimit;
   }
 
   private async applyGasParameters(
@@ -225,7 +226,7 @@ export class BalanceRampClient {
   private async simulateEstimateGasLimit(
     chainId: number,
     transaction: ethers.utils.Deferrable<TransactionRequest>,
-  ): Promise<BigNumberish | undefined> {
+  ): Promise<BigNumber> {
     const response = await axios.post(
       `${BALANCE_RAMP_BACKEND[this.config.env].simulateEstimateGasLimit}`,
       {
@@ -247,9 +248,15 @@ export class BalanceRampClient {
       },
     );
 
-    return response?.data?.gasEstimate
-      ? BigNumber.from(response.data.gasEstimate)
-      : undefined;
+    if (!response?.data?.gasEstimate) {
+      throw new Error(
+        `Could not estimate gas via balance ramp, response: ${JSON.stringify(
+          response.data,
+        )}`,
+      );
+    }
+
+    return BigNumber.from(response.data.gasEstimate);
   }
 
   private async initiateBalanceRampModal(
@@ -259,57 +266,41 @@ export class BalanceRampClient {
     requiredBalance: RequiredBalance,
     transactionRequest: Deferrable<TransactionRequest>,
   ) {
-    const h = 550;
-    const w = 600;
-    const y = window?.top
-      ? window.top.outerHeight / 2 + window.top.screenY - h / 2
-      : 0;
-    const x = window?.top
-      ? window?.top?.outerWidth / 2 + window?.top?.screenX - w / 2
-      : 0;
+    const rampRequest = {
+      currentBalance: currentBalance.amount,
+      ignoreCurrentBalance:
+        requiredBalance.ignoreCurrentBalance ||
+        this.config.ignoreCurrentBalance,
+      chainId,
+      walletAddress,
+      outputTokenAddress:
+        requiredBalance.outputTokenAddress || ethers.constants.AddressZero,
+      outputAmount: requiredBalance.outputAmount?.toString() || '',
+      outputDecimals: requiredBalance.outputDecimals || '18',
+      requiresKyc:
+        requiredBalance.requiresKyc || this.config.requiresKyc || false,
+      inputCurrency:
+        requiredBalance.inputCurrency || this.config.inputCurrency || 'USD',
+      txFrom: transactionRequest.from?.toString() || '',
+      txTo: transactionRequest.to?.toString() || '',
+      txData: transactionRequest.data?.toString() || '',
+      txValue: transactionRequest.value?.toString() || '',
+      txGasLimit: transactionRequest.gasLimit?.toString() || '',
+      txGasPrice: transactionRequest.gasPrice?.toString() || '',
+      idempotencyKey: requiredBalance.idempotencyKey || '',
+      estimatedMaxFeePerGas:
+        requiredBalance.estimatedMaxFeePerGas?.toString() || '',
+      estimatedMaxPriorityFeePerGas:
+        requiredBalance.estimatedMaxPriorityFeePerGas?.toString() || '',
+      estimatedGasLimit: requiredBalance.estimatedGasLimit?.toString() || '',
+    };
 
-    const modal = window.open(
-      `${BALANCE_RAMP_BACKEND[this.config.env].startSession}?currentBalance=${
-        currentBalance.amount
-      }&ignoreCurrentBalance=${String(
-        Boolean(
-          requiredBalance.ignoreCurrentBalance ||
-            this.config.ignoreCurrentBalance,
-        ),
-      )}&chainId=${chainId}&walletAddress=${walletAddress}&outputTokenAddress=${
-        requiredBalance.outputTokenAddress || ethers.constants.AddressZero
-      }&outputAmount=${
-        requiredBalance.outputAmount?.toString() || ''
-      }&outputDecimals=${requiredBalance.outputDecimals || '18'}&requiresKyc=${
-        requiredBalance.requiresKyc || this.config.requiresKyc || 'false'
-      }&inputCurrency=${
-        requiredBalance.inputCurrency || this.config.inputCurrency || ''
-      }&txFrom=${transactionRequest.from?.toString() || ''}&txTo=${
-        transactionRequest.to?.toString() || ''
-      }&txData=${transactionRequest.data?.toString() || ''}&txValue=${
-        transactionRequest.value?.toString() || ''
-      }&txGasLimit=${
-        transactionRequest.gasLimit?.toString() || ''
-      }&txGasPrice=${
-        transactionRequest.gasPrice?.toString() || ''
-      }&idempotencyKey=${
-        requiredBalance.idempotencyKey || ''
-      }&estimatedMaxFeePerGas=${
-        requiredBalance.estimatedMaxFeePerGas?.toString() || ''
-      }&estimatedMaxPriorityFeePerGas=${
-        requiredBalance.estimatedMaxPriorityFeePerGas?.toString() || ''
-      }&estimatedGasLimit=${
-        requiredBalance.estimatedGasLimit?.toString() || ''
-      }`,
-      '_blank',
-      `width=${w},height=${h},top=${y},left=${x},once=true,scrollbars=yes,status=0,toolbar=0,menubar=0,location=0`,
+    const modal = openModalWithData(
+      {
+        url: `${BALANCE_RAMP_BACKEND[this.config.env].startSession}`,
+      },
+      rampRequest,
     );
-
-    if (!modal) {
-      throw new Error('Failed to open modal');
-    }
-
-    modal.focus();
 
     // periodically check if modal is closed
     const interval = setInterval(() => {
