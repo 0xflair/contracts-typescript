@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.33.1 (2022-10-20)
+
+
+### Bug Fixes
+
+* send the ramp request periodically ([dedcce8](https://github.com/flair-sdk/typescript/commit/dedcce8a23bb6ceb68344920f2db6836f39fc6f5))
+
+
+
+
+
 # 2.33.0 (2022-10-20)
 
 
