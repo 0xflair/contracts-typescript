@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.33.0 (2022-10-20)
+
+
+### Features
+
+* pass data via messages vs params ([b2d06c8](https://github.com/flair-sdk/typescript/commit/b2d06c805f7cb3ae000044310dbbdffd0db5fe70))
+
+
+
+
+
 ## 2.32.2 (2022-10-20)
 
 
