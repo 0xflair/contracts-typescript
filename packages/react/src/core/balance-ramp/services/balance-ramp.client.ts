@@ -133,6 +133,10 @@ export class BalanceRampClient {
         e.message?.toString() ||
         e?.toString();
 
+      if (!message.toLowerCase().includes('insufficient funds')) {
+        throw e;
+      }
+
       console.warn(`Could not estimate gas via provider, message: `, message);
 
       const suppliedGas = message.match(/supplied gas (\d+)/)?.[1];
