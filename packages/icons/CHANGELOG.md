@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.32.2 (2022-10-20)
+
+
+### Bug Fixes
+
+* only capture insufficient funds exceptions ([18bae4b](https://github.com/flair-sdk/typescript/commit/18bae4b072979eed331463e2d88da0b8ab51257c))
+
+
+
+
+
 ## 2.32.1 (2022-10-19)
 
 
