@@ -27,14 +27,20 @@ export function openModalWithData(
     throw new Error('Failed to open modal');
   }
 
-  modal.postMessage(
-    {
-      flair: true,
-      type: 'BalanceRampRequest',
-      rampRequest,
-    },
-    args.url,
-  );
+  const intervalRequest = setInterval(() => {
+    if (modal.closed) {
+      clearInterval(intervalRequest);
+      return;
+    }
+    modal.postMessage(
+      {
+        flair: true,
+        type: 'BalanceRampRequest',
+        rampRequest,
+      },
+      args.url,
+    );
+  }, 500);
 
   modal.focus();
 
