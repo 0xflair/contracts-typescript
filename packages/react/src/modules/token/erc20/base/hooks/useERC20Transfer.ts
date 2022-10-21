@@ -1,7 +1,7 @@
 import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 
-import { useContractWriteAndWait } from '../../../../common';
+import { useContractWriteAndWait } from '../../../../../common';
 
 type Config = {
   contractAddress?: string;
