@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.35.0 (2022-10-21)
+
+
+### Features
+
+* add basic erc20 hooks and components ([0576e0e](https://github.com/flair-sdk/typescript/commit/0576e0e8d13096602a6b30b3cf0cec7040237513))
+
+
+
+
+
 # 2.34.0 (2022-10-21)
 
 
