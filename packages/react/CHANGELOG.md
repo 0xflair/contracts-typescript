@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.34.0 (2022-10-21)
+
+
+### Features
+
+* port all new chains ([ca410d2](https://github.com/flair-sdk/typescript/commit/ca410d2769335092d06a01cf8ee61e7df941e699))
+
+
+
+
+
 ## 2.33.1 (2022-10-20)
 
 
