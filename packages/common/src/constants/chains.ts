@@ -1,8 +1,8 @@
-import { allChains as WagmiChains, Chain } from '@wagmi/core';
+import { allChains, Chain } from '@wagmi/core';
 
 // TODO: Move these to wagmi repo itself
 // https://github.com/wagmi-dev/wagmi/blob/0.3.x/packages/core/src/constants/chains.ts#L234
-const newChains: Chain[] = [
+const newChains = [
   {
     id: 56,
     name: 'Binance Mainnet',
@@ -138,7 +138,7 @@ const newChains: Chain[] = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://rpc.ankr.com/fantom/',
+      default: 'https://rpc.ankr.com/fantom',
     },
     blockExplorers: {
       etherscan: {
@@ -161,7 +161,7 @@ const newChains: Chain[] = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://rpc.testnet.fantom.network/',
+      default: 'https://rpc.testnet.fantom.network',
     },
     blockExplorers: {
       etherscan: {
@@ -208,7 +208,7 @@ const newChains: Chain[] = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://testnet.aurora.dev/',
+      default: 'https://testnet.aurora.dev',
     },
     blockExplorers: {
       etherscan: {
@@ -363,10 +363,223 @@ const newChains: Chain[] = [
     },
     testnet: true,
   },
+  {
+    id: 25,
+    name: 'Cronos Mainnet',
+    network: 'cronos',
+    nativeCurrency: {
+      name: 'CRO',
+      symbol: 'CRO',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://node.croswap.com/rpc',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Cronos Chain explorer',
+        url: 'https://cronoscan.com',
+      },
+      default: {
+        name: 'Cronos Chain explorer',
+        url: 'https://cronoscan.com',
+      },
+    },
+  },
+  {
+    id: 338,
+    name: 'Cronos Testnet',
+    network: 'cronosTestnet',
+    nativeCurrency: {
+      name: 'TCRO',
+      symbol: 'TCRO',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://evm-t3.cronos.org',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Cronos Chain Testnet explorer',
+        url: 'https://testnet.cronoscan.com',
+      },
+      default: {
+        name: 'Cronos Chain Testnet explorer',
+        url: 'https://testnet.cronoscan.com',
+      },
+    },
+    testnet: true,
+  },
+  {
+    id: 42220,
+    name: 'Celo Mainnet',
+    network: 'celo',
+    nativeCurrency: {
+      name: 'CELO',
+      symbol: 'CELO',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://forno.celo.org',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Celo explorer',
+        url: 'https://explorer.celo.org',
+      },
+      default: {
+        name: 'Celo explorer',
+        url: 'https://explorer.celo.org',
+      },
+    },
+  },
+  {
+    id: 44787,
+    name: 'Celo Testnet Alfajores',
+    network: 'celoAlfajores',
+    nativeCurrency: {
+      name: 'CELO',
+      symbol: 'CELO',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://alfajores-forno.celo-testnet.org',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Celo explorer',
+        url: 'https://alfajores-blockscout.celo-testnet.org',
+      },
+      default: {
+        name: 'Celo explorer',
+        url: 'https://alfajores-blockscout.celo-testnet.org',
+      },
+    },
+    testnet: true,
+  },
+  {
+    id: 42170,
+    name: 'Arbitrum Nova',
+    network: 'arbitrumNova',
+    nativeCurrency: {
+      name: 'ETH',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://nova.arbitrum.io/rpc',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Arbitrum Nova explorer',
+        url: 'https://nova-explorer.arbitrum.io',
+      },
+      default: {
+        name: 'Arbitrum Nova explorer',
+        url: 'https://nova-explorer.arbitrum.io',
+      },
+    },
+  },
+  {
+    id: 40,
+    name: 'Telos',
+    network: 'telos',
+    nativeCurrency: {
+      name: 'TLOS',
+      symbol: 'TLOS',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://mainnet.telos.net/evm',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Telos explorer',
+        url: 'https://www.teloscan.io',
+      },
+      default: {
+        name: 'Telos explorer',
+        url: 'https://www.teloscan.io',
+      },
+    },
+  },
+  {
+    id: 41,
+    name: 'Telos Testnet',
+    network: 'telosTestnet',
+    nativeCurrency: {
+      name: 'TLOS',
+      symbol: 'TLOS',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://testnet.telos.net/evm',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Telos explorer',
+        url: 'https://testnet.teloscan.io',
+      },
+      default: {
+        name: 'Telos explorer',
+        url: 'https://testnet.teloscan.io',
+      },
+    },
+    testnet: true,
+  },
+  {
+    id: 42262,
+    name: 'Oasis Emerald',
+    network: 'oasisEmerald',
+    nativeCurrency: {
+      name: 'ROSE',
+      symbol: 'ROSE',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://emerald.oasis.dev',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Oasis explorer',
+        url: 'https://explorer.emerald.oasis.dev',
+      },
+      default: {
+        name: 'Oasis explorer',
+        url: 'https://explorer.emerald.oasis.dev',
+      },
+    },
+  },
+  {
+    id: 42261,
+    name: 'Oasis Emerald Testnet',
+    network: 'oasisEmeraldTestnet',
+    nativeCurrency: {
+      name: 'ROSE',
+      symbol: 'ROSE',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://testnet.emerald.oasis.dev',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Oasis Emerald explorer',
+        url: 'https://testnet.explorer.emerald.oasis.dev',
+      },
+      default: {
+        name: 'Oasis Emerald explorer',
+        url: 'https://testnet.explorer.emerald.oasis.dev',
+      },
+    },
+    testnet: true,
+  },
 ];
+
+const WagmiChains = allChains.filter((c) => ![3, 4, 421611].includes(c.id));
 
 export const FLAIR_CHAINS: Chain[] = [...WagmiChains, ...newChains];
 
 export const FLAIR_DEFAULT_CHAIN = FLAIR_CHAINS.find(
-  (c) => c.id === 4 /* rinkeby */,
+  (c) => c.id === 1 /* ethereum */,
 ) as Chain;
