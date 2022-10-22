@@ -37,12 +37,16 @@ export type WalletProviderProps = {
 const FLAIR_MAGIC_API_KEY = 'pk_live_8B82089A89462668';
 
 const { chains, provider, webSocketProvider } = configureChains(FLAIR_CHAINS, [
-  publicProvider(),
   alchemyProvider({
+    priority: 10,
     apiKey: FLAIR_ALCHEMY_API_KEY,
   }),
   infuraProvider({
+    priority: 50,
     apiKey: FLAIR_INFURA_PROJECT_ID,
+  }),
+  publicProvider({
+    priority: 100,
   }),
 ]);
 
