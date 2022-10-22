@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.36.1 (2022-10-22)
+
+
+### Bug Fixes
+
+* correct type for decimals hook ([e6daec9](https://github.com/flair-sdk/typescript/commit/e6daec9595900f2840d37c15625a8373c514302e))
+
+
+
+
+
 # 2.36.0 (2022-10-22)
 
 
