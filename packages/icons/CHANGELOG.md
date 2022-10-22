@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.35.2 (2022-10-22)
+
+
+### Bug Fixes
+
+* put alchemy on highest priority ([d4611a8](https://github.com/flair-sdk/typescript/commit/d4611a8236e2d1458f0846f93f525498b1d4c395))
+
+
+
+
+
 ## 2.35.1 (2022-10-22)
 
 
