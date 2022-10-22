@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.35.1 (2022-10-22)
+
+
+### Bug Fixes
+
+* disable auto watch for balance ([d2ce369](https://github.com/flair-sdk/typescript/commit/d2ce369b1f74cc22dc2af74d3fbd650504997245))
+
+
+
+
+
 # 2.35.0 (2022-10-21)
 
 
