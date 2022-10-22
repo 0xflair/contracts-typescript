@@ -46,7 +46,7 @@ export const WalletProfile = ({
   const { data: balance } = useBalance({
     addressOrName: address,
     formatUnits: 'ether',
-    watch: true,
+    watch: false,
   });
   const { data: avatar } = useEnsAvatar({
     addressOrName: address,
