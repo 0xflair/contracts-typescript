@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.36.0 (2022-10-22)
+
+
+### Features
+
+* add decimals locked hook ([bd21f61](https://github.com/flair-sdk/typescript/commit/bd21f615127346632f221930ae10fc0843698059))
+
+
+
+
+
 ## 2.35.2 (2022-10-22)
 
 
