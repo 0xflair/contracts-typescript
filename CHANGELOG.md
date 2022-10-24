@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.37.0 (2022-10-24)
+
+
+### Features
+
+* enable custodial wallet by default ([06932ba](https://github.com/flair-sdk/typescript/commit/06932ba1ecb23c4ec99a111556ca4f8ac6a3aede))
+
+
+
+
+
 ## 2.36.4 (2022-10-24)
 
 
