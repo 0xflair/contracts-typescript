@@ -1,5 +1,3 @@
-import { BigNumberish } from 'ethers';
-
 import {
   PredefinedReadContractConfig,
   useContractRead,

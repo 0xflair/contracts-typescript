@@ -83,8 +83,6 @@ export const augmentContractWithMetaTransactions = <
   flairClientId: string;
   contract: T;
   forwarder: string;
-  addressOrName?: string;
-  signer?: Signer;
 }): MetaTransactionsAugmentedContract<T> => {
   const metaTxClient = new MetaTransactionsClient({
     env: config.env || Environment.PROD,
