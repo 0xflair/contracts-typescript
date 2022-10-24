@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.36.4 (2022-10-24)
+
+
+### Bug Fixes
+
+* remove extra underlines from classname ([d957599](https://github.com/flair-sdk/typescript/commit/d957599eeb780481519707bf260b751c9c388cea))
+
+
+
+
+
 ## 2.36.3 (2022-10-24)
 
 **Note:** Version bump only for package @flair-sdk/common
