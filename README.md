@@ -10,6 +10,16 @@ A complete suite of Flair reusable components and clients for frontend and backe
 | [@flair&#x2011;sdk/metatx](./packages/metatx) | Extension to ether.js `Contract` class to make all functions compatible with native meta transactions standard ([ERC 2771](https://eips.ethereum.org/EIPS/eip-2771)). (node.js and browser) |
 | [@flair&#x2011;sdk/ipfs](./packages/ipfs)     | Utility functions to interact with IPFS, useful for NFT metadata storage. (node.js and browser)                                                                                             |
 
+## Examples
+
+Explore all the examples using the Flair SDK in the [flair-sdk/examples](https://github.com/flair-sdk/examples) repo:
+
+- [Simple wallet integration and connect button](https://github.com/flair-sdk/examples/tree/main/react/simple-wallet-integration)
+- [Custom minting sales in your own website](https://github.com/flair-sdk/examples/tree/main/react/custom-tiered-sales)
+- [Minting NFTs from your backend via a trustless relayer API](https://github.com/flair-sdk/examples/tree/main/express/mint-erc721-with-metadata)
+- [Customize sales logic in the smart contract](https://github.com/flair-sdk/examples/tree/main/solidity/custom-sales-logic)
+
+
 ## Documentation
 
 Visit [docs.flair.dev](https://docs.flair.dev) for the full SDK documentation.
