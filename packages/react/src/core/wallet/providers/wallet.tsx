@@ -62,8 +62,8 @@ const AutoWalletWrapper = ({
 
 export const WalletProvider = ({
   children,
-  appName = 'Flair',
-  custodialWallet = false,
+  appName = 'Quick Wallet',
+  custodialWallet = true,
   injectStyles = true,
   preferredChainId,
   wagmiOverrides,
