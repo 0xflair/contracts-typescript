@@ -24,6 +24,4 @@ yarn add @flair-sdk/metatx
 
 Here are the example projects using this library:
 
-- [Node.js / Express / mint-nft-by-role-meta-transactions](https://github.com/0xflair/examples/tree/main/nodejs/express/mint-nft-by-role-meta-transactions): Mint NFTs from your backend, via Flair trustless relayers.
-
-- [Node.js / Express / mint-one-of-one-nfts-meta-transactions](https://github.com/0xflair/examples/tree/main/nodejs/express/mint-one-of-one-nfts-meta-transactions): Mint NFTs from your backend, via Flair trustless relayers.
+- [Typescript / Express / mint-erc721-with-metadata](https://github.com/flair-sdk/examples/tree/main/express/mint-erc721-with-metadata): Mint NFTs from your backend, via trustless relayers APIs.
