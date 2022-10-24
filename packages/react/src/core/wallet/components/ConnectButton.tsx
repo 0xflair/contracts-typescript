@@ -68,7 +68,7 @@ export const ConnectButton = ({
         closeTimeoutMS={150}
         isOpen={dialogOpen}
         onRequestClose={() => setDialogOpen(false)}
-        portalClassName={'flair-component___ connect-dialog-portal'}
+        portalClassName={'flair-component connect-dialog-portal'}
         className={
           dialogProps?.contentClassName ||
           'w-full h-full sm:w-auto sm:h-auto absolute max-w-lg mx-auto overflow-scroll align-middle p-4 sm:rounded-lg bg-white shadow-xl top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2' // sm:align-middle justify-center inline-flex flex-col gap-4 transform transition-all
@@ -100,7 +100,7 @@ export const ConnectButton = ({
         </h3>
         {dialogProps?.contentPrepend}
         <ConnectPalette
-          paletteClassName="grid grid-cols-2 gap-2 w-full"
+          paletteClassName="flex flex-wrap gap-2 w-full"
           {...connectPalletteProps}
         />
         {dialogProps?.contentAppend}
