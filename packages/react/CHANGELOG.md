@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.36.2 (2022-10-24)
+
+
+### Bug Fixes
+
+* remove unused arguments ([95fd0d7](https://github.com/flair-sdk/typescript/commit/95fd0d746383c4f8d4ffede98135b8d9268a511e))
+
+
+
+
+
 ## 2.36.1 (2022-10-22)
 
 
