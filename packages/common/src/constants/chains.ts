@@ -338,6 +338,7 @@ const newChains = [
         url: 'https://moonriver.moonscan.io',
       },
     },
+    testnet: true,
   },
   {
     id: 280,
