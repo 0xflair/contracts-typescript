@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.37.2 (2022-10-25)
+
+
+### Bug Fixes
+
+* add status checks for loading var ([0b43db9](https://github.com/flair-sdk/typescript/commit/0b43db92e3d0742bf1c6ada085bd7a5bd731b6a5))
+
+
+
+
+
 ## 2.37.1 (2022-10-24)
 
 **Note:** Version bump only for package @flair-sdk/ipfs
