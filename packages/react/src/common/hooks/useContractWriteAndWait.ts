@@ -80,6 +80,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     isLoading: responseIsLoading,
     isSuccess: responseIsSuccess,
     isError: responseIsError,
+    status: responseStatus,
     writeAsync: doWrite,
   } = useContractWrite(config);
 
@@ -90,6 +91,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     isLoading: receiptIsLoading,
     isSuccess: receiptIsSuccess,
     isError: receiptIsError,
+    fetchStatus: receiptFetchStatus,
   } = useWaitForTransaction({
     hash: responseData?.hash,
     confirmations,
@@ -146,7 +148,12 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     error: prepareError || responseError || receiptError,
     isIdle: responseIsIdle && receiptIsIdle,
     isPreparing: prepareLoading,
-    isLoading: prepareLoading || responseIsLoading || receiptIsLoading,
+    isLoading:
+      prepareLoading ||
+      responseIsLoading ||
+      responseStatus === 'loading' ||
+      receiptIsLoading ||
+      receiptFetchStatus === 'fetching',
     isSuccess: responseIsSuccess && receiptIsSuccess,
     isError: prepareIsError || responseIsError || receiptIsError,
     writeAndWait: doWrite ? writeAndWait : undefined,

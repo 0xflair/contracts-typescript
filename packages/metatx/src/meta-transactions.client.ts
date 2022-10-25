@@ -33,7 +33,7 @@ export class MetaTransactionsClient {
     return {
       value: '0',
       minGasPrice: '0',
-      maxGasPrice: '1000000000000',
+      maxGasPrice: '100000000000',
       expiresAt: 8000000000,
       nonce: generateRandomUint256(),
       forwarder: this.forwarder as string,
