@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.38.0 (2022-11-04)
+
+
+### Features
+
+* simpler connect palette and select account on connect for metamask ([e3028fb](https://github.com/flair-sdk/typescript/commit/e3028fb41617ab77163066d16bd7a3ff307638b7))
+
+
+
+
+
 ## 2.37.3 (2022-10-25)
 
 **Note:** Version bump only for package @flair-sdk/typescript
