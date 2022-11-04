@@ -19,6 +19,7 @@ import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { publicProvider } from 'wagmi/providers/public';
 
+import { isDarkMode } from '../../../common/utils/isDarkMode';
 import stylesheet from '../../../index.css';
 import { wrapWagmiClient } from '../../balance-ramp';
 import { FLAIR_ALCHEMY_API_KEY, FLAIR_INFURA_PROJECT_ID } from '../constants';
@@ -63,17 +64,26 @@ const AutoWalletWrapper = ({
 export const WalletProvider = ({
   children,
   appName = 'Quick Wallet',
-  custodialWallet = true,
   injectStyles = true,
   preferredChainId,
   wagmiOverrides,
 }: WalletProviderProps) => {
   const connectors = useCallback(() => {
     const connectors: any[] = [
-      new MetaMaskConnector({ chains }),
+      new MetaMaskConnector({
+        chains,
+        options: {
+          shimDisconnect: true,
+          UNSTABLE_shimOnConnectSelectAccount: true,
+          shimChainChangedDisconnect: true,
+        },
+      }),
       new InjectedConnector({
         chains,
-        options: { shimDisconnect: true },
+        options: {
+          shimDisconnect: true,
+          shimChainChangedDisconnect: true,
+        },
       }),
       new WalletConnectConnector({
         chains,
@@ -85,6 +95,7 @@ export const WalletProvider = ({
         chains,
         options: {
           appName,
+          darkMode: isDarkMode(),
         },
       }),
       new SafeConnector({
@@ -93,25 +104,20 @@ export const WalletProvider = ({
           debug: true,
         },
       }),
+      new MagicLinkConnector({
+        chains,
+        options: {
+          apiKey: FLAIR_MAGIC_API_KEY,
+          oauthOptions: {
+            providers: ['google', 'twitter', 'github'],
+          },
+          customHeaderText: appName,
+        },
+      }),
     ];
 
-    if (custodialWallet) {
-      connectors.push(
-        new MagicLinkConnector({
-          chains,
-          options: {
-            apiKey: FLAIR_MAGIC_API_KEY,
-            oauthOptions: {
-              providers: ['google', 'twitter', 'github'],
-            },
-            customHeaderText: appName,
-          },
-        }),
-      );
-    }
-
     return connectors;
-  }, [appName, custodialWallet]);
+  }, [appName]);
 
   const wagmiClient = useMemo(
     () =>

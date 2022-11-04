@@ -100,7 +100,7 @@ export const ConnectButton = ({
         </h3>
         {dialogProps?.contentPrepend}
         <ConnectPalette
-          paletteClassName="flex flex-wrap gap-2 w-full"
+          className="flex flex-wrap gap-2 w-full"
           {...connectPalletteProps}
         />
         {dialogProps?.contentAppend}

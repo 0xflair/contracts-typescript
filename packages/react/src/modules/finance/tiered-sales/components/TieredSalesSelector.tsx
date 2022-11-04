@@ -156,7 +156,7 @@ export const TieredSalesSelector = ({
         <RadioGroup.Label className={titleClassName}>{title}</RadioGroup.Label>
       ) : null}
 
-      <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
+      <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
         {visibleTiers.map(([tierId, tier]) => (
           <RadioGroup.Option
             key={tierId}
