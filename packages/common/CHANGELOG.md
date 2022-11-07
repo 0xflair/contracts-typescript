@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.38.1 (2022-11-07)
+
+
+### Bug Fixes
+
+* dark mode for magic and correct icon for injected ([50679bf](https://github.com/flair-sdk/typescript/commit/50679bfaba6fa80f842e55ba2efb2f8ebf32796e))
+
+
+
+
+
 # 2.38.0 (2022-11-04)
 
 
