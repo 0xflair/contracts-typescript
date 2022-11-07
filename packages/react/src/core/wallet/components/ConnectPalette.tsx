@@ -9,7 +9,7 @@ import {
 } from '@flair-sdk/icons';
 import MetaMaskOnboarding from '@metamask/onboarding';
 import { useRef } from 'react';
-import { Connector, useConnect } from 'wagmi';
+import { Connector, useAccount, useConnect } from 'wagmi';
 
 import { Spinner } from '../../ui';
 import { WalletComponentWrapper } from './WalletComponentWrapper';
@@ -46,6 +46,7 @@ export type ConnectPaletteProps = {
 export const ConnectPalette = (props: ConnectPaletteProps) => {
   const activeButtonRef = useRef(null);
   const { connectors, connect, isLoading, pendingConnector } = useConnect();
+  const { isConnecting, isReconnecting } = useAccount();
 
   const connectorMetamask = connectors.find((c) => c.id == 'metaMask');
   const connectorInjected = connectors.find((c) => c.id == 'injected');
@@ -80,6 +81,9 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const showConnector =
     props.showConnector || ((c, m) => m.supported === undefined || m.supported);
 
+  const isWorking = isLoading || isConnecting || isReconnecting;
+  const pendingConnectorId = pendingConnector?.id;
+
   return (
     <WalletComponentWrapper as={props.as} className={className}>
       {connectorMetamask &&
@@ -92,7 +96,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               <button
                 ref={activeButtonRef}
                 type="button"
-                disabled={!connectorMetamask.ready}
+                disabled={!connectorMetamask.ready || isWorking}
                 className={classNames(
                   'flair connect-button connector-metamask',
                   `connector-${connectorMetamask.name
@@ -102,7 +106,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                 )}
                 onClick={() => connect({ connector: connectorMetamask })}
               >
-                {isLoading && pendingConnector?.id == connectorMetamask.id ? (
+                {isWorking && pendingConnectorId == connectorMetamask.id ? (
                   <Spinner />
                 ) : (
                   <MetaMaskIcon className={iconClassName} />
@@ -143,7 +147,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             <button
               ref={activeButtonRef}
               type="button"
-              disabled={!connectorInjected.ready}
+              disabled={!connectorInjected.ready || isWorking}
               className={classNames(
                 'flair connect-button connector-injected',
                 `connector-${connectorInjected.name
@@ -153,7 +157,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               )}
               onClick={() => connect({ connector: connectorInjected })}
             >
-              {isLoading && pendingConnector?.id == connectorInjected.id ? (
+              {isWorking && pendingConnectorId == connectorInjected.id ? (
                 <Spinner />
               ) : (
                 <>
@@ -164,7 +168,10 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                   )}
                 </>
               )}
-              {connectorInjected.name || 'Injected Wallet'}
+              {connectorInjected.name &&
+              connectorInjected?.name?.toLowerCase() !== 'injected'
+                ? connectorInjected.name
+                : 'Browser Wallet'}
             </button>
           </>
         )}
@@ -176,7 +183,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
         }) && (
           <button
             type="button"
-            disabled={!connectorWalletConnect.ready}
+            disabled={!connectorWalletConnect.ready || isWorking}
             ref={!metamaskAvailable ? activeButtonRef : undefined}
             className={classNames(
               'flair connect-button connector-wallet-connect',
@@ -184,7 +191,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             )}
             onClick={() => connect({ connector: connectorWalletConnect })}
           >
-            {isLoading && pendingConnector?.id == connectorWalletConnect.id ? (
+            {isWorking && pendingConnectorId == connectorWalletConnect.id ? (
               <Spinner />
             ) : (
               <WalletConnectIcon className={iconClassName} />
@@ -203,14 +210,14 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
         }) && (
           <button
             type="button"
-            disabled={!connectorCoinbaseWallet.ready}
+            disabled={!connectorCoinbaseWallet.ready || isWorking}
             className={classNames(
               'flair connect-button connector-coinbase',
               buttonClassName,
             )}
             onClick={() => connect({ connector: connectorCoinbaseWallet })}
           >
-            {isLoading && pendingConnector?.id == connectorCoinbaseWallet.id ? (
+            {isWorking && pendingConnectorId == connectorCoinbaseWallet.id ? (
               <Spinner />
             ) : (
               <WalletLinkIcon className={iconClassName} />
@@ -235,8 +242,13 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                 buttonClassName,
               )}
               onClick={() => connect({ connector: connectorMagic })}
+              disabled={!connectorMagic.ready || isWorking}
             >
-              <MagicLinkIcon className={iconClassName} />
+              {isWorking && pendingConnectorId == connectorMagic.id ? (
+                <Spinner />
+              ) : (
+                <MagicLinkIcon className={iconClassName} />
+              )}
               {connectorLabel?.(connectorMagic, {
                 custodyType: CustodyType.FULL,
                 supported: true,

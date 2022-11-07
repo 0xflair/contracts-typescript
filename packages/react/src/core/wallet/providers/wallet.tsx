@@ -108,6 +108,7 @@ export const WalletProvider = ({
         chains,
         options: {
           apiKey: FLAIR_MAGIC_API_KEY,
+          isDarkMode: isDarkMode(),
           oauthOptions: {
             providers: ['google', 'twitter', 'github'],
           },
