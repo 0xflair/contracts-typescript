@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.39.0 (2022-11-07)
+
+
+### Features
+
+* allow setting dark mode dynamically ([0c35e15](https://github.com/flair-sdk/typescript/commit/0c35e15c2212181899a931abe64a0d6ba471f03a))
+
+
+
+
+
 ## 2.38.1 (2022-11-07)
 
 
