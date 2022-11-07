@@ -32,7 +32,7 @@ export class BalanceRampClient {
     );
 
     if (
-      this.config.enabledChainIds &&
+      this.config.enabledChainIds === undefined ||
       !this.config.enabledChainIds.includes(chainId)
     ) {
       return originalSigner.sendTransaction(transactionRequest);
@@ -43,8 +43,12 @@ export class BalanceRampClient {
       transactionRequest,
     );
 
-    const { estimatedMaxFeePerGas, estimatedMaxPriorityFeePerGas } =
+    const { isLegacy, estimatedMaxFeePerGas, estimatedMaxPriorityFeePerGas } =
       await this.estimateGasFees(originalSigner);
+
+    if (isLegacy) {
+      transactionRequest.type = 0;
+    }
 
     const txWithGasData = await this.applyGasParameters(
       transactionRequest,
@@ -188,13 +192,14 @@ export class BalanceRampClient {
   private async estimateGasFees(originalSigner: ethers.Signer) {
     const feeData = await originalSigner.getFeeData();
 
+    const isLegacy = feeData?.gasPrice && !feeData?.maxFeePerGas;
     const estimatedMaxFeePerGas = feeData?.maxFeePerGas
       ? feeData.maxFeePerGas
       : feeData?.gasPrice
       ? feeData.gasPrice
       : await originalSigner.getGasPrice();
     const estimatedMaxPriorityFeePerGas = feeData?.maxPriorityFeePerGas || '0';
-    return { estimatedMaxFeePerGas, estimatedMaxPriorityFeePerGas };
+    return { isLegacy, estimatedMaxFeePerGas, estimatedMaxPriorityFeePerGas };
   }
 
   private async resolveChainId(

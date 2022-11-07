@@ -5,6 +5,8 @@ import {
 } from '@flair-sdk/common';
 import { alchemyProvider } from '@wagmi/core/providers/alchemy';
 import { infuraProvider } from '@wagmi/core/providers/infura';
+import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plugin';
+import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
 import {
   PropsWithChildren,
   ReactNode,
@@ -23,8 +25,8 @@ import { isDarkMode } from '../../../common/utils/dark-mode';
 import stylesheet from '../../../index.css';
 import { wrapWagmiClient } from '../../balance-ramp';
 import { FLAIR_ALCHEMY_API_KEY, FLAIR_INFURA_PROJECT_ID } from '../constants';
-import { useAutoSwitch } from '../hooks';
 import { useAutoConnect } from '../hooks/useAutoConnect';
+import { useAutoSwitch } from '../hooks/useAutoSwitch';
 
 export type WalletProviderProps = {
   children?: ReactNode;
@@ -36,6 +38,8 @@ export type WalletProviderProps = {
 };
 
 const FLAIR_MAGIC_API_KEY = 'pk_live_8B82089A89462668';
+const FLAIR_WEB3AUTH_CLIENT_ID =
+  'BELgvAxTUr_qKkDF7aS0Q0SxFXHxmAbzIrSRKKogR0e3__F_0GpQNzukF1uX9lWmwi0y1l2b0XBnxWLeLlPg-g4';
 
 const { chains, provider, webSocketProvider } = configureChains(FLAIR_CHAINS, [
   alchemyProvider({
@@ -70,6 +74,21 @@ export const WalletProvider = ({
 }: WalletProviderProps) => {
   const darkMode = isDarkMode();
   const connectors = useCallback(() => {
+    const torusPlugin = new TorusWalletConnectorPlugin({
+      torusWalletOpts: {
+        buttonPosition: 'bottom-left',
+      },
+      walletInitOptions: {
+        whiteLabel: {
+          theme: { isDark: isDarkMode(), colors: { primary: '#00a8ff' } },
+          logoDark: 'https://web3auth.io/images/w3a-L-Favicon-1.svg',
+          logoLight: 'https://web3auth.io/images/w3a-D-Favicon-1.svg',
+        },
+        useWalletConnect: true,
+        enableLogging: true,
+      },
+    });
+
     const connectors: any[] = [
       new MetaMaskConnector({
         chains,
@@ -116,7 +135,22 @@ export const WalletProvider = ({
           customHeaderText: appName,
         },
       }),
+      new Web3AuthConnector({
+        chains,
+        options: {
+          network: 'mainnet',
+          clientId: FLAIR_WEB3AUTH_CLIENT_ID,
+          socialLoginConfig: {
+            mfaLevel: 'optional',
+          },
+          uxMode: 'popup',
+        },
+      }),
     ];
+
+    connectors
+      .find((c) => c instanceof Web3AuthConnector)
+      ?.addPlugin(torusPlugin);
 
     return connectors;
   }, [appName, darkMode]);

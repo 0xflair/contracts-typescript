@@ -9,4 +9,3 @@ export * from './Spinner';
 export * from './Time';
 export * from './Tooltip';
 export * from './TransactionLink';
-export * from './index';

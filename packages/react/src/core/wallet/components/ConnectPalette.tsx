@@ -3,6 +3,7 @@ import {
   GenericWalletIcon,
   MagicLinkIcon,
   MetaMaskIcon,
+  TorusIcon,
   TrustWalletIcon,
   WalletConnectIcon,
   WalletLinkIcon,
@@ -57,6 +58,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
     (c) => c.id == 'coinbaseWallet',
   );
   const connectorMagic = connectors.find((c) => c.id == 'magic');
+  const connectorWeb3Auth = connectors.find((c) => c.id == 'web3Auth');
 
   const metamaskAvailable = Boolean(
     window?.['ethereum'] || MetaMaskOnboarding.isMetaMaskInstalled(),
@@ -223,6 +225,32 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               <WalletLinkIcon className={iconClassName} />
             )}
             {connectorLabel?.(connectorCoinbaseWallet, {
+              custodyType: CustodyType.FULL,
+              supported: true,
+            })}
+          </button>
+        )}
+
+      {connectorWeb3Auth &&
+        showConnector(connectorWeb3Auth, {
+          custodyType: CustodyType.MPC,
+          supported: true,
+        }) && (
+          <button
+            type="button"
+            disabled={!connectorWeb3Auth.ready || isWorking}
+            className={classNames(
+              'flair connect-button connector-web3auth',
+              buttonClassName,
+            )}
+            onClick={() => connect({ connector: connectorWeb3Auth })}
+          >
+            {isWorking && pendingConnectorId == connectorWeb3Auth.id ? (
+              <Spinner />
+            ) : (
+              <TorusIcon className={iconClassName} />
+            )}
+            {connectorLabel?.(connectorWeb3Auth, {
               custodyType: CustodyType.FULL,
               supported: true,
             })}

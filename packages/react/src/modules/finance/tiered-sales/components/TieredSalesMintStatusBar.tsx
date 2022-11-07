@@ -1,3 +1,5 @@
+import { useAccount } from 'wagmi';
+
 import { Errors, Spinner, TransactionLink } from '../../../../core/ui';
 import { useTieredSalesContext } from '../providers';
 
@@ -6,6 +8,7 @@ type Props = {
 };
 
 export const TieredSalesMintStatusBar = ({ className }: Props) => {
+  const { isConnected } = useAccount();
   const {
     data: { txReceipt, txResponse },
     isLoading: { isAutoDetectingTier, tiersLoading, mintLoading },
@@ -29,7 +32,7 @@ export const TieredSalesMintStatusBar = ({ className }: Props) => {
           {txReceipt || txResponse ? (
             <TransactionLink txReceipt={txReceipt} txResponse={txResponse} />
           ) : null}
-          {!mintLoading && mintError && (
+          {isConnected && !mintLoading && mintError && (
             <Errors title="Cannot mint" error={mintError} />
           )}
         </>
