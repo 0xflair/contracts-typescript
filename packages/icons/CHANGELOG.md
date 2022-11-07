@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.40.0 (2022-11-07)
+
+
+### Features
+
+* add torus wallet option ([f947fc1](https://github.com/flair-sdk/typescript/commit/f947fc16049fae8681274a6ab40d289fec523659))
+
+
+
+
+
 ## 2.39.2 (2022-11-07)
 
 
