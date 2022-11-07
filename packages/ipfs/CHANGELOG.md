@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.39.1 (2022-11-07)
+
+
+### Bug Fixes
+
+* immediately apply dark mode if changed ([23028fc](https://github.com/flair-sdk/typescript/commit/23028fce072b33ae2a363b460b2fa02b050e39e8))
+
+
+
+
+
 # 2.39.0 (2022-11-07)
 
 
