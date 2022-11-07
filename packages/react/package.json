@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/react",
-  "version": "2.40.1",
+  "version": "2.40.2",
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
@@ -169,11 +169,11 @@
     }
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.40.1",
-    "@flair-sdk/icons": "^2.40.1",
-    "@flair-sdk/ipfs": "^2.40.1",
-    "@flair-sdk/metatx": "^2.40.1",
-    "@flair-sdk/registry": "^2.40.1",
+    "@flair-sdk/common": "^2.40.2",
+    "@flair-sdk/icons": "^2.40.2",
+    "@flair-sdk/ipfs": "^2.40.2",
+    "@flair-sdk/metatx": "^2.40.2",
+    "@flair-sdk/registry": "^2.40.2",
     "@gnosis.pm/safe-apps-wagmi": "^1.0.3",
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^1.0.6",
