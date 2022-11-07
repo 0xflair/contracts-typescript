@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.39.2 (2022-11-07)
+
+
+### Bug Fixes
+
+* add the dark mode class to html tag ([82b35ae](https://github.com/flair-sdk/typescript/commit/82b35ae7f9c8f46d43fed5e1edaa2faccd63451f))
+
+
+
+
+
 ## 2.39.1 (2022-11-07)
 
 
