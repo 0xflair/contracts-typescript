@@ -19,7 +19,7 @@ import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { publicProvider } from 'wagmi/providers/public';
 
-import { isDarkMode } from '../../../common/utils/isDarkMode';
+import { isDarkMode } from '../../../common/utils/dark-mode';
 import stylesheet from '../../../index.css';
 import { wrapWagmiClient } from '../../balance-ramp';
 import { FLAIR_ALCHEMY_API_KEY, FLAIR_INFURA_PROJECT_ID } from '../constants';
@@ -68,6 +68,7 @@ export const WalletProvider = ({
   preferredChainId,
   wagmiOverrides,
 }: WalletProviderProps) => {
+  const darkMode = isDarkMode();
   const connectors = useCallback(() => {
     const connectors: any[] = [
       new MetaMaskConnector({
@@ -95,7 +96,7 @@ export const WalletProvider = ({
         chains,
         options: {
           appName,
-          darkMode: isDarkMode(),
+          darkMode,
         },
       }),
       new SafeConnector({
@@ -108,7 +109,7 @@ export const WalletProvider = ({
         chains,
         options: {
           apiKey: FLAIR_MAGIC_API_KEY,
-          isDarkMode: isDarkMode(),
+          isDarkMode: darkMode,
           oauthOptions: {
             providers: ['google', 'twitter', 'github'],
           },
@@ -118,7 +119,7 @@ export const WalletProvider = ({
     ];
 
     return connectors;
-  }, [appName]);
+  }, [appName, darkMode]);
 
   const wagmiClient = useMemo(
     () =>
