@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.40.1 (2022-11-07)
+
+
+### Bug Fixes
+
+* correct call to add torus plugin ([14abfc7](https://github.com/flair-sdk/typescript/commit/14abfc777876a4163d520d0370b13174c0b9c2f5))
+
+
+
+
+
 # 2.40.0 (2022-11-07)
 
 

@@ -140,14 +140,14 @@ export const WalletProvider = ({
         options: {
           network: 'mainnet',
           clientId: FLAIR_WEB3AUTH_CLIENT_ID,
+          uiConfig: {
+            theme: isDarkMode() ? 'dark' : undefined,
+          },
           socialLoginConfig: {
             mfaLevel: 'optional',
           },
           uxMode: 'popup',
           displayErrorsOnModal: true,
-          whiteLabel: {
-            theme,
-          },
         },
       }),
     ];
