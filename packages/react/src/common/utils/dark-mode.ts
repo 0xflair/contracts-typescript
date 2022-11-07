@@ -27,8 +27,8 @@ export const setDarkMode = (
   }
 
   if (isDarkMode()) {
-    document?.body?.classList?.add('dark');
+    document?.documentElement?.classList?.add('dark');
   } else {
-    document?.body?.classList?.remove('dark');
+    document?.documentElement?.classList?.remove('dark');
   }
 };
