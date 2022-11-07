@@ -149,8 +149,8 @@ export const WalletProvider = ({
     ];
 
     connectors
-      .find((c) => c instanceof Web3AuthConnector)
-      ?.addPlugin(torusPlugin);
+      ?.find((c) => c instanceof Web3AuthConnector)
+      ?.web3AuthInstance?.addPlugin?.(torusPlugin);
 
     return connectors;
   }, [appName, darkMode]);
