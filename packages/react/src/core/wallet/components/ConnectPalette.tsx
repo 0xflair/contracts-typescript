@@ -9,10 +9,18 @@ import {
   WalletLinkIcon,
 } from '@flair-sdk/icons';
 import MetaMaskOnboarding from '@metamask/onboarding';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Connector, useAccount, useConnect } from 'wagmi';
 
 import { Spinner } from '../../ui';
+import {
+  LedgerLiveDeepLink,
+  OmniWalletDeepLink,
+  RainbowWalletDeepLink,
+  TrustWalletDeepLink,
+} from '../deeplinks';
+import { ArgentWalletDeepLink } from '../deeplinks/argent-wallet';
+import { DeepLinkConfig } from '../types/deep-links';
 import { WalletComponentWrapper } from './WalletComponentWrapper';
 
 export enum CustodyType {
@@ -42,6 +50,9 @@ export type ConnectPaletteProps = {
     connector: Connector<any, any, any>,
     metadata: ConnectorMetadata,
   ) => boolean;
+
+  deepLinkLabel?: (config: DeepLinkConfig) => string;
+  showDeepLink?: (config: DeepLinkConfig) => boolean;
 };
 
 export const ConnectPalette = (props: ConnectPaletteProps) => {
@@ -87,6 +98,14 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const showConnector =
     props.showConnector || ((c, m) => m.supported === undefined || m.supported);
 
+  const deepLinks = [
+    LedgerLiveDeepLink({ connectors }),
+    ArgentWalletDeepLink({ connectors }),
+    TrustWalletDeepLink({ connectors }),
+    RainbowWalletDeepLink({ connectors }),
+    OmniWalletDeepLink({ connectors }),
+  ];
+
   const isWorking = isLoading || isConnecting || isReconnecting;
   const pendingConnectorId = pendingConnector?.id;
 
@@ -104,7 +123,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                 type="button"
                 disabled={!connectorMetamask.ready || isWorking}
                 className={classNames(
-                  'flair connect-button connector-metamask',
+                  'flair connect-button connector connector-metamask',
                   `connector-${connectorMetamask.name
                     .replaceAll(' ', '-')
                     .toLowerCase()}`,
@@ -128,7 +147,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                 href={`https://metamask.app.link/dapp/${window?.location.href}`}
                 type="button"
                 className={classNames(
-                  'flair connect-button connector-metamask',
+                  'flair connect-button connector connector-metamask',
                   buttonClassName,
                 )}
                 rel="noreferrer"
@@ -155,7 +174,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               type="button"
               disabled={!connectorInjected.ready || isWorking}
               className={classNames(
-                'flair connect-button connector-injected',
+                'flair connect-button connector connector-injected',
                 `connector-${connectorInjected.name
                   .replaceAll(' ', '-')
                   .toLowerCase()}`,
@@ -192,7 +211,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             disabled={!connectorWalletConnect.ready || isWorking}
             ref={!metamaskAvailable ? activeButtonRef : undefined}
             className={classNames(
-              'flair connect-button connector-wallet-connect',
+              'flair connect-button connector connector-wallet-connect',
               buttonClassName,
             )}
             onClick={() => connect({ connector: connectorWalletConnect })}
@@ -218,7 +237,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             type="button"
             disabled={!connectorCoinbaseWallet.ready || isWorking}
             className={classNames(
-              'flair connect-button connector-coinbase',
+              'flair connect-button connector connector-coinbase',
               buttonClassName,
             )}
             onClick={() => connect({ connector: connectorCoinbaseWallet })}
@@ -244,7 +263,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             type="button"
             disabled={!connectorWeb3Auth.ready || isWorking}
             className={classNames(
-              'flair connect-button connector-web3auth',
+              'flair connect-button connector connector-web3auth',
               buttonClassName,
             )}
             onClick={() => connect({ connector: connectorWeb3Auth })}
@@ -270,7 +289,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             <button
               type="button"
               className={classNames(
-                'flair connect-button connector-magic',
+                'flair connect-button connector connector-magic',
                 buttonClassName,
               )}
               onClick={() => connect({ connector: connectorMagic })}
@@ -288,6 +307,52 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             </button>
           </>
         )}
+
+      {deepLinks.map((deepLink) =>
+        !props.showDeepLink || props.showDeepLink(deepLink) ? (
+          <DeepLinkButton
+            key={deepLink.id}
+            {...deepLink}
+            buttonClassName={buttonClassName}
+            iconClassName={iconClassName}
+            customLabel={props.deepLinkLabel?.(deepLink)}
+          />
+        ) : null,
+      )}
     </WalletComponentWrapper>
+  );
+};
+
+export const DeepLinkButton = ({
+  id,
+  logo: Logo,
+  getUri,
+  name,
+  customLabel,
+  buttonClassName,
+  iconClassName,
+}: {
+  customLabel?: string;
+  buttonClassName?: string;
+  iconClassName?: string;
+} & DeepLinkConfig) => {
+  const [uri, setUri] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    getUri().then(setUri);
+  }, [getUri]);
+
+  return (
+    <a
+      href={uri}
+      target="_blank"
+      className={classNames(
+        'flair connect-button deep-link deep-' + id,
+        buttonClassName,
+      )}
+    >
+      <Logo className={iconClassName} />
+      {customLabel || name}
+    </a>
   );
 };
