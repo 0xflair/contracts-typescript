@@ -144,6 +144,10 @@ export const WalletProvider = ({
             mfaLevel: 'optional',
           },
           uxMode: 'popup',
+          displayErrorsOnModal: true,
+          whiteLabel: {
+            theme,
+          },
         },
       }),
     ];

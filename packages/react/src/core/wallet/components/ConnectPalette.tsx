@@ -77,6 +77,10 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
         return 'Email sign-in';
       }
 
+      if (c.id === 'web3Auth') {
+        return 'Torus (web3auth.io)';
+      }
+
       return c.name || c.id;
     });
 
