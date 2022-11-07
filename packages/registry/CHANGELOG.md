@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.41.0 (2022-11-07)
+
+
+### Features
+
+* add more wallets as deeplinks ([09873fd](https://github.com/flair-sdk/typescript/commit/09873fd03c49e0c4cd227b7c7e34f2aadb1d90ef))
+
+
+
+
+
 ## 2.40.2 (2022-11-07)
 
 **Note:** Version bump only for package @flair-sdk/registry
