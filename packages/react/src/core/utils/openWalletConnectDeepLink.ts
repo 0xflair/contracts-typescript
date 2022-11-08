@@ -1,7 +1,8 @@
 import { connect, Connector } from '@wagmi/core';
 import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect';
 
-import { isAndroid } from './mobile';
+import { isSafari } from './browsers';
+import { isAndroid, isMobile } from './mobile';
 
 export const openWalletConnectDeepLink = async (
   wcUriPrefix: string,
@@ -31,14 +32,18 @@ export const openWalletConnectDeepLink = async (
         ? uri
         : `${wcUriPrefix}${encodeURIComponent(uri)}`;
 
-      if (finalLink.startsWith('http')) {
-        const link = document.createElement('a');
-        link.href = finalLink;
-        link.target = '_blank';
-        link.rel = 'noreferrer noopener';
-        link.click();
+      if (isMobile()) {
+        if (finalLink.startsWith('http')) {
+          const link = document.createElement('a');
+          link.href = finalLink;
+          link.target = '_blank';
+          link.rel = 'noreferrer noopener';
+          link.click();
+        } else {
+          window.location.href = finalLink;
+        }
       } else {
-        window.location.href = finalLink;
+        window.open(finalLink, isSafari() ? '_blank' : '_self');
       }
     });
   } catch (e) {

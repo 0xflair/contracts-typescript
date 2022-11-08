@@ -15,9 +15,11 @@ export const isDarkMode = () => {
       ? window?.localStorage?.getItem?.('mode') === 'dark'
       : undefined;
 
-  return explicitDarkMode !== undefined
-    ? explicitDarkMode
-    : darkByUrl || darkByMedia || darkByLocalStorage;
+  return Boolean(
+    explicitDarkMode !== undefined
+      ? explicitDarkMode
+      : darkByUrl || darkByMedia || darkByLocalStorage,
+  );
 };
 
 export const setDarkMode = (
