@@ -309,7 +309,7 @@ export class BalanceRampClient {
 
     // periodically check if modal is closed
     const interval = setInterval(() => {
-      if (modal.closed) {
+      if (modal?.closed) {
         window.postMessage(
           {
             flair: true,

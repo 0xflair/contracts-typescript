@@ -8,6 +8,8 @@ export function openModalWithData(
   args: { url: string; width?: string; height?: string },
   rampRequest: Record<string, any>,
 ) {
+  if (typeof window === 'undefined') return;
+
   const h = Number(args.height || 550);
   const w = Number(args.width || 600);
   const y = window?.top

@@ -6,9 +6,10 @@ export const isDarkMode = () => {
       ? window?.location?.href?.toLowerCase()?.includes('mode=dark')
       : undefined;
 
-  const darkByMedia = window?.matchMedia?.(
-    '(prefers-color-scheme: dark)',
-  ).matches;
+  const darkByMedia =
+    typeof window !== 'undefined'
+      ? window?.matchMedia?.('(prefers-color-scheme: dark)').matches
+      : undefined;
 
   const darkByLocalStorage =
     typeof window !== 'undefined'
@@ -28,8 +29,10 @@ export const setDarkMode = (
 ) => {
   explicitDarkMode = value;
 
-  if (saveToStorage && typeof window !== 'undefined') {
-    window?.localStorage?.setItem?.('mode', value ? 'dark' : 'light');
+  if (saveToStorage) {
+    if (typeof window !== 'undefined') {
+      window?.localStorage?.setItem?.('mode', value ? 'dark' : 'light');
+    }
   }
 
   if (typeof document !== 'undefined') {
