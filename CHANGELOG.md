@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.42.5 (2022-11-08)
+
+
+### Bug Fixes
+
+* handle desktop and mobile differently ([28f1033](https://github.com/flair-sdk/typescript/commit/28f1033a85890ab4f46517069b46145bff70411e))
+
+
+
+
+
 ## 2.42.4 (2022-11-08)
 
 
