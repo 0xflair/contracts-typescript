@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.42.7 (2022-11-08)
+
+
+### Bug Fixes
+
+* open http links in a new tab ([008af2e](https://github.com/flair-sdk/typescript/commit/008af2e8af03019f47bc9933d7c8883d3c712972))
+
+
+
+
+
 ## 2.42.6 (2022-11-08)
 
 
