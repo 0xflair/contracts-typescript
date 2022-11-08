@@ -11,7 +11,7 @@ export const openWalletConnectDeepLink = async (
     return;
   }
   const walletConnect = connectors.find(
-    (c) => c.id == 'walletConnect' && c.options.qrcode,
+    (c) => c.id == 'walletConnect' && !c.options.qrcode,
   ) as WalletConnectConnector;
 
   if (!walletConnect) {
