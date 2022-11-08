@@ -24,6 +24,7 @@ type RenderProps = {
 };
 
 type Props = {
+  className?: string;
   title?: string | React.ReactNode;
   titleClassName?: string;
   optionElement?: (props: RenderProps) => JSX.Element;
@@ -33,6 +34,7 @@ type Props = {
 };
 
 export const TieredSalesSelector = ({
+  className = 'flex flex-col gap-2',
   title = 'Select from active sale tiers',
   titleClassName = 'text-base font-medium text-gray-900',
   optionElement,
@@ -147,6 +149,7 @@ export const TieredSalesSelector = ({
 
   return visibleTiers.length > 1 || alwaysShow ? (
     <RadioGroup
+      className={className}
       value={currentTierId?.toString()}
       onChange={(newTierId: BigNumberish) => {
         setCurrentTierId(newTierId.toString());
