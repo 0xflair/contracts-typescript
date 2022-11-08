@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.42.1 (2022-11-08)
+
+
+### Bug Fixes
+
+* do not show walelt connect qrcode for deep links ([690d9dc](https://github.com/flair-sdk/typescript/commit/690d9dc55a2455c489b765d6e9133b7138baf1e7))
+
+
+
+
+
 # 2.42.0 (2022-11-08)
 
 
