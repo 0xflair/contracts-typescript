@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.42.6 (2022-11-08)
+
+
+### Bug Fixes
+
+* put condition of window everywhere for next.js ([200b37d](https://github.com/flair-sdk/typescript/commit/200b37d5bbd3fa9b592dcc96779899efefc69355))
+
+
+
+
+
 ## 2.42.5 (2022-11-08)
 
 
