@@ -43,7 +43,10 @@ export const openWalletConnectDeepLink = async (
           window.location.href = finalLink;
         }
       } else {
-        window.open(finalLink, isSafari() ? '_blank' : '_self');
+        window.open(
+          finalLink,
+          finalLink.startsWith('http') || isSafari() ? '_blank' : '_self',
+        );
       }
     });
   } catch (e) {
