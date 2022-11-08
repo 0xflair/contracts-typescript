@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.42.0 (2022-11-08)
+
+
+### Features
+
+* open wallet connect deep links after connecting ([fa8596c](https://github.com/flair-sdk/typescript/commit/fa8596c582c3b425a11a5ba32e4e79d7904104da))
+
+
+
+
+
 # 2.41.0 (2022-11-07)
 
 
