@@ -1,4 +1,4 @@
-import { Connector } from '@wagmi/core';
+import { connect, Connector } from '@wagmi/core';
 import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect';
 
 import { isAndroid } from './mobile';
@@ -11,7 +11,7 @@ export const openWalletConnectDeepLink = async (
     return;
   }
   const walletConnect = connectors.find(
-    (c) => c.id == 'walletConnect' && !c.options.qrcode,
+    (c) => c.id == 'walletConnect',
   ) as WalletConnectConnector;
 
   if (!walletConnect) {
@@ -22,20 +22,26 @@ export const openWalletConnectDeepLink = async (
     return;
   }
 
-  await walletConnect.connect();
+  try {
+    connect({ connector: walletConnect });
 
-  const { uri } = (await walletConnect.getProvider()).connector;
-  const finalLink = isAndroid()
-    ? uri
-    : `${wcUriPrefix}${encodeURIComponent(uri)}`;
+    setTimeout(async () => {
+      const { uri } = (await walletConnect.getProvider()).connector;
+      const finalLink = isAndroid()
+        ? uri
+        : `${wcUriPrefix}${encodeURIComponent(uri)}`;
 
-  if (finalLink.startsWith('http')) {
-    const link = document.createElement('a');
-    link.href = finalLink;
-    link.target = '_blank';
-    link.rel = 'noreferrer noopener';
-    link.click();
-  } else {
-    window.location.href = finalLink;
+      if (finalLink.startsWith('http')) {
+        const link = document.createElement('a');
+        link.href = finalLink;
+        link.target = '_blank';
+        link.rel = 'noreferrer noopener';
+        link.click();
+      } else {
+        window.location.href = finalLink;
+      }
+    });
+  } catch (e) {
+    debugger;
   }
 };

@@ -63,7 +63,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const connectorMetamask = connectors.find((c) => c.id == 'metaMask');
   const connectorInjected = connectors.find((c) => c.id == 'injected');
   const connectorWalletConnect = connectors.find(
-    (c) => c.id == 'walletConnect' && c.options.qrcode,
+    (c) => c.id == 'walletConnect',
   );
   const connectorCoinbaseWallet = connectors.find(
     (c) => c.id == 'coinbaseWallet',
