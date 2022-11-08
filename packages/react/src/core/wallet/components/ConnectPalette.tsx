@@ -72,7 +72,8 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const connectorWeb3Auth = connectors.find((c) => c.id == 'web3Auth');
 
   const metamaskAvailable = Boolean(
-    window?.['ethereum'] || MetaMaskOnboarding.isMetaMaskInstalled(),
+    typeof window !== 'undefined' &&
+      (window?.['ethereum'] || MetaMaskOnboarding.isMetaMaskInstalled()),
   );
 
   const className = props.className || 'grid grid-cols-1 sm:grid-cols-2 gap-2';

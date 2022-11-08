@@ -1,15 +1,19 @@
 let explicitDarkMode: boolean | undefined = undefined;
 
 export const isDarkMode = () => {
-  const darkByUrl = window?.location?.href
-    ?.toLowerCase()
-    ?.includes('mode=dark');
+  const darkByUrl =
+    typeof window !== 'undefined'
+      ? window?.location?.href?.toLowerCase()?.includes('mode=dark')
+      : undefined;
 
   const darkByMedia = window?.matchMedia?.(
     '(prefers-color-scheme: dark)',
   ).matches;
 
-  const darkByLocalStorage = window?.localStorage?.getItem?.('mode') === 'dark';
+  const darkByLocalStorage =
+    typeof window !== 'undefined'
+      ? window?.localStorage?.getItem?.('mode') === 'dark'
+      : undefined;
 
   return explicitDarkMode !== undefined
     ? explicitDarkMode
@@ -22,13 +26,15 @@ export const setDarkMode = (
 ) => {
   explicitDarkMode = value;
 
-  if (saveToStorage) {
+  if (saveToStorage && typeof window !== 'undefined') {
     window?.localStorage?.setItem?.('mode', value ? 'dark' : 'light');
   }
 
-  if (isDarkMode()) {
-    document?.documentElement?.classList?.add('dark');
-  } else {
-    document?.documentElement?.classList?.remove('dark');
+  if (typeof document !== 'undefined') {
+    if (isDarkMode()) {
+      document?.documentElement?.classList?.add('dark');
+    } else {
+      document?.documentElement?.classList?.remove('dark');
+    }
   }
 };

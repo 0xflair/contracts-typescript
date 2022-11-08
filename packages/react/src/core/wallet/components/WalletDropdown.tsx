@@ -76,7 +76,10 @@ export const WalletDropdown = ({
                   onClick={(e) => {
                     address && copyToClipboard(address);
 
-                    const selection = window?.getSelection();
+                    const selection =
+                      typeof window !== 'undefined'
+                        ? window?.getSelection()
+                        : undefined;
                     const range = document.createRange();
                     range.selectNodeContents(e.currentTarget);
                     selection?.removeAllRanges();
