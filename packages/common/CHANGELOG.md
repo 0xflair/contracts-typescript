@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.42.3 (2022-11-08)
+
+
+### Bug Fixes
+
+* better responsiveness for wallet options ([965633e](https://github.com/flair-sdk/typescript/commit/965633e904bc1ac00e2df81c58ade9ae1ba5a142))
+
+
+
+
+
 ## 2.42.2 (2022-11-08)
 
 
