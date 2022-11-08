@@ -39,9 +39,3 @@ This repository is equipped with [Storybook](https://storybook.js.org/) for ease
    ```sh
    npm install
    ```
-
-3. Start the Storybook:
-
-   ```sh
-   npm start
-   ```

@@ -1,6 +1,6 @@
 import { OmniWalletIcon } from '@flair-sdk/icons';
 
-import { isAndroid } from '../../utils/mobile';
+import { openWalletConnectDeepLink } from '../../utils';
 import { DeepLinkConfig, DeepLinkContext } from '../types/deep-links';
 
 export const OmniWalletDeepLink = ({
@@ -10,22 +10,11 @@ export const OmniWalletDeepLink = ({
     id: 'omni',
     name: 'Omni',
     logo: OmniWalletIcon,
-    getUri: async () => {
-      if (!connectors) {
-        return '';
-      }
-      const walletConnect = connectors.find(
-        (connector) => connector.id === 'walletConnect',
+    fire: async () => {
+      openWalletConnectDeepLink(
+        `https://links.steakwallet.fi/wc?uri=`,
+        connectors,
       );
-      if (!walletConnect) {
-        return '';
-      }
-
-      const { uri } = (await walletConnect.getProvider()).connector;
-
-      return isAndroid()
-        ? uri
-        : `https://links.steakwallet.fi/wc?uri=${encodeURIComponent(uri)}`;
     },
   };
 };

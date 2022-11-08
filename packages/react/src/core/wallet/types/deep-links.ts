@@ -1,11 +1,10 @@
 import { Connector } from '@wagmi/core';
-import { ReactNode } from 'react';
 
 export type DeepLinkConfig = {
   id: string;
   name: string;
   logo: React.FC<any>;
-  getUri: () => Promise<string>;
+  fire: () => Promise<void>;
 };
 
 export type DeepLinkContext = {

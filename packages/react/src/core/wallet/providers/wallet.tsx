@@ -111,6 +111,12 @@ export const WalletProvider = ({
           qrcode: true,
         },
       }),
+      new WalletConnectConnector({
+        chains,
+        options: {
+          qrcode: false,
+        },
+      }),
       new CoinbaseWalletConnector({
         chains,
         options: {

@@ -63,7 +63,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const connectorMetamask = connectors.find((c) => c.id == 'metaMask');
   const connectorInjected = connectors.find((c) => c.id == 'injected');
   const connectorWalletConnect = connectors.find(
-    (c) => c.id == 'walletConnect',
+    (c) => c.id == 'walletConnect' && c.options.qrcode,
   );
   const connectorCoinbaseWallet = connectors.find(
     (c) => c.id == 'coinbaseWallet',
@@ -313,6 +313,8 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
           <DeepLinkButton
             key={deepLink.id}
             {...deepLink}
+            disabled={!connectorWalletConnect?.ready || isWorking}
+            connectors={connectors}
             buttonClassName={buttonClassName}
             iconClassName={iconClassName}
             customLabel={props.deepLinkLabel?.(deepLink)}
@@ -326,33 +328,30 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
 export const DeepLinkButton = ({
   id,
   logo: Logo,
-  getUri,
+  fire,
   name,
   customLabel,
   buttonClassName,
   iconClassName,
+  disabled,
 }: {
   customLabel?: string;
   buttonClassName?: string;
   iconClassName?: string;
+  disabled?: boolean;
+  connectors: Connector<any, any, any>[];
 } & DeepLinkConfig) => {
-  const [uri, setUri] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    getUri().then(setUri);
-  }, [getUri]);
-
   return (
-    <a
-      href={uri}
-      target="_blank"
+    <button
+      onClick={() => fire()}
       className={classNames(
         'flair connect-button deep-link deep-' + id,
         buttonClassName,
       )}
+      disabled={disabled}
     >
       <Logo className={iconClassName} />
       {customLabel || name}
-    </a>
+    </button>
   );
 };
