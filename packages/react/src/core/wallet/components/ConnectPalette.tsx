@@ -75,10 +75,10 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
     window?.['ethereum'] || MetaMaskOnboarding.isMetaMaskInstalled(),
   );
 
-  const className = props.className || 'inline-flex flex-col gap-2';
+  const className = props.className || 'grid grid-cols-1 sm:grid-cols-2 gap-2';
   const buttonClassName =
     props.walletButtonClassName ||
-    'inline-flex w-full gap-2 items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
+    'inline-flex gap-2 items-center justify-start text-left text-base sm:text-xs md:text-sm px-3 py-2 lg:px-4 lg:py-3 border border-gray-300 shadow-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed';
   const iconClassName = props.iconClassName || '-ml-0.5 h-6 w-6';
 
   const connectorLabel =
@@ -136,10 +136,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                 ) : (
                   <MetaMaskIcon className={iconClassName} />
                 )}
-                {connectorLabel?.(connectorMetamask, {
-                  custodyType: CustodyType.SELF,
-                  supported: metamaskAvailable,
-                })}
+                <span className="truncate">
+                  {connectorLabel?.(connectorMetamask, {
+                    custodyType: CustodyType.SELF,
+                    supported: metamaskAvailable,
+                  })}
+                </span>
               </button>
             ) : (
               <a
@@ -153,10 +155,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                 rel="noreferrer"
               >
                 <MetaMaskIcon className={iconClassName} />
-                {connectorLabel?.(connectorMetamask, {
-                  custodyType: CustodyType.SELF,
-                  supported: metamaskAvailable,
-                })}
+                <span className="truncate">
+                  {connectorLabel?.(connectorMetamask, {
+                    custodyType: CustodyType.SELF,
+                    supported: metamaskAvailable,
+                  })}
+                </span>
               </a>
             )}
           </>
@@ -193,10 +197,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                   )}
                 </>
               )}
-              {connectorInjected.name &&
-              connectorInjected?.name?.toLowerCase() !== 'injected'
-                ? connectorInjected.name
-                : 'Browser Wallet'}
+              <span className="truncate">
+                {connectorInjected.name &&
+                connectorInjected?.name?.toLowerCase() !== 'injected'
+                  ? connectorInjected.name
+                  : 'Browser Wallet'}
+              </span>
             </button>
           </>
         )}
@@ -221,10 +227,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             ) : (
               <WalletConnectIcon className={iconClassName} />
             )}
-            {connectorLabel?.(connectorWalletConnect, {
-              custodyType: CustodyType.UNKNOWN,
-              supported: true,
-            })}
+            <span className="truncate">
+              {connectorLabel?.(connectorWalletConnect, {
+                custodyType: CustodyType.UNKNOWN,
+                supported: true,
+              })}
+            </span>
           </button>
         )}
 
@@ -247,10 +255,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             ) : (
               <WalletLinkIcon className={iconClassName} />
             )}
-            {connectorLabel?.(connectorCoinbaseWallet, {
-              custodyType: CustodyType.FULL,
-              supported: true,
-            })}
+            <span className="truncate">
+              {connectorLabel?.(connectorCoinbaseWallet, {
+                custodyType: CustodyType.FULL,
+                supported: true,
+              })}
+            </span>
           </button>
         )}
 
@@ -273,10 +283,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             ) : (
               <TorusIcon className={iconClassName} />
             )}
-            {connectorLabel?.(connectorWeb3Auth, {
-              custodyType: CustodyType.FULL,
-              supported: true,
-            })}
+            <span className="truncate">
+              {connectorLabel?.(connectorWeb3Auth, {
+                custodyType: CustodyType.FULL,
+                supported: true,
+              })}
+            </span>
           </button>
         )}
 
@@ -300,10 +312,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               ) : (
                 <MagicLinkIcon className={iconClassName} />
               )}
-              {connectorLabel?.(connectorMagic, {
-                custodyType: CustodyType.FULL,
-                supported: true,
-              })}
+              <span className="truncate">
+                {connectorLabel?.(connectorMagic, {
+                  custodyType: CustodyType.FULL,
+                  supported: true,
+                })}
+              </span>
             </button>
           </>
         )}
@@ -351,7 +365,7 @@ export const DeepLinkButton = ({
       disabled={disabled}
     >
       <Logo className={iconClassName} />
-      {customLabel || name}
+      <span className="truncate">{customLabel || name}</span>
     </button>
   );
 };
