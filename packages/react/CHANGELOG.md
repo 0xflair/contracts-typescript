@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.42.4 (2022-11-08)
+
+
+### Bug Fixes
+
+* allow setting class name for tiered sales selectoe ([c61da81](https://github.com/flair-sdk/typescript/commit/c61da81088a40f175a7ac9052d04567ebab5ec15))
+
+
+
+
+
 ## 2.42.3 (2022-11-08)
 
 
