@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.42.2 (2022-11-08)
+
+
+### Bug Fixes
+
+* show wc modal even for deeplinks for more robust ux ([ed40a77](https://github.com/flair-sdk/typescript/commit/ed40a774dc9423f7506284cae2050b50283ddea6))
+
+
+
+
+
 ## 2.42.1 (2022-11-08)
 
 
