@@ -46,9 +46,7 @@ export const useAxiosGet = <T>({
           headers: overrides?.headers || headers,
         });
         if (!didCancel) {
-          if (!_.isEqual(resp.data, response)) {
-            setResponse(resp.data);
-          }
+          setResponse(resp.data);
           setLoading(false);
         }
         return resp;
@@ -64,7 +62,7 @@ export const useAxiosGet = <T>({
         }
       }
     },
-    [cancelQuery, url, params, timeout, headers, response],
+    [cancelQuery, url, params, timeout, headers],
   );
 
   useEffect(() => {
