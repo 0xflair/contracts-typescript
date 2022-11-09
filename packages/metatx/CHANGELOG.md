@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.42.8 (2022-11-09)
+
+
+### Bug Fixes
+
+* update axios get hook to avoid response checks ([92cfb6c](https://github.com/flair-sdk/typescript/commit/92cfb6c3e51aeeaec7c495a355aaff2e22cc80fc))
+
+
+
+
+
 ## 2.42.7 (2022-11-08)
 
 
