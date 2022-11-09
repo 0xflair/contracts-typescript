@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.43.0 (2022-11-09)
+
+
+### Features
+
+* allow disabling disconnect button ([eac51e5](https://github.com/flair-sdk/typescript/commit/eac51e5b0b4d1dc85e92902c507d1e8bed41008a))
+
+
+
+
+
 ## 2.42.8 (2022-11-09)
 
 
