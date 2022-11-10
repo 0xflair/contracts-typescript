@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.43.1 (2022-11-10)
+
+
+### Bug Fixes
+
+* shorter name for web3auth connector ([e07d07f](https://github.com/flair-sdk/typescript/commit/e07d07f98bcbf3e39425a3d9bc8607c8caa875a7))
+
+
+
+
+
 # 2.43.0 (2022-11-09)
 
 
