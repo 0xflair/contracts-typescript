@@ -15,12 +15,17 @@ export type ButtonWithDialogProps<T extends HTMLElement = HTMLButtonElement> =
       dialogCloseWrapperClassName?: string;
       dialogCloseButtonClassName?: string;
       portalClassName?: string;
+      buttons?: ((
+        dialogOpen: boolean,
+        setDialogOpen: (open: boolean) => void,
+      ) => React.ReactNode)[];
     }
   >;
 
 export function ButtonWithDialog<T extends HTMLElement = HTMLElement>({
   as,
   text,
+  buttons,
   children,
   dialogTitle,
   dialogTitleClassName,
@@ -85,6 +90,15 @@ export function ButtonWithDialog<T extends HTMLElement = HTMLElement>({
           </h3>
         )}
         {children}
+        {buttons?.length ? (
+          <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            {buttons.map((button, index) => (
+              <Fragment key={index}>
+                {button(dialogOpen, setDialogOpen)}
+              </Fragment>
+            ))}
+          </div>
+        ) : null}
       </Modal>
     </>
   );
