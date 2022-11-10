@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.43.2 (2022-11-10)
+
+
+### Bug Fixes
+
+* use pinata gateway for general links ([8ddf3a8](https://github.com/flair-sdk/typescript/commit/8ddf3a842ecffb5afe86707d830f3e038db7f2e0))
+
+
+
+
+
 ## 2.43.1 (2022-11-10)
 
 
