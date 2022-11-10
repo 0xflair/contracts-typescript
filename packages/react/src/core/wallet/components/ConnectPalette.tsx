@@ -90,7 +90,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
       }
 
       if (c.id === 'web3Auth') {
-        return 'Torus (web3auth.io)';
+        return 'Torus';
       }
 
       return c.name || c.id;
