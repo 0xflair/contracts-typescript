@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.44.0 (2022-11-11)
+
+
+### Features
+
+* allow passing default values for meta transactions ([01109c1](https://github.com/flair-sdk/typescript/commit/01109c1930dbb77cfb6fc9569086215bd3db8d04))
+
+
+
+
+
 ## 2.43.2 (2022-11-10)
 
 
