@@ -1,5 +1,6 @@
 import { Environment } from '@flair-sdk/common';
 import {
+  BigNumberish,
   Contract,
   Contract as EthersContract,
   ContractFunction,
@@ -83,11 +84,17 @@ export const augmentContractWithMetaTransactions = <
   flairClientId: string;
   contract: T;
   forwarder: string;
+  defaults?: {
+    minGasPrice?: string;
+    maxGasPrice?: string;
+    expiresAt?: number;
+  };
 }): MetaTransactionsAugmentedContract<T> => {
   const metaTxClient = new MetaTransactionsClient({
     env: config.env || Environment.PROD,
     flairClientId: config.flairClientId,
     forwarder: config.forwarder,
+    defaults: config.defaults,
   });
 
   const augmentedContract = applyMetaTransactions<T>(
