@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.45.0 (2022-11-12)
+
+
+### Features
+
+* add defaults in metatx config ([213cc7c](https://github.com/flair-sdk/typescript/commit/213cc7c433fc0163758bd504d8120cf8eeb2f75b))
+
+
+
+
+
 # 2.44.0 (2022-11-11)
 
 
