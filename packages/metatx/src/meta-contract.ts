@@ -1,6 +1,5 @@
 import { Provider } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
-import { ContractFqn } from '@flair-sdk/registry';
 import {
   BaseContract,
   Contract,
@@ -79,11 +78,17 @@ export class MetaContract<
     addressOrName: string;
     abi: any;
     signerOrProvider?: Signer | Provider;
+    defaults?: {
+      minGasPrice?: string;
+      maxGasPrice?: string;
+      expiresAt?: number;
+    };
   }): T {
     const metaTxClient = new MetaTransactionsClient({
       env: config.env || Environment.PROD,
       flairClientId: config.flairClientId,
       forwarder: config.forwarder,
+      defaults: config.defaults,
     });
 
     return new MetaContract(
