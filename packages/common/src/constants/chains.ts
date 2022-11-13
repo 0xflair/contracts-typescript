@@ -575,6 +575,29 @@ const newChains = [
     },
     testnet: true,
   },
+  {
+    id: 122,
+    name: 'Fuse',
+    network: 'fuse',
+    nativeCurrency: {
+      name: 'FUSE',
+      symbol: 'FUSE',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: 'https://rpc.fuse.io',
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Fuse explorer',
+        url: 'https://explorer.fuse.io/',
+      },
+      default: {
+        name: 'Fuse explorer',
+        url: 'https://explorer.fuse.io/',
+      },
+    },
+  },
 ];
 
 const WagmiChains = allChains.filter((c) => ![3, 4, 421611].includes(c.id));
