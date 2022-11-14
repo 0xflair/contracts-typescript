@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.46.1 (2022-11-14)
+
+
+### Bug Fixes
+
+* wallet styling for small screens ([7f88f6f](https://github.com/flair-sdk/typescript/commit/7f88f6f2b6811dca7dd1b83b2e5d731e5ff4aa59))
+
+
+
+
+
 # 2.46.0 (2022-11-14)
 
 
