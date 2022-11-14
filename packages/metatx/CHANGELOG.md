@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.46.2 (2022-11-14)
+
+
+### Bug Fixes
+
+* better modal styling on mobile screens and with all wallet options ([345d04d](https://github.com/flair-sdk/typescript/commit/345d04d8120a22b9fff4ef8bc91f623a3a5d3a1e))
+
+
+
+
+
 ## 2.46.1 (2022-11-14)
 
 
