@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.46.0 (2022-11-14)
+
+
+### Features
+
+* add sequence and web3auth wallets ([3f6f94b](https://github.com/flair-sdk/typescript/commit/3f6f94b623f8a12f529d318245cdc35fe16a35d0))
+
+
+
+
+
 ## 2.45.1 (2022-11-13)
 
 **Note:** Version bump only for package @flair-sdk/icons

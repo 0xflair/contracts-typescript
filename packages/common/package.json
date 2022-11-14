@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/common",
-  "version": "2.45.1",
+  "version": "2.46.0",
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
@@ -29,8 +29,8 @@
     "@web3-onboard/portis": "*",
     "@web3auth/ui": "*",
     "@web3auth/web3auth-wagmi-connector": "*",
-    "ethers": "*",
     "bowser": "*",
+    "ethers": "*",
     "eventemitter3": "*"
   },
   "peerDependenciesMeta": {
