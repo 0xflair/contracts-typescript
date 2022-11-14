@@ -9,8 +9,6 @@ export const IfWalletConnected = ({ as, children, ...attributes }: Props) => {
   const { chain: activeChain } = useNetwork();
   const { address, isConnected } = useAccount();
 
-  console.log('IfWalletConnected === ', activeChain, address, isConnected);
-
   const Component =
     as || (attributes.className || attributes.style ? 'span' : Fragment);
 

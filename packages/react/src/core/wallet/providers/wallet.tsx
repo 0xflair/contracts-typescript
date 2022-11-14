@@ -105,8 +105,6 @@ export const WalletProvider = ({
   const [allowedNetworks, setAllowedNetworks] =
     useState<AllowedNetworks>('ALL');
 
-  console.log('WalletProvider preferredChainId === ', preferredChainId);
-
   const connectors = useCallback(() => {
     const preferredChain = chains.find(
       (chain) => chain.id === preferredChainId,
@@ -254,9 +252,6 @@ export const WalletProvider = ({
   }, [appName, darkMode, preferredChainId]);
 
   const wagmiClient = useMemo(() => {
-    console.log('wagmiClient preferredChainId === ', preferredChainId);
-    console.log('wagmiClient wagmiOverrides === ', wagmiOverrides);
-
     return wrapWagmiClient(
       createClient({
         autoConnect: false,

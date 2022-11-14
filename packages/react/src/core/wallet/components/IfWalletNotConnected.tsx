@@ -13,8 +13,6 @@ export const IfWalletNotConnected = ({
   const { chain: activeChain } = useNetwork();
   const { address, isConnected } = useAccount();
 
-  console.log('IfWalletNotConnected === ', activeChain, address, isConnected);
-
   const Component =
     as || (attributes.className || attributes.style ? 'span' : Fragment);
 

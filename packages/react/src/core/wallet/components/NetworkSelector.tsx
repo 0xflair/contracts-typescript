@@ -76,9 +76,6 @@ export const NetworkSelector = (props: Props) => {
     );
   }, [availableChains, chain?.id, preferredChainId]);
 
-  console.log('NetworkSelector selected === ', selected);
-  console.log('NetworkSelector preferredChainId === ', preferredChainId);
-
   const categorizedChains = availableChains.reduce<{
     mainnet: Chain[];
     testnet: Chain[];

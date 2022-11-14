@@ -30,10 +30,6 @@ export class Web3AuthModalConnector
           (visibility) => {
             if (!visibility) {
               this.isAuthorized().then((authorized) => {
-                console.log(
-                  'WEB3AUUUUTH CONNECTED authorized ==== ',
-                  authorized,
-                );
                 if (!authorized) {
                   reject(new Error('User closed modal'));
                 }

@@ -94,32 +94,6 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const isWorking = isLoading || isConnecting || isReconnecting;
   const pendingConnectorId = pendingConnector?.id;
 
-  console.log('isLoading === ', isLoading);
-  console.log('isConnecting === ', isConnecting);
-  console.log('isReconnecting === ', isReconnecting);
-  console.log('pendingConnectorId === ', pendingConnectorId);
-
-  // Disconnect if wallet is not connected after 10 seconds
-  // useEffect(() => {
-  //   if (isWorking) {
-  //     const timeout = setTimeout(() => {
-  //       if (isWorking) {
-  //         disconnect();
-  //       }
-  //     }, 3000);
-
-  //     return () => clearTimeout(timeout);
-  //   }
-  // }, [isWorking]);
-
-  // console.log('web3OnboardInjectedWallets === ', web3OnboardInjectedWallets);
-  // console.log(
-  //   'gamestop === ',
-  //   web3OnboardInjectedWallets.find((w) =>
-  //     w.label.toLowerCase().includes('gamestop'),
-  //   ),
-  // );
-
   return (
     <WalletComponentWrapper as={props.as} className={className}>
       {connectorMetamask &&
