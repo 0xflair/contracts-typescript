@@ -24,18 +24,18 @@ class SafeConnector extends Connector<SafeAppProvider, SafeOpts | undefined> {
   readonly name = 'Safe';
   ready = !__IS_SERVER__ && __IS_IFRAME__;
 
-  #provider?: SafeAppProvider;
-  #sdk: SafeAppsSDK;
-  #safe?: SafeInfo;
+  provider?: SafeAppProvider;
+  sdk!: SafeAppsSDK;
+  safe?: SafeInfo;
 
   constructor(config: { chains?: Chain[]; options?: SafeOpts }) {
     super({ ...config, options: config?.options });
 
-    this.#sdk = new SafeAppsSDK(config.options);
+    this.sdk = new SafeAppsSDK(config.options);
   }
 
   async connect() {
-    const runningAsSafeApp = await this.#isSafeApp();
+    const runningAsSafeApp = await this.isSafeApp();
     if (!runningAsSafeApp) {
       throw new ConnectorNotFoundError();
     }
@@ -67,47 +67,47 @@ class SafeConnector extends Connector<SafeAppProvider, SafeOpts | undefined> {
   }
 
   async getAccount() {
-    if (!this.#safe) {
+    if (!this.safe) {
       throw new ConnectorNotFoundError();
     }
 
-    return utils.getAddress(this.#safe.safeAddress);
+    return utils.getAddress(this.safe.safeAddress);
   }
 
   async getChainId() {
-    if (!this.#provider) {
+    if (!this.provider) {
       throw new ConnectorNotFoundError();
     }
 
-    return normalizeChainId(this.#provider.chainId);
+    return normalizeChainId(this.provider.chainId);
   }
 
   async getTransactionBySafeHash(safeTxHash: string) {
     const result = await Promise.race([
-      this.#sdk.txs.getBySafeTxHash(safeTxHash),
+      this.sdk.txs.getBySafeTxHash(safeTxHash),
       new Promise<undefined>((resolve) => setTimeout(resolve, 3000)),
     ]);
 
     return result;
   }
 
-  async #getSafeInfo(): Promise<SafeInfo> {
-    if (!this.#sdk) {
+  async getSafeInfo(): Promise<SafeInfo> {
+    if (!this.sdk) {
       throw new ConnectorNotFoundError();
     }
-    if (!this.#safe) {
-      this.#safe = await this.#sdk.safe.getInfo();
+    if (!this.safe) {
+      this.safe = await this.sdk.safe.getInfo();
     }
-    return this.#safe;
+    return this.safe;
   }
 
-  async #isSafeApp(): Promise<boolean> {
+  async isSafeApp(): Promise<boolean> {
     if (!this.ready) {
       return false;
     }
 
     const safe = await Promise.race([
-      this.#getSafeInfo(),
+      this.getSafeInfo(),
       new Promise<void>((resolve) => setTimeout(resolve, 1000)),
     ]);
 
@@ -115,15 +115,15 @@ class SafeConnector extends Connector<SafeAppProvider, SafeOpts | undefined> {
   }
 
   async getProvider() {
-    if (!this.#provider) {
-      const safe = await this.#getSafeInfo();
+    if (!this.provider) {
+      const safe = await this.getSafeInfo();
       if (!safe) {
         throw new Error('Could not load Safe information');
       }
 
-      this.#provider = new SafeAppProvider(safe, this.#sdk);
+      this.provider = new SafeAppProvider(safe, this.sdk);
     }
-    return this.#provider;
+    return this.provider;
   }
 
   async getSigner() {

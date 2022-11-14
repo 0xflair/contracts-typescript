@@ -1,5 +1,5 @@
 import { Fragment, PropsWithChildren } from 'react';
-import { useAccount } from 'wagmi';
+import { useAccount, useNetwork } from 'wagmi';
 
 import { BareComponentProps } from '../../../common';
 
@@ -10,14 +10,17 @@ export const IfWalletNotConnected = ({
   children,
   ...attributes
 }: Props) => {
+  const { chain: activeChain } = useNetwork();
   const { address, isConnected } = useAccount();
+
+  console.log('IfWalletNotConnected === ', activeChain, address, isConnected);
 
   const Component =
     as || (attributes.className || attributes.style ? 'span' : Fragment);
 
   return (
     <Component {...attributes}>
-      {!isConnected || !address ? children : null}
+      {!isConnected || !address || !activeChain ? children : null}
     </Component>
   );
 };

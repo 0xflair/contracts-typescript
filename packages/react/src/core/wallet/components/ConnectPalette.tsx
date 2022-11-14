@@ -1,18 +1,18 @@
-import { classNames } from '@flair-sdk/common';
+import { classNames, CustodyType, ExtendedConnector } from '@flair-sdk/common';
 import {
   GenericWalletIcon,
   MagicLinkIcon,
   MetaMaskIcon,
-  TorusIcon,
   TrustWalletIcon,
   WalletConnectIcon,
   WalletLinkIcon,
 } from '@flair-sdk/icons';
 import MetaMaskOnboarding from '@metamask/onboarding';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Connector, useAccount, useConnect } from 'wagmi';
 
 import { Spinner } from '../../ui';
+import { PromisedImage } from '../../ui/components/elements/PromisedImage';
 import {
   LedgerLiveDeepLink,
   OmniWalletDeepLink,
@@ -22,13 +22,6 @@ import {
 import { ArgentWalletDeepLink } from '../deeplinks/argent-wallet';
 import { DeepLinkConfig } from '../types/deep-links';
 import { WalletComponentWrapper } from './WalletComponentWrapper';
-
-export enum CustodyType {
-  SELF = 'self-custody',
-  FULL = 'full-custodial',
-  MPC = 'mpc',
-  UNKNOWN = 'unknown',
-}
 
 export type ConnectorMetadata = {
   custodyType: CustodyType;
@@ -69,7 +62,6 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
     (c) => c.id == 'coinbaseWallet',
   );
   const connectorMagic = connectors.find((c) => c.id == 'magic');
-  const connectorWeb3Auth = connectors.find((c) => c.id == 'web3Auth');
 
   const metamaskAvailable = Boolean(
     typeof window !== 'undefined' &&
@@ -85,14 +77,6 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const connectorLabel =
     props.connectorLabel ||
     ((c) => {
-      if (c.id === 'magic') {
-        return 'Email sign-in';
-      }
-
-      if (c.id === 'web3Auth') {
-        return 'Torus';
-      }
-
       return c.name || c.id;
     });
 
@@ -110,11 +94,37 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const isWorking = isLoading || isConnecting || isReconnecting;
   const pendingConnectorId = pendingConnector?.id;
 
+  console.log('isLoading === ', isLoading);
+  console.log('isConnecting === ', isConnecting);
+  console.log('isReconnecting === ', isReconnecting);
+  console.log('pendingConnectorId === ', pendingConnectorId);
+
+  // Disconnect if wallet is not connected after 10 seconds
+  // useEffect(() => {
+  //   if (isWorking) {
+  //     const timeout = setTimeout(() => {
+  //       if (isWorking) {
+  //         disconnect();
+  //       }
+  //     }, 3000);
+
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [isWorking]);
+
+  // console.log('web3OnboardInjectedWallets === ', web3OnboardInjectedWallets);
+  // console.log(
+  //   'gamestop === ',
+  //   web3OnboardInjectedWallets.find((w) =>
+  //     w.label.toLowerCase().includes('gamestop'),
+  //   ),
+  // );
+
   return (
     <WalletComponentWrapper as={props.as} className={className}>
       {connectorMetamask &&
         showConnector(connectorMetamask, {
-          custodyType: CustodyType.SELF,
+          custodyType: CustodyType.SELF_CUSTODY,
           supported: metamaskAvailable,
         }) && (
           <>
@@ -139,7 +149,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                 )}
                 <span className="truncate">
                   {connectorLabel?.(connectorMetamask, {
-                    custodyType: CustodyType.SELF,
+                    custodyType: CustodyType.SELF_CUSTODY,
                     supported: metamaskAvailable,
                   })}
                 </span>
@@ -158,7 +168,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                 <MetaMaskIcon className={iconClassName} />
                 <span className="truncate">
                   {connectorLabel?.(connectorMetamask, {
-                    custodyType: CustodyType.SELF,
+                    custodyType: CustodyType.SELF_CUSTODY,
                     supported: metamaskAvailable,
                   })}
                 </span>
@@ -239,7 +249,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
 
       {connectorCoinbaseWallet &&
         showConnector(connectorCoinbaseWallet, {
-          custodyType: CustodyType.FULL,
+          custodyType: CustodyType.THIRD_PARTY,
           supported: true,
         }) && (
           <button
@@ -258,44 +268,51 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
             )}
             <span className="truncate">
               {connectorLabel?.(connectorCoinbaseWallet, {
-                custodyType: CustodyType.FULL,
+                custodyType: CustodyType.THIRD_PARTY,
                 supported: true,
               })}
             </span>
           </button>
         )}
 
-      {connectorWeb3Auth &&
-        showConnector(connectorWeb3Auth, {
-          custodyType: CustodyType.MPC,
-          supported: true,
-        }) && (
-          <button
-            type="button"
-            disabled={!connectorWeb3Auth.ready || isWorking}
-            className={classNames(
-              'flair connect-button connector connector-web3auth',
-              buttonClassName,
-            )}
-            onClick={() => connect({ connector: connectorWeb3Auth })}
-          >
-            {isWorking && pendingConnectorId == connectorWeb3Auth.id ? (
-              <Spinner />
-            ) : (
-              <TorusIcon className={iconClassName} />
-            )}
-            <span className="truncate">
-              {connectorLabel?.(connectorWeb3Auth, {
-                custodyType: CustodyType.FULL,
-                supported: true,
-              })}
-            </span>
-          </button>
+      {(connectors as unknown as (Connector & ExtendedConnector)[])
+        .filter((c: ExtendedConnector) => !!('custodyType' in c))
+        .map((connector: Connector & ExtendedConnector) =>
+          connector &&
+          showConnector(connector, {
+            custodyType: CustodyType.SELF_CUSTODY,
+            supported: true,
+          }) ? (
+            <button
+              key={connector.id}
+              type="button"
+              disabled={!connector.ready || !connector.available || isWorking}
+              className={classNames(
+                'flair connect-button connector',
+                `connector-${connector.id}`,
+                buttonClassName,
+              )}
+              onClick={() => connect({ connector: connector })}
+            >
+              {isWorking && pendingConnectorId == connector.id ? (
+                <Spinner />
+              ) : (
+                <PromisedImage src={connector.icon} className={iconClassName} />
+              )}
+              <span className="truncate">
+                {connectorLabel?.(connector, {
+                  custodyType: CustodyType.THIRD_PARTY,
+                  supported: true,
+                })}
+                {!connector.available && ' (Unsupported)'}
+              </span>
+            </button>
+          ) : null,
         )}
 
       {connectorMagic &&
         showConnector(connectorMagic, {
-          custodyType: CustodyType.FULL,
+          custodyType: CustodyType.THIRD_PARTY,
           supported: true,
         }) && (
           <>
@@ -315,7 +332,7 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               )}
               <span className="truncate">
                 {connectorLabel?.(connectorMagic, {
-                  custodyType: CustodyType.FULL,
+                  custodyType: CustodyType.THIRD_PARTY,
                   supported: true,
                 })}
               </span>

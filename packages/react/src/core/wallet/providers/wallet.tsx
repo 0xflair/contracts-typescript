@@ -2,17 +2,27 @@ import {
   FLAIR_CHAINS,
   MagicLinkConnector,
   SafeConnector,
+  SequenceConnector,
+  Web3AuthModalConnector,
+  Web3OnboardBinanceConnector,
+  Web3OnboardBraveConnector,
+  Web3OnboardGamestopConnector,
+  Web3OnboardLedgerConnector,
+  Web3OnboardPortisConnector,
+  Web3OnboardTrustConnector,
 } from '@flair-sdk/common';
 import { alchemyProvider } from '@wagmi/core/providers/alchemy';
 import { infuraProvider } from '@wagmi/core/providers/infura';
 import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plugin';
 import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
-import {
+import { hexlify } from 'ethers/lib/utils';
+import React, {
   PropsWithChildren,
   ReactNode,
   useCallback,
   useEffect,
   useMemo,
+  useState,
 } from 'react';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
@@ -65,15 +75,43 @@ const AutoWalletWrapper = ({
   return <>{children}</>;
 };
 
+type LoginContextValue = {
+  state: {
+    preferredChainId: number;
+    allowedNetworks: AllowedNetworks;
+  };
+  setPreferredChainId: (chainId: number) => void;
+  setAllowedNetworks: (allowedNetworks: AllowedNetworks) => void;
+};
+
+export const WalletContext = React.createContext<LoginContextValue | null>(
+  null,
+);
+
+export type AllowedNetworks = 'ALL' | number[];
+
 export const WalletProvider = ({
   children,
   appName = 'Quick Wallet',
   injectStyles = true,
-  preferredChainId,
+  preferredChainId: preferredChainId_,
   wagmiOverrides,
 }: WalletProviderProps) => {
   const darkMode = isDarkMode();
+
+  const [preferredChainId, setPreferredChainId] = useState<number>(
+    preferredChainId_ || 1,
+  );
+  const [allowedNetworks, setAllowedNetworks] =
+    useState<AllowedNetworks>('ALL');
+
+  console.log('WalletProvider preferredChainId === ', preferredChainId);
+
   const connectors = useCallback(() => {
+    const preferredChain = chains.find(
+      (chain) => chain.id === preferredChainId,
+    );
+
     const torusPlugin = new TorusWalletConnectorPlugin({
       torusWalletOpts: {
         buttonPosition: 'bottom-left',
@@ -86,8 +124,23 @@ export const WalletProvider = ({
         },
         useWalletConnect: true,
         enableLogging: true,
+        network: preferredChain
+          ? {
+              host: preferredChain.rpcUrls.default,
+              chainId: preferredChain.id,
+              blockExplorer: preferredChain.blockExplorers?.default.url,
+              networkName: preferredChain.name,
+              ticker: preferredChain.nativeCurrency?.symbol,
+              tickerName: preferredChain.nativeCurrency?.name,
+            }
+          : undefined,
       },
     });
+
+    const web3OnboardOptions = {
+      appName,
+      appLogo: 'https://app.flair.dev/logo-light-filled.png',
+    };
 
     const connectors: any[] = [
       new MetaMaskConnector({
@@ -130,15 +183,15 @@ export const WalletProvider = ({
           apiKey: FLAIR_MAGIC_API_KEY,
           isDarkMode: darkMode,
           oauthOptions: {
-            providers: ['google', 'twitter', 'github'],
+            providers: ['google', 'twitter', 'github', 'twitch', 'discord'],
           },
           customHeaderText: appName,
         },
       }),
-      new Web3AuthConnector({
+      new Web3AuthModalConnector({
         chains,
         options: {
-          network: 'mainnet',
+          network: 'cyan',
           clientId: FLAIR_WEB3AUTH_CLIENT_ID,
           uiConfig: {
             theme: isDarkMode() ? 'dark' : undefined,
@@ -148,6 +201,46 @@ export const WalletProvider = ({
           },
           uxMode: 'popup',
           displayErrorsOnModal: true,
+          chainId: hexlify(preferredChainId).toString(),
+        },
+      }),
+      new SequenceConnector({
+        chains: chains as any,
+        options: {
+          connect: {
+            app: appName,
+            networkId: preferredChainId,
+          },
+        },
+      }),
+      new Web3OnboardBinanceConnector({
+        chains,
+        options: web3OnboardOptions,
+      }),
+      new Web3OnboardBraveConnector({
+        chains,
+        options: web3OnboardOptions,
+      }),
+      new Web3OnboardGamestopConnector({
+        chains,
+        options: web3OnboardOptions,
+      }),
+      new Web3OnboardTrustConnector({
+        chains,
+        options: web3OnboardOptions,
+      }),
+      new Web3OnboardPortisConnector({
+        chains,
+        options: {
+          appName,
+          appLogo: 'https://app.flair.dev/logo-light-filled.png',
+        },
+      }),
+      new Web3OnboardLedgerConnector({
+        chains,
+        options: {
+          appName,
+          appLogo: 'https://app.flair.dev/logo-light-filled.png',
         },
       }),
     ];
@@ -157,20 +250,23 @@ export const WalletProvider = ({
       ?.web3AuthInstance?.addPlugin?.(torusPlugin);
 
     return connectors;
-  }, [appName, darkMode]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [appName, darkMode, preferredChainId]);
 
-  const wagmiClient = useMemo(
-    () =>
-      wrapWagmiClient(
-        createClient({
-          autoConnect: false,
-          connectors,
-          provider,
-          webSocketProvider,
-        }),
-      ),
-    [connectors],
-  );
+  const wagmiClient = useMemo(() => {
+    console.log('wagmiClient preferredChainId === ', preferredChainId);
+    console.log('wagmiClient wagmiOverrides === ', wagmiOverrides);
+
+    return wrapWagmiClient(
+      createClient({
+        autoConnect: false,
+        connectors,
+        provider,
+        webSocketProvider,
+      }),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connectors]);
 
   useEffect(() => {
     if (!injectStyles) {
@@ -186,11 +282,31 @@ export const WalletProvider = ({
     style.innerHTML = stylesheet;
   }, [injectStyles]);
 
-  return (
+  const value = {
+    state: {
+      preferredChainId,
+      allowedNetworks,
+    },
+    setPreferredChainId: (chainId: number) => {
+      console.trace('WalletProvider setPreferredChainId === ', chainId);
+      setPreferredChainId(chainId);
+    },
+    setAllowedNetworks,
+  };
+
+  return React.createElement(
+    WalletContext.Provider,
+    { value },
     <WagmiConfig client={wagmiClient} {...wagmiOverrides}>
       <AutoWalletWrapper preferredChainId={preferredChainId}>
         {children}
       </AutoWalletWrapper>
-    </WagmiConfig>
+    </WagmiConfig>,
   );
+};
+
+export const useWalletContext = () => {
+  const context = React.useContext(WalletContext);
+  if (!context) throw Error('Must be used within <WalletProvider>');
+  return context;
 };

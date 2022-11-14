@@ -1,9 +1,10 @@
 import { classNames, FLAIR_CHAINS } from '@flair-sdk/common';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import React, { Fragment } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import { Chain, useNetwork, useSwitchNetwork } from 'wagmi';
 
+import { useWalletContext } from '../providers';
 import { WalletComponentWrapper } from './WalletComponentWrapper';
 
 type Props = {
@@ -59,10 +60,24 @@ const ChainView = ({ chain }: { chain: Chain }) => {
 export const NetworkSelector = (props: Props) => {
   const { chains } = props;
   const { chain } = useNetwork();
+  const {
+    state: { preferredChainId },
+    setPreferredChainId,
+  } = useWalletContext();
   const { switchNetwork } = useSwitchNetwork();
 
   const availableChains = chains || FLAIR_CHAINS;
-  const selected = availableChains.find((c) => c.id === chain?.id);
+  const selected = useMemo(() => {
+    return (
+      availableChains.find((c) => c.id === chain?.id) ||
+      availableChains.find(
+        (c) => c.id?.toString() === preferredChainId?.toString(),
+      )
+    );
+  }, [availableChains, chain?.id, preferredChainId]);
+
+  console.log('NetworkSelector selected === ', selected);
+  console.log('NetworkSelector preferredChainId === ', preferredChainId);
 
   const categorizedChains = availableChains.reduce<{
     mainnet: Chain[];
@@ -90,8 +105,13 @@ export const NetworkSelector = (props: Props) => {
     >
       <Listbox
         value={selected}
+        disabled={availableChains?.length < 2}
         onChange={(chain: Chain) => {
-          switchNetwork && switchNetwork(chain.id);
+          if (switchNetwork) {
+            switchNetwork(chain.id);
+          } else {
+            setPreferredChainId(chain.id);
+          }
         }}
       >
         {({ open }) => (
@@ -99,7 +119,10 @@ export const NetworkSelector = (props: Props) => {
             <div className="relative">
               <Listbox.Button className="bg-white relative w-24 sm:w-32 md:w-48 border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <span className="block truncate">
-                  {(chain?.name ?? chain?.id) || '<wallet not connected>'}
+                  {(chain?.name ?? chain?.id) ||
+                    (selected?.name ?? selected?.id) || (
+                      <i className="italic">Select a network</i>
+                    )}
                 </span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <SelectorIcon

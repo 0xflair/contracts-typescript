@@ -12,6 +12,7 @@ import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { SmartContract, useChainId, useSmartContract } from '../../../common';
+import { useWalletContext } from '../../wallet';
 import { useDiamond } from '../hooks/useDiamond';
 import { Diamond } from '../types';
 
@@ -125,6 +126,20 @@ export const DiamondProvider = ({
     chainId,
     contractAddress: diamond?.contractAddress,
   });
+
+  const {
+    state: { preferredChainId },
+    setPreferredChainId,
+    setAllowedNetworks,
+  } = useWalletContext();
+
+  useEffect(() => {
+    if (diamond?.chainId && diamond?.chainId !== preferredChainId) {
+      setPreferredChainId(Number(chainId));
+      setAllowedNetworks([Number(chainId)]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chainId]);
 
   /**
    * Set the current facets based on smart contract analysis

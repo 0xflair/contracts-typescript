@@ -49,6 +49,12 @@ export const ConnectButton = ({
 
   const Component = as || 'button';
 
+  console.log(
+    'BUTTON isConnecting, isConnected == ',
+    isConnecting,
+    isConnected,
+  );
+
   return (
     <>
       {isConnected ? (
@@ -71,7 +77,7 @@ export const ConnectButton = ({
         portalClassName={'flair-component connect-dialog-portal'}
         className={
           dialogProps?.contentClassName ||
-          'w-full h-full sm:w-auto sm:h-auto absolute max-w-lg p-4 mx-auto overflow-scroll align-middle sm:rounded-lg bg-white shadow-lg border border-gray-200 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2' //// sm:align-middle justify-center inline-flex flex-col gap-4 transform transition-all
+          'scroll-visible w-full h-full sm:w-auto sm:h-auto absolute max-w-lg p-4 mx-auto overflow-scroll align-middle sm:rounded-lg bg-white shadow-lg border border-gray-200 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2' //// sm:align-middle justify-center inline-flex flex-col gap-4 transform transition-all
         }
         overlayClassName={
           dialogProps?.overlayClassName ||
