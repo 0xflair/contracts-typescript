@@ -77,15 +77,15 @@ export const ConnectButton = ({
         portalClassName={'flair-component connect-dialog-portal'}
         className={
           dialogProps?.contentClassName ||
-          'scroll-visible w-full h-full sm:w-auto sm:h-auto absolute max-w-lg p-4 mx-auto overflow-scroll align-middle sm:rounded-lg bg-white shadow-lg border border-gray-200 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2' //// sm:align-middle justify-center inline-flex flex-col gap-4 transform transition-all
+          'align-bottom bg-white sm:rounded-lg px-4 sm:p-6 sm:my-8 text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-lg w-full h-full sm:h-auto justify-center inline-flex flex-col gap-4'
         }
         overlayClassName={
           dialogProps?.overlayClassName ||
-          'fixed inset-0 filter backdrop-filter backdrop-blur transition-opacity w-screen h-screen overflow-scroll'
+          'fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity flex items-center justify-center'
         }
         contentLabel={dialogProps?.title || 'Connect your wallet'}
       >
-        <div className="max-h-96">
+        <div className="max-h-96 scroll-visible">
           <h3
             className={
               dialogProps?.headerClassName ||
