@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.46.4 (2022-11-17)
+
+
+### Bug Fixes
+
+* erc1155 max supply batching, dark mode by media, erc721 balance ([6ad594c](https://github.com/flair-sdk/typescript/commit/6ad594cfb37432999747d1c395329eb2d802f02d))
+
+
+
+
+
 ## 2.46.3 (2022-11-14)
 
 
