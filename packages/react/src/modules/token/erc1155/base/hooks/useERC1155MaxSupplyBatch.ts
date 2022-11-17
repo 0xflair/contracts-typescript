@@ -1,9 +1,8 @@
-import { BigNumberish } from 'ethers';
+import { BigNumberish, BytesLike, ethers } from 'ethers';
+import { useMemo } from 'react';
 
-import {
-  PredefinedReadContractConfig,
-  useContractRead,
-} from '../../../../../common';
+import { PredefinedReadContractConfig } from '../../../../../common';
+import { useMultiCallRead } from '../../../../../common/hooks/useMultiCallRead';
 
 type ArgsType = [tokenIds: BigNumberish[]];
 
@@ -16,25 +15,35 @@ export const useERC1155MaxSupplyBatch = ({
   contractAddress,
   enabled = true,
   tokenIds,
+  contractInterface: _contractInterface,
   ...restOfConfig
 }: Config) => {
-  const result = useContractRead<BigNumberish[], ArgsType>({
-    contractInterface: [
-      'function maxSupplyBatch(uint256[] tokenIds) external view returns (uint256[])',
-    ],
-    functionName: 'maxSupplyBatch(uint256[])',
+  const contractInterface = useMemo(() => {
+    return new ethers.utils.Interface([
+      'function maxSupply(uint256 tokenId) external view returns (uint256)',
+    ]);
+  }, []);
+
+  const result = useMultiCallRead<BytesLike[]>({
     chainId,
-    contractAddress,
-    args: (tokenIds?.length ? [tokenIds] : []) as ArgsType,
-    enabled: Boolean(enabled && tokenIds?.length),
+    addressOrName: contractAddress as string,
+    contractInterface,
+    enabled: Boolean(enabled && contractAddress),
+    calls: tokenIds?.length
+      ? tokenIds.map((tokenId) => ({
+          id: `token-${tokenId}`,
+          function: 'maxSupply(uint256)',
+          args: [tokenId],
+        }))
+      : [],
     ...restOfConfig,
   });
 
-  // Create a mapping from token ID to maxSupply
+  // Create a mapping from token ID to URI
   const mapping =
     tokenIds &&
-    result.data?.reduce((acc, maxSupply, index) => {
-      acc[tokenIds[index].toString()] = maxSupply?.toString();
+    result.data?.reduce((acc, value, index) => {
+      acc[tokenIds[index].toString()] = value;
       return acc;
     }, {} as Record<string, BigNumberish>);
 

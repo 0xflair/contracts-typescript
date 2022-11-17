@@ -19,7 +19,7 @@ export const isDarkMode = () => {
   return Boolean(
     explicitDarkMode !== undefined
       ? explicitDarkMode
-      : darkByUrl || darkByMedia || darkByLocalStorage,
+      : darkByUrl || darkByLocalStorage, //  || darkByMedia
   );
 };
 
