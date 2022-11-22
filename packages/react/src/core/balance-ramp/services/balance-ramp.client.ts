@@ -131,10 +131,11 @@ export class BalanceRampClient {
       estimatedGasLimit = await originalSigner.estimateGas(transactionRequest);
     } catch (e: any) {
       const message =
-        e?.error?.message?.toString() ||
-        e?.message?.toString() ||
-        e?.error?.error?.toString() ||
-        e.message?.toString() ||
+        e?.data?.message?.toString() +
+        e?.error?.message?.toString() +
+        e?.message?.toString() +
+        e?.error?.error?.toString() +
+        e.message?.toString() +
         e?.toString();
 
       if (!message.toLowerCase().includes('insufficient funds')) {
