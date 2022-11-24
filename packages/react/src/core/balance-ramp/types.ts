@@ -1,5 +1,6 @@
 import { TransactionRequest } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
+import { MetaTransaction } from '@flair-sdk/metatx';
 import { BigNumberish } from 'ethers';
 import { Deferrable } from 'ethers/lib/utils';
 
@@ -41,4 +42,41 @@ export type BalanceRampConfig = {
   resolvers: BalanceResolver[];
   enabledChainIds?: number[];
   maxGasLimit?: BigNumberish;
+};
+
+export type BalanceRamp = {
+  id: string;
+  chainId: number;
+  walletAddress: string;
+  outputTokenAddress: string;
+  outputDecimals: number;
+  outputAmount: string;
+  inputCurrency: string;
+  inputAmount: string;
+  inputAmountWithFee: string;
+  requiresKyc: boolean;
+  txFrom: string;
+  txTo: string;
+  txData: string;
+  txValue: string;
+  txGasLimit: string;
+  txGasPrice: string;
+  estimatedMaxFeePerGas: string;
+  estimatedMaxPriorityFeePerGas: string;
+  estimatedGasLimit: string;
+  title: string;
+  stripeSessionId: string;
+  stripeSessionUrl: string;
+  paymentState: 'created' | 'paid' | 'canceled' | 'failed';
+  settlementState:
+    | 'idle'
+    | 'processing'
+    | 'submitted'
+    | 'waiting'
+    | 'settled'
+    | 'failed';
+  settlementRelayId: string;
+  settlementRelayMetaTx: MetaTransaction;
+  settlementWillDepositBalance: boolean;
+  processingError: string;
 };

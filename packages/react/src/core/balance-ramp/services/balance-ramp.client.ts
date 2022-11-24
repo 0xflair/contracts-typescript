@@ -8,6 +8,7 @@ import { Deferrable } from 'ethers/lib/utils';
 
 import { BALANCE_RAMP_BACKEND } from '../constants';
 import {
+  BalanceRamp,
   BalanceRampConfig,
   BalanceResolverContext,
   CurrentBalance,
@@ -90,7 +91,40 @@ export class BalanceRampClient {
           requiredBalance,
           transactionRequest,
         );
-        await this.waitUntilReady(originalSigner, requiredBalance);
+        const balanceRamp = await this.waitUntilReady(
+          originalSigner,
+          requiredBalance,
+        );
+
+        if (!balanceRamp?.settlementWillDepositBalance) {
+          if (!balanceRamp?.settlementRelayMetaTx.txHash) {
+            throw new Error(
+              `Balance ramp failed, no tx hash found for id=${balanceRamp?.id} relay=${balanceRamp?.settlementRelayId}`,
+            );
+          }
+
+          return {
+            ...balanceRamp?.settlementRelayMetaTx,
+            chainId,
+
+            from: balanceRamp?.settlementRelayMetaTx?.from as string,
+            to: balanceRamp?.settlementRelayMetaTx?.to as string,
+            data: balanceRamp?.settlementRelayMetaTx?.data as string,
+            nonce: Number(balanceRamp?.settlementRelayMetaTx?.nonce as string),
+            value: BigNumber.from(balanceRamp?.settlementRelayMetaTx?.value),
+
+            hash: balanceRamp?.settlementRelayMetaTx?.txHash,
+            confirmations:
+              balanceRamp?.settlementRelayMetaTx?.txReceipt?.confirmations,
+            wait: async (confirmations?: number) =>
+              ({
+                ...balanceRamp.settlementRelayMetaTx?.txReceipt,
+              } as any),
+            gasLimit: BigNumber.from(
+              balanceRamp?.settlementRelayMetaTx?.txReceipt.gasUsed,
+            ),
+          };
+        }
 
         if (
           !this.config.maxGasLimit ||
@@ -326,7 +360,7 @@ export class BalanceRampClient {
   private async waitUntilReady(
     signer: Signer,
     requiredBalance: RequiredBalance,
-  ) {
+  ): Promise<BalanceRamp | undefined> {
     const promises = [];
 
     if (
@@ -336,16 +370,20 @@ export class BalanceRampClient {
       promises.push(this.regularlyCheckForBalance(signer, requiredBalance));
     }
 
-    promises.push(this.waitForModalMessage(signer, requiredBalance));
+    const rampPromise = this.waitForModalMessage(signer, requiredBalance);
 
-    return Promise.race(promises);
+    promises.push(rampPromise);
+
+    await Promise.race(promises);
+
+    return rampPromise;
   }
 
   private async waitForModalMessage(
     signer: Signer,
     requiredBalance: RequiredBalance,
-  ): Promise<void> {
-    const promise = new Promise<void>((resolve, reject) => {
+  ): Promise<BalanceRamp> {
+    const promise = new Promise<BalanceRamp>((resolve, reject) => {
       window.addEventListener('message', async (event) => {
         const message = event.data;
 
@@ -355,7 +393,7 @@ export class BalanceRampClient {
 
         try {
           if (message.type === 'BalanceRampSuccess') {
-            resolve(message.data);
+            resolve(message.data as BalanceRamp);
           } else if (message.type === 'WindowClosed') {
             reject('Payment window was closed, please try again.');
           } else if (message.type === 'BalanceRampFailure') {
