@@ -6,7 +6,7 @@ import { Required } from 'utility-types';
 import { FLAIR_META_TRANSACTIONS_BACKEND } from './constants';
 import { EIP712_MTX_TYPES } from './eip712';
 import { generateRandomUint256 } from './random-uint256';
-import { MetaTransactionSignedData } from './types';
+import { MetaTransactionSignedData as MetaTransactionUnsignedData } from './types';
 import { MetaTransaction } from './types/meta-transaction';
 
 type Config = {
@@ -44,24 +44,24 @@ export class MetaTransactionsClient {
   async submit(
     chainId: number,
     signer: Signer,
-    metaTransactionSignedData: Required<
-      Partial<MetaTransactionSignedData>,
+    metaTransactionUnsignedData: Required<
+      Partial<MetaTransactionUnsignedData>,
       'from' | 'to' | 'data'
     >,
   ): Promise<MetaTransaction> {
-    const signedData = { ...this.defaults, ...metaTransactionSignedData };
+    const unsignedData = { ...this.defaults, ...metaTransactionUnsignedData };
 
     const signature = await this.signMetaTransaction(
       chainId,
       signer,
-      signedData,
+      unsignedData,
     );
 
     const response = await axios.post<MetaTransaction>(
       `${
         FLAIR_META_TRANSACTIONS_BACKEND[this.config.env || Environment.PROD]
       }/v1/meta-transactions`,
-      { chainId, ...signedData, signature },
+      { chainId, ...unsignedData, signature },
       {
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export class MetaTransactionsClient {
   async signMetaTransaction(
     chainId: number,
     signer: Signer,
-    metaTransactionSignedData: MetaTransactionSignedData,
+    metaTransactionUnsignedData: MetaTransactionUnsignedData,
     forwarderAddress?: string,
     forwarderName: string = 'UnorderedForwarder',
     forwarderVersion: string = '0.0.1',
@@ -91,7 +91,7 @@ export class MetaTransactionsClient {
         verifyingContract: forwarderAddress || this.forwarder,
       },
       EIP712_MTX_TYPES,
-      metaTransactionSignedData,
+      metaTransactionUnsignedData,
     );
   }
 }
