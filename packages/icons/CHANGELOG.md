@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.47.0 (2022-11-24)
+
+
+### Features
+
+* add method to get metatx by id ([860b814](https://github.com/flair-sdk/typescript/commit/860b814aec14b2304c55135bac7208998b813f03))
+
+
+
+
+
 ## 2.46.8 (2022-11-24)
 
 **Note:** Version bump only for package @flair-sdk/icons
