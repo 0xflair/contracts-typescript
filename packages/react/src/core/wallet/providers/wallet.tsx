@@ -45,6 +45,7 @@ export type WalletProviderProps = {
   custodialWallet?: boolean;
   injectStyles?: boolean;
   wagmiOverrides?: Record<string, any>;
+  tryAutoConnect?: boolean;
 };
 
 const FLAIR_MAGIC_API_KEY = 'pk_live_8B82089A89462668';
@@ -65,11 +66,12 @@ const { chains, provider, webSocketProvider } = configureChains(FLAIR_CHAINS, [
   }),
 ]);
 
-const AutoWalletWrapper = ({
+const WalletAutomationWrapper = ({
+  tryAutoConnect,
   preferredChainId,
   children,
 }: PropsWithChildren<any>) => {
-  useAutoConnect();
+  useAutoConnect(tryAutoConnect);
   useAutoSwitch(preferredChainId);
 
   return <>{children}</>;
@@ -94,6 +96,7 @@ export const WalletProvider = ({
   children,
   appName = 'Quick Wallet',
   injectStyles = true,
+  tryAutoConnect = true,
   preferredChainId: preferredChainId_,
   wagmiOverrides,
 }: WalletProviderProps) => {
@@ -145,15 +148,15 @@ export const WalletProvider = ({
         chains,
         options: {
           shimDisconnect: true,
-          UNSTABLE_shimOnConnectSelectAccount: true,
-          shimChainChangedDisconnect: true,
+          UNSTABLE_shimOnConnectSelectAccount: !tryAutoConnect,
+          shimChainChangedDisconnect: !tryAutoConnect,
         },
       }),
       new InjectedConnector({
         chains,
         options: {
           shimDisconnect: true,
-          shimChainChangedDisconnect: true,
+          shimChainChangedDisconnect: !tryAutoConnect,
         },
       }),
       new WalletConnectConnector({
@@ -293,9 +296,9 @@ export const WalletProvider = ({
     WalletContext.Provider,
     { value },
     <WagmiConfig client={wagmiClient} {...wagmiOverrides}>
-      <AutoWalletWrapper preferredChainId={preferredChainId}>
+      <WalletAutomationWrapper preferredChainId={preferredChainId}>
         {children}
-      </AutoWalletWrapper>
+      </WalletAutomationWrapper>
     </WagmiConfig>,
   );
 };
