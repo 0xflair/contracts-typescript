@@ -37,6 +37,7 @@
   },
   "peerDependencies": {
     "@flair-sdk/common": "*",
+    "@flair-sdk/connectors": "*",
     "@flair-sdk/icons": "*",
     "@flair-sdk/ipfs": "*",
     "@flair-sdk/metatx": "*",
@@ -72,6 +73,9 @@
   },
   "peerDependenciesMeta": {
     "@flair-sdk/common": {
+      "optional": true
+    },
+    "@flair-sdk/connectors": {
       "optional": true
     },
     "@flair-sdk/icons": {
@@ -170,6 +174,7 @@
   },
   "dependencies": {
     "@flair-sdk/common": "^2.47.0",
+    "@flair-sdk/connectors": "^2.47.0",
     "@flair-sdk/icons": "^2.47.0",
     "@flair-sdk/ipfs": "^2.47.0",
     "@flair-sdk/metatx": "^2.47.0",

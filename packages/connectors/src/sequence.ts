@@ -1,6 +1,5 @@
 import { SequenceConnector as SequenceConnectorOfficial } from '@0xsequence/wagmi-connector';
-
-import { CustodyType } from '../types';
+import { CustodyType } from '@flair-sdk/common';
 
 export class SequenceConnector extends SequenceConnectorOfficial {
   name: string = 'Sequence';

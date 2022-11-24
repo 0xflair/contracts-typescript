@@ -1,6 +1,6 @@
+import { CustodyType } from '@flair-sdk/common';
 import { InjectedWalletModule } from '@web3-onboard/injected-wallets/dist/types';
 
-import { CustodyType } from '../types';
 import { Web3OnboardInjectedConnectorBase } from './base/onboard-injected-base';
 
 class Web3OnboardBinanceConnector extends Web3OnboardInjectedConnectorBase {

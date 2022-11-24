@@ -4,11 +4,12 @@ A complete suite of Flair reusable components and clients for frontend and backe
 
 ## Packages
 
-| Name                                   | Description                                                                                                                                                                                 |
-| :------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [@flair&#x2011;sdk/react](./packages/react)   | React hooks and components for features like Wallet, NFT Collections, Token Streams, etc. (browser only)                                                                                    |
-| [@flair&#x2011;sdk/metatx](./packages/metatx) | Extension to ether.js `Contract` class to make all functions compatible with native meta transactions standard ([ERC 2771](https://eips.ethereum.org/EIPS/eip-2771)). (node.js and browser) |
-| [@flair&#x2011;sdk/ipfs](./packages/ipfs)     | Utility functions to interact with IPFS, useful for NFT metadata storage. (node.js and browser)                                                                                             |
+| Name                                                  | Description                                                                                                                                                                                 |
+| :---------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [@flair&#x2011;sdk/connectors](./packages/connectors) | Ready-made WAGMI connectors for various wallet providers.                                                                                                                                    |
+| [@flair&#x2011;sdk/react](./packages/react)           | React hooks and components for features like Wallet, NFT Collections, Token Streams, etc. (browser only)                                                                                    |
+| [@flair&#x2011;sdk/metatx](./packages/metatx)         | Extension to ether.js `Contract` class to make all functions compatible with native meta transactions standard ([ERC 2771](https://eips.ethereum.org/EIPS/eip-2771)). (node.js and browser) |
+| [@flair&#x2011;sdk/ipfs](./packages/ipfs)             | Utility functions to interact with IPFS, useful for NFT metadata storage. (node.js and browser)                                                                                             |
 
 ## Examples
 
@@ -18,7 +19,6 @@ Explore all the examples using the Flair SDK in the [flair-sdk/examples](https:/
 - [Custom minting sales in your own website](https://github.com/flair-sdk/examples/tree/main/react/custom-tiered-sales)
 - [Minting NFTs from your backend via a trustless relayer API](https://github.com/flair-sdk/examples/tree/main/express/mint-erc721-with-metadata)
 - [Customize sales logic in the smart contract](https://github.com/flair-sdk/examples/tree/main/solidity/custom-sales-logic)
-
 
 ## Documentation
 

@@ -1,7 +1,7 @@
+import { CustodyType } from '@flair-sdk/common';
 import type { WalletModule } from '@web3-onboard/common';
-import portisModule from '@web3-onboard/portis';
+import ledgerModule from '@web3-onboard/ledger';
 
-import { CustodyType } from '../types';
 import {
   BaseOptions,
   Web3OnboardConnectorBase,
@@ -9,18 +9,18 @@ import {
 
 type Options = BaseOptions & {};
 
-class Web3OnboardPortisConnector extends Web3OnboardConnectorBase<Options> {
-  readonly id = 'web3onboard-portis';
-  name = 'Portis';
-  custodyType = CustodyType.THIRD_PARTY;
+class Web3OnboardLedgerConnector extends Web3OnboardConnectorBase<Options> {
+  readonly id = 'web3onboard-ledger';
+  name = 'Ledger (USB)';
+  icon =
+    'https://ipfs.io/ipfs/bafkreiaca3pyolq355exgp7c5etlc7yh6voceglciiswaju46dsbswkctu';
+  custodyType = CustodyType.SELF_CUSTODY;
 
   walletModule!: WalletModule;
 
   async getWalletModule() {
     if (!this.walletModule) {
-      const modules = portisModule({
-        apiKey: '78fdcb96-6f55-43ae-a5a2-77e870455a0b',
-      })({
+      const modules = ledgerModule({})({
         device: {
           os: null,
           browser: null,
@@ -29,7 +29,7 @@ class Web3OnboardPortisConnector extends Web3OnboardConnectorBase<Options> {
       });
 
       if (!modules) {
-        throw new Error('No Portis module found');
+        throw new Error('No Ledger module found');
       }
 
       this.walletModule = Array.isArray(modules) ? modules[0] : modules;
@@ -39,4 +39,4 @@ class Web3OnboardPortisConnector extends Web3OnboardConnectorBase<Options> {
   }
 }
 
-export { Web3OnboardPortisConnector };
+export { Web3OnboardLedgerConnector };

@@ -1,6 +1,5 @@
+import { CustodyType } from '@flair-sdk/common';
 import { Connector } from '@wagmi/core';
-
-import { CustodyType } from '../../types';
 
 export interface ExtendedConnector extends Connector {
   name: string;

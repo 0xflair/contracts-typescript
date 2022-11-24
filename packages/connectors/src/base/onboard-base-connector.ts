@@ -1,4 +1,5 @@
 import { Web3Provider } from '@ethersproject/providers';
+import { CustodyType } from '@flair-sdk/common';
 import {
   Chain,
   Connector,
@@ -11,7 +12,6 @@ import type { EIP1193Provider, WalletModule } from '@web3-onboard/common';
 import { BigNumber, utils } from 'ethers';
 import EventEmitter from 'eventemitter3';
 
-import { CustodyType } from '../../types';
 import { ExtendedConnector } from './extended-connector';
 
 function normalizeChainId(chainId: string | number) {

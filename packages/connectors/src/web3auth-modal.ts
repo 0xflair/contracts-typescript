@@ -1,3 +1,4 @@
+import { CustodyType } from '@flair-sdk/common';
 import {
   normalizeChainId,
   ProviderRpcError,
@@ -8,7 +9,6 @@ import LoginModal, { LOGIN_MODAL_EVENTS } from '@web3auth/ui';
 import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
 import { hexlify } from 'ethers/lib/utils';
 
-import { CustodyType } from '../types';
 import { ExtendedConnector } from './base/extended-connector';
 
 export class Web3AuthModalConnector

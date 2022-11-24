@@ -1,5 +1,5 @@
+import { FLAIR_CHAINS } from '@flair-sdk/common';
 import {
-  FLAIR_CHAINS,
   MagicLinkConnector,
   SafeConnector,
   SequenceConnector,
@@ -10,7 +10,7 @@ import {
   Web3OnboardLedgerConnector,
   Web3OnboardPortisConnector,
   Web3OnboardTrustConnector,
-} from '@flair-sdk/common';
+} from '@flair-sdk/connectors';
 import { alchemyProvider } from '@wagmi/core/providers/alchemy';
 import { infuraProvider } from '@wagmi/core/providers/infura';
 import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plugin';
