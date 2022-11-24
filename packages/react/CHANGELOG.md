@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.49.0 (2022-11-24)
+
+
+### Features
+
+* auto resolve transaction when relayed via balance ramp ([7ab1c48](https://github.com/flair-sdk/typescript/commit/7ab1c481bab772aa5c40ac4981158cb09cfe4e40))
+
+
+
+
+
 # 2.48.0 (2022-11-24)
 
 
