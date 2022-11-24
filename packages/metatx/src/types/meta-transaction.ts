@@ -37,7 +37,7 @@ export type MetaTransaction = {
   submittedAt: number; // 3) Submitted fully to the relayer
   processedAt?: number; // 4) Relayer accepted the tx and gave us a txHash
   waitAt?: number; // 5) Waiting for transaction to be mined
-  minedAt?: number; // 5) Transaction is fully mined (either failed or succeeded)
+  minedAt?: number; // 5) Transaction is fully mined
 
   state?: MetaTransactionState;
   lastError?: StandardError;

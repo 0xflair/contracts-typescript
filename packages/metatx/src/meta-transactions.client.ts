@@ -74,6 +74,23 @@ export class MetaTransactionsClient {
     return response.data;
   }
 
+  async fetchById(id: MetaTransaction['id']): Promise<MetaTransaction> {
+    const response = await axios.get<MetaTransaction>(
+      `${
+        FLAIR_META_TRANSACTIONS_BACKEND[this.config.env || Environment.PROD]
+      }/v1/meta-transactions/${id}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'X-Flair-Client-Id': this.config.flairClientId,
+        },
+      },
+    );
+
+    return response.data;
+  }
+
   async signMetaTransaction(
     chainId: number,
     signer: Signer,
