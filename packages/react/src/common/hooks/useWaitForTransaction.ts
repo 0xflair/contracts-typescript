@@ -1,6 +1,6 @@
 import '@ethersproject/abstract-provider';
 
-import { SafeConnector } from '@flair-sdk/common';
+import { SafeConnector } from '@flair-sdk/connectors';
 import { useCallback, useEffect, useState } from 'react';
 import { useInterval } from 'react-use';
 import {

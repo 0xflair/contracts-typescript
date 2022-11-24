@@ -1,4 +1,5 @@
-import { classNames, CustodyType, ExtendedConnector } from '@flair-sdk/common';
+import { classNames, CustodyType } from '@flair-sdk/common';
+import { ExtendedConnector } from '@flair-sdk/connectors';
 import {
   GenericWalletIcon,
   MagicLinkIcon,

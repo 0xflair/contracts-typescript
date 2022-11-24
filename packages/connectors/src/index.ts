@@ -1,4 +1,5 @@
 export * from './base';
+export * from './utils';
 export * from './binance';
 export * from './brave';
 export * from './gamestop';
