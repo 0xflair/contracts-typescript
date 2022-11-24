@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.46.6 (2022-11-24)
+
+
+### Bug Fixes
+
+* hide status bar when not connected ([736e394](https://github.com/flair-sdk/typescript/commit/736e394f19e69b0bd7d195e69bf1d864016c8511))
+
+
+
+
+
 ## 2.46.5 (2022-11-22)
 
 
