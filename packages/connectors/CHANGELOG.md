@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.50.0 (2022-11-24)
+
+
+### Features
+
+* allow configuring auto-conenct behavior of the wallet provider ([873c5e9](https://github.com/flair-sdk/typescript/commit/873c5e9fb57432bf402b0c355f7406c9eaf3e709))
+
+
+
+
+
 # 2.49.0 (2022-11-24)
 
 
