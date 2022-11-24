@@ -21,7 +21,7 @@ export const TieredSalesMintStatusBar = ({ className }: Props) => {
         <div className="flex items-center gap-2">
           <Spinner /> Checking your wallet eligibility...
         </div>
-      ) : (
+      ) : isConnected ? (
         <>
           {mintLoading && (
             <div className="flex items-center gap-2">
@@ -32,11 +32,11 @@ export const TieredSalesMintStatusBar = ({ className }: Props) => {
           {txReceipt || txResponse ? (
             <TransactionLink txReceipt={txReceipt} txResponse={txResponse} />
           ) : null}
-          {isConnected && !mintLoading && mintError && (
+          {!mintLoading && mintError && (
             <Errors title="Cannot mint" error={mintError} />
           )}
         </>
-      )}
+      ) : null}
     </div>
   );
 };

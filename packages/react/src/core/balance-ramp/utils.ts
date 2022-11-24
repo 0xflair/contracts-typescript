@@ -10,7 +10,7 @@ export function openModalWithData(
 ) {
   if (typeof window === 'undefined') return;
 
-  const h = Number(args.height || 550);
+  const h = Number(args.height || 600);
   const w = Number(args.width || 600);
   const y = window?.top
     ? window.top.outerHeight / 2 + window.top.screenY - h / 2
