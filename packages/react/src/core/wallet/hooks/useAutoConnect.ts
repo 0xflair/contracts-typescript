@@ -3,7 +3,7 @@ import { useAccount, useClient, useConnect } from 'wagmi';
 
 const EAGER_CONNECTOR_IDS = ['safe'];
 
-export const useAutoConnect = () => {
+export const useAutoConnect = (tryAutoConnect?: boolean) => {
   const { connect, connectors } = useConnect();
   const { isConnecting, isReconnecting } = useAccount();
   const [triedAutoConnect, setTriedAutoConnect] = useState(false);
@@ -31,11 +31,12 @@ export const useAutoConnect = () => {
       !eagerlyConnected &&
       !triedAutoConnect &&
       !isConnecting &&
-      !isReconnecting
+      !isReconnecting &&
+      tryAutoConnect
     ) {
       setTriedAutoConnect(true);
       wagmiClient.autoConnect();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connect, connectors]);
+  }, [tryAutoConnect, connect, connectors]);
 };

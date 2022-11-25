@@ -59,11 +59,17 @@ export function useSmartContract<TInitialConfig = any, TInfo = any>({
 
   useInterval(() => {
     const detectingFeatures =
-      !result.data?.features ||
+      !result?.data?.analysisState ||
       (result.data.analysisState !== 'succeeded' &&
         result.data.analysisState !== 'failed');
 
-    if (detectingFeatures && canRequest) {
+    if (
+      detectingFeatures &&
+      canRequest &&
+      !result.isLoading &&
+      !result.isFetching &&
+      result.fetchStatus !== 'fetching'
+    ) {
       queryClient.invalidateQueries({ queryKey });
     }
   }, 5000);

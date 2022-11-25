@@ -3,7 +3,7 @@ import injectedModule from '@web3-onboard/injected-wallets';
 import { InjectedWalletModule } from '@web3-onboard/injected-wallets/dist/types';
 import injectedModuleWallets from '@web3-onboard/injected-wallets/dist/wallets';
 
-import { getDevice } from '../../utils';
+import { getDevice } from '../utils';
 import {
   BaseOptions,
   Web3OnboardConnectorBase,

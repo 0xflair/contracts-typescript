@@ -1,7 +1,6 @@
 import { MagicConnector } from '@everipedia/wagmi-magic-connector';
+import { FLAIR_CHAINS } from '@flair-sdk/common';
 import { Chain, UserRejectedRequestError } from '@wagmi/core';
-
-import { FLAIR_CHAINS } from '../constants';
 
 export class MagicLinkConnector extends MagicConnector {
   currentChain!: Chain;

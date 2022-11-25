@@ -2,6 +2,7 @@ import '@tanstack/query-core';
 import '@wagmi/core';
 
 export * from '@flair-sdk/common';
+export * from '@flair-sdk/connectors';
 export * from '@flair-sdk/registry';
 export * from '@flair-sdk/ipfs';
 export * from '@flair-sdk/metatx';
