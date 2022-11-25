@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.50.4 (2022-11-25)
+
+
+### Bug Fixes
+
+* pass auto connect flag to wallet provider ([1d826c7](https://github.com/flair-sdk/typescript/commit/1d826c711166026a1e4ea6da1129f9c85fbe2f4a))
+
+
+
+
+
 ## 2.50.3 (2022-11-25)
 
 
