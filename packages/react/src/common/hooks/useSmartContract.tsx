@@ -59,7 +59,7 @@ export function useSmartContract<TInitialConfig = any, TInfo = any>({
 
   useInterval(() => {
     const detectingFeatures =
-      !result.data?.features ||
+      !result?.data?.analysisState ||
       (result.data.analysisState !== 'succeeded' &&
         result.data.analysisState !== 'failed');
 
