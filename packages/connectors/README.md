@@ -1,6 +1,6 @@
 # `@flair-sdk/connectors`
 
-Ready-made WAGMI connectors for various providers as open-source.
+Ready-made [wagmi.sh](https://wagmi.sh) connectors for various providers as open-source.
 
 ## Getting Started
 
