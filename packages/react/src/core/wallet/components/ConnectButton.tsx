@@ -101,7 +101,19 @@ export const ConnectButton = ({
           </h3>
           {dialogProps?.contentPrepend}
           <ConnectPalette {...connectPalletteProps} />
-          {dialogProps?.contentAppend}
+          {dialogProps?.contentAppend || (
+            <span className="mt-3 text-xs text-center">
+              By connecting your wallet, you agree with{' '}
+              <a
+                className="underline"
+                href="https://flair.dev/terms"
+                target="_blank"
+                rel="noreferrer"
+              >
+                terms of service
+              </a>
+            </span>
+          )}
         </div>
       </Modal>
     </>
