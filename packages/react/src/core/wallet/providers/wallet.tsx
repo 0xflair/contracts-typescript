@@ -296,7 +296,10 @@ export const WalletProvider = ({
     WalletContext.Provider,
     { value },
     <WagmiConfig client={wagmiClient} {...wagmiOverrides}>
-      <WalletAutomationWrapper preferredChainId={preferredChainId}>
+      <WalletAutomationWrapper
+        tryAutoConnect={tryAutoConnect}
+        preferredChainId={preferredChainId}
+      >
         {children}
       </WalletAutomationWrapper>
     </WagmiConfig>,
