@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.50.3 (2022-11-25)
+
+
+### Bug Fixes
+
+* invalidate only if it not already fetching ([97dc2ac](https://github.com/flair-sdk/typescript/commit/97dc2ace061e05d5f6b05f3af6760fc498de0852))
+
+
+
+
+
 ## 2.50.2 (2022-11-25)
 
 **Note:** Version bump only for package @flair-sdk/ipfs
