@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.50.1 (2022-11-25)
+
+
+### Bug Fixes
+
+* refresh contract metadata if during analysis ([ed698ed](https://github.com/flair-sdk/typescript/commit/ed698ed1228353ef85909170e0dcce043159a9a8))
+
+
+
+
+
 # 2.50.0 (2022-11-24)
 
 
