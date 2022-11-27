@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.50.6 (2022-11-27)
+
+
+### Bug Fixes
+
+* force upper bound on mint input ([d0333fd](https://github.com/flair-sdk/typescript/commit/d0333fdbce8ce176b6845ed5c3b83f600f33a7c7))
+
+
+
+
+
 ## 2.50.5 (2022-11-25)
 
 **Note:** Version bump only for package @flair-sdk/common
