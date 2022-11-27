@@ -1,4 +1,5 @@
 import { BigNumberish } from 'ethers';
+import { useEffect } from 'react';
 
 import { useTieredSalesContext } from '../providers';
 
@@ -21,6 +22,16 @@ export const TieredSalesMintInput = ({
     // Number(maxSupply?.toString() || Infinity),
     Number(eligibleAmount?.toString() || Infinity),
   );
+
+  useEffect(() => {
+    if (
+      mintCount &&
+      maxAllowedMintCount &&
+      Number(mintCount) > maxAllowedMintCount
+    ) {
+      setMintCount(maxAllowedMintCount);
+    }
+  }, [maxAllowedMintCount, mintCount, setMintCount]);
 
   return (
     <input

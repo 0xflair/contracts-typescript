@@ -193,8 +193,16 @@ export class BalanceRampClient {
           chainId,
           transactionRequest,
         );
-      } catch (e) {
-        console.warn(`Could not estimate gas via balance ramp, message: `, e);
+      } catch (e: any) {
+        console.warn(`Could not simulate gas limit: `, e);
+
+        if (e?.response?.data?.code === 'ErrTransactionSimulationFailed') {
+          throw new Error(
+            `Transaction will fail: ${
+              e?.response?.data?.message || e?.response?.data?.code
+            }`,
+          );
+        }
       }
     }
 

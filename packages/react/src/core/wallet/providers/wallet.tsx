@@ -13,6 +13,7 @@ import {
 } from '@flair-sdk/connectors';
 import { alchemyProvider } from '@wagmi/core/providers/alchemy';
 import { infuraProvider } from '@wagmi/core/providers/infura';
+import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc';
 import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plugin';
 import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
 import { hexlify } from 'ethers/lib/utils';
@@ -29,7 +30,6 @@ import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
-import { publicProvider } from 'wagmi/providers/public';
 
 import { isDarkMode } from '../../../common/utils/dark-mode';
 import stylesheet from '../../../index.css';
@@ -52,7 +52,11 @@ const FLAIR_MAGIC_API_KEY = 'pk_live_8B82089A89462668';
 const FLAIR_WEB3AUTH_CLIENT_ID =
   'BELgvAxTUr_qKkDF7aS0Q0SxFXHxmAbzIrSRKKogR0e3__F_0GpQNzukF1uX9lWmwi0y1l2b0XBnxWLeLlPg-g4';
 
-const { chains, provider, webSocketProvider } = configureChains(FLAIR_CHAINS, [
+const {
+  chains,
+  provider: wagmiProvider,
+  webSocketProvider,
+} = configureChains(FLAIR_CHAINS, [
   alchemyProvider({
     priority: 10,
     apiKey: FLAIR_ALCHEMY_API_KEY,
@@ -61,8 +65,14 @@ const { chains, provider, webSocketProvider } = configureChains(FLAIR_CHAINS, [
     priority: 50,
     apiKey: FLAIR_INFURA_PROJECT_ID,
   }),
-  publicProvider({
-    priority: 100,
+  jsonRpcProvider({
+    rpc: (chain) => {
+      if (chain.rpcUrls.alchemy || chain.rpcUrls.infura) {
+        return null;
+      }
+
+      return { http: chain.rpcUrls.default };
+    },
   }),
 ]);
 
@@ -148,15 +158,15 @@ export const WalletProvider = ({
         chains,
         options: {
           shimDisconnect: true,
-          UNSTABLE_shimOnConnectSelectAccount: !tryAutoConnect,
-          shimChainChangedDisconnect: !tryAutoConnect,
+          UNSTABLE_shimOnConnectSelectAccount: true,
+          shimChainChangedDisconnect: true,
         },
       }),
       new InjectedConnector({
         chains,
         options: {
           shimDisconnect: true,
-          shimChainChangedDisconnect: !tryAutoConnect,
+          shimChainChangedDisconnect: true,
         },
       }),
       new WalletConnectConnector({
@@ -257,9 +267,9 @@ export const WalletProvider = ({
   const wagmiClient = useMemo(() => {
     return wrapWagmiClient(
       createClient({
-        autoConnect: false,
+        autoConnect: true,
         connectors,
-        provider,
+        provider: wagmiProvider,
         webSocketProvider,
       }),
     );
