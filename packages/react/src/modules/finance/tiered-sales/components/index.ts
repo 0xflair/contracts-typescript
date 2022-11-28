@@ -14,3 +14,5 @@ export * from './TieredSalesStatus';
 export * from './TieredSalesSuccessDialog';
 export * from './TieredSalesTotalMinted';
 export * from './TieredSalesWalletMints';
+export * from './TieredSalesIfSoldOut';
+export * from './TieredSalesIfNotSoldOut';
