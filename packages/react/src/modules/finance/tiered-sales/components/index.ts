@@ -1,5 +1,7 @@
 export * from './TieredSalesAllowlistStatus';
 export * from './TieredSalesEligibleAmount';
+export * from './TieredSalesIfNotSoldOut';
+export * from './TieredSalesIfSoldOut';
 export * from './TieredSalesIfWalletCanMint';
 export * from './TieredSalesMaxAllocation';
 export * from './TieredSalesMaxSupply';
