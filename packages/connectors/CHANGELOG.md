@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.50.8 (2022-11-29)
+
+
+### Bug Fixes
+
+* update to latest ethers for infura support for arbitrum ([#6](https://github.com/flair-sdk/typescript/issues/6)) ([d32ef82](https://github.com/flair-sdk/typescript/commit/d32ef82fb664f53154e9644318b9366ebd12b42c))
+
+
+
+
+
 ## 2.50.7 (2022-11-28)
 
 **Note:** Version bump only for package @flair-sdk/connectors
