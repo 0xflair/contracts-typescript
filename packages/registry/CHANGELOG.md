@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.50.9 (2022-11-30)
+
+
+### Bug Fixes
+
+* add utrust type of balance ramp ([52a78fc](https://github.com/flair-sdk/typescript/commit/52a78fcf0c0e7701a0307c36408a15e9cef04b23))
+
+
+
+
+
 ## 2.50.8 (2022-11-29)
 
 
