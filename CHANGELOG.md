@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.50.10 (2022-11-30)
+
+
+### Bug Fixes
+
+* add more types to balance ramp ([f3822d5](https://github.com/flair-sdk/typescript/commit/f3822d524f7cd7a0d7c0df0e26983c5b22c31764))
+
+
+
+
+
 ## 2.50.9 (2022-11-30)
 
 
