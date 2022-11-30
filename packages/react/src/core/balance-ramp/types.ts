@@ -65,8 +65,11 @@ export type BalanceRamp = {
   estimatedMaxPriorityFeePerGas: string;
   estimatedGasLimit: string;
   title: string;
+  method: 'stripe' | 'utrust' | 'bitpay';
   stripeSessionId: string;
   stripeSessionUrl: string;
+  utrustOrderId: string;
+  utrustRedirectUrl: string;
   paymentState: 'created' | 'paid' | 'canceled' | 'failed';
   settlementState:
     | 'idle'
