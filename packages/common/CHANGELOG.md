@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.51.0 (2022-12-01)
+
+
+### Features
+
+* allow enabling balance ramp on all chains ([fbc03a9](https://github.com/flair-sdk/typescript/commit/fbc03a922c517637dfd1125d845dcb87e9a23f32))
+
+
+
+
+
 ## 2.50.10 (2022-11-30)
 
 
