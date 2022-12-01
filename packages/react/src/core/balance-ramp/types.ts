@@ -40,7 +40,7 @@ export type BalanceRampConfig = {
   ignoreCurrentBalance: boolean;
   inputCurrency?: string;
   resolvers: BalanceResolver[];
-  enabledChainIds?: number[];
+  enabledChainIds?: number[] | 'ALL';
   maxGasLimit?: BigNumberish;
 };
 

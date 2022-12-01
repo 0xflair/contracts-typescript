@@ -33,8 +33,9 @@ export class BalanceRampClient {
     );
 
     if (
-      this.config.enabledChainIds === undefined ||
-      !this.config.enabledChainIds.includes(chainId)
+      this.config.enabledChainIds !== 'ALL' &&
+      (this.config.enabledChainIds === undefined ||
+        !this.config.enabledChainIds.includes(chainId))
     ) {
       return originalSigner.sendTransaction(transactionRequest);
     }
