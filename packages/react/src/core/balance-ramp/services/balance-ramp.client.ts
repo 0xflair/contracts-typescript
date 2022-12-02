@@ -40,7 +40,7 @@ export class BalanceRampClient {
       return originalSigner.sendTransaction(transactionRequest);
     }
 
-    const estimatedGasLimit = await this.handleEstimateGas(
+    const estimatedGasLimit = await this.handleEstimateGasLimit(
       originalSigner,
       transactionRequest,
     );
@@ -156,7 +156,7 @@ export class BalanceRampClient {
     return originalSigner.sendTransaction(txWithGasData);
   }
 
-  async handleEstimateGas(
+  async handleEstimateGasLimit(
     originalSigner: Signer,
     transactionRequest: Deferrable<TransactionRequest>,
   ) {
@@ -238,10 +238,8 @@ export class BalanceRampClient {
 
     const isLegacy = feeData?.gasPrice && !feeData?.maxFeePerGas;
     const estimatedMaxFeePerGas = feeData?.maxFeePerGas || undefined;
-    const estimatedGasPrice = feeData?.gasPrice
-      ? feeData.gasPrice
-      : isLegacy
-      ? await originalSigner.getGasPrice()
+    const estimatedGasPrice = isLegacy
+      ? feeData?.gasPrice || (await originalSigner.getGasPrice())
       : undefined;
     const estimatedMaxPriorityFeePerGas =
       feeData?.maxPriorityFeePerGas || undefined;
