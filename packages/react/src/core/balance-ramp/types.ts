@@ -15,6 +15,7 @@ export type RequiredBalance = {
   outputDecimals?: number;
   outputAmount: string;
   estimatedGasLimit?: string;
+  estimatedGasPrice?: string;
   estimatedMaxFeePerGas?: string;
   estimatedMaxPriorityFeePerGas?: string;
   inputCurrency?: string;
@@ -25,6 +26,7 @@ export type RequiredBalance = {
 export type BalanceResolverContext = {
   config: BalanceRampConfig;
   estimatedGasLimit?: BigNumberish;
+  estimatedGasPrice?: BigNumberish;
   estimatedMaxFeePerGas?: BigNumberish;
   estimatedMaxPriorityFeePerGas?: BigNumberish;
   transactionRequest?: Deferrable<TransactionRequest>;
@@ -53,7 +55,8 @@ export type BalanceRamp = {
   outputAmount: string;
   inputCurrency: string;
   inputAmount: string;
-  inputAmountWithFee: string;
+  platformFee: string;
+  gasCost: string;
   requiresKyc: boolean;
   txFrom: string;
   txTo: string;
@@ -61,6 +64,7 @@ export type BalanceRamp = {
   txValue: string;
   txGasLimit: string;
   txGasPrice: string;
+  estimatedGasPrice: string;
   estimatedMaxFeePerGas: string;
   estimatedMaxPriorityFeePerGas: string;
   estimatedGasLimit: string;
