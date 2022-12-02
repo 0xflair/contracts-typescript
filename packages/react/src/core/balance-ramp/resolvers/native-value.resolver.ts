@@ -9,14 +9,15 @@ export const balanceRampNativeValueResolve: BalanceResolver = async (
   if (context.transactionRequest) {
     const {
       config,
+      estimatedGasPrice,
       estimatedMaxFeePerGas,
       estimatedMaxPriorityFeePerGas,
       estimatedGasLimit,
       transactionRequest,
     } = context;
     const { value } = transactionRequest;
-    const result = (await value) || BigNumber.from(0);
-    const totalAmount = BigNumber.from(result.toString());
+    const txValueRaw = (await value) || BigNumber.from(0);
+    const txValue = BigNumber.from(txValueRaw.toString());
 
     return {
       idempotencyKey: keccak256(
@@ -28,7 +29,8 @@ export const balanceRampNativeValueResolve: BalanceResolver = async (
       ),
       outputTokenAddress: '0x0000000000000000000000000000000000000000',
       outputDecimals: 18,
-      outputAmount: totalAmount.toString(),
+      outputAmount: txValue.toString(),
+      estimatedGasPrice: estimatedGasPrice?.toString(),
       estimatedMaxFeePerGas: estimatedMaxFeePerGas?.toString(),
       estimatedMaxPriorityFeePerGas: estimatedMaxPriorityFeePerGas?.toString(),
       estimatedGasLimit: estimatedGasLimit?.toString(),

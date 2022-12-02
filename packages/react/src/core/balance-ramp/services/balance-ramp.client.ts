@@ -45,16 +45,20 @@ export class BalanceRampClient {
       transactionRequest,
     );
 
-    const { isLegacy, estimatedMaxFeePerGas, estimatedMaxPriorityFeePerGas } =
-      await this.estimateGasFees(originalSigner);
+    const {
+      estimatedGasPrice,
+      estimatedMaxFeePerGas,
+      estimatedMaxPriorityFeePerGas,
+    } = await this.estimateGasFees(originalSigner);
 
-    if (isLegacy) {
+    if (estimatedGasPrice && !estimatedMaxFeePerGas) {
       transactionRequest.type = 0;
     }
 
     const txWithGasData = await this.applyGasParameters(
       transactionRequest,
       estimatedGasLimit,
+      estimatedGasPrice,
       estimatedMaxFeePerGas,
       estimatedMaxPriorityFeePerGas,
     );
@@ -62,6 +66,7 @@ export class BalanceRampClient {
     const requiredBalance = await this.resolveRequiredBalance({
       config: this.config,
       estimatedGasLimit,
+      estimatedGasPrice,
       estimatedMaxFeePerGas,
       estimatedMaxPriorityFeePerGas,
       transactionRequest,
@@ -213,23 +218,18 @@ export class BalanceRampClient {
   private async applyGasParameters(
     transactionRequest: ethers.utils.Deferrable<TransactionRequest>,
     estimatedGasLimit?: BigNumberish,
+    estimatedGasPrice?: BigNumberish,
     estimatedMaxFeePerGas?: BigNumberish,
     estimatedMaxPriorityFeePerGas?: BigNumberish,
   ): Promise<Deferrable<TransactionRequest>> {
-    const isLegacy =
-      (transactionRequest.gasPrice && !transactionRequest.maxFeePerGas) ||
-      (await transactionRequest.type)?.toString() === '0';
-
     return {
       ...transactionRequest,
       ...(estimatedGasLimit ? { gasLimit: estimatedGasLimit } : {}),
-      // Decide if EIP-1559 or legacy gas price
-      ...(isLegacy
-        ? { gasPrice: estimatedMaxFeePerGas }
-        : {
-            maxFeePerGas: estimatedMaxFeePerGas,
-            maxPriorityFeePerGas: estimatedMaxPriorityFeePerGas,
-          }),
+      ...(estimatedGasPrice ? { gasPrice: estimatedGasPrice } : {}),
+      ...(estimatedMaxFeePerGas ? { maxFeePerGas: estimatedMaxFeePerGas } : {}),
+      ...(estimatedMaxPriorityFeePerGas
+        ? { maxPriorityFeePerGas: estimatedMaxPriorityFeePerGas }
+        : {}),
     };
   }
 
@@ -237,13 +237,20 @@ export class BalanceRampClient {
     const feeData = await originalSigner.getFeeData();
 
     const isLegacy = feeData?.gasPrice && !feeData?.maxFeePerGas;
-    const estimatedMaxFeePerGas = feeData?.maxFeePerGas
-      ? feeData.maxFeePerGas
-      : feeData?.gasPrice
+    const estimatedMaxFeePerGas = feeData?.maxFeePerGas || undefined;
+    const estimatedGasPrice = feeData?.gasPrice
       ? feeData.gasPrice
-      : await originalSigner.getGasPrice();
-    const estimatedMaxPriorityFeePerGas = feeData?.maxPriorityFeePerGas || '0';
-    return { isLegacy, estimatedMaxFeePerGas, estimatedMaxPriorityFeePerGas };
+      : isLegacy
+      ? await originalSigner.getGasPrice()
+      : undefined;
+    const estimatedMaxPriorityFeePerGas =
+      feeData?.maxPriorityFeePerGas || undefined;
+
+    return {
+      estimatedGasPrice,
+      estimatedMaxFeePerGas,
+      estimatedMaxPriorityFeePerGas,
+    };
   }
 
   private async resolveChainId(
@@ -337,6 +344,7 @@ export class BalanceRampClient {
       txGasLimit: transactionRequest.gasLimit?.toString() || '',
       txGasPrice: transactionRequest.gasPrice?.toString() || '',
       idempotencyKey: requiredBalance.idempotencyKey || '',
+      estimatedGasPrice: requiredBalance.estimatedGasPrice?.toString() || '',
       estimatedMaxFeePerGas:
         requiredBalance.estimatedMaxFeePerGas?.toString() || '',
       estimatedMaxPriorityFeePerGas:
@@ -431,10 +439,12 @@ export class BalanceRampClient {
       let balance = await signer.getBalance();
 
       const totalGasFees = BigNumber.from(
-        requiredBalance.estimatedMaxFeePerGas || 0,
+        requiredBalance.estimatedGasPrice || 0,
       )
+        .add(requiredBalance.estimatedMaxFeePerGas || 0)
         .add(requiredBalance.estimatedMaxPriorityFeePerGas || 0)
         .mul(requiredBalance.estimatedGasLimit || 100_000);
+
       const totalRequiredBalance = BigNumber.from(
         requiredBalance.outputAmount,
       ).add(totalGasFees);
@@ -462,13 +472,14 @@ export class BalanceRampClient {
     // Consider gas fees if output token is native currency
     if (
       requiredBalance.outputTokenAddress === constants.AddressZero &&
-      requiredBalance.estimatedGasLimit &&
-      requiredBalance.estimatedMaxFeePerGas
+      requiredBalance.estimatedGasLimit
     ) {
       amount = amount.add(
         BigNumber.from(requiredBalance.estimatedGasLimit).mul(
-          BigNumber.from(requiredBalance.estimatedMaxFeePerGas).add(
-            requiredBalance.estimatedMaxPriorityFeePerGas || 0,
+          BigNumber.from(requiredBalance.estimatedMaxFeePerGas || 0).add(
+            BigNumber.from(
+              requiredBalance.estimatedMaxPriorityFeePerGas || 0,
+            ).add(BigNumber.from(requiredBalance.estimatedGasPrice || 0)),
           ),
         ),
       );
