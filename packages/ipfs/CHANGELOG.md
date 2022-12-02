@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.52.0 (2022-12-02)
+
+
+### Features
+
+* pass legacy gas price in estimation ([#8](https://github.com/flair-sdk/typescript/issues/8)) ([9dea0dc](https://github.com/flair-sdk/typescript/commit/9dea0dc2897569ca3f6551593c6ec2eef649294b))
+
+
+
+
+
 # 2.51.0 (2022-12-01)
 
 
