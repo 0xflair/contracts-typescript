@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.52.1 (2022-12-02)
+
+
+### Bug Fixes
+
+* do not include legacy gas price if eip1559 tx ([a1e6b94](https://github.com/flair-sdk/typescript/commit/a1e6b948bb165dfe164a1140245e0f472f5c672e))
+
+
+
+
+
 # 2.52.0 (2022-12-02)
 
 
