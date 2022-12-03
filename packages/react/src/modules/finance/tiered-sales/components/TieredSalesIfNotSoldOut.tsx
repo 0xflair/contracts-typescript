@@ -35,11 +35,13 @@ export const TieredSalesIfNotSoldOut = ({
   });
 
   const isSoldOut =
-    totalMinted &&
+    totalMinted?.data &&
     !totalMinted.isLoading &&
-    maxAllocation &&
+    maxAllocation?.data &&
     !maxAllocation.isLoading
-      ? BigNumber.from(totalMinted.data).gte(BigNumber.from(maxAllocation.data))
+      ? BigNumber.from(totalMinted?.data).gte(
+          BigNumber.from(maxAllocation?.data),
+        )
       : undefined;
 
   const Component =

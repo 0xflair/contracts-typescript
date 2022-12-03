@@ -1,6 +1,6 @@
 import { BigNumberish, BytesLike } from 'ethers';
 
-export type TiersDictionary = Record<string, Tier>;
+export type TiersDictionary<T = Tier> = Record<string, T>;
 
 export type Tier = {
   // On-chain
@@ -18,6 +18,7 @@ export type Tier = {
   isSavedOnChain?: boolean;
   isActive?: boolean;
   hasAllowlist?: boolean;
+  metadataUri?: string;
 
   // Wallet-specific
   minterAddress?: BytesLike;
