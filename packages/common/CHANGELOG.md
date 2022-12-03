@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.53.0 (2022-12-03)
+
+
+### Features
+
+* show title and image for erc721 tier selector if exists ([#9](https://github.com/flair-sdk/typescript/issues/9)) ([1ead52e](https://github.com/flair-sdk/typescript/commit/1ead52e5bc374bfe982fc6a4e150202629c434f2))
+
+
+
+
+
 ## 2.52.1 (2022-12-02)
 
 
