@@ -26,6 +26,7 @@ export const ERC1155TieredSalesSelector = ({ labelElement }: Props) => {
     chainId,
     contractAddress,
     tierIds: Object.keys(tiers || {}),
+    enabled: Boolean(chainId && contractAddress && tiers),
   });
 
   const renderElement = labelElement
