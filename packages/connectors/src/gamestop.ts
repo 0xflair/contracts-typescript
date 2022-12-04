@@ -4,7 +4,7 @@ import { InjectedWalletModule } from '@web3-onboard/injected-wallets/dist/types'
 import { Web3OnboardInjectedConnectorBase } from './base/onboard-injected-base';
 
 class Web3OnboardGamestopConnector extends Web3OnboardInjectedConnectorBase {
-  readonly id = 'web3onboard-gamestop';
+  readonly id = 'web3OnboardGameStop';
   custodyType = CustodyType.SELF_CUSTODY;
 
   async selectModule(wallets: InjectedWalletModule[]) {
