@@ -10,7 +10,7 @@ import {
 type Options = BaseOptions & {};
 
 class Web3OnboardLedgerConnector extends Web3OnboardConnectorBase<Options> {
-  readonly id = 'web3onboard-ledger';
+  readonly id = 'web3OnboardLedger';
   name = 'Ledger (USB)';
   icon =
     'https://ipfs.io/ipfs/bafkreiaca3pyolq355exgp7c5etlc7yh6voceglciiswaju46dsbswkctu';

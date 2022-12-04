@@ -10,7 +10,7 @@ import {
 type Options = BaseOptions & {};
 
 class Web3OnboardPortisConnector extends Web3OnboardConnectorBase<Options> {
-  readonly id = 'web3onboard-portis';
+  readonly id = 'web3OnboardPortis';
   name = 'Portis';
   custodyType = CustodyType.THIRD_PARTY;
 

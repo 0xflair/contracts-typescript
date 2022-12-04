@@ -1,8 +1,13 @@
 import { FLAIR_CHAINS } from '@flair-sdk/common';
 import {
+  DiscordWeb3AuthConnector,
+  GithubWeb3AuthConnector,
+  GoogleWeb3AuthConnector,
   MagicLinkConnector,
   SafeConnector,
   SequenceConnector,
+  TwitchWeb3AuthConnector,
+  TwitterWeb3AuthConnector,
   Web3AuthModalConnector,
   Web3OnboardBinanceConnector,
   Web3OnboardBraveConnector,
@@ -16,6 +21,7 @@ import { infuraProvider } from '@wagmi/core/providers/infura';
 import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc';
 import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plugin';
 import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
+import { Options as Web3AuthOptions } from '@web3auth/web3auth-wagmi-connector/dist/types/lib/interfaces';
 import { hexlify } from 'ethers/lib/utils';
 import React, {
   PropsWithChildren,
@@ -153,6 +159,20 @@ export const WalletProvider = ({
       appLogo: 'https://app.flair.dev/logo-light-filled.png',
     };
 
+    const web3AuthOptions: Web3AuthOptions = {
+      network: 'cyan',
+      clientId: FLAIR_WEB3AUTH_CLIENT_ID,
+      uiConfig: {
+        theme: isDarkMode() ? 'dark' : undefined,
+      },
+      socialLoginConfig: {
+        mfaLevel: 'optional',
+      },
+      uxMode: 'popup',
+      displayErrorsOnModal: true,
+      chainId: hexlify(preferredChainId).toString(),
+    };
+
     const connectors: any[] = [
       new MetaMaskConnector({
         chains,
@@ -214,6 +234,26 @@ export const WalletProvider = ({
           displayErrorsOnModal: true,
           chainId: hexlify(preferredChainId).toString(),
         },
+      }),
+      new GoogleWeb3AuthConnector({
+        chains,
+        options: web3AuthOptions,
+      }),
+      new TwitterWeb3AuthConnector({
+        chains,
+        options: web3AuthOptions,
+      }),
+      new TwitchWeb3AuthConnector({
+        chains,
+        options: web3AuthOptions,
+      }),
+      new GithubWeb3AuthConnector({
+        chains,
+        options: web3AuthOptions,
+      }),
+      new DiscordWeb3AuthConnector({
+        chains,
+        options: web3AuthOptions,
       }),
       new SequenceConnector({
         chains: chains as any,

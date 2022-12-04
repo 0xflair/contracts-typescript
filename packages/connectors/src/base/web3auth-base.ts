@@ -10,36 +10,18 @@ import LoginModal, { LOGIN_MODAL_EVENTS } from '@web3auth/ui';
 import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
 import { hexlify } from 'ethers/lib/utils';
 
-import { ExtendedConnector } from './base/extended-connector';
+import { ExtendedConnector } from './extended-connector';
 
-export class Web3AuthModalConnector
+export abstract class Web3AuthBaseConnector
   extends Web3AuthConnector
   implements ExtendedConnector
 {
-  // @ts-ignore
-  name = 'Social Logins';
-  icon = 'https://web3auth.io/images/w3a-L-Favicon-1.svg';
-  available: boolean = true;
-  custodyType: CustodyType = CustodyType.MPC;
+  abstract loginProvider: string;
+  custodyType = CustodyType.SELF_CUSTODY;
+  available = true;
 
   async connect() {
     return new Promise<any>(async (resolve, reject) => {
-      setTimeout(() => {
-        // @ts-ignore
-        (this.loginModal as LoginModal).on(
-          LOGIN_MODAL_EVENTS.MODAL_VISIBILITY,
-          (visibility) => {
-            if (!visibility) {
-              this.isAuthorized().then((authorized) => {
-                if (!authorized) {
-                  reject(new Error('User closed modal'));
-                }
-              });
-            }
-          },
-        );
-      }, 100);
-
       try {
         await this.disconnect();
       } catch (e) {}
@@ -48,15 +30,17 @@ export class Web3AuthModalConnector
         await this.web3AuthInstance?.init();
       }
 
-      return super
-        .connect()
-        .then(async (result) => {
+      return this.web3AuthInstance
+        ?.connectTo('openlogin', {
+          loginProvider: this.loginProvider,
+        })
+        .then(async (provider) => {
           const account = await this.getAccount();
           const id = await this.getChainId();
 
           resolve({
             account,
-            provider: result.provider,
+            provider,
             chain: { id, unsupported: await this.isChainUnsupported(id) },
           });
         })
@@ -72,7 +56,7 @@ export class Web3AuthModalConnector
     try {
       await this.disconnect();
 
-      const tmp = new Web3AuthModalConnector({
+      const tmp = new Web3AuthConnector({
         chains: this.chains,
         options: {
           ...this.options,
