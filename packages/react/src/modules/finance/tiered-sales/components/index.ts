@@ -1,4 +1,5 @@
 export * from './TieredSalesAllowlistStatus';
+export * from './TieredSalesApproveButton';
 export * from './TieredSalesEligibleAmount';
 export * from './TieredSalesIfNotSoldOut';
 export * from './TieredSalesIfSoldOut';
