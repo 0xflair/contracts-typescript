@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.55.2 (2022-12-08)
+
+
+### Bug Fixes
+
+* remove customData when sending the tx via ethers ([3031dc5](https://github.com/flair-sdk/typescript/commit/3031dc5da5d408ef1e2862cecf0bb7586f9b5bc3))
+
+
+
+
+
 ## 2.55.1 (2022-12-08)
 
 
