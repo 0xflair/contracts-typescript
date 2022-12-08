@@ -22,6 +22,14 @@ export const POPULAR_ERC20_TOKENS = {
       contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
     },
     {
+      symbol: 'BUSD',
+      contractAddress: '0x4fabb145d64652a948d72533023f6e7a623c7c53',
+    },
+    {
+      symbol: 'USDP',
+      contractAddress: '0x8e870d67f660d95d5be530380d0ec0bd388289e1',
+    },
+    {
       symbol: 'WETH',
       contractAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
       coinMarketCapSymbol: 'ETH',
@@ -41,6 +49,29 @@ export const POPULAR_ERC20_TOKENS = {
       coingeckoId: 'ethereum',
     },
   ],
+  // Binance Mainnet
+  56: [
+    {
+      symbol: 'USDT',
+      contractAddress: '0x55d398326f99059ff775485246999027b3197955',
+    },
+    {
+      symbol: 'USDC',
+      contractAddress: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
+    },
+    {
+      symbol: 'BUSD',
+      contractAddress: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+    },
+    {
+      symbol: 'WETH',
+      contractAddress: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
+    },
+    {
+      symbol: 'WBNB',
+      contractAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    },
+  ],
   // Polygon
   137: [
     {
@@ -54,6 +85,10 @@ export const POPULAR_ERC20_TOKENS = {
     {
       symbol: 'USDT',
       contractAddress: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f',
+    },
+    {
+      symbol: 'BUSD',
+      contractAddress: '0xdab529f40e671a1d4bf91361c21bf9f0c9712ab7',
     },
     {
       symbol: 'WETH',
