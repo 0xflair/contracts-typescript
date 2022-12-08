@@ -1,10 +1,9 @@
 import { BigNumber, ethers } from 'ethers';
 import { Fragment, ReactNode } from 'react';
 
-import { useContractSymbol } from '~/REACT_SDK/modules/token/metadata/hooks';
-
 import { BareComponentProps, useChainInfo } from '../../../../common';
 import { CryptoUnits, CryptoValue } from '../../../../core/crypto-currency';
+import { useContractSymbol } from '../../../token';
 import { useTieredSalesContext } from '../providers';
 
 type Props = BareComponentProps & {

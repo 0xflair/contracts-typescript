@@ -1,3 +1,12 @@
+export const DOLLAR_STABLECOIN_SYMBOLS = [
+  'USD',
+  'DAI',
+  'USDC',
+  'USDT',
+  'BUSD',
+  'USDP',
+];
+
 export const POPULAR_ERC20_TOKENS = {
   1: [
     {

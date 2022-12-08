@@ -5,22 +5,26 @@ import Modal from 'react-modal';
 import { BareComponentProps } from '../../../../common';
 
 export type ButtonWithDialogProps<T extends HTMLElement = HTMLButtonElement> =
-  PropsWithChildren<
-    BareComponentProps<T> & {
-      text?: React.ReactNode;
-      dialogTitle?: string;
-      dialogTitleClassName?: string;
-      dialogOverlayClassName?: string;
-      dialogContentClassName?: string;
-      dialogCloseWrapperClassName?: string;
-      dialogCloseButtonClassName?: string;
-      portalClassName?: string;
-      buttons?: ((
-        dialogOpen: boolean,
-        setDialogOpen: (open: boolean) => void,
-      ) => React.ReactNode)[];
-    }
-  >;
+  BareComponentProps<T> & {
+    text?: React.ReactNode;
+    dialogTitle?: string;
+    dialogTitleClassName?: string;
+    dialogOverlayClassName?: string;
+    dialogContentClassName?: string;
+    dialogCloseWrapperClassName?: string;
+    dialogCloseButtonClassName?: string;
+    portalClassName?: string;
+    buttons?: ((
+      dialogOpen: boolean,
+      setDialogOpen: (open: boolean) => void,
+    ) => React.ReactNode)[];
+    children?:
+      | React.ReactNode
+      | ((props: {
+          dialogOpen: boolean;
+          setDialogOpen: (open: boolean) => void;
+        }) => React.ReactNode);
+  };
 
 export function ButtonWithDialog<T extends HTMLElement = HTMLElement>({
   as,

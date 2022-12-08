@@ -5,8 +5,6 @@ import { Chain } from '@wagmi/core';
 import { BigNumber, BigNumberish, ethers } from 'ethers';
 import { useEffect } from 'react';
 
-import { useContractSymbol } from '~/REACT_SDK/modules/token';
-
 import { useChainInfo } from '../../../../common';
 import {
   CryptoSymbol,
@@ -14,6 +12,7 @@ import {
   CryptoValue,
   IfWalletConnected,
 } from '../../../../core';
+import { useContractSymbol } from '../../../token';
 import { useTieredSalesContext } from '../providers';
 import { Tier } from '../types';
 

@@ -1,4 +1,4 @@
-import { classNames } from '@flair-sdk/common';
+import { classNames, POPULAR_ERC20_TOKENS } from '@flair-sdk/common';
 import { InformationCircleIcon } from '@heroicons/react/solid';
 import { BigNumberish, ethers, utils } from 'ethers';
 import * as React from 'react';
@@ -7,6 +7,7 @@ import { useNetwork } from 'wagmi';
 
 import { useContractName, useContractSymbol } from '../../../../modules';
 import {
+  AddressScannerLink,
   Button,
   ButtonWithDialog,
   PRIMARY_BUTTON,
@@ -113,16 +114,17 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
             <div className="absolute top-2 right-0 pr-3 flex items-center pointer-events-none">
               <span className="text-gray-500 sm:text-sm" id="price-currency">
                 (
-                {!symbol || symbol === ethers.constants.AddressZero
+                {!symbol || symbol?.toString() === ethers.constants.AddressZero
                   ? chain?.nativeCurrency?.name
-                  : erc20Symbol}
+                  : erc20Symbol?.toString()}
                 ){' '}
                 <CryptoPrice
                   value={etherValue}
                   symbol={
-                    (!symbol || symbol === ethers.constants.AddressZero
+                    (!symbol ||
+                    symbol?.toString() === ethers.constants.AddressZero
                       ? chain?.nativeCurrency?.symbol
-                      : erc20Symbol) as CryptoSymbol
+                      : erc20Symbol?.toString()) as CryptoSymbol
                   }
                   unit={CryptoUnits.ETHER}
                   showCurrencySymbol={true}
@@ -137,7 +139,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
               dialogTitle="Change currency"
               className={classNames(SECONDARY_BUTTON)}
               buttons={[
-                (dialogOpen, setDialogOpen) => {
+                (dialogOpen: boolean, setDialogOpen: any) => {
                   return (
                     <Button
                       className={PRIMARY_BUTTON}
@@ -225,13 +227,13 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
                             <li className="text-sm text-gray-500">
                               Name:{' '}
                               <i className="italic text-gray-700">
-                                {erc20Name || '-'}
+                                {erc20Name?.toString() || '-'}
                               </i>
                             </li>
                             <li className="text-sm text-gray-500">
                               Symbol:{' '}
                               <i className="italic text-gray-700">
-                                {erc20Symbol || '-'}
+                                {erc20Symbol?.toString() || '-'}
                               </i>
                             </li>
                           </ul>
@@ -273,14 +275,14 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
                                   (token) => (
                                     <li key={token.contractAddress}>
                                       <div className="w-full flex flex-col gap-2">
-                                        <b>{token.name}: </b>
-                                        <AddressLink
+                                        <b>{token.symbol}: </b>
+                                        <AddressScannerLink
                                           chainId={chain.id}
                                           address={token.contractAddress}
                                         />
                                         <div>
                                           <Button
-                                            text={`Use ${token.name}`}
+                                            text={`Use ${token.symbol}`}
                                             className={classNames(
                                               'px-0.2 py-0.5',
                                               SECONDARY_BUTTON,

@@ -3,9 +3,8 @@ import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { BigNumber, BigNumberish, BytesLike, ethers, Signer } from 'ethers';
 import { useCallback, useMemo } from 'react';
 
-import { useERC20Allowance, useERC20Approve } from '~/REACT_SDK/modules/token';
-
 import { useContractWriteAndWait } from '../../../../common';
+import { useERC20Allowance, useERC20Approve } from '../../../token';
 import { useSaleTierConfig } from './useSaleTierConfig';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
 import { useTieredSalesEligibleAmount } from './useTieredSalesEligibleAmount';

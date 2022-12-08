@@ -7,10 +7,6 @@ import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 
-import { calculateUniqueTransactionIdentifier } from '~/REACT_SDK/core';
-import { useERC20Allowance } from '~/REACT_SDK/modules/token/erc20';
-import { useERC20Approve } from '~/REACT_SDK/modules/token/erc20/base/hooks/useERC20Approve';
-
 import { useTieredSalesMinter } from '../hooks';
 import { useSaleTiers } from '../hooks/useSaleTiers';
 import { Tier } from '../types';

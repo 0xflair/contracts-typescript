@@ -1,6 +1,4 @@
 import { classNames } from '@flair-sdk/common';
-import { BigNumberish } from 'ethers';
-import { useState } from 'react';
 import { useAccount } from 'wagmi';
 
 import { SECONDARY_BUTTON } from '../../../../core/ui/components/elements/Button';
