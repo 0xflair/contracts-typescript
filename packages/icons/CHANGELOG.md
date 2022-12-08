@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.55.1 (2022-12-08)
+
+
+### Bug Fixes
+
+* add missing export for approve button ([493cfac](https://github.com/flair-sdk/typescript/commit/493cfacf707a22e5e31b9ce38d0d237a0642617f))
+
+
+
+
+
 # 2.55.0 (2022-12-08)
 
 
