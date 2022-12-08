@@ -1,6 +1,9 @@
 import { Environment } from '@flair-sdk/common';
 
-import { balanceRampNativeValueResolve } from '../resolvers';
+import {
+  balanceRampCustomDataResolve,
+  balanceRampNativeValueResolve,
+} from '../resolvers';
 import { BalanceRampConfig } from '../types';
 import { BalanceRampClient } from './balance-ramp.client';
 
@@ -14,7 +17,10 @@ export const createBalanceRampClient = (
       {},
       {
         env: Environment.PROD,
-        resolvers: [balanceRampNativeValueResolve],
+        resolvers: [
+          balanceRampNativeValueResolve,
+          balanceRampCustomDataResolve,
+        ],
         requiresKyc: false,
         ignoreCurrentBalance: false,
         maxGasLimit: 1_000_000,

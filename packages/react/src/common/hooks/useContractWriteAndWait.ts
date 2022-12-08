@@ -1,7 +1,7 @@
 import { Provider } from '@ethersproject/providers';
 import { PrepareWriteContractConfig } from '@wagmi/core';
-import { ContractInterface, Signer } from 'ethers';
-import { useCallback } from 'react';
+import { ContractInterface, ethers, Signer } from 'ethers';
+import { useCallback, useMemo } from 'react';
 import {
   useAccount,
   useContractWrite,
@@ -50,6 +50,16 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   const { address, isConnected } = useAccount();
   const { chain } = useNetwork();
 
+  const shouldPrepare = Boolean(
+    prepare &&
+      isConnected &&
+      address &&
+      contractAddress &&
+      contractInterface &&
+      args !== undefined &&
+      functionName,
+  );
+
   const {
     config,
     data: prepareData,
@@ -57,15 +67,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     isError: prepareIsError,
     isLoading: prepareLoading,
   } = usePrepareContractWrite({
-    enabled: Boolean(
-      prepare &&
-        isConnected &&
-        address &&
-        contractAddress &&
-        contractInterface &&
-        args !== undefined &&
-        functionName,
-    ),
+    enabled: shouldPrepare,
     addressOrName: contractAddress as string,
     contractInterface,
     functionName,
@@ -145,7 +147,10 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
       txResponse: responseData,
       txReceipt: receiptData,
     },
-    error: prepareError || responseError || receiptError,
+    error:
+      shouldPrepare && prepareError
+        ? prepareError
+        : responseError || receiptError,
     isIdle: responseIsIdle && receiptIsIdle,
     isPreparing: prepareLoading,
     isLoading:

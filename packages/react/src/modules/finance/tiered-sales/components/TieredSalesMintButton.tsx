@@ -1,18 +1,18 @@
-import { BigNumberish } from 'ethers';
 import { Fragment, PropsWithChildren } from 'react';
 
 import { BareComponentProps } from '../../../../common';
 import { useTieredSalesContext } from '../providers';
 
 type Props = PropsWithChildren<BareComponentProps> & {
-  soldOutContent?: React.ReactNode;
-  mintCount?: BigNumberish;
+  rampIgnoreCurrentBalance?: boolean;
+  rampPaymentMethod?: string;
 };
 
 export const TieredSalesMintButton = ({
   as = 'button',
-  children = 'Mint',
-  mintCount = 1,
+  children = 'Mint now',
+  rampIgnoreCurrentBalance,
+  rampPaymentMethod,
   ...attributes
 }: Props) => {
   const {
@@ -25,7 +25,19 @@ export const TieredSalesMintButton = ({
 
   return (
     <Component
-      onClick={() => mint?.({ mintCount })}
+      onClick={() =>
+        mint?.(
+          undefined,
+          rampIgnoreCurrentBalance || rampPaymentMethod
+            ? {
+                customData: {
+                  rampIgnoreCurrentBalance,
+                  rampPaymentMethod,
+                },
+              }
+            : undefined,
+        )
+      }
       disabled={!canMint || !mint}
       {...attributes}
     >

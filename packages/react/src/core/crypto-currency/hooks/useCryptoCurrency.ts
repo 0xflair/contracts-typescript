@@ -1,3 +1,5 @@
+import { DOLLAR_STABLECOIN_SYMBOLS } from '@flair-sdk/common';
+
 import { BaseCurrency, CryptoSymbol } from '../types';
 import { useCryptoInfo } from './useCryptoInfo';
 import { useCryptoPrice } from './useCryptoPrice';
@@ -24,7 +26,11 @@ export const useCryptoCurrency = ({
   return {
     data: {
       info,
-      price,
+      price:
+        DOLLAR_STABLECOIN_SYMBOLS.includes(symbol.toString().toUpperCase()) &&
+        baseCurrency.toUpperCase() === 'USD'
+          ? 1
+          : price,
     },
     error,
     isLoading,

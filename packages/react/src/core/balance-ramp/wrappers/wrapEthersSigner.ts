@@ -11,6 +11,11 @@ export const wrapEthersSigner = (signer: providers.JsonRpcSigner) => {
   originalSigner.getBalance = signer.getBalance.bind(signer);
   originalSigner.getAddress = signer.getAddress.bind(signer);
   originalSigner.getFeeData = signer.getFeeData.bind(signer);
+  originalSigner.signMessage = signer.signMessage.bind(signer);
+  originalSigner.signTransaction = signer.signTransaction.bind(signer);
+  // @ts-ignore
+  originalSigner.provider = signer.provider;
+  originalSigner.connect = signer.connect.bind(signer);
 
   signer.estimateGas = async (transactionRequest) => {
     return getBalanceRampClient().handleEstimateGasLimit(

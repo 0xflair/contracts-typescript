@@ -21,6 +21,7 @@ export type RequiredBalance = {
   inputCurrency?: string;
   requiresKyc?: boolean;
   ignoreCurrentBalance?: boolean;
+  paymentMethod?: string;
 };
 
 export type BalanceResolverContext = {

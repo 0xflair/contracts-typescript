@@ -1,3 +1,4 @@
+import { DOLLAR_STABLECOIN_SYMBOLS } from '@flair-sdk/common';
 import axios from 'axios';
 import React from 'react';
 
@@ -74,6 +75,13 @@ export const CoinGeckoProvider = ({
       for (const coinGeckoSymbol in coinGeckoResult) {
         data[convertCoinGeckoSymbol(coinGeckoSymbol)] =
           coinGeckoResult[coinGeckoSymbol];
+      }
+
+      // Override for USD symbols
+      for (const sym in DOLLAR_STABLECOIN_SYMBOLS) {
+        data[sym] = {
+          USD: 1,
+        };
       }
 
       setState({ data, loading: false });
