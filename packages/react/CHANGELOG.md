@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.55.3 (2022-12-08)
+
+
+### Bug Fixes
+
+* remove customData field entirely ([e17f228](https://github.com/flair-sdk/typescript/commit/e17f2286ec6aa48b6b9941bb44c5b23b47eb7948))
+
+
+
+
+
 ## 2.55.2 (2022-12-08)
 
 
