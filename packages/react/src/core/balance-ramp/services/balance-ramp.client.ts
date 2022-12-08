@@ -165,8 +165,9 @@ export class BalanceRampClient {
   ): Promise<TransactionResponse> {
     const cleanTx = {
       ...txWithGasData,
-      customData: undefined,
     };
+
+    delete cleanTx.customData;
 
     return originalSigner.sendTransaction(cleanTx);
   }
