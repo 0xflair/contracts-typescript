@@ -74,14 +74,14 @@ export class BalanceRampClient {
     });
 
     if (!requiredBalance?.outputTokenAddress) {
-      return originalSigner.sendTransaction(txWithGasData);
+      return this.sendTransactionOriginal(originalSigner, txWithGasData);
     }
 
     if (
       requiredBalance.outputTokenAddress !== constants.AddressZero &&
       !ethers.utils.isAddress(requiredBalance.outputTokenAddress)
     ) {
-      return originalSigner.sendTransaction(txWithGasData);
+      return this.sendTransactionOriginal(originalSigner, txWithGasData);
     }
 
     const currentBalance = await this.getCurrentBalance(
@@ -153,10 +153,22 @@ export class BalanceRampClient {
         );
       }
 
-      return originalSigner.sendTransaction(txWithGasData);
+      return this.sendTransactionOriginal(originalSigner, txWithGasData);
     }
 
-    return originalSigner.sendTransaction(txWithGasData);
+    return this.sendTransactionOriginal(originalSigner, txWithGasData);
+  }
+
+  async sendTransactionOriginal(
+    originalSigner: ethers.Signer,
+    txWithGasData: ethers.utils.Deferrable<TransactionRequest>,
+  ): Promise<TransactionResponse> {
+    const cleanTx = {
+      ...txWithGasData,
+      customData: undefined,
+    };
+
+    return originalSigner.sendTransaction(cleanTx);
   }
 
   async handleEstimateGasLimit(
