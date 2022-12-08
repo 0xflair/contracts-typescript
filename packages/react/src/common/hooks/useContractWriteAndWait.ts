@@ -1,7 +1,7 @@
 import { Provider } from '@ethersproject/providers';
 import { PrepareWriteContractConfig } from '@wagmi/core';
-import { ContractInterface, Signer } from 'ethers';
-import { useCallback } from 'react';
+import { ContractInterface, ethers, Signer } from 'ethers';
+import { useCallback, useMemo } from 'react';
 import {
   useAccount,
   useContractWrite,
@@ -50,6 +50,16 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   const { address, isConnected } = useAccount();
   const { chain } = useNetwork();
 
+  const shouldPrepare = Boolean(
+    prepare &&
+      isConnected &&
+      address &&
+      contractAddress &&
+      contractInterface &&
+      args !== undefined &&
+      functionName,
+  );
+
   const {
     config,
     data: prepareData,
@@ -57,15 +67,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     isError: prepareIsError,
     isLoading: prepareLoading,
   } = usePrepareContractWrite({
-    enabled: Boolean(
-      prepare &&
-        isConnected &&
-        address &&
-        contractAddress &&
-        contractInterface &&
-        args !== undefined &&
-        functionName,
-    ),
+    enabled: shouldPrepare,
     addressOrName: contractAddress as string,
     contractInterface,
     functionName,
@@ -97,6 +99,32 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     confirmations,
     enabled: Boolean(isConnected && chain),
   });
+
+  const expectedRequest = useMemo(() => {
+    if (!contractInterface) {
+      return;
+    }
+
+    try {
+      let iface: ethers.utils.Interface;
+
+      if (contractInterface instanceof ethers.utils.Interface) {
+        iface = contractInterface;
+      } else {
+        iface = new ethers.utils.Interface(contractInterface);
+      }
+
+      const data = iface.encodeFunctionData(functionName, args);
+
+      return {
+        from: address,
+        to: contractAddress,
+        data,
+      };
+    } catch (error) {
+      console.warn(`Could not calculate expected request: `, error);
+    }
+  }, [address, args, contractAddress, contractInterface, functionName]);
 
   const writeAndWait = useCallback(
     async (
@@ -140,12 +168,17 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   );
 
   return {
+    expectedRequest,
+    preparedConfig: config,
     data: {
       ...prepareData,
       txResponse: responseData,
       txReceipt: receiptData,
     },
-    error: prepareError || responseError || receiptError,
+    error:
+      shouldPrepare && prepareError
+        ? prepareError
+        : responseError || receiptError,
     isIdle: responseIsIdle && receiptIsIdle,
     isPreparing: prepareLoading,
     isLoading:

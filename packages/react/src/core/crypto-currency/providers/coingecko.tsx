@@ -76,6 +76,20 @@ export const CoinGeckoProvider = ({
           coinGeckoResult[coinGeckoSymbol];
       }
 
+      // Override for USD symbols
+      data['USD'] = {
+        USD: 1,
+      };
+      data['USDC'] = {
+        USD: 1,
+      };
+      data['USDT'] = {
+        USD: 1,
+      };
+      data['DAI'] = {
+        USD: 1,
+      };
+
       setState({ data, loading: false });
     } catch (e) {
       setState({ error: e as Error, loading: false });

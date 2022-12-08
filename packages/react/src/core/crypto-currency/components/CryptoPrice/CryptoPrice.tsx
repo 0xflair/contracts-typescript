@@ -29,6 +29,8 @@ export const CryptoPrice = (props: Props) => {
     baseCurrency,
   });
 
+  console.log('useCryptoCurrency data === ', symbol, baseCurrency, data);
+
   const etherValue = useMemo(() => {
     try {
       const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);

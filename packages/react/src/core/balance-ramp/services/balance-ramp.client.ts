@@ -2,6 +2,7 @@ import {
   TransactionRequest,
   TransactionResponse,
 } from '@ethersproject/providers';
+import { ERC20__factory } from '@flair-sdk/contracts';
 import axios from 'axios';
 import { BigNumber, BigNumberish, constants, ethers, Signer } from 'ethers';
 import { Deferrable } from 'ethers/lib/utils';
@@ -72,85 +73,87 @@ export class BalanceRampClient {
       transactionRequest,
     });
 
-    if (!requiredBalance) {
+    if (!requiredBalance?.outputTokenAddress) {
       return originalSigner.sendTransaction(txWithGasData);
     }
 
-    /**
-     * Handler for required native token
-     */
-    if (requiredBalance.outputTokenAddress === constants.AddressZero) {
-      const currentBalance = await this.getCurrentBalance(
+    if (
+      requiredBalance.outputTokenAddress !== constants.AddressZero &&
+      !ethers.utils.isAddress(requiredBalance.outputTokenAddress)
+    ) {
+      return originalSigner.sendTransaction(txWithGasData);
+    }
+
+    const currentBalance = await this.getCurrentBalance(
+      originalSigner,
+      requiredBalance,
+    );
+
+    if (
+      this.config.ignoreCurrentBalance ||
+      requiredBalance.ignoreCurrentBalance ||
+      this.shouldDoBalanceRamp(currentBalance, requiredBalance)
+    ) {
+      await this.initiateBalanceRampModal(
+        chainId,
+        await originalSigner.getAddress(),
+        currentBalance,
+        requiredBalance,
+        transactionRequest,
+      );
+      const balanceRamp = await this.waitUntilReady(
         originalSigner,
         requiredBalance,
       );
 
-      if (
-        this.config.ignoreCurrentBalance ||
-        requiredBalance.ignoreCurrentBalance ||
-        this.shouldDoBalanceRamp(currentBalance, requiredBalance)
-      ) {
-        await this.initiateBalanceRampModal(
+      if (!balanceRamp?.settlementWillDepositBalance) {
+        if (!balanceRamp?.settlementRelayMetaTx.txHash) {
+          throw new Error(
+            `Balance ramp failed, no tx hash found for id=${balanceRamp?.id} relay=${balanceRamp?.settlementRelayId}`,
+          );
+        }
+
+        return {
+          ...balanceRamp?.settlementRelayMetaTx,
           chainId,
-          await originalSigner.getAddress(),
-          currentBalance,
-          requiredBalance,
+
+          from: balanceRamp?.settlementRelayMetaTx?.from as string,
+          to: balanceRamp?.settlementRelayMetaTx?.to as string,
+          data: balanceRamp?.settlementRelayMetaTx?.data as string,
+          nonce: Number(balanceRamp?.settlementRelayMetaTx?.nonce as string),
+          value: BigNumber.from(balanceRamp?.settlementRelayMetaTx?.value),
+
+          hash: balanceRamp?.settlementRelayMetaTx?.txHash,
+          confirmations:
+            balanceRamp?.settlementRelayMetaTx?.txReceipt?.confirmations,
+          wait: async (confirmations?: number) =>
+            ({
+              ...balanceRamp.settlementRelayMetaTx?.txReceipt,
+            } as any),
+          gasLimit: BigNumber.from(
+            balanceRamp?.settlementRelayMetaTx?.txReceipt.gasUsed,
+          ),
+        };
+      }
+
+      if (
+        !this.config.maxGasLimit ||
+        BigNumber.from(estimatedGasLimit).gte(this.config.maxGasLimit)
+      ) {
+        // re estimate gas if current gas estimate is maximum configured
+        const newGasListEstimate = await originalSigner.estimateGas(
           transactionRequest,
         );
-        const balanceRamp = await this.waitUntilReady(
-          originalSigner,
-          requiredBalance,
+        // const newFees = await this.estimateGasFees(originalSigner);
+        this.applyGasParameters(
+          txWithGasData,
+          newGasListEstimate,
+          // newFees.estimatedMaxFeePerGas,
+          // newFees.estimatedMaxPriorityFeePerGas,
         );
-
-        if (!balanceRamp?.settlementWillDepositBalance) {
-          if (!balanceRamp?.settlementRelayMetaTx.txHash) {
-            throw new Error(
-              `Balance ramp failed, no tx hash found for id=${balanceRamp?.id} relay=${balanceRamp?.settlementRelayId}`,
-            );
-          }
-
-          return {
-            ...balanceRamp?.settlementRelayMetaTx,
-            chainId,
-
-            from: balanceRamp?.settlementRelayMetaTx?.from as string,
-            to: balanceRamp?.settlementRelayMetaTx?.to as string,
-            data: balanceRamp?.settlementRelayMetaTx?.data as string,
-            nonce: Number(balanceRamp?.settlementRelayMetaTx?.nonce as string),
-            value: BigNumber.from(balanceRamp?.settlementRelayMetaTx?.value),
-
-            hash: balanceRamp?.settlementRelayMetaTx?.txHash,
-            confirmations:
-              balanceRamp?.settlementRelayMetaTx?.txReceipt?.confirmations,
-            wait: async (confirmations?: number) =>
-              ({
-                ...balanceRamp.settlementRelayMetaTx?.txReceipt,
-              } as any),
-            gasLimit: BigNumber.from(
-              balanceRamp?.settlementRelayMetaTx?.txReceipt.gasUsed,
-            ),
-          };
-        }
-
-        if (
-          !this.config.maxGasLimit ||
-          BigNumber.from(estimatedGasLimit).gte(this.config.maxGasLimit)
-        ) {
-          // re estimate gas if current gas estimate is maximum configured
-          const newGasListEstimate = await originalSigner.estimateGas(
-            transactionRequest,
-          );
-          // const newFees = await this.estimateGasFees(originalSigner);
-          this.applyGasParameters(
-            txWithGasData,
-            newGasListEstimate,
-            // newFees.estimatedMaxFeePerGas,
-            // newFees.estimatedMaxPriorityFeePerGas,
-          );
-        }
-
-        return originalSigner.sendTransaction(txWithGasData);
       }
+
+      return originalSigner.sendTransaction(txWithGasData);
     }
 
     return originalSigner.sendTransaction(txWithGasData);
@@ -178,7 +181,10 @@ export class BalanceRampClient {
         e.message?.toString() +
         e?.toString();
 
-      if (!message.toLowerCase().includes('insufficient funds')) {
+      if (
+        !message.toLowerCase().includes('insufficient funds') &&
+        !message.toLowerCase().includes('exceeds allowance')
+      ) {
         throw e;
       }
 
@@ -195,9 +201,13 @@ export class BalanceRampClient {
         : BigNumber.from(maxGasLimit) || BigNumber.from(0);
 
       try {
+        // const suggestedOverridesForGasEstimation =
+        //   this.getSuggestedOverrides(transactionRequest);
+
         estimatedGasLimit = await this.simulateEstimateGasLimit(
           chainId,
           transactionRequest,
+          // suggestedOverridesForGasEstimation,
         );
       } catch (e: any) {
         console.warn(`Could not simulate gas limit: `, e);
@@ -214,6 +224,45 @@ export class BalanceRampClient {
 
     return estimatedGasLimit;
   }
+
+  // private getSuggestedOverrides(
+  //   transactionRequest: ethers.utils.Deferrable<TransactionRequest>,
+  // ) {
+  //   try {
+  //     debugger;
+  //     const txUniqueHash = ethers.utils.keccak256(
+  //       ethers.utils.toUtf8Bytes(
+  //         JSON.stringify({
+  //           from: transactionRequest.from?.toString().toLowerCase(),
+  //           to: transactionRequest.to?.toString().toLowerCase(),
+  //           data: transactionRequest.data?.toString().toLowerCase(),
+  //         }),
+  //       ),
+  //     );
+  //     const requiredAmountsRaw = window.localStorage.getItem(
+  //       `reqAmt-${txUniqueHash}`,
+  //     );
+  //     const requiredAmounts =
+  //       (requiredAmountsRaw && JSON.parse(requiredAmountsRaw)) || undefined;
+
+  //     const suggestedOverridesForGasEstimation =
+  //       requiredAmounts && Array.isArray(requiredAmounts)
+  //         ? requiredAmounts.map((amount) => {
+  //             return {
+  //               type: 'addBalance',
+  //               token: amount.token,
+  //               accounts: amount.accounts,
+  //               amount: BigNumber.from(amount.value).toString(),
+  //             };
+  //           })
+  //         : undefined;
+
+  //     return suggestedOverridesForGasEstimation;
+  //   } catch (e) {
+  //     console.error(`Could not get suggested overrides: `, e);
+  //     return undefined;
+  //   }
+  // }
 
   private async applyGasParameters(
     transactionRequest: ethers.utils.Deferrable<TransactionRequest>,
@@ -261,25 +310,59 @@ export class BalanceRampClient {
   }
 
   private async getCurrentBalance(
-    signer: ethers.Signer,
+    originalSigner: ethers.Signer,
     requiredBalance: RequiredBalance,
   ) {
     if (requiredBalance.outputTokenAddress === constants.AddressZero) {
       return {
         tokenAddress: constants.AddressZero,
-        amount: await signer.getBalance(),
+        amount: (await originalSigner.getBalance())?.toString(),
       };
     }
 
-    // TODO - handle ERC20
+    if (
+      requiredBalance.outputTokenAddress &&
+      ethers.utils.isAddress(requiredBalance.outputTokenAddress)
+    ) {
+      const amount = await this.getERC20Balance(
+        requiredBalance.outputTokenAddress,
+        originalSigner,
+      );
+
+      return {
+        tokenAddress: requiredBalance.outputTokenAddress,
+        amount,
+      };
+    }
+
     throw new Error(
       `Not implemented balance type for token ${requiredBalance.outputTokenAddress}`,
     );
   }
 
+  private async getERC20Balance(
+    outputTokenAddress: string,
+    originalSigner: ethers.Signer,
+  ) {
+    const tokenContract = ERC20__factory.connect(
+      outputTokenAddress,
+      originalSigner.provider || originalSigner,
+    );
+    const amount = (
+      await tokenContract.balanceOf(await originalSigner.getAddress())
+    )?.toString();
+    return amount;
+  }
+
   private async simulateEstimateGasLimit(
     chainId: number,
     transaction: ethers.utils.Deferrable<TransactionRequest>,
+    overrides?: {
+      type: string;
+      accounts: (string | Promise<string | undefined> | undefined)[];
+      token: string;
+      amount: BigNumberish;
+    }[],
   ): Promise<BigNumber> {
     const response = await axios.post(
       `${BALANCE_RAMP_BACKEND[this.config.env].simulateEstimateGasLimit}`,
@@ -288,7 +371,7 @@ export class BalanceRampClient {
           chainId,
           ...(await transaction),
         },
-        overrides: [
+        overrides: overrides || [
           {
             type: 'addBalance',
             accounts: [transaction.from],
@@ -325,6 +408,7 @@ export class BalanceRampClient {
       ignoreCurrentBalance:
         requiredBalance.ignoreCurrentBalance ||
         this.config.ignoreCurrentBalance,
+      paymentMethod: requiredBalance.paymentMethod,
       chainId,
       walletAddress,
       outputTokenAddress:
@@ -434,8 +518,6 @@ export class BalanceRampClient {
      * For native balance
      */
     if (requiredBalance.outputTokenAddress === constants.AddressZero) {
-      let balance = await signer.getBalance();
-
       const totalGasFees = BigNumber.from(
         requiredBalance.estimatedGasPrice || 0,
       )
@@ -447,18 +529,34 @@ export class BalanceRampClient {
         requiredBalance.outputAmount,
       ).add(totalGasFees);
 
-      while (balance.lt(totalRequiredBalance)) {
+      let currentBalance;
+      while (!currentBalance || currentBalance.lt(totalRequiredBalance)) {
         await new Promise((resolve) => setTimeout(resolve, 5000));
-        balance = await signer.getBalance();
+        try {
+          currentBalance = await signer.getBalance();
+        } catch (e) {}
       }
-    } else {
+    } else if (requiredBalance.outputTokenAddress) {
       /**
        * For ERC20 balance
        */
-      throw new Error(
-        `ERC20 tokens are not implemented yet for regularlyCheckForBalance`,
-      );
+      const totalRequiredBalance = BigNumber.from(requiredBalance.outputAmount);
+
+      let currentBalance;
+      while (!currentBalance || currentBalance.lt(totalRequiredBalance)) {
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+        try {
+          currentBalance = BigNumber.from(
+            (await this.getERC20Balance(
+              requiredBalance.outputTokenAddress,
+              signer,
+            )) || '0',
+          );
+        } catch (e) {}
+      }
     }
+
+    throw new Error(`Missing outputTokenAddress for regularlyCheckForBalance`);
   }
 
   private shouldDoBalanceRamp(

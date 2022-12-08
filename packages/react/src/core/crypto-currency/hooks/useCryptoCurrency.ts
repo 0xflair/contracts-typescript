@@ -24,7 +24,12 @@ export const useCryptoCurrency = ({
   return {
     data: {
       info,
-      price,
+      price:
+        ['USD', 'USDC', 'USDT', 'DAI'].includes(
+          symbol.toString().toUpperCase(),
+        ) && baseCurrency.toUpperCase() === 'USD'
+          ? 1
+          : price,
     },
     error,
     isLoading,

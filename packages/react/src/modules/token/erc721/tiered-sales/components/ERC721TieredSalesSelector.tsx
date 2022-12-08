@@ -9,22 +9,16 @@ import {
   IfWalletConnected,
   useDiamondContext,
 } from '../../../../../core';
-import { TieredSalesSelector } from '../../../../finance/tiered-sales/components/TieredSalesSelector';
-import { Tier } from '../../../../finance/tiered-sales/types';
+import {
+  RenderProps,
+  TieredSalesSelector,
+} from '../../../../finance/tiered-sales/components/TieredSalesSelector';
 import { NftMetadataPreview } from '../../../metadata/components/NftMetadataPreview';
 
 type OptionClassProps = {
   checked: boolean;
   active: boolean;
   disabled: boolean;
-};
-
-type RenderProps = {
-  checked: boolean;
-  active: boolean;
-  disabled: boolean;
-  tierId: string;
-  tier: Tier;
 };
 
 type Props = {
@@ -52,6 +46,7 @@ export const ERC721TieredSalesSelector = (props: Props = {}) => {
         disabled,
         tier,
         tierId,
+        currencySymbol,
       }: RenderProps) => {
         const metadataUri =
           configValues?.['admin:tiered-sales']?.tiers?.[tierId]?.metadataUri;
@@ -89,7 +84,7 @@ export const ERC721TieredSalesSelector = (props: Props = {}) => {
                 >
                   {tier.price.toString() ? (
                     <CryptoValue
-                      symbol={chainInfo?.nativeCurrency?.symbol}
+                      symbol={currencySymbol}
                       value={tier.price.toString()}
                       unit={CryptoUnits.WEI}
                       showPrice={false}

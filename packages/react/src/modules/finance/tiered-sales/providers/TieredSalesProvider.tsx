@@ -1,12 +1,17 @@
 import { TransactionReceipt } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
 import { SendTransactionResult } from '@wagmi/core';
-import { BigNumber, BigNumberish, BytesLike } from 'ethers';
+import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
+import _ from 'lodash';
 import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 
-import { useTieredSalesMinter as useTieredSalesMinter } from '../hooks';
+import { calculateUniqueTransactionIdentifier } from '~/REACT_SDK/core';
+import { useERC20Allowance } from '~/REACT_SDK/modules/token/erc20';
+import { useERC20Approve } from '~/REACT_SDK/modules/token/erc20/base/hooks/useERC20Approve';
+
+import { useTieredSalesMinter } from '../hooks';
 import { useSaleTiers } from '../hooks/useSaleTiers';
 import { Tier } from '../types';
 
@@ -33,19 +38,28 @@ type TieredSalesContextValue = {
 
     // Helpers
     // maxSupply?: BigNumberish;
+    mintCount?: BigNumberish;
     autoDetectedTierId?: BigNumberish;
     canMint?: boolean;
+    isERC20Payment?: boolean;
+    isApproveNeeded?: boolean;
     minterAddress?: BytesLike;
 
     // Transaction
-    txReceipt?: TransactionReceipt;
-    txResponse?: SendTransactionResult;
+    approveReceipt?: TransactionReceipt;
+    approveResponse?: SendTransactionResult;
+    mintReceipt?: TransactionReceipt;
+    mintResponse?: SendTransactionResult;
   };
 
   isLoading: {
     // On-chain values
     isAutoDetectingTier?: boolean;
     tiersLoading?: boolean;
+
+    // Helpers
+    allowanceLoading: boolean;
+    approveLoading: boolean;
 
     // Transaction
     mintLoading?: boolean;
@@ -55,6 +69,10 @@ type TieredSalesContextValue = {
     // On-chain values
     tiersError?: string | Error | null;
 
+    // Helpers
+    allowanceError?: string | Error | null;
+    approveError?: string | Error | null;
+
     // Transaction
     mintError?: string | Error | null;
   };
@@ -63,10 +81,15 @@ type TieredSalesContextValue = {
   setCurrentTierId: (currentTierId: BigNumberish) => void;
   // setMaxSupply: (maxSupply: BigNumberish) => void;
 
-  mint?: (args: {
-    mintCount: BigNumberish;
-    allowlistProof?: BytesLike[];
-  }) => void;
+  setMintCount: (mintCount: BigNumberish) => void;
+  approve?: (args?: { mintCount: BigNumberish }) => void;
+  mint?: (
+    args?: {
+      mintCount: BigNumberish;
+      allowlistProof?: BytesLike[];
+    },
+    overrides?: Partial<ethers.CallOverrides>,
+  ) => void;
 };
 
 export const TieredSalesContext =
@@ -85,7 +108,14 @@ type Props = {
   autoSelectEligibleTier?: boolean;
   minterAddress?: BytesLike;
   onMintSuccess?: (args: {
+    totalAmount: BigNumberish;
     mintCount: BigNumberish;
+    txReceipt?: TransactionReceipt;
+    txResponse?: SendTransactionResult;
+  }) => void;
+  onApproveSuccess?: (args: {
+    spender: BytesLike;
+    amount: BigNumberish;
     txReceipt?: TransactionReceipt;
     txResponse?: SendTransactionResult;
   }) => void;
@@ -102,6 +132,7 @@ export const TieredSalesProvider = ({
   autoSelectEligibleTier = true,
   minterAddress,
   onMintSuccess,
+  onApproveSuccess,
 }: Props) => {
   const chainId = Number(rawChainId);
 
@@ -109,8 +140,9 @@ export const TieredSalesProvider = ({
   const [currentTierId, setCurrentTierId] = useState<BigNumberish | undefined>(
     tierId !== undefined ? Number(tierId.toString()) : undefined,
   );
-  const [maxSupply, setMaxSupply] = useState<BigNumberish>(Infinity);
+  // const [maxSupply, setMaxSupply] = useState<BigNumberish>(Infinity);
   const [autoDetectedTierId, setAutoDetectedTierId] = useState<BigNumberish>();
+  const [mintCount, setMintCount] = useState<BigNumberish>(1);
   const [isAutoDetectingTier, setIsAutoDetectingTier] = useState(true);
 
   const finalMinterAddress = minterAddress || address;
@@ -132,8 +164,13 @@ export const TieredSalesProvider = ({
 
   const {
     data: {
-      txReceipt,
-      txResponse,
+      expectedMintRequest,
+      preparedMintConfig,
+      requiredAmounts,
+      approveReceipt,
+      approveResponse,
+      mintReceipt,
+      mintResponse,
       start,
       end,
       price,
@@ -142,21 +179,34 @@ export const TieredSalesProvider = ({
       isAllowlisted,
       isEligible,
       eligibleAmount,
+      isApproveNeeded,
+      isERC20Payment,
     },
-    error: { mintError, allowlistCheckerError, eligibleAmountError, tierError },
+    error: {
+      tierError,
+      eligibleAmountError,
+      allowlistCheckerError,
+      allowanceError,
+      approveError,
+      mintError,
+    },
     isLoading: {
-      allowlistCheckerLoading,
-      eligibleAmountLoading,
-      mintLoading,
       tierLoading,
+      eligibleAmountLoading,
+      allowlistCheckerLoading,
+      allowanceLoading,
+      approveLoading,
+      mintLoading,
     },
     mint: doMint,
+    approve: doApprove,
   } = useTieredSalesMinter({
     env,
     chainId,
     contractAddress,
     tierId: currentTierId,
     minterAddress: finalMinterAddress,
+    mintCount,
   });
 
   const canMint = Boolean(
@@ -262,14 +312,68 @@ export const TieredSalesProvider = ({
     tiersLoading,
   ]);
 
+  // Store required amounts for balance ramp's gas estimation when user does not have enough funds
+  // useEffect(() => {
+  //   (async () => {
+  //     if (!preparedMintConfig?.request && !expectedMintRequest) {
+  //       return;
+  //     }
+
+  //     if (isERC20Payment) {
+  //       const req = preparedMintConfig?.request || expectedMintRequest;
+
+  //       const txUniqueHash = await calculateUniqueTransactionIdentifier(req);
+
+  //       window.localStorage.setItem(
+  //         `reqAmt-${txUniqueHash}`,
+  //         JSON.stringify(requiredAmounts),
+  //       );
+  //     }
+  //   })();
+  // }, [
+  //   expectedMintRequest,
+  //   isERC20Payment,
+  //   preparedMintConfig?.request,
+  //   requiredAmounts,
+  // ]);
+
   const mint = useCallback(
-    async (args: { mintCount: BigNumberish }) => {
-      const result = await doMint?.(args);
+    async (
+      args?: { mintCount: BigNumberish },
+      overrides?: Partial<ethers.CallOverrides>,
+    ) => {
+      const result = await doMint?.(args, overrides);
 
       if (result) {
-        onMintSuccess &&
-          onMintSuccess({
-            ...args,
+        if (result.receipt?.status === 0) {
+          throw new Error(
+            'Failed to mint, transaction reverted! Check Etherscan for reason.',
+          );
+        } else {
+          onMintSuccess &&
+            onMintSuccess({
+              totalAmount: result.totalAmount,
+              mintCount: result.mintCount,
+              txReceipt: result.receipt,
+              txResponse: result.response,
+            });
+        }
+      }
+
+      await refetchTiers();
+    },
+    [doMint, onMintSuccess, refetchTiers],
+  );
+
+  const approve = useCallback(
+    async (args?: { mintCount: BigNumberish }) => {
+      const result = await doApprove?.(args);
+
+      if (result) {
+        onApproveSuccess &&
+          onApproveSuccess({
+            amount: result.amount,
+            spender: result.spender,
             txReceipt: result.receipt,
             txResponse: result.response,
           });
@@ -277,7 +381,7 @@ export const TieredSalesProvider = ({
 
       await refetchTiers();
     },
-    [doMint, onMintSuccess, refetchTiers],
+    [doApprove, onApproveSuccess, refetchTiers],
   );
 
   const value = {
@@ -303,39 +407,53 @@ export const TieredSalesProvider = ({
       // Helpers
       // maxSupply,
       autoDetectedTierId,
+      mintCount,
       canMint,
+      isERC20Payment,
+      isApproveNeeded,
       minterAddress: finalMinterAddress,
 
       // Transaction
-      txReceipt,
-      txResponse,
+      approveReceipt,
+      approveResponse,
+      mintReceipt,
+      mintResponse,
     },
 
     isLoading: {
       // Helpers
-      isAutoDetectingTier,
+      tierLoading,
       tiersLoading,
+      isAutoDetectingTier,
       allowlistCheckerLoading,
       eligibleAmountLoading,
+      allowanceLoading,
 
       // Transaction
+      approveLoading,
       mintLoading,
     },
 
     error: {
       // Helpers
+      tierError,
       tiersError,
       allowlistCheckerError,
       eligibleAmountError,
+      allowanceError,
 
       // Transaction
+      approveError,
       mintError,
     },
 
     refetchTiers,
     setCurrentTierId,
     // setMaxSupply,
+    setMintCount,
+
     mint: doMint ? mint : undefined,
+    approve: doApprove ? approve : undefined,
   };
 
   return React.createElement(

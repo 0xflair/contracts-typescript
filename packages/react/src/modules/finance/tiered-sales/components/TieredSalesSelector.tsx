@@ -1,11 +1,19 @@
 import { classNames } from '@flair-sdk/common';
 import { RadioGroup } from '@headlessui/react';
 import { CheckCircleIcon } from '@heroicons/react/solid';
-import { BigNumber, BigNumberish } from 'ethers';
+import { Chain } from '@wagmi/core';
+import { BigNumber, BigNumberish, ethers } from 'ethers';
 import { useEffect } from 'react';
 
+import { useContractSymbol } from '~/REACT_SDK/modules/token';
+
 import { useChainInfo } from '../../../../common';
-import { CryptoUnits, CryptoValue, IfWalletConnected } from '../../../../core';
+import {
+  CryptoSymbol,
+  CryptoUnits,
+  CryptoValue,
+  IfWalletConnected,
+} from '../../../../core';
 import { useTieredSalesContext } from '../providers';
 import { Tier } from '../types';
 
@@ -15,12 +23,13 @@ type OptionClassProps = {
   disabled: boolean;
 };
 
-type RenderProps = {
+export type RenderProps = {
   checked: boolean;
   active: boolean;
   disabled: boolean;
   tierId: string;
   tier: Tier;
+  currencySymbol: CryptoSymbol;
 };
 
 type Props = {
@@ -93,7 +102,14 @@ export const TieredSalesSelector = ({
 
   const renderOption = optionElement
     ? optionElement
-    : ({ checked, active, disabled, tier, tierId }: RenderProps) => (
+    : ({
+        checked,
+        active,
+        disabled,
+        tier,
+        tierId,
+        currencySymbol,
+      }: RenderProps) => (
         <>
           <span className="flex flex-1">
             <span className="flex flex-col">
@@ -101,7 +117,14 @@ export const TieredSalesSelector = ({
                 as="span"
                 className="block text-sm font-medium text-gray-900"
               >
-                {renderLabel({ checked, active, disabled, tier, tierId })}
+                {renderLabel({
+                  checked,
+                  active,
+                  disabled,
+                  tier,
+                  tierId,
+                  currencySymbol,
+                })}
               </RadioGroup.Label>
               <IfWalletConnected>
                 {tier.isEligible !== undefined ? (
@@ -119,7 +142,7 @@ export const TieredSalesSelector = ({
               >
                 {tier.price.toString() ? (
                   <CryptoValue
-                    symbol={chainInfo?.nativeCurrency?.symbol}
+                    symbol={currencySymbol}
                     value={tier.price.toString()}
                     unit={CryptoUnits.WEI}
                     showPrice={false}
@@ -166,18 +189,61 @@ export const TieredSalesSelector = ({
             value={tierId.toString()}
             className={optionClassName}
           >
-            {({ checked, active, disabled }) =>
-              renderOption({
-                checked,
-                active,
-                disabled,
-                tierId,
-                tier,
-              })
-            }
+            {({ checked, active, disabled }) => (
+              <TierItemRow
+                key={tierId}
+                chainInfo={chainInfo}
+                checked={checked}
+                active={active}
+                disabled={disabled}
+                tierId={tierId}
+                tier={tier}
+                renderOption={renderOption}
+              />
+            )}
           </RadioGroup.Option>
         ))}
       </div>
     </RadioGroup>
   ) : null;
+};
+
+const TierItemRow = ({
+  chainInfo,
+  checked,
+  active,
+  disabled,
+  tierId,
+  tier,
+  renderOption,
+}: {
+  chainInfo?: Chain;
+  checked: boolean;
+  active: boolean;
+  disabled: boolean;
+  tierId: string;
+  tier: Tier;
+  renderOption: (props: RenderProps) => JSX.Element;
+}) => {
+  const { data: erc20Symbol } = useContractSymbol({
+    chainId: chainInfo?.id,
+    contractAddress: tier?.currency?.toString(),
+    enabled: Boolean(
+      chainInfo?.id &&
+        tier?.currency &&
+        tier?.currency !== ethers.constants.AddressZero,
+    ),
+  });
+
+  return renderOption({
+    checked,
+    active,
+    disabled,
+    tierId,
+    tier,
+    currencySymbol: (!tier.currency ||
+    tier.currency === ethers.constants.AddressZero
+      ? chainInfo?.nativeCurrency?.symbol
+      : erc20Symbol) as CryptoSymbol,
+  });
 };

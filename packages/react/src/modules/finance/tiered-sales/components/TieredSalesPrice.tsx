@@ -1,5 +1,7 @@
-import { BigNumber } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { Fragment, ReactNode } from 'react';
+
+import { useContractSymbol } from '~/REACT_SDK/modules/token/metadata/hooks';
 
 import { BareComponentProps, useChainInfo } from '../../../../common';
 import { CryptoUnits, CryptoValue } from '../../../../core/crypto-currency';
@@ -12,6 +14,7 @@ type Props = BareComponentProps & {
   freeElement?: ReactNode;
   mintCount?: number;
   fractionDigits?: number;
+  tierId?: string;
 };
 
 export const TieredSalesPrice = ({
@@ -20,22 +23,39 @@ export const TieredSalesPrice = ({
   showPrice = false,
   showSymbol = true,
   freeElement = <>Free</>,
+  tierId,
   mintCount = 1,
   fractionDigits,
   ...attributes
 }: Props) => {
   const {
-    data: { chainId, price, currentTierId },
+    data: { chainId, tiers, currentTierId },
     isLoading: { isAutoDetectingTier },
   } = useTieredSalesContext();
 
   const chainInfo = useChainInfo(chainId);
+  const finalTierId = tierId || currentTierId;
+  const finalTier =
+    finalTierId && tiers && Number(finalTierId.toString()) in tiers
+      ? tiers[Number(finalTierId.toString())]
+      : undefined;
+
+  const pricePerUnit = finalTier?.price;
 
   const mintNo = Number(mintCount || '1');
   const finalPrice =
-    price !== undefined && mintCount !== undefined
-      ? BigNumber.from(price).mul(Number.isNaN(mintNo) ? 1 : mintNo)
+    pricePerUnit !== undefined && mintCount !== undefined
+      ? BigNumber.from(pricePerUnit).mul(Number.isNaN(mintNo) ? 1 : mintNo)
       : undefined;
+
+  const isERC20Price =
+    finalTier?.currency && finalTier?.currency !== ethers.constants.AddressZero;
+
+  const { data: erc20Symbol } = useContractSymbol({
+    chainId: chainInfo?.id,
+    contractAddress: finalTier?.currency?.toString(),
+    enabled: Boolean(chainInfo?.id && isERC20Price),
+  });
 
   const Component =
     as || (attributes.className || attributes.style ? 'span' : Fragment);
@@ -45,7 +65,11 @@ export const TieredSalesPrice = ({
       {finalPrice !== undefined && !isAutoDetectingTier ? (
         Number(finalPrice.toString()) > 0 || !freeElement ? (
           <CryptoValue
-            symbol={chainInfo?.nativeCurrency?.symbol}
+            symbol={
+              isERC20Price
+                ? erc20Symbol?.toString()
+                : chainInfo?.nativeCurrency?.symbol?.toString()
+            }
             value={finalPrice}
             unit={CryptoUnits.WEI}
             showPrice={showPrice}

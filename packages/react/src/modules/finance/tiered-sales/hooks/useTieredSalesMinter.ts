@@ -1,7 +1,9 @@
 import { Provider } from '@ethersproject/providers';
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
-import { BigNumber, BigNumberish, BytesLike, Signer } from 'ethers';
+import { BigNumber, BigNumberish, BytesLike, ethers, Signer } from 'ethers';
 import { useCallback, useMemo } from 'react';
+
+import { useERC20Allowance, useERC20Approve } from '~/REACT_SDK/modules/token';
 
 import { useContractWriteAndWait } from '../../../../common';
 import { useSaleTierConfig } from './useSaleTierConfig';
@@ -64,6 +66,10 @@ export const useTieredSalesMinter = ({
     ? tier.merkleRoot !== ZERO_BYTES32
     : undefined;
 
+  const isERC20Payment = tier?.currency
+    ? Boolean(tier.currency !== ethers.constants.AddressZero)
+    : undefined;
+
   const {
     data: { merkleProof, merkleMetadata, isAllowlisted },
     error: allowlistCheckerError,
@@ -84,6 +90,10 @@ export const useTieredSalesMinter = ({
   const _mintCount = mintCount || 1;
   const _maxAllowance = merkleMetadata?.maxAllowance || _mintCount;
   const _merkleProof = useMemo(() => merkleProof || [], [merkleProof]);
+  const _totalAmount =
+    typeof tier?.price !== 'undefined'
+      ? BigNumber.from(tier?.price).mul(BigNumber.from(_mintCount))
+      : undefined;
 
   const {
     data: eligibleAmount,
@@ -106,6 +116,58 @@ export const useTieredSalesMinter = ({
   });
 
   const {
+    data: approveData,
+    error: approveError,
+    isLoading: approveLoading,
+    writeAndWait: approveAndWait,
+  } = useERC20Approve({
+    contractAddress: tier?.currency?.toString(),
+    spender: contractAddress,
+    amount: _totalAmount,
+    prepare: Boolean(isERC20Payment === true && _totalAmount && minterAddress),
+  });
+
+  const {
+    data: allowance,
+    error: allowanceError,
+    isLoading: allowanceLoading,
+    call: refetchAllowance,
+  } = useERC20Allowance({
+    chainId,
+    contractAddress: tier?.currency?.toString(),
+    holder: minterAddress,
+    spender: contractAddress,
+    enabled: isERC20Payment === true,
+    watch: Boolean(isERC20Payment === true && approveData),
+  });
+
+  const isApproveNeeded = Boolean(
+    isERC20Payment === true &&
+      _totalAmount &&
+      allowance &&
+      BigNumber.from(allowance).lt(_totalAmount),
+  );
+
+  const shouldPrepareMint = Boolean(
+    _tierId !== undefined && typeof _totalAmount !== 'undefined',
+    //  &&
+    // (isERC20Payment === false ||
+    //   (_totalAmount && allowance && !isApproveNeeded)),
+  );
+
+  const requiredAmounts = useMemo(() => {
+    return [
+      {
+        token: tier?.currency?.toString(),
+        accounts: [minterAddress],
+        value: _totalAmount,
+      },
+    ];
+  }, [_totalAmount, tier?.currency, minterAddress]);
+
+  const {
+    expectedRequest: expectedMintRequest,
+    preparedConfig: preparedMintConfig,
     data: mintData,
     error: mintError,
     isLoading: mintLoading,
@@ -119,51 +181,145 @@ export const useTieredSalesMinter = ({
     signerOrProvider,
     confirmations: 1,
     args: [_tierId, _mintCount, _maxAllowance, _merkleProof] as ArgsType,
-    prepare: Boolean(
-      _tierId !== undefined && typeof tier?.price !== 'undefined',
-    ),
+    prepare: shouldPrepareMint,
     overrides: {
-      value:
-        typeof tier?.price !== 'undefined'
-          ? BigNumber.from(tier?.price).mul(BigNumber.from(_mintCount))
-          : undefined,
+      value: !isERC20Payment ? _totalAmount : undefined,
+      customData: {
+        rampRequiredAmounts: requiredAmounts,
+      },
     },
   });
 
+  console.log(
+    'useContractWriteAndWait preparedMintConfig === ',
+    preparedMintConfig.request,
+  );
+  console.log(
+    'useContractWriteAndWait expectedMintRequest === ',
+    expectedMintRequest,
+  );
+
   const mint = useCallback(
-    (args?: { mintCount: BigNumberish }) => {
-      if (args?.mintCount !== undefined) {
-        const _finalMintCount = args?.mintCount || _mintCount;
-        return mintAndWait?.(
+    (
+      args?: { mintCount: BigNumberish },
+      overrides?: Partial<ethers.CallOverrides>,
+    ) => {
+      const _finalMintCount = args?.mintCount || _mintCount;
+      const _finalTotalAmount = args?.mintCount
+        ? tier?.price
+          ? BigNumber.from(tier?.price).mul(BigNumber.from(_finalMintCount))
+          : undefined
+        : _totalAmount;
+
+      const _finalOverrides = {
+        ...(overrides || {}),
+        customData: {
+          rampRequiredAmounts: requiredAmounts,
+          ...(overrides?.customData || {}),
+        },
+      };
+
+      let promise;
+
+      if (!isERC20Payment) {
+        promise = mintAndWait?.(
           [_tierId, _finalMintCount, _maxAllowance, _merkleProof] as ArgsType,
           {
-            value: tier?.price
-              ? BigNumber.from(tier?.price).mul(BigNumber.from(_finalMintCount))
-              : undefined,
+            value: _finalTotalAmount,
+            ..._finalOverrides,
           },
         );
+      } else if (args?.mintCount !== undefined) {
+        promise = mintAndWait?.(
+          [_tierId, _finalMintCount, _maxAllowance, _merkleProof] as ArgsType,
+          _finalOverrides,
+        );
       } else {
-        return mintAndWait?.();
+        promise = mintAndWait?.(undefined, _finalOverrides);
       }
+
+      if (!promise) {
+        throw new Error('mintAndWait is not ready');
+      }
+
+      return promise.then((result) => {
+        return {
+          ...result,
+          mintCount: _finalMintCount,
+          totalAmount: _finalTotalAmount as BigNumberish,
+        } as const;
+      });
     },
     [
       _maxAllowance,
       _merkleProof,
       _mintCount,
       _tierId,
+      _totalAmount,
+      isERC20Payment,
       mintAndWait,
+      requiredAmounts,
+      tier?.price,
+    ],
+  );
+
+  const approve = useCallback(
+    (args?: { mintCount: BigNumberish }) => {
+      const _finalMintCount = args?.mintCount || _mintCount;
+      const _finalTotalAmount = args?.mintCount
+        ? tier?.price
+          ? BigNumber.from(tier?.price).mul(BigNumber.from(_finalMintCount))
+          : undefined
+        : _totalAmount;
+
+      let promise;
+
+      if (args?.mintCount) {
+        promise = approveAndWait?.([
+          contractAddress as BytesLike,
+          _finalTotalAmount as BigNumberish,
+        ]);
+      } else {
+        promise = approveAndWait?.();
+      }
+
+      if (!promise) {
+        throw new Error('approveAndWait is not ready');
+      }
+
+      return promise.then((result) => {
+        refetchAllowance();
+        return {
+          ...result,
+          amount: _totalAmount as BigNumberish,
+          spender: contractAddress as BytesLike,
+        } as const;
+      });
+    },
+    [
+      _mintCount,
+      _totalAmount,
+      approveAndWait,
+      contractAddress,
+      refetchAllowance,
       tier?.price,
     ],
   );
 
   return {
     data: {
-      txResponse: mintData.txResponse,
-      txReceipt: mintData.txReceipt,
+      expectedMintRequest,
+      preparedMintConfig,
+      requiredAmounts,
+      approveResponse: approveData.txResponse,
+      approveReceipt: approveData.txReceipt,
+      mintResponse: mintData.txResponse,
+      mintReceipt: mintData.txReceipt,
       tier,
       start,
       end,
       price: tier?.price,
+      totalAmount: _totalAmount,
       isActive,
       merkleProof,
       merkleMetadata,
@@ -176,19 +332,26 @@ export const useTieredSalesMinter = ({
               !eligibleAmountError && Number(eligibleAmount.toString()) > 0,
             )
           : undefined,
+      isApproveNeeded,
+      isERC20Payment,
     },
     error: {
       tierError,
       allowlistCheckerError,
       eligibleAmountError,
+      allowanceError,
+      approveError,
       mintError,
     },
     isLoading: {
       tierLoading,
       allowlistCheckerLoading,
       eligibleAmountLoading,
+      allowanceLoading,
+      approveLoading,
       mintLoading,
     },
     mint: mintAndWait ? mint : undefined,
+    approve: approveAndWait ? approve : undefined,
   } as const;
 };
