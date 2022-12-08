@@ -100,32 +100,6 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     enabled: Boolean(isConnected && chain),
   });
 
-  const expectedRequest = useMemo(() => {
-    if (!contractInterface) {
-      return;
-    }
-
-    try {
-      let iface: ethers.utils.Interface;
-
-      if (contractInterface instanceof ethers.utils.Interface) {
-        iface = contractInterface;
-      } else {
-        iface = new ethers.utils.Interface(contractInterface);
-      }
-
-      const data = iface.encodeFunctionData(functionName, args);
-
-      return {
-        from: address,
-        to: contractAddress,
-        data,
-      };
-    } catch (error) {
-      console.warn(`Could not calculate expected request: `, error);
-    }
-  }, [address, args, contractAddress, contractInterface, functionName]);
-
   const writeAndWait = useCallback(
     async (
       inputArgs?: ArgsType,
@@ -168,8 +142,6 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   );
 
   return {
-    expectedRequest,
-    preparedConfig: config,
     data: {
       ...prepareData,
       txResponse: responseData,

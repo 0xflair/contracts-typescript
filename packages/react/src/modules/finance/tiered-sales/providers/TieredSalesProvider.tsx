@@ -160,9 +160,6 @@ export const TieredSalesProvider = ({
 
   const {
     data: {
-      expectedMintRequest,
-      preparedMintConfig,
-      requiredAmounts,
       approveReceipt,
       approveResponse,
       mintReceipt,
@@ -307,31 +304,6 @@ export const TieredSalesProvider = ({
     tiersIsPreviousData,
     tiersLoading,
   ]);
-
-  // Store required amounts for balance ramp's gas estimation when user does not have enough funds
-  // useEffect(() => {
-  //   (async () => {
-  //     if (!preparedMintConfig?.request && !expectedMintRequest) {
-  //       return;
-  //     }
-
-  //     if (isERC20Payment) {
-  //       const req = preparedMintConfig?.request || expectedMintRequest;
-
-  //       const txUniqueHash = await calculateUniqueTransactionIdentifier(req);
-
-  //       window.localStorage.setItem(
-  //         `reqAmt-${txUniqueHash}`,
-  //         JSON.stringify(requiredAmounts),
-  //       );
-  //     }
-  //   })();
-  // }, [
-  //   expectedMintRequest,
-  //   isERC20Payment,
-  //   preparedMintConfig?.request,
-  //   requiredAmounts,
-  // ]);
 
   const mint = useCallback(
     async (

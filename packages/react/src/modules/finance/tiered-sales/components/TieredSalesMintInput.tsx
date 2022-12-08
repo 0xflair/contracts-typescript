@@ -1,4 +1,3 @@
-import { BigNumberish } from 'ethers';
 import { useEffect } from 'react';
 
 import { useTieredSalesContext } from '../providers';
@@ -14,7 +13,6 @@ export const TieredSalesMintInput = ({ className }: Props) => {
   } = useTieredSalesContext();
 
   const maxAllowedMintCount = Math.min(
-    // Number(maxSupply?.toString() || Infinity),
     Number(eligibleAmount?.toString() || Infinity),
   );
 
@@ -35,7 +33,7 @@ export const TieredSalesMintInput = ({ className }: Props) => {
       min={1}
       max={maxAllowedMintCount || Infinity}
       value={mintCount?.toString()}
-      // disabled={!canMint}
+      disabled={!canMint}
       onChange={(e) => setMintCount(e.target.value)}
       className={className}
     />

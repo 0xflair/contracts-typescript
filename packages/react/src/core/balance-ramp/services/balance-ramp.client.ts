@@ -201,13 +201,9 @@ export class BalanceRampClient {
         : BigNumber.from(maxGasLimit) || BigNumber.from(0);
 
       try {
-        // const suggestedOverridesForGasEstimation =
-        //   this.getSuggestedOverrides(transactionRequest);
-
         estimatedGasLimit = await this.simulateEstimateGasLimit(
           chainId,
           transactionRequest,
-          // suggestedOverridesForGasEstimation,
         );
       } catch (e: any) {
         console.warn(`Could not simulate gas limit: `, e);
@@ -224,45 +220,6 @@ export class BalanceRampClient {
 
     return estimatedGasLimit;
   }
-
-  // private getSuggestedOverrides(
-  //   transactionRequest: ethers.utils.Deferrable<TransactionRequest>,
-  // ) {
-  //   try {
-  //     debugger;
-  //     const txUniqueHash = ethers.utils.keccak256(
-  //       ethers.utils.toUtf8Bytes(
-  //         JSON.stringify({
-  //           from: transactionRequest.from?.toString().toLowerCase(),
-  //           to: transactionRequest.to?.toString().toLowerCase(),
-  //           data: transactionRequest.data?.toString().toLowerCase(),
-  //         }),
-  //       ),
-  //     );
-  //     const requiredAmountsRaw = window.localStorage.getItem(
-  //       `reqAmt-${txUniqueHash}`,
-  //     );
-  //     const requiredAmounts =
-  //       (requiredAmountsRaw && JSON.parse(requiredAmountsRaw)) || undefined;
-
-  //     const suggestedOverridesForGasEstimation =
-  //       requiredAmounts && Array.isArray(requiredAmounts)
-  //         ? requiredAmounts.map((amount) => {
-  //             return {
-  //               type: 'addBalance',
-  //               token: amount.token,
-  //               accounts: amount.accounts,
-  //               amount: BigNumber.from(amount.value).toString(),
-  //             };
-  //           })
-  //         : undefined;
-
-  //     return suggestedOverridesForGasEstimation;
-  //   } catch (e) {
-  //     console.error(`Could not get suggested overrides: `, e);
-  //     return undefined;
-  //   }
-  // }
 
   private async applyGasParameters(
     transactionRequest: ethers.utils.Deferrable<TransactionRequest>,

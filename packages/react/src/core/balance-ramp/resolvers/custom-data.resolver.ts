@@ -13,24 +13,11 @@ export const balanceRampCustomDataResolve: BalanceResolver = async (
       estimatedMaxFeePerGas,
       estimatedMaxPriorityFeePerGas,
       estimatedGasLimit,
-      transactionRequest,
     } = context;
-
-    // const requiredAmountsRaw = window.localStorage.getItem(
-    //   `reqAmt-${txUniqueHash}`,
-    // );
-
-    // if (
-    //   // !requiredAmountsRaw &&
-    //   !(await context.transactionRequest?.customData)?.rampRequiredAmounts
-    // ) {
-    //   return;
-    // }
 
     try {
       const requiredAmounts = (await context.transactionRequest?.customData)
         ?.rampRequiredAmounts;
-      // JSON.parse(requiredAmountsRaw || '[]');
 
       if (!requiredAmounts || !requiredAmounts.length) {
         return;

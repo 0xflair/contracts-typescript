@@ -165,8 +165,6 @@ export const useTieredSalesMinter = ({
   }, [_totalAmount, tier?.currency, minterAddress]);
 
   const {
-    expectedRequest: expectedMintRequest,
-    preparedConfig: preparedMintConfig,
     data: mintData,
     error: mintError,
     isLoading: mintLoading,
@@ -188,15 +186,6 @@ export const useTieredSalesMinter = ({
       },
     },
   });
-
-  console.log(
-    'useContractWriteAndWait preparedMintConfig === ',
-    preparedMintConfig.request,
-  );
-  console.log(
-    'useContractWriteAndWait expectedMintRequest === ',
-    expectedMintRequest,
-  );
 
   const mint = useCallback(
     (
@@ -307,9 +296,6 @@ export const useTieredSalesMinter = ({
 
   return {
     data: {
-      expectedMintRequest,
-      preparedMintConfig,
-      requiredAmounts,
       approveResponse: approveData.txResponse,
       approveReceipt: approveData.txReceipt,
       mintResponse: mintData.txResponse,
