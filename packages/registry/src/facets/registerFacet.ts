@@ -6,7 +6,7 @@ export const registerFacet = (facet: FacetManifest) => {
   const registry = getFacetsRegistry();
 
   if (registry.find((f) => generateFacetId(f) === generateFacetId(facet))) {
-    console.error(
+    console.log(
       `Facet ${generateFacetId(facet)} already registered, skipping. `,
       facet,
     );

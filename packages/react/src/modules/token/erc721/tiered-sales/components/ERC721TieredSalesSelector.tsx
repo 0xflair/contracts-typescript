@@ -36,8 +36,6 @@ export const ERC721TieredSalesSelector = (props: Props = {}) => {
     data: { chainId, configValues },
   } = useDiamondContext();
 
-  const chainInfo = useChainInfo(chainId);
-
   return (
     <TieredSalesSelector
       optionElement={({
