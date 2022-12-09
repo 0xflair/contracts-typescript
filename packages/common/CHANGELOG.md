@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.57.0 (2022-12-09)
+
+
+### Features
+
+* add a pay button wrapper for easier interface ([89e28d7](https://github.com/flair-sdk/typescript/commit/89e28d7b55c162415f8e124d5ca3308f346da5aa))
+
+
+
+
+
 # 2.56.0 (2022-12-09)
 
 
