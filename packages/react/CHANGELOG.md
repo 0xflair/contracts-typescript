@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.58.0 (2022-12-09)
+
+
+### Features
+
+* allow configuring web3auth and magic link ([#13](https://github.com/flair-sdk/typescript/issues/13)) ([f67346d](https://github.com/flair-sdk/typescript/commit/f67346d72f587022fa8f14f494caead9d2956f00))
+
+
+
+
+
 ## 2.57.1 (2022-12-09)
 
 
