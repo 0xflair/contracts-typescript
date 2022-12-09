@@ -246,7 +246,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
                   chain?.id &&
                   chain.id in POPULAR_ERC20_TOKENS &&
                   POPULAR_ERC20_TOKENS[chain.id as 1]?.length > 0 && (
-                    <div className="mt-4">
+                    <div className="mt-4 text-xs">
                       <div className="rounded-md bg-blue-50 p-4">
                         <div className="flex">
                           <div className="flex-shrink-0">
@@ -255,26 +255,26 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
                               aria-hidden="true"
                             />
                           </div>
-                          <div className="ml-3 flex flex-col gap-3">
-                            <h3 className="text-md font-medium text-blue-800">
+                          <div className="ml-1 flex flex-col gap-1">
+                            <h3 className="text-xs font-medium text-blue-800">
                               Popular ERC20 Tokens
                             </h3>
 
-                            <p className="mt-1 text-blue-900 text-sm">
+                            <p className="mt-1 text-blue-900 text-xs">
                               You can use one of these popular ERC20 tokens,
                               just click on "Use" button or paste the address in
                               the text input above.
                             </p>
 
-                            <p className="mt-2 text-sm text-blue-700">
+                            <p className="mt-1 text-xs text-blue-700">
                               <ul
                                 role="list"
-                                className="list-disc space-y-1 pl-5"
+                                className="list-disc space-y-1 pl-3"
                               >
                                 {POPULAR_ERC20_TOKENS[chain.id as 1].map(
                                   (token) => (
                                     <li key={token.contractAddress}>
-                                      <div className="w-full flex flex-col gap-2">
+                                      <div className="w-full flex flex-col gap-1">
                                         <b>{token.symbol}: </b>
                                         <AddressScannerLink
                                           chainId={chain.id}

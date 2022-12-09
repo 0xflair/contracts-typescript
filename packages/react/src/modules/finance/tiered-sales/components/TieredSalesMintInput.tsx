@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useDebounce } from 'react-use';
 
 import { useTieredSalesContext } from '../providers';
 
@@ -16,6 +17,8 @@ export const TieredSalesMintInput = ({ className }: Props) => {
     Number(eligibleAmount?.toString() || Infinity),
   );
 
+  const [localValue, setLocalValue] = useState(mintCount?.toString() || '');
+
   useEffect(() => {
     if (
       mintCount &&
@@ -26,15 +29,34 @@ export const TieredSalesMintInput = ({ className }: Props) => {
     }
   }, [maxAllowedMintCount, mintCount, setMintCount]);
 
+  useDebounce(
+    () => {
+      setLocalValue(mintCount?.toString() || '');
+    },
+    1000,
+    [mintCount],
+  );
+  useDebounce(
+    () => {
+      setMintCount(localValue);
+    },
+    300,
+    [localValue],
+  );
+
   return (
     <input
       type="number"
       required
       min={1}
       max={maxAllowedMintCount || Infinity}
-      value={mintCount?.toString()}
-      disabled={!canMint}
-      onChange={(e) => setMintCount(e.target.value)}
+      value={localValue}
+      onChange={(e) => {
+        setLocalValue(e.target.value);
+      }}
+      onBlur={(e) => {
+        setMintCount(e.target.value);
+      }}
       className={className}
     />
   );
