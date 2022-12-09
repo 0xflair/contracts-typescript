@@ -142,6 +142,7 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
   );
 
   return {
+    config,
     data: {
       ...prepareData,
       txResponse: responseData,

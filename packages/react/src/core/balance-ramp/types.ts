@@ -88,3 +88,42 @@ export type BalanceRamp = {
   settlementWillDepositBalance: boolean;
   processingError: string;
 };
+
+export type BalanceRampBackendConfig = {
+  stripeEnabled: boolean;
+  utrustEnabled: boolean;
+  canRelayTransaction: boolean;
+  stripeConfiguredAndActive: boolean;
+  utrustConfiguredAndActive: boolean;
+  paymentRailsSupportedForChainAndToken: boolean;
+  onRamperEnabled: boolean;
+  onRamperWalletPrefix: string;
+  rampNetworkSwapAsset: string;
+  rampNetworkEnabled: boolean;
+};
+
+export type BalanceRampRequest = {
+  testMode?: boolean;
+  method?: 'stripe' | 'utrust';
+  chainId?: string;
+  walletAddress?: string;
+  idempotencyKey?: string;
+  outputTokenAddress?: string;
+  outputAmount?: string;
+  outputDecimals?: string;
+  inputCurrency?: string;
+  requiresKyc?: string;
+  paymentMethod?: string;
+  txFrom?: string;
+  txTo?: string;
+  txData?: string;
+  txValue?: string;
+  txGasPrice?: string;
+  txGasLimit?: string;
+  estimatedGasPrice?: string;
+  estimatedMaxFeePerGas?: string;
+  estimatedMaxPriorityFeePerGas?: string;
+  estimatedGasLimit?: string;
+  successUrl?: string;
+  cancelUrl?: string;
+};
