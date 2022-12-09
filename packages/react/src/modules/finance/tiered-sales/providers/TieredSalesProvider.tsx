@@ -7,6 +7,8 @@ import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 
+import { useChainInfo } from '../../../../common';
+import { useBalanceRampConfig } from '../../../../core';
 import { useTieredSalesMinter } from '../hooks';
 import { useSaleTiers } from '../hooks/useSaleTiers';
 import { Tier } from '../types';
@@ -131,6 +133,7 @@ export const TieredSalesProvider = ({
   onApproveSuccess,
 }: Props) => {
   const chainId = Number(rawChainId);
+  const chainInfo = useChainInfo(chainId);
 
   const { address } = useAccount();
   const [currentTierId, setCurrentTierId] = useState<BigNumberish | undefined>(
@@ -160,6 +163,8 @@ export const TieredSalesProvider = ({
 
   const {
     data: {
+      requiredAmounts,
+      mintPreparedConfig,
       approveReceipt,
       approveResponse,
       mintReceipt,
@@ -200,6 +205,22 @@ export const TieredSalesProvider = ({
     tierId: currentTierId,
     minterAddress: finalMinterAddress,
     mintCount,
+  });
+
+  const { data: rampConfig } = useBalanceRampConfig({
+    env,
+    rampRequest: {
+      chainId: chainId.toString(),
+      walletAddress: requiredAmounts?.[0].accounts?.[0]?.toString(),
+      txTo: contractAddress,
+      txFrom: minterAddress?.toString(),
+      txValue: mintPreparedConfig?.request?.value?.toString(),
+      txData: mintPreparedConfig?.request?.data?.toString(),
+      inputCurrency: 'USD',
+      outputTokenAddress: requiredAmounts?.[0].token?.toString(),
+      outputAmount: requiredAmounts?.[0].value?.toString(),
+      testMode: chainInfo?.testnet,
+    },
   });
 
   const canMint = Boolean(
@@ -374,6 +395,7 @@ export const TieredSalesProvider = ({
 
       // Helpers
       // maxSupply,
+      rampConfig,
       autoDetectedTierId,
       mintCount,
       canMint,

@@ -165,6 +165,7 @@ export const useTieredSalesMinter = ({
   }, [_totalAmount, tier?.currency, minterAddress]);
 
   const {
+    config: mintPreparedConfig,
     data: mintData,
     error: mintError,
     isLoading: mintLoading,
@@ -296,8 +297,10 @@ export const useTieredSalesMinter = ({
 
   return {
     data: {
+      requiredAmounts,
       approveResponse: approveData.txResponse,
       approveReceipt: approveData.txReceipt,
+      mintPreparedConfig,
       mintResponse: mintData.txResponse,
       mintReceipt: mintData.txReceipt,
       tier,
