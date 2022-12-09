@@ -75,7 +75,7 @@ export type BalanceRamp = {
   stripeSessionUrl: string;
   utrustOrderId: string;
   utrustRedirectUrl: string;
-  paymentState: 'created' | 'processing' | 'paid' | 'canceled' | 'failed';
+  paymentState: 'created' | 'canceled' | 'failed' | 'processing' | 'paid';
   settlementState:
     | 'idle'
     | 'processing'

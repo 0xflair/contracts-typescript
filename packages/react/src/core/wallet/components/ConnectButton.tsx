@@ -2,7 +2,7 @@ import { Web3AuthBaseConnector } from '@flair-sdk/connectors';
 import { ArrowSmDownIcon, ArrowSmUpIcon, XIcon } from '@heroicons/react/solid';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import { useAccount } from 'wagmi';
+import { useAccount, useConnect } from 'wagmi';
 
 import { BareComponentProps } from '../../../common';
 import { ConnectPalette, ConnectPaletteProps } from './ConnectPalette';
@@ -49,6 +49,9 @@ export const ConnectButton = ({
   const [showPopularOptions, setShowPopularOptions] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const { isConnecting, isConnected } = useAccount();
+  const { connectors } = useConnect();
+
+  const hasLoginOptions = Boolean(connectors.find((c) => 'loginProvider' in c));
 
   useEffect(() => {
     let didCancel = false;
@@ -117,30 +120,34 @@ export const ConnectButton = ({
             </button>
           </h3>
           {dialogProps?.contentPrepend}
-          <div className="flex flex-col gap-2">
-            <h3>Continue with</h3>
-            <ConnectPalette
-              showConnector={(connector, metadata) => {
-                const providerName = (connector as Web3AuthBaseConnector)
-                  ?.loginProvider;
-                const isLogin = Boolean(providerName);
+          {hasLoginOptions ? (
+            <>
+              <div className="flex flex-col gap-2">
+                <h3>Continue with</h3>
+                <ConnectPalette
+                  showConnector={(connector, metadata) => {
+                    const providerName = (connector as Web3AuthBaseConnector)
+                      ?.loginProvider;
+                    const isLogin = Boolean(providerName);
 
-                if (showPopularOptions) {
-                  return (
-                    isLogin &&
-                    (popularOptions.includes(connector.id) ||
-                      popularOptions.includes(providerName))
-                  );
-                }
+                    if (showPopularOptions) {
+                      return (
+                        isLogin &&
+                        (popularOptions.includes(connector.id) ||
+                          popularOptions.includes(providerName))
+                      );
+                    }
 
-                return isLogin;
-              }}
-              showDeepLink={() => false}
-              {...connectPalletteProps}
-            />
-          </div>
+                    return isLogin;
+                  }}
+                  showDeepLink={() => false}
+                  {...connectPalletteProps}
+                />
+              </div>
+            </>
+          ) : null}
           <div className="flex flex-col gap-2">
-            <h3>Or connect your wallet</h3>
+            {hasLoginOptions ? <h3>Or connect your wallet</h3> : null}
             <ConnectPalette
               showConnector={(connector, metadata) => {
                 const isWallet = !(connector as Web3AuthBaseConnector)

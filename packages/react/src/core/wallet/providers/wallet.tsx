@@ -8,7 +8,6 @@ import {
   SequenceConnector,
   TwitchWeb3AuthConnector,
   TwitterWeb3AuthConnector,
-  Web3AuthModalConnector,
   Web3OnboardBinanceConnector,
   Web3OnboardBraveConnector,
   Web3OnboardGamestopConnector,
@@ -16,12 +15,15 @@ import {
   Web3OnboardPortisConnector,
   Web3OnboardTrustConnector,
 } from '@flair-sdk/connectors';
+import { OAuthExtension, OAuthProvider } from '@magic-ext/oauth';
+import { MagicSDKAdditionalConfiguration } from '@magic-sdk/provider';
 import { alchemyProvider } from '@wagmi/core/providers/alchemy';
 import { infuraProvider } from '@wagmi/core/providers/infura';
 import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc';
 import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plugin';
 import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
-import { Options as Web3AuthOptions } from '@web3auth/web3auth-wagmi-connector/dist/types/lib/interfaces';
+import { Options as Web3AuthOptionsOriginal } from '@web3auth/web3auth-wagmi-connector/dist/types/lib/interfaces';
+import deepmerge from 'deepmerge';
 import { hexlify } from 'ethers/lib/utils';
 import React, {
   PropsWithChildren,
@@ -31,6 +33,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { Required } from 'utility-types';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
@@ -44,6 +47,11 @@ import { FLAIR_ALCHEMY_API_KEY, FLAIR_INFURA_PROJECT_ID } from '../constants';
 import { useAutoConnect } from '../hooks/useAutoConnect';
 import { useAutoSwitch } from '../hooks/useAutoSwitch';
 
+export type Web3AuthOptions = Required<
+  Partial<Web3AuthOptionsOriginal>,
+  'clientId'
+>;
+
 export type WalletProviderProps = {
   children?: ReactNode;
   appName?: string;
@@ -52,11 +60,27 @@ export type WalletProviderProps = {
   injectStyles?: boolean;
   wagmiOverrides?: Record<string, any>;
   tryAutoConnect?: boolean;
+  magicLinkOptions?: MagicLinkOptions;
+  web3AuthOptions?: Web3AuthOptions;
 };
 
-const FLAIR_MAGIC_API_KEY = 'pk_live_8B82089A89462668';
-const FLAIR_WEB3AUTH_CLIENT_ID =
-  'BELgvAxTUr_qKkDF7aS0Q0SxFXHxmAbzIrSRKKogR0e3__F_0GpQNzukF1uX9lWmwi0y1l2b0XBnxWLeLlPg-g4';
+export interface MagicLinkOptions {
+  apiKey: string;
+  accentColor?: string;
+  isDarkMode?: boolean;
+  customLogo?: string;
+  customHeaderText?: string;
+  enableEmailLogin?: boolean;
+  enableSMSlogin?: boolean;
+  oauthOptions?: {
+    providers: OAuthProvider[];
+    callbackUrl?: string;
+  };
+  additionalMagicOptions?: MagicSDKAdditionalConfiguration<
+    string,
+    OAuthExtension[]
+  >;
+}
 
 const {
   chains,
@@ -97,9 +121,13 @@ type LoginContextValue = {
   state: {
     preferredChainId: number;
     allowedNetworks: AllowedNetworks;
+    web3AuthOptions?: Web3AuthOptions;
+    magicLinkOptions?: MagicLinkOptions;
   };
   setPreferredChainId: (chainId: number) => void;
   setAllowedNetworks: (allowedNetworks: AllowedNetworks) => void;
+  setMagicLinkOptions: (options: MagicLinkOptions) => void;
+  setWeb3AuthOptions: (options: Web3AuthOptions) => void;
 };
 
 export const WalletContext = React.createContext<LoginContextValue | null>(
@@ -115,8 +143,17 @@ export const WalletProvider = ({
   tryAutoConnect = true,
   preferredChainId: preferredChainId_,
   wagmiOverrides,
+  web3AuthOptions: web3AuthOptions_,
+  magicLinkOptions: magicLinkOptions_,
 }: WalletProviderProps) => {
   const darkMode = isDarkMode();
+
+  const [web3AuthOptions, setWeb3AuthOptions] = useState<
+    Web3AuthOptions | undefined
+  >(web3AuthOptions_);
+  const [magicLinkOptions, setMagicLinkOptions] = useState<
+    MagicLinkOptions | undefined
+  >(magicLinkOptions_);
 
   const [preferredChainId, setPreferredChainId] = useState<number>(
     preferredChainId_ || 1,
@@ -159,19 +196,22 @@ export const WalletProvider = ({
       appLogo: 'https://app.flair.dev/logo-light-filled.png',
     };
 
-    const web3AuthOptions: Web3AuthOptions = {
-      network: 'cyan',
-      clientId: FLAIR_WEB3AUTH_CLIENT_ID,
-      uiConfig: {
-        theme: isDarkMode() ? 'dark' : undefined,
+    const web3AuthConfigured = Boolean(web3AuthOptions?.clientId);
+    const finalWeb3AuthOptions: Web3AuthOptionsOriginal = deepmerge(
+      web3AuthOptions || {},
+      {
+        network: 'cyan',
+        uiConfig: {
+          theme: isDarkMode() ? 'dark' : undefined,
+        },
+        socialLoginConfig: {
+          mfaLevel: 'optional',
+        },
+        uxMode: 'popup',
+        displayErrorsOnModal: true,
+        chainId: hexlify(preferredChainId).toString(),
       },
-      socialLoginConfig: {
-        mfaLevel: 'optional',
-      },
-      uxMode: 'popup',
-      displayErrorsOnModal: true,
-      chainId: hexlify(preferredChainId).toString(),
-    };
+    );
 
     const connectors: any[] = [
       new MetaMaskConnector({
@@ -207,53 +247,6 @@ export const WalletProvider = ({
         options: {
           debug: true,
         },
-      }),
-      new MagicLinkConnector({
-        chains,
-        options: {
-          apiKey: FLAIR_MAGIC_API_KEY,
-          isDarkMode: darkMode,
-          oauthOptions: {
-            providers: ['google', 'twitter', 'github', 'twitch', 'discord'],
-          },
-          customHeaderText: appName,
-        },
-      }),
-      new Web3AuthModalConnector({
-        chains,
-        options: {
-          network: 'cyan',
-          clientId: FLAIR_WEB3AUTH_CLIENT_ID,
-          uiConfig: {
-            theme: isDarkMode() ? 'dark' : undefined,
-          },
-          socialLoginConfig: {
-            mfaLevel: 'optional',
-          },
-          uxMode: 'popup',
-          displayErrorsOnModal: true,
-          chainId: hexlify(preferredChainId).toString(),
-        },
-      }),
-      new GoogleWeb3AuthConnector({
-        chains,
-        options: web3AuthOptions,
-      }),
-      new TwitterWeb3AuthConnector({
-        chains,
-        options: web3AuthOptions,
-      }),
-      new TwitchWeb3AuthConnector({
-        chains,
-        options: web3AuthOptions,
-      }),
-      new GithubWeb3AuthConnector({
-        chains,
-        options: web3AuthOptions,
-      }),
-      new DiscordWeb3AuthConnector({
-        chains,
-        options: web3AuthOptions,
       }),
       new SequenceConnector({
         chains: chains as any,
@@ -296,9 +289,51 @@ export const WalletProvider = ({
       }),
     ];
 
+    if (web3AuthConfigured) {
+      connectors.push(
+        new GoogleWeb3AuthConnector({
+          chains,
+          options: finalWeb3AuthOptions,
+        }),
+        new TwitterWeb3AuthConnector({
+          chains,
+          options: finalWeb3AuthOptions,
+        }),
+        new TwitchWeb3AuthConnector({
+          chains,
+          options: finalWeb3AuthOptions,
+        }),
+        new GithubWeb3AuthConnector({
+          chains,
+          options: finalWeb3AuthOptions,
+        }),
+        new DiscordWeb3AuthConnector({
+          chains,
+          options: finalWeb3AuthOptions,
+        }),
+      );
+    }
+
+    if (magicLinkOptions?.apiKey) {
+      connectors.push(
+        new MagicLinkConnector({
+          chains,
+          options: deepmerge(magicLinkOptions, {
+            isDarkMode: darkMode,
+            oauthOptions: {
+              providers: ['google', 'twitter', 'github', 'twitch', 'discord'],
+            },
+            customHeaderText: appName,
+          }),
+        }),
+      );
+    }
+
     connectors
-      ?.find((c) => c instanceof Web3AuthConnector)
-      ?.web3AuthInstance?.addPlugin?.(torusPlugin);
+      ?.filter((c) => c instanceof Web3AuthConnector)
+      ?.map((c) => {
+        c?.web3AuthInstance?.addPlugin?.(torusPlugin);
+      });
 
     return connectors;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -334,12 +369,16 @@ export const WalletProvider = ({
     state: {
       preferredChainId,
       allowedNetworks,
+      web3AuthOptions,
+      magicLinkOptions,
     },
     setPreferredChainId: (chainId: number) => {
       console.trace('WalletProvider setPreferredChainId === ', chainId);
       setPreferredChainId(chainId);
     },
     setAllowedNetworks,
+    setMagicLinkOptions,
+    setWeb3AuthOptions,
   };
 
   return React.createElement(

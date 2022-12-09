@@ -5,17 +5,7 @@ export type Diamond<TConfig = Record<string, any>> = {
   ownerAddress?: string;
   chainId?: number;
   contractAddress?: string;
-  privateName?: string;
-  publicTitle?: string;
-  profileImage?: string;
-  profileCover?: string;
-  profileBio?: string;
-  websiteLink?: string;
-  twitterLink?: string;
-  discordLink?: string;
-  otherLinks?: string[];
   smartContract?: SmartContract;
-  contractVerification?: any;
   deployTransaction?: string;
   config?: TConfig;
   plugins?: string[];
