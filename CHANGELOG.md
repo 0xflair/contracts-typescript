@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.57.1 (2022-12-09)
+
+
+### Bug Fixes
+
+* always lower case contract addresses ([8d47257](https://github.com/flair-sdk/typescript/commit/8d47257217dc3dc8334943ddcd76ab469d81ac8f))
+
+
+
+
+
 # 2.57.0 (2022-12-09)
 
 
