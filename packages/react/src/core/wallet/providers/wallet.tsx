@@ -337,7 +337,7 @@ export const WalletProvider = ({
 
     return connectors;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [appName, darkMode, preferredChainId]);
+  }, [appName, darkMode, preferredChainId, web3AuthOptions, magicLinkOptions]);
 
   const wagmiClient = useMemo(() => {
     return wrapWagmiClient(
