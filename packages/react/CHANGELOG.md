@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.58.1 (2022-12-09)
+
+
+### Bug Fixes
+
+* update wallet connectors based on dynamic configs ([a138ea3](https://github.com/flair-sdk/typescript/commit/a138ea3a1d1f5ab23ace702f757f1676629d986f))
+
+
+
+
+
 # 2.58.0 (2022-12-09)
 
 
