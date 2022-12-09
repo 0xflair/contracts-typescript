@@ -9,6 +9,7 @@ export * from './TieredSalesMaxSupply';
 export * from './TieredSalesMintButton';
 export * from './TieredSalesMintInput';
 export * from './TieredSalesMintStatusBar';
+export * from './TieredSalesPayButton';
 export * from './TieredSalesPrice';
 export * from './TieredSalesRemainingSupply';
 export * from './TieredSalesReservedSupply';
