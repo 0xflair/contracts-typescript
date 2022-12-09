@@ -89,10 +89,13 @@ export const useTieredSalesMinter = ({
   const _mintCount = mintCount || 1;
   const _maxAllowance = merkleMetadata?.maxAllowance || _mintCount;
   const _merkleProof = useMemo(() => merkleProof || [], [merkleProof]);
-  const _totalAmount =
-    typeof tier?.price !== 'undefined'
-      ? BigNumber.from(tier?.price).mul(BigNumber.from(_mintCount))
-      : undefined;
+  const _totalAmount = useMemo(
+    () =>
+      typeof tier?.price !== 'undefined'
+        ? BigNumber.from(tier?.price).mul(BigNumber.from(_mintCount))
+        : undefined,
+    [_mintCount, tier?.price],
+  );
 
   const {
     data: eligibleAmount,

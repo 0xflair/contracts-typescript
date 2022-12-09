@@ -4,6 +4,7 @@ import { BareComponentProps } from '../../../../common';
 import { useTieredSalesContext } from '../providers';
 
 type Props = PropsWithChildren<BareComponentProps> & {
+  disabled?: boolean;
   rampIgnoreCurrentBalance?: boolean;
   rampPaymentMethod?: string;
 };
@@ -11,6 +12,7 @@ type Props = PropsWithChildren<BareComponentProps> & {
 export const TieredSalesMintButton = ({
   as = 'button',
   children = 'Mint now',
+  disabled,
   rampIgnoreCurrentBalance,
   rampPaymentMethod,
   ...attributes
@@ -38,7 +40,7 @@ export const TieredSalesMintButton = ({
             : undefined,
         )
       }
-      disabled={!canMint || !mint}
+      disabled={!canMint || !mint || disabled}
       {...attributes}
     >
       {children}

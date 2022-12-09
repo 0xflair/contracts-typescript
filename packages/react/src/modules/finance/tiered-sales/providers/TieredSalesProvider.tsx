@@ -4,7 +4,7 @@ import { SendTransactionResult } from '@wagmi/core';
 import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
 import _ from 'lodash';
 import * as React from 'react';
-import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 
 import { useChainInfo } from '../../../../common';
@@ -36,6 +36,7 @@ type TieredSalesContextValue = {
 
     // Helpers
     // maxSupply?: BigNumberish;
+    rampConfig?: ReturnType<typeof useBalanceRampConfig>['data'];
     mintCount?: BigNumberish;
     autoDetectedTierId?: BigNumberish;
     canMint?: boolean;
@@ -207,20 +208,35 @@ export const TieredSalesProvider = ({
     mintCount,
   });
 
-  const { data: rampConfig } = useBalanceRampConfig({
-    env,
-    rampRequest: {
+  const rampRequest = useMemo(() => {
+    return {
       chainId: chainId.toString(),
       walletAddress: requiredAmounts?.[0].accounts?.[0]?.toString(),
       txTo: contractAddress,
-      txFrom: minterAddress?.toString(),
+      txFrom:
+        minterAddress?.toString() ||
+        requiredAmounts?.[0].accounts?.[0]?.toString(),
       txValue: mintPreparedConfig?.request?.value?.toString(),
       txData: mintPreparedConfig?.request?.data?.toString(),
       inputCurrency: 'USD',
       outputTokenAddress: requiredAmounts?.[0].token?.toString(),
       outputAmount: requiredAmounts?.[0].value?.toString(),
       testMode: chainInfo?.testnet,
-    },
+    };
+  }, [
+    chainId,
+    chainInfo?.testnet,
+    contractAddress,
+    mintPreparedConfig?.request?.data,
+    mintPreparedConfig?.request?.value,
+    minterAddress,
+    requiredAmounts,
+  ]);
+
+  const { data: rampConfig } = useBalanceRampConfig({
+    env,
+    rampRequest,
+    enabled: Boolean(rampRequest),
   });
 
   const canMint = Boolean(
