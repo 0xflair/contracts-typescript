@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.56.0 (2022-12-09)
+
+
+### Features
+
+* add ramp config in sales provider ([#12](https://github.com/flair-sdk/typescript/issues/12)) ([d82c7f7](https://github.com/flair-sdk/typescript/commit/d82c7f7649dadc3bbe34b780755838a74266f9a3))
+
+
+
+
+
 ## 2.55.3 (2022-12-08)
 
 
