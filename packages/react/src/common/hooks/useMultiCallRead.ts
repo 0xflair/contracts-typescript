@@ -88,6 +88,7 @@ export const useMultiCallRead = <TData extends any[]>({
     args: [callDataList as any],
     cacheTime: 0,
     staleTime: 0,
+    cacheOnBlock: false,
     ...restOfConfig,
   });
 

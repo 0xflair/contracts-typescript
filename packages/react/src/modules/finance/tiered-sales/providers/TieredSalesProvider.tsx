@@ -151,15 +151,18 @@ export const TieredSalesProvider = ({
     data: tiers,
     error: tiersError,
     isLoading: tiersLoading,
-    refetch: refetchTiers,
     fetchStatus: tiersFetchStatus,
     isPreviousData: tiersIsPreviousData,
+    refetch: refetchTiers,
   } = useSaleTiers({
     env,
     chainId,
     contractAddress,
     minterAddress: finalMinterAddress,
     enabled: Boolean(chainId && contractAddress),
+    cacheTime: 0,
+    staleTime: 0,
+    cacheOnBlock: false,
   });
 
   const {

@@ -10,7 +10,7 @@ import { BigNumber, BigNumberish, BytesLike } from 'ethers';
 import { useCallback, useEffect, useMemo } from 'react';
 
 import { PredefinedReadContractConfig } from '../../../../common';
-import { useMergeQueryStates } from '../../../../core';
+import { useMergeQueryStates } from '../../../../core/utils/useMergeQueryStates';
 import { Tier, TiersDictionary } from '../types';
 import { useSaleTiersConfigs } from './useSaleTiersConfigs';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
@@ -64,6 +64,9 @@ export const useSaleTiers = ({
     chainId,
     contractAddress,
     enabled,
+    cacheTime: 0,
+    staleTime: 0,
+    cacheOnBlock: false,
     ...restOfConfig,
   });
 
@@ -202,15 +205,16 @@ export const useSaleTiers = ({
   const queryClient = useQueryClient();
   const mergedStates = useMergeQueryStates([saleTiersQuery, tiersConfigsQuery]);
 
-  const refresh = useCallback(() => {
-    queryClient.invalidateQueries(queryKey);
-    refetchConfigs().then(() => {
-      saleTiersQuery.refetch();
+  const refetch = useCallback(() => {
+    queryClient.invalidateQueries(queryKey).then(() => {
+      refetchConfigs().then(() => {
+        saleTiersQuery.refetch();
+      });
     });
   }, [queryClient, queryKey, refetchConfigs, saleTiersQuery]);
 
   useEffect(() => {
-    refresh();
+    refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -219,6 +223,6 @@ export const useSaleTiers = ({
     ...mergedStates,
     data: saleTiersQuery.data,
     isLoading: mergedStates.isLoading || mergedStates?.fetchStatus !== 'idle',
-    refresh,
+    refetch,
   } as const;
 };

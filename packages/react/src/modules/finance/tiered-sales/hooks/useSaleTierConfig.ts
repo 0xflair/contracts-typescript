@@ -1,7 +1,9 @@
 import { BigNumberish } from 'ethers';
 
-import { PredefinedReadContractConfig } from '../../../../common';
-import { useContractRead } from '../../../../common/hooks/useContractRead';
+import {
+  PredefinedReadContractConfig,
+  useContractRead,
+} from '../../../../common';
 import { Tier } from '../types';
 
 type ArgsType = [tierId: BigNumberish];
@@ -80,7 +82,7 @@ export const useSaleTierConfig = (config: Config) => {
         type: 'function',
       },
     ],
-    cacheTime: 60,
+    cacheTime: 5,
     staleTime: 5,
     functionName: 'tiers(uint256)',
     args: isValid ? ([config.tierId] as ArgsType) : [0],

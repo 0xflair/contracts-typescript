@@ -4,10 +4,8 @@ import { BigNumber, BigNumberish, ethers } from 'ethers';
 import _ from 'lodash';
 import { useMemo } from 'react';
 
-import {
-  PredefinedReadContractConfig,
-  useMultiCallRead,
-} from '../../../../common';
+import { PredefinedReadContractConfig } from '../../../../common';
+import { useMultiCallRead } from '../../../../common/hooks/useMultiCallRead';
 import { Tier } from '../types';
 import { normalizeTiers } from '../util';
 
@@ -110,9 +108,9 @@ export const useSaleTiersConfigs = ({
     abi,
     enabled: Boolean(enabled && contractAddress),
     calls,
-    cacheTime,
-    staleTime,
-    cacheOnBlock,
+    cacheTime: cacheTime || 0,
+    staleTime: staleTime || 0,
+    cacheOnBlock: cacheOnBlock || false,
   });
 
   const normalizedTiers = useMemo(() => {

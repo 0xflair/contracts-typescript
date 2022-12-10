@@ -1,9 +1,8 @@
 import { Provider } from '@ethersproject/providers';
+import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { PrepareWriteContractConfig } from '@wagmi/core';
 import { BigNumber, BigNumberish, BytesLike, ethers, Signer } from 'ethers';
 import { useCallback, useMemo } from 'react';
-
-import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 
 import { useContractWriteAndWait } from '../../../../common';
 import { useERC20Allowance, useERC20Approve } from '../../../token';
