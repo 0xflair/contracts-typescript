@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.61.1 (2022-12-10)
+
+
+### Bug Fixes
+
+* use correct abi for tierToTokenId method ([66b2adf](https://github.com/flair-sdk/typescript/commit/66b2adf878af13c71ae93ca1571960c8590f705d))
+
+
+
+
+
 # 2.61.0 (2022-12-10)
 
 
