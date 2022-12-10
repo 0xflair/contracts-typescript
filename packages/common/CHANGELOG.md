@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.59.0 (2022-12-10)
+
+
+### Features
+
+* allow configuring dedicated web3auth and upgrade wagmi to 0.8.x ([#14](https://github.com/flair-sdk/typescript/issues/14)) ([a26dcda](https://github.com/flair-sdk/typescript/commit/a26dcdac2b32fd777005bee5a528f20ef8d3a54c))
+
+
+
+
+
 ## 2.58.1 (2022-12-09)
 
 

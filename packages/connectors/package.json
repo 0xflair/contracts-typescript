@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/connectors",
-  "version": "2.58.1",
+  "version": "2.59.0",
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
@@ -16,28 +16,28 @@
     "build": "rollup -c"
   },
   "peerDependencies": {
-    "@flair-sdk/common": "*",
     "@ethersproject/providers": "*",
     "@everipedia/wagmi-magic-connector": "*",
+    "@flair-sdk/common": "*",
     "@gnosis.pm/safe-apps-provider": "*",
     "@gnosis.pm/safe-apps-sdk": "*",
+    "@toruslabs/broadcast-channel": "*",
+    "@toruslabs/openlogin": "*",
     "@wagmi/core": "*",
     "@web3-onboard/common": "*",
     "@web3-onboard/core": "*",
     "@web3-onboard/injected-wallets": "*",
     "@web3-onboard/ledger": "*",
     "@web3-onboard/portis": "*",
-    "@web3auth/ui": "*",
     "@web3auth/base": "*",
     "@web3auth/core": "*",
     "@web3auth/openlogin-adapter": "*",
-    "loglevel": "*",
+    "@web3auth/ui": "*",
     "@web3auth/web3auth-wagmi-connector": "*",
     "bowser": "*",
     "ethers": "*",
     "eventemitter3": "*",
-    "@toruslabs/openlogin": "*",
-    "@toruslabs/broadcast-channel": "*"
+    "loglevel": "*"
   },
   "peerDependenciesMeta": {
     "@flair-sdk/common": {
@@ -105,7 +105,7 @@
     }
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.58.1",
+    "@flair-sdk/common": "^2.59.0",
     "@gnosis.pm/safe-apps-provider": "^0.13.1",
     "@gnosis.pm/safe-apps-sdk": "^7.8.0",
     "@wagmi/core": "^0.8.2",
