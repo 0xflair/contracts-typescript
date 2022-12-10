@@ -2,9 +2,9 @@ import { SmartContract } from '../../common';
 
 export type Diamond<TConfig = Record<string, any>> = {
   id?: string;
-  ownerAddress?: string;
+  ownerAddress?: `0x${string}`;
   chainId?: number;
-  contractAddress?: string;
+  contractAddress?: `0x${string}`;
   smartContract?: SmartContract;
   deployTransaction?: string;
   config?: TConfig;

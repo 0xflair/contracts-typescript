@@ -9,7 +9,21 @@ type ArgsType = [];
 
 export const useERC20DecimalsLocked = (config: Config) => {
   return useContractRead<boolean, ArgsType>({
-    contractInterface: ['function decimalsLocked() view returns (bool)'],
+    abi: [
+      {
+        inputs: [],
+        name: 'decimalsLocked',
+        outputs: [
+          {
+            internalType: 'bool',
+            name: '',
+            type: 'bool',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
     functionName: 'decimalsLocked()',
     ...config,
   });

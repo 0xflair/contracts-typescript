@@ -1,6 +1,5 @@
 import '@ethersproject/abstract-provider';
 
-import { SafeConnector } from '@flair-sdk/connectors';
 import { useCallback, useEffect, useState } from 'react';
 import { useInterval } from 'react-use';
 import {
@@ -8,6 +7,8 @@ import {
   useConnect,
   useWaitForTransaction as useWaitForTransactionWagmi,
 } from 'wagmi';
+
+import { SafeConnector } from '@flair-sdk/connectors';
 // import {
 //   UseWaitForTransactionArgs,
 //   UseWaitForTransactionConfig,

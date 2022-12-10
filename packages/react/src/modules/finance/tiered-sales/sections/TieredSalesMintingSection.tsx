@@ -1,5 +1,6 @@
-import { classNames } from '@flair-sdk/common';
 import { useAccount } from 'wagmi';
+
+import { classNames } from '@flair-sdk/common';
 
 import { SECONDARY_BUTTON } from '../../../../core/ui/components/elements/Button';
 import {

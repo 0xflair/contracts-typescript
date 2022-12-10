@@ -18,7 +18,7 @@ class Web3OnboardLedgerConnector extends Web3OnboardConnectorBase<Options> {
 
   walletModule!: WalletModule;
 
-  async getWalletModule() {
+  getWalletModule() {
     if (!this.walletModule) {
       const modules = ledgerModule({})({
         device: {

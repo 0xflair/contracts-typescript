@@ -9,8 +9,32 @@ export const useDefaultRoyalty = (config: PredefinedReadContractConfig) => {
   const { data, ...rest } = useContractRead<
     [receiver: BytesLike, bps: BigNumberish]
   >({
-    contractInterface: [
-      'function defaultRoyalty() view returns (address,uint16)',
+    abi: [
+      {
+        inputs: [],
+        name: 'defaultRoyalty',
+        outputs: [
+          {
+            components: [
+              {
+                internalType: 'address',
+                name: 'recipient',
+                type: 'address',
+              },
+              {
+                internalType: 'uint16',
+                name: 'bps',
+                type: 'uint16',
+              },
+            ],
+            internalType: 'struct IRoyaltyInternal.TokenRoyalty',
+            name: '',
+            type: 'tuple',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     functionName: 'defaultRoyalty()',
     ...config,

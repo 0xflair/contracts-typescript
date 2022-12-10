@@ -1,6 +1,7 @@
-import { classNames } from '@flair-sdk/common';
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
+
+import { classNames } from '@flair-sdk/common';
 
 export type ImageFieldProps = {
   label: string;

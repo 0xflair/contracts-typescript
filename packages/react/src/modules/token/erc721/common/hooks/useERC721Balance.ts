@@ -17,7 +17,27 @@ export const useERC721Balance = ({
   ...config
 }: Config) => {
   return useContractRead<BytesLike, ArgsType>({
-    contractInterface: ['function balanceOf(address) view returns (uint256)'],
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'address',
+            name: 'owner',
+            type: 'address',
+          },
+        ],
+        name: 'balanceOf',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
     functionName: 'balanceOf(address)',
     args: walletAddress !== undefined ? [walletAddress] : undefined,
     enabled: Boolean(enabled && walletAddress !== undefined),

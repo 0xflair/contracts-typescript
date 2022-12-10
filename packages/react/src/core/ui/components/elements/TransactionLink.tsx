@@ -1,6 +1,7 @@
+import { Chain } from '@wagmi/chains';
 import { SendTransactionResult } from '@wagmi/core';
 import { ethers } from 'ethers';
-import { Chain, useNetwork } from 'wagmi';
+import { useNetwork } from 'wagmi';
 
 import { useChainInfo } from '../../../../common';
 import { CopyButton } from './CopyButton';

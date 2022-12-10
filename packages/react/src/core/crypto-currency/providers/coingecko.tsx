@@ -1,6 +1,7 @@
-import { DOLLAR_STABLECOIN_SYMBOLS } from '@flair-sdk/common';
 import axios from 'axios';
 import React from 'react';
+
+import { DOLLAR_STABLECOIN_SYMBOLS } from '@flair-sdk/common';
 
 import {
   KNOWN_BASE_CURRENCIES,

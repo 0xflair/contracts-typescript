@@ -11,8 +11,26 @@ type Config = {
 
 export const useTieredSalesTotalMinted = (config: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
-    contractInterface: [
-      'function tierMints(uint256 tierId) external view returns (uint256)',
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'tierId',
+            type: 'uint256',
+          },
+        ],
+        name: 'tierMints',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     cacheTime: 10,
     staleTime: 2,

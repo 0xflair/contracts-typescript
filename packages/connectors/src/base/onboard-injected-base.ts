@@ -31,23 +31,22 @@ abstract class Web3OnboardInjectedConnectorBase<
   constructor(config: { chains?: Chain[]; options: Options }) {
     super({ ...config, options: config.options });
 
-    this.getWalletModule().then((module) => {
-      this.walletModule = module;
-      this.name = module.label;
+    const module = this.getWalletModule();
+    this.walletModule = module;
+    this.name = module.label;
 
-      if (getAvailableInjectedWallets().find((w) => w.label === module.label)) {
-        this.available = true;
-      }
-    });
+    if (getAvailableInjectedWallets().find((w) => w.label === module.label)) {
+      this.available = true;
+    }
   }
 
   abstract selectModule(
     wallets: InjectedWalletModule[],
-  ): Promise<InjectedWalletModule | undefined>;
+  ): InjectedWalletModule | undefined;
 
-  async getWalletModule(): Promise<InjectedWalletModule> {
+  getWalletModule(): InjectedWalletModule {
     if (!this.walletModule) {
-      const mod = await this.selectModule(injectedModuleWallets);
+      const mod = this.selectModule(injectedModuleWallets);
 
       if (!mod) {
         debugger;

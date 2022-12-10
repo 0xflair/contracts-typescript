@@ -1,5 +1,5 @@
 import { TransactionReceipt } from '@ethersproject/providers';
-import { SendTransactionResult } from '@wagmi/core';
+import type { SendTransactionResult } from '@wagmi/core';
 
 export type TransactionData = {
   receipt?: TransactionReceipt;

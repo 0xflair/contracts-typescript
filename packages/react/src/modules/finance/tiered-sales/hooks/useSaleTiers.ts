@@ -1,9 +1,10 @@
 import '@wagmi/core';
 
-import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
 import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
 import { useCallback } from 'react';
+
+import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 
 import { PredefinedReadContractConfig } from '../../../../common';
 import { useMergeQueryStates } from '../../../../core';
@@ -18,7 +19,7 @@ type ArgsType = [tierId: BigNumberish];
 type Config = {
   env?: Environment;
   chainId?: number;
-  contractAddress?: string;
+  contractAddress?: `0x${string}`;
   enabled?: boolean;
   minterAddress?: BytesLike;
 } & PredefinedReadContractConfig<ArgsType>;
@@ -180,9 +181,8 @@ export const useSaleTiers = ({
         !tiersConfigsQuery.isLoading &&
         tiersConfigsQuery.fetchStatus === 'idle',
     ),
-    // TODO Find a way to safely cache tiers data without causing issues when detecting eligible tier
-    cacheTime: 0,
-    staleTime: 0,
+    cacheTime: 60,
+    staleTime: 30,
   });
 
   const mergedStates = useMergeQueryStates([saleTiersQuery, tiersConfigsQuery]);

@@ -13,21 +13,75 @@ type ArgsType = [tierId: BigNumberish];
 
 type Config = {
   chainId?: number;
-  contractAddress?: string;
+  address?: `0x${string}`;
   enabled?: boolean;
 } & PredefinedReadContractConfig<ArgsType>;
 
-export const useSaleTiersConfigs = ({
-  chainId,
-  contractAddress,
-  enabled,
-}: Config) => {
-  const contractInterface = useMemo(() => {
-    return new ethers.utils.Interface([
-      'function tiers(uint256) view returns ((uint256 start,uint256 end,address currency,uint256 price,uint256 maxPerWallet,bytes32 merkleRoot,uint256 reserved,uint256 maxAllocation))',
-    ]);
-  }, []);
+const abi = [
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'tierId',
+        type: 'uint256',
+      },
+    ],
+    name: 'tiers',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'start',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'end',
+            type: 'uint256',
+          },
+          {
+            internalType: 'address',
+            name: 'currency',
+            type: 'address',
+          },
+          {
+            internalType: 'uint256',
+            name: 'price',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'maxPerWallet',
+            type: 'uint256',
+          },
+          {
+            internalType: 'bytes32',
+            name: 'merkleRoot',
+            type: 'bytes32',
+          },
+          {
+            internalType: 'uint256',
+            name: 'reserved',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'maxAllocation',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct ITieredSalesInternal.Tier',
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+] as const;
 
+export const useSaleTiersConfigs = ({ chainId, address, enabled }: Config) => {
   // Create an array of calls to get tiers by index from 0 to 20
   const calls = useMemo(() => {
     const calls = [];
@@ -43,9 +97,9 @@ export const useSaleTiersConfigs = ({
 
   const result = useMultiCallRead<Tier[]>({
     chainId,
-    addressOrName: contractAddress as string,
-    contractInterface,
-    enabled: Boolean(enabled && contractAddress),
+    address: address || ethers.constants.AddressZero,
+    abi,
+    enabled: Boolean(enabled && address),
     calls,
   });
 

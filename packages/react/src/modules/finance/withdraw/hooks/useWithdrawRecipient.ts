@@ -7,7 +7,21 @@ import {
 
 export const useWithdrawRecipient = (config: PredefinedReadContractConfig) => {
   return useContractRead<BytesLike>({
-    contractInterface: ['function withdrawRecipient() view returns (address)'],
+    abi: [
+      {
+        inputs: [],
+        name: 'withdrawRecipient',
+        outputs: [
+          {
+            internalType: 'address',
+            name: '',
+            type: 'address',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
     functionName: 'withdrawRecipient()',
     ...config,
   });

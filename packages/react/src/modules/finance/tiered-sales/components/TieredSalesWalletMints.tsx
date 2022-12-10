@@ -2,7 +2,7 @@ import { BytesLike } from 'ethers';
 import { Fragment } from 'react';
 
 import { BareComponentProps } from '../../../../common';
-import { useTieredSalesWalletMints as useTieredSalesWalletMints } from '../hooks/useTieredSalesWalletMints';
+import { useTieredSalesWalletMints } from '../hooks/useTieredSalesWalletMints';
 import { useTieredSalesContext } from '../providers/TieredSalesProvider';
 
 type Props = BareComponentProps & {

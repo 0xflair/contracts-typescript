@@ -7,7 +7,7 @@ class Web3OnboardBinanceConnector extends Web3OnboardInjectedConnectorBase {
   readonly id = 'web3OnboardBinance';
   custodyType = CustodyType.SELF_CUSTODY;
 
-  async selectModule(wallets: InjectedWalletModule[]) {
+  selectModule(wallets: InjectedWalletModule[]) {
     return wallets.find((w) => w.label.toLowerCase().includes('binance'));
   }
 

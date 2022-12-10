@@ -9,20 +9,8 @@ type Config = {
   tierId?: BigNumberish;
 } & PredefinedReadContractConfig<ArgsType>;
 
-export const useTieredSalesReservedSupply = ({
-  chainId,
-  contractAddress,
-  enabled,
-  tierId,
-  ...restOfConfig
-}: Config) => {
-  const result = useSaleTierConfig({
-    chainId,
-    contractAddress,
-    tierId,
-    enabled,
-    ...restOfConfig,
-  });
+export const useTieredSalesReservedSupply = (config: Config) => {
+  const result = useSaleTierConfig(config);
 
   return {
     ...result,

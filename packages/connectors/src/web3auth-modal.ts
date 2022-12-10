@@ -1,5 +1,6 @@
 import { CustodyType } from '@flair-sdk/common';
 import {
+  Chain,
   normalizeChainId,
   ProviderRpcError,
   SwitchChainError,
@@ -7,10 +8,10 @@ import {
 } from '@wagmi/core';
 import { ADAPTER_STATUS } from '@web3auth/base';
 import LoginModal, { LOGIN_MODAL_EVENTS } from '@web3auth/ui';
-import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
 import { hexlify } from 'ethers/lib/utils';
 
 import { ExtendedConnector } from './base/extended-connector';
+import { Web3AuthConnector } from './base/web3auth-core';
 
 export class Web3AuthModalConnector
   extends Web3AuthConnector
@@ -66,7 +67,7 @@ export class Web3AuthModalConnector
     });
   }
 
-  async switchChain(chainId: number) {
+  async switchChain(chainId: number): Promise<Chain> {
     const id = normalizeChainId(chainId);
 
     try {
@@ -107,7 +108,8 @@ export class Web3AuthModalConnector
           id: chainId,
           name: `Chain ${id}`,
           network: `${id}`,
-          rpcUrls: { default: '' },
+          rpcUrls: { default: { http: [''] } },
+          nativeCurrency: { name: 'Token', symbol: 'Token', decimals: 18 },
         }
       );
     } catch (error) {

@@ -7,7 +7,21 @@ export const useTokenMetadataBaseUriLocked = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<boolean>({
-    contractInterface: ['function baseURILocked() view returns (bool)'],
+    abi: [
+      {
+        inputs: [],
+        name: 'baseURILocked',
+        outputs: [
+          {
+            internalType: 'bool',
+            name: '',
+            type: 'bool',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
     functionName: 'baseURILocked()',
     ...config,
   });

@@ -1,5 +1,4 @@
-import { BigNumberish, BytesLike, ethers } from 'ethers';
-import { useMemo } from 'react';
+import { BigNumberish, BytesLike } from 'ethers';
 
 import {
   PredefinedReadContractConfig,
@@ -13,24 +12,33 @@ type Config = {
 } & PredefinedReadContractConfig<ArgsType>;
 
 export const useTokenMetadataUriBatch = ({
-  chainId,
-  contractAddress,
   enabled = true,
   tokenIds,
-  contractInterface: _contractInterface,
   ...restOfConfig
 }: Config) => {
-  const contractInterface = useMemo(() => {
-    return new ethers.utils.Interface([
-      'function uri(uint256) view returns (string)',
-    ]);
-  }, []);
-
   const result = useMultiCallRead<BytesLike[]>({
-    chainId,
-    addressOrName: contractAddress as string,
-    contractInterface,
-    enabled: Boolean(enabled && contractAddress),
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'tokenId',
+            type: 'uint256',
+          },
+        ],
+        name: 'uri',
+        outputs: [
+          {
+            internalType: 'string',
+            name: '',
+            type: 'string',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
+    enabled,
     calls: tokenIds?.length
       ? tokenIds.map((tokenId) => ({
           id: `token-${tokenId}`,

@@ -1,8 +1,9 @@
+import * as React from 'react';
+
 import {
   extractHumanReadableError,
   translateContractError,
 } from '@flair-sdk/common';
-import * as React from 'react';
 
 interface Props {
   title?: string;

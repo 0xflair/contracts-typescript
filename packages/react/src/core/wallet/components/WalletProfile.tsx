@@ -1,4 +1,3 @@
-import { classNames } from '@flair-sdk/common';
 import Blockies from 'react-blockies';
 import {
   useAccount,
@@ -7,6 +6,8 @@ import {
   useEnsName,
   useNetwork,
 } from 'wagmi';
+
+import { classNames } from '@flair-sdk/common';
 
 import { WalletComponentWrapper } from './WalletComponentWrapper';
 
@@ -44,12 +45,12 @@ export const WalletProfile = ({
   const { chain } = useNetwork();
   const { address } = useAccount();
   const { data: balance } = useBalance({
-    addressOrName: address,
+    address,
     formatUnits: 'ether',
     watch: false,
   });
   const { data: avatar } = useEnsAvatar({
-    addressOrName: address,
+    address,
     chainId: 1,
   });
   const { data: ens } = useEnsName({

@@ -7,7 +7,7 @@ class Web3OnboardGamestopConnector extends Web3OnboardInjectedConnectorBase {
   readonly id = 'web3OnboardGameStop';
   custodyType = CustodyType.SELF_CUSTODY;
 
-  async selectModule(wallets: InjectedWalletModule[]) {
+  selectModule(wallets: InjectedWalletModule[]) {
     return wallets.find((w) => w.label.toLowerCase().includes('gamestop'));
   }
 }

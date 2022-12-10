@@ -12,19 +12,33 @@ type Config = {
 } & PredefinedReadContractConfig<ArgsType>;
 
 export const useTierToTokenIds = ({
-  chainId,
-  contractAddress,
   enabled = true,
   tierIds,
   ...restOfConfig
 }: Config) => {
   const result = useContractRead<BigNumberish[], ArgsType>({
-    contractInterface: [
-      'function tierToTokenId(uint256[] calldata tierIds) external view virtual returns (uint256[] memory)',
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'tierId',
+            type: 'uint256',
+          },
+        ],
+        name: 'tierToTokenId',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     functionName: 'tierToTokenId(uint256[])',
-    chainId,
-    contractAddress,
     args: (tierIds?.length ? [tierIds] : []) as ArgsType,
     enabled: Boolean(enabled && tierIds?.length),
     ...restOfConfig,

@@ -1,6 +1,7 @@
-import { CustodyType } from '@flair-sdk/common';
 import type { WalletModule } from '@web3-onboard/common';
 import portisModule from '@web3-onboard/portis';
+
+import { CustodyType } from '@flair-sdk/common';
 
 import {
   BaseOptions,
@@ -16,7 +17,7 @@ class Web3OnboardPortisConnector extends Web3OnboardConnectorBase<Options> {
 
   walletModule!: WalletModule;
 
-  async getWalletModule() {
+  getWalletModule() {
     if (!this.walletModule) {
       const modules = portisModule({
         apiKey: '78fdcb96-6f55-43ae-a5a2-77e870455a0b',

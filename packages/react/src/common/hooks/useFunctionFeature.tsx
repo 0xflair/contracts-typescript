@@ -1,5 +1,6 @@
-import { Environment } from '@flair-sdk/common';
 import { useMemo } from 'react';
+
+import { Environment } from '@flair-sdk/common';
 
 import { FeatureFunction, FeatureType } from '../types';
 import { useSmartContract } from './useSmartContract';

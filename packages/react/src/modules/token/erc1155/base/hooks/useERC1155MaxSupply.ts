@@ -12,18 +12,32 @@ type Config = {
 } & PredefinedReadContractConfig<ArgsType>;
 
 export const useERC1155MaxSupply = ({
-  chainId,
-  contractAddress,
   enabled = true,
   tokenId,
   ...restOfConfig
 }: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
-    contractInterface: [
-      'function maxSupply(uint256 tokenId) external view returns (uint256)',
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
+          },
+        ],
+        name: 'maxSupply',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
-    chainId,
-    contractAddress,
     functionName: 'maxSupply(uint256)',
     args: [tokenId] as ArgsType,
     enabled: Boolean(enabled && tokenId),

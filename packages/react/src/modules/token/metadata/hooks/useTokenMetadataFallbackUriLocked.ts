@@ -7,7 +7,21 @@ export const useTokenMetadataFallbackUriLocked = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<boolean>({
-    contractInterface: ['function fallbackURILocked() view returns (bool)'],
+    abi: [
+      {
+        inputs: [],
+        name: 'fallbackURILocked',
+        outputs: [
+          {
+            internalType: 'bool',
+            name: '',
+            type: 'bool',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
     functionName: 'fallbackURILocked()',
     ...config,
   });

@@ -1,6 +1,7 @@
-import { Environment } from '@flair-sdk/common';
 import { BigNumberish, BytesLike } from 'ethers';
 import { useCallback } from 'react';
+
+import { Environment } from '@flair-sdk/common';
 
 import { useContractRead } from '../../../../common/hooks/useContractRead';
 import { useAddressListMerkleProof } from '../../../../core/address-lists';
@@ -63,11 +64,43 @@ export const useTieredSalesAllowlistChecker = ({
         merkleMetadata?.maxAllowance !== undefined &&
         merkleProof,
     ),
-    contractInterface: [
-      'function onTierAllowlist(uint256 tierId, address minter, uint256 maxAllowance, bytes32[] calldata proof) external view returns (bool)',
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'tierId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'address',
+            name: 'minter',
+            type: 'address',
+          },
+          {
+            internalType: 'uint256',
+            name: 'maxAllowance',
+            type: 'uint256',
+          },
+          {
+            internalType: 'bytes32[]',
+            name: 'proof',
+            type: 'bytes32[]',
+          },
+        ],
+        name: 'onTierAllowlist',
+        outputs: [
+          {
+            internalType: 'bool',
+            name: '',
+            type: 'bool',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     functionName: 'onTierAllowlist(uint256,address,uint256,bytes32[])',
-    contractAddress,
     cacheOnBlock: false,
     cacheTime: 10,
     staleTime: 2,

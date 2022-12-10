@@ -1,6 +1,7 @@
-import { ZERO_ADDRESS } from '@flair-sdk/common';
 import { BytesLike, utils } from 'ethers';
 import { useMemo } from 'react';
+
+import { ZERO_ADDRESS } from '@flair-sdk/common';
 
 type Config = {
   address?: BytesLike;

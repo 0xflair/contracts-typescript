@@ -7,7 +7,7 @@ class Web3OnboardBraveConnector extends Web3OnboardInjectedConnectorBase {
   readonly id = 'web3OnboardBrave';
   custodyType = CustodyType.SELF_CUSTODY;
 
-  async selectModule(wallets: InjectedWalletModule[]) {
+  selectModule(wallets: InjectedWalletModule[]) {
     return wallets.find((w) => w.label.toLowerCase().includes('brave'));
   }
 }

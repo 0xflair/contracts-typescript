@@ -4,11 +4,8 @@ import { utils } from 'ethers';
 import { useEffect, useMemo, useState } from 'react';
 import { useContractRead, useNetwork } from 'wagmi';
 
-type Config = Omit<
-  ReadContractConfig,
-  'args' | 'functionName' | 'contractInterface'
-> & {
-  contractInterface?: utils.Interface;
+type Config = Omit<ReadContractConfig, 'args' | 'functionName' | 'address'> & {
+  address?: string;
   calls?: ContractCall[];
   enabled?: boolean;
 };
@@ -16,7 +13,7 @@ type Config = Omit<
 export const useMultiCallRead = <TData extends any[]>({
   calls,
   enabled,
-  contractInterface,
+  abi,
   ...restOfConfig
 }: Config) => {
   const [error, setError] = useState<Error>();
@@ -36,9 +33,9 @@ export const useMultiCallRead = <TData extends any[]>({
           return undefined;
         }
 
-        const iface =
-          contractInterface ||
-          new utils.Interface([`function ${call.function}`]);
+        const iface = new utils.Interface(
+          (abi as any) || [`function ${call.function}`],
+        );
 
         if (!iface.functions[call.function]) {
           throw new Error(
@@ -59,15 +56,33 @@ export const useMultiCallRead = <TData extends any[]>({
         }
       })
       .filter((callData) => !!callData) || []) as string[];
-  }, [calls, contractInterface]);
+  }, [calls, abi]);
 
   const result = useContractRead({
-    contractInterface: [
-      'function multicall(bytes[] calldata data) external view returns (bytes[] memory results)',
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'bytes[]',
+            name: 'data',
+            type: 'bytes[]',
+          },
+        ],
+        name: 'multicall',
+        outputs: [
+          {
+            internalType: 'bytes[]',
+            name: 'results',
+            type: 'bytes[]',
+          },
+        ],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
     ],
     functionName: 'multicall',
-    enabled: Boolean(enabled && restOfConfig.addressOrName),
-    args: [callDataList],
+    enabled: Boolean(enabled && restOfConfig.address),
+    args: [callDataList as any],
     cacheTime: 0,
     staleTime: 0,
     ...restOfConfig,
@@ -75,7 +90,7 @@ export const useMultiCallRead = <TData extends any[]>({
 
   useEffect(() => {
     if (
-      !contractInterface ||
+      !abi ||
       !calls ||
       !enabled ||
       result.isLoading ||
@@ -87,9 +102,7 @@ export const useMultiCallRead = <TData extends any[]>({
     }
 
     if (!result.data || result.error) {
-      setError(
-        result.error || new Error(`No data or contract interface or calls`),
-      );
+      setError(result.error || new Error(`No data or abi or calls`));
       return;
     }
 
@@ -99,8 +112,9 @@ export const useMultiCallRead = <TData extends any[]>({
         throw new Error(`Call not found for result ${index}`);
       }
 
-      const iface =
-        contractInterface || new utils.Interface([`function ${call.function}`]);
+      const iface = new utils.Interface([
+        (abi as any) || `function ${call.function}`,
+      ]);
 
       if (!call.function || !iface.functions[call.function]) {
         throw new Error(

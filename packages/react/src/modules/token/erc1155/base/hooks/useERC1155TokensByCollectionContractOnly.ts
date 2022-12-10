@@ -1,6 +1,7 @@
-import { Environment } from '@flair-sdk/common';
 import { BigNumber } from 'ethers';
 import { useMemo } from 'react';
+
+import { Environment } from '@flair-sdk/common';
 
 import { useMergeQueryStates } from '../../../../../core';
 import { useNftTokensByCollection } from '../../../../../core/data-query/hooks/useNftTokensByCollection';

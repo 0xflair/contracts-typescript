@@ -1,7 +1,8 @@
-import { Environment } from '@flair-sdk/common';
 import { FLAIR_IPFS_BACKEND } from '@flair-sdk/ipfs';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
+
+import { Environment } from '@flair-sdk/common';
 
 import { useCancel } from '../../../common';
 
