@@ -1,8 +1,7 @@
+import { Environment } from '@flair-sdk/common';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useInterval } from 'react-use';
-
-import { Environment } from '@flair-sdk/common';
 
 import { FLAIR_SMART_CONTRACTS_BACKEND } from '../constants/backend';
 import { SmartContract } from '../types';

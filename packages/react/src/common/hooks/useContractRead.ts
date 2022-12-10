@@ -1,5 +1,6 @@
 import '@tanstack/react-query';
 
+import { ZERO_ADDRESS } from '@flair-sdk/common';
 import {
   ContractReference,
   findContractByReference,
@@ -8,8 +9,6 @@ import { ReadContractConfig as ReadContractConfigWagmi } from '@wagmi/core';
 import { ethers } from 'ethers';
 import { useCallback, useMemo } from 'react';
 import { useContractRead as useContractReadWagmi, useProvider } from 'wagmi';
-
-import { ZERO_ADDRESS } from '@flair-sdk/common';
 
 export type ReadContractConfig<ArgsType = []> = Partial<
   Omit<ReadContractConfigWagmi, 'address' | 'args'>
