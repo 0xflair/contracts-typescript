@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { PredefinedReadContractConfig } from '../../../../common';
 import { useTieredSalesRemainingSupply } from './useTieredSalesRemainingSupply';
 import { useTieredSalesReservedSupply } from './useTieredSalesReservedSupply';
-import { useTieredSalesTotalMinted as useTieredSalesTotalMinted } from './useTieredSalesTotalMinted';
+import { useTieredSalesTotalMinted } from './useTieredSalesTotalMinted';
 
 type Config = {
   tierId?: BigNumberish;

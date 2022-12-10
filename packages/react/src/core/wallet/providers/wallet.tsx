@@ -3,9 +3,7 @@ import {
   DiscordWeb3AuthConnector,
   GithubWeb3AuthConnector,
   GoogleWeb3AuthConnector,
-  MagicLinkConnector,
   SafeConnector,
-  SequenceConnector,
   TwitchWeb3AuthConnector,
   TwitterWeb3AuthConnector,
   Web3OnboardBinanceConnector,
@@ -15,8 +13,6 @@ import {
   Web3OnboardPortisConnector,
   Web3OnboardTrustConnector,
 } from '@flair-sdk/connectors';
-import { OAuthExtension, OAuthProvider } from '@magic-ext/oauth';
-import { MagicSDKAdditionalConfiguration } from '@magic-sdk/provider';
 import { alchemyProvider } from '@wagmi/core/providers/alchemy';
 import { infuraProvider } from '@wagmi/core/providers/infura';
 import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc';
@@ -44,8 +40,6 @@ import { isDarkMode } from '../../../common/utils/dark-mode';
 import stylesheet from '../../../index.css';
 import { wrapWagmiClient } from '../../balance-ramp';
 import { FLAIR_ALCHEMY_API_KEY, FLAIR_INFURA_PROJECT_ID } from '../constants';
-import { useAutoConnect } from '../hooks/useAutoConnect';
-import { useAutoSwitch } from '../hooks/useAutoSwitch';
 
 export type Web3AuthOptions = Required<
   Partial<Web3AuthOptionsOriginal>,
@@ -60,27 +54,8 @@ export type WalletProviderProps = {
   injectStyles?: boolean;
   wagmiOverrides?: Record<string, any>;
   tryAutoConnect?: boolean;
-  magicLinkOptions?: MagicLinkOptions;
   web3AuthOptions?: Web3AuthOptions;
 };
-
-export interface MagicLinkOptions {
-  apiKey: string;
-  accentColor?: string;
-  isDarkMode?: boolean;
-  customLogo?: string;
-  customHeaderText?: string;
-  enableEmailLogin?: boolean;
-  enableSMSlogin?: boolean;
-  oauthOptions?: {
-    providers: OAuthProvider[];
-    callbackUrl?: string;
-  };
-  additionalMagicOptions?: MagicSDKAdditionalConfiguration<
-    string,
-    OAuthExtension[]
-  >;
-}
 
 const {
   chains,
@@ -101,32 +76,19 @@ const {
         return null;
       }
 
-      return { http: chain.rpcUrls.default };
+      return { http: chain.rpcUrls.default.http[0] };
     },
   }),
 ]);
 
-const WalletAutomationWrapper = ({
-  tryAutoConnect,
-  preferredChainId,
-  children,
-}: PropsWithChildren<any>) => {
-  useAutoConnect(tryAutoConnect);
-  useAutoSwitch(preferredChainId);
-
-  return <>{children}</>;
-};
-
 type LoginContextValue = {
   state: {
-    preferredChainId: number;
-    allowedNetworks: AllowedNetworks;
+    allowedNetworks?: AllowedNetworks;
+    preferredChainId?: number;
     web3AuthOptions?: Web3AuthOptions;
-    magicLinkOptions?: MagicLinkOptions;
   };
   setPreferredChainId: (chainId: number) => void;
   setAllowedNetworks: (allowedNetworks: AllowedNetworks) => void;
-  setMagicLinkOptions: (options: MagicLinkOptions) => void;
   setWeb3AuthOptions: (options: Web3AuthOptions) => void;
 };
 
@@ -144,19 +106,15 @@ export const WalletProvider = ({
   preferredChainId: preferredChainId_,
   wagmiOverrides,
   web3AuthOptions: web3AuthOptions_,
-  magicLinkOptions: magicLinkOptions_,
 }: WalletProviderProps) => {
   const darkMode = isDarkMode();
 
   const [web3AuthOptions, setWeb3AuthOptions] = useState<
     Web3AuthOptions | undefined
   >(web3AuthOptions_);
-  const [magicLinkOptions, setMagicLinkOptions] = useState<
-    MagicLinkOptions | undefined
-  >(magicLinkOptions_);
 
-  const [preferredChainId, setPreferredChainId] = useState<number>(
-    preferredChainId_ || 1,
+  const [preferredChainId, setPreferredChainId] = useState<number | undefined>(
+    preferredChainId_,
   );
   const [allowedNetworks, setAllowedNetworks] =
     useState<AllowedNetworks>('ALL');
@@ -180,7 +138,7 @@ export const WalletProvider = ({
         enableLogging: true,
         network: preferredChain
           ? {
-              host: preferredChain.rpcUrls.default,
+              host: preferredChain.rpcUrls?.default?.http?.[0],
               chainId: preferredChain.id,
               blockExplorer: preferredChain.blockExplorers?.default.url,
               networkName: preferredChain.name,
@@ -209,7 +167,7 @@ export const WalletProvider = ({
         },
         uxMode: 'popup',
         displayErrorsOnModal: true,
-        chainId: hexlify(preferredChainId).toString(),
+        chainId: hexlify(preferredChainId || 1).toString(),
       },
     );
 
@@ -246,15 +204,6 @@ export const WalletProvider = ({
         chains,
         options: {
           debug: true,
-        },
-      }),
-      new SequenceConnector({
-        chains: chains as any,
-        options: {
-          connect: {
-            app: appName,
-            networkId: preferredChainId,
-          },
         },
       }),
       new Web3OnboardBinanceConnector({
@@ -314,21 +263,6 @@ export const WalletProvider = ({
       );
     }
 
-    if (magicLinkOptions?.apiKey) {
-      connectors.push(
-        new MagicLinkConnector({
-          chains,
-          options: deepmerge(magicLinkOptions, {
-            isDarkMode: darkMode,
-            oauthOptions: {
-              providers: ['google', 'twitter', 'github', 'twitch', 'discord'],
-            },
-            customHeaderText: appName,
-          }),
-        }),
-      );
-    }
-
     connectors
       ?.filter((c) => c instanceof Web3AuthConnector)
       ?.map((c) => {
@@ -336,20 +270,24 @@ export const WalletProvider = ({
       });
 
     return connectors;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [appName, darkMode, preferredChainId, web3AuthOptions, magicLinkOptions]);
+  }, [appName, darkMode, preferredChainId, web3AuthOptions]);
+
+  const connectorsList = useMemo(connectors, [
+    connectors,
+    preferredChainId,
+    web3AuthOptions,
+  ]);
 
   const wagmiClient = useMemo(() => {
     return wrapWagmiClient(
       createClient({
-        autoConnect: true,
-        connectors,
+        autoConnect: tryAutoConnect,
+        connectors: () => connectorsList,
         provider: wagmiProvider,
         webSocketProvider,
       }),
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connectors]);
+  }, [connectorsList, tryAutoConnect]);
 
   useEffect(() => {
     if (!injectStyles) {
@@ -370,27 +308,21 @@ export const WalletProvider = ({
       preferredChainId,
       allowedNetworks,
       web3AuthOptions,
-      magicLinkOptions,
     },
-    setPreferredChainId: (chainId: number) => {
-      console.trace('WalletProvider setPreferredChainId === ', chainId);
-      setPreferredChainId(chainId);
-    },
+    setPreferredChainId,
     setAllowedNetworks,
-    setMagicLinkOptions,
     setWeb3AuthOptions,
   };
 
   return React.createElement(
     WalletContext.Provider,
     { value },
-    <WagmiConfig client={wagmiClient} {...wagmiOverrides}>
-      <WalletAutomationWrapper
-        tryAutoConnect={tryAutoConnect}
-        preferredChainId={preferredChainId}
-      >
-        {children}
-      </WalletAutomationWrapper>
+    <WagmiConfig
+      client={wagmiClient}
+      {...wagmiOverrides}
+      key={connectorsList.length}
+    >
+      {children}
     </WagmiConfig>,
   );
 };

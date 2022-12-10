@@ -1,15 +1,16 @@
-import { allChains, Chain } from '@wagmi/core';
+import type { Chain } from '@wagmi/chains';
+import * as allChains from '@wagmi/chains';
 
 // TODO: Move these to wagmi repo itself
 // https://github.com/wagmi-dev/wagmi/blob/0.6.x/packages/core/src/constants/chains.ts#L234
-const newChains = [
+const newChains: Chain[] = [
   {
     id: 56,
     name: 'Binance Mainnet',
     network: 'bsc',
     nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
     rpcUrls: {
-      default: 'https://bsc-dataseed1.binance.org',
+      default: { http: ['https://bsc-dataseed1.binance.org'] },
     },
     blockExplorers: {
       etherscan: {
@@ -28,7 +29,7 @@ const newChains = [
     network: 'bscTestnet',
     nativeCurrency: { name: 'tBNB', symbol: 'tBNB', decimals: 18 },
     rpcUrls: {
-      default: 'https://data-seed-prebsc-1-s3.binance.org:8545',
+      default: { http: ['https://data-seed-prebsc-1-s3.binance.org:8545'] },
     },
     blockExplorers: {
       etherscan: {
@@ -48,7 +49,7 @@ const newChains = [
     network: 'okcMainnet',
     nativeCurrency: { name: 'OKT', symbol: 'OKT', decimals: 18 },
     rpcUrls: {
-      default: 'https://exchainrpc.okex.org',
+      default: { http: ['https://exchainrpc.okex.org'] },
     },
     blockExplorers: {
       etherscan: {
@@ -67,7 +68,7 @@ const newChains = [
     network: 'okcTestnet',
     nativeCurrency: { name: 'OKT', symbol: 'OKT', decimals: 18 },
     rpcUrls: {
-      default: 'https://exchaintestrpc.okex.org',
+      default: { http: ['https://exchaintestrpc.okex.org'] },
     },
     blockExplorers: {
       etherscan: {
@@ -91,7 +92,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://api.avax.network/ext/bc/C/rpc',
+      default: { http: ['https://api.avax.network/ext/bc/C/rpc'] },
     },
     blockExplorers: {
       etherscan: {
@@ -114,7 +115,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://api.avax-test.network/ext/bc/C/rpc',
+      default: { http: ['https://api.avax-test.network/ext/bc/C/rpc'] },
     },
     blockExplorers: {
       etherscan: {
@@ -138,7 +139,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://rpc.ankr.com/fantom',
+      default: { http: ['https://rpc.ankr.com/fantom'] },
     },
     blockExplorers: {
       etherscan: {
@@ -161,7 +162,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://rpc.testnet.fantom.network',
+      default: { http: ['https://rpc.testnet.fantom.network'] },
     },
     blockExplorers: {
       etherscan: {
@@ -185,7 +186,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://mainnet.aurora.dev',
+      default: { http: ['https://mainnet.aurora.dev'] },
     },
     blockExplorers: {
       etherscan: {
@@ -208,7 +209,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://testnet.aurora.dev',
+      default: { http: ['https://testnet.aurora.dev'] },
     },
     blockExplorers: {
       etherscan: {
@@ -232,7 +233,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://proxy.devnet.neonlabs.org/solana',
+      default: { http: ['https://proxy.devnet.neonlabs.org/solana'] },
     },
     blockExplorers: {
       etherscan: {
@@ -256,7 +257,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://eth.bd.evmos.dev:8545',
+      default: { http: ['https://eth.bd.evmos.dev:8545'] },
     },
     blockExplorers: {
       etherscan: {
@@ -280,7 +281,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://eth.bd.evmos.org:8545',
+      default: { http: ['https://eth.bd.evmos.org:8545'] },
     },
     blockExplorers: {
       etherscan: {
@@ -303,7 +304,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://rpc.api.moonbeam.network',
+      default: { http: ['https://rpc.api.moonbeam.network'] },
     },
     blockExplorers: {
       etherscan: {
@@ -326,7 +327,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://rpc.api.moonriver.moonbeam.network',
+      default: { http: ['https://rpc.api.moonriver.moonbeam.network'] },
     },
     blockExplorers: {
       etherscan: {
@@ -350,7 +351,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://zksync2-testnet.zksync.dev',
+      default: { http: ['https://zksync2-testnet.zksync.dev'] },
     },
     blockExplorers: {
       etherscan: {
@@ -374,7 +375,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://node.croswap.com/rpc',
+      default: { http: ['https://node.croswap.com/rpc'] },
     },
     blockExplorers: {
       etherscan: {
@@ -397,7 +398,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://evm-t3.cronos.org',
+      default: { http: ['https://evm-t3.cronos.org'] },
     },
     blockExplorers: {
       etherscan: {
@@ -421,7 +422,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://forno.celo.org',
+      default: { http: ['https://forno.celo.org'] },
     },
     blockExplorers: {
       etherscan: {
@@ -444,7 +445,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://alfajores-forno.celo-testnet.org',
+      default: { http: ['https://alfajores-forno.celo-testnet.org'] },
     },
     blockExplorers: {
       etherscan: {
@@ -468,7 +469,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://nova.arbitrum.io/rpc',
+      default: { http: ['https://nova.arbitrum.io/rpc'] },
     },
     blockExplorers: {
       etherscan: {
@@ -491,7 +492,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://mainnet.telos.net/evm',
+      default: { http: ['https://mainnet.telos.net/evm'] },
     },
     blockExplorers: {
       etherscan: {
@@ -514,7 +515,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://testnet.telos.net/evm',
+      default: { http: ['https://testnet.telos.net/evm'] },
     },
     blockExplorers: {
       etherscan: {
@@ -538,7 +539,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://emerald.oasis.dev',
+      default: { http: ['https://emerald.oasis.dev'] },
     },
     blockExplorers: {
       etherscan: {
@@ -561,7 +562,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://testnet.emerald.oasis.dev',
+      default: { http: ['https://testnet.emerald.oasis.dev'] },
     },
     blockExplorers: {
       etherscan: {
@@ -585,7 +586,7 @@ const newChains = [
       decimals: 18,
     },
     rpcUrls: {
-      default: 'https://rpc.fuse.io',
+      default: { http: ['https://rpc.fuse.io'] },
     },
     blockExplorers: {
       etherscan: {
@@ -600,7 +601,9 @@ const newChains = [
   },
 ];
 
-const WagmiChains = allChains.filter((c) => ![3, 4, 421611].includes(c.id));
+const WagmiChains = Object.values(allChains).filter(
+  (c) => ![3, 4, 421611].includes(c.id),
+);
 
 export const FLAIR_CHAINS: Chain[] = [...WagmiChains, ...newChains];
 

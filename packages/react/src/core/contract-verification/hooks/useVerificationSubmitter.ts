@@ -1,4 +1,3 @@
-import { Environment } from '@flair-sdk/common';
 import {
   ContractReference,
   findContractByReference,
@@ -6,6 +5,8 @@ import {
 import * as axios from 'axios';
 import { ethers } from 'ethers';
 import { useMemo } from 'react';
+
+import { Environment } from '@flair-sdk/common';
 
 import { useAxiosPost } from '../../../common';
 import { useLoginJwt } from '../../wallet';

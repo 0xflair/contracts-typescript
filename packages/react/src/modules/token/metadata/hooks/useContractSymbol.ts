@@ -7,7 +7,21 @@ import {
 
 export const useContractSymbol = (config: PredefinedReadContractConfig) => {
   return useContractRead<BytesLike>({
-    contractInterface: ['function symbol() view returns (string)'],
+    abi: [
+      {
+        inputs: [],
+        name: 'symbol',
+        outputs: [
+          {
+            internalType: 'string',
+            name: '',
+            type: 'string',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
     functionName: 'symbol()',
     cacheTime: 1000 * 60 * 60 * 3,
     staleTime: 1000 * 60 * 60 * 3,

@@ -1,7 +1,5 @@
-import { Provider } from '@ethersproject/providers';
 import { PrepareWriteContractConfig } from '@wagmi/core';
-import { ContractInterface, ethers, Signer } from 'ethers';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import {
   useAccount,
   useContractWrite,
@@ -13,16 +11,9 @@ import { useWaitForTransaction } from './useWaitForTransaction';
 
 export type ContractWriteConfig<ArgsType extends any[]> = Omit<
   PrepareWriteContractConfig,
-  | 'addressOrName'
-  | 'addressOrName'
-  | 'contractInterface'
-  | 'functionName'
-  | 'args'
+  'address' | 'args'
 > & {
-  contractInterface: ContractInterface;
   contractAddress?: string;
-  signerOrProvider?: Signer | Provider | null;
-  functionName: string;
   args?: ArgsType;
   confirmations?: number;
   prepare?: boolean;
@@ -31,31 +22,30 @@ export type ContractWriteConfig<ArgsType extends any[]> = Omit<
 export type PredefinedContractWriteConfig<ArgsType extends any[] = any[]> =
   Omit<
     ContractWriteConfig<ArgsType>,
-    'args' | 'contractInterface' | 'functionName'
+    'address' | 'args' | 'abi' | 'functionName'
   > & {
     contractAddress?: string;
     prepare?: boolean;
   };
 
 export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
-  contractInterface,
+  abi,
   contractAddress,
-  signerOrProvider,
   functionName,
   args,
   confirmations = 1,
   prepare = true,
   ...restOfConfig
 }: ContractWriteConfig<ArgsType>) => {
-  const { address, isConnected } = useAccount();
+  const { address: account, isConnected } = useAccount();
   const { chain } = useNetwork();
 
   const shouldPrepare = Boolean(
     prepare &&
       isConnected &&
-      address &&
+      account &&
       contractAddress &&
-      contractInterface &&
+      abi &&
       args !== undefined &&
       functionName,
   );
@@ -68,8 +58,8 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     isLoading: prepareLoading,
   } = usePrepareContractWrite({
     enabled: shouldPrepare,
-    addressOrName: contractAddress as string,
-    contractInterface,
+    address: contractAddress,
+    abi,
     functionName,
     args,
     ...restOfConfig,

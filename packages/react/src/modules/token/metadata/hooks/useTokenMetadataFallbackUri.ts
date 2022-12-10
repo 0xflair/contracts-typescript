@@ -9,7 +9,21 @@ export const useTokenMetadataFallbackUri = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<BytesLike>({
-    contractInterface: ['function fallbackURI() view returns (string)'],
+    abi: [
+      {
+        inputs: [],
+        name: 'fallbackURI',
+        outputs: [
+          {
+            internalType: 'string',
+            name: '',
+            type: 'string',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
     functionName: 'fallbackURI()',
     ...config,
   });

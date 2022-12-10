@@ -34,7 +34,7 @@ abstract class Web3OnboardConnectorBase<TOptions extends BaseOptions>
 {
   name: string = '';
   icon?: ExtendedConnector['icon'];
-  ready: boolean = false;
+  ready: boolean = true;
   available: boolean = true;
   custodyType: CustodyType = CustodyType.UNKNOWN;
 
@@ -43,28 +43,28 @@ abstract class Web3OnboardConnectorBase<TOptions extends BaseOptions>
   constructor(config: { chains?: Chain[]; options: TOptions }) {
     super({ ...config, options: config.options });
 
-    this.getWalletModule()
-      .then((m) => {
-        if (!this.name) {
-          this.name = m.label;
-        }
-        this.ready = true;
-        this.available = true;
+    try {
+      const module = this.getWalletModule();
+      if (!this.name) {
+        this.name = module.label;
+      }
+      this.ready = true;
+      this.available = true;
 
-        if (!this.icon) {
-          m.getIcon().then((icon) => {
-            this.icon = icon;
-          });
-        }
-      })
-      .catch((e) => {
-        this.ready = false;
-        this.available = false;
-        this.emit('error', e);
-      });
+      if (!this.icon) {
+        this.icon = module.getIcon().then((icon) => {
+          this.icon = icon;
+          return icon;
+        });
+      }
+    } catch (e: any) {
+      this.ready = false;
+      this.available = false;
+      this.emit('error', e);
+    }
   }
 
-  abstract getWalletModule(): Promise<WalletModule>;
+  abstract getWalletModule(): WalletModule;
 
   async connect() {
     const provider = await this.getProvider();
@@ -94,7 +94,7 @@ abstract class Web3OnboardConnectorBase<TOptions extends BaseOptions>
     provider.removeListener('disconnect', this.onDisconnect);
   }
 
-  async getAccount() {
+  async getAccount(): Promise<`0x${string}`> {
     const accounts = await (
       await this.getProvider()
     ).request({ method: 'eth_requestAccounts' });
@@ -103,7 +103,7 @@ abstract class Web3OnboardConnectorBase<TOptions extends BaseOptions>
       throw new Error('No accounts found');
     }
 
-    return accounts[0].toString();
+    return accounts[0].toString() as `0x${string}`;
   }
 
   async getChainId() {
@@ -117,7 +117,7 @@ abstract class Web3OnboardConnectorBase<TOptions extends BaseOptions>
   }
 
   async getProvider() {
-    const walletModule = await this.getWalletModule();
+    const walletModule = this.getWalletModule();
 
     if (!this.provider) {
       this.provider = (
@@ -125,7 +125,7 @@ abstract class Web3OnboardConnectorBase<TOptions extends BaseOptions>
           chains: this.chains.map((x) => ({
             id: x.id.toString(),
             label: x.name,
-            rpcUrl: x.rpcUrls.default,
+            rpcUrl: x.rpcUrls.default.http[0],
             token: x.nativeCurrency?.symbol || 'Token',
           })),
           BigNumber,
@@ -165,7 +165,8 @@ abstract class Web3OnboardConnectorBase<TOptions extends BaseOptions>
           id: chainId,
           name: `Chain ${id}`,
           network: `${id}`,
-          rpcUrls: { default: '' },
+          rpcUrls: { default: { http: [''] } },
+          nativeCurrency: { name: 'Token', symbol: 'Token', decimals: 18 },
         }
       );
     } catch (error) {

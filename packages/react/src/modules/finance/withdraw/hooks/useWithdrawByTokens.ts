@@ -1,11 +1,9 @@
-import { Provider } from '@ethersproject/providers';
-import { BigNumberish, BytesLike, Signer } from 'ethers';
+import { BigNumberish, BytesLike } from 'ethers';
 
 import { useContractWriteAndWait } from '../../../../common';
 
 type Config = {
   contractAddress?: string;
-  signerOrProvider?: Signer | Provider | null;
   tokenAddresses?: BytesLike[];
   amounts?: BigNumberish[];
   prepare?: boolean;
@@ -13,16 +11,33 @@ type Config = {
 
 export const useWithdrawByTokens = ({
   contractAddress,
-  signerOrProvider,
   prepare,
   tokenAddresses,
   amounts,
 }: Config) => {
   return useContractWriteAndWait({
-    contractInterface: ['function withdraw(address[],uint256[])'],
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'address[]',
+            name: 'claimTokens',
+            type: 'address[]',
+          },
+          {
+            internalType: 'uint256[]',
+            name: 'amounts',
+            type: 'uint256[]',
+          },
+        ],
+        name: 'withdraw',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+    ],
     functionName: 'withdraw(address[],uint256[])',
     contractAddress,
-    signerOrProvider,
     confirmations: 1,
     args: [tokenAddresses, amounts],
     prepare: Boolean(prepare && contractAddress && tokenAddresses && amounts),

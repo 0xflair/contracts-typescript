@@ -1,6 +1,6 @@
 import { TransactionReceipt } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
-import { SendTransactionResult } from '@wagmi/core';
+import { PrepareWriteContractConfig, SendTransactionResult } from '@wagmi/core';
 import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
 import _ from 'lodash';
 import * as React from 'react';
@@ -87,7 +87,7 @@ type TieredSalesContextValue = {
       mintCount: BigNumberish;
       allowlistProof?: BytesLike[];
     },
-    overrides?: Partial<ethers.CallOverrides>,
+    overrides?: Partial<PrepareWriteContractConfig['overrides']>,
   ) => void;
 };
 
@@ -101,7 +101,7 @@ type FunctionalChildren = (
 type Props = {
   env?: Environment;
   chainId: number | string;
-  contractAddress: string;
+  contractAddress: `0x${string}`;
 
   tierId?: BigNumberish;
   autoSelectEligibleTier?: boolean;
@@ -136,7 +136,7 @@ export const TieredSalesProvider = ({
   const chainId = Number(rawChainId);
   const chainInfo = useChainInfo(chainId);
 
-  const { address } = useAccount();
+  const { address: account } = useAccount();
   const [currentTierId, setCurrentTierId] = useState<BigNumberish | undefined>(
     tierId !== undefined ? Number(tierId.toString()) : undefined,
   );
@@ -145,7 +145,7 @@ export const TieredSalesProvider = ({
   const [mintCount, setMintCount] = useState<BigNumberish>(1);
   const [isAutoDetectingTier, setIsAutoDetectingTier] = useState(true);
 
-  const finalMinterAddress = minterAddress || address;
+  const finalMinterAddress = minterAddress || account;
 
   const {
     data: tiers,
@@ -157,7 +157,7 @@ export const TieredSalesProvider = ({
   } = useSaleTiers({
     env,
     chainId,
-    contractAddress: contractAddress,
+    contractAddress,
     minterAddress: finalMinterAddress,
     enabled: Boolean(chainId && contractAddress),
   });
@@ -345,7 +345,7 @@ export const TieredSalesProvider = ({
   const mint = useCallback(
     async (
       args?: { mintCount: BigNumberish },
-      overrides?: Partial<ethers.CallOverrides>,
+      overrides?: Partial<PrepareWriteContractConfig['overrides']>,
     ) => {
       const result = await doMint?.(args, overrides);
 

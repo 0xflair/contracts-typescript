@@ -1,4 +1,3 @@
-import { CustodyType } from '@flair-sdk/common';
 import {
   normalizeChainId,
   ProviderRpcError,
@@ -6,11 +5,12 @@ import {
   UserRejectedRequestError,
 } from '@wagmi/core';
 import { ADAPTER_STATUS } from '@web3auth/base';
-import LoginModal, { LOGIN_MODAL_EVENTS } from '@web3auth/ui';
-import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
 import { hexlify } from 'ethers/lib/utils';
 
+import { CustodyType } from '@flair-sdk/common';
+
 import { ExtendedConnector } from './extended-connector';
+import { Web3AuthConnector } from './web3auth-core';
 
 export abstract class Web3AuthBaseConnector
   extends Web3AuthConnector
@@ -91,7 +91,8 @@ export abstract class Web3AuthBaseConnector
           id: chainId,
           name: `Chain ${id}`,
           network: `${id}`,
-          rpcUrls: { default: '' },
+          rpcUrls: { default: { http: [''] } },
+          nativeCurrency: { name: 'Token', symbol: 'Token', decimals: 18 },
         }
       );
     } catch (error) {

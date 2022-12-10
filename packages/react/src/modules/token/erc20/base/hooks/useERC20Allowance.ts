@@ -14,8 +14,31 @@ type Config = PredefinedReadContractConfig<ArgsType> & {
 
 export const useERC20Allowance = (config: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
-    contractInterface: [
-      'function allowance(address holder, address spender) view returns (uint256)',
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'address',
+            name: 'holder',
+            type: 'address',
+          },
+          {
+            internalType: 'address',
+            name: 'spender',
+            type: 'address',
+          },
+        ],
+        name: 'allowance',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     functionName: 'allowance(address,address)',
     args: [config.holder, config.spender] as ArgsType,

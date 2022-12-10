@@ -1,7 +1,9 @@
 import { Provider } from '@ethersproject/providers';
-import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
+import { PrepareWriteContractConfig } from '@wagmi/core';
 import { BigNumber, BigNumberish, BytesLike, ethers, Signer } from 'ethers';
 import { useCallback, useMemo } from 'react';
+
+import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
 
 import { useContractWriteAndWait } from '../../../../common';
 import { useERC20Allowance, useERC20Approve } from '../../../token';
@@ -34,7 +36,6 @@ export const useTieredSalesMinter = ({
   env,
   chainId,
   contractAddress,
-  signerOrProvider,
   tierId,
   minterAddress,
   mintCount,
@@ -174,12 +175,38 @@ export const useTieredSalesMinter = ({
     isLoading: mintLoading,
     writeAndWait: mintAndWait,
   } = useContractWriteAndWait<ArgsType>({
-    contractInterface: [
-      'function mintByTier(uint256 tierId,uint256 count,uint256 maxAllowance,bytes32[] calldata proof) external payable',
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'tierId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'count',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'maxAllowance',
+            type: 'uint256',
+          },
+          {
+            internalType: 'bytes32[]',
+            name: 'proof',
+            type: 'bytes32[]',
+          },
+        ],
+        name: 'mintByTier',
+        outputs: [],
+        stateMutability: 'payable',
+        type: 'function',
+      },
     ],
     functionName: 'mintByTier',
     contractAddress,
-    signerOrProvider,
     confirmations: 1,
     args: [_tierId, _mintCount, _maxAllowance, _merkleProof] as ArgsType,
     prepare: shouldPrepareMint,
@@ -194,7 +221,7 @@ export const useTieredSalesMinter = ({
   const mint = useCallback(
     (
       args?: { mintCount: BigNumberish },
-      overrides?: Partial<ethers.CallOverrides>,
+      overrides?: Partial<PrepareWriteContractConfig['overrides']>,
     ) => {
       const _finalMintCount = args?.mintCount || _mintCount;
       const _finalTotalAmount = args?.mintCount

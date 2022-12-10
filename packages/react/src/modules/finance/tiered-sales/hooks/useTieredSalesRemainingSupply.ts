@@ -39,8 +39,26 @@ export const useTieredSalesRemainingSupply = ({
   });
 
   const hook = useContractRead<BigNumberish, ArgsType>({
-    contractInterface: [
-      'function remainingForTier(uint256 tierId) external view returns (uint256)',
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'tierId',
+            type: 'uint256',
+          },
+        ],
+        name: 'remainingForTier',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     cacheTime: 10,
     staleTime: 2,

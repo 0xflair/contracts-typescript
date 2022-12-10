@@ -1,8 +1,5 @@
-import { classNames, CustodyType } from '@flair-sdk/common';
-import { ExtendedConnector } from '@flair-sdk/connectors';
 import {
   GenericWalletIcon,
-  MagicLinkIcon,
   MetaMaskIcon,
   TrustWalletIcon,
   WalletConnectIcon,
@@ -11,6 +8,9 @@ import {
 import MetaMaskOnboarding from '@metamask/onboarding';
 import { useRef } from 'react';
 import { Connector, useAccount, useConnect } from 'wagmi';
+
+import { classNames, CustodyType } from '@flair-sdk/common';
+import { ExtendedConnector } from '@flair-sdk/connectors';
 
 import { Spinner } from '../../ui';
 import { PromisedImage } from '../../ui/components/elements/PromisedImage';
@@ -21,6 +21,7 @@ import {
   TrustWalletDeepLink,
 } from '../deeplinks';
 import { ArgentWalletDeepLink } from '../deeplinks/argent-wallet';
+import { useWalletContext } from '../providers';
 import { DeepLinkConfig } from '../types/deep-links';
 import { WalletComponentWrapper } from './WalletComponentWrapper';
 
@@ -53,6 +54,9 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const activeButtonRef = useRef(null);
   const { connectors, connect, isLoading, pendingConnector } = useConnect();
   const { isConnecting, isReconnecting } = useAccount();
+  const {
+    state: { preferredChainId },
+  } = useWalletContext();
 
   const connectorMetamask = connectors.find((c) => c.id == 'metaMask');
   const connectorInjected = connectors.find((c) => c.id == 'injected');
@@ -62,8 +66,6 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const connectorCoinbaseWallet = connectors.find(
     (c) => c.id == 'coinbaseWallet',
   );
-  const connectorMagic = connectors.find((c) => c.id == 'magic');
-
   const metamaskAvailable = Boolean(
     typeof window !== 'undefined' &&
       (window?.['ethereum'] || MetaMaskOnboarding.isMetaMaskInstalled()),
@@ -95,6 +97,8 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
   const isWorking = isLoading || isConnecting || isReconnecting;
   const pendingConnectorId = pendingConnector?.id;
 
+  console.log('connectors === ', connectors);
+
   return (
     <WalletComponentWrapper as={props.as} className={className}>
       {connectorMetamask &&
@@ -115,7 +119,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                     .toLowerCase()}`,
                   buttonClassName,
                 )}
-                onClick={() => connect({ connector: connectorMetamask })}
+                onClick={() =>
+                  connect({
+                    connector: connectorMetamask,
+                    chainId: preferredChainId,
+                  })
+                }
               >
                 {isWorking && pendingConnectorId == connectorMetamask.id ? (
                   <Spinner />
@@ -170,7 +179,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                   .toLowerCase()}`,
                 buttonClassName,
               )}
-              onClick={() => connect({ connector: connectorInjected })}
+              onClick={() =>
+                connect({
+                  connector: connectorInjected,
+                  chainId: preferredChainId,
+                })
+              }
             >
               {isWorking && pendingConnectorId == connectorInjected.id ? (
                 <Spinner />
@@ -206,7 +220,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               'flair connect-button connector connector-wallet-connect',
               buttonClassName,
             )}
-            onClick={() => connect({ connector: connectorWalletConnect })}
+            onClick={() =>
+              connect({
+                connector: connectorWalletConnect,
+                chainId: preferredChainId,
+              })
+            }
           >
             {isWorking && pendingConnectorId == connectorWalletConnect.id ? (
               <Spinner />
@@ -234,7 +253,12 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               'flair connect-button connector connector-coinbase',
               buttonClassName,
             )}
-            onClick={() => connect({ connector: connectorCoinbaseWallet })}
+            onClick={() =>
+              connect({
+                connector: connectorCoinbaseWallet,
+                chainId: preferredChainId,
+              })
+            }
           >
             {isWorking && pendingConnectorId == connectorCoinbaseWallet.id ? (
               <Spinner />
@@ -267,8 +291,11 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
                 `connector-${connector.id}`,
                 buttonClassName,
               )}
-              onClick={() => connect({ connector: connector })}
+              onClick={() => connect({ connector, chainId: preferredChainId })}
             >
+              {/* isWorking = {isWorking.toString()}
+              available = {connector.available.toString()}
+              ready = {connector.ready.toString()} */}
               {isWorking && pendingConnectorId == connector.id ? (
                 <Spinner />
               ) : (
@@ -288,36 +315,6 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
               </span>
             </button>
           ) : null,
-        )}
-
-      {connectorMagic &&
-        showConnector(connectorMagic, {
-          custodyType: CustodyType.THIRD_PARTY,
-          supported: true,
-        }) && (
-          <>
-            <button
-              type="button"
-              className={classNames(
-                'flair connect-button connector connector-magic',
-                buttonClassName,
-              )}
-              onClick={() => connect({ connector: connectorMagic })}
-              disabled={!connectorMagic.ready || isWorking}
-            >
-              {isWorking && pendingConnectorId == connectorMagic.id ? (
-                <Spinner />
-              ) : (
-                <MagicLinkIcon className={iconClassName} />
-              )}
-              <span className="truncate">
-                {connectorLabel?.(connectorMagic, {
-                  custodyType: CustodyType.THIRD_PARTY,
-                  supported: true,
-                })}
-              </span>
-            </button>
-          </>
         )}
 
       {deepLinks.map((deepLink) =>

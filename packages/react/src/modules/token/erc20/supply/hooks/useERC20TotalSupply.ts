@@ -7,7 +7,21 @@ import {
 
 export const useERC20TotalSupply = (config: PredefinedReadContractConfig) => {
   return useContractRead<BigNumberish>({
-    contractInterface: ['function totalSupply() view returns (uint256)'],
+    abi: [
+      {
+        inputs: [],
+        name: 'totalSupply',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
     functionName: 'totalSupply()',
     ...config,
   });

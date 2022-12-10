@@ -1,5 +1,6 @@
-import { classNames } from '@flair-sdk/common';
 import React from 'react';
+
+import { classNames } from '@flair-sdk/common';
 
 export const Spinner = ({ className = 'h-5 w-5' }: { className?: string }) => {
   return (

@@ -7,7 +7,21 @@ import {
 
 export const useERC20MaxSupply = (config: PredefinedReadContractConfig) => {
   return useContractRead<BigNumberish>({
-    contractInterface: ['function maxSupply() view returns (uint256)'],
+    abi: [
+      {
+        inputs: [],
+        name: 'maxSupply',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
     functionName: 'maxSupply()',
     ...config,
   });

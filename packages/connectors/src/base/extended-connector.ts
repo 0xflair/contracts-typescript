@@ -6,5 +6,5 @@ export interface ExtendedConnector extends Connector {
   available: boolean;
   ready: boolean;
   custodyType: CustodyType;
-  icon?: string | ((props: any) => JSX.Element);
+  icon?: string | Promise<string> | ((props: any) => JSX.Element);
 }

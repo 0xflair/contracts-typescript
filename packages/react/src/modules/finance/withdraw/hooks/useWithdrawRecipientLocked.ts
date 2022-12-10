@@ -7,8 +7,20 @@ export const useWithdrawRecipientLocked = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<boolean>({
-    contractInterface: [
-      'function withdrawRecipientLocked() view returns (bool)',
+    abi: [
+      {
+        inputs: [],
+        name: 'withdrawRecipientLocked',
+        outputs: [
+          {
+            internalType: 'bool',
+            name: '',
+            type: 'bool',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     functionName: 'withdrawRecipientLocked()',
     ...config,

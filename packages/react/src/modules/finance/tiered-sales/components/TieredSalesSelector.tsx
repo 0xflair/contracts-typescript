@@ -1,9 +1,10 @@
-import { classNames } from '@flair-sdk/common';
 import { RadioGroup } from '@headlessui/react';
 import { CheckCircleIcon } from '@heroicons/react/solid';
-import { Chain } from '@wagmi/core';
+import { Chain } from '@wagmi/chains';
 import { BigNumber, BigNumberish, ethers } from 'ethers';
 import { useEffect } from 'react';
+
+import { classNames } from '@flair-sdk/common';
 
 import { useChainInfo } from '../../../../common';
 import {

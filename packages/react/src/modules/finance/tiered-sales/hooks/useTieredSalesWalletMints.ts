@@ -11,20 +11,39 @@ type Config = {
 } & PredefinedReadContractConfig<ArgsType>;
 
 export const useTieredSalesWalletMints = ({
-  chainId,
-  contractAddress,
   enabled = true,
   tierId,
   walletAddress,
   ...restOfConfig
 }: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
-    contractInterface: [
-      'function walletMintedByTier(uint256 tierId, address wallet) external view returns (uint256)',
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'tierId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'address',
+            name: 'wallet',
+            type: 'address',
+          },
+        ],
+        name: 'walletMintedByTier',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     functionName: 'walletMintedByTier(uint256,address)',
-    chainId,
-    contractAddress,
     args: [tierId, walletAddress] as ArgsType,
     enabled: enabled && tierId !== undefined && walletAddress !== undefined,
     ...restOfConfig,

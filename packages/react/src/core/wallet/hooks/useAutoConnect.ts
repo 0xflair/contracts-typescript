@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useDebounce } from 'react-use';
 import { useAccount, useClient, useConnect } from 'wagmi';
 
 const EAGER_CONNECTOR_IDS = ['safe'];
@@ -9,34 +10,44 @@ export const useAutoConnect = (tryAutoConnect?: boolean) => {
   const [triedAutoConnect, setTriedAutoConnect] = useState(false);
   const wagmiClient = useClient();
 
-  useEffect(() => {
-    let eagerlyConnected = false;
+  useDebounce(
+    () => {
+      let eagerlyConnected = false;
 
-    EAGER_CONNECTOR_IDS.forEach((connector) => {
-      const connectorInstance = connectors.find(
-        (c) => c.id === connector && c.ready,
-      );
+      EAGER_CONNECTOR_IDS.forEach((connector) => {
+        const connectorInstance = connectors.find(
+          (c) => c.id === connector && c.ready,
+        );
 
-      if (connectorInstance) {
-        try {
-          connect({ connector: connectorInstance });
-          eagerlyConnected = true;
-        } catch (e) {
-          console.error(`Could not eagerly connect to ${connector}`, e);
+        if (connectorInstance) {
+          try {
+            connect({ connector: connectorInstance });
+            eagerlyConnected = true;
+          } catch (e) {
+            console.error(`Could not eagerly connect to ${connector}`, e);
+          }
         }
-      }
-    });
+      });
 
-    if (
-      !eagerlyConnected &&
-      !triedAutoConnect &&
-      !isConnecting &&
-      !isReconnecting &&
-      tryAutoConnect
-    ) {
-      setTriedAutoConnect(true);
-      wagmiClient.autoConnect();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tryAutoConnect, connect, connectors]);
+      if (
+        !eagerlyConnected &&
+        !triedAutoConnect &&
+        !isConnecting &&
+        !isReconnecting &&
+        tryAutoConnect
+      ) {
+        setTriedAutoConnect(true);
+        wagmiClient.autoConnect();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
+    500,
+    [tryAutoConnect, connect, connectors],
+  );
 };
+
+/*
+
+Why react is not updating on wagmi changes?
+
+*/

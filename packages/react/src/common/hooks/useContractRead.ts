@@ -1,6 +1,5 @@
 import '@tanstack/react-query';
 
-import { ZERO_ADDRESS } from '@flair-sdk/common';
 import {
   ContractReference,
   findContractByReference,
@@ -9,29 +8,33 @@ import { ReadContractConfig as ReadContractConfigWagmi } from '@wagmi/core';
 import { ethers } from 'ethers';
 import { useCallback, useMemo } from 'react';
 import { useContractRead as useContractReadWagmi, useProvider } from 'wagmi';
-import { UseContractReadConfig } from 'wagmi/dist/declarations/src/hooks/contracts/useContractRead';
+
+import { ZERO_ADDRESS } from '@flair-sdk/common';
 
 export type ReadContractConfig<ArgsType = []> = Partial<
-  Omit<ReadContractConfigWagmi, 'args'>
-> &
-  UseContractReadConfig & {
-    contractReference?: ContractReference;
-    contractAddress?: string;
-    functionName: string;
-    args?: ArgsType;
-    watch?: boolean;
-    cacheOnBlock?: boolean;
-  };
+  Omit<ReadContractConfigWagmi, 'address' | 'args'>
+> & {
+  contractReference?: ContractReference;
+  args?: ArgsType;
+  enabled?: boolean;
+  watch?: boolean;
+  cacheOnBlock?: boolean;
+  cacheTime?: number;
+  staleTime?: number;
+  contractAddress?: string;
+};
 
-export type PredefinedReadContractConfig<ArgsType = []> = Omit<
+export type PredefinedReadContractConfig<ArgsType extends any[] = []> = Omit<
   ReadContractConfig<ArgsType>,
-  'contractReference' | 'functionName' | 'addressOrName'
->;
+  'contractReference' | 'abi' | 'functionName' | 'address'
+> & {
+  contractAddress?: string;
+};
 
-export const useContractRead = <ResultType = any, ArgsType = []>({
+export const useContractRead = <ResultType = any, ArgsType extends any[] = []>({
   enabled = true,
   contractReference,
-  contractInterface,
+  abi,
   contractAddress,
   functionName,
   args,
@@ -39,6 +42,7 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
   cacheOnBlock,
   ...restOfConfig
 }: ReadContractConfig<ArgsType>) => {
+  const finalAddress = contractAddress;
   const contractDefinition = useMemo(() => {
     try {
       return contractReference
@@ -53,23 +57,23 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
   }, [contractReference]);
 
   const readyToRead = Boolean(
-    enabled && contractAddress && contractAddress !== ZERO_ADDRESS,
+    enabled && finalAddress && finalAddress !== ZERO_ADDRESS,
   );
 
   const finalContractInterface = useMemo(
     () =>
-      contractDefinition?.artifact?.abi ||
-      contractInterface || [
+      (contractDefinition?.artifact?.abi as any) ||
+      abi || [
         `function ${
-          functionName.endsWith(')') ? functionName : `${functionName}()`
+          functionName?.endsWith(')') ? functionName : `${functionName}()`
         } view`,
       ],
-    [contractDefinition?.artifact?.abi, contractInterface, functionName],
+    [abi, contractDefinition?.artifact?.abi, functionName],
   );
 
   const result = useContractReadWagmi({
-    addressOrName: contractAddress as string,
-    contractInterface: finalContractInterface,
+    abi: finalContractInterface,
+    address: finalAddress,
     functionName,
     args,
     enabled: readyToRead,
@@ -82,16 +86,11 @@ export const useContractRead = <ResultType = any, ArgsType = []>({
     chainId: restOfConfig.chainId,
   });
   const contract = useMemo(() => {
-    if (!contractAddress || !provider) {
+    if (!finalAddress || !provider) {
       return;
     }
-
-    return new ethers.Contract(
-      contractAddress,
-      finalContractInterface,
-      provider,
-    );
-  }, [contractAddress, finalContractInterface, provider]);
+    return new ethers.Contract(finalAddress, finalContractInterface, provider);
+  }, [finalAddress, finalContractInterface, provider]);
 
   const call = useCallback(
     async (overrides?: { args?: ArgsType }) => {

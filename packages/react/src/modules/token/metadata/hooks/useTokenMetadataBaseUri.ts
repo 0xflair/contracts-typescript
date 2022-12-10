@@ -9,7 +9,21 @@ export const useTokenMetadataBaseUri = (
   config: PredefinedReadContractConfig,
 ) => {
   return useContractRead<BytesLike>({
-    contractInterface: ['function baseURI() view returns (string)'],
+    abi: [
+      {
+        inputs: [],
+        name: 'baseURI',
+        outputs: [
+          {
+            internalType: 'string',
+            name: '',
+            type: 'string',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
     functionName: 'baseURI()',
     ...config,
   });

@@ -12,15 +12,31 @@ type Config = {
 } & PredefinedReadContractConfig<ArgsType>;
 
 export const useERC1155TotalSupply = ({
-  chainId,
-  contractAddress,
   enabled = true,
   tokenId,
   ...restOfConfig
 }: Config) => {
   return useContractRead<BigNumberish, ArgsType>({
-    contractInterface: [
-      'function totalSupply(uint256 tokenId) external view returns (uint256)',
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
+          },
+        ],
+        name: 'totalSupply',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: '',
+            type: 'uint256',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     functionName: 'totalSupply',
     args: [tokenId] as ArgsType,

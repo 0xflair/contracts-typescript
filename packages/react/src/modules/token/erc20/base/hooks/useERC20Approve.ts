@@ -1,11 +1,9 @@
-import { Provider } from '@ethersproject/providers';
 import { BigNumberish, BytesLike, Signer } from 'ethers';
 
 import { useContractWriteAndWait } from '../../../../../common';
 
 type Config = {
   contractAddress?: string;
-  signerOrProvider?: Signer | Provider | null;
   spender?: BytesLike;
   amount?: BigNumberish;
   prepare?: boolean;
@@ -13,16 +11,39 @@ type Config = {
 
 export const useERC20Approve = ({
   contractAddress,
-  signerOrProvider,
   prepare,
   spender,
   amount,
 }: Config) => {
   return useContractWriteAndWait<[BytesLike, BigNumberish]>({
-    contractInterface: ['function approve(address spender, uint256 amount)'],
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'address',
+            name: 'spender',
+            type: 'address',
+          },
+          {
+            internalType: 'uint256',
+            name: 'amount',
+            type: 'uint256',
+          },
+        ],
+        name: 'approve',
+        outputs: [
+          {
+            internalType: 'bool',
+            name: '',
+            type: 'bool',
+          },
+        ],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+    ],
     functionName: 'approve',
     contractAddress,
-    signerOrProvider,
     confirmations: 1,
     args: [spender as BytesLike, amount as BigNumberish],
     prepare: Boolean(prepare && contractAddress && spender && amount),

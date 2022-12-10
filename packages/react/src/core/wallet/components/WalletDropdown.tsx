@@ -1,9 +1,10 @@
-import { classNames } from '@flair-sdk/common';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';
 import { useCopyToClipboard } from 'react-use';
 import { useAccount, useBalance, useNetwork } from 'wagmi';
+
+import { classNames } from '@flair-sdk/common';
 
 import { BareComponentProps } from '../../../common';
 import { CryptoUnits, CryptoValue } from '../../crypto-currency';
@@ -26,7 +27,7 @@ export const WalletDropdown = ({
   const { chain } = useNetwork();
   const { address } = useAccount();
   const { data: balance } = useBalance({
-    addressOrName: address,
+    address,
     formatUnits: 'ether',
     watch: false,
   });

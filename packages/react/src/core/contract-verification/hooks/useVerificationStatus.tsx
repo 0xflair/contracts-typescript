@@ -1,7 +1,8 @@
-import { Environment } from '@flair-sdk/common';
 import axios from 'axios';
 import { useMemo } from 'react';
 import { useInterval } from 'react-use';
+
+import { Environment } from '@flair-sdk/common';
 
 import { useAxiosGet } from '../../../common';
 import { useLoginJwt } from '../../wallet';
