@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.60.2 (2022-12-10)
+
+
+### Bug Fixes
+
+* fetch tiers on initial render ([2e928bb](https://github.com/flair-sdk/typescript/commit/2e928bbea8e93c7e3c39111430fc67d31f7c0d11))
+
+
+
+
+
 ## 2.60.1 (2022-12-10)
 
 
