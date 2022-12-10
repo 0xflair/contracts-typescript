@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.61.0 (2022-12-10)
+
+
+### Features
+
+* enabled balance ramp on all chains by default ([a722f47](https://github.com/flair-sdk/typescript/commit/a722f477e2db76a1bad032afdc9ba20412768cd3))
+
+
+
+
+
 ## 2.60.3 (2022-12-10)
 
 **Note:** Version bump only for package @flair-sdk/ipfs
