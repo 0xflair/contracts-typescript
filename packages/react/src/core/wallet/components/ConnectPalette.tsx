@@ -1,3 +1,5 @@
+import { classNames, CustodyType } from '@flair-sdk/common';
+import { ExtendedConnector } from '@flair-sdk/connectors';
 import {
   GenericWalletIcon,
   MetaMaskIcon,
@@ -8,9 +10,6 @@ import {
 import MetaMaskOnboarding from '@metamask/onboarding';
 import { useRef } from 'react';
 import { Connector, useAccount, useConnect } from 'wagmi';
-
-import { classNames, CustodyType } from '@flair-sdk/common';
-import { ExtendedConnector } from '@flair-sdk/connectors';
 
 import { Spinner } from '../../ui';
 import { PromisedImage } from '../../ui/components/elements/PromisedImage';
@@ -96,8 +95,6 @@ export const ConnectPalette = (props: ConnectPaletteProps) => {
 
   const isWorking = isLoading || isConnecting || isReconnecting;
   const pendingConnectorId = pendingConnector?.id;
-
-  console.log('connectors === ', connectors);
 
   return (
     <WalletComponentWrapper as={props.as} className={className}>

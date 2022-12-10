@@ -1,3 +1,4 @@
+import { CustodyType } from '@flair-sdk/common';
 import {
   normalizeChainId,
   ProviderRpcError,
@@ -6,8 +7,6 @@ import {
 } from '@wagmi/core';
 import { ADAPTER_STATUS } from '@web3auth/base';
 import { hexlify } from 'ethers/lib/utils';
-
-import { CustodyType } from '@flair-sdk/common';
 
 import { ExtendedConnector } from './extended-connector';
 import { Web3AuthConnector } from './web3auth-core';

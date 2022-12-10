@@ -6,6 +6,7 @@ import {
   SafeConnector,
   TwitchWeb3AuthConnector,
   TwitterWeb3AuthConnector,
+  Web3AuthOptions as Web3AuthOptionsOriginal,
   Web3OnboardBinanceConnector,
   Web3OnboardBraveConnector,
   Web3OnboardGamestopConnector,
@@ -18,11 +19,9 @@ import { infuraProvider } from '@wagmi/core/providers/infura';
 import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc';
 import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plugin';
 import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
-import { Options as Web3AuthOptionsOriginal } from '@web3auth/web3auth-wagmi-connector/dist/types/lib/interfaces';
 import deepmerge from 'deepmerge';
 import { hexlify } from 'ethers/lib/utils';
 import React, {
-  PropsWithChildren,
   ReactNode,
   useCallback,
   useEffect,

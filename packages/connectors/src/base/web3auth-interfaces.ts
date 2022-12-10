@@ -64,7 +64,7 @@ export interface UIConfig {
 
   loginMethodConfig?: LoginMethodConfig;
 }
-export interface Options extends OpenLoginOptions {
+export interface Web3AuthOptions extends OpenLoginOptions {
   /**
    * Web3Auth Client Id, you can obtain this from the web3auth developer dashboard by visiting
    * https://dashboard.web3auth.io

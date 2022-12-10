@@ -45,9 +45,3 @@ export const useAutoConnect = (tryAutoConnect?: boolean) => {
     [tryAutoConnect, connect, connectors],
   );
 };
-
-/*
-
-Why react is not updating on wagmi changes?
-
-*/

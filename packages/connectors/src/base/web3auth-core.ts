@@ -26,7 +26,7 @@ import { ethers, Signer } from 'ethers';
 import { getAddress } from 'ethers/lib/utils';
 import log from 'loglevel';
 
-import { Options } from './web3auth-interfaces';
+import { Web3AuthOptions } from './web3auth-interfaces';
 
 const IS_SERVER = typeof window === 'undefined';
 
@@ -43,13 +43,13 @@ export class Web3AuthConnector extends Connector {
 
   isModalOpen = false;
 
-  web3AuthOptions: Options;
+  web3AuthOptions: Web3AuthOptions;
 
   private loginModal: LoginModal;
 
   private socialLoginAdapter: OpenloginAdapter;
 
-  constructor(config: { chains?: Chain[]; options: Options }) {
+  constructor(config: { chains?: Chain[]; options: Web3AuthOptions }) {
     super(config);
     this.web3AuthOptions = config.options;
     const chainId = config.options.chainId
