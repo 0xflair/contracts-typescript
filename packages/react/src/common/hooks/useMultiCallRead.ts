@@ -8,6 +8,9 @@ type Config = Omit<ReadContractConfig, 'args' | 'functionName' | 'address'> & {
   address?: string;
   calls?: ContractCall[];
   enabled?: boolean;
+  cacheTime?: number;
+  staleTime?: number;
+  cacheOnBlock?: boolean;
 };
 
 export const useMultiCallRead = <TData extends any[]>({
@@ -85,23 +88,17 @@ export const useMultiCallRead = <TData extends any[]>({
     args: [callDataList as any],
     cacheTime: 0,
     staleTime: 0,
+    cacheOnBlock: false,
     ...restOfConfig,
   });
 
   useEffect(() => {
-    if (
-      !abi ||
-      !calls ||
-      !enabled ||
-      result.isLoading ||
-      result.isFetching ||
-      result.isRefetching
-    ) {
-      return;
-    }
+    console.log('INSIDE 1 === ', result.data);
 
-    if (!result.data || result.error) {
-      setError(result.error || new Error(`No data or abi or calls`));
+    if (!result.data || !calls) {
+      return;
+    } else if (result.error) {
+      setError(result.error);
       return;
     }
 

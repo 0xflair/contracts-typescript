@@ -3,7 +3,9 @@ import '@wagmi/core';
 import { BigNumber, BigNumberish, ethers } from 'ethers';
 import _ from 'lodash';
 import { useMemo } from 'react';
-import { PredefinedReadContractConfig, useMultiCallRead } from '../../../../common';
+
+import { PredefinedReadContractConfig } from '../../../../common';
+import { useMultiCallRead } from '../../../../common/hooks/useMultiCallRead';
 import { Tier } from '../types';
 import { normalizeTiers } from '../util';
 
@@ -83,6 +85,9 @@ export const useSaleTiersConfigs = ({
   chainId,
   contractAddress,
   enabled,
+  cacheTime,
+  staleTime,
+  cacheOnBlock,
 }: Config) => {
   // Create an array of calls to get tiers by index from 0 to 20
   const calls = useMemo(() => {
@@ -103,6 +108,9 @@ export const useSaleTiersConfigs = ({
     abi,
     enabled: Boolean(enabled && contractAddress),
     calls,
+    cacheTime: cacheTime || 0,
+    staleTime: staleTime || 0,
+    cacheOnBlock: cacheOnBlock || false,
   });
 
   const normalizedTiers = useMemo(() => {

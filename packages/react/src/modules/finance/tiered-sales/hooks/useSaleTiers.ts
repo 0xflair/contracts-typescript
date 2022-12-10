@@ -1,12 +1,16 @@
 import '@wagmi/core';
 
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
-import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
+import {
+  QueryFunctionContext,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { BigNumber, BigNumberish, BytesLike } from 'ethers';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 import { PredefinedReadContractConfig } from '../../../../common';
-import { useMergeQueryStates } from '../../../../core';
+import { useMergeQueryStates } from '../../../../core/utils/useMergeQueryStates';
 import { Tier, TiersDictionary } from '../types';
 import { useSaleTiersConfigs } from './useSaleTiersConfigs';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
@@ -52,21 +56,32 @@ export const useSaleTiers = ({
     enabled: false,
   });
 
-  const { data: tiersConfigs, ...tiersConfigsQuery } = useSaleTiersConfigs({
+  const {
+    data: tiersConfigs,
+    refetch: refetchConfigs,
+    ...tiersConfigsQuery
+  } = useSaleTiersConfigs({
     chainId,
     contractAddress,
     enabled,
+    cacheTime: 0,
+    staleTime: 0,
+    cacheOnBlock: false,
     ...restOfConfig,
   });
 
-  const queryKey = [
-    {
-      type: 'tiers',
-      chainId,
-      contractAddress,
-      minterAddress,
-    },
-  ] as const;
+  const queryKey = useMemo(
+    () =>
+      [
+        {
+          type: 'tiers',
+          chainId,
+          contractAddress,
+          minterAddress,
+        },
+      ] as const,
+    [chainId, contractAddress, minterAddress],
+  );
 
   const enrichTierById = useCallback(
     async (tierId: BigNumberish, forAddress?: BytesLike) => {
@@ -182,17 +197,32 @@ export const useSaleTiers = ({
         !tiersConfigsQuery.isLoading &&
         tiersConfigsQuery.fetchStatus === 'idle',
     ),
-    cacheTime: 60,
-    staleTime: 30,
+    cacheTime: 5,
+    staleTime: 5,
     ...restOfConfig,
   });
 
+  const queryClient = useQueryClient();
   const mergedStates = useMergeQueryStates([saleTiersQuery, tiersConfigsQuery]);
+
+  const refetch = useCallback(() => {
+    queryClient.invalidateQueries(queryKey).then(() => {
+      refetchConfigs().then(() => {
+        saleTiersQuery.refetch();
+      });
+    });
+  }, [queryClient, queryKey, refetchConfigs, saleTiersQuery]);
+
+  useEffect(() => {
+    refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     ...tiersConfigsQuery,
     ...mergedStates,
     data: saleTiersQuery.data,
     isLoading: mergedStates.isLoading || mergedStates?.fetchStatus !== 'idle',
+    refetch,
   } as const;
 };
