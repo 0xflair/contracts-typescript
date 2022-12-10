@@ -8,6 +8,9 @@ type Config = Omit<ReadContractConfig, 'args' | 'functionName' | 'address'> & {
   address?: string;
   calls?: ContractCall[];
   enabled?: boolean;
+  cacheTime?: number;
+  staleTime?: number;
+  cacheOnBlock?: boolean;
 };
 
 export const useMultiCallRead = <TData extends any[]>({
