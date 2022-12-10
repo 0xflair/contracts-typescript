@@ -395,6 +395,11 @@ export const TieredSalesProvider = ({
     [doApprove, onApproveSuccess, refetchTiers],
   );
 
+  useEffect(() => {
+    refetchTiers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const value = {
     data: {
       env,
