@@ -49,7 +49,7 @@ export const registerContract = (contract: ContractManifest) => {
       (f) => generateContractId(f) === generateContractId(contract),
     )
   ) {
-    console.error(
+    console.log(
       `Contract ${generateContractId(contract)} already registered, skipping. `,
       contract,
     );
