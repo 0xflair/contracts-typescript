@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.59.1 (2022-12-10)
+
+
+### Bug Fixes
+
+* read mutability for multicall and propagate errors ([e9f688b](https://github.com/flair-sdk/typescript/commit/e9f688b13d7e6e6fa190821891af1e7db358840b))
+
+
+
+
+
 # 2.59.0 (2022-12-10)
 
 
