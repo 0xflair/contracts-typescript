@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.60.1 (2022-12-10)
+
+
+### Bug Fixes
+
+* remove extra console.log ([3288201](https://github.com/flair-sdk/typescript/commit/328820183136290bf29fe7680c5c916d38bd7aac))
+
+
+
+
+
 # 2.60.0 (2022-12-10)
 
 
