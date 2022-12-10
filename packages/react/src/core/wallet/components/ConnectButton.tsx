@@ -1,9 +1,8 @@
+import { Web3AuthBaseConnector } from '@flair-sdk/connectors';
 import { ArrowSmDownIcon, ArrowSmUpIcon, XIcon } from '@heroicons/react/solid';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useAccount, useConnect } from 'wagmi';
-
-import { Web3AuthBaseConnector } from '@flair-sdk/connectors';
 
 import { BareComponentProps } from '../../../common';
 import { ConnectPalette, ConnectPaletteProps } from './ConnectPalette';

@@ -25,6 +25,7 @@ export const createBalanceRampClient = (
         ignoreCurrentBalance: false,
         maxGasLimit: 1_000_000,
         inputCurrency: 'USD',
+        enabledChainIds: 'ALL',
       },
       config || {},
     ),
