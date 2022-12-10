@@ -21,17 +21,17 @@ export const useTierToTokenIds = ({
       {
         inputs: [
           {
-            internalType: 'uint256',
-            name: 'tierId',
-            type: 'uint256',
+            internalType: 'uint256[]',
+            name: 'tierIds',
+            type: 'uint256[]',
           },
         ],
         name: 'tierToTokenId',
         outputs: [
           {
-            internalType: 'uint256',
+            internalType: 'uint256[]',
             name: '',
-            type: 'uint256',
+            type: 'uint256[]',
           },
         ],
         stateMutability: 'view',
