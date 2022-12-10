@@ -64,8 +64,8 @@ export const useSaleTiers = ({
     chainId,
     contractAddress,
     enabled,
-    cacheTime: 0,
-    staleTime: 0,
+    cacheTime: 2,
+    staleTime: 2,
     cacheOnBlock: false,
     ...restOfConfig,
   });
@@ -197,8 +197,8 @@ export const useSaleTiers = ({
         !tiersConfigsQuery.isLoading &&
         tiersConfigsQuery.fetchStatus === 'idle',
     ),
-    cacheTime: 5,
-    staleTime: 5,
+    cacheTime: 2,
+    staleTime: 2,
     ...restOfConfig,
   });
 

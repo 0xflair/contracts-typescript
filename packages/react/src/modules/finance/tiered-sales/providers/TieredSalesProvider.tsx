@@ -102,9 +102,10 @@ type Props = {
   env?: Environment;
   chainId: number | string;
   contractAddress: `0x${string}`;
-
   tierId?: BigNumberish;
   autoSelectEligibleTier?: boolean;
+  tiersCacheTime?: number;
+  tiersStaleTime?: number;
   minterAddress?: BytesLike;
   onMintSuccess?: (args: {
     totalAmount: BigNumberish;
@@ -128,6 +129,8 @@ export const TieredSalesProvider = ({
   contractAddress,
   children,
   tierId,
+  tiersCacheTime,
+  tiersStaleTime,
   autoSelectEligibleTier = true,
   minterAddress,
   onMintSuccess,
@@ -160,8 +163,8 @@ export const TieredSalesProvider = ({
     contractAddress,
     minterAddress: finalMinterAddress,
     enabled: Boolean(chainId && contractAddress),
-    cacheTime: 0,
-    staleTime: 0,
+    cacheTime: tiersCacheTime || 2,
+    staleTime: tiersStaleTime || 2,
     cacheOnBlock: false,
   });
 
