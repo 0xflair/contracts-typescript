@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.59.2 (2022-12-10)
+
+
+### Bug Fixes
+
+* consistent version for react query provider ([1f34dd7](https://github.com/flair-sdk/typescript/commit/1f34dd75ad759a1f4c5c0093649b68a87993d551))
+
+
+
+
+
 ## 2.59.1 (2022-12-10)
 
 
