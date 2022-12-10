@@ -1,10 +1,9 @@
 import '@wagmi/core';
 
-import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
-import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
-import { useCallback } from 'react';
-
 import { Environment, ZERO_BYTES32 } from '@flair-sdk/common';
+import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
+import { BigNumber, BigNumberish, BytesLike } from 'ethers';
+import { useCallback } from 'react';
 
 import { PredefinedReadContractConfig } from '../../../../common';
 import { useMergeQueryStates } from '../../../../core';
@@ -30,6 +29,7 @@ export const useSaleTiers = ({
   contractAddress,
   enabled,
   minterAddress,
+  ...restOfConfig
 }: Config) => {
   const { call: checkAllowlist } = useTieredSalesAllowlistChecker({
     env,
@@ -56,6 +56,7 @@ export const useSaleTiers = ({
     chainId,
     contractAddress,
     enabled,
+    ...restOfConfig,
   });
 
   const queryKey = [
@@ -183,6 +184,7 @@ export const useSaleTiers = ({
     ),
     cacheTime: 60,
     staleTime: 30,
+    ...restOfConfig,
   });
 
   const mergedStates = useMergeQueryStates([saleTiersQuery, tiersConfigsQuery]);

@@ -1,9 +1,7 @@
 import { BigNumberish } from 'ethers';
 
-import {
-  PredefinedReadContractConfig,
-  useContractRead,
-} from '../../../../common';
+import { PredefinedReadContractConfig } from '../../../../common';
+import { useContractRead } from '../../../../common/hooks/useContractRead';
 import { Tier } from '../types';
 
 type ArgsType = [tierId: BigNumberish];

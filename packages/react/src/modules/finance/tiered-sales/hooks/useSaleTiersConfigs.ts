@@ -3,9 +3,7 @@ import '@wagmi/core';
 import { BigNumber, BigNumberish, ethers } from 'ethers';
 import _ from 'lodash';
 import { useMemo } from 'react';
-
-import { PredefinedReadContractConfig } from '../../../../common';
-import { useMultiCallRead } from '../../../../common/hooks/useMultiCallRead';
+import { PredefinedReadContractConfig, useMultiCallRead } from '../../../../common';
 import { Tier } from '../types';
 import { normalizeTiers } from '../util';
 
@@ -13,7 +11,7 @@ type ArgsType = [tierId: BigNumberish];
 
 type Config = {
   chainId?: number;
-  address?: `0x${string}`;
+  contractAddress?: `0x${string}`;
   enabled?: boolean;
 } & PredefinedReadContractConfig<ArgsType>;
 
@@ -81,7 +79,11 @@ const abi = [
   },
 ] as const;
 
-export const useSaleTiersConfigs = ({ chainId, address, enabled }: Config) => {
+export const useSaleTiersConfigs = ({
+  chainId,
+  contractAddress,
+  enabled,
+}: Config) => {
   // Create an array of calls to get tiers by index from 0 to 20
   const calls = useMemo(() => {
     const calls = [];
@@ -97,9 +99,9 @@ export const useSaleTiersConfigs = ({ chainId, address, enabled }: Config) => {
 
   const result = useMultiCallRead<Tier[]>({
     chainId,
-    address: address || ethers.constants.AddressZero,
+    address: contractAddress || ethers.constants.AddressZero,
     abi,
-    enabled: Boolean(enabled && address),
+    enabled: Boolean(enabled && contractAddress),
     calls,
   });
 

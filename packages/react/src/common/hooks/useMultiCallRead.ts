@@ -2,7 +2,7 @@ import { ContractCall } from '@flair-sdk/registry';
 import { ReadContractConfig } from '@wagmi/core';
 import { utils } from 'ethers';
 import { useEffect, useMemo, useState } from 'react';
-import { useContractRead, useNetwork } from 'wagmi';
+import { useContractRead } from 'wagmi';
 
 type Config = Omit<ReadContractConfig, 'args' | 'functionName' | 'address'> & {
   address?: string;
@@ -76,7 +76,7 @@ export const useMultiCallRead = <TData extends any[]>({
             type: 'bytes[]',
           },
         ],
-        stateMutability: 'nonpayable',
+        stateMutability: 'view',
         type: 'function',
       },
     ],
@@ -94,7 +94,6 @@ export const useMultiCallRead = <TData extends any[]>({
       !calls ||
       !enabled ||
       result.isLoading ||
-      result.fetchStatus !== 'idle' ||
       result.isFetching ||
       result.isRefetching
     ) {
@@ -112,9 +111,9 @@ export const useMultiCallRead = <TData extends any[]>({
         throw new Error(`Call not found for result ${index}`);
       }
 
-      const iface = new utils.Interface([
-        (abi as any) || `function ${call.function}`,
-      ]);
+      const iface = new utils.Interface(
+        abi ? (abi as any) : [`function ${call.function}`],
+      );
 
       if (!call.function || !iface.functions[call.function]) {
         throw new Error(
@@ -148,7 +147,7 @@ export const useMultiCallRead = <TData extends any[]>({
 
   return {
     ...result,
-    error,
+    error: error || (result.status === 'error' && result.error),
     data: resultData,
   };
 };
