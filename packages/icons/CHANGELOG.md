@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.60.0 (2022-12-10)
+
+
+### Features
+
+* provide a way to refresh tiers cache ([#15](https://github.com/flair-sdk/typescript/issues/15)) ([fe95c57](https://github.com/flair-sdk/typescript/commit/fe95c57b82374e283f90a65d27654466fcab421e))
+
+
+
+
+
 ## 2.59.2 (2022-12-10)
 
 
