@@ -93,8 +93,6 @@ export const useMultiCallRead = <TData extends any[]>({
   });
 
   useEffect(() => {
-    console.log('INSIDE 1 === ', result.data);
-
     if (!result.data || !calls) {
       return;
     } else if (result.error) {
