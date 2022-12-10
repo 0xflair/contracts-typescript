@@ -93,19 +93,12 @@ export const useMultiCallRead = <TData extends any[]>({
   });
 
   useEffect(() => {
-    if (
-      !abi ||
-      !calls ||
-      !enabled ||
-      result.isLoading ||
-      result.isFetching ||
-      result.isRefetching
-    ) {
-      return;
-    }
+    console.log('INSIDE 1 === ', result.data);
 
-    if (!result.data || result.error) {
-      setError(result.error || new Error(`No data or abi or calls`));
+    if (!result.data || !calls) {
+      return;
+    } else if (result.error) {
+      setError(result.error);
       return;
     }
 

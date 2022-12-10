@@ -50,6 +50,7 @@ export const normalizeTiers = (
         ...(configOnly
           ? {}
           : {
+              metadataUri: value.metadataUri,
               isSavedOnChain: Boolean(value.isSavedOnChain),
               eligibleAmount:
                 value.eligibleAmount !== undefined
