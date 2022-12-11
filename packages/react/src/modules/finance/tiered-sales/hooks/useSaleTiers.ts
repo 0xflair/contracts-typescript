@@ -214,9 +214,11 @@ export const useSaleTiers = ({
   }, [queryClient, queryKey, refetchConfigs, saleTiersQuery]);
 
   useEffect(() => {
-    refetch();
+    if (enabled) {
+      refetch();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [enabled]);
 
   return {
     ...tiersConfigsQuery,
