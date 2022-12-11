@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.63.4 (2022-12-11)
+
+
+### Bug Fixes
+
+* avoid initial fetch when not enabled ([1fcfd81](https://github.com/flair-sdk/typescript/commit/1fcfd81b85e7d42b5081b5d5d4a70c6eaf2eeb7e))
+
+
+
+
+
 ## 2.63.3 (2022-12-11)
 
 
