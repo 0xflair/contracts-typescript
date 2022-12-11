@@ -57,6 +57,7 @@ export const useTieredSalesAllowlistChecker = ({
     [BigNumberish, BytesLike, BigNumberish, BytesLike[]]
   >({
     chainId,
+    contractAddress,
     enabled: Boolean(
       readyToRead &&
         tierId !== undefined &&
