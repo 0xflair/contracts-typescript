@@ -1,6 +1,5 @@
-import { useAccount } from 'wagmi';
-
 import { classNames } from '@flair-sdk/common';
+import { useAccount } from 'wagmi';
 
 import { SECONDARY_BUTTON } from '../../../../core/ui/components/elements/Button';
 import {
@@ -127,7 +126,7 @@ export const TieredSalesMintingSection = ({}: Props) => {
                         'flex flex-1 flex-col justify-center items-center gap-2',
                       )}
                       rampIgnoreCurrentBalance={true}
-                      rampPaymentMethod="utrust"
+                      rampPaymentMethod="utrust,bitpay,coinbase"
                     >
                       <span>Buy with other Crypto</span>
                       <div className="payment-logos crypto-logos">

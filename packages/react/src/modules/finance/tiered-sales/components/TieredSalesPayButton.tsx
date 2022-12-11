@@ -34,7 +34,7 @@ export const TieredSalesPayButton = ({
           />
         </div>
       </>
-    ) : method == 'utrust' ? (
+    ) : ['utrust', 'bitpay', 'coinbase'].find(method.includes) ? (
       <>
         <span>Buy with other Crypto</span>
         <div>
@@ -51,8 +51,9 @@ export const TieredSalesPayButton = ({
     ));
 
   const rampDisabled =
-    (method === 'stripe' && !rampConfig?.stripeEnabled) ||
-    (method === 'utrust' && !rampConfig?.utrustEnabled);
+    (method.includes('stripe') && !rampConfig?.stripeEnabled) ||
+    (method.includes('utrust') && !rampConfig?.utrustEnabled) ||
+    (method.includes('bitpay') && !rampConfig?.bitpayEnabled);
 
   if (!alwaysShow) {
     if (rampDisabled) {
