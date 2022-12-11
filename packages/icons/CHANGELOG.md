@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.61.3 (2022-12-11)
+
+
+### Bug Fixes
+
+* pass contractAddress to useTieredSalesAllowlistChecker ([31a3512](https://github.com/flair-sdk/typescript/commit/31a3512636cd6d11c03adc17340f3fbd92b4d7ae))
+
+
+
+
+
 ## 2.61.2 (2022-12-11)
 
 **Note:** Version bump only for package @flair-sdk/icons
