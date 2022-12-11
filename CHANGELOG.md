@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.63.0 (2022-12-11)
+
+
+### Features
+
+* allow customizing tier selector and pass all useful info ([#17](https://github.com/flair-sdk/typescript/issues/17)) ([405507e](https://github.com/flair-sdk/typescript/commit/405507ee7318c50b6bb7019505a77ad7ed489564))
+
+
+
+
+
 # 2.62.0 (2022-12-11)
 
 
