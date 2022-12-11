@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.61.4 (2022-12-11)
+
+
+### Bug Fixes
+
+* pass down props to tiered-sales-selector ([#16](https://github.com/flair-sdk/typescript/issues/16)) ([ec2e3ff](https://github.com/flair-sdk/typescript/commit/ec2e3fffe73bc1675abaaa781f781096da925295))
+
+
+
+
+
 ## 2.61.3 (2022-12-11)
 
 
