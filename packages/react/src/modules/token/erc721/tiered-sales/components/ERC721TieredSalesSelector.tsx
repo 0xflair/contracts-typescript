@@ -38,6 +38,7 @@ export const ERC721TieredSalesSelector = (props: Props = {}) => {
 
   return (
     <TieredSalesSelector
+      {...props}
       optionElement={({
         checked,
         active,
