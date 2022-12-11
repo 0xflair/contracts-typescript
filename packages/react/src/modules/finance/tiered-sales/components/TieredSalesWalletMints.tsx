@@ -1,4 +1,4 @@
-import { BytesLike } from 'ethers';
+import { BigNumberish, BytesLike } from 'ethers';
 import { Fragment } from 'react';
 
 import { BareComponentProps } from '../../../../common';
@@ -7,7 +7,7 @@ import { useTieredSalesContext } from '../providers/TieredSalesProvider';
 
 type Props = BareComponentProps & {
   loadingMask?: React.ReactNode;
-  tierId?: number;
+  tierId?: BigNumberish;
   walletAddress?: BytesLike;
 };
 

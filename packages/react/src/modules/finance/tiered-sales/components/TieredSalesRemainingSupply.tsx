@@ -1,3 +1,4 @@
+import { BigNumberish } from 'ethers';
 import { Fragment } from 'react';
 
 import { BareComponentProps } from '../../../../common';
@@ -6,7 +7,7 @@ import { useTieredSalesContext } from '../providers/TieredSalesProvider';
 
 type Props = BareComponentProps & {
   loadingMask?: React.ReactNode;
-  tierId?: number;
+  tierId?: BigNumberish;
 };
 
 export const TieredSalesRemainingSupply = ({
