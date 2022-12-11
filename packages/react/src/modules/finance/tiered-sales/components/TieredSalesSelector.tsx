@@ -3,7 +3,7 @@ import { RadioGroup } from '@headlessui/react';
 import { CheckCircleIcon } from '@heroicons/react/solid';
 import { Chain } from '@wagmi/chains';
 import { BigNumber, BigNumberish, ethers } from 'ethers';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 import { useChainInfo } from '../../../../common';
 import {
@@ -45,6 +45,7 @@ type Props = {
   optionElement?: (props: TieredSalesSelectorRenderProps) => JSX.Element;
   optionClassName?: string | ((props: OptionClassProps) => string);
   labelElement?: (props: TieredSalesSelectorRenderProps) => JSX.Element;
+  loadingElement?: ReactNode;
   alwaysShowTierSelector?: boolean;
   hideNotEligibleTiers?: boolean;
   hideNotActiveTiers?: boolean;
@@ -65,6 +66,7 @@ export const TieredSalesSelector = ({
       'relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none',
     ),
   labelElement,
+  loadingElement,
   alwaysShowTierSelector = false,
   hideNotEligibleTiers = false,
   hideNotActiveTiers = false,
@@ -72,7 +74,7 @@ export const TieredSalesSelector = ({
 }: Props) => {
   const {
     data: { chainId, autoDetectedTierId, currentTierId, tiers },
-    isLoading: { isAutoDetectingTier },
+    isLoading: { tiersLoading, isAutoDetectingTier },
     setCurrentTierId,
   } = useTieredSalesContext();
 
@@ -219,6 +221,14 @@ export const TieredSalesSelector = ({
       )}
     </RadioGroup.Option>
   ));
+
+  if (
+    !visibleTiers?.length &&
+    (tiersLoading || isAutoDetectingTier) &&
+    loadingElement
+  ) {
+    return <>{loadingElement}</>;
+  }
 
   return visibleTiers.length > 1 || alwaysShowTierSelector ? (
     <RadioGroup
