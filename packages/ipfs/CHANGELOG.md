@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.61.2 (2022-12-11)
+
+**Note:** Version bump only for package @flair-sdk/ipfs
+
+
+
+
+
 ## 2.61.1 (2022-12-10)
 
 
