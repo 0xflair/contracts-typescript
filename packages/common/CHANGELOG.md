@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.64.1 (2022-12-11)
+
+
+### Bug Fixes
+
+* add missing type and use proper property name ([380aac9](https://github.com/flair-sdk/typescript/commit/380aac99b1892355209834a4d1e03079ea276b15))
+
+
+
+
+
 # 2.64.0 (2022-12-11)
 
 
