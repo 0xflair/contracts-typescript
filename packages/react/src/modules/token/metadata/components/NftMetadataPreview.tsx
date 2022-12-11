@@ -6,6 +6,7 @@ type Props = {
   uri?: string;
   hideAttributes?: boolean;
   hideDescription?: boolean;
+  className?: string;
 };
 
 export const NftMetadataPreview = ({
@@ -26,16 +27,18 @@ export const NftMetadataPreview = ({
   return (
     <>
       {remoteTokenMetadataLoading ? (
-        <span className="flex gap-2">
+        <span className="metadata-loading flex gap-2">
           <Spinner /> Loading...
         </span>
       ) : remoteTokenMetadataError ? (
-        <Errors
-          title="Could not load metadata from URI"
-          error={remoteTokenMetadataError}
-        />
+        <span className="metadata-error">
+          <Errors
+            title="Could not load metadata from URI"
+            error={remoteTokenMetadataError}
+          />
+        </span>
       ) : !remoteTokenMetadata ? (
-        <span>
+        <span className="metadata-error">
           {uri ? (
             <Errors
               title="Unknown error"
@@ -44,28 +47,28 @@ export const NftMetadataPreview = ({
           ) : null}
         </span>
       ) : (
-        <div className="flex flex-col items-start gap-2">
+        <div className="metadata-wrapper flex flex-col items-start gap-2">
           {remoteTokenMetadata.image ? (
             <img
               src={normalizeIpfsUrl(remoteTokenMetadata.image)}
-              className="h-16 w-16 rounded-md"
+              className="metadata-image h-16 w-16 rounded-md"
             />
           ) : null}
-          <div>
-            <h4 className="text-lg font-bold">
+          <div className="metadata-info">
+            <h4 className="metadata-title text-lg font-bold">
               {remoteTokenMetadata.name || (
                 <span className="italic">No name</span>
               )}
             </h4>
             {!hideDescription && (
-              <p className="mt-1">
+              <p className="metadata-description mt-1">
                 {remoteTokenMetadata.description || (
                   <span className="italic">No description</span>
                 )}
               </p>
             )}
             {!hideAttributes && (
-              <p className="mt-1 text-neutral-700">
+              <p className="metadata-attributes mt-1 text-neutral-700">
                 {remoteTokenMetadata.attributes ? (
                   JSON.stringify(remoteTokenMetadata.attributes)
                 ) : (

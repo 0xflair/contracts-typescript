@@ -1,10 +1,9 @@
+import { classNames } from '@flair-sdk/common';
 import { RadioGroup } from '@headlessui/react';
 import { CheckCircleIcon } from '@heroicons/react/solid';
 import { Chain } from '@wagmi/chains';
 import { BigNumber, BigNumberish, ethers } from 'ethers';
 import { useEffect } from 'react';
-
-import { classNames } from '@flair-sdk/common';
 
 import { useChainInfo } from '../../../../common';
 import {
@@ -111,11 +110,11 @@ export const TieredSalesSelector = ({
         currencySymbol,
       }: RenderProps) => (
         <>
-          <span className="flex flex-1">
-            <span className="flex flex-col">
+          <span className="tier-item-wrapper flex flex-1">
+            <span className="tier-item-content flex flex-col">
               <RadioGroup.Label
                 as="span"
-                className="block text-sm font-medium text-gray-900"
+                className="tier-metadata block text-sm font-medium text-gray-900"
               >
                 {renderLabel({
                   checked,
@@ -130,7 +129,7 @@ export const TieredSalesSelector = ({
                 {tier.isEligible !== undefined ? (
                   <RadioGroup.Description
                     as="span"
-                    className="mt-1 flex items-center text-xs text-gray-500"
+                    className="tier-eligibility-status mt-1 flex items-center text-xs text-gray-500"
                   >
                     {tier.isEligible ? 'Eligible' : 'Not eligible'}
                   </RadioGroup.Description>
@@ -138,7 +137,7 @@ export const TieredSalesSelector = ({
               </IfWalletConnected>
               <RadioGroup.Description
                 as="span"
-                className="mt-4 text-sm font-medium text-gray-900"
+                className="tier-price mt-4 text-sm font-medium text-gray-900"
               >
                 {tier.price.toString() ? (
                   <CryptoValue
@@ -155,7 +154,7 @@ export const TieredSalesSelector = ({
           <CheckCircleIcon
             className={classNames(
               !checked ? 'invisible' : '',
-              'h-5 w-5 text-indigo-600',
+              'tier-checked-icon h-5 w-5 text-indigo-600',
             )}
             aria-hidden="true"
           />
@@ -163,7 +162,7 @@ export const TieredSalesSelector = ({
             className={classNames(
               active ? 'border' : 'border-2',
               checked ? 'border-indigo-500' : 'border-transparent',
-              'pointer-events-none absolute -inset-px rounded-lg',
+              'tier-checked-border pointer-events-none absolute -inset-px rounded-lg',
             )}
             aria-hidden="true"
           />
@@ -182,7 +181,7 @@ export const TieredSalesSelector = ({
         <RadioGroup.Label className={titleClassName}>{title}</RadioGroup.Label>
       ) : null}
 
-      <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
+      <div className="tier-items-list grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
         {visibleTiers.map(([tierId, tier]) => (
           <RadioGroup.Option
             key={tierId}
