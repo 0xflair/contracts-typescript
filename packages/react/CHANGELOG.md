@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.63.3 (2022-12-11)
+
+
+### Bug Fixes
+
+* use same prop type for erc721 and erc1155 selector ([60dc58c](https://github.com/flair-sdk/typescript/commit/60dc58c70d3f7ae12e8fada2868d3a93a7630bbf))
+
+
+
+
+
 ## 2.63.2 (2022-12-11)
 
 
