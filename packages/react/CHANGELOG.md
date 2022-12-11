@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.64.3 (2022-12-11)
+
+
+### Bug Fixes
+
+* use arrow func when checking methods ([e2c20fb](https://github.com/flair-sdk/typescript/commit/e2c20fbc200d6f8565b8adcd5932a7c03a75996f))
+
+
+
+
+
 ## 2.64.2 (2022-12-11)
 
 
