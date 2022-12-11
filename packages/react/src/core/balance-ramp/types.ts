@@ -1,9 +1,8 @@
 import { TransactionRequest } from '@ethersproject/providers';
+import { Environment } from '@flair-sdk/common';
 import { MetaTransaction } from '@flair-sdk/metatx';
 import { BigNumberish } from 'ethers';
 import { Deferrable } from 'ethers/lib/utils';
-
-import { Environment } from '@flair-sdk/common';
 
 export type CurrentBalance = {
   tokenAddress: string;
@@ -76,6 +75,8 @@ export type BalanceRamp = {
   stripeSessionUrl: string;
   utrustOrderId: string;
   utrustRedirectUrl: string;
+  bitpayInvoiceId: string;
+  bitpayRedirectUrl: string;
   paymentState: 'created' | 'canceled' | 'failed' | 'processing' | 'paid';
   settlementState:
     | 'idle'
@@ -92,10 +93,12 @@ export type BalanceRamp = {
 
 export type BalanceRampBackendConfig = {
   stripeEnabled: boolean;
-  utrustEnabled: boolean;
-  canRelayTransaction: boolean;
   stripeConfiguredAndActive: boolean;
+  utrustEnabled: boolean;
   utrustConfiguredAndActive: boolean;
+  bitpayEnabled: boolean;
+  bitpayConfiguredAndActive: boolean;
+  canRelayTransaction: boolean;
   paymentRailsSupportedForChainAndToken: boolean;
   onRamperEnabled: boolean;
   onRamperWalletPrefix: string;
