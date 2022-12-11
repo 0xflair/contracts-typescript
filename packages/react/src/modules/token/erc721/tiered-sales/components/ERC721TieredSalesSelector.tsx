@@ -2,16 +2,14 @@ import { classNames } from '@flair-sdk/common';
 import { RadioGroup } from '@headlessui/react';
 import { CheckCircleIcon } from '@heroicons/react/solid';
 
-import { useChainInfo } from '../../../../../common';
 import {
   CryptoUnits,
   CryptoValue,
   IfWalletConnected,
-  useDiamondContext,
 } from '../../../../../core';
 import {
-  RenderProps,
   TieredSalesSelector,
+  TieredSalesSelectorRenderProps,
 } from '../../../../finance/tiered-sales/components/TieredSalesSelector';
 import { NftMetadataPreview } from '../../../metadata/components/NftMetadataPreview';
 
@@ -25,29 +23,24 @@ type Props = {
   className?: string;
   title?: string | React.ReactNode;
   titleClassName?: string;
-  optionElement?: (props: RenderProps) => JSX.Element;
+  optionElement?: (props: TieredSalesSelectorRenderProps) => JSX.Element;
   optionClassName?: string | ((props: OptionClassProps) => string);
-  labelElement?: (props: RenderProps) => JSX.Element;
+  labelElement?: (props: TieredSalesSelectorRenderProps) => JSX.Element;
   alwaysShow?: boolean;
 };
 
 export const ERC721TieredSalesSelector = (props: Props = {}) => {
-  const {
-    data: { chainId, configValues },
-  } = useDiamondContext();
-
   return (
     <TieredSalesSelector
       optionElement={({
         checked,
         active,
         disabled,
-        tier,
         tierId,
+        tierConfig,
         currencySymbol,
-      }: RenderProps) => {
-        const metadataUri =
-          configValues?.['admin:tiered-sales']?.tiers?.[tierId]?.metadataUri;
+        tokenMetadata,
+      }: TieredSalesSelectorRenderProps) => {
         return (
           <>
             <span className="tier-item-wrapper flex flex-1">
@@ -56,9 +49,9 @@ export const ERC721TieredSalesSelector = (props: Props = {}) => {
                   as="span"
                   className="tier-metadata block text-sm font-medium text-gray-900"
                 >
-                  {metadataUri ? (
+                  {tokenMetadata ? (
                     <NftMetadataPreview
-                      uri={metadataUri}
+                      metadata={tokenMetadata}
                       hideAttributes={true}
                       hideDescription={true}
                     />
@@ -67,12 +60,12 @@ export const ERC721TieredSalesSelector = (props: Props = {}) => {
                   )}
                 </RadioGroup.Label>
                 <IfWalletConnected>
-                  {tier.isEligible !== undefined ? (
+                  {tierConfig.isEligible !== undefined ? (
                     <RadioGroup.Description
                       as="span"
                       className="tier-eligibility-status mt-1 flex items-center text-xs text-gray-500"
                     >
-                      {tier.isEligible ? 'Eligible' : 'Not eligible'}
+                      {tierConfig.isEligible ? 'Eligible' : 'Not eligible'}
                     </RadioGroup.Description>
                   ) : null}
                 </IfWalletConnected>
@@ -80,10 +73,10 @@ export const ERC721TieredSalesSelector = (props: Props = {}) => {
                   as="span"
                   className="tier-price mt-4 text-sm font-medium text-gray-900"
                 >
-                  {tier.price.toString() ? (
+                  {tierConfig?.price?.toString() ? (
                     <CryptoValue
                       symbol={currencySymbol}
-                      value={tier.price.toString()}
+                      value={tierConfig.price?.toString()}
                       unit={CryptoUnits.WEI}
                       showPrice={false}
                       showSymbol={true}

@@ -11,8 +11,10 @@ import {
   CryptoUnits,
   CryptoValue,
   IfWalletConnected,
+  useDiamondContext,
+  useRemoteJsonReader,
 } from '../../../../core';
-import { useContractSymbol } from '../../../token';
+import { NftTokenMetadata, useContractSymbol } from '../../../token';
 import { useTieredSalesContext } from '../providers';
 import { Tier } from '../types';
 
@@ -22,29 +24,39 @@ type OptionClassProps = {
   disabled: boolean;
 };
 
-export type RenderProps = {
+export type TieredSalesSelectorRenderProps = {
   checked: boolean;
   active: boolean;
   disabled: boolean;
   tierId: string;
-  tier: Tier;
+  tierConfig: Tier;
   currencySymbol: CryptoSymbol;
+  tokenMetadataUri?: string;
+  tokenMetadata?: NftTokenMetadata;
+  tokenMetadataLoading?: boolean;
 };
 
 type Props = {
   className?: string;
-  title?: string | React.ReactNode;
+  title?: boolean | string | React.ReactNode;
   titleClassName?: string;
-  optionElement?: (props: RenderProps) => JSX.Element;
+  wrapper?: boolean;
+  wrapperClassName?: string;
+  optionElement?: (props: TieredSalesSelectorRenderProps) => JSX.Element;
   optionClassName?: string | ((props: OptionClassProps) => string);
-  labelElement?: (props: RenderProps) => JSX.Element;
-  alwaysShow?: boolean;
+  labelElement?: (props: TieredSalesSelectorRenderProps) => JSX.Element;
+  alwaysShowTierSelector?: boolean;
+  hideNotEligibleTiers?: boolean;
+  hideNotActiveTiers?: boolean;
+  hideSoldOutTiers?: boolean;
 };
 
 export const TieredSalesSelector = ({
   className = 'flex flex-col gap-2',
   title = 'Select from active sale tiers',
   titleClassName = 'text-base font-medium text-gray-900',
+  wrapper = true,
+  wrapperClassName = 'tier-items-list mt-2 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4',
   optionElement,
   optionClassName = ({ checked, active }) =>
     classNames(
@@ -53,7 +65,10 @@ export const TieredSalesSelector = ({
       'relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none',
     ),
   labelElement,
-  alwaysShow = false,
+  alwaysShowTierSelector = false,
+  hideNotEligibleTiers = false,
+  hideNotActiveTiers = false,
+  hideSoldOutTiers = false,
 }: Props) => {
   const {
     data: { chainId, autoDetectedTierId, currentTierId, tiers },
@@ -63,13 +78,21 @@ export const TieredSalesSelector = ({
 
   const chainInfo = useChainInfo(chainId);
 
+  const {
+    data: { configValues },
+  } = useDiamondContext();
+
   const visibleTiers = Object.entries(tiers || {}).filter(([tierId, tier]) => {
-    return (
-      tier?.isActive ||
-      tier?.isEligible ||
-      (tier?.remainingSupply !== undefined &&
-        BigNumber.from(tier?.remainingSupply).gt(0))
-    );
+    if (hideNotEligibleTiers && tier?.isEligible === false) {
+      return false;
+    }
+    if (hideNotActiveTiers && tier?.isActive === false) {
+      return false;
+    }
+    if (hideSoldOutTiers && tier?.remainingSupply !== undefined) {
+      return BigNumber.from(tier?.remainingSupply).gt(0);
+    }
+    return true;
   });
 
   useEffect(() => {
@@ -97,7 +120,7 @@ export const TieredSalesSelector = ({
 
   const renderLabel = labelElement
     ? labelElement
-    : ({ tierId }: RenderProps) => <>Tier #{tierId}</>;
+    : ({ tierId }: TieredSalesSelectorRenderProps) => <>Tier #{tierId}</>;
 
   const renderOption = optionElement
     ? optionElement
@@ -105,10 +128,13 @@ export const TieredSalesSelector = ({
         checked,
         active,
         disabled,
-        tier,
+        tierConfig,
         tierId,
         currencySymbol,
-      }: RenderProps) => (
+        tokenMetadata,
+        tokenMetadataUri,
+        tokenMetadataLoading,
+      }: TieredSalesSelectorRenderProps) => (
         <>
           <span className="tier-item-wrapper flex flex-1">
             <span className="tier-item-content flex flex-col">
@@ -120,18 +146,21 @@ export const TieredSalesSelector = ({
                   checked,
                   active,
                   disabled,
-                  tier,
+                  tierConfig,
                   tierId,
                   currencySymbol,
+                  tokenMetadata,
+                  tokenMetadataUri,
+                  tokenMetadataLoading,
                 })}
               </RadioGroup.Label>
               <IfWalletConnected>
-                {tier.isEligible !== undefined ? (
+                {tierConfig?.isEligible !== undefined ? (
                   <RadioGroup.Description
                     as="span"
                     className="tier-eligibility-status mt-1 flex items-center text-xs text-gray-500"
                   >
-                    {tier.isEligible ? 'Eligible' : 'Not eligible'}
+                    {tierConfig?.isEligible ? 'Eligible' : 'Not eligible'}
                   </RadioGroup.Description>
                 ) : null}
               </IfWalletConnected>
@@ -139,10 +168,10 @@ export const TieredSalesSelector = ({
                 as="span"
                 className="tier-price mt-4 text-sm font-medium text-gray-900"
               >
-                {tier.price.toString() ? (
+                {tierConfig?.price?.toString() ? (
                   <CryptoValue
                     symbol={currencySymbol}
-                    value={tier.price.toString()}
+                    value={tierConfig.price.toString()}
                     unit={CryptoUnits.WEI}
                     showPrice={false}
                     showSymbol={true}
@@ -169,7 +198,29 @@ export const TieredSalesSelector = ({
         </>
       );
 
-  return visibleTiers.length > 1 || alwaysShow ? (
+  const elementsView = visibleTiers.map(([tierId, tierConfig]) => (
+    <RadioGroup.Option
+      key={tierId}
+      value={tierId.toString()}
+      className={optionClassName}
+    >
+      {({ checked, active, disabled }) => (
+        <TierItemRow
+          key={tierId}
+          chainInfo={chainInfo}
+          checked={checked}
+          active={active}
+          disabled={disabled}
+          tierId={tierId}
+          tierConfig={tierConfig}
+          configValues={configValues}
+          renderOption={renderOption}
+        />
+      )}
+    </RadioGroup.Option>
+  ));
+
+  return visibleTiers.length > 1 || alwaysShowTierSelector ? (
     <RadioGroup
       className={className}
       value={currentTierId?.toString()}
@@ -180,29 +231,11 @@ export const TieredSalesSelector = ({
       {title ? (
         <RadioGroup.Label className={titleClassName}>{title}</RadioGroup.Label>
       ) : null}
-
-      <div className="tier-items-list grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
-        {visibleTiers.map(([tierId, tier]) => (
-          <RadioGroup.Option
-            key={tierId}
-            value={tierId.toString()}
-            className={optionClassName}
-          >
-            {({ checked, active, disabled }) => (
-              <TierItemRow
-                key={tierId}
-                chainInfo={chainInfo}
-                checked={checked}
-                active={active}
-                disabled={disabled}
-                tierId={tierId}
-                tier={tier}
-                renderOption={renderOption}
-              />
-            )}
-          </RadioGroup.Option>
-        ))}
-      </div>
+      {wrapper ? (
+        <div className={wrapperClassName || ''}>{elementsView}</div>
+      ) : (
+        elementsView
+      )}
     </RadioGroup>
   ) : null;
 };
@@ -213,7 +246,8 @@ const TierItemRow = ({
   active,
   disabled,
   tierId,
-  tier,
+  tierConfig,
+  configValues,
   renderOption,
 }: {
   chainInfo?: Chain;
@@ -221,28 +255,51 @@ const TierItemRow = ({
   active: boolean;
   disabled: boolean;
   tierId: string;
-  tier: Tier;
-  renderOption: (props: RenderProps) => JSX.Element;
+  tierConfig: Tier;
+  configValues?: Record<string, any>;
+  renderOption: (props: TieredSalesSelectorRenderProps) => JSX.Element;
 }) => {
   const { data: erc20Symbol } = useContractSymbol({
     chainId: chainInfo?.id,
-    contractAddress: tier?.currency?.toString(),
+    contractAddress: tierConfig?.currency?.toString(),
     enabled: Boolean(
       chainInfo?.id &&
-        tier?.currency &&
-        tier?.currency !== ethers.constants.AddressZero,
+        tierConfig?.currency &&
+        tierConfig?.currency !== ethers.constants.AddressZero,
     ),
   });
+
+  const tokenMetadataUri =
+    configValues?.['admin:tiered-sales']?.tiers?.[tierId]?.metadataUri;
+
+  const {
+    data: tokenMetadata,
+    error: tokenMetadataError,
+    isLoading: tokenMetadataLoading,
+  } = useRemoteJsonReader({
+    uri: tokenMetadataUri?.toString(),
+    enabled: Boolean(tokenMetadataUri),
+  });
+
+  if (tokenMetadataError) {
+    console.warn(
+      `Got tokenMetadataError for tier ${tierId}: `,
+      tokenMetadataError,
+    );
+  }
 
   return renderOption({
     checked,
     active,
     disabled,
     tierId,
-    tier,
-    currencySymbol: (!tier.currency ||
-    tier.currency === ethers.constants.AddressZero
+    tierConfig,
+    currencySymbol: (!tierConfig.currency ||
+    tierConfig.currency === ethers.constants.AddressZero
       ? chainInfo?.nativeCurrency?.symbol
       : erc20Symbol) as CryptoSymbol,
+    tokenMetadataUri,
+    tokenMetadata,
+    tokenMetadataLoading,
   });
 };
