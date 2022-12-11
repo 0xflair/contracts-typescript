@@ -1,15 +1,12 @@
-import { TieredSalesSelector } from '../../../../finance/tiered-sales/components/TieredSalesSelector';
+import {
+  TieredSalesSelector,
+  TieredSalesSelectorRenderProps,
+} from '../../../../finance/tiered-sales/components/TieredSalesSelector';
 import { useTieredSalesContext } from '../../../../finance/tiered-sales/providers';
-import { Tier } from '../../../../finance/tiered-sales/types';
 import { ERC1155TokenBadge } from '../../base/components/ERC1155TokenBadge';
 import { useTierToTokenIds } from '../hooks';
 
-type RenderProps = {
-  checked: boolean;
-  active: boolean;
-  disabled: boolean;
-  tierId: string;
-  tier: Tier;
+type RenderProps = TieredSalesSelectorRenderProps & {
   tokenId?: string;
 };
 
