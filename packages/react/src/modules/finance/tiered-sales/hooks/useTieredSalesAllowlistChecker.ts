@@ -102,8 +102,8 @@ export const useTieredSalesAllowlistChecker = ({
     ],
     functionName: 'onTierAllowlist(uint256,address,uint256,bytes32[])',
     cacheOnBlock: false,
-    cacheTime: 10,
-    staleTime: 2,
+    cacheTime: 0,
+    staleTime: 0,
     args:
       tierId !== undefined &&
       minterAddress &&
