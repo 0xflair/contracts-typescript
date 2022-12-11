@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.62.0 (2022-12-11)
+
+
+### Features
+
+* add useful classes to tier selector elements ([9fcd568](https://github.com/flair-sdk/typescript/commit/9fcd5684aaffd94e243d08b80e3be54ea78b547e))
+
+
+
+
+
 ## 2.61.5 (2022-12-11)
 
 
