@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.63.1 (2022-12-11)
+
+
+### Bug Fixes
+
+* accept big numberish for tier id ([b3c8778](https://github.com/flair-sdk/typescript/commit/b3c8778e11f4f1a693ac47fbca73b584f8423d4c))
+
+
+
+
+
 # 2.63.0 (2022-12-11)
 
 
