@@ -106,7 +106,7 @@ export const TieredSalesMintingSection = ({}: Props) => {
                         'flex flex-1 flex-col justify-center items-center gap-2',
                       )}
                       rampIgnoreCurrentBalance={true}
-                      rampPaymentMethod="stripe"
+                      rampPreferredPaymentMethod="stripe"
                     >
                       <span>Buy with Credit Card</span>
                       <div className="payment-logos fiat-logos flex gap-2">
@@ -126,7 +126,7 @@ export const TieredSalesMintingSection = ({}: Props) => {
                         'flex flex-1 flex-col justify-center items-center gap-2',
                       )}
                       rampIgnoreCurrentBalance={true}
-                      rampPaymentMethod="utrust,bitpay,coinbase"
+                      rampPreferredPaymentMethod="utrust,bitpay,coinbase"
                     >
                       <span>Buy with other Crypto</span>
                       <div className="payment-logos crypto-logos">

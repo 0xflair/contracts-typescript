@@ -66,7 +66,7 @@ export const TieredSalesPayButton = ({
   return (
     <TieredSalesMintButton
       rampIgnoreCurrentBalance={true}
-      rampPaymentMethod={method}
+      rampPreferredPaymentMethod={method}
       disabled={finalDisabled}
       {...attributes}
     >

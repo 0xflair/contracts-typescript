@@ -21,7 +21,7 @@ export type RequiredBalance = {
   inputCurrency?: string;
   requiresKyc?: boolean;
   ignoreCurrentBalance?: boolean;
-  paymentMethod?: string;
+  preferredPaymentMethod?: string;
 };
 
 export type BalanceResolverContext = {
@@ -108,7 +108,7 @@ export type BalanceRampBackendConfig = {
 
 export type BalanceRampRequest = {
   testMode?: boolean;
-  method?: 'stripe' | 'utrust';
+  method?: 'stripe' | 'utrust' | 'bitpay' | 'coinbase';
   chainId?: string;
   walletAddress?: string;
   idempotencyKey?: string;
@@ -117,7 +117,7 @@ export type BalanceRampRequest = {
   outputDecimals?: string;
   inputCurrency?: string;
   requiresKyc?: string;
-  paymentMethod?: string;
+  preferredPaymentMethod?: string;
   txFrom?: string;
   txTo?: string;
   txData?: string;

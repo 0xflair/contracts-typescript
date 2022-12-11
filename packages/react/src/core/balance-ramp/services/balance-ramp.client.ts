@@ -378,7 +378,7 @@ export class BalanceRampClient {
       ignoreCurrentBalance:
         requiredBalance.ignoreCurrentBalance ||
         this.config.ignoreCurrentBalance,
-      paymentMethod: requiredBalance.paymentMethod,
+      preferredPaymentMethod: requiredBalance.preferredPaymentMethod,
       chainId,
       walletAddress,
       outputTokenAddress:

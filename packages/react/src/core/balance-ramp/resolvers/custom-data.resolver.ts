@@ -44,8 +44,8 @@ export const balanceRampCustomDataResolve: BalanceResolver = async (
             (await context?.transactionRequest?.customData)
               ?.rampIgnoreCurrentBalance,
           ),
-        paymentMethod: (await context?.transactionRequest?.customData)
-          ?.rampPaymentMethod,
+        preferredPaymentMethod: (await context?.transactionRequest?.customData)
+          ?.rampPreferredPaymentMethod,
       };
     } catch (e) {
       return;
