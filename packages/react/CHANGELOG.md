@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.64.0 (2022-12-11)
+
+
+### Features
+
+* add bitpay payment option ([#18](https://github.com/flair-sdk/typescript/issues/18)) ([f0f41bf](https://github.com/flair-sdk/typescript/commit/f0f41bf0e0d65b01f6872880830a95f5a6b6e4ae))
+
+
+
+
+
 ## 2.63.4 (2022-12-11)
 
 
