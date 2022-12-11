@@ -1,5 +1,6 @@
 import {
   TieredSalesSelector,
+  TieredSalesSelectorProps,
   TieredSalesSelectorRenderProps,
 } from '../../../../finance/tiered-sales/components/TieredSalesSelector';
 import { useTieredSalesContext } from '../../../../finance/tiered-sales/providers';
@@ -10,11 +11,10 @@ type RenderProps = TieredSalesSelectorRenderProps & {
   tokenId?: string;
 };
 
-type Props = {
-  labelElement?: (props: RenderProps) => JSX.Element;
-};
-
-export const ERC1155TieredSalesSelector = ({ labelElement }: Props) => {
+export const ERC1155TieredSalesSelector = ({
+  labelElement,
+  ...props
+}: TieredSalesSelectorProps) => {
   const {
     data: { chainId, contractAddress, tiers },
   } = useTieredSalesContext();
@@ -52,6 +52,7 @@ export const ERC1155TieredSalesSelector = ({ labelElement }: Props) => {
           tokenId: props?.tierId && tierToTokenIds?.[props?.tierId]?.toString(),
         })
       }
+      {...props}
     />
   );
 };

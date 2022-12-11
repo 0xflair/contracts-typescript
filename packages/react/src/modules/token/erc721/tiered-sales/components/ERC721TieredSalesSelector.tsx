@@ -9,27 +9,12 @@ import {
 } from '../../../../../core';
 import {
   TieredSalesSelector,
+  TieredSalesSelectorProps,
   TieredSalesSelectorRenderProps,
 } from '../../../../finance/tiered-sales/components/TieredSalesSelector';
 import { NftMetadataPreview } from '../../../metadata/components/NftMetadataPreview';
 
-type OptionClassProps = {
-  checked: boolean;
-  active: boolean;
-  disabled: boolean;
-};
-
-type Props = {
-  className?: string;
-  title?: string | React.ReactNode;
-  titleClassName?: string;
-  optionElement?: (props: TieredSalesSelectorRenderProps) => JSX.Element;
-  optionClassName?: string | ((props: OptionClassProps) => string);
-  labelElement?: (props: TieredSalesSelectorRenderProps) => JSX.Element;
-  alwaysShow?: boolean;
-};
-
-export const ERC721TieredSalesSelector = (props: Props = {}) => {
+export const ERC721TieredSalesSelector = (props: TieredSalesSelectorProps) => {
   return (
     <TieredSalesSelector
       optionElement={({

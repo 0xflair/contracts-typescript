@@ -36,7 +36,7 @@ export type TieredSalesSelectorRenderProps = {
   tokenMetadataLoading?: boolean;
 };
 
-type Props = {
+export type TieredSalesSelectorProps = {
   className?: string;
   title?: boolean | string | React.ReactNode;
   titleClassName?: string;
@@ -71,7 +71,7 @@ export const TieredSalesSelector = ({
   hideNotEligibleTiers = false,
   hideNotActiveTiers = false,
   hideSoldOutTiers = false,
-}: Props) => {
+}: TieredSalesSelectorProps) => {
   const {
     data: { chainId, autoDetectedTierId, currentTierId, tiers },
     isLoading: { tiersLoading, isAutoDetectingTier },
@@ -85,10 +85,10 @@ export const TieredSalesSelector = ({
   } = useDiamondContext();
 
   const visibleTiers = Object.entries(tiers || {}).filter(([tierId, tier]) => {
-    if (hideNotEligibleTiers && tier?.isEligible === false) {
+    if (hideNotEligibleTiers && !tier?.isEligible) {
       return false;
     }
-    if (hideNotActiveTiers && tier?.isActive === false) {
+    if (hideNotActiveTiers && !tier?.isActive) {
       return false;
     }
     if (hideSoldOutTiers && tier?.remainingSupply !== undefined) {
