@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.63.2 (2022-12-11)
+
+
+### Bug Fixes
+
+* allow showing a loading element for tier selector ([301c946](https://github.com/flair-sdk/typescript/commit/301c946fb166fce94ac6412f1eb8256de3b2f71c))
+
+
+
+
+
 ## 2.63.1 (2022-12-11)
 
 
