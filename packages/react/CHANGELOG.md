@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.64.2 (2022-12-11)
+
+
+### Bug Fixes
+
+* check if method is provided before condition ([6d879d2](https://github.com/flair-sdk/typescript/commit/6d879d2932cfa9a90660cc8f86ded0f66ccbfd8e))
+
+
+
+
+
 ## 2.64.1 (2022-12-11)
 
 
