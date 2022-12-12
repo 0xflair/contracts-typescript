@@ -4,6 +4,7 @@ export * from './TieredSalesEligibleAmount';
 export * from './TieredSalesIfNotSoldOut';
 export * from './TieredSalesIfSoldOut';
 export * from './TieredSalesIfWalletCanMint';
+export * from './TieredSalesIfWalletCannotMint';
 export * from './TieredSalesMaxAllocation';
 export * from './TieredSalesMaxSupply';
 export * from './TieredSalesMintButton';
