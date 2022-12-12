@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.65.6 (2022-12-12)
+
+
+### Bug Fixes
+
+* smaller list for popular tokens on eth ([a77df91](https://github.com/flair-sdk/typescript/commit/a77df91f41d6bc77ff3e87bdfeaa2b416cd1d486))
+
+
+
+
+
 ## 2.65.5 (2022-12-12)
 
 
