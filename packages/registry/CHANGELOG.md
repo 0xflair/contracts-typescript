@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.65.5 (2022-12-12)
+
+
+### Bug Fixes
+
+* use more stable rpc for Fuse chain ([6f465bd](https://github.com/flair-sdk/typescript/commit/6f465bd8a685e20fcca42a1daae2e9c20720a064))
+
+
+
+
+
 ## 2.65.4 (2022-12-12)
 
 
