@@ -223,7 +223,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
                           )}
                         />
                         <p className="mt-1 text-xs">
-                          <ul role="list" className="list-disc space-y-1 pl-5">
+                          <ul className="flex gap-4 pl-5">
                             <li className="text-sm text-gray-500">
                               Name:{' '}
                               <i className="italic text-gray-700">
@@ -260,16 +260,10 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
                               Popular ERC20 Tokens
                             </h3>
 
-                            <p className="mt-1 text-blue-900 text-xs">
-                              You can use one of these popular ERC20 tokens,
-                              just click on "Use" button or paste the address in
-                              the text input above.
-                            </p>
-
                             <p className="mt-1 text-xs text-blue-700">
                               <ul
                                 role="list"
-                                className="list-disc space-y-1 pl-3"
+                                className="list-disc space-y-1 pl-3 h-32 overflow-scroll scroll-visible"
                               >
                                 {POPULAR_ERC20_TOKENS[chain.id as 1].map(
                                   (token) => (
