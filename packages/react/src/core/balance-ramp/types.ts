@@ -77,6 +77,8 @@ export type BalanceRamp = {
   utrustRedirectUrl: string;
   bitpayInvoiceId: string;
   bitpayRedirectUrl: string;
+  coinbaseCheckoutId: string;
+  coinbaseRedirectUrl: string;
   paymentState: 'created' | 'canceled' | 'failed' | 'processing' | 'paid';
   settlementState:
     | 'idle'
@@ -98,6 +100,8 @@ export type BalanceRampBackendConfig = {
   utrustConfiguredAndActive: boolean;
   bitpayEnabled: boolean;
   bitpayConfiguredAndActive: boolean;
+  coinbaseEnabled: boolean;
+  coinbaseConfiguredAndActive: boolean;
   canRelayTransaction: boolean;
   paymentRailsSupportedForChainAndToken: boolean;
   onRamperEnabled: boolean;

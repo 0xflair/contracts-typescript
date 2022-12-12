@@ -54,7 +54,8 @@ export const TieredSalesPayButton = ({
   const rampDisabled =
     (method?.includes?.('stripe') && !rampConfig?.stripeEnabled) ||
     (method?.includes?.('utrust') && !rampConfig?.utrustEnabled) ||
-    (method?.includes?.('bitpay') && !rampConfig?.bitpayEnabled);
+    (method?.includes?.('bitpay') && !rampConfig?.bitpayEnabled) ||
+    (method?.includes?.('coinbase') && !rampConfig?.coinbaseEnabled);
 
   if (!alwaysShow) {
     if (rampDisabled) {

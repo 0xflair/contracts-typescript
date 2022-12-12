@@ -126,7 +126,7 @@ export const TieredSalesMintingSection = ({}: Props) => {
                         'flex flex-1 flex-col justify-center items-center gap-2',
                       )}
                       rampIgnoreCurrentBalance={true}
-                      rampPreferredPaymentMethod="utrust,bitpay,coinbase"
+                      rampPreferredPaymentMethod="coinbase,utrust,bitpay"
                     >
                       <span>Buy with other Crypto</span>
                       <div className="payment-logos crypto-logos">
