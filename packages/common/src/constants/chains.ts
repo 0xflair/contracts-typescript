@@ -453,16 +453,16 @@ const newChains: Chain[] = [
       decimals: 18,
     },
     rpcUrls: {
-      default: { http: ['https://rpc.fuse.io'] },
+      default: { http: ['https://fuse-mainnet.chainstacklabs.com'] },
     },
     blockExplorers: {
       etherscan: {
         name: 'Fuse explorer',
-        url: 'https://explorer.fuse.io/',
+        url: 'https://explorer.fuse.io',
       },
       default: {
         name: 'Fuse explorer',
-        url: 'https://explorer.fuse.io/',
+        url: 'https://explorer.fuse.io',
       },
     },
   },
