@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.65.4 (2022-12-12)
+
+
+### Bug Fixes
+
+* send original tx request when ignoring balance ramp ([a77bffd](https://github.com/flair-sdk/typescript/commit/a77bffd53c05463a253043012e8b00346123a025))
+
+
+
+
+
 ## 2.65.3 (2022-12-12)
 
 
