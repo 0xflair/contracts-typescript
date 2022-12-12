@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.65.3 (2022-12-12)
+
+
+### Bug Fixes
+
+* remove gas fee parameters when skipping balance ramp ([57a34c1](https://github.com/flair-sdk/typescript/commit/57a34c144eaef1950307806e319a146b6dce8f1a))
+
+
+
+
+
 ## 2.65.2 (2022-12-12)
 
 **Note:** Version bump only for package @flair-sdk/ipfs
