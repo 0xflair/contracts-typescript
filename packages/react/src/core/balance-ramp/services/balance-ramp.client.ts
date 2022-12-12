@@ -74,14 +74,14 @@ export class BalanceRampClient {
     });
 
     if (!requiredBalance?.outputTokenAddress) {
-      return this.sendTransactionOriginal(originalSigner, txWithGasData);
+      return this.sendTransactionOriginal(originalSigner, transactionRequest);
     }
 
     if (
       requiredBalance.outputTokenAddress !== constants.AddressZero &&
       !ethers.utils.isAddress(requiredBalance.outputTokenAddress)
     ) {
-      return this.sendTransactionOriginal(originalSigner, txWithGasData);
+      return this.sendTransactionOriginal(originalSigner, transactionRequest);
     }
 
     const currentBalance = await this.getCurrentBalance(
@@ -161,10 +161,10 @@ export class BalanceRampClient {
 
   async sendTransactionOriginal(
     originalSigner: ethers.Signer,
-    txWithGasData: ethers.utils.Deferrable<TransactionRequest>,
+    tx: ethers.utils.Deferrable<TransactionRequest>,
   ): Promise<TransactionResponse> {
     const cleanTx = {
-      ...txWithGasData,
+      ...tx,
     };
 
     delete cleanTx.customData;
