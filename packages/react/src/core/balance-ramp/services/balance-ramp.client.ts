@@ -284,9 +284,15 @@ export class BalanceRampClient {
     requiredBalance: RequiredBalance,
   ) {
     if (requiredBalance.outputTokenAddress === constants.AddressZero) {
+      let amount = '0';
+      try {
+        amount = (await originalSigner.getBalance())?.toString();
+      } catch (e: any) {
+        console.warn(`Could not get native balance: `, e);
+      }
       return {
         tokenAddress: constants.AddressZero,
-        amount: (await originalSigner.getBalance())?.toString(),
+        amount,
       };
     }
 
@@ -294,11 +300,19 @@ export class BalanceRampClient {
       requiredBalance.outputTokenAddress &&
       ethers.utils.isAddress(requiredBalance.outputTokenAddress)
     ) {
-      const amount = await this.getERC20Balance(
-        requiredBalance.outputTokenAddress,
-        originalSigner,
-      );
-
+      let amount = '0';
+      try {
+        amount = await this.getERC20Balance(
+          requiredBalance.outputTokenAddress,
+          originalSigner,
+        );
+      } catch (e: any) {
+        console.warn(
+          `Could not get erc20 balance: `,
+          requiredBalance.outputTokenAddress,
+          e,
+        );
+      }
       return {
         tokenAddress: requiredBalance.outputTokenAddress,
         amount,
