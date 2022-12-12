@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.65.1 (2022-12-12)
+
+
+### Bug Fixes
+
+* assume no balance if it fails to fetch ([5feaa86](https://github.com/flair-sdk/typescript/commit/5feaa864f37d8ff9c2f515dda6a32f0d1ea20249))
+
+
+
+
+
 # 2.65.0 (2022-12-12)
 
 
