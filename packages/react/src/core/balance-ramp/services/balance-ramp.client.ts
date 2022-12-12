@@ -156,7 +156,7 @@ export class BalanceRampClient {
       return this.sendTransactionOriginal(originalSigner, txWithGasData);
     }
 
-    return this.sendTransactionOriginal(originalSigner, txWithGasData);
+    return this.sendTransactionOriginal(originalSigner, transactionRequest);
   }
 
   async sendTransactionOriginal(
