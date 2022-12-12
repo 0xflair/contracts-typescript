@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.65.0 (2022-12-12)
+
+
+### Features
+
+* add negate component for ability to mint ([21ef5b3](https://github.com/flair-sdk/typescript/commit/21ef5b3a15cf53d2deef405882b3de2ac2154e13))
+
+
+
+
+
 ## 2.64.3 (2022-12-11)
 
 
