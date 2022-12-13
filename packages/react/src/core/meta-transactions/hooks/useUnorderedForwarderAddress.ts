@@ -1,10 +1,9 @@
+import { ZERO_ADDRESS } from '@flair-sdk/common';
 import {
   ContractReference,
   findContractByReference,
 } from '@flair-sdk/registry';
 import { useMemo } from 'react';
-
-import { ZERO_ADDRESS } from '@flair-sdk/common';
 
 import { useChainId } from '../../../common';
 

@@ -1,11 +1,10 @@
+import { Environment } from '@flair-sdk/common';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import * as React from 'react';
 import { useCallback, useEffect } from 'react';
 import { useLocalStorage } from 'react-use';
 import { useAccount, useSigner } from 'wagmi';
-
-import { Environment } from '@flair-sdk/common';
 
 import { useCancel } from '../../../common';
 import { FLAIR_WALLET_BACKEND } from '../constants';

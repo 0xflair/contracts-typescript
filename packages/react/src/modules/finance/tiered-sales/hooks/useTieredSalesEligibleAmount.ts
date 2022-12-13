@@ -1,6 +1,5 @@
-import { BigNumberish, BytesLike } from 'ethers';
-
 import { ZERO_ADDRESS } from '@flair-sdk/common';
+import { BigNumberish, BytesLike } from 'ethers';
 
 import { PredefinedReadContractConfig } from '../../../../common';
 import { useContractRead } from '../../../../common/hooks/useContractRead';

@@ -1,8 +1,7 @@
+import { classNames } from '@flair-sdk/common';
 import { normalizeIpfsUrl } from '@flair-sdk/ipfs';
 import { BigNumberish } from 'ethers';
 import { ReactNode, useMemo } from 'react';
-
-import { classNames } from '@flair-sdk/common';
 
 import { useRemoteJsonReader } from '../../../../../core';
 import { useTokenMetadataUri } from '../../../metadata';

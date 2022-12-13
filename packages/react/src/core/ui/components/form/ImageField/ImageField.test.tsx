@@ -10,6 +10,6 @@ it('renders without crashing', () => {
       setImageFile={(imageFile) => {}}
       setImagePreview={(imagePreview) => {}}
     />,
-    div
+    div,
   );
 });

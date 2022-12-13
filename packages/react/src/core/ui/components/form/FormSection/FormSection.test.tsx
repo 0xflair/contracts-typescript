@@ -8,6 +8,6 @@ it('renders without crashing', () => {
     <FormSection title="test" description="test">
       Something
     </FormSection>,
-    div
+    div,
   );
 });

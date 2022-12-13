@@ -1,7 +1,6 @@
+import { classNames } from '@flair-sdk/common';
 import { Switch } from '@headlessui/react';
 import { ReactNode, useCallback, useState } from 'react';
-
-import { classNames } from '@flair-sdk/common';
 
 export type FormSectionProps = {
   title?: ReactNode;

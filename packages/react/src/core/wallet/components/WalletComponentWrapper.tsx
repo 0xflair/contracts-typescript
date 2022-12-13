@@ -1,6 +1,5 @@
-import { PropsWithChildren } from 'react';
-
 import { classNames } from '@flair-sdk/common';
+import { PropsWithChildren } from 'react';
 
 type Props = {
   as?: React.ElementType;

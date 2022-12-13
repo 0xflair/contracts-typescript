@@ -1,10 +1,9 @@
+import { classNames } from '@flair-sdk/common';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';
 import { useCopyToClipboard } from 'react-use';
 import { useAccount, useBalance, useNetwork } from 'wagmi';
-
-import { classNames } from '@flair-sdk/common';
 
 import { BareComponentProps } from '../../../common';
 import { CryptoUnits, CryptoValue } from '../../crypto-currency';

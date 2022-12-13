@@ -1,8 +1,7 @@
+import { Environment } from '@flair-sdk/common';
 import * as axios from 'axios';
 import { BytesLike } from 'ethers';
 import { useCallback } from 'react';
-
-import { Environment } from '@flair-sdk/common';
 
 import { useAxiosGet } from '../../../common';
 import { FLAIR_ADDRESS_LISTS_BACKEND } from '../constants';
