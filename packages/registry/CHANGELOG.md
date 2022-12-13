@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.65.8 (2022-12-13)
+
+
+### Bug Fixes
+
+* add 150k relayer overhead to estimated gas limit ([3a052bb](https://github.com/flair-sdk/typescript/commit/3a052bb856c4f63710439fb0abbe7c2230a1c726))
+
+
+
+
+
 ## 2.65.7 (2022-12-13)
 
 
