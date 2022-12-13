@@ -20,8 +20,6 @@ export const TieredSalesPayButton = ({
     data: { rampConfig },
   } = useTieredSalesContext();
 
-  console.log('method == =', method);
-
   const finalChildren =
     children ||
     (method === 'stripe' ? (
@@ -58,9 +56,6 @@ export const TieredSalesPayButton = ({
     (method?.includes?.('utrust') && rampConfig?.utrustEnabled) ||
     (method?.includes?.('bitpay') && rampConfig?.bitpayEnabled) ||
     (method?.includes?.('coinbase') && rampConfig?.coinbaseEnabled);
-
-  console.log('rampConfig === ', rampConfig);
-  console.log('rampEnabled === ', rampEnabled);
 
   if (!alwaysShow) {
     if (!rampEnabled) {
