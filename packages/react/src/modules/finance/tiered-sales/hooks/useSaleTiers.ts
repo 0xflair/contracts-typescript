@@ -70,8 +70,6 @@ export const useSaleTiers = ({
     ...restOfConfig,
   });
 
-  console.log('tiersConfigs == ', tiersConfigs);
-
   const queryKey = useMemo(
     () =>
       [

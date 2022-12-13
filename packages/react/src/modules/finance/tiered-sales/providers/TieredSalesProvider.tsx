@@ -169,8 +169,6 @@ export const TieredSalesProvider = ({
     cacheOnBlock: false,
   });
 
-  console.log('tiers ==== ', tiers);
-
   const {
     data: {
       requiredAmounts,
