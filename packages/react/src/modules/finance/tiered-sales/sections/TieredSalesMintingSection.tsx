@@ -74,7 +74,7 @@ export const TieredSalesMintingSection = ({}: Props) => {
             {/* Connect, Switch, Approve, Mint, and Buy buttons */}
             <ConnectButton
               className={classNames('flair-connect-button', mainButtonClass)}
-              label="Connect to Mint"
+              label="Sign-in to buy"
             >
               {/* ... if connected show the rest: */}
               <div className="flex flex-col gap-3 items-center">

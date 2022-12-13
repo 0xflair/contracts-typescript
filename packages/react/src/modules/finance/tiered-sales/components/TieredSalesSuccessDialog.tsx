@@ -1,12 +1,11 @@
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransactionReceipt } from '@ethersproject/providers';
+import { classNames } from '@flair-sdk/common';
 import { Dialog, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/outline';
 import { SendTransactionResult } from '@wagmi/core';
 import { BigNumberish } from 'ethers';
 import { Fragment, HTMLAttributeAnchorTarget, ReactNode } from 'react';
-
-import { classNames } from '@flair-sdk/common';
 
 import {
   PRIMARY_BUTTON,

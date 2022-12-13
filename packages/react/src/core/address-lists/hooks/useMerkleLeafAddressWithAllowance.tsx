@@ -1,8 +1,7 @@
+import { ZERO_ADDRESS } from '@flair-sdk/common';
 import * as axios from 'axios';
 import { BigNumberish, BytesLike, utils } from 'ethers';
 import { useMemo } from 'react';
-
-import { ZERO_ADDRESS } from '@flair-sdk/common';
 
 type Config = {
   address?: BytesLike;

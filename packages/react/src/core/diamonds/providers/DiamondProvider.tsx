@@ -1,16 +1,15 @@
 import {
+  Environment,
+  TransactionData,
+  TransactionListener,
+} from '@flair-sdk/common';
+import {
   ContractCall,
   EIP165InterfaceID,
   FacetManifest,
 } from '@flair-sdk/registry';
 import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-
-import {
-  Environment,
-  TransactionData,
-  TransactionListener,
-} from '@flair-sdk/common';
 
 import { SmartContract, useChainId, useSmartContract } from '../../../common';
 import { useWalletContext } from '../../wallet';

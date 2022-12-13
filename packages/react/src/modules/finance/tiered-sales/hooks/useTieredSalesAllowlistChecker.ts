@@ -1,7 +1,6 @@
+import { Environment } from '@flair-sdk/common';
 import { BigNumberish, BytesLike } from 'ethers';
 import { useCallback } from 'react';
-
-import { Environment } from '@flair-sdk/common';
 
 import { useContractRead } from '../../../../common/hooks/useContractRead';
 import { useAddressListMerkleProof } from '../../../../core/address-lists';

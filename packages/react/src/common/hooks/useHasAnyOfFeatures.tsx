@@ -1,6 +1,5 @@
-import { useMemo } from 'react';
-
 import { Environment } from '@flair-sdk/common';
+import { useMemo } from 'react';
 
 import { useSmartContract } from './useSmartContract';
 

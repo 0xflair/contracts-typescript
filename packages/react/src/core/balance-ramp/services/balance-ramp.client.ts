@@ -253,20 +253,25 @@ export class BalanceRampClient {
   }
 
   private async estimateGasFees(originalSigner: ethers.Signer) {
-    const feeData = await originalSigner.getFeeData();
+    const gasFeeData = await this.getGasFeeData(originalSigner);
 
-    const isLegacy = feeData?.gasPrice && !feeData?.maxFeePerGas;
-    const estimatedMaxFeePerGas = feeData?.maxFeePerGas || undefined;
-    const estimatedGasPrice = isLegacy
-      ? feeData?.gasPrice || (await originalSigner.getGasPrice())
-      : undefined;
-    const estimatedMaxPriorityFeePerGas =
-      feeData?.maxPriorityFeePerGas || undefined;
+    const gasPrice =
+      gasFeeData?.gasPrice && BigNumber.from(gasFeeData?.gasPrice);
+    const maxFeePerGas =
+      gasFeeData?.maxFeePerGas && BigNumber.from(gasFeeData?.maxFeePerGas);
+    const maxPriorityFeePerGas =
+      gasFeeData?.maxPriorityFeePerGas &&
+      BigNumber.from(gasFeeData?.maxPriorityFeePerGas);
+
+    // add 50% buffer to gas prices
+    const gasPriceBuffer = gasPrice?.mul(150).div(100);
+    const maxFeePerGasBuffer = maxFeePerGas?.mul(150).div(100);
+    const maxPriorityFeePerGasBuffer = maxPriorityFeePerGas?.mul(150).div(100);
 
     return {
-      estimatedGasPrice,
-      estimatedMaxFeePerGas,
-      estimatedMaxPriorityFeePerGas,
+      estimatedGasPrice: gasPriceBuffer,
+      estimatedMaxFeePerGas: maxFeePerGasBuffer,
+      estimatedMaxPriorityFeePerGas: maxPriorityFeePerGasBuffer,
     };
   }
 
@@ -275,7 +280,11 @@ export class BalanceRampClient {
     transactionRequest: ethers.utils.Deferrable<TransactionRequest>,
   ) {
     return (
-      (await (transactionRequest.chainId || (await signer.getChainId()))) || 1
+      (await (transactionRequest.chainId ||
+        (
+          await transactionRequest?.customData
+        )?.rampChainId ||
+        (await signer.getChainId()))) || 1
     );
   }
 
@@ -365,7 +374,7 @@ export class BalanceRampClient {
         ],
       },
       {
-        timeout: 2000,
+        timeout: 5000,
       },
     );
 
@@ -378,6 +387,65 @@ export class BalanceRampClient {
     }
 
     return BigNumber.from(response.data.gasEstimate);
+  }
+
+  private async getGasFeeData(originalSigner: ethers.Signer): Promise<
+    | {
+        gasPrice?: BigNumber;
+        maxFeePerGas?: BigNumber;
+        maxPriorityFeePerGas?: BigNumber;
+      }
+    | undefined
+  > {
+    let gasPrice;
+    let maxFeePerGas;
+    let maxPriorityFeePerGas;
+
+    try {
+      const chainId = await originalSigner.getChainId();
+      const result = await axios.get(
+        `${BALANCE_RAMP_BACKEND[this.config.env].getGasFeeData(chainId)}`,
+        {
+          timeout: 5000,
+        },
+      );
+      if (result.data.gasPrice) {
+        gasPrice = BigNumber.from(result.data.gasPrice);
+      }
+      if (result.data.maxFeePerGas) {
+        maxFeePerGas = BigNumber.from(result.data.maxFeePerGas);
+      }
+      if (result.data.maxPriorityFeePerGas) {
+        maxPriorityFeePerGas = BigNumber.from(result.data.maxPriorityFeePerGas);
+      }
+    } catch (e: any) {
+      console.warn(
+        `Could not get gas fee data from API, falling back to provider: `,
+        e,
+      );
+    }
+
+    if (!gasPrice && (!maxFeePerGas || !maxPriorityFeePerGas)) {
+      const feeData = await originalSigner.getFeeData();
+      const isLegacy = feeData?.gasPrice && !feeData?.maxFeePerGas;
+      if (!gasPrice) {
+        gasPrice = isLegacy
+          ? feeData?.gasPrice || (await originalSigner.getGasPrice())
+          : undefined;
+      }
+      if (!maxFeePerGas) {
+        maxFeePerGas = feeData?.maxFeePerGas || undefined;
+      }
+      if (!maxPriorityFeePerGas) {
+        maxPriorityFeePerGas = feeData?.maxPriorityFeePerGas || undefined;
+      }
+    }
+
+    return {
+      gasPrice,
+      maxFeePerGas,
+      maxPriorityFeePerGas,
+    };
   }
 
   private async initiateBalanceRampModal(

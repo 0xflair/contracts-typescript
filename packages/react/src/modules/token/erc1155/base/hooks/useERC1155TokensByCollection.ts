@@ -1,8 +1,7 @@
+import { Environment } from '@flair-sdk/common';
 import { BigNumber } from 'ethers';
 import { rest } from 'lodash';
 import { useMemo } from 'react';
-
-import { Environment } from '@flair-sdk/common';
 
 import { useDiamondContext } from '../../../../../core';
 import { ERC1155Token } from '../../types';

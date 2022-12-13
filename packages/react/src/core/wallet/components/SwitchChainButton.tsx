@@ -33,7 +33,10 @@ export const SwitchChainButton = ({
         onClick={() => switchNetwork && switchNetwork(requiredChainId)}
         {...attributes}
       >
-        {label || `Switch to ${requiredChain?.name || requiredChainId} chain`}
+        {label ||
+          `Switch to ${
+            requiredChain?.name || `correct chain (${requiredChainId})`
+          }`}
       </Component>
     );
   }

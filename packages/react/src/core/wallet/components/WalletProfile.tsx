@@ -1,3 +1,4 @@
+import { classNames } from '@flair-sdk/common';
 import Blockies from 'react-blockies';
 import {
   useAccount,
@@ -6,8 +7,6 @@ import {
   useEnsName,
   useNetwork,
 } from 'wagmi';
-
-import { classNames } from '@flair-sdk/common';
 
 import { WalletComponentWrapper } from './WalletComponentWrapper';
 

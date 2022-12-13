@@ -1,10 +1,9 @@
+import { classNames, FLAIR_CHAINS } from '@flair-sdk/common';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { Chain } from '@wagmi/chains';
 import React, { Fragment, useMemo } from 'react';
 import { useNetwork, useSwitchNetwork } from 'wagmi';
-
-import { classNames, FLAIR_CHAINS } from '@flair-sdk/common';
 
 import { useWalletContext } from '../providers';
 import { WalletComponentWrapper } from './WalletComponentWrapper';

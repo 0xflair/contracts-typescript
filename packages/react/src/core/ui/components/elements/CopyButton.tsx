@@ -1,8 +1,7 @@
+import { classNames } from '@flair-sdk/common';
 import { CheckCircleIcon } from '@heroicons/react/outline';
 import { useState } from 'react';
 import { useCopyToClipboard } from 'react-use';
-
-import { classNames } from '@flair-sdk/common';
 
 import { Button, SECONDARY_BUTTON } from './Button';
 

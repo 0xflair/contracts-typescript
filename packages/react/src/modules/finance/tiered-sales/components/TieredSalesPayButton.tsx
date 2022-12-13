@@ -20,6 +20,8 @@ export const TieredSalesPayButton = ({
     data: { rampConfig },
   } = useTieredSalesContext();
 
+  console.log('method == =', method);
+
   const finalChildren =
     children ||
     (method === 'stripe' ? (
@@ -51,19 +53,22 @@ export const TieredSalesPayButton = ({
       <>Pay to mint</>
     ));
 
-  const rampDisabled =
-    (method?.includes?.('stripe') && !rampConfig?.stripeEnabled) ||
-    (method?.includes?.('utrust') && !rampConfig?.utrustEnabled) ||
-    (method?.includes?.('bitpay') && !rampConfig?.bitpayEnabled) ||
-    (method?.includes?.('coinbase') && !rampConfig?.coinbaseEnabled);
+  const rampEnabled =
+    (method?.includes?.('stripe') && rampConfig?.stripeEnabled) ||
+    (method?.includes?.('utrust') && rampConfig?.utrustEnabled) ||
+    (method?.includes?.('bitpay') && rampConfig?.bitpayEnabled) ||
+    (method?.includes?.('coinbase') && rampConfig?.coinbaseEnabled);
+
+  console.log('rampConfig === ', rampConfig);
+  console.log('rampEnabled === ', rampEnabled);
 
   if (!alwaysShow) {
-    if (rampDisabled) {
+    if (!rampEnabled) {
       return null;
     }
   }
 
-  const finalDisabled = attributes.disabled || rampDisabled;
+  const finalDisabled = attributes.disabled || !rampEnabled;
 
   return (
     <TieredSalesMintButton
