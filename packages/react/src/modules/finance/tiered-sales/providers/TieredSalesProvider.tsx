@@ -108,6 +108,7 @@ type Props = {
   autoSelectEligibleTier?: boolean;
   minterAddress?: BytesLike;
   onMintSuccess?: (args: {
+    currentTierId: BigNumberish;
     totalAmount: BigNumberish;
     mintCount: BigNumberish;
     txReceipt?: TransactionReceipt;
@@ -163,10 +164,12 @@ export const TieredSalesProvider = ({
     contractAddress,
     minterAddress: finalMinterAddress,
     enabled: Boolean(chainId && contractAddress),
-    cacheTime: tiersCacheTime || 0,
+    cacheTime: tiersCacheTime || 24 * 60 * 60 * 1000,
     staleTime: tiersStaleTime || 0,
     cacheOnBlock: false,
   });
+
+  console.log('tiers ==== ', tiers);
 
   const {
     data: {
@@ -363,6 +366,7 @@ export const TieredSalesProvider = ({
         } else {
           onMintSuccess &&
             onMintSuccess({
+              currentTierId: currentTierId as BigNumberish,
               totalAmount: result.totalAmount,
               mintCount: result.mintCount,
               txReceipt: result.receipt,
@@ -373,7 +377,7 @@ export const TieredSalesProvider = ({
 
       await refetchTiers();
     },
-    [doMint, onMintSuccess, refetchTiers],
+    [currentTierId, doMint, onMintSuccess, refetchTiers],
   );
 
   const approve = useCallback(

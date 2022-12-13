@@ -32,8 +32,8 @@ export const useTieredSalesTotalMinted = (config: Config) => {
         type: 'function',
       },
     ],
-    cacheTime: 10,
-    staleTime: 2,
+    cacheTime: 24 * 60 * 60 * 1000,
+    staleTime: 0,
     functionName: 'tierMints(uint256)',
     args: [config.tierId] as ArgsType,
     enabled:

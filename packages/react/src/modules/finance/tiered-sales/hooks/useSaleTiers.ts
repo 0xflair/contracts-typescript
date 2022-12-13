@@ -64,11 +64,13 @@ export const useSaleTiers = ({
     chainId,
     contractAddress,
     enabled,
-    cacheTime: 0,
+    cacheTime: 24 * 60 * 60 * 1000,
     staleTime: 0,
     cacheOnBlock: false,
     ...restOfConfig,
   });
+
+  console.log('tiersConfigs == ', tiersConfigs);
 
   const queryKey = useMemo(
     () =>
@@ -197,8 +199,8 @@ export const useSaleTiers = ({
         !tiersConfigsQuery.isLoading &&
         tiersConfigsQuery.fetchStatus === 'idle',
     ),
-    cacheTime: 5,
-    staleTime: 5,
+    cacheTime: 24 * 60 * 60 * 1000,
+    staleTime: 0,
     ...restOfConfig,
   });
 

@@ -1,5 +1,6 @@
 import { useAccount } from 'wagmi';
 
+import { IfChain } from '../../../../core';
 import { Errors, Spinner, TransactionLink } from '../../../../core/ui';
 import { useTieredSalesContext } from '../providers';
 
@@ -10,7 +11,13 @@ type Props = {
 export const TieredSalesMintStatusBar = ({ className }: Props) => {
   const { isConnected } = useAccount();
   const {
-    data: { mintReceipt, mintResponse, approveReceipt, approveResponse },
+    data: {
+      chainId,
+      mintReceipt,
+      mintResponse,
+      approveReceipt,
+      approveResponse,
+    },
     isLoading: {
       isAutoDetectingTier,
       tiersLoading,
@@ -24,24 +31,21 @@ export const TieredSalesMintStatusBar = ({ className }: Props) => {
   return (
     <div className={className}>
       {isAutoDetectingTier || tiersLoading ? (
-        <div className="flex items-center gap-2">
-          <Spinner /> Checking your wallet eligibility...
-        </div>
+        isConnected ? (
+          <>
+            <div className="flex items-center gap-2">
+              <Spinner /> Checking your wallet eligibility...
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex items-center gap-2">
+              <Spinner /> Getting sales information...
+            </div>
+          </>
+        )
       ) : isConnected ? (
         <>
-          {allowanceLoading && (
-            <div className="flex items-center gap-2">
-              <Spinner /> Checking allowance...
-            </div>
-          )}
-          {approveLoading && (
-            <div className="flex items-center gap-2">
-              <Spinner />
-              {mintReceipt || mintResponse
-                ? 'Approving...'
-                : 'Approve in your wallet...'}
-            </div>
-          )}
           {mintLoading && (
             <div className="flex items-center gap-2">
               <Spinner />{' '}
@@ -49,27 +53,42 @@ export const TieredSalesMintStatusBar = ({ className }: Props) => {
             </div>
           )}
 
-          {mintReceipt || mintResponse ? (
-            <TransactionLink
-              txReceipt={mintReceipt}
-              txResponse={mintResponse}
-            />
-          ) : approveReceipt || approveResponse ? (
-            <TransactionLink
-              txReceipt={approveReceipt}
-              txResponse={approveResponse}
-            />
-          ) : null}
+          <IfChain connectedTo={chainId}>
+            {allowanceLoading && (
+              <div className="flex items-center gap-2">
+                <Spinner /> Checking allowance...
+              </div>
+            )}
+            {approveLoading && (
+              <div className="flex items-center gap-2">
+                <Spinner />
+                {mintReceipt || mintResponse
+                  ? 'Approving...'
+                  : 'Approve in your wallet...'}
+              </div>
+            )}
+            {mintReceipt || mintResponse ? (
+              <TransactionLink
+                txReceipt={mintReceipt}
+                txResponse={mintResponse}
+              />
+            ) : approveReceipt || approveResponse ? (
+              <TransactionLink
+                txReceipt={approveReceipt}
+                txResponse={approveResponse}
+              />
+            ) : null}
 
-          {!mintLoading && mintError && (
-            <Errors title="Cannot mint" error={mintError} />
-          )}
-          {!approveLoading && approveError && (
-            <Errors title="Cannot approve" error={approveError} />
-          )}
-          {!allowanceLoading && allowanceError && (
-            <Errors title="Cannot check allowance" error={allowanceError} />
-          )}
+            {!mintLoading && mintError && (
+              <Errors title="Cannot mint" error={mintError} />
+            )}
+            {!approveLoading && approveError && (
+              <Errors title="Cannot approve" error={approveError} />
+            )}
+            {!allowanceLoading && allowanceError && (
+              <Errors title="Cannot check allowance" error={allowanceError} />
+            )}
+          </IfChain>
         </>
       ) : null}
     </div>

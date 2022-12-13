@@ -108,7 +108,7 @@ export const useSaleTiersConfigs = ({
     abi,
     enabled: Boolean(enabled && contractAddress),
     calls,
-    cacheTime: cacheTime || 0,
+    cacheTime: cacheTime || 24 * 60 * 60 * 1000,
     staleTime: staleTime || 0,
     cacheOnBlock: cacheOnBlock || false,
   });
