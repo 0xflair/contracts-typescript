@@ -231,6 +231,9 @@ export class BalanceRampClient {
       }
     }
 
+    // Add 150k buffer for relay overhead:
+    estimatedGasLimit = estimatedGasLimit.add(150_000);
+
     return estimatedGasLimit;
   }
 
@@ -253,6 +256,7 @@ export class BalanceRampClient {
   }
 
   private async estimateGasFees(originalSigner: ethers.Signer) {
+    const chainId = await originalSigner.getChainId();
     const gasFeeData = await this.getGasFeeData(originalSigner);
 
     const gasPrice =
@@ -263,10 +267,14 @@ export class BalanceRampClient {
       gasFeeData?.maxPriorityFeePerGas &&
       BigNumber.from(gasFeeData?.maxPriorityFeePerGas);
 
-    // add 50% buffer to gas prices
-    const gasPriceBuffer = gasPrice?.mul(150).div(100);
-    const maxFeePerGasBuffer = maxFeePerGas?.mul(150).div(100);
-    const maxPriorityFeePerGasBuffer = maxPriorityFeePerGas?.mul(150).div(100);
+    // add 50% buffer to gas prices (20% for eth)
+    const gasPriceBuffer = gasPrice?.mul(chainId === 1 ? 120 : 150).div(100);
+    const maxFeePerGasBuffer = maxFeePerGas
+      ?.mul(chainId === 1 ? 120 : 150)
+      .div(100);
+    const maxPriorityFeePerGasBuffer = maxPriorityFeePerGas
+      ?.mul(chainId === 1 ? 120 : 150)
+      .div(100);
 
     return {
       estimatedGasPrice: gasPriceBuffer,

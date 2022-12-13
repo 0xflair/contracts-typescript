@@ -3,6 +3,7 @@ import { BigNumberish, BytesLike, Signer } from 'ethers';
 import { useContractWriteAndWait } from '../../../../../common';
 
 type Config = {
+  chainId?: number;
   contractAddress?: string;
   spender?: BytesLike;
   amount?: BigNumberish;
@@ -10,6 +11,7 @@ type Config = {
 };
 
 export const useERC20Approve = ({
+  chainId,
   contractAddress,
   prepare,
   spender,
@@ -43,6 +45,7 @@ export const useERC20Approve = ({
       },
     ],
     functionName: 'approve',
+    chainId,
     contractAddress,
     confirmations: 1,
     args: [spender as BytesLike, amount as BigNumberish],

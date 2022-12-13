@@ -123,6 +123,7 @@ export const useTieredSalesMinter = ({
     isLoading: approveLoading,
     writeAndWait: approveAndWait,
   } = useERC20Approve({
+    chainId,
     contractAddress: tier?.currency?.toString(),
     spender: contractAddress,
     amount: _totalAmount,
@@ -205,6 +206,7 @@ export const useTieredSalesMinter = ({
       },
     ],
     functionName: 'mintByTier',
+    chainId,
     contractAddress,
     confirmations: 1,
     args: [_tierId, _mintCount, _maxAllowance, _merkleProof] as ArgsType,
