@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.66.0 (2022-12-13)
+
+
+### Features
+
+* longer cache for tier info, passing tier id in mint callback ([738ea42](https://github.com/flair-sdk/typescript/commit/738ea4279505f8e5fe1d2a100810a291e8ecbcad))
+
+
+
+
+
 ## 2.65.8 (2022-12-13)
 
 
