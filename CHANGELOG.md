@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.65.7 (2022-12-13)
+
+
+### Bug Fixes
+
+* accurate gas fees with proper buffer ([#19](https://github.com/flair-sdk/typescript/issues/19)) ([68caf4b](https://github.com/flair-sdk/typescript/commit/68caf4ba08a35c0df101da1e860401e58ad34210))
+
+
+
+
+
 ## 2.65.6 (2022-12-12)
 
 
