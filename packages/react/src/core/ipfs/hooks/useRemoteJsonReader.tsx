@@ -6,11 +6,13 @@ import { useAxiosGet } from '../../../common';
 type Config = {
   uri?: string;
   enabled?: boolean;
+  preferDedicatedGateway?: boolean;
 };
 
 export function useRemoteJsonReader<TContent = Record<string, any>>({
   uri,
   enabled = true,
+  preferDedicatedGateway = false,
 }: Config) {
   const headers = useMemo(() => {
     return {
@@ -20,7 +22,7 @@ export function useRemoteJsonReader<TContent = Record<string, any>>({
   }, []);
 
   return useAxiosGet<TContent>({
-    url: normalizeIpfsUrl(uri) as string,
+    url: normalizeIpfsUrl(uri, preferDedicatedGateway) as string,
     enabled: Boolean(enabled && uri),
     headers,
   });

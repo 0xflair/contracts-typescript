@@ -6,5 +6,5 @@ export const normalizeIpfsUrl = (
     /^ipfs:\/\//i,
     preferManagedGateway
       ? 'https://ipfs.flair.finance/ipfs/'
-      : 'https://gateway.pinata.cloud/ipfs/',
+      : 'https://cloudflare-ipfs.com/ipfs/',
   );
