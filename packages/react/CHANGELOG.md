@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.67.0 (2022-12-14)
+
+
+### Features
+
+* allow customizing sale status component ([3e6f2c9](https://github.com/flair-sdk/typescript/commit/3e6f2c92293bf31123e114c8ccaea8399a1a8dfc))
+
+
+
+
+
 ## 2.66.3 (2022-12-14)
 
 
