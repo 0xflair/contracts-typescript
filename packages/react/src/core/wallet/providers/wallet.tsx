@@ -97,6 +97,8 @@ export const WalletContext = React.createContext<LoginContextValue | null>(
 
 export type AllowedNetworks = 'ALL' | number[];
 
+let connectorsList: any[];
+
 export const WalletProvider = ({
   children,
   appName = 'Quick Wallet',
@@ -271,7 +273,7 @@ export const WalletProvider = ({
     return connectors;
   }, [appName, darkMode, preferredChainId, web3AuthOptions]);
 
-  const connectorsList = useMemo(connectors, [
+  connectorsList = useMemo(connectors, [
     connectors,
     preferredChainId,
     web3AuthOptions,
@@ -286,7 +288,8 @@ export const WalletProvider = ({
         webSocketProvider,
       }),
     );
-  }, [connectorsList, tryAutoConnect]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!injectStyles) {
