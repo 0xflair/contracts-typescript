@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.66.3 (2022-12-14)
+
+
+### Bug Fixes
+
+* create wagmi client only once ([95f4a94](https://github.com/flair-sdk/typescript/commit/95f4a94e7e1c83cf66867fb1f08af54d68da5e25))
+
+
+
+
+
 ## 2.66.2 (2022-12-14)
 
 
