@@ -9,7 +9,11 @@ import { useAccount } from 'wagmi';
 
 import { useChainInfo } from '../../../../common';
 import { useBalanceRampConfig } from '../../../../core';
-import { useTieredSalesMinter } from '../hooks';
+import {
+  useTieredSalesMaxAllocation,
+  useTieredSalesMinter,
+  useTieredSalesTotalMinted,
+} from '../hooks';
 import { useSaleTiers } from '../hooks/useSaleTiers';
 import { Tier } from '../types';
 
