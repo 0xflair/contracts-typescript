@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.66.2 (2022-12-14)
+
+
+### Bug Fixes
+
+* use cloudflare for public ipfs gateway ([278d304](https://github.com/flair-sdk/typescript/commit/278d304d1f984ea793f0f3e1a8481c332d1ed7b0))
+
+
+
+
+
 ## 2.66.1 (2022-12-13)
 
 **Note:** Version bump only for package @flair-sdk/typescript
