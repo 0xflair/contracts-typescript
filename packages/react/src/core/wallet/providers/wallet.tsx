@@ -86,8 +86,6 @@ const {
       }
     } catch (e) {}
 
-    console.log('httpRpcUrl === ', httpRpcUrl);
-
     return {
       chain: {
         ...chain,
@@ -165,8 +163,6 @@ export const WalletContext = React.createContext<LoginContextValue | null>(
 );
 
 export type AllowedNetworks = 'ALL' | number[];
-
-let connectorsList: any[];
 
 export const WalletProvider = ({
   children,
@@ -342,7 +338,7 @@ export const WalletProvider = ({
     return connectors;
   }, [appName, darkMode, preferredChainId, web3AuthOptions]);
 
-  connectorsList = useMemo(connectors, [
+  const connectorsList = useMemo(connectors, [
     connectors,
     preferredChainId,
     web3AuthOptions,
@@ -352,16 +348,13 @@ export const WalletProvider = ({
     return wrapWagmiClient(
       createClient({
         autoConnect: tryAutoConnect,
-        connectors: () => {
-          console.log('connectors connectorsList === ', connectorsList);
-          return connectorsList;
-        },
+        connectors: connectorsList,
         provider: wagmiProvider,
         webSocketProvider,
       }),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connectors]);
+  }, [connectorsList]);
 
   useEffect(() => {
     if (!injectStyles) {

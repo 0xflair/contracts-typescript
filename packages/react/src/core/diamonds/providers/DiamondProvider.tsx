@@ -10,6 +10,7 @@ import {
 } from '@flair-sdk/registry';
 import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { useAccount } from 'wagmi';
 
 import { SmartContract, useChainId, useSmartContract } from '../../../common';
 import { useWalletContext } from '../../wallet';
@@ -133,13 +134,20 @@ export const DiamondProvider = ({
     setAllowedNetworks,
   } = useWalletContext();
 
+  const { isConnecting, isReconnecting } = useAccount();
+
   useEffect(() => {
-    if (chainId?.toString() !== preferredChainId?.toString()) {
-      setPreferredChainId(Number(chainId));
-      setAllowedNetworks([Number(chainId)]);
+    if (isConnecting || isReconnecting) {
+      return;
     }
+    setTimeout(() => {
+      if (chainId?.toString() !== preferredChainId?.toString()) {
+        setPreferredChainId(Number(chainId));
+        setAllowedNetworks([Number(chainId)]);
+      }
+    }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chainId]);
+  }, [chainId, isConnecting, isReconnecting]);
 
   /**
    * Set the current facets based on smart contract analysis
