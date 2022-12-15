@@ -30,7 +30,7 @@ export const balanceRampCustomDataResolve: BalanceResolver = async (
       return {
         idempotencyKey: txUniqueHash,
         outputTokenAddress: requiredAmounts[0]?.token,
-        outputDecimals: 18,
+        outputDecimals: requiredAmounts[0]?.decimals,
         outputAmount: BigNumber.from(requiredAmounts[0]?.value).toString(),
         estimatedGasPrice: estimatedGasPrice?.toString(),
         estimatedMaxFeePerGas: estimatedMaxFeePerGas?.toString(),

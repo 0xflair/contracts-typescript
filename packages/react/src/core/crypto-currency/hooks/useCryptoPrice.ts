@@ -1,18 +1,18 @@
-import { BigNumber, BigNumberish, ethers, utils } from 'ethers';
+import { BigNumberish, ethers } from 'ethers';
 
 import { useCryptoPricesContext } from '../providers';
-import { BaseCurrency, CryptoSymbol, CryptoUnits } from '../types';
+import { BaseCurrency, CryptoSymbol } from '../types';
 
 type Config = {
   amount?: BigNumberish;
-  amountUnit?: CryptoUnits;
+  decimals?: BigNumberish;
   symbol?: CryptoSymbol;
   baseCurrency?: BaseCurrency;
 };
 
 export const useCryptoPrice = ({
-  amount = 1,
-  amountUnit = CryptoUnits.ETHER,
+  amount = ethers.utils.parseEther('1'),
+  decimals = 18,
   symbol = 'ETH',
   baseCurrency = 'USD',
 }: Config = {}) => {
@@ -43,16 +43,13 @@ export const useCryptoPrice = ({
     );
   }
 
-  const amountRaw = amount
-    ? ethers.utils.parseUnits(amount.toString(), amountUnit)
-    : undefined;
-  const convertedAmountEther = amountRaw
-    ? ethers.utils.formatEther(amountRaw)
+  const formattedAmount = amount
+    ? ethers.utils.formatUnits(amount.toString(), decimals)
     : undefined;
 
   const total =
-    price && convertedAmountEther
-      ? Number(convertedAmountEther.toString()) * price
+    price && formattedAmount
+      ? Number(formattedAmount.toString()) * price
       : undefined;
 
   return {

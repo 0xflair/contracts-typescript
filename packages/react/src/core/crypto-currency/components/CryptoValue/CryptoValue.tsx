@@ -9,8 +9,9 @@ import { CryptoPrice } from '../CryptoPrice/CryptoPrice';
 type Props = {
   value?: BigNumberish;
   fractionDigits?: number;
-  unit?: CryptoUnits;
-  targetUnit?: CryptoUnits;
+  formatted?: boolean;
+  decimals?: BigNumberish;
+  outputUnit?: CryptoUnits;
   symbol?: CryptoSymbol;
   showPrice?: boolean;
   showSymbol?: boolean;
@@ -21,8 +22,9 @@ export const CryptoValue = (props: Props) => {
   const {
     value = '0',
     fractionDigits,
-    unit = CryptoUnits.ETHER,
-    targetUnit = CryptoUnits.ETHER,
+    formatted = true,
+    decimals = CryptoUnits.ETHER,
+    outputUnit,
     symbol = 'ETH',
     showPrice = false,
     showSymbol = true,
@@ -31,18 +33,25 @@ export const CryptoValue = (props: Props) => {
 
   const { data, error, isLoading: loading } = useCryptoCurrency({ symbol });
 
+  const valueBn = useMemo(
+    () =>
+      formatted
+        ? ethers.utils.parseUnits(
+            BigNumber.from(value || '0')?.toString() || '0',
+            decimals,
+          )
+        : BigNumber.from(value || '0'),
+    [formatted, decimals, value],
+  );
+
   const targetUnitValue = useMemo(() => {
     try {
-      const valueBn = ethers.utils.parseUnits(
-        BigNumber.from(value || '0')?.toString() || '0',
-        unit,
-      );
-      return ethers.utils.formatUnits(valueBn, targetUnit);
+      return ethers.utils.formatUnits(valueBn, outputUnit || decimals);
     } catch (e) {
       debugger;
-      console.error(`Error parsing value: `, value, e);
+      console.error(`Error parsing value: `, valueBn, e);
     }
-  }, [targetUnit, unit, value]);
+  }, [decimals, outputUnit, valueBn]);
 
   const fractions = useMemo(() => {
     try {
@@ -50,7 +59,7 @@ export const CryptoValue = (props: Props) => {
         fractionDigits !== undefined
           ? fractionDigits
           : symbol?.toString().toLowerCase().endsWith('eth')
-          ? targetUnit === CryptoUnits.ETHER
+          ? decimals === CryptoUnits.ETHER
             ? 4
             : 0
           : 2,
@@ -65,7 +74,7 @@ export const CryptoValue = (props: Props) => {
         e,
       );
     }
-  }, [fractionDigits, symbol, targetUnit, targetUnitValue]);
+  }, [fractionDigits, symbol, decimals, targetUnitValue]);
 
   if (error) {
     console.warn(`Could not fetch price for ${symbol}: `, error);
@@ -94,20 +103,17 @@ export const CryptoValue = (props: Props) => {
   ) : (
     <>
       {valueToRenderFormatted || '...'}{' '}
-      {showSymbol
-        ? targetUnit === CryptoUnits.ETHER
-          ? data.info?.icon || symbol
-          : targetUnit
-        : null}
+      {showSymbol ? outputUnit || data.info?.icon || symbol : null}
       {showPrice && data.price && Number(data.price) > 0 ? (
         <>
           {' '}
           (~
           <CryptoPrice
-            value={value}
+            value={valueBn}
+            formatted={false}
             fractionDigits={1}
             symbol={symbol}
-            unit={unit}
+            decimals={decimals}
           />
           )
         </>

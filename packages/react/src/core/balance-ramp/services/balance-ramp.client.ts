@@ -195,7 +195,8 @@ export class BalanceRampClient {
 
       if (
         !message.toLowerCase().includes('insufficient funds') &&
-        !message.toLowerCase().includes('exceeds allowance')
+        !message.toLowerCase().includes('exceeds allowance') &&
+        !message.toLowerCase().includes('exceeds balance')
       ) {
         throw e;
       }
@@ -474,7 +475,7 @@ export class BalanceRampClient {
       outputTokenAddress:
         requiredBalance.outputTokenAddress || ethers.constants.AddressZero,
       outputAmount: requiredBalance.outputAmount?.toString() || '',
-      outputDecimals: requiredBalance.outputDecimals || '18',
+      outputDecimals: requiredBalance.outputDecimals,
       requiresKyc:
         requiredBalance.requiresKyc || this.config.requiresKyc || false,
       inputCurrency:

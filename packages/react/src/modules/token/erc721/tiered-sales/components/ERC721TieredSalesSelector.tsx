@@ -2,6 +2,7 @@ import { classNames } from '@flair-sdk/common';
 import { RadioGroup } from '@headlessui/react';
 import { CheckCircleIcon } from '@heroicons/react/solid';
 
+import { useChainInfo } from '../../../../../common';
 import {
   CryptoUnits,
   CryptoValue,
@@ -18,12 +19,15 @@ export const ERC721TieredSalesSelector = (props: TieredSalesSelectorProps) => {
   return (
     <TieredSalesSelector
       optionElement={({
+        chainInfo,
         checked,
         active,
         disabled,
         tierId,
         tierConfig,
+        isERC20Price,
         currencySymbol,
+        currencyDecimals,
         tokenMetadata,
       }: TieredSalesSelectorRenderProps) => {
         return (
@@ -63,7 +67,12 @@ export const ERC721TieredSalesSelector = (props: TieredSalesSelectorProps) => {
                     <CryptoValue
                       symbol={currencySymbol}
                       value={tierConfig.price?.toString()}
-                      unit={CryptoUnits.WEI}
+                      formatted={false}
+                      decimals={
+                        currencyDecimals ||
+                        chainInfo?.nativeCurrency.decimals ||
+                        18
+                      }
                       showPrice={false}
                       showSymbol={true}
                     />

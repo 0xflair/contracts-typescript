@@ -32,7 +32,7 @@ export const balanceRampNativeValueResolve: BalanceResolver = async (
     return {
       idempotencyKey: txUniqueHash,
       outputTokenAddress: '0x0000000000000000000000000000000000000000',
-      outputDecimals: 18,
+      outputDecimals: 18, // TODO get from chain info for stupid chains
       outputAmount: txValue.toString(),
       estimatedGasPrice: estimatedGasPrice?.toString(),
       estimatedMaxFeePerGas: estimatedMaxFeePerGas?.toString(),

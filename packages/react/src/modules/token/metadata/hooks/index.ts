@@ -1,3 +1,4 @@
+export * from './useContractDecimals';
 export * from './useContractName';
 export * from './useContractNameAndSymbolLocked';
 export * from './useContractSymbol';

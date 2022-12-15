@@ -8,13 +8,13 @@ import { ReactNode, useEffect } from 'react';
 import { useChainInfo } from '../../../../common';
 import {
   CryptoSymbol,
-  CryptoUnits,
   CryptoValue,
   IfWalletConnected,
   useDiamondContext,
   useRemoteJsonReader,
 } from '../../../../core';
 import { NftTokenMetadata, useContractSymbol } from '../../../token';
+import { useContractDecimals } from '../../../token/metadata/hooks/useContractDecimals';
 import { useTieredSalesContext } from '../providers';
 import { Tier } from '../types';
 
@@ -28,9 +28,12 @@ export type TieredSalesSelectorRenderProps = {
   checked: boolean;
   active: boolean;
   disabled: boolean;
+  chainInfo?: Chain;
   tierId: string;
   tierConfig: Tier;
+  isERC20Price: boolean;
   currencySymbol: CryptoSymbol;
+  currencyDecimals?: BigNumberish;
   tokenMetadataUri?: string;
   tokenMetadata?: NftTokenMetadata;
   tokenMetadataLoading?: boolean;
@@ -136,9 +139,12 @@ export const TieredSalesSelector = ({
         checked,
         active,
         disabled,
+        chainInfo,
         tierConfig,
         tierId,
+        isERC20Price,
         currencySymbol,
+        currencyDecimals,
         tokenMetadata,
         tokenMetadataUri,
         tokenMetadataLoading,
@@ -154,9 +160,12 @@ export const TieredSalesSelector = ({
                   checked,
                   active,
                   disabled,
+                  chainInfo,
                   tierConfig,
                   tierId,
+                  isERC20Price,
                   currencySymbol,
+                  currencyDecimals,
                   tokenMetadata,
                   tokenMetadataUri,
                   tokenMetadataLoading,
@@ -180,7 +189,7 @@ export const TieredSalesSelector = ({
                   <CryptoValue
                     symbol={currencySymbol}
                     value={tierConfig.price.toString()}
-                    unit={CryptoUnits.WEI}
+                    formatted={false}
                     showPrice={false}
                     showSymbol={true}
                   />
@@ -304,16 +313,29 @@ const TierItemRow = ({
     );
   }
 
+  const isERC20Price = Boolean(
+    tierConfig?.currency &&
+      tierConfig?.currency !== ethers.constants.AddressZero,
+  );
+
+  const { data: currencyDecimals } = useContractDecimals({
+    chainId: chainInfo?.id,
+    contractAddress: tierConfig?.currency as string,
+    enabled: Boolean(chainInfo?.id && isERC20Price),
+  });
+
   return renderOption({
     checked,
     active,
     disabled,
+    chainInfo,
     tierId,
     tierConfig,
-    currencySymbol: (!tierConfig.currency ||
-    tierConfig.currency === ethers.constants.AddressZero
-      ? chainInfo?.nativeCurrency?.symbol
-      : erc20Symbol) as CryptoSymbol,
+    isERC20Price,
+    currencySymbol: (isERC20Price
+      ? erc20Symbol
+      : chainInfo?.nativeCurrency?.symbol) as CryptoSymbol,
+    currencyDecimals,
     tokenMetadataUri,
     tokenMetadata,
     tokenMetadataLoading,
