@@ -5,7 +5,7 @@ import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
 import _ from 'lodash';
 import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import { useAccount } from 'wagmi';
+import { useAccount, useConnect } from 'wagmi';
 
 import { useChainInfo } from '../../../../common';
 import { useBalanceRampConfig } from '../../../../core';

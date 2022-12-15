@@ -117,6 +117,11 @@ export const useTieredSalesMinter = ({
     ),
   });
 
+  const isEligible =
+    eligibleAmount !== undefined
+      ? Boolean(!eligibleAmountError && Number(eligibleAmount.toString()) > 0)
+      : undefined;
+
   const {
     data: approveData,
     error: approveError,
@@ -151,12 +156,21 @@ export const useTieredSalesMinter = ({
       BigNumber.from(allowance).lt(_totalAmount),
   );
 
+  const canMintNow = Boolean(
+    isActive &&
+      isEligible &&
+      (!hasAllowlist || isAllowlisted) &&
+      !isApproveNeeded,
+  );
+
   const shouldPrepareMint = Boolean(
-    _tierId !== undefined && typeof _totalAmount !== 'undefined',
+    _tierId !== undefined && typeof _totalAmount !== 'undefined' && canMintNow,
     //  &&
     // (isERC20Payment === false ||
     //   (_totalAmount && allowance && !isApproveNeeded)),
   );
+
+  console.log('shouldPrepareMint === ', shouldPrepareMint);
 
   const requiredAmounts = useMemo(() => {
     return [
@@ -345,14 +359,10 @@ export const useTieredSalesMinter = ({
       hasAllowlist,
       isAllowlisted,
       eligibleAmount,
-      isEligible:
-        eligibleAmount !== undefined
-          ? Boolean(
-              !eligibleAmountError && Number(eligibleAmount.toString()) > 0,
-            )
-          : undefined,
+      isEligible,
       isApproveNeeded,
       isERC20Payment,
+      canMintNow,
     },
     error: {
       tierError,

@@ -86,6 +86,8 @@ const {
       }
     } catch (e) {}
 
+    console.log('httpRpcUrl === ', httpRpcUrl);
+
     return {
       chain: {
         ...chain,
@@ -350,19 +352,16 @@ export const WalletProvider = ({
     return wrapWagmiClient(
       createClient({
         autoConnect: tryAutoConnect,
-        connectors: () => connectorsList,
-        provider: ({ chainId }: { chainId?: number | undefined }) => {
-          const provider = wagmiProvider({ chainId });
-
-          console.log('provider === ', provider);
-
-          return provider;
+        connectors: () => {
+          console.log('connectors connectorsList === ', connectorsList);
+          return connectorsList;
         },
+        provider: wagmiProvider,
         webSocketProvider,
       }),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [connectors]);
 
   useEffect(() => {
     if (!injectStyles) {

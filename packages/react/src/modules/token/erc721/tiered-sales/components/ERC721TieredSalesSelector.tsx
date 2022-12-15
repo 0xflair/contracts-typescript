@@ -39,6 +39,7 @@ export const ERC721TieredSalesSelector = (props: TieredSalesSelectorProps) => {
                       metadata={tokenMetadata}
                       hideAttributes={true}
                       hideDescription={true}
+                      preferDedicatedGateway={true}
                     />
                   ) : (
                     <>Tier #{tierId}</>

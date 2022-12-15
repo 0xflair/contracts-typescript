@@ -8,6 +8,7 @@ type Props = {
   metadata?: NftTokenMetadata;
   hideAttributes?: boolean;
   hideDescription?: boolean;
+  preferDedicatedGateway?: boolean;
   className?: string;
 };
 
@@ -16,6 +17,7 @@ export const NftMetadataPreview = ({
   metadata,
   hideAttributes = true,
   hideDescription = false,
+  preferDedicatedGateway = false,
 }: Props) => {
   const {
     data: remoteTokenMetadata,
@@ -25,6 +27,7 @@ export const NftMetadataPreview = ({
   } = useRemoteJsonReader({
     uri: uri?.toString(),
     enabled: Boolean(uri),
+    preferDedicatedGateway,
   });
 
   const finalMetadata = metadata || remoteTokenMetadata;

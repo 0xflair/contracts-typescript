@@ -134,7 +134,7 @@ export const DiamondProvider = ({
   } = useWalletContext();
 
   useEffect(() => {
-    if (diamond?.chainId && diamond?.chainId !== preferredChainId) {
+    if (chainId?.toString() !== preferredChainId?.toString()) {
       setPreferredChainId(Number(chainId));
       setAllowedNetworks([Number(chainId)]);
     }

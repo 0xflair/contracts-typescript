@@ -513,7 +513,7 @@ export class BalanceRampClient {
         );
         clearInterval(interval);
       }
-    }, 300);
+    }, 1000);
   }
 
   private async waitUntilReady(
