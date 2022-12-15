@@ -2,7 +2,7 @@ import { BigNumber, ethers } from 'ethers';
 import { Fragment, ReactNode } from 'react';
 
 import { BareComponentProps, useChainInfo } from '../../../../common';
-import { CryptoUnits, CryptoValue } from '../../../../core/crypto-currency';
+import { CryptoValue } from '../../../../core/crypto-currency';
 import { useContractDecimals, useContractSymbol } from '../../../token';
 import { useTieredSalesContext } from '../providers';
 
@@ -85,7 +85,7 @@ export const TieredSalesPrice = ({
             decimals={
               isERC20Price
                 ? erc20Decimals
-                : chainInfo?.nativeCurrency.decimals || 18
+                : chainInfo?.nativeCurrency?.decimals || 18
             }
             showPrice={showPrice}
             showSymbol={showSymbol}

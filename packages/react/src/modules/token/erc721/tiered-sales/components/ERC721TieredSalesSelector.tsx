@@ -2,7 +2,12 @@ import { classNames } from '@flair-sdk/common';
 import { RadioGroup } from '@headlessui/react';
 import { CheckCircleIcon } from '@heroicons/react/solid';
 
-import { CryptoValue, IfWalletConnected } from '../../../../../core';
+import { useChainInfo } from '../../../../../common';
+import {
+  CryptoUnits,
+  CryptoValue,
+  IfWalletConnected,
+} from '../../../../../core';
 import {
   TieredSalesSelector,
   TieredSalesSelectorProps,

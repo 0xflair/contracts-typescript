@@ -8,7 +8,6 @@ import { ReactNode, useEffect } from 'react';
 import { useChainInfo } from '../../../../common';
 import {
   CryptoSymbol,
-  CryptoUnits,
   CryptoValue,
   IfWalletConnected,
   useDiamondContext,
