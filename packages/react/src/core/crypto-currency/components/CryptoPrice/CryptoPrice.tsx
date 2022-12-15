@@ -8,7 +8,7 @@ import { BaseCurrency, CryptoSymbol, CryptoUnits } from '../../types';
 type Props = {
   value?: string | BigNumberish;
   fractionDigits?: number;
-  unit?: CryptoUnits;
+  unit?: CryptoUnits | BigNumberish;
   symbol?: CryptoSymbol;
   baseCurrency?: BaseCurrency;
   showCurrencySymbol?: boolean;
@@ -32,7 +32,7 @@ export const CryptoPrice = (props: Props) => {
   const etherValue = useMemo(() => {
     try {
       const valueBn = ethers.utils.parseUnits(value?.toString() || '0', unit);
-      return ethers.utils.formatUnits(valueBn, CryptoUnits.ETHER);
+      return ethers.utils.formatUnits(valueBn, unit);
     } catch (e) {
       console.error(
         `Error parsing value: `,

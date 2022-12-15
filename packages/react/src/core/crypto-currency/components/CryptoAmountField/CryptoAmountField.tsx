@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useNetwork } from 'wagmi';
 
 import { useContractName, useContractSymbol } from '../../../../modules';
+import { useContractDecimals } from '../../../../modules/token/metadata/hooks/useContractDecimals';
 import {
   AddressScannerLink,
   Button,
@@ -20,12 +21,12 @@ export type CryptoAmountFieldProps = {
   label: string;
   description?: React.ReactNode;
   value: string | BigNumberish;
-  unit?: CryptoUnits;
+  unit?: CryptoUnits | BigNumberish;
   symbol?: CryptoSymbol;
   min?: number;
   max?: number;
   tabIndex?: number;
-  onChange?: (value: string) => void;
+  onChange?: (value: BigNumberish) => void;
   allowSymbolChange?: boolean;
   onSymbolChange?: (symbol: CryptoSymbol) => void;
 };
@@ -35,7 +36,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
     label,
     description,
     value,
-    unit = CryptoUnits.ETHER,
+    unit = 18,
     symbol,
     allowSymbolChange,
     min,
@@ -46,8 +47,8 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
 
   const { chain } = useNetwork();
 
-  const convertedValueWei = utils.parseUnits(value.toString(), unit);
-  const convertedValueEther = utils.formatEther(convertedValueWei);
+  const convertedValueWei = value.toString();
+  const convertedValueEther = utils.formatUnits(convertedValueWei, unit);
 
   const [etherValue, setEtherValue] = useState(convertedValueEther.toString());
 
@@ -67,6 +68,17 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
         erc20Address !== ethers.constants.AddressZero,
     ),
   });
+  const { data: erc20Decimals } = useContractDecimals({
+    chainId: chain?.id,
+    contractAddress: erc20Address,
+    enabled: Boolean(
+      chain?.id &&
+        erc20Address &&
+        erc20Address !== ethers.constants.AddressZero,
+    ),
+  });
+
+  console.log('CRYPTO AMOUNT erc20Decimals === ', erc20Decimals?.toString());
 
   const { data: erc20Name } = useContractName({
     chainId: chain?.id,
@@ -100,15 +112,10 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
               tabIndex={tabIndex}
               onChange={(e) => {
                 if (Number.isNaN(Number(e.target.value))) return;
-
                 setEtherValue(e.target.value);
-                onChange &&
-                  onChange(
-                    utils.formatUnits(
-                      utils.parseEther(e.target.value || '0'),
-                      unit,
-                    ),
-                  );
+              }}
+              onBlur={() => {
+                onChange && onChange(utils.parseUnits(etherValue || '0', unit));
               }}
             />
             <div className="absolute top-2 right-0 pr-3 flex items-center pointer-events-none">
@@ -126,7 +133,7 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
                       ? chain?.nativeCurrency?.symbol
                       : erc20Symbol?.toString()) as CryptoSymbol
                   }
-                  unit={CryptoUnits.ETHER}
+                  unit={erc20Decimals}
                   showCurrencySymbol={true}
                 />
               </span>

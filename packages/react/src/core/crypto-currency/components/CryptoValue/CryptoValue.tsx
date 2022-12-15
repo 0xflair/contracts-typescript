@@ -9,8 +9,8 @@ import { CryptoPrice } from '../CryptoPrice/CryptoPrice';
 type Props = {
   value?: BigNumberish;
   fractionDigits?: number;
-  unit?: CryptoUnits;
-  targetUnit?: CryptoUnits;
+  unit?: CryptoUnits | BigNumberish;
+  targetUnit?: CryptoUnits | BigNumberish;
   symbol?: CryptoSymbol;
   showPrice?: boolean;
   showSymbol?: boolean;
@@ -22,7 +22,7 @@ export const CryptoValue = (props: Props) => {
     value = '0',
     fractionDigits,
     unit = CryptoUnits.ETHER,
-    targetUnit = CryptoUnits.ETHER,
+    targetUnit = 18,
     symbol = 'ETH',
     showPrice = false,
     showSymbol = true,
@@ -33,10 +33,13 @@ export const CryptoValue = (props: Props) => {
 
   const targetUnitValue = useMemo(() => {
     try {
-      const valueBn = ethers.utils.parseUnits(
-        BigNumber.from(value || '0')?.toString() || '0',
-        unit,
-      );
+      const valueBn =
+        unit === CryptoUnits.ETHER
+          ? ethers.utils.parseUnits(
+              BigNumber.from(value || '0')?.toString() || '0',
+              unit,
+            )
+          : BigNumber.from(value || '0');
       return ethers.utils.formatUnits(valueBn, targetUnit);
     } catch (e) {
       debugger;
@@ -97,7 +100,7 @@ export const CryptoValue = (props: Props) => {
       {showSymbol
         ? targetUnit === CryptoUnits.ETHER
           ? data.info?.icon || symbol
-          : targetUnit
+          : symbol
         : null}
       {showPrice && data.price && Number(data.price) > 0 ? (
         <>

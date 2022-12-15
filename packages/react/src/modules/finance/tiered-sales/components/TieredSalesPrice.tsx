@@ -3,7 +3,7 @@ import { Fragment, ReactNode } from 'react';
 
 import { BareComponentProps, useChainInfo } from '../../../../common';
 import { CryptoUnits, CryptoValue } from '../../../../core/crypto-currency';
-import { useContractSymbol } from '../../../token';
+import { useContractDecimals, useContractSymbol } from '../../../token';
 import { useTieredSalesContext } from '../providers';
 
 type Props = BareComponentProps & {
@@ -52,6 +52,15 @@ export const TieredSalesPrice = ({
   const isERC20Price =
     finalTier?.currency && finalTier?.currency !== ethers.constants.AddressZero;
 
+  const { data: erc20Decimals } = useContractDecimals({
+    chainId,
+    contractAddress: finalTier?.currency as string,
+    enabled: Boolean(
+      chainId &&
+        finalTier?.currency &&
+        finalTier?.currency !== ethers.constants.AddressZero,
+    ),
+  });
   const { data: erc20Symbol } = useContractSymbol({
     chainId: chainInfo?.id,
     contractAddress: finalTier?.currency?.toString(),
@@ -72,7 +81,8 @@ export const TieredSalesPrice = ({
                 : chainInfo?.nativeCurrency?.symbol?.toString()
             }
             value={finalPrice}
-            unit={CryptoUnits.WEI}
+            unit={isERC20Price ? erc20Decimals : CryptoUnits.WEI}
+            targetUnit={isERC20Price ? erc20Decimals : 18}
             showPrice={showPrice}
             showSymbol={showSymbol}
             fractionDigits={fractionDigits}
