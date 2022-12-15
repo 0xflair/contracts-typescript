@@ -164,13 +164,8 @@ export const useTieredSalesMinter = ({
   );
 
   const shouldPrepareMint = Boolean(
-    _tierId !== undefined && typeof _totalAmount !== 'undefined' && canMintNow,
-    //  &&
-    // (isERC20Payment === false ||
-    //   (_totalAmount && allowance && !isApproveNeeded)),
+    _tierId !== undefined && typeof _totalAmount !== 'undefined' && isActive,
   );
-
-  console.log('shouldPrepareMint === ', shouldPrepareMint);
 
   const requiredAmounts = useMemo(() => {
     return [

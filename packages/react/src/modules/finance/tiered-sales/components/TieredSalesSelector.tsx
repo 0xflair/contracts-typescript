@@ -233,7 +233,7 @@ export const TieredSalesSelector = ({
   return visibleTiers.length > 1 || alwaysShowTierSelector ? (
     <RadioGroup
       className={className}
-      value={currentTierId?.toString()}
+      value={currentTierId?.toString() || ''}
       onChange={(newTierId: BigNumberish) => {
         setCurrentTierId(newTierId.toString());
       }}

@@ -387,7 +387,7 @@ export const WalletProvider = ({
     <WagmiConfig
       client={wagmiClient}
       {...wagmiOverrides}
-      key={connectorsList.length}
+      key={`${preferredChainId}:${connectorsList.length}:${web3AuthOptions?.clientId}`}
     >
       {children}
     </WagmiConfig>,
