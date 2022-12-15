@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.68.4 (2022-12-15)
+
+
+### Bug Fixes
+
+* move loading elements to sdk ([b8b9a60](https://github.com/flair-sdk/typescript/commit/b8b9a60a8b48d3eaef0dc157ac6d1662197a0a0c))
+
+
+
+
+
 ## 2.68.3 (2022-12-15)
 
 
