@@ -84,6 +84,8 @@ export const CoinGeckoProvider = ({
         };
       }
 
+      data['GOR'] = data['ETH'];
+
       setState({ data, loading: false });
     } catch (e) {
       setState({ error: e as Error, loading: false });

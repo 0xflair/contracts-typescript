@@ -12,7 +12,9 @@ type Props = BareComponentProps & {
 
 export const TieredSalesAllowlistStatus = ({
   as,
-  loadingMask = '...',
+  loadingMask = (
+    <span className="rounded-full bg-gray-200 animate-pulse h-5 w-32" />
+  ),
   allowlistedContent = (
     <span className="allowlist-status allowlist-status-allowlisted inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
       You are allowlisted
@@ -37,9 +39,11 @@ export const TieredSalesAllowlistStatus = ({
   return (
     <Component {...attributes}>
       {loadingMask &&
-      (isAutoDetectingTier || tiersLoading || mintLoading) &&
-      hasAllowlist === undefined &&
-      isAllowlisted === undefined ? (
+      (isAutoDetectingTier ||
+        tiersLoading ||
+        (mintLoading &&
+          hasAllowlist === undefined &&
+          isAllowlisted === undefined)) ? (
         loadingMask
       ) : (
         <>

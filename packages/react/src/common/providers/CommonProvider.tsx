@@ -17,12 +17,12 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       cacheTime: 1_000 * 60 * 60 * 24,
-      staleTime: 1_000 * 60 * 60 * 2,
+      staleTime: 0,
       networkMode: 'offlineFirst',
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry: 0,
+      retry: 1,
     },
   },
 });

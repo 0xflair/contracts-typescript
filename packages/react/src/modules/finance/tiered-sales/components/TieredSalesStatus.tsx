@@ -11,14 +11,16 @@ type Props = BareComponentProps & {
 
 export const TieredSalesStatus = ({
   as,
-  loadingMask = '...',
+  loadingMask = (
+    <span className="rounded-full bg-gray-200 animate-pulse h-5 w-32" />
+  ),
   activeContent = (
-    <span className="sale-status sale-not-active inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+    <span className="sale-status sale-active inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
       Sale is active
     </span>
   ),
   notActiveContent = (
-    <span className="sale-status pre-sale pre-sale-active inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
+    <span className="sale-status sale-not-active inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
       Sale not active yet
     </span>
   ),
@@ -34,7 +36,7 @@ export const TieredSalesStatus = ({
 
   return (
     <Component {...attributes}>
-      {loadingMask && isAutoDetectingTier ? (
+      {loadingMask && (isAutoDetectingTier || isActive === undefined) ? (
         <>{loadingMask}</>
       ) : (
         <>

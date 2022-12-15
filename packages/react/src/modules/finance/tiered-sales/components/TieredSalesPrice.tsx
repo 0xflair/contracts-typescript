@@ -18,7 +18,9 @@ type Props = BareComponentProps & {
 
 export const TieredSalesPrice = ({
   as,
-  loadingMask = '...',
+  loadingMask = (
+    <div className="rounded-full bg-gray-400 animate-pulse h-8 w-20" />
+  ),
   showPrice = false,
   showSymbol = true,
   freeElement = <>Free</>,
