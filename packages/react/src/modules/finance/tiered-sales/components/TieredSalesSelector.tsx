@@ -66,7 +66,13 @@ export const TieredSalesSelector = ({
       'relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none',
     ),
   labelElement,
-  loadingElement,
+  loadingElement = (
+    <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
+      <div className="bg-gray-200 duration-300 animate-pulse h-48 rounded-lg"></div>
+      <div className="bg-gray-200 duration-300 animate-pulse h-48 rounded-lg"></div>
+      <div className="bg-gray-200 duration-300 animate-pulse h-48 rounded-lg"></div>
+    </div>
+  ),
   alwaysShowTierSelector = false,
   hideNotEligibleTiers = false,
   hideNotActiveTiers = false,

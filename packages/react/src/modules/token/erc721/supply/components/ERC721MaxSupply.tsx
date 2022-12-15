@@ -13,7 +13,9 @@ export const ERC721MaxSupply = ({
   chainId,
   contractAddress,
   as,
-  loadingMask = '...',
+  loadingMask = (
+    <span className="bg-gray-200 duration-300 animate-pulse h-3 w-8 rounded-lg"></span>
+  ),
   ...attributes
 }: Props) => {
   const { data: maxSupply, isLoading: maxSupplyLoading } = useERC721MaxSupply({

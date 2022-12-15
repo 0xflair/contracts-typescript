@@ -15,7 +15,13 @@ export const ERC721SupplyCounter = ({
   contractAddress,
   as,
   loadingMask,
-  separator = <>&nbsp;/&nbsp;</>,
+  separator = (
+    <div className="flex gap-1 items-center">
+      <span className="bg-gray-200 duration-300 animate-pulse h-3 w-8 rounded-lg"></span>
+      <span>/</span>
+      <span className="bg-gray-200 duration-300 animate-pulse h-3 w-8 rounded-lg"></span>
+    </div>
+  ),
   ...attributes
 }: Props) => {
   const { data: totalSupply, isLoading: totalSupplyLoading } =
