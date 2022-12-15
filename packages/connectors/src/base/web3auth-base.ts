@@ -23,7 +23,9 @@ export abstract class Web3AuthBaseConnector
     return new Promise<any>(async (resolve, reject) => {
       try {
         await this.disconnect();
+      } catch (e) {}
 
+      try {
         if (this.web3AuthInstance?.status !== ADAPTER_STATUS.READY) {
           await this.web3AuthInstance?.init();
         }
@@ -53,7 +55,9 @@ export abstract class Web3AuthBaseConnector
     const id = normalizeChainId(chainId);
 
     try {
-      await this.disconnect();
+      try {
+        await this.disconnect();
+      } catch (e) {}
 
       const tmp = new Web3AuthConnector({
         chains: this.chains,

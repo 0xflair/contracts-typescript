@@ -45,9 +45,11 @@ export class Web3AuthModalConnector
         await this.disconnect();
       } catch (e) {}
 
-      if (this.web3AuthInstance?.status !== ADAPTER_STATUS.READY) {
-        await this.web3AuthInstance?.init();
-      }
+      try {
+        if (this.web3AuthInstance?.status !== ADAPTER_STATUS.READY) {
+          await this.web3AuthInstance?.init();
+        }
+      } catch (e) {}
 
       return super
         .connect()
@@ -71,7 +73,9 @@ export class Web3AuthModalConnector
     const id = normalizeChainId(chainId);
 
     try {
-      await this.disconnect();
+      try {
+        await this.disconnect();
+      } catch (e) {}
 
       const tmp = new Web3AuthModalConnector({
         chains: this.chains,
@@ -91,6 +95,12 @@ export class Web3AuthModalConnector
 
       // @ts-ignore
       this.subscribeToLoginModalEvents();
+
+      try {
+        if (this.web3AuthInstance?.status !== ADAPTER_STATUS.READY) {
+          await this.web3AuthInstance?.init();
+        }
+      } catch (e) {}
 
       await this.connect();
 
