@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.68.3 (2022-12-15)
+
+
+### Bug Fixes
+
+* re-create wagmi when config changes, prepare mint if sale active ([73c3942](https://github.com/flair-sdk/typescript/commit/73c3942302dcaf5caabf377ca9e6c06022cf1385))
+
+
+
+
+
 ## 2.68.2 (2022-12-15)
 
 
