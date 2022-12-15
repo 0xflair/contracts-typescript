@@ -37,7 +37,7 @@ export const TieredSalesPrice = ({
   const chainInfo = useChainInfo(chainId);
   const finalTierId = tierId || currentTierId;
   const finalTier =
-    finalTierId && tiers && Number(finalTierId.toString()) in tiers
+    finalTierId !== undefined && tiers && tiers[Number(finalTierId.toString())]
       ? tiers[Number(finalTierId.toString())]
       : undefined;
 
