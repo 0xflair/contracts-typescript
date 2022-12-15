@@ -1,8 +1,8 @@
 import { classNames, POPULAR_ERC20_TOKENS } from '@flair-sdk/common';
 import { InformationCircleIcon } from '@heroicons/react/solid';
-import { BigNumberish, ethers, utils } from 'ethers';
+import { BigNumber, BigNumberish, ethers, utils } from 'ethers';
 import * as React from 'react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNetwork } from 'wagmi';
 
 import { useContractName, useContractSymbol } from '../../../../modules';
@@ -14,14 +14,15 @@ import {
   PRIMARY_BUTTON,
   SECONDARY_BUTTON,
 } from '../../../ui';
-import { CryptoSymbol, CryptoUnits } from '../../types';
+import { CryptoSymbol } from '../../types';
 import { CryptoPrice } from '../CryptoPrice/CryptoPrice';
 
 export type CryptoAmountFieldProps = {
   label: string;
   description?: React.ReactNode;
   value: string | BigNumberish;
-  unit?: CryptoUnits | BigNumberish;
+  decimals?: BigNumberish;
+  formatted?: boolean;
   symbol?: CryptoSymbol;
   min?: number;
   max?: number;
@@ -36,7 +37,8 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
     label,
     description,
     value,
-    unit = 18,
+    decimals = 18,
+    formatted,
     symbol,
     allowSymbolChange,
     min,
@@ -47,10 +49,18 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
 
   const { chain } = useNetwork();
 
-  const convertedValueWei = value.toString();
-  const convertedValueEther = utils.formatUnits(convertedValueWei, unit);
+  const convertedValueBN = useMemo(
+    () =>
+      formatted
+        ? utils.parseUnits(value.toString(), decimals)
+        : BigNumber.from(value).toString(),
+    [decimals, formatted, value],
+  );
+  const convertedValueFormatted = utils.formatUnits(convertedValueBN, decimals);
 
-  const [etherValue, setEtherValue] = useState(convertedValueEther.toString());
+  const [formattedValue, setFormattedValue] = useState(
+    convertedValueFormatted.toString(),
+  );
 
   const [selectedTokenType, setSelectedTokenType] = useState(
     !symbol || symbol === ethers.constants.AddressZero ? 'native' : 'erc20',
@@ -78,8 +88,6 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
     ),
   });
 
-  console.log('CRYPTO AMOUNT erc20Decimals === ', erc20Decimals?.toString());
-
   const { data: erc20Name } = useContractName({
     chainId: chain?.id,
     contractAddress: erc20Address,
@@ -106,16 +114,17 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
               type="number"
               className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"
               placeholder="0.00"
-              value={etherValue}
+              value={formattedValue}
               min={min || 0}
               max={max || Infinity}
               tabIndex={tabIndex}
               onChange={(e) => {
                 if (Number.isNaN(Number(e.target.value))) return;
-                setEtherValue(e.target.value);
+                setFormattedValue(e.target.value);
               }}
               onBlur={() => {
-                onChange && onChange(utils.parseUnits(etherValue || '0', unit));
+                onChange &&
+                  onChange(utils.parseUnits(formattedValue || '0', decimals));
               }}
             />
             <div className="absolute top-2 right-0 pr-3 flex items-center pointer-events-none">
@@ -126,14 +135,15 @@ export const CryptoAmountField = (props: CryptoAmountFieldProps) => {
                   : erc20Symbol?.toString()}
                 ){' '}
                 <CryptoPrice
-                  value={etherValue}
+                  value={formattedValue}
+                  formatted={true}
+                  decimals={erc20Decimals}
                   symbol={
                     (!symbol ||
                     symbol?.toString() === ethers.constants.AddressZero
                       ? chain?.nativeCurrency?.symbol
                       : erc20Symbol?.toString()) as CryptoSymbol
                   }
-                  unit={erc20Decimals}
                   showCurrencySymbol={true}
                 />
               </span>

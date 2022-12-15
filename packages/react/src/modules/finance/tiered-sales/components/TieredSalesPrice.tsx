@@ -81,8 +81,12 @@ export const TieredSalesPrice = ({
                 : chainInfo?.nativeCurrency?.symbol?.toString()
             }
             value={finalPrice}
-            unit={isERC20Price ? erc20Decimals : CryptoUnits.WEI}
-            targetUnit={isERC20Price ? erc20Decimals : 18}
+            formatted={false}
+            decimals={
+              isERC20Price
+                ? erc20Decimals
+                : chainInfo?.nativeCurrency.decimals || 18
+            }
             showPrice={showPrice}
             showSymbol={showSymbol}
             fractionDigits={fractionDigits}

@@ -29,6 +29,7 @@ export type TieredSalesSelectorRenderProps = {
   checked: boolean;
   active: boolean;
   disabled: boolean;
+  chainInfo?: Chain;
   tierId: string;
   tierConfig: Tier;
   isERC20Price: boolean;
@@ -139,6 +140,7 @@ export const TieredSalesSelector = ({
         checked,
         active,
         disabled,
+        chainInfo,
         tierConfig,
         tierId,
         isERC20Price,
@@ -159,6 +161,7 @@ export const TieredSalesSelector = ({
                   checked,
                   active,
                   disabled,
+                  chainInfo,
                   tierConfig,
                   tierId,
                   isERC20Price,
@@ -187,7 +190,7 @@ export const TieredSalesSelector = ({
                   <CryptoValue
                     symbol={currencySymbol}
                     value={tierConfig.price.toString()}
-                    unit={CryptoUnits.WEI}
+                    formatted={false}
                     showPrice={false}
                     showSymbol={true}
                   />
@@ -326,6 +329,7 @@ const TierItemRow = ({
     checked,
     active,
     disabled,
+    chainInfo,
     tierId,
     tierConfig,
     isERC20Price,
