@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/common",
-  "version": "2.68.0",
+  "version": "2.68.1",
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
@@ -16,10 +16,10 @@
     "build": "rollup -c"
   },
   "peerDependencies": {
+    "@ethersproject/providers": "*",
     "@wagmi/chains": "*",
     "@wagmi/core": "*",
-    "ethers": "*",
-    "@ethersproject/providers": "*"
+    "ethers": "*"
   },
   "peerDependenciesMeta": {
     "@wagmi/core": {

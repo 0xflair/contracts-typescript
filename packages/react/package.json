@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/react",
-  "version": "2.68.0",
+  "version": "2.68.1",
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
@@ -36,6 +36,8 @@
     ]
   },
   "peerDependencies": {
+    "@ethersproject/properties": "*",
+    "@ethersproject/providers": "*",
     "@flair-sdk/common": "*",
     "@flair-sdk/connectors": "*",
     "@flair-sdk/icons": "*",
@@ -50,6 +52,7 @@
     "@tanstack/query-sync-storage-persister": "*",
     "@tanstack/react-query": "*",
     "@tanstack/react-query-persist-client": "*",
+    "@wagmi/chains": "*",
     "@wagmi/core": "*",
     "@web3auth/torus-wallet-connector-plugin": "*",
     "@web3auth/web3auth-wagmi-connector": "*",
@@ -69,10 +72,7 @@
     "react-use": "*",
     "tailwindcss": "*",
     "versioning": "*",
-    "wagmi": "*",
-    "@wagmi/chains": "*",
-    "@ethersproject/providers": "*",
-    "@ethersproject/properties": "*"
+    "wagmi": "*"
   },
   "peerDependenciesMeta": {
     "@ethersproject/properties": {
@@ -185,12 +185,12 @@
     }
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.68.0",
-    "@flair-sdk/connectors": "^2.68.0",
-    "@flair-sdk/icons": "^2.68.0",
-    "@flair-sdk/ipfs": "^2.68.0",
-    "@flair-sdk/metatx": "^2.68.0",
-    "@flair-sdk/registry": "^2.68.0",
+    "@flair-sdk/common": "^2.68.1",
+    "@flair-sdk/connectors": "^2.68.1",
+    "@flair-sdk/icons": "^2.68.1",
+    "@flair-sdk/ipfs": "^2.68.1",
+    "@flair-sdk/metatx": "^2.68.1",
+    "@flair-sdk/registry": "^2.68.1",
     "@gnosis.pm/safe-apps-wagmi": "^1.0.3",
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^1.0.6",
