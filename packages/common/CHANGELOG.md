@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.68.0 (2022-12-15)
+
+
+### Features
+
+* batch rpc calls, correct goerli symbol, support any injected provider and chain ([#20](https://github.com/flair-sdk/typescript/issues/20)) ([22d0aeb](https://github.com/flair-sdk/typescript/commit/22d0aebdaef9c8c6c8499841c25fc16879095b51))
+
+
+
+
+
 # 2.67.0 (2022-12-14)
 
 
