@@ -23,11 +23,11 @@ export abstract class Web3AuthBaseConnector
     return new Promise<any>(async (resolve, reject) => {
       try {
         await this.disconnect();
-      } catch (e) {}
 
-      if (this.web3AuthInstance?.status !== ADAPTER_STATUS.READY) {
-        await this.web3AuthInstance?.init();
-      }
+        if (this.web3AuthInstance?.status !== ADAPTER_STATUS.READY) {
+          await this.web3AuthInstance?.init();
+        }
+      } catch (e) {}
 
       return this.web3AuthInstance
         ?.connectTo('openlogin', {
