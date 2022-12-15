@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.68.2 (2022-12-15)
+
+
+### Bug Fixes
+
+* separate disconnection and init attempts ([2c8e548](https://github.com/flair-sdk/typescript/commit/2c8e548793100210304241558ca6dbffcf51b615))
+
+
+
+
+
 ## 2.68.1 (2022-12-15)
 
 **Note:** Version bump only for package @flair-sdk/metatx
