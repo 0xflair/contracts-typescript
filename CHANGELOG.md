@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.68.5 (2022-12-15)
+
+
+### Bug Fixes
+
+* consider erc20 decimals for the output token ([#21](https://github.com/flair-sdk/typescript/issues/21)) ([c4dd793](https://github.com/flair-sdk/typescript/commit/c4dd79325608dd0390770b7ce17c20ad88dea517))
+
+
+
+
+
 ## 2.68.4 (2022-12-15)
 
 
