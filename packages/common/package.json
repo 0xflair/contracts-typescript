@@ -17,13 +17,21 @@
   },
   "peerDependencies": {
     "@wagmi/chains": "*",
-    "@wagmi/core": "*"
+    "@wagmi/core": "*",
+    "ethers": "*",
+    "@ethersproject/providers": "*"
   },
   "peerDependenciesMeta": {
     "@wagmi/core": {
       "optional": true
     },
     "@wagmi/chains": {
+      "optional": true
+    },
+    "ethers": {
+      "optional": true
+    },
+    "@ethersproject/providers": {
       "optional": true
     }
   },

@@ -69,9 +69,21 @@
     "react-use": "*",
     "tailwindcss": "*",
     "versioning": "*",
-    "wagmi": "*"
+    "wagmi": "*",
+    "@wagmi/chains": "*",
+    "@ethersproject/providers": "*",
+    "@ethersproject/properties": "*"
   },
   "peerDependenciesMeta": {
+    "@ethersproject/properties": {
+      "optional": true
+    },
+    "@ethersproject/providers": {
+      "optional": true
+    },
+    "@wagmi/chains": {
+      "optional": true
+    },
     "@flair-sdk/common": {
       "optional": true
     },
@@ -175,7 +187,6 @@
   "dependencies": {
     "@flair-sdk/common": "^2.68.0",
     "@flair-sdk/connectors": "^2.68.0",
-    "@flair-sdk/contracts": "^2.23.6",
     "@flair-sdk/icons": "^2.68.0",
     "@flair-sdk/ipfs": "^2.68.0",
     "@flair-sdk/metatx": "^2.68.0",

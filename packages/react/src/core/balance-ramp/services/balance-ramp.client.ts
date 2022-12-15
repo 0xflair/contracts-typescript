@@ -2,7 +2,6 @@ import {
   TransactionRequest,
   TransactionResponse,
 } from '@ethersproject/providers';
-import { ERC20__factory } from '@flair-sdk/contracts';
 import axios from 'axios';
 import { BigNumber, BigNumberish, constants, ethers, Signer } from 'ethers';
 import { Deferrable } from 'ethers/lib/utils';
@@ -345,8 +344,9 @@ export class BalanceRampClient {
     outputTokenAddress: string,
     originalSigner: ethers.Signer,
   ) {
-    const tokenContract = ERC20__factory.connect(
+    const tokenContract = new ethers.Contract(
       outputTokenAddress,
+      ['function balanceOf(address account) external view returns (uint256)'],
       originalSigner.provider || originalSigner,
     );
     const amount = (
