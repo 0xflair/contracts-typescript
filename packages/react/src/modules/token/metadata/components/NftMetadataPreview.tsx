@@ -58,7 +58,10 @@ export const NftMetadataPreview = ({
         <div className="metadata-wrapper flex flex-col items-start gap-2">
           {finalMetadata.image ? (
             <img
-              src={normalizeIpfsUrl(finalMetadata.image)}
+              src={normalizeIpfsUrl(
+                finalMetadata.image,
+                preferDedicatedGateway,
+              )}
               className="metadata-image h-16 w-16 rounded-md"
             />
           ) : null}
