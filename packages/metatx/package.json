@@ -36,19 +36,11 @@
     ]
   },
   "peerDependencies": {
-    "@flair-sdk/common": "*",
-    "@flair-sdk/registry": "*",
     "axios": "*",
     "ethers": "*",
     "randombytes": "*"
   },
   "peerDependenciesMeta": {
-    "@flair-sdk/common": {
-      "optional": true
-    },
-    "@flair-sdk/registry": {
-      "optional": true
-    },
     "axios": {
       "optional": true
     },
@@ -60,8 +52,6 @@
     }
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.68.11",
-    "@flair-sdk/registry": "^2.68.11",
     "axios": "^0.26.1",
     "ethers": "^5.6.9",
     "randombytes": "^2.1.0",

@@ -1,14 +1,8 @@
-import { Environment } from '@flair-sdk/common';
-import {
-  BigNumberish,
-  Contract,
-  Contract as EthersContract,
-  ContractFunction,
-  Signer,
-} from 'ethers';
+import { Contract, Contract as EthersContract, ContractFunction } from 'ethers';
 import { defineReadOnly, FunctionFragment } from 'ethers/lib/utils';
 
 import { MetaTransactionsClient } from './meta-transactions.client';
+import { Environment } from './types';
 import { MetaTransaction } from './types/meta-transaction';
 
 export type MetaTransactionsAugmentedContract<T extends EthersContract> = T & {

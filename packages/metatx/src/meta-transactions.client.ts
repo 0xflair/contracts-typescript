@@ -1,4 +1,3 @@
-import { Environment } from '@flair-sdk/common';
 import axios from 'axios';
 import { Signer } from 'ethers';
 import { Required } from 'utility-types';
@@ -6,7 +5,7 @@ import { Required } from 'utility-types';
 import { FLAIR_META_TRANSACTIONS_BACKEND } from './constants';
 import { EIP712_MTX_TYPES } from './eip712';
 import { generateRandomUint256 } from './random-uint256';
-import { MetaTransactionSignedData as MetaTransactionUnsignedData } from './types';
+import { Environment, MetaTransactionSignedData as MetaTransactionUnsignedData } from './types';
 import { MetaTransaction } from './types/meta-transaction';
 
 type Config = {

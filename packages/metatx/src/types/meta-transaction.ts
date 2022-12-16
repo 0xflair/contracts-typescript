@@ -1,6 +1,8 @@
 import { Log } from '@ethersproject/providers';
-import { StandardError, TransactionEvent } from '@flair-sdk/common';
 import { BigNumberish } from 'ethers';
+
+import { StandardError } from './error';
+import { TransactionEvent } from './transaction-event';
 
 export enum MetaTransactionState {
   CREATED = 'created',
