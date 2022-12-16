@@ -84,7 +84,10 @@ export const useSaleTiers = ({
   );
 
   const enrichTierById = useCallback(
-    async (tierId: BigNumberish, forAddress?: BytesLike) => {
+    async (
+      tierId: BigNumberish,
+      forAddress?: BytesLike,
+    ): Promise<Tier | undefined> => {
       if (!tiersConfigs || !tiersConfigs[tierId.toString()]) {
         return;
       }
@@ -107,12 +110,17 @@ export const useSaleTiers = ({
         ? tier.merkleRoot !== ZERO_BYTES32
         : undefined;
 
-      const { isAllowlisted, merkleMetadata, merkleProof } = hasAllowlist
-        ? await checkAllowlist({
+      const checkAllowlistPromise = hasAllowlist
+        ? checkAllowlist({
             tierId,
             merkleRoot: tier.merkleRoot,
           })
         : ({} as any);
+
+      const remainingSupplyPromise = getTierRemainingSupply(tierId);
+
+      const [{ isAllowlisted, merkleMetadata, merkleProof }, remainingSupply] =
+        await Promise.all([checkAllowlistPromise, remainingSupplyPromise]);
 
       let eligibleAmount;
 
@@ -131,8 +139,6 @@ export const useSaleTiers = ({
       } catch (e) {
         console.warn(`Error when fetching eligible amount: `, e);
       }
-
-      const remainingSupply = await getTierRemainingSupply(tierId);
 
       return {
         ...tier,
@@ -165,19 +171,24 @@ export const useSaleTiers = ({
       args: QueryFunctionContext<any>,
     ): Promise<TiersDictionary | undefined> => {
       const enrichedTiers: Record<string, Tier> = {};
+      const tierIds: string[] = [];
+      const promises: Promise<Tier | undefined>[] = [];
 
       for (const tierId in tiersConfigs) {
-        const tier = await enrichTierById(
-          tierId,
-          args.queryKey[0].minterAddress,
-        );
+        tierIds.push(tierId);
+        promises.push(enrichTierById(tierId, args.queryKey[0].minterAddress));
+      }
 
+      const resolvedTiers = await Promise.all(promises);
+
+      for (let i = 0, len = tierIds.length; i < len; i++) {
+        const tier = resolvedTiers[i];
         if (
           tier &&
           tier.maxPerWallet &&
           Number(tier.maxPerWallet.toString()) > 0
         ) {
-          enrichedTiers[tierId] = tier;
+          enrichedTiers[tierIds[i]] = tier;
         }
       }
 
@@ -205,11 +216,12 @@ export const useSaleTiers = ({
   const queryClient = useQueryClient();
   const mergedStates = useMergeQueryStates([saleTiersQuery, tiersConfigsQuery]);
 
-  const refetch = useCallback(() => {
-    queryClient.invalidateQueries(queryKey).then(() => {
-      refetchConfigs().then(() => {
-        saleTiersQuery.refetch();
-      });
+  const refetch = useCallback(async () => {
+    if (restOfConfig.cacheTime === 0) {
+      await queryClient.invalidateQueries(queryKey);
+    }
+    return refetchConfigs().then((result) => {
+      return saleTiersQuery.refetch();
     });
   }, [queryClient, queryKey, refetchConfigs, saleTiersQuery]);
 

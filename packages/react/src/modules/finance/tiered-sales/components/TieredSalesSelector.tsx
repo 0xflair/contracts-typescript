@@ -304,6 +304,7 @@ const TierItemRow = ({
   } = useRemoteJsonReader({
     uri: tokenMetadataUri?.toString(),
     enabled: Boolean(tokenMetadataUri),
+    preferDedicatedGateway: true,
   });
 
   if (tokenMetadataError) {
