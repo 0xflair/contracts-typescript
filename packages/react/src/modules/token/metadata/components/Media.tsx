@@ -4,15 +4,19 @@ import { useEffect, useState } from 'react';
 type Props<T = HTMLImageElement | HTMLVideoElement> = {
   uri?: string;
   loadingMask?: React.ReactNode;
+  preferManagedGateway?: boolean;
 } & React.HTMLAttributes<T>;
 
 export const Media = ({
   uri,
-  loadingMask = <>...</>,
+  loadingMask = (
+    <div className="bg-gray-200 duration-300 animate-pulse h-48 w-48 rounded-lg"></div>
+  ),
+  preferManagedGateway = false,
   ...attributes
 }: Props) => {
   const [contentType, setContentType] = useState<string>();
-  const url = normalizeIpfsUrl(uri);
+  const url = normalizeIpfsUrl(uri, preferManagedGateway);
 
   useEffect(() => {
     // Send a HEAD request using axios and grab the Content-Type header
