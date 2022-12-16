@@ -82,7 +82,7 @@ export const TieredSalesSelector = ({
   hideSoldOutTiers = false,
 }: TieredSalesSelectorProps) => {
   const {
-    data: { chainId, autoDetectedTierId, currentTierId, tiers },
+    data: { chainId, autoDetectedTierId, currentTierId, tiers: contractTiers },
     isLoading: { tiersLoading, isAutoDetectingTier },
     setCurrentTierId,
   } = useTieredSalesContext();
@@ -90,21 +90,34 @@ export const TieredSalesSelector = ({
   const chainInfo = useChainInfo(chainId);
 
   const {
-    data: { configValues },
+    data: { diamond, configValues },
   } = useDiamondContext();
 
-  const visibleTiers = Object.entries(tiers || {}).filter(([tierId, tier]) => {
-    if (hideNotEligibleTiers && !tier?.isEligible) {
-      return false;
-    }
-    if (hideNotActiveTiers && !tier?.isActive) {
-      return false;
-    }
-    if (hideSoldOutTiers && tier?.remainingSupply !== undefined) {
-      return BigNumber.from(tier?.remainingSupply).gt(0);
-    }
-    return true;
-  });
+  const diamondConfigTiers = diamond?.config?.['admin:tiered-sales']
+    ?.tiers as Record<string, Tier>;
+  const configValuesTiers = configValues?.['admin:tiered-sales']
+    ?.tiers as Record<string, Tier>;
+  const finalTiers =
+    contractTiers && Object.values(contractTiers).length
+      ? contractTiers
+      : configValuesTiers && Object.values(configValuesTiers).length
+      ? configValuesTiers
+      : diamondConfigTiers;
+
+  const visibleTiers = Object.entries(finalTiers || {}).filter(
+    ([tierId, tier]) => {
+      if (hideNotEligibleTiers && !tier?.isEligible) {
+        return false;
+      }
+      if (hideNotActiveTiers && !tier?.isActive) {
+        return false;
+      }
+      if (hideSoldOutTiers && tier?.remainingSupply !== undefined) {
+        return BigNumber.from(tier?.remainingSupply).gt(0);
+      }
+      return true;
+    },
+  );
 
   useEffect(() => {
     if (
@@ -118,7 +131,7 @@ export const TieredSalesSelector = ({
     if (visibleTiers.length > 0) {
       setCurrentTierId(autoDetectedTierId || visibleTiers[0][0]);
     } else {
-      setCurrentTierId(autoDetectedTierId || Object.keys(tiers || {})[0]);
+      setCurrentTierId(autoDetectedTierId || Object.keys(finalTiers || {})[0]);
     }
   }, [
     visibleTiers,
@@ -126,7 +139,7 @@ export const TieredSalesSelector = ({
     currentTierId,
     isAutoDetectingTier,
     setCurrentTierId,
-    tiers,
+    finalTiers,
   ]);
 
   const renderLabel = labelElement

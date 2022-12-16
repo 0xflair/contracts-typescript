@@ -2,20 +2,20 @@ import {
   Environment,
   TransactionData,
   TransactionListener,
-} from '@flair-sdk/common';
+} from "@flair-sdk/common";
 import {
   ContractCall,
   EIP165InterfaceID,
   FacetManifest,
-} from '@flair-sdk/registry';
-import * as React from 'react';
-import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import { useAccount } from 'wagmi';
+} from "@flair-sdk/registry";
+import * as React from "react";
+import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import { useAccount } from "wagmi";
 
-import { SmartContract, useChainId, useSmartContract } from '../../../common';
-import { useWalletContext } from '../../wallet';
-import { useDiamond } from '../hooks/useDiamond';
-import { Diamond } from '../types';
+import { SmartContract, useChainId, useSmartContract } from "../../../common";
+import { useWalletContext } from "../../wallet";
+import { useDiamond } from "../hooks/useDiamond";
+import { Diamond } from "../types";
 
 type DiamondContextValue = {
   data: {
@@ -62,11 +62,11 @@ type DiamondContextValue = {
 };
 
 export const DiamondContext = React.createContext<DiamondContextValue | null>(
-  null,
+  null
 );
 
 type FunctionalChildren = (
-  contextValue: DiamondContextValue,
+  contextValue: DiamondContextValue
 ) => ReactNode | ReactNode[];
 
 type Props = {
@@ -114,7 +114,7 @@ export const DiamondProvider = ({
       ? diamond?.chainId
       : chainId_
       ? Number(chainId_)
-      : undefined,
+      : undefined
   );
 
   const {
@@ -189,11 +189,11 @@ export const DiamondProvider = ({
       }
       setProposedCalls((calls) =>
         [...calls.filter((existing) => existing.id !== call.id), call].filter(
-          (c) => c.contract && c.function && c.args !== undefined,
-        ),
+          (c) => c.contract && c.function && c.args !== undefined
+        )
       );
     },
-    [proposedCallsLoading],
+    [proposedCallsLoading]
   );
 
   const refresh = useCallback(() => {
@@ -204,7 +204,7 @@ export const DiamondProvider = ({
     (id: string, listener: TransactionListener) => {
       setListeners((listeners) => ({ ...listeners, [id]: listener }));
     },
-    [],
+    []
   );
 
   const invokeListeners = useCallback(
@@ -213,7 +213,7 @@ export const DiamondProvider = ({
         await listener(data);
       }
     },
-    [listeners],
+    [listeners]
   );
 
   const value = {
@@ -251,12 +251,18 @@ export const DiamondProvider = ({
   return React.createElement(
     DiamondContext.Provider,
     { value },
-    typeof children === 'function' ? children(value) : children,
+    typeof children === "function" ? children(value) : children
   );
 };
 
 export const useDiamondContext = () => {
   const context = React.useContext(DiamondContext);
-  if (!context) throw Error('Must be used within <DiamondProvider>');
-  return context;
+  return (
+    context ||
+    ({
+      data: {},
+      isLoading: false,
+      error: `Must be used within <DiamondProvider>`,
+    } as unknown as DiamondContextValue)
+  );
 };
