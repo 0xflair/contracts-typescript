@@ -2,12 +2,7 @@ import { classNames } from '@flair-sdk/common';
 import { RadioGroup } from '@headlessui/react';
 import { CheckCircleIcon } from '@heroicons/react/solid';
 
-import { useChainInfo } from '../../../../../common';
-import {
-  CryptoUnits,
-  CryptoValue,
-  IfWalletConnected,
-} from '../../../../../core';
+import { CryptoValue, IfWalletConnected } from '../../../../../core';
 import {
   TieredSalesSelector,
   TieredSalesSelectorProps,
@@ -28,7 +23,7 @@ export const ERC721TieredSalesSelector = (props: TieredSalesSelectorProps) => {
         isERC20Price,
         currencySymbol,
         currencyDecimals,
-        tokenMetadata,
+        tierMetadata,
       }: TieredSalesSelectorRenderProps) => {
         return (
           <>
@@ -38,9 +33,9 @@ export const ERC721TieredSalesSelector = (props: TieredSalesSelectorProps) => {
                   as="span"
                   className="tier-metadata block text-sm font-medium text-gray-900"
                 >
-                  {tokenMetadata ? (
+                  {tierMetadata ? (
                     <NftMetadataPreview
-                      metadata={tokenMetadata}
+                      metadata={tierMetadata}
                       hideAttributes={true}
                       hideDescription={true}
                       preferDedicatedGateway={true}

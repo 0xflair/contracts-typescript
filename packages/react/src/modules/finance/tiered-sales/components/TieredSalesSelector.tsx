@@ -34,9 +34,9 @@ export type TieredSalesSelectorRenderProps = {
   isERC20Price: boolean;
   currencySymbol: CryptoSymbol;
   currencyDecimals?: BigNumberish;
-  tokenMetadataUri?: string;
-  tokenMetadata?: NftTokenMetadata;
-  tokenMetadataLoading?: boolean;
+  tierMetadataUri?: string;
+  tierMetadata?: NftTokenMetadata;
+  tierMetadataLoading?: boolean;
 };
 
 export type TieredSalesSelectorProps = {
@@ -145,9 +145,9 @@ export const TieredSalesSelector = ({
         isERC20Price,
         currencySymbol,
         currencyDecimals,
-        tokenMetadata,
-        tokenMetadataUri,
-        tokenMetadataLoading,
+        tierMetadata,
+        tierMetadataUri,
+        tierMetadataLoading,
       }: TieredSalesSelectorRenderProps) => (
         <>
           <span className="tier-item-wrapper flex flex-1">
@@ -166,9 +166,9 @@ export const TieredSalesSelector = ({
                   isERC20Price,
                   currencySymbol,
                   currencyDecimals,
-                  tokenMetadata,
-                  tokenMetadataUri,
-                  tokenMetadataLoading,
+                  tierMetadata,
+                  tierMetadataUri,
+                  tierMetadataLoading,
                 })}
               </RadioGroup.Label>
               <IfWalletConnected>
@@ -294,23 +294,23 @@ const TierItemRow = ({
     ),
   });
 
-  const tokenMetadataUri =
+  const tierMetadataUri =
     configValues?.['admin:tiered-sales']?.tiers?.[tierId]?.metadataUri;
 
   const {
-    data: tokenMetadata,
-    error: tokenMetadataError,
-    isLoading: tokenMetadataLoading,
+    data: tierMetadata,
+    error: tierMetadataError,
+    isLoading: tierMetadataLoading,
   } = useRemoteJsonReader({
-    uri: tokenMetadataUri?.toString(),
-    enabled: Boolean(tokenMetadataUri),
+    uri: tierMetadataUri?.toString(),
+    enabled: Boolean(tierMetadataUri),
     preferDedicatedGateway: true,
   });
 
-  if (tokenMetadataError) {
+  if (tierMetadataError) {
     console.warn(
       `Got tokenMetadataError for tier ${tierId}: `,
-      tokenMetadataError,
+      tierMetadataError,
     );
   }
 
@@ -337,8 +337,8 @@ const TierItemRow = ({
       ? erc20Symbol
       : chainInfo?.nativeCurrency?.symbol) as CryptoSymbol,
     currencyDecimals,
-    tokenMetadataUri,
-    tokenMetadata,
-    tokenMetadataLoading,
+    tierMetadataUri,
+    tierMetadata,
+    tierMetadataLoading,
   });
 };

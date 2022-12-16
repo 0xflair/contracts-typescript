@@ -514,7 +514,7 @@ export class BalanceRampClient {
         );
         clearInterval(interval);
       }
-    }, 1000);
+    }, 3000);
   }
 
   private async waitUntilReady(
