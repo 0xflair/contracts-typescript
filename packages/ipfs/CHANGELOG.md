@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.68.10 (2022-12-16)
+
+
+### Bug Fixes
+
+* add missing preferDedicatedGateway flag for metadata image ([fec6c03](https://github.com/flair-sdk/typescript/commit/fec6c03959fca62bb5d1000f5c2b342d5c5c677a))
+
+
+
+
+
 ## 2.68.9 (2022-12-16)
 
 
