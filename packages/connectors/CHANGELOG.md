@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.68.8 (2022-12-16)
+
+
+### Bug Fixes
+
+* batch requests to fetching tiers for faster ux ([#22](https://github.com/flair-sdk/typescript/issues/22)) ([066c334](https://github.com/flair-sdk/typescript/commit/066c3344ede9b6d662258b9813a8b6af58adbfa4))
+
+
+
+
+
 ## 2.68.7 (2022-12-16)
 
 
