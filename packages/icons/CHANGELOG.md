@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.68.11 (2022-12-16)
+
+
+### Bug Fixes
+
+* fallback to off-chain config for tiers ([2c35e90](https://github.com/flair-sdk/typescript/commit/2c35e90b5e8fdc61ea7435fccf95c23840be9c69))
+
+
+
+
+
 ## 2.68.10 (2022-12-16)
 
 
