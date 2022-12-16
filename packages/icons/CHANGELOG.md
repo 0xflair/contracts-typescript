@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.68.7 (2022-12-16)
+
+
+### Bug Fixes
+
+* allow using dedicated gateway on media component ([1607732](https://github.com/flair-sdk/typescript/commit/160773212bc6921affac5bd7d4565b774746931f))
+
+
+
+
+
 ## 2.68.6 (2022-12-15)
 
 
