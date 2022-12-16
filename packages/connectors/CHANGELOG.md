@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.68.9 (2022-12-16)
+
+
+### Bug Fixes
+
+* wait a bit longer before considering window closed ([c0190d2](https://github.com/flair-sdk/typescript/commit/c0190d241334ccff5616966ad52688ce5528383b))
+
+
+
+
+
 ## 2.68.8 (2022-12-16)
 
 
