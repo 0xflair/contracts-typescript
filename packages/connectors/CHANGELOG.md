@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.71.0 (2022-12-17)
+
+
+### Features
+
+* add component to load erc721 metadata on-chain ([cffe1d7](https://github.com/flair-sdk/typescript/commit/cffe1d75cd6e7b4e087752d57bc17da878e37404))
+
+
+
+
+
 # 2.70.0 (2022-12-17)
 
 
