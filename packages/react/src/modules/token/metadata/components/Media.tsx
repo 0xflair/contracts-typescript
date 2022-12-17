@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 type Props<T = HTMLImageElement | HTMLVideoElement> = {
   uri?: string;
   loadingMask?: React.ReactNode;
-  preferManagedGateway?: boolean;
+  preferManagedGateway?: boolean | string;
 } & React.HTMLAttributes<T>;
 
 export const Media = ({
@@ -57,5 +57,5 @@ export const Media = ({
     return <img src={url} {...attributes} />;
   }
 
-  return loadingMask ? <span {...attributes}>{loadingMask}</span> : <></>;
+  return loadingMask ? <>{loadingMask}</> : <></>;
 };
