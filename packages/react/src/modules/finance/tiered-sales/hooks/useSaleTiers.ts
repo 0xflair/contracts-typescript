@@ -223,7 +223,13 @@ export const useSaleTiers = ({
     return refetchConfigs().then((result) => {
       return saleTiersQuery.refetch();
     });
-  }, [queryClient, queryKey, refetchConfigs, saleTiersQuery]);
+  }, [
+    queryClient,
+    queryKey,
+    refetchConfigs,
+    restOfConfig.cacheTime,
+    saleTiersQuery,
+  ]);
 
   useEffect(() => {
     if (enabled) {
