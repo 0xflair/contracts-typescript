@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.69.1 (2022-12-17)
+
+
+### Bug Fixes
+
+* only force preferred chain for deployed diamonds ([8979e2a](https://github.com/flair-sdk/typescript/commit/8979e2a8beaa1b5f87ad710e79ce7da74cf362b7))
+
+
+
+
+
 # 2.69.0 (2022-12-17)
 
 
