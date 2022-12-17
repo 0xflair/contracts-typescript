@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.69.0 (2022-12-17)
+
+
+### Features
+
+* prefill tiers with off-chain config on init ([3c882cf](https://github.com/flair-sdk/typescript/commit/3c882cf9eb858b313196f6cd5e51222092f0e095))
+
+
+
+
+
 ## 2.68.12 (2022-12-16)
 
 **Note:** Version bump only for package @flair-sdk/metatx
