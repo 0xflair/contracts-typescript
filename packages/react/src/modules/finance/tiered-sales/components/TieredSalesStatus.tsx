@@ -21,7 +21,7 @@ export const TieredSalesStatus = ({
   ),
   notActiveContent = (
     <span className="sale-status sale-not-active inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-      Sale not active yet
+      Sale not active
     </span>
   ),
   ...attributes

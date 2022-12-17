@@ -191,7 +191,6 @@
     "@flair-sdk/ipfs": "^2.69.1",
     "@flair-sdk/metatx": "^2.69.1",
     "@flair-sdk/registry": "^2.69.1",
-    "@gnosis.pm/safe-apps-wagmi": "^1.0.3",
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^1.0.6",
     "@metamask/onboarding": "^1.0.1",
@@ -223,10 +222,5 @@
     "@types/react-dom": "^18.0.5",
     "@types/react-modal": "^3.13.1",
     "postcss-add-root-selector": "^1.0.5"
-  },
-  "overrides": {
-    "@gnosis.pm/safe-apps-wagmi": {
-      "@wagmi/core": "^0.8.2"
-    }
   }
 }
