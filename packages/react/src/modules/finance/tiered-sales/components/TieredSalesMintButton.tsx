@@ -20,22 +20,18 @@ export const TieredSalesMintButton = ({
   ...attributes
 }: Props) => {
   const {
-    data: { chainId, canMint, currentTierId, tiers },
+    data: { chainId, canMint, currentTierConfig },
     mint,
   } = useTieredSalesContext();
 
   const chainInfo = useChainInfo(chainId);
-  const finalTier =
-    currentTierId && tiers && Number(currentTierId.toString()) in tiers
-      ? tiers[Number(currentTierId.toString())]
-      : undefined;
-
-  const isERC20Price =
-    finalTier?.currency && finalTier?.currency !== ethers.constants.AddressZero;
+  const isERC20Price = currentTierConfig?.currency
+    ? currentTierConfig?.currency !== ethers.constants.AddressZero
+    : undefined;
 
   const { data: erc20Symbol } = useContractSymbol({
     chainId: chainInfo?.id,
-    contractAddress: finalTier?.currency?.toString(),
+    contractAddress: currentTierConfig?.currency?.toString(),
     enabled: Boolean(chainInfo?.id && isERC20Price),
   });
 
@@ -67,7 +63,9 @@ export const TieredSalesMintButton = ({
     >
       {children || (
         <span className="flex flex-col gap-1 items-center justify-center">
-          <span>{`Buy with ${finalSymbol}`}</span>
+          <span>{`Buy with ${
+            isERC20Price !== undefined ? finalSymbol : '...'
+          }`}</span>
           {chainInfo?.name && (
             <span className="mint-chain-label opacity-50 text-xs font-light">
               on {`${chainInfo?.name}`}

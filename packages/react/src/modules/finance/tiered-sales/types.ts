@@ -19,6 +19,7 @@ export type Tier = {
   isActive?: boolean;
   hasAllowlist?: boolean;
   metadataUri?: string;
+  hideTierForUsers?: string;
 
   // Wallet-specific
   minterAddress?: BytesLike;

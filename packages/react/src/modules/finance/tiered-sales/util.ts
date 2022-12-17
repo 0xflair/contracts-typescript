@@ -51,6 +51,7 @@ export const normalizeTiers = (
           ? {}
           : {
               metadataUri: value.metadataUri,
+              hideTierForUsers: Boolean(value.hideTierForUsers),
               isSavedOnChain: Boolean(value.isSavedOnChain),
               eligibleAmount:
                 value.eligibleAmount !== undefined

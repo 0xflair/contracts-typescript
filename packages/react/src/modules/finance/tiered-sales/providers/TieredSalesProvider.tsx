@@ -5,17 +5,13 @@ import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
 import _ from 'lodash';
 import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import { useAccount, useConnect } from 'wagmi';
+import { useAccount } from 'wagmi';
 
 import { useChainInfo } from '../../../../common';
-import { useBalanceRampConfig } from '../../../../core';
-import {
-  useTieredSalesMaxAllocation,
-  useTieredSalesMinter,
-  useTieredSalesTotalMinted,
-} from '../hooks';
+import { useBalanceRampConfig, useDiamondContext } from '../../../../core';
+import { useTieredSalesMinter } from '../hooks';
 import { useSaleTiers } from '../hooks/useSaleTiers';
-import { Tier } from '../types';
+import { Tier, TiersDictionary } from '../types';
 
 type TieredSalesContextValue = {
   data: {
@@ -25,10 +21,11 @@ type TieredSalesContextValue = {
     contractAddress?: string;
 
     // On-chain values
-    tiers?: Record<number, Tier>;
+    tiers?: Record<string, Tier>;
 
     // Current tier
     currentTierId?: BigNumberish;
+    currentTierConfig?: Tier;
     start?: Date;
     end?: Date;
     price?: BigNumberish;
@@ -156,7 +153,7 @@ export const TieredSalesProvider = ({
   const finalMinterAddress = minterAddress || account;
 
   const {
-    data: tiers,
+    data: contractTiers,
     error: tiersError,
     isLoading: tiersLoading,
     fetchStatus: tiersFetchStatus,
@@ -172,6 +169,46 @@ export const TieredSalesProvider = ({
     staleTime: tiersStaleTime || 0,
     cacheOnBlock: false,
   });
+
+  const {
+    data: { diamond, configValues },
+  } = useDiamondContext();
+
+  const diamondConfigTiers = diamond?.config?.['admin:tiered-sales']
+    ?.tiers as Record<string, Tier>;
+  const configValuesTiers = configValues?.['admin:tiered-sales']
+    ?.tiers as Record<string, Tier>;
+
+  // Grab off-chain only tier values (metadataUri) from configValues or diamondConfigValues
+  const configValuesTierIds = Object.keys(configValuesTiers || {});
+  const diamondConfigTierIds = Object.keys(diamondConfigTiers || {});
+  const tierIds = [
+    ...new Set([...configValuesTierIds, ...diamondConfigTierIds]),
+  ];
+  const tiers: TiersDictionary = tierIds.reduce((acc, tierId) => {
+    const tier = {
+      ...configValuesTiers?.[tierId],
+      ...diamondConfigTiers?.[tierId],
+      ...contractTiers?.[tierId],
+      metadataUri:
+        configValuesTiers?.[tierId]?.metadataUri ||
+        diamondConfigTiers?.[tierId]?.metadataUri,
+      hideTierForUsers:
+        configValuesTiers?.[tierId]?.hideTierForUsers ||
+        diamondConfigTiers?.[tierId]?.hideTierForUsers,
+    };
+
+    if (tier?.hideTierForUsers) {
+      return acc;
+    }
+
+    return {
+      ...acc,
+      [tierId]: tier,
+    };
+  }, {});
+  const currentTierConfig =
+    currentTierId !== undefined ? tiers[currentTierId.toString()] : undefined;
 
   const {
     data: {
@@ -417,6 +454,7 @@ export const TieredSalesProvider = ({
 
       // Current tier
       currentTierId,
+      currentTierConfig,
       start,
       end,
       price,

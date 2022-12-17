@@ -82,42 +82,25 @@ export const TieredSalesSelector = ({
   hideSoldOutTiers = false,
 }: TieredSalesSelectorProps) => {
   const {
-    data: { chainId, autoDetectedTierId, currentTierId, tiers: contractTiers },
+    data: { chainId, autoDetectedTierId, currentTierId, tiers },
     isLoading: { tiersLoading, isAutoDetectingTier },
     setCurrentTierId,
   } = useTieredSalesContext();
 
   const chainInfo = useChainInfo(chainId);
 
-  const {
-    data: { diamond, configValues },
-  } = useDiamondContext();
-
-  const diamondConfigTiers = diamond?.config?.['admin:tiered-sales']
-    ?.tiers as Record<string, Tier>;
-  const configValuesTiers = configValues?.['admin:tiered-sales']
-    ?.tiers as Record<string, Tier>;
-  const finalTiers =
-    contractTiers && Object.values(contractTiers).length
-      ? contractTiers
-      : configValuesTiers && Object.values(configValuesTiers).length
-      ? configValuesTiers
-      : diamondConfigTiers;
-
-  const visibleTiers = Object.entries(finalTiers || {}).filter(
-    ([tierId, tier]) => {
-      if (hideNotEligibleTiers && !tier?.isEligible) {
-        return false;
-      }
-      if (hideNotActiveTiers && !tier?.isActive) {
-        return false;
-      }
-      if (hideSoldOutTiers && tier?.remainingSupply !== undefined) {
-        return BigNumber.from(tier?.remainingSupply).gt(0);
-      }
-      return true;
-    },
-  );
+  const visibleTiers = Object.entries(tiers || {}).filter(([tierId, tier]) => {
+    if (hideNotEligibleTiers && !tier?.isEligible) {
+      return false;
+    }
+    if (hideNotActiveTiers && !tier?.isActive) {
+      return false;
+    }
+    if (hideSoldOutTiers && tier?.remainingSupply !== undefined) {
+      return BigNumber.from(tier?.remainingSupply).gt(0);
+    }
+    return true;
+  });
 
   useEffect(() => {
     if (
@@ -131,7 +114,7 @@ export const TieredSalesSelector = ({
     if (visibleTiers.length > 0) {
       setCurrentTierId(autoDetectedTierId || visibleTiers[0][0]);
     } else {
-      setCurrentTierId(autoDetectedTierId || Object.keys(finalTiers || {})[0]);
+      setCurrentTierId(autoDetectedTierId || Object.keys(tiers || {})[0]);
     }
   }, [
     visibleTiers,
@@ -139,7 +122,7 @@ export const TieredSalesSelector = ({
     currentTierId,
     isAutoDetectingTier,
     setCurrentTierId,
-    finalTiers,
+    tiers,
   ]);
 
   const renderLabel = labelElement
@@ -243,7 +226,6 @@ export const TieredSalesSelector = ({
           disabled={disabled}
           tierId={tierId}
           tierConfig={tierConfig}
-          configValues={configValues}
           renderOption={renderOption}
         />
       )}
@@ -285,7 +267,6 @@ const TierItemRow = ({
   disabled,
   tierId,
   tierConfig,
-  configValues,
   renderOption,
 }: {
   chainInfo?: Chain;
@@ -294,7 +275,6 @@ const TierItemRow = ({
   disabled: boolean;
   tierId: string;
   tierConfig: Tier;
-  configValues?: Record<string, any>;
   renderOption: (props: TieredSalesSelectorRenderProps) => JSX.Element;
 }) => {
   const { data: erc20Symbol } = useContractSymbol({
@@ -307,16 +287,13 @@ const TierItemRow = ({
     ),
   });
 
-  const tierMetadataUri =
-    configValues?.['admin:tiered-sales']?.tiers?.[tierId]?.metadataUri;
-
   const {
     data: tierMetadata,
     error: tierMetadataError,
     isLoading: tierMetadataLoading,
   } = useRemoteJsonReader({
-    uri: tierMetadataUri?.toString(),
-    enabled: Boolean(tierMetadataUri),
+    uri: tierConfig?.metadataUri?.toString(),
+    enabled: Boolean(tierConfig?.metadataUri),
     preferDedicatedGateway: true,
   });
 
@@ -350,7 +327,7 @@ const TierItemRow = ({
       ? erc20Symbol
       : chainInfo?.nativeCurrency?.symbol) as CryptoSymbol,
     currencyDecimals,
-    tierMetadataUri,
+    tierMetadataUri: tierConfig?.metadataUri?.toString(),
     tierMetadata,
     tierMetadataLoading,
   });
