@@ -200,7 +200,7 @@
     "@web3auth/web3auth-wagmi-connector": "^1.0.0",
     "axios": "^0.26.1",
     "axios-retry": "^3.3.1",
-    "ethers": "^5.6.9",
+    "ethers": ">=5.5.1",
     "humanize-duration": "^3.27.3",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
@@ -210,6 +210,7 @@
     "react-dropzone": "^14.2.2",
     "react-modal": "^3.15.1",
     "react-use": "^17.4.0",
+    "siwe": "^1.1.6",
     "tailwindcss": "^3.1.8",
     "versioning": "^1.1.2",
     "wagmi": "^0.9.2"

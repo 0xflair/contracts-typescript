@@ -54,6 +54,6 @@
   "dependencies": {
     "@flair-sdk/common": "^2.71.1",
     "axios": "^0.26.1",
-    "ethers": "^5.6.9"
+    "ethers": ">=5.5.1"
   }
 }

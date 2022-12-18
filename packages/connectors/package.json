@@ -17,7 +17,6 @@
   },
   "peerDependencies": {
     "@ethersproject/providers": "*",
-    "@everipedia/wagmi-magic-connector": "*",
     "@flair-sdk/common": "*",
     "@gnosis.pm/safe-apps-provider": "*",
     "@gnosis.pm/safe-apps-sdk": "*",
@@ -117,7 +116,7 @@
     "@web3auth/base": "^4.0.0-alpha.0",
     "@web3auth/ui": "^3.0.4",
     "bowser": "^2.11.0",
-    "ethers": "^5.6.9"
+    "ethers": ">=5.5.1"
   },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
