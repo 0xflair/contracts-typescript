@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.72.1 (2022-12-18)
+
+
+### Bug Fixes
+
+* remove auto switch hook ([7143cb9](https://github.com/flair-sdk/typescript/commit/7143cb99ea399fe244ee458ff5739f1c33b05150))
+
+
+
+
+
 # 2.72.0 (2022-12-18)
 
 
