@@ -597,6 +597,8 @@ export class BalanceRampClient {
           currentBalance = await signer.getBalance();
         } catch (e) {}
       }
+
+      return;
     } else if (requiredBalance.outputTokenAddress) {
       /**
        * For ERC20 balance
@@ -615,6 +617,8 @@ export class BalanceRampClient {
           );
         } catch (e) {}
       }
+
+      return;
     }
 
     throw new Error(`Missing outputTokenAddress for regularlyCheckForBalance`);
