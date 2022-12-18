@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useMemo } from 'react';
+import React, { ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { useInterval } from 'react-use';
 import { SiweMessage } from 'siwe';
 import { useAccount, useSignMessage } from 'wagmi';
@@ -137,8 +137,7 @@ export const SignInProvider = ({
       siweMessage: undefined,
     }));
   }, [setSignInState]);
-
-  useInterval(() => {
+  const checkExpiration = useCallback(() => {
     if (signInState?.siweMessage?.expirationTime) {
       const expirationTime = new Date(signInState.siweMessage.expirationTime);
       const now = Date.now();
@@ -146,7 +145,10 @@ export const SignInProvider = ({
         setSignInState((p) => ({ ...p, signedIn: false }));
       }
     }
-  }, 5000);
+  }, [signInState, setSignInState]);
+
+  useEffect(checkExpiration, [checkExpiration]);
+  useInterval(checkExpiration, 60_000);
 
   const value = {
     data: signInState,
