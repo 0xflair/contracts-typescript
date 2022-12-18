@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.72.0 (2022-12-18)
+
+
+### Features
+
+* add hooks and components to help with sign-in with ethereum ([#23](https://github.com/flair-sdk/typescript/issues/23)) ([bb73c68](https://github.com/flair-sdk/typescript/commit/bb73c68f6e874d5ed683565b0b3f9a8356f13705))
+
+
+
+
+
 ## 2.71.1 (2022-12-18)
 
 
