@@ -1,5 +1,4 @@
-import * as ethers from 'ethers';
-import { BigNumberish } from 'ethers';
+import { BigNumberish, ethers } from 'ethers';
 import { useMemo } from 'react';
 
 import { useCryptoCurrency } from '../../hooks';
