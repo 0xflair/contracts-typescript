@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.71.1 (2022-12-18)
+
+
+### Bug Fixes
+
+* properly resolve the promise when balance is ready ([b9c36ca](https://github.com/flair-sdk/typescript/commit/b9c36ca3bb6df710c96a2ac31591c4b99ae49f0e))
+
+
+
+
+
 # 2.71.0 (2022-12-17)
 
 
