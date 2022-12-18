@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.72.2 (2022-12-18)
+
+
+### Bug Fixes
+
+* importing ethers as property ([7fe0af8](https://github.com/flair-sdk/typescript/commit/7fe0af8524d594d51c7c03987a1a7c4b2aa53b59))
+
+
+
+
+
 ## 2.72.1 (2022-12-18)
 
 
