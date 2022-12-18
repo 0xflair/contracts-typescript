@@ -54,7 +54,6 @@ export type WalletProviderProps = {
   preferredChainId?: number;
   custodialWallet?: boolean;
   injectStyles?: boolean;
-  wagmiOverrides?: Record<string, any>;
   tryAutoConnect?: boolean;
   web3AuthOptions?: Web3AuthOptions;
 };
@@ -147,7 +146,7 @@ const {
   },
 ]);
 
-type LoginContextValue = {
+type WalletContextValue = {
   state: {
     allowedNetworks?: AllowedNetworks;
     preferredChainId?: number;
@@ -158,7 +157,7 @@ type LoginContextValue = {
   setWeb3AuthOptions: (options: Web3AuthOptions) => void;
 };
 
-export const WalletContext = React.createContext<LoginContextValue | null>(
+export const WalletContext = React.createContext<WalletContextValue | null>(
   null,
 );
 
@@ -166,11 +165,10 @@ export type AllowedNetworks = 'ALL' | number[];
 
 export const WalletProvider = ({
   children,
-  appName = 'Quick Wallet',
+  appName = 'My App',
   injectStyles = true,
   tryAutoConnect = true,
   preferredChainId: preferredChainId_,
-  wagmiOverrides,
   web3AuthOptions: web3AuthOptions_,
 }: WalletProviderProps) => {
   const darkMode = isDarkMode();
@@ -386,7 +384,6 @@ export const WalletProvider = ({
     { value },
     <WagmiConfig
       client={wagmiClient}
-      {...wagmiOverrides}
       key={`${preferredChainId}:${connectorsList.length}:${web3AuthOptions?.clientId}`}
     >
       {children}
