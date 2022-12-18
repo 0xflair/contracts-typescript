@@ -17,7 +17,6 @@
   },
   "peerDependencies": {
     "@ethersproject/providers": "*",
-    "@everipedia/wagmi-magic-connector": "*",
     "@flair-sdk/common": "*",
     "@gnosis.pm/safe-apps-provider": "*",
     "@gnosis.pm/safe-apps-sdk": "*",
