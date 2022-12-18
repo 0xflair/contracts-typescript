@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.72.3 (2022-12-18)
+
+
+### Bug Fixes
+
+* remove siwe from package dist ([4373604](https://github.com/flair-sdk/typescript/commit/4373604c4c82c71097d9e2e772a1abca5cb22fdd))
+
+
+
+
+
 ## 2.72.2 (2022-12-18)
 
 
