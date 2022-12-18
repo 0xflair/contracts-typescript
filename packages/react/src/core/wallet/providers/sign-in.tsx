@@ -1,16 +1,9 @@
-import { useCancel, useChainId } from '@flair-sdk/react';
-import React, {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { ReactNode, useCallback, useMemo } from 'react';
 import { useInterval } from 'react-use';
 import { SiweMessage } from 'siwe';
 import { useAccount, useSignMessage } from 'wagmi';
 
-import { useStickyState } from '../../../common';
+import { useCancel, useChainId, useStickyState } from '../../../common';
 
 export type SignInProviderProps = {
   children?: ReactNode;
