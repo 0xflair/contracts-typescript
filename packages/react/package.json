@@ -72,7 +72,8 @@
     "react-use": "*",
     "tailwindcss": "*",
     "versioning": "*",
-    "wagmi": "*"
+    "wagmi": "*",
+    "siwe": "*"
   },
   "peerDependenciesMeta": {
     "@ethersproject/properties": {
@@ -181,6 +182,9 @@
       "optional": true
     },
     "wagmi": {
+      "optional": true
+    },
+    "siwe": {
       "optional": true
     }
   },
