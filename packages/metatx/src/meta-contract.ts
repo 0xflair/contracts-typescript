@@ -1,4 +1,5 @@
 import { Provider } from '@ethersproject/providers';
+import { Environment } from '@flair-sdk/common';
 import {
   BaseContract,
   Contract,
@@ -9,7 +10,6 @@ import {
 import { defineReadOnly, FunctionFragment } from 'ethers/lib/utils';
 
 import { MetaTransactionsClient } from './meta-transactions.client';
-import { Environment } from './types';
 import { MetaTransaction } from './types/meta-transaction';
 
 function buildMetaTransaction(

@@ -1,8 +1,6 @@
-import type { Chain } from '@wagmi/chains';
-import * as allChains from '@wagmi/chains';
+import { Chain } from '@wagmi/core';
+import * as allChains from '@wagmi/core/chains';
 
-// TODO: Move these to wagmi repo itself
-// https://github.com/wagmi-dev/wagmi/blob/0.6.x/packages/core/src/constants/chains.ts#L234
 const newChains: Chain[] = [
   {
     id: 66,
@@ -468,11 +466,10 @@ const newChains: Chain[] = [
   },
 ];
 
-const WagmiChains = Object.values(allChains).filter(
-  (c) => ![3, 4, 421611].includes(c.id),
-);
-
-export const FLAIR_CHAINS: Chain[] = [...WagmiChains, ...newChains];
+export const FLAIR_CHAINS: Chain[] = [
+  ...Object.values(allChains),
+  ...newChains,
+];
 
 export const FLAIR_DEFAULT_CHAIN = FLAIR_CHAINS.find(
   (c) => c.id === 1 /* ethereum */,

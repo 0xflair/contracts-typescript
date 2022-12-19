@@ -36,12 +36,12 @@
     ]
   },
   "peerDependencies": {
-    "axios": "*",
     "ethers": "*",
+    "got": "*",
     "randombytes": "*"
   },
   "peerDependenciesMeta": {
-    "axios": {
+    "got": {
       "optional": true
     },
     "ethers": {
@@ -52,8 +52,9 @@
     }
   },
   "dependencies": {
-    "axios": "^0.26.1",
+    "@flair-sdk/common": "^2.72.3",
     "ethers": ">=5.5.1",
+    "got": "^11.8.5",
     "randombytes": "^2.1.0",
     "utility-types": "^3.10.0"
   },

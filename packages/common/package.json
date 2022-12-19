@@ -17,15 +17,11 @@
   },
   "peerDependencies": {
     "@ethersproject/providers": "*",
-    "@wagmi/chains": "*",
     "@wagmi/core": "*",
     "ethers": "*"
   },
   "peerDependenciesMeta": {
     "@wagmi/core": {
-      "optional": true
-    },
-    "@wagmi/chains": {
       "optional": true
     },
     "ethers": {
@@ -36,7 +32,6 @@
     }
   },
   "dependencies": {
-    "@wagmi/chains": "^0.1.0",
     "@wagmi/core": "^0.8.2"
   },
   "main": "dist/index.js",
