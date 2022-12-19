@@ -1,4 +1,4 @@
-import { Environment } from '@flair-sdk/common';
+import { Environment, StandardError } from '@flair-sdk/common';
 import { Signer } from 'ethers';
 import got, { Got } from 'got';
 import { Required } from 'utility-types';
@@ -75,19 +75,33 @@ export class MetaTransactionsClient {
       unsignedData,
     );
 
-    const response = await this.getGotInstance().post<MetaTransaction>(
-      `v1/meta-transactions`,
-      {
-        json: { chainId, ...unsignedData, signature },
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          'X-Flair-Client-Id': this.config.flairClientId,
+    try {
+      const response = await this.getGotInstance().post<MetaTransaction>(
+        `v1/meta-transactions`,
+        {
+          json: { chainId, ...unsignedData, signature },
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'X-Flair-Client-Id': this.config.flairClientId,
+          },
         },
-      },
-    );
+      );
 
-    return response.body;
+      return response.body;
+    } catch (e: any) {
+      if (e.response?.body?.code) {
+        throw e.response?.body;
+      }
+
+      throw {
+        code: 'ErrTransactionQueueFailed',
+        message: e.message || e.toString(),
+        details: {
+          originalError: e,
+        },
+      } as StandardError;
+    }
   }
 
   async fetchById(id: MetaTransaction['id']): Promise<MetaTransaction> {
