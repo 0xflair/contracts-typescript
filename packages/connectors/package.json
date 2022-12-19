@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/connectors",
-  "version": "2.72.3",
+  "version": "2.73.0",
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
@@ -104,7 +104,7 @@
     }
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.72.3",
+    "@flair-sdk/common": "^2.73.0",
     "@gnosis.pm/safe-apps-provider": "^0.13.1",
     "@gnosis.pm/safe-apps-sdk": "^7.8.0",
     "@wagmi/core": "^0.8.2",

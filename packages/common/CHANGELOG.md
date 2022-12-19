@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.73.0 (2022-12-19)
+
+
+### Features
+
+* use got in metatx client + remove dependency on wagmi/chains lib ([#24](https://github.com/flair-sdk/typescript/issues/24)) ([b592ecb](https://github.com/flair-sdk/typescript/commit/b592ecb6c4675c619334334ced52feb19d4922c7))
+
+
+
+
+
 ## 2.72.3 (2022-12-18)
 
 
