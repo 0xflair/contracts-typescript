@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.73.1 (2022-12-19)
+
+
+### Bug Fixes
+
+* inline wagmi chains ([5737530](https://github.com/flair-sdk/typescript/commit/5737530ec033f77b77b02b3099ff4c30fb1846fd))
+
+
+
+
+
 # 2.73.0 (2022-12-19)
 
 
