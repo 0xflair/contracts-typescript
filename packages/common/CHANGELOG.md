@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.73.3 (2022-12-19)
+
+
+### Bug Fixes
+
+* sign out an expired session only if signed in ([38c0d38](https://github.com/flair-sdk/typescript/commit/38c0d3885a3cc5d326f2b7445634d3c62b0db547))
+
+
+
+
+
 ## 2.73.2 (2022-12-19)
 
 
