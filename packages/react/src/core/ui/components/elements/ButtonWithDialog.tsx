@@ -42,7 +42,7 @@ export function ButtonWithDialog<T extends HTMLElement = HTMLElement>({
 }: ButtonWithDialogProps<T>) {
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const Component = as || (attributes.className ? 'div' : Fragment);
+  const Component = as || (attributes.className ? 'button' : Fragment);
 
   return (
     <>
