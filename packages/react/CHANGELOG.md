@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.73.2 (2022-12-19)
+
+
+### Bug Fixes
+
+* consistent error structure ([ec9baec](https://github.com/flair-sdk/typescript/commit/ec9baec48ef25a2f9d6de7ec1e56d0305895c1a4))
+
+
+
+
+
 ## 2.73.1 (2022-12-19)
 
 
