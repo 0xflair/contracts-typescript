@@ -39,3 +39,14 @@ This repository is equipped with [Storybook](https://storybook.js.org/) for ease
    ```sh
    npm install
    ```
+
+## Peer Dependencies
+
+Due to breaking change in NPM you might need to enable legacy peer dependency resolution:
+
+```sh
+# Globally:
+npm config set legacy-peer-deps true
+
+# Or add --legacy-peer-deps to your npm install command
+```
