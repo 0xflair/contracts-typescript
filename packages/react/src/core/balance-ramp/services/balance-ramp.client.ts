@@ -123,14 +123,14 @@ export class BalanceRampClient {
           value: BigNumber.from(balanceRamp?.settlementRelayMetaTx?.value),
 
           hash: balanceRamp?.settlementRelayMetaTx?.txHash,
-          confirmations:
-            balanceRamp?.settlementRelayMetaTx?.txReceipt?.confirmations,
+          confirmations: balanceRamp?.settlementRelayMetaTx?.txReceipt
+            ?.confirmations as number,
           wait: async (confirmations?: number) =>
             ({
               ...balanceRamp.settlementRelayMetaTx?.txReceipt,
             } as any),
           gasLimit: BigNumber.from(
-            balanceRamp?.settlementRelayMetaTx?.txReceipt.gasUsed,
+            balanceRamp?.settlementRelayMetaTx?.txReceipt?.gasUsed,
           ),
         };
       }
