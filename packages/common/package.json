@@ -8,6 +8,13 @@
     "type": "git",
     "url": "git+https://github.com/flair-sdk/typescript.git"
   },
+  "type": "module",
+  "exports": "./dist/index.es.js",
+  "module": "dist/index.es.js",
+  "types": "dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -34,11 +41,5 @@
   "dependencies": {
     "@wagmi/chains": "^0.1.3",
     "@wagmi/core": "^0.8.2"
-  },
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "types": "dist/types.d.ts",
-  "files": [
-    "dist"
-  ]
+  }
 }

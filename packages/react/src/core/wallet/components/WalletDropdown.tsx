@@ -1,6 +1,6 @@
 import { classNames } from '@flair-sdk/common';
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon } from '@heroicons/react/solid/esm/index.js';
 import React, { Fragment } from 'react';
 import { useCopyToClipboard } from 'react-use';
 import { useAccount, useBalance, useNetwork } from 'wagmi';

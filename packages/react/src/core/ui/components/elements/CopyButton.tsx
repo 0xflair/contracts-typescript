@@ -1,5 +1,5 @@
 import { classNames } from '@flair-sdk/common';
-import { CheckCircleIcon } from '@heroicons/react/outline';
+import { CheckCircleIcon } from '@heroicons/react/outline/esm/index.js';
 import { useState } from 'react';
 import { useCopyToClipboard } from 'react-use';
 

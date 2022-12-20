@@ -1,6 +1,6 @@
 import { classNames } from '@flair-sdk/common';
 import { RadioGroup } from '@headlessui/react';
-import { CheckCircleIcon } from '@heroicons/react/solid';
+import { CheckCircleIcon } from '@heroicons/react/solid/esm/index.js';
 
 import { CryptoValue, IfWalletConnected } from '../../../../../core';
 import {

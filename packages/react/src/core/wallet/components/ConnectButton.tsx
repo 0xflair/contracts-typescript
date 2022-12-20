@@ -1,5 +1,5 @@
 import { Web3AuthBaseConnector } from '@flair-sdk/connectors';
-import { ArrowSmDownIcon, ArrowSmUpIcon, XIcon } from '@heroicons/react/solid';
+import { ArrowSmDownIcon, ArrowSmUpIcon, XIcon } from '@heroicons/react/solid/esm/index.js';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useAccount, useConnect } from 'wagmi';

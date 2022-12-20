@@ -1,7 +1,7 @@
 import { TransactionReceipt } from '@ethersproject/providers';
 import { classNames } from '@flair-sdk/common';
 import { Dialog, Transition } from '@headlessui/react';
-import { CheckIcon } from '@heroicons/react/outline';
+import { CheckIcon } from '@heroicons/react/outline/esm/index.js';
 import { SendTransactionResult } from '@wagmi/core';
 import { BigNumberish } from 'ethers';
 import { Fragment, HTMLAttributeAnchorTarget, ReactNode } from 'react';

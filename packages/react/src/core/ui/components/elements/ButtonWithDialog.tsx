@@ -1,4 +1,4 @@
-import { XIcon } from '@heroicons/react/solid';
+import { XIcon } from '@heroicons/react/solid/esm/index.js';
 import React, { Fragment, PropsWithChildren, useState } from 'react';
 import Modal from 'react-modal';
 

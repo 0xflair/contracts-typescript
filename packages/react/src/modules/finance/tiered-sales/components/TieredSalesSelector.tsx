@@ -1,6 +1,6 @@
 import { classNames } from '@flair-sdk/common';
 import { RadioGroup } from '@headlessui/react';
-import { CheckCircleIcon } from '@heroicons/react/solid';
+import { CheckCircleIcon } from '@heroicons/react/solid/esm/index.js';
 import { Chain } from '@wagmi/chains';
 import { BigNumber, BigNumberish, ethers } from 'ethers';
 import { ReactNode, useEffect } from 'react';

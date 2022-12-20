@@ -4,7 +4,6 @@
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flair-sdk/typescript.git"
@@ -13,6 +12,7 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "type": "module",
   "exports": "./dist/index.es.js",
   "module": "dist/index.es.js",
   "types": "dist/types.d.ts",

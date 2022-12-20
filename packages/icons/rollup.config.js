@@ -1,7 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
-import json from '@rollup/plugin-json';
 import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
@@ -12,7 +12,7 @@ export default [
     input: './build/index.ts',
     output: [
       {
-        file: packageJson.main,
+        file: 'dist/index.cjs',
         format: 'cjs',
         sourcemap: true,
       },
