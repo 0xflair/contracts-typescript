@@ -2,6 +2,7 @@ import {
   TransactionRequest,
   TransactionResponse,
 } from '@ethersproject/providers';
+import { Environment } from '@flair-sdk/common';
 import axios from 'axios';
 import { BigNumber, BigNumberish, constants, ethers, Signer } from 'ethers';
 import { Deferrable } from 'ethers/lib/utils';
@@ -17,7 +18,14 @@ import {
 import { min, openModalWithData } from '../utils';
 
 export class BalanceRampClient {
-  constructor(private readonly config: BalanceRampConfig) {}
+  private iframe!: HTMLIFrameElement;
+  private modalOverlay!: HTMLDivElement;
+  private modalContent!: HTMLDivElement;
+
+  constructor(private readonly config: BalanceRampConfig) {
+    this.injectModal();
+    this.injectIframe();
+  }
 
   getConfig() {
     return this.config;
@@ -105,6 +113,8 @@ export class BalanceRampClient {
         requiredBalance,
       );
 
+      this.hide();
+
       if (!balanceRamp?.settlementWillDepositBalance) {
         if (!balanceRamp?.settlementRelayMetaTx.txHash) {
           throw new Error(
@@ -123,14 +133,14 @@ export class BalanceRampClient {
           value: BigNumber.from(balanceRamp?.settlementRelayMetaTx?.value),
 
           hash: balanceRamp?.settlementRelayMetaTx?.txHash,
-          confirmations: balanceRamp?.settlementRelayMetaTx?.txReceipt
-            ?.confirmations as number,
+          confirmations:
+            balanceRamp?.settlementRelayMetaTx?.txReceipt?.confirmations || 1,
           wait: async (confirmations?: number) =>
             ({
               ...balanceRamp.settlementRelayMetaTx?.txReceipt,
             } as any),
           gasLimit: BigNumber.from(
-            balanceRamp?.settlementRelayMetaTx?.txReceipt?.gasUsed,
+            balanceRamp?.settlementRelayMetaTx?.txReceipt?.gasUsed || 0,
           ),
         };
       }
@@ -269,12 +279,21 @@ export class BalanceRampClient {
 
     // add 50% buffer to gas prices (20% for eth)
     const gasPriceBuffer = gasPrice?.mul(chainId === 1 ? 120 : 150).div(100);
-    const maxFeePerGasBuffer = maxFeePerGas
+    let maxFeePerGasBuffer = maxFeePerGas
       ?.mul(chainId === 1 ? 120 : 150)
       .div(100);
-    const maxPriorityFeePerGasBuffer = maxPriorityFeePerGas
+    let maxPriorityFeePerGasBuffer = maxPriorityFeePerGas
       ?.mul(chainId === 1 ? 120 : 150)
       .div(100);
+
+    // maxFeePerGas cannot be less than maxPriorityFeePerGas
+    if (
+      maxFeePerGasBuffer &&
+      maxPriorityFeePerGasBuffer &&
+      maxFeePerGasBuffer.lt(maxPriorityFeePerGasBuffer)
+    ) {
+      maxFeePerGasBuffer = BigNumber.from(maxPriorityFeePerGasBuffer);
+    }
 
     return {
       estimatedGasPrice: gasPriceBuffer,
@@ -495,26 +514,127 @@ export class BalanceRampClient {
       estimatedGasLimit: requiredBalance.estimatedGasLimit?.toString() || '',
     };
 
-    const modal = openModalWithData(
-      {
-        url: `${BALANCE_RAMP_BACKEND[this.config.env].startSession}`,
-      },
-      rampRequest,
-    );
+    const url = `${BALANCE_RAMP_BACKEND[this.config.env].startSession}`;
+    this.iframe.src = url;
+    this.show();
 
-    // periodically check if modal is closed
-    const interval = setInterval(() => {
-      if (modal?.closed) {
-        window.postMessage(
-          {
-            flair: true,
-            type: 'WindowClosed',
-          },
-          '*',
-        );
-        clearInterval(interval);
+    const intervalRequest = setInterval(() => {
+      this.iframe?.contentWindow?.postMessage(
+        {
+          flair: true,
+          type: 'BalanceRampRequest',
+          rampRequest,
+        },
+        '*',
+      );
+    }, 500);
+
+    const handleInitialized = (event: any) => {
+      if (
+        event?.data?.flair &&
+        event?.data?.type === 'BalanceRampInitialized'
+      ) {
+        clearInterval(intervalRequest);
+        window.removeEventListener('message', handleInitialized);
       }
-    }, 3000);
+    };
+    window.addEventListener('message', handleInitialized);
+  }
+
+  hide() {
+    this.modalOverlay.style.opacity = '0';
+    setTimeout(() => {
+      this.modalOverlay.style.display = 'none';
+    }, 300);
+    this.iframe.src = 'about:blank';
+  }
+
+  show() {
+    this.modalOverlay.style.display = 'block';
+    setTimeout(() => {
+      this.modalOverlay.style.opacity = '1';
+    }, 10);
+  }
+
+  private injectModal() {
+    const onload = () => {
+      this.modalOverlay = document.createElement('div');
+      this.modalOverlay.style.display = 'none';
+      this.modalOverlay.className = 'balance-ramp-modal-overlay';
+      (this.config.portalElement || document.body).appendChild(
+        this.modalOverlay,
+      );
+
+      this.modalContent = document.createElement('div');
+      this.modalContent.className = 'balance-ramp-modal-content';
+      this.modalOverlay.appendChild(this.modalContent);
+
+      // add css styles for modal overlay
+      const style = document.createElement('style');
+      style.id = 'balance-ramp-styles';
+      style.innerHTML = `
+        .balance-ramp-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: rgba(255, 255, 255, 0.5);
+            transition-property: all;
+            transition-duration: 300ms;
+            opacity: 0;
+        }
+        .balance-ramp-modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 600px;
+            height: 100%;
+            max-height: 750px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .balance-ramp-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    `;
+      document.querySelector(`#balance-ramp-styles`)?.remove();
+      document.head.appendChild(style);
+    };
+
+    if (['loaded', 'interactive', 'complete'].includes(document.readyState)) {
+      onload();
+    } else {
+      window.addEventListener('load', onload, false);
+    }
+  }
+
+  private injectIframe() {
+    this.iframe = document.createElement('iframe');
+    this.iframe.allow = 'usb';
+    this.modalContent.appendChild(this.iframe);
+
+    window?.addEventListener('message', async (event) => {
+      const message = event.data;
+      if (!message.flair) {
+        return;
+      }
+
+      switch (event.data.type) {
+        case 'BalanceRampCancelled':
+        case 'BalanceRampFailure':
+          this.hide();
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   private async waitUntilReady(
@@ -554,13 +674,14 @@ export class BalanceRampClient {
         try {
           if (message.type === 'BalanceRampSuccess') {
             resolve(message.data as BalanceRamp);
-          } else if (message.type === 'WindowClosed') {
-            reject('Payment window was closed, please try again.');
+          } else if (message.type === 'BalanceRampCancelled') {
+            reject('Payment was cancelled by user.');
           } else if (message.type === 'BalanceRampFailure') {
-            debugger;
             reject(message.data);
+          } else if (message.type === 'BalanceRampInitialized') {
+            // ignore
           } else {
-            reject('Unknown message type: ' + event.data);
+            reject('Unknown message type: ' + event?.data?.type);
           }
         } catch (e) {
           console.error('Failed to parse message: ', e);

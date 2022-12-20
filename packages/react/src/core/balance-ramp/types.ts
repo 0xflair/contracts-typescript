@@ -45,6 +45,7 @@ export type BalanceRampConfig = {
   resolvers: BalanceResolver[];
   enabledChainIds?: number[] | 'ALL';
   maxGasLimit?: BigNumberish;
+  portalElement?: Element;
 };
 
 export type BalanceRamp = {
