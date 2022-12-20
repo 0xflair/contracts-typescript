@@ -1,24 +1,26 @@
 import React from 'react';
 import { useDisconnect } from 'wagmi';
 
-import { SECONDARY_BUTTON } from '../../ui';
+import { BareComponentProps } from '../../../common';
 
-type Props = {
+type Props = BareComponentProps & {
   label?: React.ReactNode;
   className?: string;
   disabled?: boolean;
 };
 
-export const DisconnectButton = (props: Props) => {
+export const DisconnectButton = ({
+  as,
+  label = 'Disconnect',
+  ...attributes
+}: Props) => {
   const { disconnect } = useDisconnect();
 
+  const Component = as || 'button';
+
   return (
-    <button
-      className={props.className || SECONDARY_BUTTON}
-      onClick={() => disconnect()}
-      disabled={props.disabled}
-    >
-      {props.label || 'Disconnect'}
-    </button>
+    <Component onClick={() => disconnect()} {...attributes}>
+      {label}
+    </Component>
   );
 };

@@ -18,8 +18,6 @@ import {
   Web3OnboardPortisConnector,
   Web3OnboardTrustConnector,
 } from '@flair-sdk/connectors';
-import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plugin';
-import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
 import deepmerge from 'deepmerge';
 import { providers } from 'ethers';
 import { hexlify } from 'ethers/lib/utils.js';
@@ -183,35 +181,6 @@ export const WalletProvider = ({
     useState<AllowedNetworks>('ALL');
 
   const connectors = useCallback(() => {
-    const preferredChain = chains.find(
-      (chain) => chain.id === preferredChainId,
-    );
-
-    const torusPlugin = new TorusWalletConnectorPlugin({
-      torusWalletOpts: {
-        buttonPosition: 'bottom-left',
-      },
-      walletInitOptions: {
-        whiteLabel: {
-          theme: { isDark: isDarkMode(), colors: { primary: '#00a8ff' } },
-          logoDark: 'https://web3auth.io/images/w3a-L-Favicon-1.svg',
-          logoLight: 'https://web3auth.io/images/w3a-D-Favicon-1.svg',
-        },
-        useWalletConnect: true,
-        enableLogging: true,
-        network: preferredChain
-          ? {
-              host: preferredChain.rpcUrls?.default?.http?.[0],
-              chainId: preferredChain.id,
-              blockExplorer: preferredChain.blockExplorers?.default.url,
-              networkName: preferredChain.name,
-              ticker: preferredChain.nativeCurrency?.symbol,
-              tickerName: preferredChain.nativeCurrency?.name,
-            }
-          : undefined,
-      },
-    });
-
     const web3OnboardOptions = {
       appName,
       appLogo: 'https://app.flair.dev/logo-light-filled.png',
@@ -325,12 +294,6 @@ export const WalletProvider = ({
         }),
       );
     }
-
-    connectors
-      ?.filter((c) => c instanceof Web3AuthConnector)
-      ?.map((c) => {
-        c?.web3AuthInstance?.addPlugin?.(torusPlugin);
-      });
 
     return connectors;
   }, [appName, darkMode, preferredChainId, web3AuthOptions]);

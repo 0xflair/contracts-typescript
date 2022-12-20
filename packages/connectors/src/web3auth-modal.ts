@@ -6,9 +6,10 @@ import {
   SwitchChainError,
   UserRejectedRequestError,
 } from '@wagmi/core';
-import { ADAPTER_STATUS } from '@web3auth/base';
-import LoginModal, { LOGIN_MODAL_EVENTS } from '@web3auth/ui';
-import { hexlify } from 'ethers/lib/utils';
+import * as web3authBase from '@web3auth/base';
+import LoginModal from '@web3auth/ui';
+import * as web3authUi from '@web3auth/ui';
+import { hexlify } from 'ethers/lib/utils.js';
 
 import { ExtendedConnector } from './base/extended-connector';
 import { Web3AuthConnector } from './base/web3auth-core';
@@ -28,7 +29,7 @@ export class Web3AuthModalConnector
       setTimeout(() => {
         // @ts-ignore
         (this.loginModal as LoginModal).on(
-          LOGIN_MODAL_EVENTS.MODAL_VISIBILITY,
+          web3authUi.LOGIN_MODAL_EVENTS.MODAL_VISIBILITY,
           (visibility) => {
             if (!visibility) {
               this.isAuthorized().then((authorized) => {
@@ -46,7 +47,9 @@ export class Web3AuthModalConnector
       } catch (e) {}
 
       try {
-        if (this.web3AuthInstance?.status !== ADAPTER_STATUS.READY) {
+        if (
+          this.web3AuthInstance?.status !== web3authBase.ADAPTER_STATUS.READY
+        ) {
           await this.web3AuthInstance?.init();
         }
       } catch (e) {}
@@ -97,7 +100,9 @@ export class Web3AuthModalConnector
       this.subscribeToLoginModalEvents();
 
       try {
-        if (this.web3AuthInstance?.status !== ADAPTER_STATUS.READY) {
+        if (
+          this.web3AuthInstance?.status !== web3authBase.ADAPTER_STATUS.READY
+        ) {
           await this.web3AuthInstance?.init();
         }
       } catch (e) {}

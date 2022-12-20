@@ -5,25 +5,13 @@ import {
   normalizeChainId,
   UserRejectedRequestError,
 } from '@wagmi/core';
-import {
-  ADAPTER_EVENTS,
-  ADAPTER_STATUS,
-  CHAIN_NAMESPACES,
-  CustomChainConfig,
-  getChainConfig,
-  SafeEventEmitterProvider,
-  WALLET_ADAPTER_TYPE,
-  WALLET_ADAPTERS,
-} from '@web3auth/base';
-import { Web3AuthCore } from '@web3auth/core';
-import { OpenloginAdapter } from '@web3auth/openlogin-adapter';
-import LoginModal, {
-  getAdapterSocialLogins,
-  LOGIN_MODAL_EVENTS,
-  OPENLOGIN_PROVIDERS,
-} from '@web3auth/ui';
+import * as web3authBase from '@web3auth/base';
+import * as web3authCore from '@web3auth/core';
+import * as web3authOpenLogin from '@web3auth/openlogin-adapter';
+import LoginModal from '@web3auth/ui';
+import * as web3authUi from '@web3auth/ui';
 import { ethers, Signer } from 'ethers';
-import { getAddress } from 'ethers/lib/utils';
+import { getAddress } from 'ethers/lib/utils.js';
 import log from 'loglevel';
 
 import { Web3AuthOptions } from './web3auth-interfaces';
@@ -37,9 +25,9 @@ export class Web3AuthConnector extends Connector {
 
   readonly name = 'web3Auth';
 
-  provider!: SafeEventEmitterProvider | null;
+  provider!: web3authBase.SafeEventEmitterProvider | null;
 
-  web3AuthInstance?: Web3AuthCore;
+  web3AuthInstance?: web3authCore.Web3AuthCore;
 
   isModalOpen = false;
 
@@ -47,7 +35,7 @@ export class Web3AuthConnector extends Connector {
 
   private loginModal: LoginModal;
 
-  private socialLoginAdapter: OpenloginAdapter;
+  private socialLoginAdapter: web3authOpenLogin.OpenloginAdapter;
 
   constructor(config: { chains?: Chain[]; options: Web3AuthOptions }) {
     super(config);
@@ -57,14 +45,14 @@ export class Web3AuthConnector extends Connector {
       : 1;
     const chainConfig = this.chains.filter((x) => x.id === chainId);
 
-    const defaultChainConfig = getChainConfig(
-      CHAIN_NAMESPACES.EIP155,
+    const defaultChainConfig = web3authBase.getChainConfig(
+      web3authBase.CHAIN_NAMESPACES.EIP155,
       config.options.chainId || '0x1',
     );
-    let finalChainConfig: CustomChainConfig = {
-      chainNamespace: CHAIN_NAMESPACES.EIP155,
+    let finalChainConfig: web3authBase.CustomChainConfig = {
+      chainNamespace: web3authBase.CHAIN_NAMESPACES.EIP155,
       ...defaultChainConfig,
-    } as CustomChainConfig;
+    } as web3authBase.CustomChainConfig;
     if (chainConfig.length > 0) {
       let currentChain = chainConfig[0];
       if (config.options.chainId) {
@@ -76,7 +64,7 @@ export class Web3AuthConnector extends Connector {
       }
       finalChainConfig = {
         ...finalChainConfig,
-        chainNamespace: CHAIN_NAMESPACES.EIP155,
+        chainNamespace: web3authBase.CHAIN_NAMESPACES.EIP155,
         chainId: `0x${currentChain.id.toString(16)}`,
         rpcTarget: currentChain.rpcUrls.default.http[0],
         displayName: currentChain.name,
@@ -85,7 +73,7 @@ export class Web3AuthConnector extends Connector {
         blockExplorer: currentChain?.blockExplorers?.default?.url as string,
       };
     }
-    this.web3AuthInstance = new Web3AuthCore({
+    this.web3AuthInstance = new web3authCore.Web3AuthCore({
       clientId: config.options.clientId,
       enableLogging: config.options.enableLogging,
       storageKey: config.options.storageKey,
@@ -96,7 +84,7 @@ export class Web3AuthConnector extends Connector {
       },
     });
 
-    this.socialLoginAdapter = new OpenloginAdapter({
+    this.socialLoginAdapter = new web3authOpenLogin.OpenloginAdapter({
       adapterSettings: {
         ...config.options,
       },
@@ -128,15 +116,16 @@ export class Web3AuthConnector extends Connector {
       await this.loginModal.initModal();
 
       this.loginModal.addSocialLogins(
-        WALLET_ADAPTERS.OPENLOGIN,
-        getAdapterSocialLogins(
-          WALLET_ADAPTERS.OPENLOGIN,
+        web3authBase.WALLET_ADAPTERS.OPENLOGIN,
+        web3authUi.getAdapterSocialLogins(
+          web3authBase.WALLET_ADAPTERS.OPENLOGIN,
           this.socialLoginAdapter,
           this.options.uiConfig?.loginMethodConfig,
         ),
-        this.options.uiConfig?.loginMethodsOrder || OPENLOGIN_PROVIDERS,
+        this.options.uiConfig?.loginMethodsOrder ||
+          web3authUi.OPENLOGIN_PROVIDERS,
       );
-      if (this.web3AuthInstance?.status !== ADAPTER_STATUS.READY) {
+      if (this.web3AuthInstance?.status !== web3authBase.ADAPTER_STATUS.READY) {
         await this.web3AuthInstance?.init();
       }
 
@@ -169,38 +158,44 @@ export class Web3AuthConnector extends Connector {
 
       return await new Promise((resolve, reject) => {
         this.loginModal.once(
-          LOGIN_MODAL_EVENTS.MODAL_VISIBILITY,
+          web3authUi.LOGIN_MODAL_EVENTS.MODAL_VISIBILITY,
           (isVisible: boolean) => {
             if (!isVisible && !this.web3AuthInstance?.provider) {
               return reject(new Error('User closed popup'));
             }
           },
         );
-        this.web3AuthInstance?.once(ADAPTER_EVENTS.CONNECTED, async () => {
-          const signer = await this.getSigner();
-          const account = (await signer.getAddress()) as `0x${string}`;
-          const provider = await this.getProvider();
+        this.web3AuthInstance?.once(
+          web3authBase.ADAPTER_EVENTS.CONNECTED,
+          async () => {
+            const signer = await this.getSigner();
+            const account = (await signer.getAddress()) as `0x${string}`;
+            const provider = await this.getProvider();
 
-          if (provider?.on) {
-            provider.on('accountsChanged', this.onAccountsChanged.bind(this));
-            provider.on('chainChanged', this.onChainChanged.bind(this));
-          }
-          const chainId = await this.getChainId();
-          const unsupported = this.isChainUnsupported(chainId);
+            if (provider?.on) {
+              provider.on('accountsChanged', this.onAccountsChanged.bind(this));
+              provider.on('chainChanged', this.onChainChanged.bind(this));
+            }
+            const chainId = await this.getChainId();
+            const unsupported = this.isChainUnsupported(chainId);
 
-          return resolve({
-            account,
-            chain: {
-              id: chainId,
-              unsupported,
-            },
-            provider,
-          });
-        });
-        this.web3AuthInstance?.once(ADAPTER_EVENTS.ERRORED, (err: unknown) => {
-          log.error('error while connecting', err);
-          return reject(err);
-        });
+            return resolve({
+              account,
+              chain: {
+                id: chainId,
+                unsupported,
+              },
+              provider,
+            });
+          },
+        );
+        this.web3AuthInstance?.once(
+          web3authBase.ADAPTER_EVENTS.ERRORED,
+          (err: unknown) => {
+            log.error('error while connecting', err);
+            return reject(err);
+          },
+        );
       });
     } catch (error) {
       log.error('error while connecting', error);
@@ -332,9 +327,9 @@ export class Web3AuthConnector extends Connector {
 
   private subscribeToLoginModalEvents(): void {
     this.loginModal.on(
-      LOGIN_MODAL_EVENTS.LOGIN,
+      web3authUi.LOGIN_MODAL_EVENTS.LOGIN,
       async (params: {
-        adapter: WALLET_ADAPTER_TYPE;
+        adapter: web3authBase.WALLET_ADAPTER_TYPE;
         loginParams: unknown;
       }) => {
         try {
@@ -351,7 +346,7 @@ export class Web3AuthConnector extends Connector {
       },
     );
 
-    this.loginModal.on(LOGIN_MODAL_EVENTS.DISCONNECT, async () => {
+    this.loginModal.on(web3authUi.LOGIN_MODAL_EVENTS.DISCONNECT, async () => {
       try {
         await this.disconnect();
       } catch (error) {

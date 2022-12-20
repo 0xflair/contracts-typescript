@@ -5,8 +5,8 @@ import {
   SwitchChainError,
   UserRejectedRequestError,
 } from '@wagmi/core';
-import { ADAPTER_STATUS } from '@web3auth/base';
-import { hexlify } from 'ethers/lib/utils';
+import * as web3authBase from '@web3auth/base';
+import { hexlify } from 'ethers/lib/utils.js';
 
 import { ExtendedConnector } from './extended-connector';
 import { Web3AuthConnector } from './web3auth-core';
@@ -26,7 +26,9 @@ export abstract class Web3AuthBaseConnector
       } catch (e) {}
 
       try {
-        if (this.web3AuthInstance?.status !== ADAPTER_STATUS.READY) {
+        if (
+          this.web3AuthInstance?.status !== web3authBase.ADAPTER_STATUS.READY
+        ) {
           await this.web3AuthInstance?.init();
         }
       } catch (e) {}

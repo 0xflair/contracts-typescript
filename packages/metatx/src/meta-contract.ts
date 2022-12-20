@@ -7,7 +7,7 @@ import {
   ContractFunction,
   Signer,
 } from 'ethers';
-import { defineReadOnly, FunctionFragment } from 'ethers/lib/utils';
+import { defineReadOnly, FunctionFragment } from 'ethers/lib/utils.js';
 
 import { MetaTransactionsClient } from './meta-transactions.client';
 import { MetaTransaction } from './types/meta-transaction';
