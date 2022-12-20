@@ -25,6 +25,7 @@ export function openModalWithData(
     '_blank',
     `width=${w},height=${h},top=${y},left=${x},once=true,scrollbars=yes,status=0,toolbar=0,menubar=0,location=0`,
   );
+  
 
   if (!modal) {
     throw new Error('Failed to open modal');
