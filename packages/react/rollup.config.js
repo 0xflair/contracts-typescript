@@ -2,6 +2,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
+// import { cjsToEsm } from 'cjstoesm';
 import path from 'path';
 import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
@@ -44,11 +45,11 @@ export default [
   {
     input: './src/index.ts',
     output: [
-      {
-        file: packageJson.main,
-        format: 'cjs',
-        sourcemap: true,
-      },
+      // {
+      //   file: packageJson.main,
+      //   format: 'cjs',
+      //   sourcemap: true,
+      // },
       {
         file: packageJson.module,
         format: 'esm',
@@ -60,7 +61,9 @@ export default [
       resolve(),
       json(),
       commonjs(),
-      typescript(),
+      typescript({
+        // transformers: [cjsToEsm()],
+      }),
       stylesPostCssPlugin({
         // Un-setting extract to force exporting styles in the JS
         inject: false,
