@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.74.0 (2022-12-20)
+
+
+### Features
+
+* show ramp as iframe for mobile support for reliable status checking ([#25](https://github.com/flair-sdk/typescript/issues/25)) ([58bab80](https://github.com/flair-sdk/typescript/commit/58bab80d4e992aa2d9156af927a3634fdbbd0f6a))
+
+
+
+
+
 ## 2.73.3 (2022-12-19)
 
 
