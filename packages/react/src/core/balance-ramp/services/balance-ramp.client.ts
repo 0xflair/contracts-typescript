@@ -2,6 +2,7 @@ import {
   TransactionRequest,
   TransactionResponse,
 } from '@ethersproject/providers';
+import { Environment } from '@flair-sdk/common';
 import axios from 'axios';
 import { BigNumber, BigNumberish, constants, ethers, Signer } from 'ethers';
 import { Deferrable } from 'ethers/lib/utils';
@@ -139,7 +140,7 @@ export class BalanceRampClient {
               ...balanceRamp.settlementRelayMetaTx?.txReceipt,
             } as any),
           gasLimit: BigNumber.from(
-            balanceRamp?.settlementRelayMetaTx?.txReceipt?.gasUsed,
+            balanceRamp?.settlementRelayMetaTx?.txReceipt?.gasUsed || 0,
           ),
         };
       }
@@ -513,12 +514,6 @@ export class BalanceRampClient {
       estimatedGasLimit: requiredBalance.estimatedGasLimit?.toString() || '',
     };
 
-    // const modal = openModalWithData(
-    //   {
-    //     url: `${BALANCE_RAMP_BACKEND[this.config.env].startSession}`,
-    //   },
-    //   rampRequest
-    // );
     const url = `${BALANCE_RAMP_BACKEND[this.config.env].startSession}`;
     this.iframe.src = url;
     this.show();
@@ -533,23 +528,17 @@ export class BalanceRampClient {
         '*',
       );
     }, 500);
-    setTimeout(() => {
-      clearInterval(intervalRequest);
-    }, 10000);
 
-    // periodically check if modal is closed
-    // const interval = setInterval(() => {
-    //   if (modal?.closed) {
-    //     window.postMessage(
-    //       {
-    //         flair: true,
-    //         type: "WindowClosed",
-    //       },
-    //       "*"
-    //     );
-    //     clearInterval(interval);
-    //   }
-    // }, 3000);
+    const handleInitialized = (event: any) => {
+      if (
+        event?.data?.flair &&
+        event?.data?.type === 'BalanceRampInitialized'
+      ) {
+        clearInterval(intervalRequest);
+        window.removeEventListener('message', handleInitialized);
+      }
+    };
+    window.addEventListener('message', handleInitialized);
   }
 
   hide() {
@@ -557,11 +546,14 @@ export class BalanceRampClient {
     setTimeout(() => {
       this.modalOverlay.style.display = 'none';
     }, 300);
+    this.iframe.src = 'about:blank';
   }
 
   show() {
     this.modalOverlay.style.display = 'block';
-    this.modalOverlay.style.opacity = '1';
+    setTimeout(() => {
+      this.modalOverlay.style.opacity = '1';
+    }, 10);
   }
 
   private injectModal() {
@@ -635,7 +627,7 @@ export class BalanceRampClient {
       }
 
       switch (event.data.type) {
-        case 'BalanceRampCanceled':
+        case 'BalanceRampCancelled':
         case 'BalanceRampFailure':
           this.hide();
           break;
@@ -686,8 +678,10 @@ export class BalanceRampClient {
             reject('Payment was cancelled by user.');
           } else if (message.type === 'BalanceRampFailure') {
             reject(message.data);
+          } else if (message.type === 'BalanceRampInitialized') {
+            // ignore
           } else {
-            reject('Unknown message type: ' + event.data);
+            reject('Unknown message type: ' + event?.data?.type);
           }
         } catch (e) {
           console.error('Failed to parse message: ', e);

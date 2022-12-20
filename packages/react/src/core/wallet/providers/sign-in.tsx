@@ -138,14 +138,18 @@ export const SignInProvider = ({
     }));
   }, [setSignInState]);
   const checkExpiration = useCallback(() => {
-    if (signInState?.siweMessage?.expirationTime) {
+    if (signInState.signedIn && signInState?.siweMessage?.expirationTime) {
       const expirationTime = new Date(signInState.siweMessage.expirationTime);
       const now = Date.now();
       if (+expirationTime < +now) {
-        setSignInState((p) => ({ ...p, signedIn: false }));
+        signOut();
       }
     }
-  }, [signInState, setSignInState]);
+  }, [
+    signInState?.signedIn,
+    signInState?.siweMessage?.expirationTime,
+    signOut,
+  ]);
 
   useEffect(checkExpiration, [checkExpiration]);
   useInterval(checkExpiration, 60_000);
