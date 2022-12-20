@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.3 (2022-12-20)
+
+
+### Bug Fixes
+
+* remove gnosis safe dependencies ([b5918ab](https://github.com/flair-sdk/typescript/commit/b5918ab95eb2e883c7bdea33925240f22f788c75))
+
+
+
+
+
 ## 2.74.2 (2022-12-20)
 
 **Note:** Version bump only for package @flair-sdk/registry
