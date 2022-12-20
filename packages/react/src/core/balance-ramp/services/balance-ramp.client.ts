@@ -5,7 +5,7 @@ import {
 import { Environment } from '@flair-sdk/common';
 import axios from 'axios';
 import { BigNumber, BigNumberish, constants, ethers, Signer } from 'ethers';
-import { Deferrable } from 'ethers/lib/utils';
+import { Deferrable } from 'ethers/lib/utils.js';
 
 import { BALANCE_RAMP_BACKEND } from '../constants';
 import {

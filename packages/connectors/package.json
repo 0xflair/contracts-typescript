@@ -25,8 +25,6 @@
   "peerDependencies": {
     "@ethersproject/providers": "*",
     "@flair-sdk/common": "*",
-    "@gnosis.pm/safe-apps-provider": "*",
-    "@gnosis.pm/safe-apps-sdk": "*",
     "@toruslabs/broadcast-channel": "*",
     "@toruslabs/openlogin": "*",
     "@wagmi/core": "*",
@@ -50,12 +48,6 @@
       "optional": true
     },
     "@ethersproject/providers": {
-      "optional": true
-    },
-    "@gnosis.pm/safe-apps-provider": {
-      "optional": true
-    },
-    "@gnosis.pm/safe-apps-sdk": {
       "optional": true
     },
     "@wagmi/core": {
@@ -112,8 +104,6 @@
   },
   "dependencies": {
     "@flair-sdk/common": "^2.74.2",
-    "@gnosis.pm/safe-apps-provider": "^0.13.1",
-    "@gnosis.pm/safe-apps-sdk": "^7.8.0",
     "@wagmi/core": "^0.8.2",
     "@web3-onboard/common": "^2.2.3",
     "@web3-onboard/core": "^2.10.0",

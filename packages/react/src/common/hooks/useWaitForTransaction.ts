@@ -1,6 +1,5 @@
 import '@ethersproject/abstract-provider';
 
-import { SafeConnector } from '@flair-sdk/connectors';
 import { useCallback, useEffect, useState } from 'react';
 import { useInterval } from 'react-use';
 import {
@@ -24,9 +23,7 @@ export const useWaitForTransaction = (
   const [actualHash, setActualHash] = useState<string>();
   const [isLoading, setIsLoading] = useState(Boolean(config?.hash));
 
-  const gnosisSafeConnector = connectors.find(({ id }) => id === 'safe') as
-    | SafeConnector
-    | undefined;
+  const gnosisSafeConnector = connectors.find(({ id }) => id === 'safe') as any;
 
   const resultInput = useWaitForTransactionWagmi({
     ...config,

@@ -2,7 +2,7 @@ import { TransactionRequest } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
 import { MetaTransaction } from '@flair-sdk/metatx';
 import { BigNumberish } from 'ethers';
-import { Deferrable } from 'ethers/lib/utils';
+import { Deferrable } from 'ethers/lib/utils.js';
 
 export type CurrentBalance = {
   tokenAddress: string;

@@ -3,7 +3,6 @@ export * from './utils';
 export * from './binance';
 export * from './brave';
 export * from './gamestop';
-export * from './gnosis-safe';
 export * from './ledger';
 export * from './portis';
 export * from './trust';

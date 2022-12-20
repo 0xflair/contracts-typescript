@@ -8,7 +8,6 @@ import {
   DiscordWeb3AuthConnector,
   GithubWeb3AuthConnector,
   GoogleWeb3AuthConnector,
-  SafeConnector,
   TwitchWeb3AuthConnector,
   TwitterWeb3AuthConnector,
   Web3AuthOptions as Web3AuthOptionsOriginal,
@@ -23,7 +22,7 @@ import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plu
 import { Web3AuthConnector } from '@web3auth/web3auth-wagmi-connector';
 import deepmerge from 'deepmerge';
 import { providers } from 'ethers';
-import { hexlify } from 'ethers/lib/utils';
+import { hexlify } from 'ethers/lib/utils.js';
 import React, {
   ReactNode,
   useCallback,
@@ -264,12 +263,12 @@ export const WalletProvider = ({
           darkMode,
         },
       }),
-      new SafeConnector({
-        chains,
-        options: {
-          debug: true,
-        },
-      }),
+      // new SafeConnector({
+      //   chains,
+      //   options: {
+      //     debug: true,
+      //   },
+      // }),
       new Web3OnboardBinanceConnector({
         chains,
         options: web3OnboardOptions,
