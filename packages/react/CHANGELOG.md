@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.8 (2022-12-21)
+
+
+### Bug Fixes
+
+* show loading mask if data not loaded yet ([4084661](https://github.com/flair-sdk/typescript/commit/4084661b2c62068eef666324ec3a12cedadb2404))
+
+
+
+
+
 ## 2.74.7 (2022-12-21)
 
 
