@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.9 (2022-12-21)
+
+
+### Bug Fixes
+
+* be more permissive in not sold our component to avoid flash ([2ef74dd](https://github.com/flair-sdk/typescript/commit/2ef74dd0eb7c1ce44044c281cd4f51699c44fa51))
+
+
+
+
+
 ## 2.74.8 (2022-12-21)
 
 

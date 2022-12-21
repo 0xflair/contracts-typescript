@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/connectors",
-  "version": "2.74.8",
+  "version": "2.74.9",
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
@@ -103,7 +103,7 @@
     }
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.74.8",
+    "@flair-sdk/common": "^2.74.9",
     "@wagmi/core": "^0.8.2",
     "@web3-onboard/common": "^2.2.3",
     "@web3-onboard/core": "^2.10.0",
