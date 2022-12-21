@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.7 (2022-12-21)
+
+
+### Bug Fixes
+
+* inverted overlay for ramp frame ([b37ce95](https://github.com/flair-sdk/typescript/commit/b37ce950cdffafef03435c8752f8f75022354e87))
+
+
+
+
+
 ## 2.74.6 (2022-12-21)
 
 
