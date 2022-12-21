@@ -37,7 +37,7 @@ export const TieredSalesPayButton = ({
     ) : method?.includes &&
       ['utrust', 'bitpay', 'coinbase'].find((m) => method.includes(m)) ? (
       <>
-        <span>Buy with other Crypto</span>
+        <span>Buy with Crypto</span>
         <div>
           <img
             src={

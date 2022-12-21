@@ -35,6 +35,7 @@ import { InjectedConnector } from 'wagmi/connectors/injected';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
+import { useStickyState } from '../../../common/hooks/useStickyState.js';
 import { isDarkMode } from '../../../common/utils/dark-mode';
 import stylesheet from '../../../index.css';
 import { wrapWagmiClient } from '../../balance-ramp';
@@ -170,15 +171,17 @@ export const WalletProvider = ({
 }: WalletProviderProps) => {
   const darkMode = isDarkMode();
 
-  const [web3AuthOptions, setWeb3AuthOptions] = useState<
+  const [web3AuthOptions, setWeb3AuthOptions] = useStickyState<
     Web3AuthOptions | undefined
-  >(web3AuthOptions_);
+  >(web3AuthOptions_, 'flair.web3AuthOptions');
 
-  const [preferredChainId, setPreferredChainId] = useState<number | undefined>(
-    preferredChainId_,
+  const [preferredChainId, setPreferredChainId] = useStickyState<
+    number | undefined
+  >(preferredChainId_, 'flair.preferredChainId');
+  const [allowedNetworks, setAllowedNetworks] = useStickyState<AllowedNetworks>(
+    'ALL',
+    'flair.allowedNetworks',
   );
-  const [allowedNetworks, setAllowedNetworks] =
-    useState<AllowedNetworks>('ALL');
 
   const connectors = useCallback(() => {
     const web3OnboardOptions = {

@@ -203,8 +203,8 @@ export const TieredSalesProvider = ({
     () =>
       tierIds.reduce((acc, tierId) => {
         const tier = {
-          ...configValuesTiers?.[tierId],
           ...diamondConfigTiers?.[tierId],
+          ...configValuesTiers?.[tierId],
           ...contractTiers?.[tierId],
           metadataUri:
             configValuesTiers?.[tierId]?.metadataUri ||

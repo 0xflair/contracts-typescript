@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { Fragment, PropsWithChildren } from 'react';
 
 import { BareComponentProps, useChainInfo } from '../../../../common';
@@ -63,9 +63,12 @@ export const TieredSalesMintButton = ({
     >
       {children || (
         <span className="flex flex-col gap-1 items-center justify-center">
-          <span>{`Buy with ${
-            isERC20Price !== undefined ? finalSymbol : '...'
-          }`}</span>
+          <span>
+            {currentTierConfig?.price &&
+            BigNumber.from(currentTierConfig?.price).eq(0)
+              ? `Mint for Free`
+              : `Buy with ${isERC20Price !== undefined ? finalSymbol : '...'}`}
+          </span>
           {chainInfo?.name && (
             <span className="mint-chain-label opacity-50 text-xs font-light">
               on {`${chainInfo?.name}`}
