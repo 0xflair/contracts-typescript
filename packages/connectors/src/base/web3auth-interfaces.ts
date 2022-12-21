@@ -1,5 +1,5 @@
 import type { OpenLoginOptions } from '@toruslabs/openlogin';
-import { OpenloginLoginParams } from '@web3auth/openlogin-adapter';
+import * as web3authOpenLogin from '@web3auth/openlogin-adapter';
 
 export type LoginMethodConfig = Record<
   string,
@@ -101,7 +101,7 @@ export interface Web3AuthOptions extends OpenLoginOptions {
   displayErrorsOnModal?: boolean;
 
   socialLoginConfig: Pick<
-    OpenloginLoginParams,
+    web3authOpenLogin.OpenloginLoginParams,
     'dappShare' | 'appState' | 'mfaLevel' | 'sessionTime'
   >;
 }

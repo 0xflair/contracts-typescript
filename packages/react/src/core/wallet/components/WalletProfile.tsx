@@ -1,5 +1,5 @@
 import { classNames } from '@flair-sdk/common';
-import Blockies from 'react-blockies';
+import * as Identicon from 'react-blockies';
 import {
   useAccount,
   useBalance,
@@ -73,12 +73,14 @@ export const WalletProfile = ({
             alt=""
           />
         ) : (
-          <Blockies
-            seed={address?.toLowerCase() || ''}
-            size={blockieSize}
-            scale={blockieScale}
-            className={'wallet-avatar wallet-avatar--blockies rounded-full'}
-          />
+          <>
+            <Identicon.default
+              seed={address?.toLowerCase() || ''}
+              size={blockieSize}
+              scale={blockieScale}
+              className={'wallet-avatar wallet-avatar--blockies rounded-full'}
+            />
+          </>
         )
       ) : null}
       {showLabel ? (

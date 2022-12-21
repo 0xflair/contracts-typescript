@@ -1,7 +1,7 @@
 import { Chain } from '@wagmi/core';
 import injectedModule from '@web3-onboard/injected-wallets';
 import { InjectedWalletModule } from '@web3-onboard/injected-wallets/dist/types';
-import injectedModuleWallets from '@web3-onboard/injected-wallets/dist/wallets';
+import * as injectedModuleWallets from '@web3-onboard/injected-wallets/dist/wallets.js';
 
 import { getDevice } from '../utils';
 import {
@@ -13,7 +13,7 @@ export type InjectedBaseOptions = BaseOptions & {};
 
 let availableInjectedWallets: InjectedWalletModule[] | undefined;
 
-const getAvailableInjectedWallets = () => {
+const getAvailableInjectedWallets = (): null | InjectedWalletModule[] => {
   if (!availableInjectedWallets) {
     availableInjectedWallets = injectedModule({})({
       device: getDevice() as any,
@@ -35,7 +35,7 @@ abstract class Web3OnboardInjectedConnectorBase<
     this.walletModule = module;
     this.name = module.label;
 
-    if (getAvailableInjectedWallets().find((w) => w.label === module.label)) {
+    if (getAvailableInjectedWallets()?.find((w) => w.label === module.label)) {
       this.available = true;
     }
   }
@@ -46,7 +46,7 @@ abstract class Web3OnboardInjectedConnectorBase<
 
   getWalletModule(): InjectedWalletModule {
     if (!this.walletModule) {
-      const mod = this.selectModule(injectedModuleWallets);
+      const mod = this.selectModule(injectedModuleWallets.default);
 
       if (!mod) {
         debugger;

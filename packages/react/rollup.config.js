@@ -43,18 +43,12 @@ export default [
   },
   {
     input: './src/index.ts',
-    output: [
-      {
-        file: 'dist/index.cjs',
-        format: 'cjs',
-        sourcemap: true,
-      },
-      {
-        file: packageJson.module,
-        format: 'esm',
-        sourcemap: true,
-      },
-    ],
+    output: {
+      file: packageJson.module,
+      format: 'esm',
+      sourcemap: true,
+      inlineDynamicImports: true,
+    },
     plugins: [
       peerDepsExternal(),
       resolve(),

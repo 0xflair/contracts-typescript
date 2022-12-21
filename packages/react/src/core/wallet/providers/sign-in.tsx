@@ -13,8 +13,8 @@ export type SignInProviderProps = {
   storageKey?: string;
 };
 
-const domain = window.location.host;
-const origin = window.location.origin;
+const domain = typeof window !== 'undefined' ? window?.location?.host : '';
+const origin = typeof window !== 'undefined' ? window.location.origin : '';
 
 export const SIWE_DEFAULT_MESSAGE_STATEMENT =
   'I agree to sign-in with this wallet and accept terms of service.';
