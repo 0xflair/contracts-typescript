@@ -16,7 +16,7 @@ type Props = PropsWithChildren<
 export const TieredSalesIfNotSoldOut = ({
   as,
   tierId,
-  loadingMask = <>...</>,
+  loadingMask,
   children,
   ...attributes
 }: Props) => {
@@ -54,7 +54,7 @@ export const TieredSalesIfNotSoldOut = ({
       isLoading &&
       (maxAllocation?.data === undefined || totalMinted?.data === undefined) ? (
         <>{loadingMask}</>
-      ) : isSoldOut === false ? (
+      ) : !isSoldOut ? (
         children
       ) : null}
     </Component>
