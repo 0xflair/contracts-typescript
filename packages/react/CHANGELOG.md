@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.5 (2022-12-21)
+
+
+### Bug Fixes
+
+* add missing variable ([b7d228b](https://github.com/flair-sdk/typescript/commit/b7d228bdec74bd048501c4a519cb5458e4ea1c3e))
+
+
+
+
+
 ## 2.74.4 (2022-12-21)
 
 
