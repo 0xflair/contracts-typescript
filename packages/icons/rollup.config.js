@@ -12,7 +12,7 @@ export default [
     input: './build/index.ts',
     output: [
       {
-        file: 'dist/index.cjs',
+        file: packageJson.main,
         format: 'cjs',
         sourcemap: true,
       },
