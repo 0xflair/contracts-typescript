@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.11 (2022-12-21)
+
+
+### Bug Fixes
+
+* consider all token types tiered sales configs ([3f1df41](https://github.com/flair-sdk/typescript/commit/3f1df4104bbfcbaf844afa41df7b4e8a1555f6c7))
+
+
+
+
+
 ## 2.74.10 (2022-12-21)
 
 
