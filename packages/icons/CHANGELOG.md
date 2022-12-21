@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.12 (2022-12-21)
+
+
+### Bug Fixes
+
+* persist last web3auth config on local storage ([2cb95ea](https://github.com/flair-sdk/typescript/commit/2cb95eaaa5b23a05a0ef4f3b5bb0bc132885b82d))
+
+
+
+
+
 ## 2.74.11 (2022-12-21)
 
 

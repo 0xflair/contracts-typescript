@@ -3,7 +3,7 @@
     "packages/*",
     "src"
   ],
-  "version": "2.74.11",
+  "version": "2.74.12",
   "command": {
     "version": {
       "ignoreChanges": [
