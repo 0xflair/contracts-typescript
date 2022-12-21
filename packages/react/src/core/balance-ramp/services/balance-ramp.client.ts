@@ -580,7 +580,7 @@ export class BalanceRampClient {
             width: 100%;
             height: 100%;
             z-index: 9999;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(107, 114, 128, 0.5);
             transition-property: all;
             transition-duration: 300ms;
             opacity: 0;
@@ -597,6 +597,8 @@ export class BalanceRampClient {
             background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 10%), 0 8px 10px -6px rgb(0 0 0 / 10%);
+            border: 1px solid rgba(107, 114, 128, 0.5);
         }
         .balance-ramp-modal-content iframe {
             width: 100%;
