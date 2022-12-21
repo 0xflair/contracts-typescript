@@ -9,12 +9,14 @@ import { useTieredSalesContext } from '../providers/TieredSalesProvider';
 type Props = PropsWithChildren<
   BareComponentProps & {
     tierId?: number;
+    loadingMask?: React.ReactNode;
   }
 >;
 
 export const TieredSalesIfSoldOut = ({
   as,
   tierId,
+  loadingMask = <>...</>,
   children,
   ...attributes
 }: Props) => {
@@ -35,10 +37,7 @@ export const TieredSalesIfSoldOut = ({
   });
 
   const isSoldOut =
-    totalMinted?.data &&
-    !totalMinted.isLoading &&
-    maxAllocation?.data &&
-    !maxAllocation.isLoading
+    maxAllocation?.data && totalMinted?.data
       ? BigNumber.from(totalMinted?.data).gte(
           BigNumber.from(maxAllocation?.data),
         )
@@ -47,5 +46,17 @@ export const TieredSalesIfSoldOut = ({
   const Component =
     as || (attributes.className || attributes.style ? 'span' : Fragment);
 
-  return <Component {...attributes}>{isSoldOut ? children : null}</Component>;
+  const isLoading = totalMinted.isLoading || maxAllocation.isLoading;
+
+  return (
+    <Component {...attributes}>
+      {loadingMask &&
+      isLoading &&
+      (maxAllocation?.data === undefined || totalMinted?.data === undefined) ? (
+        <>{loadingMask}</>
+      ) : isSoldOut === true ? (
+        children
+      ) : null}
+    </Component>
+  );
 };
