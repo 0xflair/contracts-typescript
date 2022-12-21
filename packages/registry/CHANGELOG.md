@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.10 (2022-12-21)
+
+
+### Bug Fixes
+
+* consider contract tiers when rendering + hide non-on-chain tiers ([361cf10](https://github.com/flair-sdk/typescript/commit/361cf1054adc3cece7885fdceeff099934a51821))
+
+
+
+
+
 ## 2.74.9 (2022-12-21)
 
 
