@@ -182,31 +182,55 @@ export const TieredSalesProvider = ({
   // Grab off-chain only tier values (metadataUri) from configValues or diamondConfigValues
   const configValuesTierIds = Object.keys(configValuesTiers || {});
   const diamondConfigTierIds = Object.keys(diamondConfigTiers || {});
-  const tierIds = [
-    ...new Set([...configValuesTierIds, ...diamondConfigTierIds]),
-  ];
-  const tiers: TiersDictionary = tierIds.reduce((acc, tierId) => {
-    const tier = {
-      ...configValuesTiers?.[tierId],
-      ...diamondConfigTiers?.[tierId],
-      ...contractTiers?.[tierId],
-      metadataUri:
-        configValuesTiers?.[tierId]?.metadataUri ||
-        diamondConfigTiers?.[tierId]?.metadataUri,
-      hideTierForUsers:
-        configValuesTiers?.[tierId]?.hideTierForUsers ||
-        diamondConfigTiers?.[tierId]?.hideTierForUsers,
-    };
+  const contractTierIds = Object.keys(contractTiers || {});
+  const tierIds = useMemo(
+    () => [
+      ...new Set([
+        ...configValuesTierIds,
+        ...diamondConfigTierIds,
+        ...contractTierIds,
+      ]),
+    ],
+    [configValuesTierIds, contractTierIds, diamondConfigTierIds],
+  );
+  const tiers: TiersDictionary = useMemo(
+    () =>
+      tierIds.reduce((acc, tierId) => {
+        const tier = {
+          ...configValuesTiers?.[tierId],
+          ...diamondConfigTiers?.[tierId],
+          ...contractTiers?.[tierId],
+          metadataUri:
+            configValuesTiers?.[tierId]?.metadataUri ||
+            diamondConfigTiers?.[tierId]?.metadataUri,
+          hideTierForUsers:
+            configValuesTiers?.[tierId]?.hideTierForUsers ||
+            diamondConfigTiers?.[tierId]?.hideTierForUsers,
+        };
 
-    if (tier?.hideTierForUsers) {
-      return acc;
-    }
+        if (
+          // If tier is intentionally hidden
+          tier?.hideTierForUsers ||
+          // Or it does not really exist on the contract
+          (contractTiers && contractTierIds.length && !contractTiers[tierId])
+        ) {
+          // ...ignore including the tier
+          return acc;
+        }
 
-    return {
-      ...acc,
-      [tierId]: tier,
-    };
-  }, {});
+        return {
+          ...acc,
+          [tierId]: tier,
+        };
+      }, {}),
+    [
+      configValuesTiers,
+      contractTierIds.length,
+      contractTiers,
+      diamondConfigTiers,
+      tierIds,
+    ],
+  );
   const currentTierConfig =
     currentTierId !== undefined ? tiers[currentTierId.toString()] : undefined;
 
