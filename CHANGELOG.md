@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.6 (2022-12-21)
+
+
+### Bug Fixes
+
+* remove relay buffer for gas limit to be done on backend ([c2ca413](https://github.com/flair-sdk/typescript/commit/c2ca413bfad236c06af7b49cdd9684595fa4abde))
+
+
+
+
+
 ## 2.74.5 (2022-12-21)
 
 
