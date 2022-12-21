@@ -174,10 +174,16 @@ export const TieredSalesProvider = ({
     data: { diamond, configValues },
   } = useDiamondContext();
 
-  const diamondConfigTiers = diamond?.config?.['admin:tiered-sales']
-    ?.tiers as Record<string, Tier>;
-  const configValuesTiers = configValues?.['admin:tiered-sales']
-    ?.tiers as Record<string, Tier>;
+  const diamondConfigTiers = (diamond?.config?.['admin:erc1155-tiered-sales']
+    ?.tiers ||
+    diamond?.config?.['admin:erc721-tiered-sales']?.tiers ||
+    diamond?.config?.['admin:erc20-tiered-sales']?.tiers ||
+    diamond?.config?.['admin:tiered-sales']?.tiers) as Record<string, Tier>;
+  const configValuesTiers = (configValues?.['admin:erc1155-tiered-sales']
+    ?.tiers ||
+    configValues?.['admin:erc721-tiered-sales']?.tiers ||
+    configValues?.['admin:erc20-tiered-sales']?.tiers ||
+    configValues?.['admin:tiered-sales']?.tiers) as Record<string, Tier>;
 
   // Grab off-chain only tier values (metadataUri) from configValues or diamondConfigValues
   const configValuesTierIds = Object.keys(configValuesTiers || {});
