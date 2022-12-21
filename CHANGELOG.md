@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.4 (2022-12-21)
+
+
+### Bug Fixes
+
+* various issues in next.js environment ([#26](https://github.com/flair-sdk/typescript/issues/26)) ([448ec9b](https://github.com/flair-sdk/typescript/commit/448ec9b6636eafd4107dee3738636af63036e42f))
+
+
+
+
+
 ## 2.74.3 (2022-12-20)
 
 
