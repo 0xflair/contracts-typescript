@@ -242,7 +242,7 @@ export class BalanceRampClient {
     }
 
     // Add 150k buffer for relay overhead:
-    estimatedGasLimit = estimatedGasLimit.add(150_000);
+    // estimatedGasLimit = estimatedGasLimit.add(150_000);
 
     return estimatedGasLimit;
   }
