@@ -79,7 +79,7 @@ export class Web3AuthConnector extends Connector {
       storageKey: config.options.storageKey,
       chainConfig: {
         // @ts-ignore
-        chainNamespace: CHAIN_NAMESPACES.EIP155,
+        chainNamespace: web3authBase.CHAIN_NAMESPACES.EIP155,
         ...finalChainConfig,
       },
     });
