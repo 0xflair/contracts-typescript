@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.16 (2022-12-22)
+
+
+### Bug Fixes
+
+* ignore if initial local storage value is corrupted ([1f99cf5](https://github.com/flair-sdk/typescript/commit/1f99cf5ed46a912a6c2bcdcea6a94022717831ee))
+
+
+
+
+
 ## 2.74.15 (2022-12-22)
 
 
