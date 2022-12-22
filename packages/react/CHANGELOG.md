@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.17 (2022-12-22)
+
+**Note:** Version bump only for package @flair-sdk/react
+
+
+
+
+
 ## 2.74.16 (2022-12-22)
 
 
