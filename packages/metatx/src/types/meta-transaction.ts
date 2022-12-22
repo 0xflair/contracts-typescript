@@ -39,38 +39,56 @@ export type CreatedMetaTransactionRequiredFields = {
   createdAt: number;
 };
 
-export type QueuedMetaTransactionRequiredFields = {
+export type QueuedMetaTransactionRequiredFields = Omit<
+  CreatedMetaTransactionRequiredFields,
+  'state'
+> & {
   state: MetaTransactionState.QUEUED;
 
   queuedAt: number;
 };
 
-export type AttemptedMetaTransactionRequiredFields = {
+export type AttemptedMetaTransactionRequiredFields = Omit<
+  QueuedMetaTransactionRequiredFields,
+  'state'
+> & {
   state: MetaTransactionState.ATTEMPTED;
 
   attemptedAt: number;
 };
 
-export type SubmittedMetaTransactionRequiredFields = {
+export type SubmittedMetaTransactionRequiredFields = Omit<
+  AttemptedMetaTransactionRequiredFields,
+  'state'
+> & {
   state: MetaTransactionState.SUBMITTED;
 
   submittedAt: number;
 };
 
-export type ProcessedMetaTransactionRequiredFields = {
+export type ProcessedMetaTransactionRequiredFields = Omit<
+  SubmittedMetaTransactionRequiredFields,
+  'state'
+> & {
   state: MetaTransactionState.PROCESSED;
 
   txHash: string;
   processedAt: number;
 };
 
-export type WaitingMetaTransactionRequiredFields = {
+export type WaitingMetaTransactionRequiredFields = Omit<
+  ProcessedMetaTransactionRequiredFields,
+  'state'
+> & {
   state: MetaTransactionState.WAITING;
 
   waitAt: number;
 };
 
-export type MinedMetaTransactionRequiredFields = {
+export type MinedMetaTransactionRequiredFields = Omit<
+  ProcessedMetaTransactionRequiredFields,
+  'state'
+> & {
   state: MetaTransactionState.MINED;
 
   minedAt: number;
@@ -78,7 +96,10 @@ export type MinedMetaTransactionRequiredFields = {
   miningError: null;
 };
 
-export type RevertedMetaTransactionRequiredFields = {
+export type RevertedMetaTransactionRequiredFields = Omit<
+  ProcessedMetaTransactionRequiredFields,
+  'state'
+> & {
   state: MetaTransactionState.REVERTED;
 
   minedAt: number;
@@ -86,7 +107,10 @@ export type RevertedMetaTransactionRequiredFields = {
   miningError: StandardError;
 };
 
-export type FailedMetaTransactionRequiredFields = {
+export type FailedMetaTransactionRequiredFields = Omit<
+  CreatedMetaTransactionRequiredFields,
+  'state'
+> & {
   state: MetaTransactionState.FAILED;
 
   lastError: StandardError;
