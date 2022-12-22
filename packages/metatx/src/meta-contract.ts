@@ -33,9 +33,9 @@ function buildMetaTransaction(
 export class MetaContract<
   T extends EthersContract = EthersContract,
 > extends EthersContract {
-  readonly metaTransaction:
-    | { [name: string]: ContractFunction<any> }
-    | T['functions'];
+  readonly metaTransaction: Partial<
+    Record<keyof T['functions'], ContractFunction<MetaTransaction>>
+  >;
 
   constructor(
     metaTransactionsClient: MetaTransactionsClient,
