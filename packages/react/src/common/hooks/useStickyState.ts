@@ -13,7 +13,14 @@ export const useStickyState = <S>(
     const stickyValue = supportsLocalStorage
       ? window?.localStorage.getItem(key)
       : null;
-    return stickyValue !== null ? JSON.parse(stickyValue) : initialState;
+
+    try {
+      return stickyValue !== null && stickyValue !== undefined
+        ? JSON.parse(stickyValue)
+        : initialState;
+    } catch (error) {
+      return initialState;
+    }
   });
 
   React.useEffect(() => {
