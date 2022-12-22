@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.15 (2022-12-22)
+
+
+### Bug Fixes
+
+* remove button with dialog from sdk ([4e472ca](https://github.com/flair-sdk/typescript/commit/4e472ca45242c49818bb000a0fa3b326a1c5afe6))
+
+
+
+
+
 ## 2.74.14 (2022-12-22)
 
 **Note:** Version bump only for package @flair-sdk/react
