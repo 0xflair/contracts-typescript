@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/metatx",
-  "version": "2.74.13",
+  "version": "2.74.14",
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
@@ -61,7 +61,7 @@
     }
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.74.13",
+    "@flair-sdk/common": "^2.74.14",
     "ethers": ">=5.5.1",
     "got": "^11.8.5",
     "randombytes": "^2.1.0",
