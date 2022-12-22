@@ -8,13 +8,13 @@
     "type": "git",
     "url": "git+https://github.com/flair-sdk/typescript.git"
   },
-  "type": "module",
   "main": "dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
       "require": "./dist/index.js",
-      "default": "./src/index.js"
+      "default": "./src/index.js",
+      "types": "./dist/types.d.ts"
     },
     "./package.json": "./package.json"
   },
@@ -31,23 +31,14 @@
     "build": "rollup -c"
   },
   "peerDependencies": {
-    "@ethersproject/providers": "*",
-    "@wagmi/core": "*",
-    "ethers": "*"
+    "@wagmi/core": "*"
   },
   "peerDependenciesMeta": {
     "@wagmi/core": {
       "optional": true
-    },
-    "ethers": {
-      "optional": true
-    },
-    "@ethersproject/providers": {
-      "optional": true
     }
   },
   "dependencies": {
-    "@wagmi/chains": "^0.1.3",
     "@wagmi/core": "^0.8.2"
   }
 }

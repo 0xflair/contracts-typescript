@@ -3,7 +3,7 @@ import {
   InfuraProvider,
   JsonRpcBatchProvider,
 } from '@ethersproject/providers';
-import { FLAIR_CHAINS } from '@flair-sdk/common';
+import { FLAIR_CHAINS } from '@flair-sdk/chains';
 import {
   DiscordWeb3AuthConnector,
   GithubWeb3AuthConnector,

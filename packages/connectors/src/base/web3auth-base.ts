@@ -1,4 +1,5 @@
 import { CustodyType } from '@flair-sdk/common';
+import type { Chain } from '@wagmi/core';
 import {
   normalizeChainId,
   ProviderRpcError,
@@ -53,7 +54,7 @@ export abstract class Web3AuthBaseConnector
     });
   }
 
-  async switchChain(chainId: number) {
+  async switchChain(chainId: number): Promise<Chain> {
     const id = normalizeChainId(chainId);
 
     try {

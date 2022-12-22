@@ -12,7 +12,6 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "type": "module",
   "main": "dist/index.js",
   "exports": {
     ".": {

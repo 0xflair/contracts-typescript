@@ -1,4 +1,5 @@
-import { classNames, FLAIR_CHAINS } from '@flair-sdk/common';
+import { FLAIR_CHAINS } from '@flair-sdk/chains';
+import { classNames } from '@flair-sdk/common';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid/esm/index.js';
 import { Chain } from '@wagmi/chains';

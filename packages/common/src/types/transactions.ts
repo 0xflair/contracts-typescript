@@ -1,4 +1,4 @@
-import { TransactionReceipt } from '@ethersproject/providers';
+import type { TransactionReceipt } from '@ethersproject/providers';
 import type { SendTransactionResult } from '@wagmi/core';
 
 export type TransactionData = {

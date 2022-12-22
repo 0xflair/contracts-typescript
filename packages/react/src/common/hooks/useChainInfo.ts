@@ -1,4 +1,4 @@
-import { FLAIR_CHAINS } from '@flair-sdk/common';
+import { FLAIR_CHAINS } from '@flair-sdk/chains';
 import { Chain } from '@wagmi/chains';
 
 export const useChainInfo = (chainId?: number) => {

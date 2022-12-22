@@ -12,13 +12,13 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "type": "module",
   "main": "dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
       "require": "./dist/index.js",
-      "default": "./src/index.js"
+      "default": "./src/index.js",
+      "types": "./dist/types.d.ts"
     },
     "./package.json": "./package.json"
   },

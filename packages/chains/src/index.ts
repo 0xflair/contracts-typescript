@@ -1,5 +1,5 @@
 import * as allChains from '@wagmi/chains';
-import { Chain } from '@wagmi/core';
+import type { Chain } from '@wagmi/core';
 
 const newChains: Chain[] = [
   {
