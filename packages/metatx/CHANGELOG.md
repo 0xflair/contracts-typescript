@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.20 (2022-12-23)
+
+
+### Bug Fixes
+
+* auto connect web3auth connectors for social logins ([#28](https://github.com/flair-sdk/typescript/issues/28)) ([6b4cbe2](https://github.com/flair-sdk/typescript/commit/6b4cbe208a13f7a6b643fb36fc871908925b3a43))
+
+
+
+
+
 ## 2.74.19 (2022-12-23)
 
 
