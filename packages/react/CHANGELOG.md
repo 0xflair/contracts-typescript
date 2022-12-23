@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.18 (2022-12-23)
+
+
+### Bug Fixes
+
+* allow explicitly disabling web3auth ([c3e3537](https://github.com/flair-sdk/typescript/commit/c3e3537d65932e294549a3bd3243ca3c3b97d946))
+
+
+
+
+
 ## 2.74.17 (2022-12-22)
 
 **Note:** Version bump only for package @flair-sdk/react
