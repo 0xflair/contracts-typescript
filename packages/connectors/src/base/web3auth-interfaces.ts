@@ -72,6 +72,11 @@ export interface Web3AuthOptions extends OpenLoginOptions {
   clientId: string;
 
   /**
+   * Disable web3auth modal
+   */
+  disabled?: boolean;
+
+  /**
    * ChainId in hex/number that you want to connect with.
    */
   chainId?: string;

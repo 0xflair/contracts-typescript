@@ -189,7 +189,9 @@ export const WalletProvider = ({
       appLogo: 'https://app.flair.dev/logo-light-filled.png',
     };
 
-    const web3AuthConfigured = Boolean(web3AuthOptions?.clientId);
+    const web3AuthConfigured = Boolean(
+      web3AuthOptions?.clientId && !web3AuthOptions?.disabled,
+    );
     const finalWeb3AuthOptions: Web3AuthOptionsOriginal = deepmerge(
       web3AuthOptions || {},
       {
