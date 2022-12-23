@@ -3,7 +3,6 @@ import { useAccount } from 'wagmi';
 import { IfChain } from '../../../../core';
 import { Errors, Spinner, TransactionLink } from '../../../../core/ui';
 import { useTieredSalesContext } from '../providers';
-import { TieredSalesIfWalletCanMint } from './TieredSalesIfWalletCanMint';
 
 type Props = {
   className?: string;

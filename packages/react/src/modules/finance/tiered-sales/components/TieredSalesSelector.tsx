@@ -10,7 +10,6 @@ import {
   CryptoSymbol,
   CryptoValue,
   IfWalletConnected,
-  useDiamondContext,
   useRemoteJsonReader,
 } from '../../../../core';
 import { NftTokenMetadata, useContractSymbol } from '../../../token';

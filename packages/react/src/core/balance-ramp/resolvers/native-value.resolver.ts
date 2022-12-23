@@ -1,5 +1,4 @@
 import { BigNumber } from 'ethers';
-import { keccak256 } from 'ethers/lib/utils.js';
 
 import { BalanceResolver } from '../types';
 import { calculateUniqueTransactionIdentifier } from '../utils';

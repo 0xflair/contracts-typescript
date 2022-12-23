@@ -11,4 +11,3 @@ export * from './github';
 export * from './discord';
 export * from './twitch';
 export * from './twitter';
-export * from './web3auth-modal';
