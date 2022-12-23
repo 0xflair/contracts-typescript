@@ -21,6 +21,7 @@ import {
 import deepmerge from 'deepmerge';
 import { providers } from 'ethers';
 import { hexlify } from 'ethers/lib/utils.js';
+import _ from 'lodash';
 import React, {
   ReactNode,
   useCallback,
@@ -54,6 +55,7 @@ export type WalletProviderProps = {
   injectStyles?: boolean;
   tryAutoConnect?: boolean;
   web3AuthOptions?: Web3AuthOptions;
+  instanceId?: string;
 };
 
 const {
@@ -168,19 +170,20 @@ export const WalletProvider = ({
   tryAutoConnect = true,
   preferredChainId: preferredChainId_,
   web3AuthOptions: web3AuthOptions_,
+  instanceId = 'default',
 }: WalletProviderProps) => {
   const darkMode = isDarkMode();
 
   const [web3AuthOptions, setWeb3AuthOptions] = useStickyState<
     Web3AuthOptions | undefined
-  >(web3AuthOptions_, 'flair.web3AuthOptions');
+  >(web3AuthOptions_, `flair.${instanceId}.web3AuthOptions`);
 
   const [preferredChainId, setPreferredChainId] = useStickyState<
     number | undefined
-  >(preferredChainId_, 'flair.preferredChainId');
+  >(preferredChainId_, `flair.${instanceId}.preferredChainId`);
   const [allowedNetworks, setAllowedNetworks] = useStickyState<AllowedNetworks>(
     'ALL',
-    'flair.allowedNetworks',
+    `flair.${instanceId}.allowedNetworks`,
   );
 
   const connectors = useCallback(() => {
@@ -320,6 +323,13 @@ export const WalletProvider = ({
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connectorsList]);
+
+  useEffect(() => {
+    if (!_.isEqual(web3AuthOptions_, web3AuthOptions)) {
+      setWeb3AuthOptions(web3AuthOptions_);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!injectStyles) {
