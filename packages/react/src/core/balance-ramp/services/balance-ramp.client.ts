@@ -20,6 +20,7 @@ export class BalanceRampClient {
   private iframe!: HTMLIFrameElement;
   private modalOverlay!: HTMLDivElement;
   private modalContent!: HTMLDivElement;
+  private intervalRequest!: NodeJS.Timeout;
 
   constructor(private readonly config: BalanceRampConfig) {
     this.injectModal();
@@ -517,7 +518,11 @@ export class BalanceRampClient {
     this.iframe.src = url;
     this.show();
 
-    const intervalRequest = setInterval(() => {
+    try {
+      clearInterval(this.intervalRequest);
+    } catch (e) {}
+
+    this.intervalRequest = setInterval(() => {
       this.iframe?.contentWindow?.postMessage(
         {
           flair: true,
@@ -531,9 +536,14 @@ export class BalanceRampClient {
     const handleInitialized = (event: any) => {
       if (
         event?.data?.flair &&
-        event?.data?.type === 'BalanceRampInitialized'
+        [
+          'BalanceRampSuccess',
+          'BalanceRampCancelled',
+          'BalanceRampFailure',
+          'BalanceRampTimeout',
+        ].includes(event?.data?.type)
       ) {
-        clearInterval(intervalRequest);
+        clearInterval(this.intervalRequest);
         window.removeEventListener('message', handleInitialized);
       }
     };
