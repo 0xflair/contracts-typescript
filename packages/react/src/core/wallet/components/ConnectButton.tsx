@@ -89,6 +89,10 @@ export const ConnectButton = ({
 
       <Modal
         ariaHideApp={false}
+        shouldCloseOnEsc={true}
+        shouldCloseOnOverlayClick={true}
+        shouldReturnFocusAfterClose={true}
+        shouldFocusAfterRender={true}
         closeTimeoutMS={150}
         isOpen={dialogOpen}
         onRequestClose={() => setDialogOpen(false)}

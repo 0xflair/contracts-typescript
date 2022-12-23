@@ -1,13 +1,6 @@
 import { CustodyType } from '@flair-sdk/common';
 import type { Chain } from '@wagmi/core';
-import {
-  normalizeChainId,
-  ProviderRpcError,
-  SwitchChainError,
-  UserRejectedRequestError,
-} from '@wagmi/core';
-import * as web3authBase from '@web3auth/base';
-import { hexlify } from 'ethers/lib/utils.js';
+import { SwitchChainError } from '@wagmi/core';
 
 import { ExtendedConnector } from './extended-connector';
 import { Web3AuthConnector } from './web3auth-core';
@@ -22,93 +15,48 @@ export abstract class Web3AuthBaseConnector
 
   async connect() {
     return new Promise<any>(async (resolve, reject) => {
-      try {
-        await this.disconnect();
-      } catch (e) {}
+      await this.initIfNotYet();
 
       try {
-        if (
-          this.web3AuthInstance?.status !== web3authBase.ADAPTER_STATUS.READY
-        ) {
-          await this.web3AuthInstance?.init();
-        }
-      } catch (e) {}
-
-      return this.web3AuthInstance
-        ?.connectTo('openlogin', {
-          loginProvider: this.loginProvider,
-        })
-        .then(async (provider) => {
+        if (this.socialLoginAdapter.status === 'connected') {
           const account = await this.getAccount();
           const id = await this.getChainId();
 
-          resolve({
+          const response = {
             account,
-            provider,
+            provider: await this.getProvider(),
             chain: { id, unsupported: await this.isChainUnsupported(id) },
+          };
+
+          return resolve(response);
+        }
+
+        return this.web3AuthInstance
+          ?.connectTo('openlogin', {
+            loginProvider: this.loginProvider,
+          })
+          .then(async (provider) => {
+            const account = await this.getAccount();
+            const id = await this.getChainId();
+
+            resolve({
+              account,
+              provider,
+              chain: { id, unsupported: await this.isChainUnsupported(id) },
+            });
+          })
+          .catch((error) => {
+            reject(error);
           });
-        })
-        .catch((error) => {
-          reject(error);
-        });
+      } catch (e) {
+        reject(e);
+      }
     });
   }
 
   async switchChain(chainId: number): Promise<Chain> {
-    const id = normalizeChainId(chainId);
-
-    try {
-      try {
-        await this.disconnect();
-      } catch (e) {}
-
-      const tmp = new Web3AuthConnector({
-        chains: this.chains,
-        options: {
-          ...this.options,
-          chainId: hexlify(id).toString(),
-        },
-      });
-
-      this.web3AuthInstance = tmp.web3AuthInstance;
-
-      // @ts-ignore
-      this.socialLoginAdapter = tmp.socialLoginAdapter;
-
-      // @ts-ignore
-      this.loginModal = tmp.loginModal;
-
-      // @ts-ignore
-      this.subscribeToLoginModalEvents();
-
-      await this.connect();
-
-      this.onChainChanged(id);
-      const provider = await this.getProvider();
-
-      if (provider?.on) {
-        provider.on('accountsChanged', this.onAccountsChanged.bind(this));
-        //provider.on('chainChanged', this.onChainChanged.bind(this));
-        provider.on('disconnect', this.onDisconnect.bind(this));
-      }
-
-      return (
-        this.chains.find((x) => x.id === chainId) ?? {
-          id: chainId,
-          name: `Chain ${id}`,
-          network: `${id}`,
-          rpcUrls: { default: { http: [''] } },
-          nativeCurrency: { name: 'Token', symbol: 'Token', decimals: 18 },
-        }
-      );
-    } catch (error) {
-      const message =
-        typeof error === 'string'
-          ? error
-          : (error as ProviderRpcError)?.message;
-      if (/user rejected request/i.test(message))
-        throw new UserRejectedRequestError(error);
-      throw new SwitchChainError(error);
-    }
+    throw new SwitchChainError(
+      `Cannot switch chain for Web3Auth ${this.name}, must provide preferredChainId via props to <WalletProvider preferredChainId={${chainId}}> or <FlairProvider wallet={{ preferredChainId: ${chainId} }}>`,
+    );
   }
 }

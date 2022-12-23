@@ -2,7 +2,6 @@ import {
   TransactionRequest,
   TransactionResponse,
 } from '@ethersproject/providers';
-import { Environment } from '@flair-sdk/common';
 import axios from 'axios';
 import { BigNumber, BigNumberish, constants, ethers, Signer } from 'ethers';
 import { Deferrable } from 'ethers/lib/utils.js';

@@ -1,12 +1,12 @@
 import { classNames } from '@flair-sdk/common';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid/esm/index.js';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { useCopyToClipboard } from 'react-use';
 import { useAccount, useBalance, useNetwork } from 'wagmi';
 
 import { BareComponentProps } from '../../../common';
-import { CryptoUnits, CryptoValue } from '../../crypto-currency';
+import { CryptoValue } from '../../crypto-currency';
 import { DisconnectButton } from './DisconnectButton';
 import { WalletComponentWrapper } from './WalletComponentWrapper';
 import { WalletProfile, WalletProfileProps } from './WalletProfile';

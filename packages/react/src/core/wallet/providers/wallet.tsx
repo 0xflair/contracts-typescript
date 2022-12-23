@@ -39,8 +39,11 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { useStickyState } from '../../../common/hooks/useStickyState.js';
 import { isDarkMode } from '../../../common/utils/dark-mode';
 import stylesheet from '../../../index.css';
-import { wrapWagmiClient } from '../../balance-ramp';
-import { FLAIR_ALCHEMY_API_KEY, FLAIR_INFURA_PROJECT_ID } from '../constants';
+import { wrapWagmiClient } from '../../balance-ramp/index.js';
+import {
+  FLAIR_ALCHEMY_API_KEY,
+  FLAIR_INFURA_PROJECT_ID,
+} from '../constants/index.js';
 
 export type Web3AuthOptions = Required<
   Partial<Web3AuthOptionsOriginal>,
