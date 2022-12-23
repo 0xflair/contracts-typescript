@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.74.19 (2022-12-23)
+
+
+### Bug Fixes
+
+* allow setting unique instance id ([315f5b4](https://github.com/flair-sdk/typescript/commit/315f5b437aba5d0a87c69559fa72dda5b23b4097))
+
+
+
+
+
 ## 2.74.18 (2022-12-23)
 
 
