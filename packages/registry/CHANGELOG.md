@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.76.0 (2022-12-24)
+
+
+### Features
+
+* add chain and currency consts ([90b577e](https://github.com/flair-sdk/typescript/commit/90b577e9f8e885106d506ab482db34a0e962076d))
+
+
+
+
+
 ## 2.75.2 (2022-12-24)
 
 
