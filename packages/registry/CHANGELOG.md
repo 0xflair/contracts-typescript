@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.76.1 (2022-12-24)
+
+
+### Bug Fixes
+
+* move currencies to common package ([4f8375d](https://github.com/flair-sdk/typescript/commit/4f8375d1d6c14a1c0549e95bcce28c89822e79a7))
+
+
+
+
+
 # 2.76.0 (2022-12-24)
 
 
