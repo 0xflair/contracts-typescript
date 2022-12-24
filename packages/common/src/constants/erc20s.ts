@@ -5,6 +5,7 @@ export const DOLLAR_STABLECOIN_SYMBOLS = [
   'USDT',
   'BUSD',
   'USDP',
+  'GoodDollar',
 ];
 
 export const POPULAR_ERC20_TOKENS = {
@@ -143,6 +144,32 @@ export const POPULAR_ERC20_TOKENS = {
         '0x82af49447d8a07e3bd95bd0d56f35241523fbab1'.toLowerCase(),
       coinMarketCapSymbol: 'ETH',
       coingeckoId: 'ethereum',
+    },
+  ],
+  // Arbitrum Nova
+  42170: [
+    {
+      symbol: 'USDC',
+      contractAddress:
+        '0x750ba8b76187092B0D1E87E28daaf484d1b5273b'.toLowerCase(),
+    },
+    {
+      symbol: 'DAI',
+      contractAddress:
+        '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1'.toLowerCase(),
+    },
+  ],
+  // Fuse
+  122: [
+    {
+      symbol: 'GoodDollar',
+      contractAddress:
+        '0x495d133B938596C9984d462F007B676bDc57eCEC'.toLowerCase(),
+    },
+    {
+      symbol: 'USDC',
+      contractAddress:
+        '0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5'.toLowerCase(),
     },
   ],
 };
