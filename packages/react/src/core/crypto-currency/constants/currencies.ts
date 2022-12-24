@@ -63,4 +63,16 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     icon: 'BNB',
     coinGeckoId: 'binancecoin',
   },
+  {
+    symbol: 'FUSE',
+    name: 'FUSE',
+    icon: 'FUSE',
+    coinGeckoId: 'fuse',
+  },
+  {
+    symbol: 'TLOS',
+    name: 'TELOS',
+    icon: 'TLOS',
+    coinGeckoId: 'telos',
+  },
 ];
