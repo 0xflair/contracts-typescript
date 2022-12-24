@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.75.2 (2022-12-24)
+
+
+### Bug Fixes
+
+* add cmc symbols to currencies ([7926f26](https://github.com/flair-sdk/typescript/commit/7926f26f5f3d96f0a0e48745fb7bb149cd44c7b7))
+
+
+
+
+
 ## 2.75.1 (2022-12-24)
 
 
