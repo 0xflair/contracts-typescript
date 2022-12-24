@@ -1,8 +1,11 @@
+import { ChainId } from '@flair-sdk/common';
+
 export type CryptoSymbol = 'ETH' | 'MATIC' | string;
 
 export type CryptoCurrency = {
   symbol: CryptoSymbol;
   name: string;
+  nativeChainIds?: ChainId[];
   icon?: React.ReactNode;
   coinGeckoId?: string;
   coinMarketCapSymbol?: string;

@@ -1,9 +1,21 @@
+import { ChainId } from '@flair-sdk/common';
+
 import { BaseCurrency, CryptoCurrency } from '../types';
 
 export const KNOWN_BASE_CURRENCIES: BaseCurrency[] = ['USD'];
 
 export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
   {
+    nativeChainIds: [
+      ChainId.ETHEREUM_MAINNET,
+      ChainId.ETHEREUM_GOERLI,
+      ChainId.ETHEREUM_SEPOLIA,
+      ChainId.ARBITRUM_ONE,
+      ChainId.ARBITRUM_NOVA,
+      ChainId.ARBITRUM_GOERLI,
+      ChainId.OPTIMISM,
+      ChainId.OPTIMISM_GOERLI,
+    ],
     symbol: 'ETH',
     name: 'Ethereum',
     icon: 'ETH',
@@ -11,6 +23,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'ETH',
   },
   {
+    nativeChainIds: [ChainId.POLYGON_MATIC, ChainId.POLYGON_MUMBAI],
     symbol: 'MATIC',
     name: 'Matic',
     icon: 'MATIC',
@@ -18,6 +31,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'MATIC',
   },
   {
+    nativeChainIds: [ChainId.AVALANCHE_C_CHAIN, ChainId.AVALANCHE_FUJI_TESTNET],
     symbol: 'AVAX',
     name: 'AVAX',
     icon: 'AVAX',
@@ -25,6 +39,11 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'AVAX',
   },
   {
+    nativeChainIds: [
+      ChainId.NEON_MAINNET,
+      ChainId.NEON_TESTNET,
+      ChainId.NEON_DEVNET,
+    ],
     symbol: 'NEON',
     name: 'NEON',
     icon: 'NEON',
@@ -39,6 +58,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'NEAR',
   },
   {
+    nativeChainIds: [ChainId.FANTOM_MAINNET, ChainId.FANTOM_TESTNET],
     symbol: 'FTM',
     name: 'FTM',
     icon: 'FTM',
@@ -46,6 +66,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'FTM',
   },
   {
+    nativeChainIds: [ChainId.EVMOS_MAINNET, ChainId.EVMOS_TESTNET],
     symbol: 'EVMOS',
     name: 'EVMOS',
     icon: 'EVMOS',
@@ -53,6 +74,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'EVMOS',
   },
   {
+    nativeChainIds: [ChainId.MOONBEAM],
     symbol: 'GLMR',
     name: 'GLMR',
     icon: 'GLMR',
@@ -60,6 +82,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'GLMR',
   },
   {
+    nativeChainIds: [ChainId.MOONRIVER],
     symbol: 'MOVR',
     name: 'MOVR',
     icon: 'MOVR',
@@ -67,6 +90,10 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'MOVR',
   },
   {
+    nativeChainIds: [
+      ChainId.BINANCE_CHAIN_MAINNET,
+      ChainId.BINANCE_CHAIN_TESTNET,
+    ],
     symbol: 'BNB',
     name: 'BNB',
     icon: 'BNB',
@@ -74,6 +101,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'BNB',
   },
   {
+    nativeChainIds: [ChainId.FUSE_MAINNET, ChainId.FUSE_SPARKNET],
     symbol: 'FUSE',
     name: 'FUSE',
     icon: 'FUSE',
@@ -81,6 +109,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'FUSE',
   },
   {
+    nativeChainIds: [ChainId.TELOS_MAINNET, ChainId.TELOS_TESTNET],
     symbol: 'TLOS',
     name: 'TELOS',
     icon: 'TLOS',
@@ -88,6 +117,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'TLOS',
   },
   {
+    nativeChainIds: [ChainId.OKC_MAINNET],
     symbol: 'OKT',
     name: 'OKT',
     icon: 'OKT',
@@ -95,6 +125,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'OKT',
   },
   {
+    nativeChainIds: [ChainId.OASIS_EMERALD_MAINNET],
     symbol: 'ROSE',
     name: 'ROSE',
     icon: 'ROSE',
@@ -102,6 +133,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'ROSE',
   },
   {
+    nativeChainIds: [ChainId.CELO_MAINNET, ChainId.CELO_ALFAJORES],
     symbol: 'CELO',
     name: 'CELO',
     icon: 'CELO',
@@ -109,6 +141,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinMarketCapSymbol: 'CELO',
   },
   {
+    nativeChainIds: [ChainId.CRONOS_MAINNET, ChainId.CRONOS_TESTNET],
     symbol: 'CRO',
     name: 'CRO',
     icon: 'CRO',
