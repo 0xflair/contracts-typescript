@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.75.0 (2022-12-24)
+
+
+### Features
+
+* add popular stable coins on fuse and arbitrum nova ([c0ce196](https://github.com/flair-sdk/typescript/commit/c0ce19605a7dcc25637ff258a39314273533ebc5))
+
+
+
+
+
 ## 2.74.21 (2022-12-23)
 
 
