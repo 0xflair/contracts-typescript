@@ -1,6 +1,9 @@
-import { DOLLAR_STABLECOIN_SYMBOLS } from '@flair-sdk/common';
+import {
+  BaseCurrency,
+  CryptoSymbol,
+  DOLLAR_STABLECOIN_SYMBOLS,
+} from '@flair-sdk/common';
 
-import { BaseCurrency, CryptoSymbol } from '../types';
 import { useCryptoInfo } from './useCryptoInfo';
 import { useCryptoPrice } from './useCryptoPrice';
 

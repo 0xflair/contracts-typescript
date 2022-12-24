@@ -1,4 +1,4 @@
-import { ChainId } from '@flair-sdk/common';
+import { ChainId } from '../constants/chain-id';
 
 export type CryptoSymbol = 'ETH' | 'MATIC' | string;
 

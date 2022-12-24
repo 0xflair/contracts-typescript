@@ -1,7 +1,7 @@
+import { BaseCurrency, CryptoSymbol } from '@flair-sdk/common';
 import { BigNumberish, ethers } from 'ethers';
 
 import { useCryptoPricesContext } from '../providers';
-import { BaseCurrency, CryptoSymbol } from '../types';
 
 type Config = {
   amount?: BigNumberish;

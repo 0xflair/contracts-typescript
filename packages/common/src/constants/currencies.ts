@@ -1,6 +1,5 @@
-import { ChainId } from '@flair-sdk/common';
-
-import { BaseCurrency, CryptoCurrency } from '../types';
+import { BaseCurrency, CryptoCurrency } from '../types/currencies';
+import { ChainId } from './chain-id';
 
 export const KNOWN_BASE_CURRENCIES: BaseCurrency[] = ['USD'];
 

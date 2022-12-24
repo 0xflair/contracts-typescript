@@ -1,4 +1,4 @@
-import { classNames } from '@flair-sdk/common';
+import { classNames, CryptoSymbol } from '@flair-sdk/common';
 import { RadioGroup } from '@headlessui/react';
 import { CheckCircleIcon } from '@heroicons/react/solid/esm/index.js';
 import { Chain } from '@wagmi/chains';
@@ -7,7 +7,6 @@ import { ReactNode, useEffect } from 'react';
 
 import { useChainInfo } from '../../../../common';
 import {
-  CryptoSymbol,
   CryptoValue,
   IfWalletConnected,
   useRemoteJsonReader,

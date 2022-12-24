@@ -1,8 +1,8 @@
+import { CryptoSymbol, CryptoUnits } from '@flair-sdk/common';
 import { BigNumber, BigNumberish, ethers } from 'ethers';
 import { ReactNode, useMemo } from 'react';
 
 import { useCryptoCurrency } from '../../hooks';
-import { CryptoSymbol, CryptoUnits } from '../../types';
 import { CryptoPrice } from '../CryptoPrice/CryptoPrice';
 
 type Props = {

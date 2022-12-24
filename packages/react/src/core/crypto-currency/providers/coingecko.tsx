@@ -1,17 +1,14 @@
-import { DOLLAR_STABLECOIN_SYMBOLS } from '@flair-sdk/common';
-import axios from 'axios';
-import React from 'react';
-
-import {
-  KNOWN_BASE_CURRENCIES,
-  KNOWN_CRYPTO_CURRENCIES,
-} from '../constants/currencies';
 import {
   BaseCurrency,
   CryptoCurrency,
   CryptoPriceDictionary,
   CryptoSymbol,
-} from '../types';
+  DOLLAR_STABLECOIN_SYMBOLS,
+  KNOWN_BASE_CURRENCIES,
+  KNOWN_CRYPTO_CURRENCIES,
+} from '@flair-sdk/common';
+import axios from 'axios';
+import React from 'react';
 
 type PricesDictionariesBySymbol = Record<CryptoSymbol, CryptoPriceDictionary>;
 
