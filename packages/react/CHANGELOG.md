@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.75.1 (2022-12-24)
+
+
+### Bug Fixes
+
+* add fuse and telos to currencies ([de3d518](https://github.com/flair-sdk/typescript/commit/de3d518a36c08005ecea9108f3876fe03e425d5b))
+
+
+
+
+
 # 2.75.0 (2022-12-24)
 
 
