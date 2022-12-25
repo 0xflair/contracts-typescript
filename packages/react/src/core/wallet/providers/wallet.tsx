@@ -3,6 +3,7 @@ import {
   InfuraProvider,
   JsonRpcBatchProvider,
 } from '@ethersproject/providers';
+import { wrapWagmiClient } from '@flair-sdk/balance-ramp';
 import { FLAIR_CHAINS } from '@flair-sdk/chains';
 import {
   DiscordWeb3AuthConnector,
@@ -36,10 +37,9 @@ import { InjectedConnector } from 'wagmi/connectors/injected';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
-import { useStickyState } from '../../../common/hooks/useStickyState.js';
+import { useStickyState } from '../../../common/hooks/useStickyState';
 import { isDarkMode } from '../../../common/utils/dark-mode';
 import stylesheet from '../../../index.css';
-import { wrapWagmiClient } from '../../balance-ramp/index.js';
 import {
   FLAIR_ALCHEMY_API_KEY,
   FLAIR_INFURA_PROJECT_ID,

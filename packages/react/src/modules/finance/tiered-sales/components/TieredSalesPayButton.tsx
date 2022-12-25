@@ -47,6 +47,8 @@ export const TieredSalesPayButton = ({
           />
         </div>
       </>
+    ) : method === 'sponsor' ? (
+      <>Mint without Gas</>
     ) : (
       <>Pay to mint</>
     ));
@@ -55,7 +57,9 @@ export const TieredSalesPayButton = ({
     (method?.includes?.('stripe') && rampConfig?.stripeEnabled) ||
     (method?.includes?.('utrust') && rampConfig?.utrustEnabled) ||
     (method?.includes?.('bitpay') && rampConfig?.bitpayEnabled) ||
-    (method?.includes?.('coinbase') && rampConfig?.coinbaseEnabled);
+    (method?.includes?.('coinbase') && rampConfig?.coinbaseEnabled) ||
+    (method?.includes?.('sponsor') &&
+      rampConfig?.paymentRailsSupportedForChainAndToken);
 
   if (!alwaysShow) {
     if (!rampEnabled) {

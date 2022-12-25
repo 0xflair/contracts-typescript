@@ -113,7 +113,7 @@ export type BalanceRampBackendConfig = {
 
 export type BalanceRampRequest = {
   testMode?: boolean;
-  method?: 'sponsor' | 'stripe' | 'utrust' | 'bitpay' | 'coinbase';
+  method?: 'stripe' | 'utrust' | 'bitpay' | 'coinbase';
   chainId?: string;
   walletAddress?: string;
   idempotencyKey?: string;
