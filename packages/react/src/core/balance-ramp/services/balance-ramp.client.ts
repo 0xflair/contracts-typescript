@@ -211,7 +211,8 @@ export class BalanceRampClient {
         !message.toLowerCase().includes('insufficient funds') &&
         !message.toLowerCase().includes('exceeds allowance') &&
         !message.toLowerCase().includes('exceeds balance') &&
-        !message.toLowerCase().includes('zero balance')
+        !message.toLowerCase().includes('zero balance') &&
+        !message.toLowerCase().includes('insufficient balance')
       ) {
         throw e;
       }
