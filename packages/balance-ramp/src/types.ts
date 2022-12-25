@@ -21,7 +21,7 @@ export type RequiredBalance = {
   inputCurrency?: string;
   requiresKyc?: boolean;
   ignoreCurrentBalance?: boolean;
-  preferredPaymentMethod?: string;
+  preferredMethod?: string;
 };
 
 export type BalanceResolverContext = {
@@ -122,7 +122,7 @@ export type BalanceRampRequest = {
   outputDecimals?: string;
   inputCurrency?: string;
   requiresKyc?: string;
-  preferredPaymentMethod?: string;
+  preferredMethod?: string;
   txFrom?: string;
   txTo?: string;
   txData?: string;
