@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.76.4 (2022-12-25)
+
+
+### Bug Fixes
+
+* add error capture for cronos chain ([3c617fc](https://github.com/flair-sdk/typescript/commit/3c617fc8b7fb6de641903a80885a385648ed3042))
+
+
+
+
+
 ## 2.76.3 (2022-12-25)
 
 
