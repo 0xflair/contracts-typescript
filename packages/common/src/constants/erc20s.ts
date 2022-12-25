@@ -1,3 +1,5 @@
+import { ChainId } from './chain-id';
+
 export const DOLLAR_STABLECOIN_SYMBOLS = [
   'USD',
   'DAI',
@@ -170,6 +172,18 @@ export const POPULAR_ERC20_TOKENS = {
       symbol: 'USDC',
       contractAddress:
         '0x620fd5fa44BE6af63715Ef4E65DDFA0387aD13F5'.toLowerCase(),
+    },
+  ],
+  [ChainId.TELOS_MAINNET]: [
+    {
+      symbol: 'USDC',
+      contractAddress:
+        '0x818ec0a7fe18ff94269904fced6ae3dae6d6dc0b'.toLowerCase(),
+    },
+    {
+      symbol: 'USDT',
+      contractAddress:
+        '0xefaeee334f0fd1712f9a8cc375f427d9cdd40d73'.toLowerCase(),
     },
   ],
 };
