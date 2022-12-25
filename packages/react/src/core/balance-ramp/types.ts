@@ -113,7 +113,7 @@ export type BalanceRampBackendConfig = {
 
 export type BalanceRampRequest = {
   testMode?: boolean;
-  method?: 'stripe' | 'utrust' | 'bitpay' | 'coinbase';
+  method?: 'sponsor' | 'stripe' | 'utrust' | 'bitpay' | 'coinbase';
   chainId?: string;
   walletAddress?: string;
   idempotencyKey?: string;
@@ -136,3 +136,18 @@ export type BalanceRampRequest = {
   successUrl?: string;
   cancelUrl?: string;
 };
+
+export enum TaxBehavior {
+  INCLUSIVE = 'inclusive',
+  EXCLUSIVE = 'exclusive',
+}
+
+export enum PlatformFeeBehavior {
+  INCLUSIVE = 'inclusive',
+  EXCLUSIVE = 'exclusive',
+}
+
+export enum GasFeeBehavior {
+  SPONSORED = 'sponsored',
+  SELF_FUNDED = 'self-funded',
+}
