@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.77.0 (2022-12-25)
+
+
+### Features
+
+* add telos stables ([c5ffec3](https://github.com/flair-sdk/typescript/commit/c5ffec3e0f7e492bd165927dcaedf27601418413))
+
+
+
+
+
 ## 2.76.4 (2022-12-25)
 
 
