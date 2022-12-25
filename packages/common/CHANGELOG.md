@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.76.2 (2022-12-25)
+
+
+### Bug Fixes
+
+* correct fuse coingecko id ([ad5c5b9](https://github.com/flair-sdk/typescript/commit/ad5c5b9c6242ca332a0b612b26dd90d093fbe04d))
+
+
+
+
+
 ## 2.76.1 (2022-12-24)
 
 
