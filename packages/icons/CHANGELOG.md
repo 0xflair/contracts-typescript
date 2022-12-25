@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.76.3 (2022-12-25)
+
+
+### Bug Fixes
+
+* remove custom data when calling original signer ([ff831d4](https://github.com/flair-sdk/typescript/commit/ff831d4b57c46acd7c81a5a6d3843a4df8035e04))
+
+
+
+
+
 ## 2.76.2 (2022-12-25)
 
 
