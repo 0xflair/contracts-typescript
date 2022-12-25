@@ -104,7 +104,7 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     symbol: 'FUSE',
     name: 'FUSE',
     icon: 'FUSE',
-    coinGeckoId: 'fuse',
+    coinGeckoId: 'fuse-network-token',
     coinMarketCapSymbol: 'FUSE',
   },
   {
