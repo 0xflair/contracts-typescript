@@ -14,7 +14,7 @@ import {
   CurrentBalance,
   RequiredBalance,
 } from '../types';
-import { min, openModalWithData } from '../utils';
+import { min } from '../utils';
 
 export class BalanceRampClient {
   private iframe!: HTMLIFrameElement;
@@ -45,7 +45,9 @@ export class BalanceRampClient {
       (this.config.enabledChainIds === undefined ||
         !this.config.enabledChainIds.includes(chainId))
     ) {
-      return originalSigner.sendTransaction(transactionRequest);
+      const cleanReq = { ...transactionRequest };
+      delete cleanReq.customData;
+      return originalSigner.sendTransaction(cleanReq);
     }
 
     const estimatedGasLimit = await this.handleEstimateGasLimit(
@@ -149,10 +151,10 @@ export class BalanceRampClient {
         !this.config.maxGasLimit ||
         BigNumber.from(estimatedGasLimit).gte(this.config.maxGasLimit)
       ) {
+        const cleanReq = { ...transactionRequest };
+        delete cleanReq.customData;
         // re estimate gas if current gas estimate is maximum configured
-        const newGasListEstimate = await originalSigner.estimateGas(
-          transactionRequest,
-        );
+        const newGasListEstimate = await originalSigner.estimateGas(cleanReq);
         // const newFees = await this.estimateGasFees(originalSigner);
         this.applyGasParameters(
           txWithGasData,
@@ -193,7 +195,9 @@ export class BalanceRampClient {
     let estimatedGasLimit: BigNumber = BigNumber.from(0);
 
     try {
-      estimatedGasLimit = await originalSigner.estimateGas(transactionRequest);
+      const cleanReq = { ...transactionRequest };
+      delete cleanReq.customData;
+      estimatedGasLimit = await originalSigner.estimateGas(cleanReq);
     } catch (e: any) {
       const message =
         e?.data?.message?.toString() +
@@ -206,7 +210,8 @@ export class BalanceRampClient {
       if (
         !message.toLowerCase().includes('insufficient funds') &&
         !message.toLowerCase().includes('exceeds allowance') &&
-        !message.toLowerCase().includes('exceeds balance')
+        !message.toLowerCase().includes('exceeds balance') &&
+        !message.toLowerCase().includes('zero balance')
       ) {
         throw e;
       }
