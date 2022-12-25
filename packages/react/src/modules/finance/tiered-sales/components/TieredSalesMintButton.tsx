@@ -8,7 +8,7 @@ import { useTieredSalesContext } from '../providers';
 type Props = PropsWithChildren<BareComponentProps> & {
   disabled?: boolean;
   rampIgnoreCurrentBalance?: boolean;
-  rampPreferredPaymentMethod?: string;
+  rampPreferredMethod?: string;
 };
 
 export const TieredSalesMintButton = ({
@@ -16,7 +16,7 @@ export const TieredSalesMintButton = ({
   children,
   disabled,
   rampIgnoreCurrentBalance,
-  rampPreferredPaymentMethod,
+  rampPreferredMethod,
   ...attributes
 }: Props) => {
   const {
@@ -47,11 +47,11 @@ export const TieredSalesMintButton = ({
       onClick={() =>
         mint?.(
           undefined,
-          rampIgnoreCurrentBalance || rampPreferredPaymentMethod
+          rampIgnoreCurrentBalance || rampPreferredMethod
             ? {
                 customData: {
                   rampIgnoreCurrentBalance,
-                  rampPreferredPaymentMethod,
+                  rampPreferredMethod,
                   rampChainId: chainInfo?.id,
                 },
               }

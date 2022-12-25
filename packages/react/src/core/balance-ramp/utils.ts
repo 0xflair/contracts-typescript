@@ -55,6 +55,7 @@ export const calculateUniqueTransactionIdentifier = async (
     from?: BytesLike;
     to?: BytesLike;
     data?: BytesLike;
+    customData?: Record<string, any>;
   }>,
 ) => {
   return ethers.utils.keccak256(
@@ -63,6 +64,9 @@ export const calculateUniqueTransactionIdentifier = async (
         from: tx.from && (await tx.from)?.toString().toLowerCase(),
         to: tx.to && (await tx.to)?.toString().toLowerCase(),
         data: tx.data && (await tx.data)?.toString().toLowerCase(),
+        lastNonce:
+          tx?.customData &&
+          (await tx?.customData)?.lastNonce?.toString().toLowerCase(),
       }),
     ),
   );

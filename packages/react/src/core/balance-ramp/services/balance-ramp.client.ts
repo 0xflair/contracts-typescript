@@ -61,9 +61,16 @@ export class BalanceRampClient {
       estimatedMaxPriorityFeePerGas,
     } = await this.estimateGasFees(originalSigner);
 
+    const lastNonce = await originalSigner?.getTransactionCount();
+
     if (estimatedGasPrice && !estimatedMaxFeePerGas) {
       transactionRequest.type = 0;
     }
+
+    transactionRequest.customData = {
+      ...(transactionRequest.customData || {}),
+      lastNonce,
+    };
 
     const txWithGasData = await this.applyGasParameters(
       transactionRequest,
