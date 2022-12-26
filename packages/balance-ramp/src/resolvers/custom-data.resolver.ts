@@ -37,15 +37,14 @@ export const balanceRampCustomDataResolve: BalanceResolver = async (
         estimatedMaxPriorityFeePerGas:
           estimatedMaxPriorityFeePerGas?.toString(),
         estimatedGasLimit: estimatedGasLimit?.toString(),
-        requiresKyc: false,
         ignoreCurrentBalance:
           config.ignoreCurrentBalance ||
           Boolean(
             (await context?.transactionRequest?.customData)
               ?.rampIgnoreCurrentBalance,
           ),
-        preferredPaymentMethod: (await context?.transactionRequest?.customData)
-          ?.rampPreferredPaymentMethod,
+        preferredMethod: (await context?.transactionRequest?.customData)
+          ?.rampPreferredMethod,
       };
     } catch (e) {
       return;

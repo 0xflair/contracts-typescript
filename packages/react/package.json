@@ -190,6 +190,7 @@
     }
   },
   "dependencies": {
+    "@flair-sdk/balance-ramp": "^2.77.1",
     "@flair-sdk/chains": "^2.77.1",
     "@flair-sdk/common": "^2.77.1",
     "@flair-sdk/connectors": "^2.77.1",

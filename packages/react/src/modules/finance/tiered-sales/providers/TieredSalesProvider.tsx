@@ -288,7 +288,7 @@ export const TieredSalesProvider = ({
 
   const rampRequest = useMemo(() => {
     return {
-      chainId: chainId.toString(),
+      chainId: Number(chainId.toString()),
       walletAddress: requiredAmounts?.[0].accounts?.[0]?.toString(),
       txTo: contractAddress,
       txFrom:

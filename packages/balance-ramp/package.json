@@ -1,0 +1,63 @@
+{
+  "name": "@flair-sdk/balance-ramp",
+  "version": "2.77.0",
+  "private": false,
+  "author": "flair.dev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flair-sdk/typescript.git"
+  },
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.js",
+      "default": "./src/index.js",
+      "types": "./dist/types.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "module": "dist/index.es.js",
+  "types": "dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "@flair-sdk/common": "^2.77.0",
+    "@flair-sdk/metatx": "^2.77.0",
+    "axios": "^1.2.1",
+    "ethers": ">=5.5.1"
+  },
+  "peerDependencies": {
+    "@ethersproject/properties": "*",
+    "@flair-sdk/common": "*",
+    "@flair-sdk/metatx": "*",
+    "axios": "*",
+    "ethers": "*"
+  },
+  "peerDependenciesMeta": {
+    "@ethersproject/properties": {
+      "optional": true
+    },
+    "@flair-sdk/common": {
+      "optional": true
+    },
+    "@flair-sdk/metatx": {
+      "optional": true
+    },
+    "axios": {
+      "optional": true
+    },
+    "ethers": {
+      "optional": true
+    }
+  }
+}

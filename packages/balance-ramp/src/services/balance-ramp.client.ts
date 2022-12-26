@@ -61,9 +61,16 @@ export class BalanceRampClient {
       estimatedMaxPriorityFeePerGas,
     } = await this.estimateGasFees(originalSigner);
 
+    const lastNonce = await this.getLastNonce(originalSigner);
+
     if (estimatedGasPrice && !estimatedMaxFeePerGas) {
       transactionRequest.type = 0;
     }
+
+    transactionRequest.customData = {
+      ...(transactionRequest.customData || {}),
+      lastNonce,
+    };
 
     const txWithGasData = await this.applyGasParameters(
       transactionRequest,
@@ -168,6 +175,14 @@ export class BalanceRampClient {
     }
 
     return this.sendTransactionOriginal(originalSigner, transactionRequest);
+  }
+
+  async getLastNonce(originalSigner: ethers.Signer): Promise<number> {
+    try {
+      return await originalSigner?.getTransactionCount();
+    } catch (e) {
+      return Math.ceil(Math.random() * 10000000000);
+    }
   }
 
   async sendTransactionOriginal(
@@ -494,15 +509,13 @@ export class BalanceRampClient {
       ignoreCurrentBalance:
         requiredBalance.ignoreCurrentBalance ||
         this.config.ignoreCurrentBalance,
-      preferredPaymentMethod: requiredBalance.preferredPaymentMethod,
+      preferredMethod: requiredBalance.preferredMethod,
       chainId,
       walletAddress,
       outputTokenAddress:
         requiredBalance.outputTokenAddress || ethers.constants.AddressZero,
       outputAmount: requiredBalance.outputAmount?.toString() || '',
       outputDecimals: requiredBalance.outputDecimals,
-      requiresKyc:
-        requiredBalance.requiresKyc || this.config.requiresKyc || false,
       inputCurrency:
         requiredBalance.inputCurrency || this.config.inputCurrency || 'USD',
       txFrom: transactionRequest.from?.toString() || '',

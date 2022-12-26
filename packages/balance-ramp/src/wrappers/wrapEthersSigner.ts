@@ -13,6 +13,7 @@ export const wrapEthersSigner = (signer: providers.JsonRpcSigner) => {
   originalSigner.getFeeData = signer.getFeeData.bind(signer);
   originalSigner.signMessage = signer.signMessage.bind(signer);
   originalSigner.signTransaction = signer.signTransaction.bind(signer);
+  originalSigner.getTransactionCount = signer.getTransactionCount.bind(signer);
   // @ts-ignore
   originalSigner.provider = signer.provider;
   originalSigner.connect = signer.connect.bind(signer);
