@@ -37,7 +37,6 @@ export const balanceRampCustomDataResolve: BalanceResolver = async (
         estimatedMaxPriorityFeePerGas:
           estimatedMaxPriorityFeePerGas?.toString(),
         estimatedGasLimit: estimatedGasLimit?.toString(),
-        requiresKyc: false,
         ignoreCurrentBalance:
           config.ignoreCurrentBalance ||
           Boolean(

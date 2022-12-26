@@ -508,8 +508,6 @@ export class BalanceRampClient {
         requiredBalance.outputTokenAddress || ethers.constants.AddressZero,
       outputAmount: requiredBalance.outputAmount?.toString() || '',
       outputDecimals: requiredBalance.outputDecimals,
-      requiresKyc:
-        requiredBalance.requiresKyc || this.config.requiresKyc || false,
       inputCurrency:
         requiredBalance.inputCurrency || this.config.inputCurrency || 'USD',
       txFrom: transactionRequest.from?.toString() || '',

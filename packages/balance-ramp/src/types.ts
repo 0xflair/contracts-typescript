@@ -19,7 +19,6 @@ export type RequiredBalance = {
   estimatedMaxFeePerGas?: string;
   estimatedMaxPriorityFeePerGas?: string;
   inputCurrency?: string;
-  requiresKyc?: boolean;
   ignoreCurrentBalance?: boolean;
   preferredMethod?: string;
 };
@@ -39,7 +38,6 @@ export type BalanceResolver = (
 
 export type BalanceRampConfig = {
   env: Environment;
-  requiresKyc: boolean;
   ignoreCurrentBalance: boolean;
   inputCurrency?: string;
   resolvers: BalanceResolver[];
@@ -59,7 +57,6 @@ export type BalanceRamp = {
   inputAmount: string;
   platformFee: string;
   gasCost: string;
-  requiresKyc: boolean;
   txFrom: string;
   txTo: string;
   txData: string;
@@ -121,7 +118,6 @@ export type BalanceRampRequest = {
   outputAmount?: string;
   outputDecimals?: string;
   inputCurrency?: string;
-  requiresKyc?: string;
   preferredMethod?: string;
   txFrom?: string;
   txTo?: string;
