@@ -61,7 +61,7 @@ export class BalanceRampClient {
       estimatedMaxPriorityFeePerGas,
     } = await this.estimateGasFees(originalSigner);
 
-    const lastNonce = await originalSigner?.getTransactionCount();
+    const lastNonce = await this.getLastNonce(originalSigner);
 
     if (estimatedGasPrice && !estimatedMaxFeePerGas) {
       transactionRequest.type = 0;
@@ -175,6 +175,14 @@ export class BalanceRampClient {
     }
 
     return this.sendTransactionOriginal(originalSigner, transactionRequest);
+  }
+
+  async getLastNonce(originalSigner: ethers.Signer): Promise<number> {
+    try {
+      return await originalSigner?.getTransactionCount();
+    } catch (e) {
+      return Math.ceil(Math.random() * 10000000000);
+    }
   }
 
   async sendTransactionOriginal(
