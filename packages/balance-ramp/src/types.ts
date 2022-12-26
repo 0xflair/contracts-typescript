@@ -68,7 +68,14 @@ export type BalanceRamp = {
   estimatedMaxPriorityFeePerGas: string;
   estimatedGasLimit: string;
   title: string;
-  method: 'stripe' | 'utrust' | 'bitpay' | 'coinbase' | 'on-ramp' | 'bridge';
+  method:
+    | 'sponsor'
+    | 'stripe'
+    | 'utrust'
+    | 'bitpay'
+    | 'coinbase'
+    | 'on-ramp'
+    | 'bridge';
   stripeSessionId: string;
   stripeSessionUrl: string;
   utrustOrderId: string;
@@ -106,17 +113,25 @@ export type BalanceRampBackendConfig = {
   onRamperWalletPrefix: string;
   rampNetworkSwapAsset: string;
   rampNetworkEnabled: boolean;
+  taxBehavior: TaxBehavior;
+  platformFeeBehavior: PlatformFeeBehavior;
+  gasFeeBehavior: GasFeeBehavior;
+  inputAmountFormatted: number;
+  platformFeeBN: BigNumberish;
+  platformFeeFormatted: number;
+  estimatedGasCostBN: BigNumberish;
+  estimatedGasCostFormatted: number;
 };
 
 export type BalanceRampRequest = {
   testMode?: boolean;
-  method?: 'stripe' | 'utrust' | 'bitpay' | 'coinbase';
-  chainId?: string;
+  method?: BalanceRamp['method'];
+  chainId?: number;
   walletAddress?: string;
   idempotencyKey?: string;
   outputTokenAddress?: string;
   outputAmount?: string;
-  outputDecimals?: string;
+  outputDecimals?: number;
   inputCurrency?: string;
   preferredMethod?: string;
   txFrom?: string;

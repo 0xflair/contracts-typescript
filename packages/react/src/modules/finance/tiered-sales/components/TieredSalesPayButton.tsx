@@ -17,14 +17,18 @@ export const TieredSalesPayButton = ({
   ...attributes
 }: Props) => {
   const {
-    data: { rampConfig },
+    data: { rampConfig, price },
   } = useTieredSalesContext();
 
   const finalChildren =
     children ||
     (method === 'stripe' ? (
       <>
-        <span>Buy with Credit Card</span>
+        {price && price.toString() === '0' ? (
+          <span>Pay gas with Credit Card</span>
+        ) : (
+          <span>Buy with Credit Card</span>
+        )}
         <div className="flex gap-2">
           <img
             src={
@@ -37,7 +41,11 @@ export const TieredSalesPayButton = ({
     ) : method?.includes &&
       ['utrust', 'bitpay', 'coinbase'].find((m) => method.includes(m)) ? (
       <>
-        <span>Buy with Crypto</span>
+        {price && price.toString() === '0' ? (
+          <span>Pay gas with any Crypto</span>
+        ) : (
+          <span>Buy with any Crypto</span>
+        )}
         <div>
           <img
             src={

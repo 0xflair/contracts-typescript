@@ -43,7 +43,7 @@ import stylesheet from '../../../index.css';
 import {
   FLAIR_ALCHEMY_API_KEY,
   FLAIR_INFURA_PROJECT_ID,
-} from '../constants/index.js';
+} from '../constants/index';
 
 export type Web3AuthOptions = Required<
   Partial<Web3AuthOptionsOriginal>,
