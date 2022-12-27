@@ -4,6 +4,7 @@ import {
   ArrowSmUpIcon,
   XIcon,
 } from '@heroicons/react/solid/esm/index.js';
+import { ConnectResult } from '@wagmi/core';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useAccount, useConnect } from 'wagmi';
@@ -25,6 +26,7 @@ export type ConnectButtonProps = BareComponentProps & {
     closeButtonClassName?: string;
   };
   connectPalletteProps?: ConnectPaletteProps;
+  onConnect?: (result: ConnectResult) => void;
   popularOptions?: string[];
 };
 
@@ -34,6 +36,7 @@ export const ConnectButton = ({
   children,
   dialogProps,
   connectPalletteProps,
+  onConnect,
   popularOptions = [
     // Social Logins
     'google',
@@ -133,6 +136,7 @@ export const ConnectButton = ({
               <div className="flex flex-col gap-2">
                 <h3>Continue with</h3>
                 <ConnectPalette
+                  onConnect={onConnect}
                   showConnector={(connector, metadata) => {
                     const providerName = (connector as Web3AuthBaseConnector)
                       ?.loginProvider;

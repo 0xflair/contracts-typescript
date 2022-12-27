@@ -8,6 +8,7 @@ import {
   WalletLinkIcon,
 } from '@flair-sdk/icons';
 import MetaMaskOnboarding from '@metamask/onboarding';
+import { ConnectResult } from '@wagmi/core';
 import { useRef } from 'react';
 import { Connector, useAccount, useConnect } from 'wagmi';
 
@@ -35,7 +36,7 @@ export type ConnectPaletteProps = {
   walletButtonClassName?: string;
   descriptionClassName?: string;
   iconClassName?: string;
-
+  onConnect?: (result: ConnectResult) => void;
   connectorLabel?: (
     connector: Connector<any, any, any>,
     metadata: ConnectorMetadata,
@@ -51,7 +52,11 @@ export type ConnectPaletteProps = {
 
 export const ConnectPalette = (props: ConnectPaletteProps) => {
   const activeButtonRef = useRef(null);
-  const { connectors, connect, isLoading, pendingConnector } = useConnect();
+  const { connectors, connect, isLoading, pendingConnector } = useConnect({
+    onSuccess(data, variables, context) {
+      props.onConnect?.(data);
+    },
+  });
   const { isConnecting, isReconnecting } = useAccount();
   const {
     state: { preferredChainId },

@@ -39,13 +39,13 @@ type TieredSalesContextValue = {
     eligibleAmount?: BigNumberish;
 
     // Helpers
-    rampRequestConfig?: ReturnType<typeof useBalanceRampRequestConfig>['data'];
     mintCount?: BigNumberish;
     autoDetectedTierId?: BigNumberish;
     canMint?: boolean;
     isERC20Payment?: boolean;
     isApproveNeeded?: boolean;
     minterAddress?: BytesLike;
+    rampRequestConfig?: ReturnType<typeof useBalanceRampRequestConfig>['data'];
 
     // Transaction
     approveReceipt?: TransactionReceipt;
@@ -62,6 +62,7 @@ type TieredSalesContextValue = {
     // Helpers
     allowanceLoading: boolean;
     approveLoading: boolean;
+    rampRequestConfigLoading: boolean;
 
     // Transaction
     mintLoading?: boolean;
@@ -74,6 +75,7 @@ type TieredSalesContextValue = {
     // Helpers
     allowanceError?: string | Error | null;
     approveError?: string | Error | null;
+    rampRequestConfigError?: string | Error | null;
 
     // Transaction
     mintError?: string | Error | null;
@@ -311,7 +313,11 @@ export const TieredSalesProvider = ({
     requiredAmounts,
   ]);
 
-  const { data: rampRequestConfig } = useBalanceRampRequestConfig({
+  const {
+    data: rampRequestConfig,
+    error: rampRequestConfigError,
+    isLoading: rampRequestConfigLoading,
+  } = useBalanceRampRequestConfig({
     env,
     rampRequest,
     enabled: Boolean(rampRequest),
@@ -495,13 +501,13 @@ export const TieredSalesProvider = ({
       isEligible,
 
       // Helpers
-      rampRequestConfig,
       autoDetectedTierId,
       mintCount,
       canMint,
       isERC20Payment,
       isApproveNeeded,
       minterAddress: finalMinterAddress,
+      rampRequestConfig,
 
       // Transaction
       approveReceipt,
@@ -518,6 +524,7 @@ export const TieredSalesProvider = ({
       allowlistCheckerLoading,
       eligibleAmountLoading,
       allowanceLoading,
+      rampRequestConfigLoading,
 
       // Transaction
       approveLoading,
@@ -531,6 +538,7 @@ export const TieredSalesProvider = ({
       allowlistCheckerError,
       eligibleAmountError,
       allowanceError,
+      rampRequestConfigError,
 
       // Transaction
       approveError,

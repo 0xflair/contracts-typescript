@@ -21,6 +21,7 @@ export const TieredSalesMintButton = ({
 }: Props) => {
   const {
     data: { chainId, canMint, currentTierConfig },
+    isLoading: { rampRequestConfigLoading },
     mint,
   } = useTieredSalesContext();
 
@@ -38,6 +39,10 @@ export const TieredSalesMintButton = ({
   const finalSymbol = isERC20Price
     ? erc20Symbol?.toString()
     : chainInfo?.nativeCurrency?.symbol?.toString();
+
+  const preparingRamp =
+    (rampIgnoreCurrentBalance || rampPreferredMethod) &&
+    rampRequestConfigLoading;
 
   const Component =
     as || (attributes.className || attributes.style ? 'span' : Fragment);
@@ -58,7 +63,7 @@ export const TieredSalesMintButton = ({
             : undefined,
         )
       }
-      disabled={!canMint || !mint || disabled}
+      disabled={!canMint || !mint || disabled || preparingRamp}
       {...attributes}
     >
       {children || (

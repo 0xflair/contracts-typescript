@@ -23,13 +23,7 @@ import deepmerge from 'deepmerge';
 import { providers } from 'ethers';
 import { hexlify } from 'ethers/lib/utils.js';
 import _ from 'lodash';
-import React, {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { Required } from 'utility-types';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';

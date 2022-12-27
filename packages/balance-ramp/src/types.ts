@@ -98,6 +98,17 @@ export type BalanceRamp = {
   processingError: string;
 };
 
+export type BalanceRampRequestAmounts = {
+  amountToPayForInOutputTokenBN: BigNumberish;
+  amountToPayForInCurrency: number;
+  platformFeeInOutputTokenBN: BigNumberish;
+  platformFeeInCurrency: number;
+  totalGasFeeInOutputTokenBN: BigNumberish;
+  totalGasFeeInCurrency: number;
+  gasUnitPriceInNativeBN: BigNumberish;
+  estimatedGasLimitBN: BigNumberish;
+};
+
 export type BalanceRampRequestConfig = {
   stripeEnabled: boolean;
   stripeConfiguredAndActive: boolean;
@@ -117,12 +128,7 @@ export type BalanceRampRequestConfig = {
   taxBehavior: TaxBehavior;
   platformFeeBehavior: PlatformFeeBehavior;
   gasFeeBehavior: GasFeeBehavior;
-  inputAmountFormatted: number;
-  platformFeeBN: BigNumberish;
-  platformFeeFormatted: number;
-  estimatedGasCostBN: BigNumberish;
-  estimatedGasCostFormatted: number;
-};
+} & BalanceRampRequestAmounts;
 
 export type BalanceRampRequest = {
   testMode?: boolean;
