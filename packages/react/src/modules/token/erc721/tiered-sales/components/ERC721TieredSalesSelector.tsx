@@ -58,7 +58,9 @@ export const ERC721TieredSalesSelector = (props: TieredSalesSelectorProps) => {
                   as="span"
                   className="tier-price mt-4 text-sm font-medium text-gray-900"
                 >
-                  {tierConfig?.price?.toString() ? (
+                  {tierConfig?.price?.toString() === '0' ? (
+                    'Free'
+                  ) : (
                     <CryptoValue
                       symbol={currencySymbol}
                       value={tierConfig.price?.toString()}
@@ -71,7 +73,7 @@ export const ERC721TieredSalesSelector = (props: TieredSalesSelectorProps) => {
                       showPrice={false}
                       showSymbol={true}
                     />
-                  ) : null}
+                  )}
                 </RadioGroup.Description>
               </span>
             </span>
