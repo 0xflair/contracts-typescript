@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.79.3 (2022-12-27)
+
+
+### Bug Fixes
+
+* only show one loading at a time ([ed32154](https://github.com/flair-sdk/typescript/commit/ed32154d454735e1f761c328525f3388540ec546))
+
+
+
+
+
 ## 2.79.2 (2022-12-27)
 
 
