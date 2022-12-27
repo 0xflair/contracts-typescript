@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.79.0 (2022-12-27)
+
+
+### Features
+
+* add sponsor to ramp request config ([#30](https://github.com/flair-sdk/typescript/issues/30)) ([e8b3940](https://github.com/flair-sdk/typescript/commit/e8b39405e95a74028d43a5c9a6e092b21b36f710))
+
+
+
+
+
 ## 2.78.1 (2022-12-26)
 
 **Note:** Version bump only for package @flair-sdk/connectors
