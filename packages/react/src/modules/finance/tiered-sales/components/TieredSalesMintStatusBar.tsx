@@ -46,39 +46,35 @@ export const TieredSalesMintStatusBar = ({ className }: Props) => {
         )
       ) : isConnected ? (
         <>
-          {mintLoading && (
+          {mintLoading ? (
             <div className="flex items-center gap-2">
               <Spinner />{' '}
               {mintReceipt || mintResponse ? 'Minting...' : 'In progress...'}
             </div>
-          )}
+          ) : allowanceLoading ? (
+            <div className="flex items-center gap-2">
+              <Spinner /> Checking allowance...
+            </div>
+          ) : approveLoading ? (
+            <div className="flex items-center gap-2">
+              <Spinner />
+              {mintReceipt || mintResponse
+                ? 'Approving...'
+                : 'Approve in your wallet...'}
+            </div>
+          ) : mintReceipt || mintResponse ? (
+            <TransactionLink
+              txReceipt={mintReceipt}
+              txResponse={mintResponse}
+            />
+          ) : approveReceipt || approveResponse ? (
+            <TransactionLink
+              txReceipt={approveReceipt}
+              txResponse={approveResponse}
+            />
+          ) : null}
 
           <IfChain connectedTo={chainId}>
-            {allowanceLoading && (
-              <div className="flex items-center gap-2">
-                <Spinner /> Checking allowance...
-              </div>
-            )}
-            {approveLoading && (
-              <div className="flex items-center gap-2">
-                <Spinner />
-                {mintReceipt || mintResponse
-                  ? 'Approving...'
-                  : 'Approve in your wallet...'}
-              </div>
-            )}
-            {mintReceipt || mintResponse ? (
-              <TransactionLink
-                txReceipt={mintReceipt}
-                txResponse={mintResponse}
-              />
-            ) : approveReceipt || approveResponse ? (
-              <TransactionLink
-                txReceipt={approveReceipt}
-                txResponse={approveResponse}
-              />
-            ) : null}
-
             {!mintLoading && mintError && (
               <Errors title="Cannot mint" error={mintError} />
             )}
