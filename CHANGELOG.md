@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.79.2 (2022-12-27)
+
+
+### Bug Fixes
+
+* show free instead of zero number ([14a917c](https://github.com/flair-sdk/typescript/commit/14a917c9d6e234f233c453d617d7d97e0c7efb2c))
+
+
+
+
+
 ## 2.79.1 (2022-12-27)
 
 
