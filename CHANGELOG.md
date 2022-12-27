@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.79.1 (2022-12-27)
+
+
+### Bug Fixes
+
+* disable mint button when resolving ramp config ([#31](https://github.com/flair-sdk/typescript/issues/31)) ([5e63d0a](https://github.com/flair-sdk/typescript/commit/5e63d0aa837f2165384861127dbd45b2418e8bb5))
+
+
+
+
+
 # 2.79.0 (2022-12-27)
 
 
