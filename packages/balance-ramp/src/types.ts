@@ -24,7 +24,7 @@ export type RequiredBalance = {
 };
 
 export type BalanceResolverContext = {
-  config: BalanceRampConfig;
+  config: BalanceRampClientConfig;
   estimatedGasLimit?: BigNumberish;
   estimatedGasPrice?: BigNumberish;
   estimatedMaxFeePerGas?: BigNumberish;
@@ -36,7 +36,7 @@ export type BalanceResolver = (
   context: BalanceResolverContext,
 ) => Promise<RequiredBalance | undefined>;
 
-export type BalanceRampConfig = {
+export type BalanceRampClientConfig = {
   env: Environment;
   ignoreCurrentBalance: boolean;
   inputCurrency?: string;
@@ -98,7 +98,7 @@ export type BalanceRamp = {
   processingError: string;
 };
 
-export type BalanceRampBackendConfig = {
+export type BalanceRampRequestConfig = {
   stripeEnabled: boolean;
   stripeConfiguredAndActive: boolean;
   utrustEnabled: boolean;
@@ -107,7 +107,8 @@ export type BalanceRampBackendConfig = {
   bitpayConfiguredAndActive: boolean;
   coinbaseEnabled: boolean;
   coinbaseConfiguredAndActive: boolean;
-  canRelayTransaction: boolean;
+  canSponsorTransaction: boolean;
+  canSettleTransaction: boolean;
   paymentRailsSupportedForChainAndToken: boolean;
   onRamperEnabled: boolean;
   onRamperWalletPrefix: string;

@@ -17,7 +17,7 @@ export const TieredSalesPayButton = ({
   ...attributes
 }: Props) => {
   const {
-    data: { rampConfig, price },
+    data: { rampRequestConfig, price },
   } = useTieredSalesContext();
 
   const finalChildren =
@@ -62,12 +62,11 @@ export const TieredSalesPayButton = ({
     ));
 
   const rampEnabled =
-    (method?.includes?.('stripe') && rampConfig?.stripeEnabled) ||
-    (method?.includes?.('utrust') && rampConfig?.utrustEnabled) ||
-    (method?.includes?.('bitpay') && rampConfig?.bitpayEnabled) ||
-    (method?.includes?.('coinbase') && rampConfig?.coinbaseEnabled) ||
-    (method?.includes?.('sponsor') &&
-      rampConfig?.paymentRailsSupportedForChainAndToken);
+    (method?.includes?.('stripe') && rampRequestConfig?.stripeEnabled) ||
+    (method?.includes?.('utrust') && rampRequestConfig?.utrustEnabled) ||
+    (method?.includes?.('bitpay') && rampRequestConfig?.bitpayEnabled) ||
+    (method?.includes?.('coinbase') && rampRequestConfig?.coinbaseEnabled) ||
+    (method?.includes?.('sponsor') && rampRequestConfig?.canSponsorTransaction);
 
   if (!alwaysShow) {
     if (!rampEnabled) {

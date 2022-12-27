@@ -1,1 +1,1 @@
-export * from './useBalanceRampConfig';
+export * from './useBalanceRampRequestConfig';

@@ -9,7 +9,7 @@ import { Deferrable } from 'ethers/lib/utils.js';
 import { BALANCE_RAMP_BACKEND } from '../constants';
 import {
   BalanceRamp,
-  BalanceRampConfig,
+  BalanceRampClientConfig,
   BalanceResolverContext,
   CurrentBalance,
   RequiredBalance,
@@ -22,7 +22,7 @@ export class BalanceRampClient {
   private modalContent!: HTMLDivElement;
   private intervalRequest!: NodeJS.Timeout;
 
-  constructor(private readonly config: BalanceRampConfig) {
+  constructor(private readonly config: BalanceRampClientConfig) {
     this.injectModal();
     this.injectIframe();
   }

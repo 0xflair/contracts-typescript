@@ -1,14 +1,17 @@
 import { TransactionReceipt } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
 import { PrepareWriteContractConfig, SendTransactionResult } from '@wagmi/core';
-import { BigNumber, BigNumberish, BytesLike, ethers } from 'ethers';
+import { BigNumber, BigNumberish, BytesLike } from 'ethers';
 import _ from 'lodash';
 import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 
 import { useChainInfo } from '../../../../common';
-import { useBalanceRampConfig, useDiamondContext } from '../../../../core';
+import {
+  useBalanceRampRequestConfig,
+  useDiamondContext,
+} from '../../../../core';
 import { useTieredSalesMinter } from '../hooks';
 import { useSaleTiers } from '../hooks/useSaleTiers';
 import { Tier, TiersDictionary } from '../types';
@@ -36,8 +39,7 @@ type TieredSalesContextValue = {
     eligibleAmount?: BigNumberish;
 
     // Helpers
-    // maxSupply?: BigNumberish;
-    rampConfig?: ReturnType<typeof useBalanceRampConfig>['data'];
+    rampRequestConfig?: ReturnType<typeof useBalanceRampRequestConfig>['data'];
     mintCount?: BigNumberish;
     autoDetectedTierId?: BigNumberish;
     canMint?: boolean;
@@ -79,7 +81,6 @@ type TieredSalesContextValue = {
 
   refetchTiers: () => void;
   setCurrentTierId: (currentTierId: BigNumberish) => void;
-  // setMaxSupply: (maxSupply: BigNumberish) => void;
 
   setMintCount: (mintCount: BigNumberish) => void;
   approve?: (args?: { mintCount: BigNumberish }) => void;
@@ -145,7 +146,6 @@ export const TieredSalesProvider = ({
   const [currentTierId, setCurrentTierId] = useState<BigNumberish | undefined>(
     tierId !== undefined ? Number(tierId.toString()) : undefined,
   );
-  // const [maxSupply, setMaxSupply] = useState<BigNumberish>(Infinity);
   const [autoDetectedTierId, setAutoDetectedTierId] = useState<BigNumberish>();
   const [mintCount, setMintCount] = useState<BigNumberish>(1);
   const [isAutoDetectingTier, setIsAutoDetectingTier] = useState(true);
@@ -311,7 +311,7 @@ export const TieredSalesProvider = ({
     requiredAmounts,
   ]);
 
-  const { data: rampConfig } = useBalanceRampConfig({
+  const { data: rampRequestConfig } = useBalanceRampRequestConfig({
     env,
     rampRequest,
     enabled: Boolean(rampRequest),
@@ -495,8 +495,7 @@ export const TieredSalesProvider = ({
       isEligible,
 
       // Helpers
-      // maxSupply,
-      rampConfig,
+      rampRequestConfig,
       autoDetectedTierId,
       mintCount,
       canMint,
@@ -540,7 +539,6 @@ export const TieredSalesProvider = ({
 
     refetchTiers,
     setCurrentTierId,
-    // setMaxSupply,
     setMintCount,
 
     mint: doMint ? mint : undefined,
