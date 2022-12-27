@@ -4,16 +4,20 @@ import {
   balanceRampCustomDataResolve,
   balanceRampNativeValueResolve,
 } from '../resolvers';
-import { BalanceRampConfig } from '../types';
+import { BalanceRampClientConfig } from '../types';
 import { BalanceRampClient } from './balance-ramp.client';
 
 let clientInstance: BalanceRampClient;
 
 export const createBalanceRampClient = (
-  config?: Partial<BalanceRampConfig>,
+  config?: Partial<BalanceRampClientConfig>,
 ) => {
   clientInstance = new BalanceRampClient(
-    Object.assign<any, Partial<BalanceRampConfig>, Partial<BalanceRampConfig>>(
+    Object.assign<
+      any,
+      Partial<BalanceRampClientConfig>,
+      Partial<BalanceRampClientConfig>
+    >(
       {},
       {
         env: Environment.PROD,

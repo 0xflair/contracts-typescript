@@ -1,7 +1,7 @@
 import {
   BALANCE_RAMP_BACKEND,
-  BalanceRampBackendConfig,
   BalanceRampRequest,
+  BalanceRampRequestConfig,
 } from '@flair-sdk/balance-ramp';
 import { Environment } from '@flair-sdk/common';
 
@@ -13,12 +13,12 @@ type Config = {
   rampRequest?: BalanceRampRequest;
 };
 
-export function useBalanceRampConfig({
+export function useBalanceRampRequestConfig({
   env = Environment.PROD,
   enabled = true,
   rampRequest,
 }: Config) {
-  return useAxiosPost<BalanceRampBackendConfig>({
+  return useAxiosPost<BalanceRampRequestConfig>({
     url: `${BALANCE_RAMP_BACKEND[env].getBackendConfig}`,
     data: rampRequest,
     enabled,
