@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.79.5 (2022-12-28)
+
+
+### Bug Fixes
+
+* add total gas fee in native token ([f373256](https://github.com/flair-sdk/typescript/commit/f373256ce42f6952734fcd27a8255dac8c19f720))
+
+
+
+
+
 ## 2.79.4 (2022-12-27)
 
 
