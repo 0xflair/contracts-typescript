@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.80.1 (2022-12-28)
+
+
+### Bug Fixes
+
+* add translator for EXCEEDS_MAX ([3e8890a](https://github.com/flair-sdk/typescript/commit/3e8890aae4a042abbca8ef40f3b1630b2a1f2d80))
+
+
+
+
+
 # 2.80.0 (2022-12-28)
 
 

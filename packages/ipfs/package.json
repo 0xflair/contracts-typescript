@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/ipfs",
-  "version": "2.80.0",
+  "version": "2.80.1",
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
@@ -60,7 +60,7 @@
     }
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.80.0",
+    "@flair-sdk/common": "^2.80.1",
     "axios": "^0.26.1",
     "ethers": ">=5.5.1"
   }
