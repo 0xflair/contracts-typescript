@@ -103,10 +103,11 @@ export type BalanceRampRequestAmounts = {
   amountToPayForInCurrency: number;
   platformFeeInOutputTokenBN: BigNumberish;
   platformFeeInCurrency: number;
+  estimatedGasLimitBN: BigNumberish;
+  gasUnitPriceInNativeBN: BigNumberish;
+  totalGasFeeInNativeBN: BigNumberish;
   totalGasFeeInOutputTokenBN: BigNumberish;
   totalGasFeeInCurrency: number;
-  gasUnitPriceInNativeBN: BigNumberish;
-  estimatedGasLimitBN: BigNumberish;
 };
 
 export type BalanceRampRequestConfig = {
@@ -121,6 +122,7 @@ export type BalanceRampRequestConfig = {
   canSponsorTransaction: boolean;
   canSettleTransaction: boolean;
   paymentRailsSupportedForChainAndToken: boolean;
+  trustedForwarderConfigured: boolean;
   onRamperEnabled: boolean;
   onRamperWalletPrefix: string;
   rampNetworkSwapAsset: string;
