@@ -52,6 +52,8 @@ export function translateContractError(message: string) {
     return 'Sale is not started yet.';
   } else if (message.includes('NOT_ALLOWLISTED')) {
     return 'This wallet address is not allowlisted.';
+  } else if (message.includes('EXCEEDS_MAX')) {
+    return 'Max allocation reached, this wallet cannot mint anymore.';
   }
 
   return message;
