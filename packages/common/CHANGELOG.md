@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.80.3 (2022-12-28)
+
+
+### Bug Fixes
+
+* use transparent logos for crypto options ([968d291](https://github.com/flair-sdk/typescript/commit/968d2916aa959e3fa51667076513a5a444ec8f38))
+
+
+
+
+
 ## 2.80.2 (2022-12-28)
 
 
