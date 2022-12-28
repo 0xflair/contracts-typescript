@@ -32,7 +32,7 @@ export const TieredSalesPayButton = ({
         <div className="flex gap-2">
           <img
             src={
-              'https://ipfs.io/ipfs/bafkreic7ffv2qgh4t7dpvyvcwdzvcjww3dbonz3ufbdi3flzibtlnv5w6y'
+              'https://ipfs.flair.dev/ipfs/bafkreic7ffv2qgh4t7dpvyvcwdzvcjww3dbonz3ufbdi3flzibtlnv5w6y'
             }
             className="h-4"
           />
@@ -49,7 +49,7 @@ export const TieredSalesPayButton = ({
         <div>
           <img
             src={
-              'https://ipfs.io/ipfs/bafkreihau2qub27bteskek7vsqc5nvuk3j3on4sx3c44m3wtilu7h6tsju'
+              'https://ipfs.flair.dev/ipfs/bafkreiazkfopozbppvn4wb6gtlfwda7mgtjorlhclpvh2s2myeslzjfe6i'
             }
             className="h-4"
           />
