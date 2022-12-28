@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.80.0 (2022-12-28)
+
+
+### Features
+
+* add metis chain information ([8e598a6](https://github.com/flair-sdk/typescript/commit/8e598a638ccc818452ebdaafbf0289cc6290c6e0))
+
+
+
+
+
 ## 2.79.5 (2022-12-28)
 
 
