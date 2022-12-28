@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.80.2 (2022-12-28)
+
+
+### Bug Fixes
+
+* add danger button class ([3d0e1ff](https://github.com/flair-sdk/typescript/commit/3d0e1ff807ae75b62e26d990c69f8da5e1a7406b))
+
+
+
+
+
 ## 2.80.1 (2022-12-28)
 
 
