@@ -147,4 +147,12 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinGeckoId: 'crypto-com-chain',
     coinMarketCapSymbol: 'CRO',
   },
+  {
+    nativeChainIds: [ChainId.METIS_MAINNET, ChainId.METIS_GOERLI],
+    symbol: 'METIS',
+    name: 'METIS',
+    icon: 'METIS',
+    coinGeckoId: 'metis-token',
+    coinMarketCapSymbol: 'METIS',
+  },
 ];

@@ -186,4 +186,42 @@ export const POPULAR_ERC20_TOKENS = {
         '0xefaeee334f0fd1712f9a8cc375f427d9cdd40d73'.toLowerCase(),
     },
   ],
+  [ChainId.METIS_MAINNET]: [
+    {
+      symbol: 'WETH',
+      contractAddress:
+        '0x420000000000000000000000000000000000000A'.toLowerCase(),
+      coinMarketCapSymbol: 'ETH',
+      coingeckoId: 'ethereum',
+    },
+    {
+      symbol: 'USDC',
+      contractAddress:
+        '0xEA32A96608495e54156Ae48931A7c20f0dcc1a21'.toLowerCase(),
+    },
+    {
+      symbol: 'USDT',
+      contractAddress:
+        '0xbB06DCA3AE6887fAbF931640f67cab3e3a16F4dC'.toLowerCase(),
+    },
+  ],
+  [ChainId.METIS_GOERLI]: [
+    {
+      symbol: 'WETH',
+      contractAddress:
+        '0x420000000000000000000000000000000000000A'.toLowerCase(),
+      coinMarketCapSymbol: 'ETH',
+      coingeckoId: 'ethereum',
+    },
+    {
+      symbol: 'USDC',
+      contractAddress:
+        '0x6F66cc9902f4770C815f6093d07e8DbB66bcCBE7'.toLowerCase(),
+    },
+    {
+      symbol: 'USDT',
+      contractAddress:
+        '0x176dD192f2f6505aD99204Ff83561baC6D7F6D4b'.toLowerCase(),
+    },
+  ],
 };

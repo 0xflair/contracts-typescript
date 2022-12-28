@@ -464,6 +464,53 @@ const newChains: Chain[] = [
       },
     },
   },
+  {
+    id: 1088,
+    name: 'Metis Mainnet',
+    network: 'metisMainnet',
+    nativeCurrency: {
+      name: 'METIS',
+      symbol: 'METIS',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: { http: ['https://andromeda.metis.io/?owner=1088'] },
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Metis explorer',
+        url: 'https://andromeda-explorer.metis.io',
+      },
+      default: {
+        name: 'Metis explorer',
+        url: 'https://andromeda-explorer.metis.io',
+      },
+    },
+  },
+  {
+    id: 599,
+    name: 'Metis Goerli',
+    network: 'metisGoerli',
+    nativeCurrency: {
+      name: 'METIS',
+      symbol: 'METIS',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: { http: ['https://goerli.gateway.metisdevops.link'] },
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Metis explorer',
+        url: 'https://goerli.explorer.metisdevops.link',
+      },
+      default: {
+        name: 'Metis explorer',
+        url: 'https://goerli.explorer.metisdevops.link',
+      },
+    },
+    testnet: true,
+  },
 ];
 
 export const FLAIR_CHAINS: Chain[] = [
