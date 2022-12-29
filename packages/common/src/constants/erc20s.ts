@@ -10,7 +10,7 @@ export const DOLLAR_STABLECOIN_SYMBOLS = [
   'BUSD',
   'USDP',
   'GoodDollar',
-];
+].map((s) => s.toUpperCase());
 
 export const POPULAR_ERC20_TOKENS = {
   1: [

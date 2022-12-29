@@ -6,8 +6,9 @@ import { NftTokenMetadata } from '../types';
 type Props = {
   uri?: string;
   metadata?: NftTokenMetadata;
-  hideAttributes?: boolean;
+  hideName?: boolean;
   hideDescription?: boolean;
+  hideAttributes?: boolean;
   preferDedicatedGateway?: boolean;
   className?: string;
 };
@@ -15,8 +16,9 @@ type Props = {
 export const NftMetadataPreview = ({
   uri,
   metadata,
-  hideAttributes = true,
+  hideName = false,
   hideDescription = false,
+  hideAttributes = true,
   preferDedicatedGateway = false,
 }: Props) => {
   const {
@@ -35,7 +37,7 @@ export const NftMetadataPreview = ({
   return (
     <>
       {remoteTokenMetadataLoading ? (
-        <span className="metadata-loading flex gap-2">
+        <span className="metadata-loading flex items-center gap-2">
           <Spinner /> Loading...
         </span>
       ) : remoteTokenMetadataError ? (
@@ -66,9 +68,11 @@ export const NftMetadataPreview = ({
             />
           ) : null}
           <div className="metadata-info">
-            <h4 className="metadata-title text-lg font-bold">
-              {finalMetadata.name || <span className="italic">No name</span>}
-            </h4>
+            {!hideName && (
+              <h4 className="metadata-title text-md font-bold">
+                {finalMetadata.name || <span className="italic">No name</span>}
+              </h4>
+            )}
             {!hideDescription && (
               <p className="metadata-description mt-1">
                 {finalMetadata.description || (
