@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.80.6 (2022-12-29)
+
+
+### Bug Fixes
+
+* normalize coingecko results ([4e4595f](https://github.com/flair-sdk/typescript/commit/4e4595faf23c100bdea1448e9d00ba3134f73274))
+
+
+
+
+
 ## 2.80.5 (2022-12-29)
 
 
