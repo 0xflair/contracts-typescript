@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.80.5 (2022-12-29)
+
+
+### Bug Fixes
+
+* always use uppercase symbols ([#32](https://github.com/flair-sdk/typescript/issues/32)) ([34df986](https://github.com/flair-sdk/typescript/commit/34df98659e3c9e54c9bb3a47faee6e0a901d0a5c))
+
+
+
+
+
 ## 2.80.4 (2022-12-29)
 
 
