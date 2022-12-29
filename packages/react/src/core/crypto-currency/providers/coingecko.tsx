@@ -70,12 +70,17 @@ export const CoinGeckoProvider = ({
       const data: PricesDictionariesBySymbol = {} as PricesDictionariesBySymbol;
 
       for (const coinGeckoSymbol in coinGeckoResult) {
+        const pairs = Object.entries(coinGeckoResult[coinGeckoSymbol]);
+        const convertedPairs = pairs.map(([key, value]) => [
+          key.toUpperCase(),
+          value,
+        ]);
         data[convertCoinGeckoSymbol(coinGeckoSymbol)] =
-          coinGeckoResult[coinGeckoSymbol];
+          Object.fromEntries(convertedPairs);
       }
 
       // Override for USD symbols
-      for (const sym in DOLLAR_STABLECOIN_SYMBOLS) {
+      for (const sym of DOLLAR_STABLECOIN_SYMBOLS) {
         data[sym.toUpperCase()] = {
           USD: 1,
         };
