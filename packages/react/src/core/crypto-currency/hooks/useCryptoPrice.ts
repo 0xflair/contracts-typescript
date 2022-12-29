@@ -24,12 +24,15 @@ export const useCryptoPrice = ({
     priceDictionariesBySymbol &&
     symbol &&
     (Object.keys(priceDictionariesBySymbol).find((s) =>
-      symbol.endsWith(s),
+      symbol.toUpperCase().endsWith(s.toUpperCase()),
     ) as CryptoSymbol);
 
   const price =
-    normalizedSymbol && priceDictionariesBySymbol[normalizedSymbol]
-      ? priceDictionariesBySymbol[normalizedSymbol][baseCurrency.toLowerCase()]
+    normalizedSymbol &&
+    priceDictionariesBySymbol[normalizedSymbol.toUpperCase()]
+      ? priceDictionariesBySymbol[normalizedSymbol.toUpperCase()][
+          baseCurrency.toUpperCase()
+        ]
       : undefined;
 
   if (

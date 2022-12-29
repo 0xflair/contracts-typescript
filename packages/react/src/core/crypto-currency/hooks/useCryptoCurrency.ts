@@ -30,8 +30,9 @@ export const useCryptoCurrency = ({
     data: {
       info,
       price:
-        DOLLAR_STABLECOIN_SYMBOLS.includes(symbol.toString().toUpperCase()) &&
-        baseCurrency.toUpperCase() === 'USD'
+        DOLLAR_STABLECOIN_SYMBOLS.map((s) => s.toUpperCase()).includes(
+          symbol.toString().toUpperCase(),
+        ) && baseCurrency.toUpperCase() === 'USD'
           ? 1
           : price,
     },

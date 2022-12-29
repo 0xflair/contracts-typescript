@@ -39,10 +39,10 @@ function convertCoinGeckoSymbol(coinGeckoSymbol: string): CryptoSymbol {
   );
 
   if (currency) {
-    return currency.symbol;
+    return currency.symbol.toUpperCase();
   }
 
-  return coinGeckoSymbol;
+  return coinGeckoSymbol.toUpperCase();
 }
 
 export const CoinGeckoProvider = ({
@@ -76,7 +76,7 @@ export const CoinGeckoProvider = ({
 
       // Override for USD symbols
       for (const sym in DOLLAR_STABLECOIN_SYMBOLS) {
-        data[sym] = {
+        data[sym.toUpperCase()] = {
           USD: 1,
         };
       }
