@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.80.4 (2022-12-29)
+
+
+### Bug Fixes
+
+* add metis usd symbols to known stablecoins ([a262ad5](https://github.com/flair-sdk/typescript/commit/a262ad5b85a72c4154db088adb7c265d95b5e951))
+
+
+
+
+
 ## 2.80.3 (2022-12-28)
 
 
