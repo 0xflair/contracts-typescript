@@ -2,6 +2,7 @@ import { TransactionReceipt } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
 import { PrepareWriteContractConfig, SendTransactionResult } from '@wagmi/core';
 import { BigNumber, BigNumberish, BytesLike } from 'ethers';
+import * as ethers from 'ethers';
 import _ from 'lodash';
 import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
@@ -12,6 +13,7 @@ import {
   useBalanceRampRequestConfig,
   useDiamondContext,
 } from '../../../../core';
+import { useContractDecimals } from '../../../token/metadata/hooks/useContractDecimals';
 import { useTieredSalesMinter } from '../hooks';
 import { useSaleTiers } from '../hooks/useSaleTiers';
 import { Tier, TiersDictionary } from '../types';
@@ -22,6 +24,7 @@ type TieredSalesContextValue = {
     env?: Environment;
     chainId?: number;
     contractAddress?: string;
+    contractDecimals?: BigNumberish;
 
     // On-chain values
     tiers?: Record<string, Tier>;
@@ -39,7 +42,7 @@ type TieredSalesContextValue = {
     eligibleAmount?: BigNumberish;
 
     // Helpers
-    mintCount?: BigNumberish;
+    mintCount?: string;
     autoDetectedTierId?: BigNumberish;
     canMint?: boolean;
     isERC20Payment?: boolean;
@@ -84,7 +87,7 @@ type TieredSalesContextValue = {
   refetchTiers: () => void;
   setCurrentTierId: (currentTierId: BigNumberish) => void;
 
-  setMintCount: (mintCount: BigNumberish) => void;
+  setMintCount: (mintCount: string) => void;
   approve?: (args?: { mintCount: BigNumberish }) => void;
   mint?: (
     args?: {
@@ -149,7 +152,7 @@ export const TieredSalesProvider = ({
     tierId !== undefined ? Number(tierId.toString()) : undefined,
   );
   const [autoDetectedTierId, setAutoDetectedTierId] = useState<BigNumberish>();
-  const [mintCount, setMintCount] = useState<BigNumberish>(1);
+  const [mintCount, setMintCount] = useState<string>();
   const [isAutoDetectingTier, setIsAutoDetectingTier] = useState(true);
 
   const finalMinterAddress = minterAddress || account;
@@ -303,6 +306,7 @@ export const TieredSalesProvider = ({
       outputAmount: requiredAmounts?.[0].value?.toString(),
       testMode: chainInfo?.testnet,
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     chainId,
     chainInfo?.testnet,
@@ -310,7 +314,7 @@ export const TieredSalesProvider = ({
     mintPreparedConfig?.request?.data,
     mintPreparedConfig?.request?.value,
     minterAddress,
-    requiredAmounts,
+    // requiredAmounts,
   ]);
 
   const {
@@ -322,6 +326,24 @@ export const TieredSalesProvider = ({
     rampRequest,
     enabled: Boolean(rampRequest),
   });
+
+  const { data: contractDecimals, isLoading: contractDecimalsLoading } =
+    useContractDecimals({
+      chainId,
+      contractAddress,
+    });
+
+  useEffect(() => {
+    if (
+      // contractDecimals !== undefined &&
+      mintCount == undefined
+    ) {
+      setMintCount(
+        '1',
+        // contractDecimals ? ethers.utils.parseUnits('1', contractDecimals) : 1,
+      );
+    }
+  }, [contractDecimals, mintCount]);
 
   const canMint = Boolean(
     isActive && isEligible && (!hasAllowlist || isAllowlisted) && !mintLoading,
@@ -484,6 +506,10 @@ export const TieredSalesProvider = ({
       env,
       chainId,
       contractAddress,
+      contractDecimals:
+        contractDecimalsLoading && !contractDecimals
+          ? undefined
+          : contractDecimals,
 
       // On-chain values
       tiers,

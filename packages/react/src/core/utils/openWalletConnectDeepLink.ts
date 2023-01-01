@@ -27,7 +27,7 @@ export const openWalletConnectDeepLink = async (
     connect({ connector: walletConnect });
 
     setTimeout(async () => {
-      const { uri } = (await walletConnect.getProvider()).connector;
+      const { uri } = (await walletConnect.getProvider())?.connector || {};
       const finalLink = isAndroid()
         ? uri
         : `${wcUriPrefix}${encodeURIComponent(uri)}`;

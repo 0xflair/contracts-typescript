@@ -49,7 +49,9 @@ export const TieredSalesMintStatusBar = ({ className }: Props) => {
           {mintLoading ? (
             <div className="flex items-center gap-2">
               <Spinner />{' '}
-              {mintReceipt || mintResponse ? 'Minting...' : 'In progress...'}
+              {mintReceipt || mintResponse
+                ? 'Minting...'
+                : 'Approve in wallet...'}
             </div>
           ) : allowanceLoading ? (
             <div className="flex items-center gap-2">

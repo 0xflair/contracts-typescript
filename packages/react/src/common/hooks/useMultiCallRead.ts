@@ -1,6 +1,6 @@
 import { ContractCall } from '@flair-sdk/registry';
 import { ReadContractConfig } from '@wagmi/core';
-import { utils } from 'ethers';
+import { BytesLike, utils } from 'ethers';
 import { useEffect, useMemo, useState } from 'react';
 import { useContractRead } from 'wagmi';
 
@@ -61,7 +61,7 @@ export const useMultiCallRead = <TData extends any[]>({
       .filter((callData) => !!callData) || []) as string[];
   }, [calls, abi]);
 
-  const result = useContractRead({
+  const result = useContractRead<any, any, BytesLike[]>({
     abi: [
       {
         inputs: [

@@ -145,13 +145,12 @@ export const useContractWriteAndWait = <ArgsType extends any[] = any[]>({
     isIdle: responseIsIdle && receiptIsIdle,
     isPreparing: prepareLoading,
     isLoading:
-      prepareLoading ||
       responseIsLoading ||
       responseStatus === 'loading' ||
       receiptIsLoading ||
       receiptFetchStatus === 'fetching',
     isSuccess: responseIsSuccess && receiptIsSuccess,
     isError: prepareIsError || responseIsError || receiptIsError,
-    writeAndWait: doWrite ? writeAndWait : undefined,
+    writeAndWait: doWrite && !prepareLoading ? writeAndWait : undefined,
   } as const;
 };

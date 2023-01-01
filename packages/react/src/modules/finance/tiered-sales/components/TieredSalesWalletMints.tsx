@@ -2,6 +2,7 @@ import { BigNumberish, BytesLike } from 'ethers';
 import { Fragment } from 'react';
 
 import { BareComponentProps } from '../../../../common';
+import { CryptoValue } from '../../../../core/crypto-currency/components';
 import { useTieredSalesWalletMints } from '../hooks/useTieredSalesWalletMints';
 import { useTieredSalesContext } from '../providers/TieredSalesProvider';
 
@@ -19,7 +20,13 @@ export const TieredSalesWalletMints = ({
   ...attributes
 }: Props) => {
   const {
-    data: { chainId, contractAddress, currentTierId, minterAddress },
+    data: {
+      chainId,
+      contractAddress,
+      currentTierId,
+      minterAddress,
+      contractDecimals,
+    },
   } = useTieredSalesContext();
 
   const finalTierId = tierId !== undefined ? tierId : currentTierId || '0';
@@ -42,8 +49,16 @@ export const TieredSalesWalletMints = ({
     <Component {...attributes}>
       {loadingMask && (isLoading || data === undefined) ? (
         <>{loadingMask}</>
-      ) : (
+      ) : !contractDecimals ? (
         data?.toLocaleString()
+      ) : (
+        <CryptoValue
+          decimals={contractDecimals}
+          formatted={false}
+          value={data}
+          showPrice={false}
+          showSymbol={false}
+        />
       )}
     </Component>
   );
