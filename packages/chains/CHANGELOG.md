@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.81.1 (2023-01-03)
+
+
+### Bug Fixes
+
+* cache mint count on re-renders ([40de08f](https://github.com/flair-sdk/typescript/commit/40de08fc6c0fdf8b5eb6bf1dd468922d65bc8561))
+
+
+
+
+
 # 2.81.0 (2023-01-03)
 
 
