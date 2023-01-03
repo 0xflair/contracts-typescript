@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.81.0 (2023-01-03)
+
+
+### Features
+
+* support erc20 in tiered sales components ([#33](https://github.com/flair-sdk/typescript/issues/33)) ([35281f2](https://github.com/flair-sdk/typescript/commit/35281f2746a999e78bbbc80372ca9086433fc3ed))
+
+
+
+
+
 ## 2.80.6 (2022-12-29)
 
 
