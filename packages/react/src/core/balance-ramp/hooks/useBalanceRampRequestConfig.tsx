@@ -1,10 +1,9 @@
-import { Environment } from '@flair-sdk/common';
-
 import {
   BALANCE_RAMP_BACKEND,
   BalanceRampRequest,
   BalanceRampRequestConfig,
 } from '@flair-sdk/balance-ramp';
+import { Environment } from '@flair-sdk/common';
 
 import { useAxiosPost } from '../../../common';
 

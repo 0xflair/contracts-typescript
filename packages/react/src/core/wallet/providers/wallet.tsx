@@ -19,6 +19,7 @@ import {
   Web3OnboardPortisConnector,
   Web3OnboardTrustConnector,
 } from '@flair-sdk/connectors';
+import { Client } from '@wagmi/core';
 import deepmerge from 'deepmerge';
 import { providers } from 'ethers';
 import { hexlify } from 'ethers/lib/utils.js';

@@ -1,7 +1,6 @@
 import * as ethers from 'ethers';
 import { BigNumber } from 'ethers';
-import { useEffect, useState } from 'react';
-import { useDebounce } from 'react-use';
+import { useEffect } from 'react';
 
 import { CryptoAmountInput } from '../../../../core/ui/components/elements/CryptoAmountInput';
 import { useTieredSalesContext } from '../providers';
@@ -26,21 +25,15 @@ export const TieredSalesMintInput = ({ className }: Props) => {
     ),
   );
 
-  const [localValue, setLocalValue] = useState(
-    mintCount
-      ? parseFloat(mintCount.toString()).toString().replace(/,/g, '.')
-      : '1',
-  );
-
   useEffect(() => {
     try {
       if (
-        localValue &&
+        mintCount &&
         maxAllowedMintCountFormatted &&
         Number.isFinite(maxAllowedMintCountFormatted)
       ) {
-        if (Number(localValue || 0) > maxAllowedMintCountFormatted) {
-          setLocalValue(
+        if (Number(mintCount || 0) > maxAllowedMintCountFormatted) {
+          setMintCount(
             parseFloat(maxAllowedMintCountFormatted.toString())
               .toString()
               .replace(/,/g, '.'),
@@ -52,37 +45,14 @@ export const TieredSalesMintInput = ({ className }: Props) => {
         !maxAllowedMintCountFormatted ||
         Number(maxAllowedMintCountFormatted) >= 1
       ) {
-        if (Number(localValue || 0) == 0) {
-          setLocalValue('1');
+        if (Number(mintCount || 0) == 0) {
+          setMintCount('1');
         }
       }
     } catch (e) {
       debugger;
     }
-  }, [
-    contractDecimals,
-    maxAllowedMintCountFormatted,
-    localValue,
-    setMintCount,
-  ]);
-
-  useDebounce(
-    () => {
-      if (mintCount) {
-        setLocalValue(mintCount?.toString().replace(/,/g, '.'));
-      }
-    },
-    500,
-    [mintCount],
-  );
-
-  useEffect(() => {
-    setMintCount(
-      contractDecimals
-        ? parseFloat(localValue.toString() || '0').toString()
-        : Math.ceil(Number(localValue.toString() || '0')).toString(),
-    );
-  }, [contractDecimals, localValue, setMintCount]);
+  }, [contractDecimals, maxAllowedMintCountFormatted, mintCount, setMintCount]);
 
   return !contractDecimals ? (
     <input
@@ -90,9 +60,9 @@ export const TieredSalesMintInput = ({ className }: Props) => {
       required
       min={1}
       max={maxAllowedMintCountFormatted || Infinity}
-      value={localValue}
+      value={mintCount}
       onChange={(e) => {
-        setLocalValue(
+        setMintCount(
           e.target.value
             ? parseFloat(Math.ceil(Number(e.target.value)).toString())
                 .toString()

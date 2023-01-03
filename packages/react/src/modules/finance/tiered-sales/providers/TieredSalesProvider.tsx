@@ -2,7 +2,6 @@ import { TransactionReceipt } from '@ethersproject/providers';
 import { Environment } from '@flair-sdk/common';
 import { PrepareWriteContractConfig, SendTransactionResult } from '@wagmi/core';
 import { BigNumber, BigNumberish, BytesLike } from 'ethers';
-import * as ethers from 'ethers';
 import _ from 'lodash';
 import * as React from 'react';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
@@ -242,8 +241,11 @@ export const TieredSalesProvider = ({
       tierIds,
     ],
   );
-  const currentTierConfig =
-    currentTierId !== undefined ? tiers[currentTierId.toString()] : undefined;
+  const currentTierConfig = useMemo(
+    () =>
+      currentTierId !== undefined ? tiers[currentTierId.toString()] : undefined,
+    [currentTierId, tiers],
+  );
 
   const {
     data: {
@@ -314,6 +316,7 @@ export const TieredSalesProvider = ({
     mintPreparedConfig?.request?.data,
     mintPreparedConfig?.request?.value,
     minterAddress,
+    currentTierConfig,
     // requiredAmounts,
   ]);
 
