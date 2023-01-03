@@ -1,6 +1,6 @@
-import { BigNumberish, BytesLike, Signer } from 'ethers';
+import { BigNumberish, BytesLike } from 'ethers';
 
-import { useContractWriteAndWait } from '../../../../../common';
+import { useContractWriteAndWait } from '../../../../../common/hooks/useContractWriteAndWait';
 
 type Config = {
   chainId?: number;

@@ -4,8 +4,12 @@ import { PrepareWriteContractConfig } from '@wagmi/core';
 import { BigNumber, BigNumberish, BytesLike, ethers, Signer } from 'ethers';
 import { useCallback, useMemo } from 'react';
 
-import { useContractWriteAndWait } from '../../../../common';
-import { useERC20Allowance, useERC20Approve } from '../../../token';
+import { useContractWriteAndWait } from '../../../../common/hooks/useContractWriteAndWait';
+import {
+  useContractDecimals,
+  useERC20Allowance,
+  useERC20Approve,
+} from '../../../token';
 import { useSaleTierConfig } from './useSaleTierConfig';
 import { useTieredSalesAllowlistChecker } from './useTieredSalesAllowlistChecker';
 import { useTieredSalesEligibleAmount } from './useTieredSalesEligibleAmount';
@@ -24,7 +28,7 @@ type Config = {
   signerOrProvider?: Signer | Provider | null;
   tierId?: BigNumberish;
   minterAddress?: BytesLike;
-  mintCount?: BigNumberish;
+  mintCount?: string;
   enabled?: boolean;
 };
 
@@ -40,6 +44,15 @@ export const useTieredSalesMinter = ({
   mintCount,
   enabled = true,
 }: Config) => {
+  const {
+    data: contractDecimals,
+    error: contractDecimalsError,
+    isLoading: contractDecimalsLoading,
+  } = useContractDecimals({
+    chainId,
+    contractAddress,
+  });
+
   const {
     data: tier,
     error: tierError,
@@ -86,16 +99,23 @@ export const useTieredSalesMinter = ({
   });
 
   const _tierId = tierId;
-  const _mintCount = mintCount || 1;
-  const _maxAllowance = merkleMetadata?.maxAllowance || _mintCount;
+  const _mintCount = mintCount || '0';
+  const _mintCountBN = contractDecimals
+    ? ethers.utils.parseUnits(_mintCount.toString(), contractDecimals)
+    : BigNumber.from(Math.ceil(Number(_mintCount || 0)).toString());
+  const _maxAllowance = merkleMetadata?.maxAllowance || _mintCountBN;
   const _merkleProof = useMemo(() => merkleProof || [], [merkleProof]);
-  const _totalAmount = useMemo(
-    () =>
-      typeof tier?.price !== 'undefined'
-        ? BigNumber.from(tier?.price).mul(BigNumber.from(_mintCount))
-        : undefined,
-    [_mintCount, tier?.price],
-  );
+  const _totalAmount = useMemo(() => {
+    return typeof tier?.price !== 'undefined'
+      ? BigNumber.from(tier?.price)
+          .mul(BigNumber.from(_mintCountBN))
+          .div(
+            contractDecimals
+              ? BigNumber.from(10).pow(contractDecimals)
+              : BigNumber.from(1),
+          )
+      : undefined;
+  }, [_mintCountBN, contractDecimals, tier?.price]);
 
   const {
     data: eligibleAmount,
@@ -164,7 +184,11 @@ export const useTieredSalesMinter = ({
   );
 
   const shouldPrepareMint = Boolean(
-    _tierId !== undefined && typeof _totalAmount !== 'undefined' && isActive,
+    _tierId !== undefined &&
+      typeof _totalAmount !== 'undefined' &&
+      isActive &&
+      _mintCountBN &&
+      _mintCountBN.gt(0),
   );
 
   const requiredAmounts = useMemo(() => {
@@ -218,7 +242,7 @@ export const useTieredSalesMinter = ({
     chainId,
     contractAddress,
     confirmations: 1,
-    args: [_tierId, _mintCount, _maxAllowance, _merkleProof] as ArgsType,
+    args: [_tierId, _mintCountBN, _maxAllowance, _merkleProof] as ArgsType,
     prepare: shouldPrepareMint,
     overrides: {
       value: !isERC20Payment ? _totalAmount : undefined,
@@ -233,10 +257,25 @@ export const useTieredSalesMinter = ({
       args?: { mintCount: BigNumberish },
       overrides?: Partial<PrepareWriteContractConfig['overrides']>,
     ) => {
-      const _finalMintCount = args?.mintCount || _mintCount;
+      const _finalMintCount = args?.mintCount
+        ? contractDecimals
+          ? ethers.utils.parseUnits(
+              (args?.mintCount).toString(),
+              contractDecimals,
+            )
+          : BigNumber.from(
+              Math.ceil(Number(args?.mintCount?.toString() || '0')).toString(),
+            )
+        : _mintCountBN;
       const _finalTotalAmount = args?.mintCount
         ? tier?.price
-          ? BigNumber.from(tier?.price).mul(BigNumber.from(_finalMintCount))
+          ? BigNumber.from(tier?.price)
+              .mul(BigNumber.from(_finalMintCount))
+              .div(
+                contractDecimals
+                  ? BigNumber.from(10).pow(contractDecimals)
+                  : BigNumber.from(1),
+              )
           : undefined
         : _totalAmount;
 
@@ -282,9 +321,10 @@ export const useTieredSalesMinter = ({
     [
       _maxAllowance,
       _merkleProof,
-      _mintCount,
+      _mintCountBN,
       _tierId,
       _totalAmount,
+      contractDecimals,
       isERC20Payment,
       mintAndWait,
       requiredAmounts,
@@ -294,10 +334,25 @@ export const useTieredSalesMinter = ({
 
   const approve = useCallback(
     (args?: { mintCount: BigNumberish }) => {
-      const _finalMintCount = args?.mintCount || _mintCount;
+      const _finalMintCount = args?.mintCount
+        ? contractDecimals
+          ? ethers.utils.parseUnits(
+              (args?.mintCount).toString(),
+              contractDecimals,
+            )
+          : BigNumber.from(
+              Math.ceil(Number(args?.mintCount?.toString() || '0')).toString(),
+            )
+        : _mintCountBN;
       const _finalTotalAmount = args?.mintCount
         ? tier?.price
-          ? BigNumber.from(tier?.price).mul(BigNumber.from(_finalMintCount))
+          ? BigNumber.from(tier?.price)
+              .mul(BigNumber.from(_finalMintCount))
+              .div(
+                contractDecimals
+                  ? BigNumber.from(10).pow(contractDecimals)
+                  : BigNumber.from(1),
+              )
           : undefined
         : _totalAmount;
 
@@ -320,16 +375,17 @@ export const useTieredSalesMinter = ({
         refetchAllowance();
         return {
           ...result,
-          amount: _totalAmount as BigNumberish,
+          amount: _finalTotalAmount as BigNumberish,
           spender: contractAddress as BytesLike,
         } as const;
       });
     },
     [
-      _mintCount,
+      _mintCountBN,
       _totalAmount,
       approveAndWait,
       contractAddress,
+      contractDecimals,
       refetchAllowance,
       tier?.price,
     ],

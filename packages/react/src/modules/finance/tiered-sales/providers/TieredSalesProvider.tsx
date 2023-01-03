@@ -8,10 +8,9 @@ import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 
 import { useChainInfo } from '../../../../common';
-import {
-  useBalanceRampRequestConfig,
-  useDiamondContext,
-} from '../../../../core';
+import { useDiamondContext } from '../../../../core';
+import { useBalanceRampRequestConfig } from '../../../../core/balance-ramp/hooks/useBalanceRampRequestConfig';
+import { useContractDecimals } from '../../../token/metadata/hooks/useContractDecimals';
 import { useTieredSalesMinter } from '../hooks';
 import { useSaleTiers } from '../hooks/useSaleTiers';
 import { Tier, TiersDictionary } from '../types';
@@ -22,6 +21,7 @@ type TieredSalesContextValue = {
     env?: Environment;
     chainId?: number;
     contractAddress?: string;
+    contractDecimals?: BigNumberish;
 
     // On-chain values
     tiers?: Record<string, Tier>;
@@ -39,7 +39,7 @@ type TieredSalesContextValue = {
     eligibleAmount?: BigNumberish;
 
     // Helpers
-    mintCount?: BigNumberish;
+    mintCount?: string;
     autoDetectedTierId?: BigNumberish;
     canMint?: boolean;
     isERC20Payment?: boolean;
@@ -84,7 +84,7 @@ type TieredSalesContextValue = {
   refetchTiers: () => void;
   setCurrentTierId: (currentTierId: BigNumberish) => void;
 
-  setMintCount: (mintCount: BigNumberish) => void;
+  setMintCount: (mintCount: string) => void;
   approve?: (args?: { mintCount: BigNumberish }) => void;
   mint?: (
     args?: {
@@ -149,7 +149,7 @@ export const TieredSalesProvider = ({
     tierId !== undefined ? Number(tierId.toString()) : undefined,
   );
   const [autoDetectedTierId, setAutoDetectedTierId] = useState<BigNumberish>();
-  const [mintCount, setMintCount] = useState<BigNumberish>(1);
+  const [mintCount, setMintCount] = useState<string>();
   const [isAutoDetectingTier, setIsAutoDetectingTier] = useState(true);
 
   const finalMinterAddress = minterAddress || account;
@@ -239,8 +239,12 @@ export const TieredSalesProvider = ({
       tierIds,
     ],
   );
-  const currentTierConfig =
-    currentTierId !== undefined ? tiers[currentTierId.toString()] : undefined;
+  const currentTierConfig = useMemo(
+    () =>
+      currentTierId !== undefined ? tiers[currentTierId.toString()] : undefined,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [currentTierId],
+  );
 
   const {
     data: {
@@ -322,6 +326,18 @@ export const TieredSalesProvider = ({
     rampRequest,
     enabled: Boolean(rampRequest),
   });
+
+  const { data: contractDecimals, isLoading: contractDecimalsLoading } =
+    useContractDecimals({
+      chainId,
+      contractAddress,
+    });
+
+  useEffect(() => {
+    if (mintCount == undefined) {
+      setMintCount('1');
+    }
+  }, [mintCount]);
 
   const canMint = Boolean(
     isActive && isEligible && (!hasAllowlist || isAllowlisted) && !mintLoading,
@@ -484,6 +500,10 @@ export const TieredSalesProvider = ({
       env,
       chainId,
       contractAddress,
+      contractDecimals:
+        contractDecimalsLoading && !contractDecimals
+          ? undefined
+          : contractDecimals,
 
       // On-chain values
       tiers,

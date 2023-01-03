@@ -1,27 +1,57 @@
+import { Chain } from '@wagmi/chains';
 import { BigNumber, ethers } from 'ethers';
-import { Fragment, PropsWithChildren } from 'react';
+import { Fragment, ReactNode } from 'react';
 
 import { BareComponentProps, useChainInfo } from '../../../../common';
 import { useContractSymbol } from '../../../token';
-import { useTieredSalesContext } from '../providers';
+import { useTieredSalesContext } from '../providers/TieredSalesProvider';
+import { Tier } from '../types';
 
-type Props = PropsWithChildren<BareComponentProps> & {
+export type TieredSalesMintButtonVariables = {
+  canMint?: boolean;
   disabled?: boolean;
+  isLoading?: boolean;
+  currentTierConfig?: Tier;
+  isERC20Price?: boolean;
+  finalSymbol?: string;
+  chainInfo?: Chain;
+};
+
+type Props = Omit<BareComponentProps, 'children'> & {
+  disabled?: boolean;
+  showChainName?: boolean;
+  loadingContent?: ReactNode;
   rampIgnoreCurrentBalance?: boolean;
   rampPreferredMethod?: string;
+  children?:
+    | ReactNode
+    | ((variables: TieredSalesMintButtonVariables) => ReactNode);
 };
 
 export const TieredSalesMintButton = ({
   as = 'button',
   children,
   disabled,
+  showChainName = true,
+  loadingContent = (
+    <span className="flex flex-col gap-1 items-center justify-center">
+      <span className="rounded-full bg-gray-500/60 animate-pulse h-5 w-48" />
+      <span className="rounded-full bg-gray-300/60 animate-pulse h-5 w-32" />
+    </span>
+  ),
   rampIgnoreCurrentBalance,
   rampPreferredMethod,
   ...attributes
 }: Props) => {
   const {
     data: { chainId, canMint, currentTierConfig },
-    isLoading: { rampRequestConfigLoading },
+    isLoading: {
+      rampRequestConfigLoading,
+      tiersLoading,
+      allowanceLoading,
+      approveLoading,
+      mintLoading,
+    },
     mint,
   } = useTieredSalesContext();
 
@@ -40,12 +70,43 @@ export const TieredSalesMintButton = ({
     ? erc20Symbol?.toString()
     : chainInfo?.nativeCurrency?.symbol?.toString();
 
-  const preparingRamp =
-    (rampIgnoreCurrentBalance || rampPreferredMethod) &&
-    rampRequestConfigLoading;
+  const isLoading = Boolean(
+    ((rampIgnoreCurrentBalance || rampPreferredMethod) &&
+      rampRequestConfigLoading) ||
+      tiersLoading ||
+      allowanceLoading ||
+      approveLoading ||
+      mintLoading,
+  );
 
   const Component =
     as || (attributes.className || attributes.style ? 'span' : Fragment);
+
+  const childrenFn =
+    children ||
+    (({
+      canMint,
+      disabled,
+      isLoading,
+      currentTierConfig,
+      isERC20Price,
+      finalSymbol,
+      chainInfo,
+    }) => (
+      <span className="flex flex-col gap-1 items-center justify-center">
+        <span>
+          {currentTierConfig?.price &&
+          BigNumber.from(currentTierConfig?.price).eq(0)
+            ? `Mint for Free`
+            : `Buy with ${isERC20Price !== undefined ? finalSymbol : '...'}`}
+        </span>
+        {showChainName && chainInfo?.name && (
+          <span className="mint-chain-label opacity-50 text-xs font-light">
+            on {`${chainInfo?.name}`}
+          </span>
+        )}
+      </span>
+    ));
 
   return (
     <Component
@@ -63,24 +124,22 @@ export const TieredSalesMintButton = ({
             : undefined,
         )
       }
-      disabled={!canMint || !mint || disabled || preparingRamp}
+      disabled={!canMint || !mint || disabled || isLoading}
       {...attributes}
     >
-      {children || (
-        <span className="flex flex-col gap-1 items-center justify-center">
-          <span>
-            {currentTierConfig?.price &&
-            BigNumber.from(currentTierConfig?.price).eq(0)
-              ? `Mint for Free`
-              : `Buy with ${isERC20Price !== undefined ? finalSymbol : '...'}`}
-          </span>
-          {chainInfo?.name && (
-            <span className="mint-chain-label opacity-50 text-xs font-light">
-              on {`${chainInfo?.name}`}
-            </span>
-          )}
-        </span>
-      )}
+      {isLoading && loadingContent && !mintLoading
+        ? loadingContent
+        : typeof childrenFn === 'function'
+        ? childrenFn({
+            canMint,
+            disabled,
+            isLoading,
+            currentTierConfig,
+            isERC20Price,
+            finalSymbol,
+            chainInfo,
+          })
+        : childrenFn}
     </Component>
   );
 };

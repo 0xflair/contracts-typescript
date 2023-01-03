@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useDebounce } from 'react-use';
+import * as ethers from 'ethers';
+import { BigNumber } from 'ethers';
+import { useEffect } from 'react';
 
+import { CryptoAmountInput } from '../../../../core/ui/components/elements/CryptoAmountInput';
 import { useTieredSalesContext } from '../providers';
 
 type Props = {
@@ -9,55 +11,86 @@ type Props = {
 
 export const TieredSalesMintInput = ({ className }: Props) => {
   const {
-    data: { canMint, eligibleAmount, mintCount },
+    data: { eligibleAmount, mintCount, contractDecimals },
     setMintCount,
   } = useTieredSalesContext();
 
-  const maxAllowedMintCount = Math.min(
-    Number(eligibleAmount?.toString() || Infinity),
+  const maxAllowedMintCountFormatted = Math.min(
+    Number(
+      eligibleAmount?.toString()
+        ? contractDecimals
+          ? ethers.utils.formatUnits(eligibleAmount, contractDecimals)
+          : Math.ceil(Number(eligibleAmount.toString()))
+        : Infinity,
+    ),
   );
-
-  const [localValue, setLocalValue] = useState(mintCount?.toString() || '');
 
   useEffect(() => {
-    if (
-      mintCount &&
-      maxAllowedMintCount &&
-      Number(mintCount) > maxAllowedMintCount
-    ) {
-      setMintCount(maxAllowedMintCount);
+    try {
+      if (
+        mintCount &&
+        maxAllowedMintCountFormatted &&
+        Number.isFinite(maxAllowedMintCountFormatted)
+      ) {
+        if (Number(mintCount || 0) > maxAllowedMintCountFormatted) {
+          setMintCount(
+            parseFloat(maxAllowedMintCountFormatted.toString())
+              .toString()
+              .replace(/,/g, '.'),
+          );
+        }
+      }
+
+      if (
+        !maxAllowedMintCountFormatted ||
+        Number(maxAllowedMintCountFormatted) >= 1
+      ) {
+        if (Number(mintCount || 0) == 0) {
+          setMintCount('1');
+        }
+      }
+    } catch (e) {
+      debugger;
     }
-  }, [maxAllowedMintCount, mintCount, setMintCount]);
+  }, [contractDecimals, maxAllowedMintCountFormatted, mintCount, setMintCount]);
 
-  useDebounce(
-    () => {
-      setLocalValue(mintCount?.toString() || '');
-    },
-    1000,
-    [mintCount],
-  );
-  useDebounce(
-    () => {
-      setMintCount(localValue);
-    },
-    300,
-    [localValue],
-  );
-
-  return (
+  return !contractDecimals ? (
     <input
       type="number"
       required
       min={1}
-      max={maxAllowedMintCount || Infinity}
-      value={localValue}
+      max={maxAllowedMintCountFormatted || Infinity}
+      value={mintCount}
       onChange={(e) => {
-        setLocalValue(e.target.value);
-      }}
-      onBlur={(e) => {
-        setMintCount(e.target.value);
+        setMintCount(
+          e.target.value
+            ? parseFloat(Math.ceil(Number(e.target.value)).toString())
+                .toString()
+                .replace(/,/g, '.')
+            : '',
+        );
       }}
       className={className}
+    />
+  ) : (
+    <CryptoAmountInput
+      value={mintCount || '0'}
+      formatted={true}
+      decimals={contractDecimals || 0}
+      onChange={(valueBN) => {
+        if (contractDecimals) {
+          if (valueBN && BigNumber.from(valueBN).gt(0)) {
+            setMintCount(
+              valueBN
+                ? ethers.utils.formatUnits(valueBN, contractDecimals)
+                : '0',
+            );
+          }
+        } else {
+          setMintCount(valueBN.toString());
+        }
+      }}
+      showPrice={false}
     />
   );
 };

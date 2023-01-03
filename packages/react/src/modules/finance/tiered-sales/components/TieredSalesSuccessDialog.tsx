@@ -7,12 +7,14 @@ import { BigNumberish } from 'ethers';
 import { Fragment, HTMLAttributeAnchorTarget, ReactNode } from 'react';
 
 import {
+  CryptoValue,
   PRIMARY_BUTTON,
   SECONDARY_BUTTON,
   TransactionLink,
 } from '../../../../core';
 
 type Props = {
+  decimals?: BigNumberish;
   mintCount?: BigNumberish;
   txResponse?: SendTransactionResult;
   txReceipt?: TransactionReceipt;
@@ -35,6 +37,7 @@ type Props = {
 };
 
 export function TieredSalesSuccessDialog({
+  decimals,
   mintCount,
   txResponse,
   txReceipt,
@@ -43,8 +46,15 @@ export function TieredSalesSuccessDialog({
   title = 'Mint successful',
   body = ({ mintCount }) => (
     <>
-      You have successfully minted {mintCount?.toString()} tokens. You can check
-      the transaction with the link below.
+      You have successfully minted{' '}
+      <CryptoValue
+        decimals={decimals || 0}
+        formatted={false}
+        showPrice={false}
+        showSymbol={false}
+        value={mintCount}
+      />{' '}
+      tokens. You can check the transaction with the link below.
     </>
   ),
   ctaButtonText,

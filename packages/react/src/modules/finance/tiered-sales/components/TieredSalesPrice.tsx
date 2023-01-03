@@ -4,7 +4,7 @@ import { Fragment, ReactNode } from 'react';
 import { BareComponentProps, useChainInfo } from '../../../../common';
 import { CryptoValue } from '../../../../core/crypto-currency';
 import { useContractDecimals, useContractSymbol } from '../../../token';
-import { useTieredSalesContext } from '../providers';
+import { useTieredSalesContext } from '../providers/TieredSalesProvider';
 
 type Props = BareComponentProps & {
   loadingMask?: ReactNode;
@@ -25,12 +25,12 @@ export const TieredSalesPrice = ({
   showSymbol = true,
   freeElement = <>Free</>,
   tierId,
-  mintCount = 1,
+  mintCount,
   fractionDigits,
   ...attributes
 }: Props) => {
   const {
-    data: { chainId, tiers, currentTierId },
+    data: { chainId, tiers, currentTierId, mintCount: currentMintCount },
     isLoading: { isAutoDetectingTier },
   } = useTieredSalesContext();
 
@@ -43,9 +43,11 @@ export const TieredSalesPrice = ({
 
   const pricePerUnit = finalTier?.price;
 
-  const mintNo = Number(mintCount || '1');
+  const mintNo = Number(
+    mintCount !== undefined ? mintCount : currentMintCount || '1',
+  );
   const finalPrice =
-    pricePerUnit !== undefined && mintCount !== undefined
+    pricePerUnit !== undefined && mintNo !== undefined && !Number.isNaN(mintNo)
       ? BigNumber.from(pricePerUnit).mul(Number.isNaN(mintNo) ? 1 : mintNo)
       : undefined;
 

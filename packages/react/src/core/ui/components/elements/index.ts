@@ -3,6 +3,7 @@ export * from './Badge';
 export * from './Button';
 export * from './ChainBadge';
 export * from './CopyButton';
+export * from './CryptoAmountInput';
 export * from './Errors';
 export * from './PromisedImage';
 export * from './Spinner';

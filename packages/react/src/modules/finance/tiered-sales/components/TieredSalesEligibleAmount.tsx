@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 
 import { BareComponentProps } from '../../../../common';
+import { CryptoValue } from '../../../../core';
 import { useTieredSalesContext } from '../providers/TieredSalesProvider';
 
 type Props = BareComponentProps & {
@@ -15,7 +16,7 @@ export const TieredSalesEligibleAmount = ({
   ...attributes
 }: Props) => {
   const {
-    data: { currentTierId, tiers },
+    data: { currentTierId, tiers, contractDecimals },
     isLoading: { isAutoDetectingTier, tiersLoading },
   } = useTieredSalesContext();
   const resolvedTierId = Number(
@@ -34,8 +35,16 @@ export const TieredSalesEligibleAmount = ({
       (isAutoDetectingTier || tiersLoading) &&
       eligibleAmount == undefined ? (
         <>{loadingMask}</>
-      ) : (
+      ) : !contractDecimals ? (
         eligibleAmount?.toLocaleString()
+      ) : (
+        <CryptoValue
+          decimals={contractDecimals}
+          formatted={false}
+          value={eligibleAmount}
+          showPrice={false}
+          showSymbol={false}
+        />
       )}
     </Component>
   );
