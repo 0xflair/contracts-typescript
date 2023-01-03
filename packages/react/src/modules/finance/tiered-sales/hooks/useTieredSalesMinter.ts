@@ -100,9 +100,13 @@ export const useTieredSalesMinter = ({
 
   const _tierId = tierId;
   const _mintCount = mintCount || '0';
-  const _mintCountBN = contractDecimals
-    ? ethers.utils.parseUnits(_mintCount.toString(), contractDecimals)
-    : BigNumber.from(Math.ceil(Number(_mintCount || 0)).toString());
+  const _mintCountBN = useMemo(
+    () =>
+      contractDecimals
+        ? ethers.utils.parseUnits(_mintCount.toString(), contractDecimals)
+        : BigNumber.from(Math.ceil(Number(_mintCount || 0)).toString()),
+    [_mintCount, contractDecimals],
+  );
   const _maxAllowance = merkleMetadata?.maxAllowance || _mintCountBN;
   const _merkleProof = useMemo(() => merkleProof || [], [merkleProof]);
   const _totalAmount = useMemo(() => {
@@ -417,6 +421,7 @@ export const useTieredSalesMinter = ({
     },
     error: {
       tierError,
+      contractDecimalsError,
       allowlistCheckerError,
       eligibleAmountError,
       allowanceError,
@@ -425,6 +430,7 @@ export const useTieredSalesMinter = ({
     },
     isLoading: {
       tierLoading,
+      contractDecimalsLoading,
       allowlistCheckerLoading,
       eligibleAmountLoading,
       allowanceLoading,
