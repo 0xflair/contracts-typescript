@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.81.2 (2023-01-03)
+
+
+### Bug Fixes
+
+* use boolean for hideTierForUsers ([fdeeec9](https://github.com/flair-sdk/typescript/commit/fdeeec9af47defd3a20e4130ee0228fdbfaaa43f))
+
+
+
+
+
 ## 2.81.1 (2023-01-03)
 
 
