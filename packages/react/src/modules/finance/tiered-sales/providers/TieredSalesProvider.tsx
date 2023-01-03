@@ -212,8 +212,10 @@ export const TieredSalesProvider = ({
             configValuesTiers?.[tierId]?.metadataUri ||
             diamondConfigTiers?.[tierId]?.metadataUri,
           hideTierForUsers:
-            configValuesTiers?.[tierId]?.hideTierForUsers ||
-            diamondConfigTiers?.[tierId]?.hideTierForUsers,
+            (
+              configValuesTiers?.[tierId]?.hideTierForUsers ||
+              diamondConfigTiers?.[tierId]?.hideTierForUsers
+            )?.toString() === 'true',
         };
 
         if (
