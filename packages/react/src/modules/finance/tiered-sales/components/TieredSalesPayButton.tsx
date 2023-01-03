@@ -1,8 +1,7 @@
 import { ReactNode } from 'react';
 
 import { BareComponentProps } from '../../../../common';
-import { Spinner } from '../../../../core/ui/components/elements/Spinner';
-import { useTieredSalesContext } from '../providers';
+import { useTieredSalesContext } from '../providers/TieredSalesProvider';
 import {
   TieredSalesMintButton,
   TieredSalesMintButtonVariables,
@@ -30,7 +29,7 @@ export const TieredSalesPayButton = ({
 
   const finalChildren = children
     ? children
-    : () => {
+    : (): ReactNode => {
         return method === 'stripe' ? (
           <>
             {price && price.toString() === '0' ? (

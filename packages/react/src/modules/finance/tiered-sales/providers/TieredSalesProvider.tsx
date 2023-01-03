@@ -8,10 +8,8 @@ import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 
 import { useChainInfo } from '../../../../common';
-import {
-  useBalanceRampRequestConfig,
-  useDiamondContext,
-} from '../../../../core';
+import { useDiamondContext } from '../../../../core';
+import { useBalanceRampRequestConfig } from '../../../../core/balance-ramp/hooks/useBalanceRampRequestConfig';
 import { useContractDecimals } from '../../../token/metadata/hooks/useContractDecimals';
 import { useTieredSalesMinter } from '../hooks';
 import { useSaleTiers } from '../hooks/useSaleTiers';
@@ -244,7 +242,8 @@ export const TieredSalesProvider = ({
   const currentTierConfig = useMemo(
     () =>
       currentTierId !== undefined ? tiers[currentTierId.toString()] : undefined,
-    [currentTierId, tiers],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [currentTierId],
   );
 
   const {
@@ -308,7 +307,6 @@ export const TieredSalesProvider = ({
       outputAmount: requiredAmounts?.[0].value?.toString(),
       testMode: chainInfo?.testnet,
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     chainId,
     chainInfo?.testnet,
@@ -316,8 +314,7 @@ export const TieredSalesProvider = ({
     mintPreparedConfig?.request?.data,
     mintPreparedConfig?.request?.value,
     minterAddress,
-    currentTierConfig,
-    // requiredAmounts,
+    requiredAmounts,
   ]);
 
   const {
@@ -337,16 +334,10 @@ export const TieredSalesProvider = ({
     });
 
   useEffect(() => {
-    if (
-      // contractDecimals !== undefined &&
-      mintCount == undefined
-    ) {
-      setMintCount(
-        '1',
-        // contractDecimals ? ethers.utils.parseUnits('1', contractDecimals) : 1,
-      );
+    if (mintCount == undefined) {
+      setMintCount('1');
     }
-  }, [contractDecimals, mintCount]);
+  }, [mintCount]);
 
   const canMint = Boolean(
     isActive && isEligible && (!hasAllowlist || isAllowlisted) && !mintLoading,

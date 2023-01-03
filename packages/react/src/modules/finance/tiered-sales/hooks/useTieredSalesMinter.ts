@@ -4,7 +4,7 @@ import { PrepareWriteContractConfig } from '@wagmi/core';
 import { BigNumber, BigNumberish, BytesLike, ethers, Signer } from 'ethers';
 import { useCallback, useMemo } from 'react';
 
-import { useContractWriteAndWait } from '../../../../common';
+import { useContractWriteAndWait } from '../../../../common/hooks/useContractWriteAndWait';
 import {
   useContractDecimals,
   useERC20Allowance,
@@ -344,7 +344,7 @@ export const useTieredSalesMinter = ({
               Math.ceil(Number(args?.mintCount?.toString() || '0')).toString(),
             )
         : _mintCountBN;
-      const _finalTotalAmountOverride = args?.mintCount
+      const _finalTotalAmount = args?.mintCount
         ? tier?.price
           ? BigNumber.from(tier?.price)
               .mul(BigNumber.from(_finalMintCount))
@@ -361,7 +361,7 @@ export const useTieredSalesMinter = ({
       if (args?.mintCount) {
         promise = approveAndWait?.([
           contractAddress as BytesLike,
-          _finalTotalAmountOverride as BigNumberish,
+          _finalTotalAmount as BigNumberish,
         ]);
       } else {
         promise = approveAndWait?.();
@@ -375,7 +375,7 @@ export const useTieredSalesMinter = ({
         refetchAllowance();
         return {
           ...result,
-          amount: _finalTotalAmountOverride as BigNumberish,
+          amount: _finalTotalAmount as BigNumberish,
           spender: contractAddress as BytesLike,
         } as const;
       });

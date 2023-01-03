@@ -3,9 +3,8 @@ import { BigNumber, ethers } from 'ethers';
 import { Fragment, ReactNode } from 'react';
 
 import { BareComponentProps, useChainInfo } from '../../../../common';
-import { Spinner } from '../../../../core/ui/components/elements/Spinner';
 import { useContractSymbol } from '../../../token';
-import { useTieredSalesContext } from '../providers';
+import { useTieredSalesContext } from '../providers/TieredSalesProvider';
 import { Tier } from '../types';
 
 export type TieredSalesMintButtonVariables = {
@@ -18,7 +17,7 @@ export type TieredSalesMintButtonVariables = {
   chainInfo?: Chain;
 };
 
-type Props = BareComponentProps & {
+type Props = Omit<BareComponentProps, 'children'> & {
   disabled?: boolean;
   showChainName?: boolean;
   loadingContent?: ReactNode;

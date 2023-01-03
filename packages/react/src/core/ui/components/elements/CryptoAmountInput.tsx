@@ -77,13 +77,13 @@ export const CryptoAmountInput = (props: CryptoAmountInputProps) => {
   );
 
   const handleChange = useCallback(
-    (formattedValue) => {
+    (formattedValue: string) => {
       try {
         onChange &&
           onChange(
             decimals
               ? utils.parseUnits(formattedValue || '0', decimals)
-              : Math.ceil(formattedValue || 0),
+              : Math.ceil(Number(formattedValue) || 0),
           );
       } catch (e) {
         debugger;
