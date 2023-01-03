@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.81.3 (2023-01-03)
+
+
+### Bug Fixes
+
+* correctly calculate erc20 decimals in price component ([d88186a](https://github.com/flair-sdk/typescript/commit/d88186aa91c8df2eb2267d175a02f44eb5dd4b98))
+
+
+
+
+
 ## 2.81.2 (2023-01-03)
 
 
