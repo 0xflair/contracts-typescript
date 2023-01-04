@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.81.4 (2023-01-04)
+
+
+### Bug Fixes
+
+* use currency decimals in default tiered sales selector ([fa09767](https://github.com/flair-sdk/typescript/commit/fa09767ec47d9c708c7505a5e98cab94b48d6031))
+
+
+
+
+
 ## 2.81.3 (2023-01-03)
 
 
