@@ -184,8 +184,13 @@ export const TieredSalesSelector = ({
                 ) : (
                   <CryptoValue
                     symbol={currencySymbol}
-                    value={tierConfig?.price?.toString()}
+                    value={tierConfig.price?.toString()}
                     formatted={false}
+                    decimals={
+                      currencyDecimals ||
+                      chainInfo?.nativeCurrency.decimals ||
+                      18
+                    }
                     showPrice={false}
                     showSymbol={true}
                   />
