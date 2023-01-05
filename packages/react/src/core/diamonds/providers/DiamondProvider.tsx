@@ -195,7 +195,7 @@ export const DiamondProvider = ({
       }
       setProposedCalls((calls) =>
         [...calls.filter((existing) => existing.id !== call.id), call].filter(
-          (c) => c.contract && c.function && c.args !== undefined,
+          (c) => c.function && c.args !== undefined,
         ),
       );
     },
