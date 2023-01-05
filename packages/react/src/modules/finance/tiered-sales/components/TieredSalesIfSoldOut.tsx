@@ -46,7 +46,13 @@ export const TieredSalesIfSoldOut = ({
   const Component =
     as || (attributes.className || attributes.style ? 'span' : Fragment);
 
-  const isLoading = totalMinted.isLoading || maxAllocation.isLoading;
+  const isLoading =
+    totalMinted.isLoading ||
+    totalMinted.isFetching ||
+    totalMinted.isRefetching ||
+    maxAllocation.isLoading ||
+    maxAllocation.isFetching ||
+    maxAllocation.isRefetching;
 
   return (
     <Component {...attributes}>
