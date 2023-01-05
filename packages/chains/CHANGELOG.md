@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.81.5 (2023-01-05)
+
+
+### Bug Fixes
+
+* allow proposing a call without fqn ([0e729bd](https://github.com/flair-sdk/typescript/commit/0e729bd7e0040e284ec3bdd433ebbfe84ed6c3ca))
+
+
+
+
+
 ## 2.81.4 (2023-01-04)
 
 
