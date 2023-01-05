@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.81.6 (2023-01-05)
+
+
+### Bug Fixes
+
+* avoid sold out flash while re-fetching ([c246acb](https://github.com/flair-sdk/typescript/commit/c246acb8da946359001f20b3d7d9598e65befc1f))
+
+
+
+
+
 ## 2.81.5 (2023-01-05)
 
 
