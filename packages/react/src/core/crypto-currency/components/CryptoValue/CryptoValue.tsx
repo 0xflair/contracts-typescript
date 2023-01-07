@@ -101,7 +101,9 @@ export const CryptoValue = (props: Props) => {
     <>{loadingContent}</>
   ) : (
     <>
-      {valueToRenderFormatted || '...'}{' '}
+      {valueToRenderFormatted
+        ? Number(valueToRenderFormatted).toLocaleString()
+        : '...'}{' '}
       {showSymbol ? outputUnit || data.info?.icon || symbol : null}
       {showPrice && data.price && Number(data.price) > 0 ? (
         <>
