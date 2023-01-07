@@ -339,11 +339,11 @@ const newChains: Chain[] = [
     blockExplorers: {
       etherscan: {
         name: 'Arbitrum Nova explorer',
-        url: 'https://nova-explorer.arbitrum.io',
+        url: 'https://nova.arbiscan.io',
       },
       default: {
         name: 'Arbitrum Nova explorer',
-        url: 'https://nova-explorer.arbitrum.io',
+        url: 'https://nova.arbiscan.io',
       },
     },
   },

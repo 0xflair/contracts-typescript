@@ -1,6 +1,6 @@
 import * as ethers from 'ethers';
 import { BigNumber } from 'ethers';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { CryptoAmountInput } from '../../../../core/ui/components/elements/CryptoAmountInput';
 import { useTieredSalesContext } from '../providers';
@@ -15,15 +15,21 @@ export const TieredSalesMintInput = ({ className }: Props) => {
     setMintCount,
   } = useTieredSalesContext();
 
-  const maxAllowedMintCountFormatted = Math.min(
-    Number(
-      eligibleAmount?.toString()
-        ? contractDecimals
-          ? ethers.utils.formatUnits(eligibleAmount, contractDecimals)
-          : Math.ceil(Number(eligibleAmount.toString()))
-        : Infinity,
-    ),
-  );
+  const maxAllowedMintCountFormatted = useMemo(() => {
+    try {
+      return Math.min(
+        Number(
+          eligibleAmount?.toString()
+            ? contractDecimals
+              ? ethers.utils.formatUnits(eligibleAmount, contractDecimals)
+              : Math.ceil(Number(eligibleAmount.toString()))
+            : Infinity,
+        ),
+      );
+    } catch (e) {
+      return Infinity;
+    }
+  }, [contractDecimals, eligibleAmount]);
 
   useEffect(() => {
     try {
