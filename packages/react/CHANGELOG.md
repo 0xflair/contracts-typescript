@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.81.7 (2023-01-07)
+
+
+### Bug Fixes
+
+* avoid failing when parsing eligible amount + etherscan for arb nova ([274fddb](https://github.com/flair-sdk/typescript/commit/274fddbae7ee84050586086d519cf34393e10a94))
+
+
+
+
+
 ## 2.81.6 (2023-01-05)
 
 

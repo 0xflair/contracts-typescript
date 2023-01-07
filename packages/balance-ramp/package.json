@@ -1,6 +1,6 @@
 {
   "name": "@flair-sdk/balance-ramp",
-  "version": "2.81.6",
+  "version": "2.81.7",
   "private": false,
   "author": "flair.dev",
   "license": "MIT",
@@ -31,8 +31,8 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "@flair-sdk/common": "^2.81.6",
-    "@flair-sdk/metatx": "^2.81.6",
+    "@flair-sdk/common": "^2.81.7",
+    "@flair-sdk/metatx": "^2.81.7",
     "axios": "^1.2.1",
     "ethers": ">=5.5.1"
   },
