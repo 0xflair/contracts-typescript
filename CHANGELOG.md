@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.81.8 (2023-01-07)
+
+
+### Bug Fixes
+
+* comma separate the crypto value number ([66ad2bb](https://github.com/flair-sdk/typescript/commit/66ad2bb038f01e5f2591a4f109771c476366ffe3))
+
+
+
+
+
 ## 2.81.7 (2023-01-07)
 
 
