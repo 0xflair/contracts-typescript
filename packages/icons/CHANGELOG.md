@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.81.9 (2023-01-08)
+
+
+### Bug Fixes
+
+* allow callback on chain switch success ([0ee2048](https://github.com/flair-sdk/typescript/commit/0ee20480726e752d294fad28b7be4dae7473adc1))
+
+
+
+
+
 ## 2.81.8 (2023-01-07)
 
 
