@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNetwork, useSwitchNetwork } from 'wagmi';
+import { Chain, useNetwork, useSwitchNetwork } from 'wagmi';
 
 import { BareComponentProps, useChainInfo } from '../../../common';
 
@@ -7,6 +7,7 @@ type Props = BareComponentProps & {
   label?: React.ReactNode;
   children?: React.ReactNode;
   requiredChainId: number;
+  onSuccess?: (chain: Chain) => void;
 };
 
 export const SwitchChainButton = ({
@@ -14,10 +15,18 @@ export const SwitchChainButton = ({
   label,
   children,
   requiredChainId,
+  onSuccess,
   ...attributes
 }: Props) => {
   const { chain } = useNetwork();
-  const { switchNetwork } = useSwitchNetwork();
+  const { switchNetwork } = useSwitchNetwork({
+    throwForSwitchChainNotSupported: false,
+    onSuccess(data, variables, context) {
+      if (data.id.toString() == requiredChainId.toString()) {
+        onSuccess?.(data);
+      }
+    },
+  });
   const requiredChain = useChainInfo(Number(requiredChainId));
 
   const Component = as || 'button';
