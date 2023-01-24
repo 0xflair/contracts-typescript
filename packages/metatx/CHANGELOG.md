@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.82.0 (2023-01-24)
+
+
+### Features
+
+* added horizen testnet chain ([a945fc2](https://github.com/flair-sdk/typescript/commit/a945fc2dba35b3b043c809375967d14df0fd33a4))
+
+
+
+
+
 ## 2.81.9 (2023-01-08)
 
 
