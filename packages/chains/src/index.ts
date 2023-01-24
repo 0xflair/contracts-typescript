@@ -511,6 +511,30 @@ const newChains: Chain[] = [
     },
     testnet: true,
   },
+  {
+    id: 1661,
+    name: 'Horizen EON Testnet',
+    network: 'horizenEON',
+    nativeCurrency: {
+      name: 'ZEN',
+      symbol: 'ZEN',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: { http: ['https://evm-tn-m2.horizenlabs.io/ethv1'] },
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Horizen EON explorer',
+        url: 'https://dune-explorer.horizen.io/',
+      },
+      default: {
+        name: 'Horizen EON explorer',
+        url: 'https://dune-explorer.horizen.io/',
+      },
+    },
+    testnet: true,
+  },
 ];
 
 export const FLAIR_CHAINS: Chain[] = [

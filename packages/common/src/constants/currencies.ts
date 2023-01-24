@@ -155,4 +155,12 @@ export const KNOWN_CRYPTO_CURRENCIES: CryptoCurrency[] = [
     coinGeckoId: 'metis-token',
     coinMarketCapSymbol: 'METIS',
   },
+  {
+    nativeChainIds: [ChainId.HORIZON_EON_TESTNET, ChainId.HORIZON_EON_TESTNET],
+    symbol: 'ZEN',
+    name: 'ZEN',
+    icon: 'ZEN',
+    coinGeckoId: 'zencash',
+    coinMarketCapSymbol: 'ZEN',
+  },
 ];
