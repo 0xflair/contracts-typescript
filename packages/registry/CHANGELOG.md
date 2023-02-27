@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.82.2 (2023-02-27)
+
+
+### Bug Fixes
+
+* add balance ramp wrapper back ([fb2d2d5](https://github.com/flair-sdk/typescript/commit/fb2d2d5e7a733d3b6422b7b35f8190a3f01c8da4))
+
+
+
+
+
 ## 2.82.1 (2023-02-27)
 
 
