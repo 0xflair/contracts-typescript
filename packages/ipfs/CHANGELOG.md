@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.82.1 (2023-02-27)
+
+
+### Bug Fixes
+
+* disable balance ramp by default ([019f1c7](https://github.com/flair-sdk/typescript/commit/019f1c71d3c96821383360904406499986fc4d11))
+
+
+
+
+
 # 2.82.0 (2023-01-24)
 
 
