@@ -192,7 +192,9 @@ export const useTieredSalesMinter = ({
       typeof _totalAmount !== 'undefined' &&
       isActive &&
       _mintCountBN &&
-      _mintCountBN.gt(0),
+      _mintCountBN.gt(0) &&
+      // TODO for balance-ramp, this must be removed:
+      !isApproveNeeded,
   );
 
   const requiredAmounts = useMemo(() => {
