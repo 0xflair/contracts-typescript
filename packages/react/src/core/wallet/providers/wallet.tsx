@@ -3,6 +3,7 @@ import {
   InfuraProvider,
   JsonRpcBatchProvider,
 } from '@ethersproject/providers';
+import { wrapWagmiClient } from '@flair-sdk/balance-ramp';
 import { FLAIR_CHAINS } from '@flair-sdk/chains';
 import {
   DiscordWeb3AuthConnector,
@@ -309,12 +310,14 @@ export const WalletProvider = ({
   ]);
 
   const wagmiClient = useMemo(() => {
-    return createClient({
-      autoConnect: tryAutoConnect,
-      connectors: connectorsList,
-      provider: wagmiProvider,
-      webSocketProvider,
-    });
+    return wrapWagmiClient(
+      createClient({
+        autoConnect: tryAutoConnect,
+        connectors: connectorsList,
+        provider: wagmiProvider,
+        webSocketProvider,
+      }),
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connectorsList]);
 
