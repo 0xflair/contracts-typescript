@@ -8,5 +8,5 @@ export const normalizeIpfsUrl = (
       ? 'https://ipfs.flair.finance/ipfs/'
       : preferManagedGateway
       ? `${preferManagedGateway}`
-      : 'https://cloudflare-ipfs.com/ipfs/',
+      : 'https://ipfs.io/ipfs/',
   );
