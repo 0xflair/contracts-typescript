@@ -535,6 +535,121 @@ const newChains: Chain[] = [
     },
     testnet: true,
   },
+  {
+    id: 100,
+    name: 'Gnosis (xDAI)',
+    network: 'gnosis',
+    nativeCurrency: {
+      name: 'xDAI',
+      symbol: 'DAI',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: { http: ['https://rpc.xdaichain.com/'] },
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Gnosis explorer',
+        url: 'https://gnosisscan.io/',
+      },
+      default: {
+        name: 'Gnosis explorer',
+        url: 'https://gnosisscan.io/',
+      },
+    },
+  },
+  {
+    id: 250,
+    name: 'Fantom Opera',
+    network: 'fantom',
+    nativeCurrency: {
+      name: 'FTM',
+      symbol: 'FTM',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: { http: ['https://rpcapi.fantom.network'] },
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Fantom explorer',
+        url: 'https://ftmscan.com/',
+      },
+      default: {
+        name: 'Fantom explorer',
+        url: 'https://ftmscan.com/',
+      },
+    },
+  },
+  {
+    id: 42220,
+    name: 'Celo Mainnet',
+    network: 'celo',
+    nativeCurrency: {
+      name: 'CELO',
+      symbol: 'CELO',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: { http: ['https://forno.celo.org'] },
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Celo explorer',
+        url: 'https://celoscan.io',
+      },
+      default: {
+        name: 'Celo explorer',
+        url: 'https://celoscan.io',
+      },
+    },
+  },
+  {
+    id: 288,
+    name: 'Boba Network',
+    network: 'boba',
+    nativeCurrency: {
+      name: 'BOBA',
+      symbol: 'BOBA',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: { http: ['https://rpc.boba.network'] },
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Boba explorer',
+        url: 'https://bobascan.com/',
+      },
+      default: {
+        name: 'Boba explorer',
+        url: 'https://bobascan.com/',
+      },
+    },
+  },
+  {
+    id: 106,
+    name: 'Velas',
+    network: 'velas',
+    nativeCurrency: {
+      name: 'VLX',
+      symbol: 'VLX',
+      decimals: 18,
+    },
+    rpcUrls: {
+      default: { http: ['https://explorer.velas.com/rpc'] },
+    },
+    blockExplorers: {
+      etherscan: {
+        name: 'Velas explorer',
+        url: 'https://explorer.velas.com/',
+      },
+      default: {
+        name: 'Velas explorer',
+        url: 'https://explorer.velas.com/',
+      },
+    },
+  },
 ];
 
 export const FLAIR_CHAINS: Chain[] = [
